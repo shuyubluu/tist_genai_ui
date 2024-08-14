@@ -1,0 +1,28 @@
+.bordered-table-login {
+  width: 40%;
+  border-collapse: collapse;
+  border: 2px solid #cccccc;
+  margin: auto; /* 置中表格 */
+
+  th{
+    border: 1px solid #cccccc;
+    padding: 6px;
+    text-align: center;
+  }
+}
+
+.tr-cell {
+  width: 15%;
+}
+
+.td-cell {
+  width: 25%;
+}
+
+.custom-header {
+  background: linear-gradient(to bottom, #f7c562, #f48d32);
+}
+
+.custom-cell {
+  background-color: #e79032;
+}

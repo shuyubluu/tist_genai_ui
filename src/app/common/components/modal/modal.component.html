@@ -1,0 +1,10 @@
+<!-- modal.component.html -->
+<h2 mat-dialog-title>{{ title }}</h2>
+<hr>
+<mat-dialog-content>
+    <p>{{ content }}</p>
+    <ng-container *ngTemplateOutlet="data.contentTemplate"></ng-container>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+    <div *ngIf="data.button"><app-button (click)="closeDialog()" [buttonIcon]="'close'" [buttonText]="button"></app-button></div>
+</mat-dialog-actions>

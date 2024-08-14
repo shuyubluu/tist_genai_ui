@@ -1,0 +1,106 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use "@angular/material" as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$angular-ngzorro-primary: mat.define-palette(mat.$indigo-palette);
+$angular-ngzorro-accent: mat.define-palette(
+  mat.$pink-palette,
+  A200,
+  A100,
+  A400
+);
+
+// The warn palette is optional (defaults to red).
+$angular-ngzorro-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$angular-ngzorro-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $angular-ngzorro-primary,
+      accent: $angular-ngzorro-accent,
+      warn: $angular-ngzorro-warn,
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+  )
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($angular-ngzorro-theme);
+
+@import "../node_modules/ng-zorro-antd/ng-zorro-antd";
+
+@import "../node_modules/bootstrap";
+
+.inner-title {
+  color: #31823e;
+  margin-bottom: 10px;
+  font-weight: bold;
+  justify-content: flex-start !important;
+  font-size: 16px;
+}
+
+.inner-title2 {
+  color: #0000ff;
+  font-size: 16px;
+}
+
+.table-container {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(83, 83, 83, 0.1);
+}
+
+.bordered-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 2px solid #cccccc;
+
+  th,
+  td {
+    border: 1px solid #cccccc;
+    padding: 6px;
+    text-align: left;
+  }
+}
+
+.bold-text {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.mt {
+  margin-top: 5px;
+}
+
+.mt-10 {
+  margin-top: 10px;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+

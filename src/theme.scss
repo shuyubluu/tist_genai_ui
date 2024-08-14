@@ -1,0 +1,111 @@
+// 引入Ant Design for Angular的SCSS文件
+@import "../node_modules/ng-zorro-antd/ng-zorro-antd";
+
+// Menu
+.ant-layout-sider-children {
+  background: #ffffff;
+  border-left: 2px solid #ffffff;
+}
+
+.ant-menu-sub.ant-menu-inline {
+  background: #ffffff;
+}
+
+.ant-menu {
+  background: #ffffff;
+}
+
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+  background-color: #fff8e3;
+}
+
+Ï.ant-menu-item:hover {
+  background-color: transparent !important;
+}
+
+ul[nz-menu] {
+  font-size: 16px !important; /* 設置菜單字體大小為18像素 */
+}
+
+ul[nz-menu] li {
+  font-size: 16px !important; /* 確保列表項字體大小為18像素 */
+}
+
+ul[nz-menu] li a {
+  font-size: 16px !important; /* 確保連結文本的字體大小為18像素 */
+}
+
+ul[nz-menu] li span {
+  font-size: 16px !important; /* 確保 span 元素的字體大小為18像素 */
+}
+
+// Tab
+/* 增加關閉按鈕和文字之間的距離 */
+.custom-tab1 .ant-tabs-tab-remove {
+  margin-bottom: 1px !important;
+  margin-left: 35px !important;
+}
+
+/* 未選中標籤頁的樣式 */
+.custom-tab1 .ant-tabs-tab {
+  display: inline-block !important; /* 確保可以設置寬度和高度 */
+  padding: 1px 3px !important; /* 調整內邊距，根據需要調整 */
+  background-color: #eaf4fa !important; /* 未選中標籤頁的背景顏色 */
+  color: #001b92 !important; /* 未選中標籤頁的文字顏色 */
+  border: 1px solid #84cdf8 !important; /* 邊框顏色 */
+  border-radius: 3px !important; /* 根據需要調整圓角半徑 */
+  text-align: center !important; /* 文字居中 */
+  min-width: 120px !important; /* 最小寬度，根據需要調整 */
+  min-height: 20px;
+  line-height: 30px; /* 确保文本垂直居中 */
+}
+
+/* 選中標籤頁的樣式 */
+.custom-tab1 .ant-tabs-tab-active .ant-tabs-tab-btn {
+  display: inline-block !important; /* 確保可以設置寬度和高度 */
+  background-color: #71c1ea !important; /* 選中標籤頁的背景顏色 */
+  color: #ffffff !important; /* 選中標籤頁的文字顏色 */
+  border-radius: 3px !important; /* 根據需要調整圓角半徑 */
+  min-width: 120px !important; /* 最小寬度，根據需要調整 */
+  min-height: 20px;
+}
+
+/* 溢出標籤頁的樣式 */
+.custom-tab1 .ant-dropdown-trigger,
+.ant-tabs-nav-more {
+  border: 1px solid #ff5050 !important; /* Red border example */
+  background-color: #ffc15d !important;
+  border-radius: 5px !important;
+  padding: 3px 15px !important;
+}
+
+/* 未選中標籤頁的樣式 */
+.custom-tab2 .ant-tabs-tab {
+  display: inline-block !important; /* 確保可以設置寬度和高度 */
+  padding: 1px 1px !important; /* 調整內邊距，根據需要調整 */
+  background-color: #eaf4fa !important; /* 未選中標籤頁的背景顏色 */
+  color: #001b92 !important; /* 未選中標籤頁的文字顏色 */
+  border: 1px solid #84cdf8 !important; /* 邊框顏色 */
+  border-radius: 3px !important; /* 根據需要調整圓角半徑 */
+  text-align: center !important; /* 文字居中 */
+  min-width: 120px !important; /* 最小寬度，根據需要調整 */
+  margin-right: -30px !important;
+}
+
+/* 選中標籤頁的樣式 */
+.custom-tab2 .ant-tabs-tab-active .ant-tabs-tab-btn {
+  display: inline-block !important; /* 確保可以設置寬度和高度 */
+  padding: 1px 5px !important; /* 調整內邊距，根據需要調整 */
+  background-color: #71c1ea !important; /* 選中標籤頁的背景顏色 */
+  color: #ffffff !important; /* 選中標籤頁的文字顏色 */
+  border-radius: 3px !important; /* 根據需要調整圓角半徑 */
+  text-align: center !important; /* 文字居中 */
+  min-width: 120px !important; /* 最小寬度，根據需要調整 */
+}
+
+.tippy-box[data-theme~="custom"] {
+  background-color: rgba(235, 235, 235);
+  color: #363636;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+}

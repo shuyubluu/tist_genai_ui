@@ -1,0 +1,14 @@
+<!-- <input nzSize="large" nz-input class="input-field-70" /> -->
+
+<input
+  nz-input
+  [type]="getInputType()"
+  [ngClass]="getInputClass()"
+  [(ngModel)]="contentEntered"
+  (ngModelChange)="onInputTextChange($event)"
+  [value]="enteredContent"
+  (input)="onInput($event)"
+  [disabled]="disabled"
+  [placeholder]="placeholder"
+  (blur)="onTouched()"
+/>

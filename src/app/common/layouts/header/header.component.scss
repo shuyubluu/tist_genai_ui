@@ -1,0 +1,107 @@
+.header {
+  background-color: #ffffff;
+  height: 100px;
+  padding: 5px 5px;
+  position: fixed; // 固定在最上方
+  top: 0;
+  width: 100%;
+  z-index: 1000; // 確保位於最上層
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+  .logo {
+    height: 40px;
+  }
+
+  .welcome-text {
+    flex: 0 0 auto;
+    color: blue;
+    font-weight: bolder;
+    font-size: 18px;
+    margin-left: 850px; // 示例：添加右邊距
+    display: flex;
+    margin-top: -30px;
+  }
+
+  .toggle-menu {
+    width: 150px;
+    white-space: nowrap;
+    background: linear-gradient(to bottom, #5bc0de, #5bc0de);
+    color: #ffffff;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 4px 8px;
+    min-width: 50px;
+    min-height: 35px;
+    text-align: center;
+    line-height: 1.5;
+    margin-left: 10px; // 添加左边距
+    position: fixed; // 保持固定位置
+    top: 55px; // 距离顶部55px
+    z-index: 1000; // 确保在其他内容上方
+  }
+
+  .logout-button {
+    width: 50px;
+    white-space: nowrap;
+    background: linear-gradient(to bottom, #5bc0de, #5bc0de);
+    color: rgb(255, 255, 255);
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 4px 8px;
+    min-width: 50px;
+    min-height: 35px;
+    display: flex;
+    transition: background-color 0.5s ease, border-color 0.5s ease;
+    margin-left: 1200px;
+    margin-top: -37px;
+  }
+
+  .logout-button:hover {
+    opacity: 0.9; /* 添加懸停效果，例如改變不透明度 */
+    transform: scale(1.1); /* 放大效果 */
+  }
+
+  .logout-button:active {
+    opacity: 1.5; /* 添加點擊效果，例如改變不透明度 */
+  }
+
+  //   .d-flex {
+  //     display: flex;
+  //     margin-left: 1020px;
+  //     margin-top: -25px;
+  //   }
+
+  //   .navbar-text {
+  //     padding-top: 0.5rem;
+  //     padding-bottom: 0.5rem;
+  //     color: var(--bs-navbar-color);
+  //   }
+
+  //   .navbar-text a,
+  //   .navbar-text a:hover,
+  //   .navbar-text a:focus {
+  //     color: var(--bs-navbar-active-color);
+  //   }
+
+  //   .auto_logout {
+  //     font-size: 0.9375rem;
+  //     color: #666;
+  //     line-height: 1.4rem;
+  //     padding-top: 0;
+  //   }
+
+  //   .auto_logout .countdown {
+  //     color: #b82b22;
+  //   }
+
+  //   .auto_logout .reset {
+  //     margin: 0 1rem 0 0;
+  //     padding-right: 1rem;
+  //   }
+
+  //   .auto_logout .reset img {
+  //     width: 1.5rem;
+  //   }
+}

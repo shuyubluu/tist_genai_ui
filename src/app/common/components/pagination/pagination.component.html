@@ -1,0 +1,15 @@
+<!-- <div class="pagination-container">
+    <button nz-button (click)="goToPrevPage()" class="mr-10" *ngIf="currentPage > 1">上頁</button>
+    <nz-pagination nzResponsive [nzPageIndex]="currentPage" [nzTotal]="totalItems" [nzPageSize]="pageSize"
+        (nzPageIndexChange)="handlePageChange($event)" [nzShowSizeChanger]="false"
+        [nzShowQuickJumper]="false"></nz-pagination>
+    <button nz-button (click)="goToNextPage()" *ngIf="currentPage < totalPages">下頁</button>
+</div> -->
+
+<div class="pagination-container">
+    <button nz-button (click)="goToPrevPage()" class="mr-10" *ngIf="currentPage > 1">上頁</button>
+    <nz-pagination nzResponsive [nzPageIndex]="currentPage" [nzTotal]="totalItems" [nzPageSize]="pageSize"
+        (nzPageIndexChange)="handlePageChange($event)" [nzShowSizeChanger]="false"
+        [nzShowQuickJumper]="false"></nz-pagination>
+    <button nz-button (click)="goToNextPage()" *ngIf="currentPage < totalPages">下頁</button>
+</div>

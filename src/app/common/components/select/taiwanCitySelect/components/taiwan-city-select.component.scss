@@ -1,0 +1,15 @@
+select {
+  border-radius: 5px;
+  border: 1px solid #b6b6b6;
+  margin: 0px 3px;
+  width: 150px;
+  height: 30px;
+
+  &:focus,
+  &:active {
+    border-color: rgb(0, 0, 0);
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
+    border-width: 1.2px;
+    border-style: solid;
+  }
+}

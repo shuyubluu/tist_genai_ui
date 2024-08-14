@@ -1,0 +1,19 @@
+<nz-layout class="app-layout">
+    <app-header (toggleCollapsed)="toggleCollapsed()"></app-header>
+    <nz-layout>
+        <nz-sider class="menu-sidebar" nzCollapsible [nzWidth]="isCollapsed ? '0px' : '256px'" nzBreakpoint="md"
+            [nzTrigger]="null" #menuSidebar>
+            <app-menu [isCollapsed]="isCollapsed"></app-menu>
+        </nz-sider>
+        <!-- <nz-content> -->
+        <div class='outter-content' [ngStyle]="{'width': isCollapsed ? 'calc(100% - 0px)' : 'calc(100% - 256px)'}">
+            <div class="tab-content">
+                <app-tab></app-tab>
+            </div>
+            <div class="inner-content">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+        <!-- </nz-content> -->
+    </nz-layout>
+</nz-layout>

@@ -1,0 +1,8 @@
+<div class='custom-tab1'>
+    <nz-tabset [nzSize]="'large'" [(nzSelectedIndex)]="selectedIndex" nzType="editable-card"
+        (nzSelectedIndexChange)="onTabChange($event)" (nzClose)="closeTab($event)">
+        <nz-tab *ngFor="let tab of tabs; let i = index" [nzTitle]="tab.title" [nzClosable]="i !== 0"></nz-tab>
+    </nz-tabset>
+</div>
+<!-- <div class="mt"></div>
+<router-outlet></router-outlet> -->

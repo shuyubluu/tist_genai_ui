@@ -1,0 +1,197 @@
+<div class="card-header">
+  <h5>待簽核表單</h5>
+  <form>
+    <div class="mt"></div>
+    <div class="table-container2">
+      <ng-container>
+        <table class="bordered-table2">
+          <thead>
+            <tr class="custom-header bold-text">
+              <!-- <th class="tr-cell-20" nzAlign="center">簽核</th>
+                            <th class="tr-cell-20" nzAlign="center">同意簽核</th> -->
+              <th nzAlign="center">提醒資訊</th>
+              <th nzAlign="center">意見審核</th>
+              <th nzAlign="center">轉介審核</th>
+              <th nzAlign="center">評估審核</th>
+              <th nzAlign="center">假單</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let item of items_1; let i = index"
+              [ngClass]="{ 'even-row': i % 2 === 1 }"
+            >
+              <!-- <td class="td-cell-20 custom-cell" nzAlign="center"><input type="checkbox"
+                                    class="custom-checkbox" /></td>
+                            <td class="td-cell-20 custom-cell" nzAlign="center"><app-button [buttonIcon]="'accept'"
+                                    [buttonText]="'確認'"></app-button></td> -->
+              <td class="custom-cell" nzAlign="center">
+                <p
+                  [innerHTML]="getInfoWithLink(item.info)"
+                  (click)="handleModalLinkClick()"
+                ></p>
+              </td>
+              <td class="custom-cell" nzAlign="center">
+                <p
+                  [innerHTML]="getInfoWithLink(item.info2)"
+                  (click)="handleModalLinkClick()"
+                ></p>
+              </td>
+              <td class="custom-cell" nzAlign="center">
+                <p
+                  [innerHTML]="getInfoWithLink(item.info3)"
+                  (click)="handleModalLinkClick()"
+                ></p>
+              </td>
+              <td class="custom-cell" nzAlign="center">
+                <p
+                  [innerHTML]="getInfoWithLink(item.info4)"
+                  (click)="handleModalLinkClick()"
+                ></p>
+              </td>
+              <td class="custom-cell" nzAlign="center">
+                <p
+                  [innerHTML]="getInfoWithLink(item.info5)"
+                  (click)="handleModalLinkClick()"
+                ></p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </ng-container>
+    </div>
+  </form>
+  <div class="mt-20"></div>
+  <form>
+    <div class="mt"></div>
+    <div class="table-container2">
+      <ng-container>
+        <table class="bordered-table2">
+          <thead>
+            <tr class="custom-header3 bold-text">
+              <!-- <th class="tr-cell-20" nzAlign="center">簽核</th>
+                            <th class="tr-cell-20" nzAlign="center">同意簽核</th> -->
+              <th nzAlign="center">通報</th>
+              <th nzAlign="center">列冊</th>
+              <th nzAlign="center">已結案</th>
+              <th nzAlign="center">男</th>
+              <th nzAlign="center">女</th>
+              <th nzAlign="center">老人</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let item of items_1; let i = index"
+              [ngClass]="{ 'even-row': i % 2 === 1 }"
+            >
+              <!-- <td class="td-cell-20 custom-cell" nzAlign="center"><input type="checkbox"
+                                    class="custom-checkbox" /></td>
+                            <td class="td-cell-20 custom-cell" nzAlign="center"><app-button [buttonIcon]="'accept'"
+                                    [buttonText]="'確認'"></app-button></td> -->
+              <td class="custom-cell" nzAlign="center">199</td>
+              <td class="custom-cell" nzAlign="center">188</td>
+              <td class="custom-cell" nzAlign="center">99</td>
+              <td class="custom-cell" nzAlign="center">139</td>
+              <td class="custom-cell" nzAlign="center">130</td>
+              <td class="custom-cell" nzAlign="center">102</td>
+            </tr>
+          </tbody>
+        </table>
+      </ng-container>
+    </div>
+  </form>
+  <div class="mt-20"></div>
+  <h5>最新公告</h5>
+  <form>
+    <div class="mt"></div>
+    <div class="table-container">
+      <ng-container>
+        <table class="bordered-table">
+          <thead>
+            <tr class="custom-header2 bold-text">
+              <th class="tr-cell-20" nzAlign="center">日期</th>
+              <th class="tr-cell-70" nzAlign="center">主旨</th>
+              <th class="tr-cell-20" nzAlign="center">單位</th>
+              <th class="tr-cell-20" nzAlign="center">建立者</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let item of items_2; let i = index"
+              [ngClass]="{ 'even-row': i % 2 === 1 }"
+            >
+              <td class="td-cell-20 custom-cell" nzAlign="center">
+                {{ item.date }}
+              </td>
+              <td class="td-cell-80 custom-cell">
+                <a (click)="openModal('主旨標題', item.info, '')">{{
+                  item.info
+                }}</a>
+              </td>
+              <td class="td-cell-20 custom-cell" nzAlign="center">
+                {{ item.unit }}
+              </td>
+              <td class="td-cell-20 custom-cell" nzAlign="center">
+                {{ item.create }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </ng-container>
+    </div>
+  </form>
+</div>
+
+<ng-template #contentTemplate>
+  <form>
+    <div class="mt"></div>
+    <ng-container>
+      <table class="bordered-table">
+        <thead>
+          <tr class="custom-header bold-text">
+            <th class="tr-cell-20" nzAlign="center">
+              <input type="checkbox" /> 選取
+            </th>
+            <th class="tr-cell-60" nzAlign="center">內容</th>
+            <th class="tr-cell-20" nzAlign="center">建立者</th>
+            <th class="tr-cell-20" nzAlign="center">時間</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="td-cell-20 custom-cell" nzAlign="center">
+              <input type="checkbox" />
+            </td>
+            <td class="td-cell-70 custom-cell">
+              113/6/18 加班補休到期，核銷加班費。
+            </td>
+            <td class="td-cell-20 custom-cell" nzAlign="center">王小明</td>
+            <td class="td-cell-20 custom-cell" nzAlign="center">
+              113/6/18 08:30:00
+            </td>
+          </tr>
+          <tr>
+            <td class="td-cell-20 custom-cell" nzAlign="center">
+              <input type="checkbox" />
+            </td>
+            <td class="td-cell-70 custom-cell">
+              112/12/25 街友王小明的審核期限即將到期。
+            </td>
+            <td class="td-cell-20 custom-cell" nzAlign="center">王大明</td>
+            <td class="td-cell-20 custom-cell" nzAlign="center">
+              112/12/25 08:30:00
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th colSpan="5">
+              <app-button [buttonText]="'同意'" />
+              <app-button [buttonText]="'退回'" />
+            </th>
+          </tr>
+        </tfoot>
+      </table>
+    </ng-container>
+  </form>
+</ng-template>

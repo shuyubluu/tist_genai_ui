@@ -1,0 +1,26 @@
+<!-- <div class="app-header">
+    <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+        <span class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></span>
+    </span>
+</div> -->
+
+<div class="header">
+    <a href="/"><img src="../../../../assets/img/hondao_logo.png" alt="Logo" class="logo"></a>
+    <span class="welcome-text">歡迎! 系統管理員!</span>
+    <!-- <div class="d-flex">
+        <div class="navbar-text auto_logout "> <span class="">自動登出時間</span>
+            <span class="countdown">29:59</span>
+            <span class="reset">
+                <img src="../../../../assets/img/icons-reset.svg" alt="reset countdown clock icon" />
+            </span>
+        </div>
+    </div> -->
+    <app-logout></app-logout>
+    <button [nzSize]="'default'" nz-button class="logout-button" (click)="logout()">
+        <span>登出</span>
+    </button>
+    <button [nzSize]="'default'" nz-button (click)="toggleCollapsed.emit()" class="toggle-menu">
+        <span nz-icon nzType="menu-fold" nzTheme="outline"></span>
+        <span>隱藏/開啟選單</span>
+    </button>
+</div>

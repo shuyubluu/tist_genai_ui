@@ -1,0 +1,40 @@
+<ul nz-menu nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+    <ng-container *ngFor="let menu of menuData">
+        <ng-container *ngIf="menu.children; else singleItem">
+            <li nz-submenu [nzTitle]="menu.title" [nzIcon]="menu.icon" [nzOpen]="menu.open"
+                [ngClass]="{ 'ant-menu-item-selected': menu.active }">
+                <ul>
+                    <ng-container *ngFor="let subMenu of menu.children">
+                        <ng-container *ngIf="subMenu.children; else singleSubItem">
+                            <li nz-submenu [nzTitle]="subMenu.title" [nzIcon]="subMenu.icon" [nzOpen]="subMenu.open"
+                                [ngClass]="{ 'ant-menu-item-selected': subMenu.active }">
+                                <ul>
+                                    <li nz-menu-item *ngFor="let subSubItem of subMenu.children"
+                                        [routerLink]="subSubItem.link" routerLinkActive="ant-menu-item-selected">
+                                        <a>
+                                            <span nz-icon [nzType]="subSubItem.icon"></span>
+                                            <span>{{ subSubItem.title }}</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ng-container>
+                        <ng-template #singleSubItem>
+                            <li nz-menu-item [routerLink]="subMenu.link" routerLinkActive="ant-menu-item-selected">
+                                <a>{{ subMenu.title }}</a>
+                            </li>
+                        </ng-template>
+                    </ng-container>
+                </ul>
+            </li>
+        </ng-container>
+        <ng-template #singleItem>
+            <li nz-menu-item [routerLink]="menu.link" routerLinkActive="ant-menu-item-selected">
+                <a>
+                    <span nz-icon [nzType]="menu.icon"></span>
+                    <span>{{ menu.title }}</span>
+                </a>
+            </li>
+        </ng-template>
+    </ng-container>
+</ul>
