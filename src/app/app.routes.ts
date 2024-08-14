@@ -19,14 +19,6 @@ export const routes: Routes = [
           ),
         data: { tabName: '首頁' },
       },
-      {
-        path: 'calendar',
-        loadChildren: () =>
-          import('./pages/calendar/calendar.routes').then(
-            (m) => m.CALENDAR_ROUTES
-          ),
-        data: { tabName: '個人行事曆' },
-      },
       // 可以加入其他子路由...
     ],
   },

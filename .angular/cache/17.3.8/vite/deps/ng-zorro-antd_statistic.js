@@ -64,8 +64,8 @@ import {
   ɵɵtext,
   ɵɵtextInterpolate
 } from "./chunk-DO3VT4SQ.js";
-import "./chunk-GFVJDENN.js";
 import "./chunk-QOAHSALO.js";
+import "./chunk-GFVJDENN.js";
 import {
   Subject,
   interval,

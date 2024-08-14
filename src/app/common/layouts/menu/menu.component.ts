@@ -24,11 +24,6 @@ export class MenuComponent implements OnInit {
         link: '/welcome',
       },
       {
-        title: '行事曆',
-        icon: 'calendar',
-        link: '/calendar',
-      },
-      {
         title: '個案管理',
         icon: '',
         link: '#',

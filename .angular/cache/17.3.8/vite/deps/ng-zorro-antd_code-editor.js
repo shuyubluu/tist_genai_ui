@@ -2,6 +2,9 @@ import {
   NzSpinComponent
 } from "./chunk-SOHCSQGU.js";
 import {
+  NG_VALUE_ACCESSOR
+} from "./chunk-JP7V4SKK.js";
+import {
   NzConfigService
 } from "./chunk-26IXARRV.js";
 import {
@@ -10,9 +13,6 @@ import {
   inNextTick,
   warn
 } from "./chunk-2XDAPGF7.js";
-import {
-  NG_VALUE_ACCESSOR
-} from "./chunk-JP7V4SKK.js";
 import "./chunk-57AWUXTH.js";
 import {
   Platform
@@ -54,10 +54,10 @@ import {
   ɵɵproperty,
   ɵɵtemplate
 } from "./chunk-DO3VT4SQ.js";
+import "./chunk-QOAHSALO.js";
 import {
   fromEvent
 } from "./chunk-GFVJDENN.js";
-import "./chunk-QOAHSALO.js";
 import {
   BehaviorSubject,
   ReplaySubject,
