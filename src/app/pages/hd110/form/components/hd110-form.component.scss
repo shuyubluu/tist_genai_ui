@@ -1,0 +1,50 @@
+.th-cell {
+  width: 5%;
+}
+
+.td-cell {
+  width: 5%;
+}
+
+.mr-5 {
+  margin-right: 5px;
+}
+
+.disableBackground {
+  background-color: #f0f0f0;
+}
+
+.result-isPassed {
+  color: blue;
+  font-weight: bold;
+}
+
+.result-isFailed {
+  color: red;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 1024px) {
+  .bordered-table tr {
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid #cccccc;
+    margin-bottom: 8px;
+  }
+
+  .bordered-table th,
+  .bordered-table td {
+    flex: 1 1 100%;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    border: none;
+    text-align: center;
+    padding: 10px;
+    border-bottom: 1px solid #cccccc;
+  }
+
+  .bordered-table th {
+    background-color: #e6f0fb;
+  }
+}

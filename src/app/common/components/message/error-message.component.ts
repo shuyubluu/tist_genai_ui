@@ -31,10 +31,13 @@ import { AbstractControl } from '@angular/forms';
  *    範例：
  *    errorMessage="這是必填欄位。"
  *
- * 4. 自訂訊息顯示的條件：
+ * 4. 是否需要失焦後才會觸發驗證
+ *    [isTouched]="true" 預設為true
+ *
+ * 5. 自訂訊息顯示的條件：
  *    [isCustom]="true" 預設為false
  *
- * 5. 判斷是否顯示自訂訊息：
+ * 6. 判斷是否顯示自訂訊息：
  *    [condition]="true" 預設為false
  *
  * 完整使用範例：
@@ -47,7 +50,7 @@ import { AbstractControl } from '@angular/forms';
  * - 自訂錯誤訊息
  * <app-error-message
  *   [isCustom]="true"
- *   condition]="true"
+ *   [condition]="true"
  *   errorMessage="這是必填欄位。"
  *  />
  */
@@ -63,6 +66,7 @@ export class ErrorMessageComponent {
   @Input() control: AbstractControl | null = null;
   @Input() errorKey: string = '';
   @Input() errorMessage: string = '';
+  @Input() isTouched: boolean = true;
   @Input() isCustom: boolean = false;
   @Input() condition: boolean = false;
 
@@ -76,7 +80,7 @@ export class ErrorMessageComponent {
       }
     }
     // 如果是驗證關鍵字是必填的，需失焦才會觸發表單驗證
-    if (this.errorKey === 'required') {
+    if (this.errorKey === 'required' && this.isTouched) {
       return this.control
         ? this.control.hasError(this.errorKey) && this.control.touched
         : false;

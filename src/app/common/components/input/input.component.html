@@ -1,14 +1,12 @@
-<!-- <input nzSize="large" nz-input class="input-field-70" /> -->
-
 <input
   nz-input
   [type]="getInputType()"
   [ngClass]="getInputClass()"
-  [(ngModel)]="contentEntered"
-  (ngModelChange)="onInputTextChange($event)"
   [value]="enteredContent"
   (input)="onInput($event)"
   [disabled]="disabled"
   [placeholder]="placeholder"
   (blur)="onTouched()"
+  [attr.maxLength]="maxLength ? maxLength : null"
+  oninput="this.maxLength > 0 ? this.value = this.value.slice(0, this.maxLength) : null"
 />

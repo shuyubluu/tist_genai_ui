@@ -2,14 +2,5 @@
   [(ngModel)]="selectedDate"
   (ngModelChange)="onselect($event)"
   (blur)="onTouched()"
-  >></nz-date-picker
->
-
-<!-- <input type="date"> -->
-
-<!-- <mat-form-field appearance="fill">
-    <mat-label>選擇日期</mat-label>
-    <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-</mat-form-field> -->
+  [disabled]="disabled"
+></nz-date-picker>

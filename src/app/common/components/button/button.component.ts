@@ -15,6 +15,8 @@ import {
   COPY,
   DATE,
   ACCEPT,
+  NEXTPAGE,
+  PREVIOUSPAGE,
 } from '../../utils/buttonHelper';
 
 /**
@@ -39,6 +41,8 @@ import {
  * - 'copy'：返回 COPY (同上圖示)
  * - 'date'：返回 DATE (大日曆圖示)
  * - 'accept'：返回 ACCEPT (同意圖示)
+ * - 'nextpage'：返回 NEXTPAGE (下一頁圖示)
+ * - 'previouspage'：返回 PREVIOUSPAGE (上一頁圖示)
  *
  * 若 this.buttonIcon 的值不符合以上任一情況，則返回空字串。
  *
@@ -94,6 +98,10 @@ export class ButtonComponent implements OnInit {
         return DATE; // 大日曆圖示
       case 'accept':
         return ACCEPT; // 同意圖示
+      case 'nextpage':
+        return NEXTPAGE; // 下一頁圖示
+      case 'previouspage':
+        return PREVIOUSPAGE; // 上一頁圖示
       default:
         return '';
     }

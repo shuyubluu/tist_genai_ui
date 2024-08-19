@@ -13,3 +13,5 @@ export const RELOAD = '../../../../../assets/img/button/arrow_refresh.png';
 export const COPY = '../../../../../assets/img/button/page_white_copy.png';
 export const DATE = '../../../../../assets/img/button/date.png';
 export const ACCEPT = './../../../../assets/img/button/accept.png';
+export const NEXTPAGE = './../../../../assets/img/button/arrow_right.png';
+export const PREVIOUSPAGE = './../../../../assets/img/button/arrow_left.png';

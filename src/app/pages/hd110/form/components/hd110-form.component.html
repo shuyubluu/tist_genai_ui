@@ -1,0 +1,747 @@
+<h1 class="inner-title">個案開案評估表</h1>
+<div class="mt"></div>
+<div class="table-container">
+  <ng-container>
+    <form [formGroup]="form">
+      <nz-table class="bordered-table">
+        <tr>
+          <th class="custom-header" colSpan="4" nzAlign="center">來源</th>
+        </tr>
+        <tr>
+          <th class="th-cell custom-header bold-text" nzAlign="center">
+            個案來源
+          </th>
+          <td class="td-cell custom-cell">
+            <app-select
+              [selectWidth]="'175px'"
+              [options]="selectOptions_caseSource"
+              (selectionChange)="onCaseSourceSelectChange()"
+              formControlName="caseSource"
+            />
+            <app-error-message
+              [control]="form.get('caseSource')"
+              [isTouched]="false"
+              errorKey="required"
+              errorMessage="這是必選選項。"
+            />
+          </td>
+          <th class="th-cell custom-header bold-text" nzAlign="center">
+            填表日期
+          </th>
+          <td class="td-cell custom-cell">
+            <app-dayPicker formControlName="formFillingDate" />
+            <app-error-message
+              [control]="form.get('formFillingDate')"
+              [isTouched]="false"
+              errorKey="required"
+              errorMessage="這是必選選項。"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th
+            [ngClass]="{
+              disableBackground: !isReferral,
+              'custom-header': isReferral
+            }"
+            colSpan="4"
+            nzAlign="center"
+          >
+            轉介單位資料
+          </th>
+        </tr>
+        <tr>
+          <th
+            class="th-cell bold-text"
+            [ngClass]="{
+              disableBackground: !isReferral,
+              'custom-header': isReferral
+            }"
+            nzAlign="center"
+          >
+            轉介單位
+          </th>
+          <td
+            class="td-cell"
+            [ngClass]="{
+              disableBackground: !isReferral,
+              'custom-cell': isReferral
+            }"
+          >
+            <app-input
+              [inputWidth]="'175px'"
+              [maxLength]="30"
+              formControlName="referralUnit"
+            />
+            <app-error-message
+              [control]="form.get('referralUnit')"
+              [isTouched]="false"
+              errorKey="required"
+              errorMessage="這是必填欄位。"
+            />
+          </td>
+          <th
+            class="th-cell bold-text"
+            [ngClass]="{
+              disableBackground: !isReferral,
+              'custom-header': isReferral
+            }"
+            nzAlign="center"
+          >
+            聯絡人
+          </th>
+          <td
+            [ngClass]="{
+              disableBackground: !isReferral,
+              'custom-cell': isReferral
+            }"
+          >
+            <app-input
+              [inputWidth]="'175px'"
+              [maxLength]="30"
+              formControlName="contactPerson"
+            />
+            <app-error-message
+              [control]="form.get('contactPerson')"
+              [isTouched]="false"
+              errorKey="required"
+              errorMessage="這是必填欄位。"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th
+            class="th-cell bold-text"
+            [ngClass]="{
+              disableBackground: !isReferral,
+              'custom-header': isReferral
+            }"
+            nzAlign="center"
+          >
+            手機(4碼+6碼)
+          </th>
+          <td
+            class="td-cell"
+            [ngClass]="{
+              disableBackground: !isReferral,
+              'custom-cell': isReferral
+            }"
+          >
+            <app-input
+              [inputWidth]="'95px'"
+              [maxLength]="4"
+              [type]="'NUMBER'"
+              formControlName="referralUnit_mobilePhone_firstFourDigits"
+            />
+            <span class="mr-5">-</span>
+            <app-input
+              [inputWidth]="'175px'"
+              [maxLength]="6"
+              [type]="'NUMBER'"
+              formControlName="referralUnit_mobilePhone_lastSixDigits"
+            />
+            <app-error-message
+              [control]="form.get('referralUnit_mobilePhone_firstFourDigits')"
+              errorKey="invalidMobilePhone_firstFourDigits"
+              errorMessage="請輸入有效的前四碼，手機號碼為09開頭"
+            />
+            <app-error-message
+              [control]="form.get('referralUnit_mobilePhone_lastSixDigits')"
+              errorKey="invalidMobilePhone_lastSixDigits"
+              errorMessage="請輸入有效的後六碼"
+            />
+          </td>
+          <th
+            class="th-cell bold-text"
+            [ngClass]="{
+              disableBackground: !isReferral,
+              'custom-header': isReferral
+            }"
+            nzAlign="center"
+          >
+            電話(區碼+電話)
+          </th>
+          <td
+            class="td-cell"
+            [ngClass]="{
+              disableBackground: !isReferral,
+              'custom-cell': isReferral
+            }"
+          >
+            <app-input
+              [inputWidth]="'90px'"
+              [maxLength]="4"
+              [type]="'NUMBER'"
+              formControlName="referralUnit_phone_areaCode"
+            />
+            <span class="mr-5">-</span>
+            <app-input
+              [inputWidth]="'175px'"
+              [maxLength]="8"
+              [type]="'NUMBER'"
+              formControlName="referralUnit_phone_phoneNumber"
+            />
+            <app-error-message
+              [control]="form.get('referralUnit_phone_areaCode')"
+              errorKey="invalidHomePhone_areaCode"
+              errorMessage="請輸入有效的區碼"
+            />
+            <app-error-message
+              [control]="form.get('referralUnit_phone_phoneNumber')"
+              errorKey="invalidHomePhone_phoneNumber"
+              errorMessage="請輸入有效的電話"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th
+            class="th-cell bold-text"
+            [ngClass]="{
+              disableBackground: !isReferral,
+              'custom-header': isReferral
+            }"
+            nzAlign="center"
+          >
+            傳真
+          </th>
+          <td
+            class="td-cell"
+            [ngClass]="{
+              disableBackground: !isReferral,
+              'custom-cell': isReferral
+            }"
+          >
+            <app-input
+              [inputWidth]="'175px'"
+              [maxLength]="10"
+              formControlName="referralUnit_fax"
+            />
+          </td>
+          <th
+            class="th-cell bold-text"
+            [ngClass]="{
+              disableBackground: !isReferral,
+              'custom-header': isReferral
+            }"
+            nzAlign="center"
+          >
+            其他
+          </th>
+          <td
+            class="td-cell"
+            [ngClass]="{
+              disableBackground: !isReferral,
+              'custom-cell': isReferral
+            }"
+          >
+            <app-input
+              [inputWidth]="'175px'"
+              [maxLength]="30"
+              formControlName="referralUnit_other"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th class="custom-header" colSpan="4" nzAlign="center">基本資料</th>
+        </tr>
+        <tr>
+          <th class="th-cell custom-header bold-text" nzAlign="center">姓名</th>
+          <td class="td-cell custom-cell">
+            <app-input
+              [inputWidth]="'175px'"
+              [maxLength]="30"
+              formControlName="name"
+            />
+            <app-error-message
+              [control]="form.get('name')"
+              [isTouched]="false"
+              errorKey="required"
+              errorMessage="這是必填欄位。"
+            />
+          </td>
+          <th class="th-cell custom-header bold-text" nzAlign="center">性別</th>
+          <td class="td-cell custom-cell">
+            <app-select
+              [selectWidth]="'175px'"
+              [options]="selectOptions_gender"
+              formControlName="gender"
+            />
+            <app-error-message
+              [control]="form.get('gender')"
+              [isTouched]="false"
+              errorKey="required"
+              errorMessage="這是必選選項。"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th class="th-cell custom-header bold-text" nzAlign="center">生日</th>
+          <td class="td-cell custom-cell">
+            <app-dayPicker formControlName="dateOfBirth" />
+            <app-error-message
+              [control]="form.get('dateOfBirth')"
+              [isTouched]="false"
+              errorKey="required"
+              errorMessage="這是必選選項。"
+            />
+          </td>
+          <th class="th-cell custom-header bold-text" nzAlign="center">
+            身份證字號
+          </th>
+          <td class="td-cell custom-cell">
+            <app-input [inputWidth]="'175px'" formControlName="idNumber" />
+            <app-error-message
+              [control]="form.get('idNumber')"
+              [isTouched]="false"
+              errorKey="required"
+              errorMessage="這是必填欄位。"
+            />
+            <app-error-message
+              [control]="form.get('idNumber')"
+              errorKey="invalidTaiwanId"
+              errorMessage="請輸入有效的台灣身份證字號。"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th class="th-cell custom-header bold-text" nzAlign="center">
+            手機(4碼+6碼)
+          </th>
+          <td class="td-cell custom-cell">
+            <app-input
+              [inputWidth]="'95px'"
+              [maxLength]="4"
+              [type]="'NUMBER'"
+              formControlName="mobilePhone_firstFourDigits"
+            />
+            <span class="mr-5">-</span>
+            <app-input
+              [inputWidth]="'175px'"
+              [maxLength]="6"
+              [type]="'NUMBER'"
+              formControlName="mobilePhone_lastSixDigits"
+            />
+            <app-error-message
+              [control]="form.get('mobilePhone_firstFourDigits')"
+              errorKey="invalidMobilePhone_firstFourDigits"
+              errorMessage="請輸入有效的前四碼，手機號碼為09開頭"
+            />
+            <app-error-message
+              [control]="form.get('mobilePhone_lastSixDigits')"
+              errorKey="invalidMobilePhone_lastSixDigits"
+              errorMessage="請輸入有效的後六碼"
+            />
+          </td>
+          <th class="th-cell custom-header bold-text" nzAlign="center">
+            電話(區碼+電話)
+          </th>
+          <td class="td-cell custom-cell">
+            <app-input
+              [inputWidth]="'90px'"
+              [maxLength]="4"
+              [type]="'NUMBER'"
+              formControlName="phone_areaCode"
+            />
+            <span class="mr-5">-</span>
+            <app-input
+              [inputWidth]="'175px'"
+              [maxLength]="8"
+              [type]="'NUMBER'"
+              formControlName="phone_phoneNumber"
+            />
+            <app-error-message
+              [control]="form.get('phone_areaCode')"
+              errorKey="invalidHomePhone_areaCode"
+              errorMessage="請輸入有效的區碼"
+            />
+            <app-error-message
+              [control]="form.get('phone_phoneNumber')"
+              errorKey="invalidHomePhone_phoneNumber"
+              errorMessage="請輸入有效的電話"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th
+            class="th-cell custom-header bold-text"
+            colSpan="1"
+            nzAlign="center"
+          >
+            通訊地址
+          </th>
+          <td class="td-cell custom-cell" colSpan="3">
+            <app-taiwan-city-select
+              formControlName="communicationAddress_select"
+            />
+            <app-input
+              [inputWidth]="'250px'"
+              [maxLength]="30"
+              formControlName="communicationAddress"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th class="th-cell custom-header bold-text" nzAlign="center">
+            福利身分
+          </th>
+          <td class="td-cell custom-cell">
+            <app-select
+              [selectWidth]="'175px'"
+              [options]="selectOptions_welfareStatus"
+              formControlName="welfareStatus"
+            />
+            <app-error-message
+              [control]="form.get('welfareStatus')"
+              [isTouched]="false"
+              errorKey="required"
+              errorMessage="這是必選選項。"
+            />
+          </td>
+          <th class="th-cell custom-header bold-text" nzAlign="center">
+            社會福利補助
+          </th>
+          <td class="td-cell custom-cell">
+            <nz-checkbox-wrapper
+              style="width: 100%"
+              (nzOnChange)="socialWelfareAssistanceChange($event)"
+            >
+              <div nz-row>
+                <div nz-col nzSpan="8">
+                  <label nz-checkbox nzValue="1" [nzDisabled]="isDisableNone"
+                    >無</label
+                  >
+                </div>
+                <div nz-col nzSpan="8">
+                  <label
+                    nz-checkbox
+                    nzValue="2"
+                    [nzDisabled]="isDisableNoneOthers"
+                    >身心障礙</label
+                  >
+                </div>
+                <div nz-col nzSpan="8">
+                  <label
+                    nz-checkbox
+                    nzValue="3"
+                    [nzDisabled]="isDisableNoneOthers"
+                    >原住民</label
+                  >
+                </div>
+                <div nz-col nzSpan="8">
+                  <label
+                    nz-checkbox
+                    nzValue="4"
+                    [nzDisabled]="isDisableNoneOthers"
+                    >新住民</label
+                  >
+                </div>
+                <div nz-col nzSpan="8">
+                  <label
+                    nz-checkbox
+                    nzValue="5"
+                    [nzDisabled]="isDisableNoneOthers"
+                    >榮民</label
+                  >
+                </div>
+                <div nz-col nzSpan="8">
+                  <label
+                    nz-checkbox
+                    nzValue="6"
+                    [nzDisabled]="isDisableNoneOthers"
+                    >榮眷</label
+                  >
+                </div>
+              </div>
+            </nz-checkbox-wrapper>
+            <app-error-message
+              [control]="form.get('socialWelfareAssistance')"
+              [isTouched]="false"
+              errorKey="required"
+              errorMessage="這是必選選項。"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th class="custom-header" colSpan="4" nzAlign="center">開案條件</th>
+        </tr>
+        <tr>
+          <th
+            class="th-cell custom-header bold-text"
+            colSpan="1"
+            nzAlign="center"
+          >
+            是否老年人口(一般65歲以上、原住民55歲以上、身心障礙者50歲以上)
+          </th>
+          <td class="td-cell custom-cell">
+            <app-select
+              [selectWidth]="'175px'"
+              [options]="selectOptions_trueOrFalse"
+              [defaultPlaceHolder]="false"
+              formControlName="isOlderPerson"
+            />
+            <app-error-message
+              [control]="form.get('isOlderPerson')"
+              [isTouched]="false"
+              errorKey="required"
+              errorMessage="這是必選選項。"
+            />
+          </td>
+          <th
+            class="th-cell custom-header bold-text"
+            colSpan="1"
+            nzAlign="center"
+          >
+            是否符合弱勢群體(身分別：低收入戶、中低收入戶、中低老人、邊緣戶)
+          </th>
+          <td class="td-cell custom-cell">
+            <app-select
+              [selectWidth]="'175px'"
+              [options]="selectOptions_trueOrFalse"
+              [defaultPlaceHolder]="false"
+              formControlName="isVulnerableGroup"
+            />
+            <app-error-message
+              [control]="form.get('isVulnerableGroup')"
+              [isTouched]="false"
+              errorKey="required"
+              errorMessage="這是必選選項。"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th
+            class="th-cell custom-header bold-text"
+            colSpan="1"
+            nzAlign="center"
+          >
+            是否含有特殊議題(獨居(含白天獨居)、老老照顧、雙重老化)
+          </th>
+          <td class="td-cell custom-cell">
+            <app-select
+              [selectWidth]="'175px'"
+              [options]="selectOptions_trueOrFalse"
+              [defaultPlaceHolder]="false"
+              formControlName="isIncludesSpecialIssues"
+            />
+            <app-error-message
+              [control]="form.get('isIncludesSpecialIssues')"
+              [isTouched]="false"
+              errorKey="required"
+              errorMessage="這是必選選項。"
+            />
+          </td>
+          <th
+            class="th-cell custom-header bold-text"
+            colSpan="1"
+            nzAlign="center"
+          >
+            是否符合服務處重點關注議題(勾是，跳填下列自填指標)
+          </th>
+          <td class="td-cell custom-cell">
+            <app-select
+              [selectWidth]="'175px'"
+              [options]="selectOptions_trueOrFalse"
+              [defaultPlaceHolder]="false"
+              (ngModelChange)="handleSelectChange_isPriorityIssue($event)"
+              formControlName="isPriorityIssue"
+            />
+            <app-error-message
+              [control]="form.get('isPriorityIssue')"
+              [isTouched]="false"
+              errorKey="required"
+              errorMessage="這是必選選項。"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th
+            class="th-cell custom-header bold-text"
+            [ngClass]="{
+              disableBackground: !isOtherFieldsRequired,
+              'custom-header': isOtherFieldsRequired
+            }"
+            colSpan="1"
+            nzAlign="center"
+          >
+            其他-自填指標
+          </th>
+          <td
+            class="td-cell custom-cell"
+            [ngClass]="{
+              disableBackground: !isOtherFieldsRequired,
+              'custom-header': isOtherFieldsRequired
+            }"
+          >
+            <app-input
+              [inputWidth]="'250px'"
+              [maxLength]="50"
+              [placeholder]="'符合服務處重點關注議題'"
+              formControlName="isSelfReportedMetric"
+            />
+            <app-error-message
+              [control]="form.get('isSelfReportedMetric')"
+              [isTouched]="false"
+              errorKey="required"
+              errorMessage="這是必填欄位。"
+            />
+          </td>
+          <th
+            class="th-cell custom-header bold-text"
+            colSpan="1"
+            nzAlign="center"
+          >
+            評估個案有需求且有風險
+          </th>
+          <td class="td-cell custom-cell">
+            <app-select
+              [selectWidth]="'175px'"
+              [options]="selectOptions_caseClassification"
+              formControlName="caseClassification"
+            />
+            <app-error-message
+              [control]="form.get('caseClassification')"
+              [isTouched]="false"
+              errorKey="required"
+              errorMessage="這是必選選項。"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th
+            class="th-cell custom-header bold-text"
+            colSpan="1"
+            nzAlign="center"
+          >
+            自述/轉介之服務需求
+          </th>
+          <td class="td-cell custom-cell">
+            <app-input
+              [inputWidth]="'250px'"
+              [maxLength]="50"
+              formControlName="selfReferralServiceNeeds"
+            />
+            <app-error-message
+              [control]="form.get('selfReferralServiceNeeds')"
+              [isTouched]="false"
+              errorKey="required"
+              errorMessage="這是必填欄位。"
+            />
+          </td>
+          <th
+            class="th-cell custom-header bold-text"
+            colSpan="1"
+            nzAlign="center"
+          >
+            長者接受服務的意願
+          </th>
+          <td class="td-cell custom-cell">
+            <app-select
+              [selectWidth]="'175px'"
+              [options]="selectOptions_serviceAcceptanceByElderly"
+              [defaultPlaceHolder]="false"
+              formControlName="isServiceAcceptanceByElderly"
+            />
+            <app-error-message
+              [control]="form.get('isServiceAcceptanceByElderly')"
+              [isTouched]="false"
+              errorKey="required"
+              errorMessage="這是必選選項。"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th
+            class="th-cell custom-header bold-text"
+            colSpan="1"
+            nzAlign="center"
+          >
+            長者需求弘道服務是否可滿足
+          </th>
+          <td class="td-cell custom-cell">
+            <app-select
+              [selectWidth]="'175px'"
+              [options]="selectOptions_elderlyNeedsSatisfactionStatus"
+              [defaultPlaceHolder]="false"
+              formControlName="isElderlyNeedsSatisfactionStatus"
+            />
+            <app-error-message
+              [control]="form.get('isElderlyNeedsSatisfactionStatus')"
+              [isTouched]="false"
+              errorKey="required"
+              errorMessage="這是必選選項。"
+            />
+          </td>
+          <th
+            class="th-cell custom-header bold-text"
+            colSpan="1"
+            nzAlign="center"
+          >
+            長者是否位於弘道服務區域內
+          </th>
+          <td class="td-cell custom-cell">
+            <app-select
+              [selectWidth]="'175px'"
+              [options]="selectOptions_trueOrFalse"
+              [defaultPlaceHolder]="false"
+              formControlName="isElderlyInServiceArea"
+            />
+            <app-error-message
+              [control]="form.get('isElderlyInServiceArea')"
+              [isTouched]="false"
+              errorKey="required"
+              errorMessage="這是必選選項。"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th
+            class="th-cell custom-header bold-text"
+            colSpan="1"
+            nzAlign="center"
+          >
+            開案評估結果：
+          </th>
+          <td
+            class="td-cell custom-cell"
+            [ngClass]="{
+              'result-isPassed': isCaseOpened === '開案',
+              'result-isFailed': isCaseOpened === '不開案'
+            }"
+          >
+            {{ isCaseOpened }}
+          </td>
+          <th
+            class="th-cell custom-header bold-text"
+            colSpan="1"
+            nzAlign="center"
+          >
+            不開案的原因：
+          </th>
+          <td class="td-cell custom-cell result-isFailed">
+            {{ caseNotOpenedResult }}
+          </td>
+        </tr>
+        <tr>
+          <td class="td-cell custom-header" colSpan="4">
+            <app-button
+              [buttonIcon]="'save'"
+              [buttonText]="'草稿暫存'"
+              (click)="save()"
+            />
+            <app-button
+              (click)="onNextPage()"
+              [buttonIcon]="'nextpage'"
+              [buttonText]="'下一頁'"
+            />
+
+            <app-button
+              [buttonIcon]="'close'"
+              [buttonText]="'關閉'"
+              (click)="closeTab('個案開案評估表')"
+            />
+          </td>
+        </tr>
+      </nz-table>
+    </form>
+  </ng-container>
+</div>

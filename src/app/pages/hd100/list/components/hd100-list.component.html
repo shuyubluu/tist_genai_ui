@@ -1,0 +1,130 @@
+<h1 class="inner-title">個案資料清單</h1>
+<div class="mt"></div>
+<div class="table-container">
+  <ng-container>
+    <form [formGroup]="form">
+      <nz-table class="bordered-table">
+        <tr>
+          <th class="th-cell custom-header bold-text" nzAlign="center">
+            服務狀態
+          </th>
+          <td class="td-cell custom-cell">
+            <app-select
+              [selectWidth]="'175px'"
+              [options]="selectOptions_serviceStatus"
+              formControlName="serviceStatus"
+            />
+          </td>
+          <th class="th-cell custom-header bold-text" nzAlign="center">
+            個案姓名
+          </th>
+          <td class="td-cell custom-cell">
+            <app-input
+              [inputWidth]="'175px'"
+              [maxLength]="30"
+              formControlName="caseName"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th class="th-cell custom-header bold-text" nzAlign="center">
+            開案日期
+          </th>
+          <td class="td-cell custom-cell">
+            <app-dayPicker formControlName="caseOpeningDate" />
+          </td>
+          <th class="th-cell custom-header bold-text" nzAlign="center">
+            個案分級
+          </th>
+          <td class="td-cell custom-cell">
+            <app-select
+              [selectWidth]="'175px'"
+              [options]="selectOptions_caseClassification"
+              formControlName="caseClassification"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th colspan="4" class="custom-header">
+            <app-button
+              [buttonIcon]="'search'"
+              [buttonText]="'搜尋個案'"
+              (click)="search()"
+            />
+            <app-button
+              [buttonIcon]="'add'"
+              [buttonText]="'新增個案'"
+              (click)="create()"
+            />
+            <app-button
+              [buttonIcon]="'close'"
+              [buttonText]="'關閉'"
+              (click)="closeTab('個案資料清單')"
+            />
+          </th>
+        </tr>
+      </nz-table>
+    </form>
+  </ng-container>
+</div>
+<div class="mt"></div>
+<div class="hd100-list-search" *ngIf="isShowSearchResult">
+  <div class="message">搜尋結果: 共{{ searchResultData.length }}筆</div>
+  <form>
+    <div class="mt"></div>
+    <div class="table-container">
+      <ng-container>
+        <table class="bordered-table">
+          <thead>
+            <tr class="custom-header2 bold-text">
+              <th class="th-cell" nzAlign="center">-</th>
+              <th class="th-cell" nzAlign="center">服務狀態</th>
+              <th class="th-cell" nzAlign="center">個案姓名</th>
+              <th class="th-cell" nzAlign="center">性別</th>
+              <th class="th-cell" nzAlign="center">生日</th>
+              <th class="th-cell" nzAlign="center">主責人</th>
+              <th class="th-cell" nzAlign="center">開案日期</th>
+              <th class="th-cell" nzAlign="center">個案分級</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let searchResult of searchResultData; let i = index"
+              [ngClass]="{
+                'even-row': i % 2 === 1,
+                'custom-cell': i % 2 !== 1
+              }"
+            >
+              <td class="td-cell2" nzAlign="center">
+                <app-button [buttonIcon]="'view'" [buttonText]="'檢視'" />
+              </td>
+              <td class="td-cell2" nzAlign="center">
+                {{ searchResult.serviceStatus }}
+              </td>
+              <td class="td-cell2" nzAlign="center">
+                {{ searchResult.caseName }}
+              </td>
+              <td class="td-cell2" nzAlign="center">
+                {{ searchResult.gender }}
+              </td>
+              <td class="td-cell2" nzAlign="center">
+                {{ searchResult.dateOfBirth }}
+              </td>
+              <td class="td-cell2" nzAlign="center">
+                {{ searchResult.responsiblePerson }}
+              </td>
+              <td class="td-cell2" nzAlign="center">
+                {{ searchResult.caseOpeningDate }}
+              </td>
+              <td class="td-cell2" nzAlign="center">
+                {{ searchResult.caseClassification }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </ng-container>
+    </div>
+  </form>
+  <div class="mt-10"></div>
+  <app-pagination></app-pagination>
+</div>

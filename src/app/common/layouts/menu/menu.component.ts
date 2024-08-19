@@ -14,7 +14,7 @@ export class MenuComponent implements OnInit {
   @Input() isCollapsed = false;
   menuData!: any[];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     const data = [
@@ -26,7 +26,7 @@ export class MenuComponent implements OnInit {
       {
         title: '個案管理',
         icon: '',
-        link: '#',
+        children: [{ title: '01- 個案資料清單', open: false, link: '/hd100' }],
       },
       {
         title: '志工管理',

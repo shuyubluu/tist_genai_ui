@@ -28,11 +28,13 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
  *
  * disabled 預設為false 可提供布林值 禁用輸入框;
  *
- * type 預設為text [type]="'字串'" 可輸入'PWD':密碼類型; 'NUMBER':純數字類型
+ * type 預設為text [type]="'字串'" 可輸入'PWD':密碼類型; 'NUMBER':純數字類型; 'CHECKBOX':選擇框類型
  *
  * placeholder 為預設字詞 [placeholder]="'字串'"
  *
  * 自定義表單驗證 formControlName="input的formControlName" 綁定表單驗證的ControlName
+ *
+ * maxLength [maxLength]="此輸入框最大的輸入字數" 為輸入框最大字數
  */
 @Component({
   selector: 'app-input',
@@ -54,7 +56,8 @@ export class InputComponent implements OnInit, ControlValueAccessor {
   @Input() contentEntered: string = '';
   @Input() disabled: boolean = false;
   @Input() type: string = '';
-  @Input() placeholder = '';
+  @Input() placeholder: string = '';
+  @Input() maxLength?: number;
 
   @Output() inputTextChange = new EventEmitter<string>();
 
@@ -86,14 +89,21 @@ export class InputComponent implements OnInit, ControlValueAccessor {
 
   onInput(event: Event) {
     const target = event.target as HTMLInputElement;
-    this.enteredContent = target.value;
-    this.onChange(this.enteredContent);
+    let value = target.value;
+
+    if (this.maxLength !== undefined && value.length > this.maxLength) {
+      value = value.slice(0, this.maxLength);
+    }
+
+    this.enteredContent = value;
+    this.onChange(value);
+    this.inputTextChange.emit(value);
   }
 
   constructor() {}
 
   ngOnInit() {
-    this.enteredContent = this.contentEntered ? this.contentEntered : '';
+    this.enteredContent = this.contentEntered || '';
   }
 
   getInputType(): string {
@@ -104,6 +114,9 @@ export class InputComponent implements OnInit, ControlValueAccessor {
         break;
       case 'NUMBER':
         type = 'number';
+        break;
+      case 'CHECKBOX':
+        type = 'checkbox';
         break;
       default:
         type = 'text'; // 默認類型設置為 'text'
@@ -330,10 +343,5 @@ export class InputComponent implements OnInit, ControlValueAccessor {
     }
 
     return classes.join(' ');
-  }
-
-  onInputTextChange(event: any) {
-    this.enteredContent = event;
-    this.inputTextChange.emit(this.enteredContent);
   }
 }

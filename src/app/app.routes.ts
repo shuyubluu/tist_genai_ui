@@ -19,7 +19,24 @@ export const routes: Routes = [
           ),
         data: { tabName: '首頁' },
       },
-      // 可以加入其他子路由...
+      {
+        path: 'hd100',
+        loadChildren: () =>
+          import('./pages/hd100/hd100.routes').then((m) => m.HD100_ROUTES),
+        data: { tabName: '個案資料清單' },
+      },
+      {
+        path: 'hd110',
+        loadChildren: () =>
+          import('./pages/hd110/hd110.routes').then((m) => m.HD110_ROUTES),
+        data: { tabName: '個案開案評估表' },
+      },
+      {
+        path: 'hd120',
+        loadChildren: () =>
+          import('./pages/hd120/hd120.routes').then((m) => m.HD120_ROUTES),
+        data: { tabName: '個案基本資料' },
+      },
     ],
   },
   {

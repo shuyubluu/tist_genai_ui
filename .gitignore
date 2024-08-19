@@ -217,6 +217,9 @@ dist
 !.vscode/extensions.json
 !.vscode/*.code-snippets
 
+# Miscellaneous
+/.angular/cache
+
 # Local History for Visual Studio Code
 .history/
 

@@ -1,4 +1,4 @@
-import { Component, forwardRef } from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   ControlValueAccessor,
@@ -20,6 +20,12 @@ import {
   MY_DATE_FORMATS,
 } from '../../utils/minguo-date-adapter';
 import { SharedModule } from '../../shared/shared.module';
+
+/**
+ * 日期選擇元件
+ *
+ * disabled 預設為false 可提供布林值 禁用輸入框;
+ */
 
 @Component({
   selector: 'app-dayPicker',
@@ -48,7 +54,10 @@ import { SharedModule } from '../../shared/shared.module';
   ],
 })
 export class DayPickerComponent implements ControlValueAccessor {
+  @Input() disabled: boolean = false;
+
   selectedDate: Date | null = null;
+
   onChange: (value: Date | null) => void = () => {}; // 當控件值變更時調用的函數
 
   onTouched: () => void = () => {}; // 當控件被觸摸時調用的函數
@@ -65,6 +74,11 @@ export class DayPickerComponent implements ControlValueAccessor {
   // 當控件被觸摸（例如，失去焦點）時，Angular 會調用這個方法來註冊一個回調函數
   registerOnTouched(fn: () => void): void {
     this.onTouched = fn; // 當控件被觸摸時，我們需要調用這個回調函數來通知外部表單模型
+  }
+
+  // 當控件被禁用或啟用時，Angular 會調用這個方法
+  setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
   }
 
   onselect(event: Date | null) {

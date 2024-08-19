@@ -94,6 +94,18 @@ $angular-ngzorro-theme: mat.define-light-theme(
   margin-top: 20px;
 }
 
+.custom-header {
+  background: linear-gradient(to bottom, #e6f0fb, #cfe6ff);
+}
+
+.custom-cell {
+  background-color: #fffdf2;
+}
+
+.even-row {
+  background-color: #f1f6fd;
+}
+
 html,
 body {
   height: 100%;
@@ -102,5 +114,3 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
-
-
