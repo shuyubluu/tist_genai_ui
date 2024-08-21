@@ -9,6 +9,7 @@
   [nzPlaceHolder]="placeHolder"
   [ngClass]="getSelectClass()"
   (ngModelChange)="onSelectChange($event)"
+  [disabled]="disabled"
 >
   <nz-option
     *ngFor="let option of options"

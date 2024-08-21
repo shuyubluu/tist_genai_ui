@@ -44,14 +44,14 @@ export class Hd100ListComponent implements OnInit {
     },
   ];
   // 服務狀態select選項
-  selectOptions_serviceStatus: Array<string> = [
+  selectOptions_serviceStatus: string[] = [
     '持續服務',
     '暫停服務',
     '結案',
     '無',
   ];
   // 個案分級select選項
-  selectOptions_caseClassification: Array<string> = [
+  selectOptions_caseClassification: string[] = [
     '高風險',
     '中風險',
     '低風險',

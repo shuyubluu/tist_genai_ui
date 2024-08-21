@@ -14,6 +14,7 @@
           <td class="td-cell custom-cell">
             <app-select
               [selectWidth]="'175px'"
+              [defaultPlaceHolder]="false"
               [options]="selectOptions_caseSource"
               (selectionChange)="onCaseSourceSelectChange()"
               formControlName="caseSource"
@@ -263,6 +264,7 @@
           <td class="td-cell custom-cell">
             <app-select
               [selectWidth]="'175px'"
+              [defaultPlaceHolder]="false"
               [options]="selectOptions_gender"
               formControlName="gender"
             />
@@ -387,6 +389,7 @@
           <td class="td-cell custom-cell">
             <app-select
               [selectWidth]="'175px'"
+              [defaultPlaceHolder]="false"
               [options]="selectOptions_welfareStatus"
               formControlName="welfareStatus"
             />
@@ -475,8 +478,8 @@
           <td class="td-cell custom-cell">
             <app-select
               [selectWidth]="'175px'"
-              [options]="selectOptions_trueOrFalse"
               [defaultPlaceHolder]="false"
+              [options]="selectOptions_trueOrFalse"
               formControlName="isOlderPerson"
             />
             <app-error-message
@@ -496,8 +499,8 @@
           <td class="td-cell custom-cell">
             <app-select
               [selectWidth]="'175px'"
-              [options]="selectOptions_trueOrFalse"
               [defaultPlaceHolder]="false"
+              [options]="selectOptions_trueOrFalse"
               formControlName="isVulnerableGroup"
             />
             <app-error-message
@@ -519,8 +522,8 @@
           <td class="td-cell custom-cell">
             <app-select
               [selectWidth]="'175px'"
-              [options]="selectOptions_trueOrFalse"
               [defaultPlaceHolder]="false"
+              [options]="selectOptions_trueOrFalse"
               formControlName="isIncludesSpecialIssues"
             />
             <app-error-message
@@ -540,8 +543,8 @@
           <td class="td-cell custom-cell">
             <app-select
               [selectWidth]="'175px'"
-              [options]="selectOptions_trueOrFalse"
               [defaultPlaceHolder]="false"
+              [options]="selectOptions_trueOrFalse"
               (ngModelChange)="handleSelectChange_isPriorityIssue($event)"
               formControlName="isPriorityIssue"
             />
@@ -569,7 +572,7 @@
             class="td-cell custom-cell"
             [ngClass]="{
               disableBackground: !isOtherFieldsRequired,
-              'custom-header': isOtherFieldsRequired
+              'custom-cell': isOtherFieldsRequired
             }"
           >
             <app-input
@@ -595,6 +598,7 @@
           <td class="td-cell custom-cell">
             <app-select
               [selectWidth]="'175px'"
+              [defaultPlaceHolder]="false"
               [options]="selectOptions_caseClassification"
               formControlName="caseClassification"
             />
@@ -637,8 +641,8 @@
           <td class="td-cell custom-cell">
             <app-select
               [selectWidth]="'175px'"
-              [options]="selectOptions_serviceAcceptanceByElderly"
               [defaultPlaceHolder]="false"
+              [options]="selectOptions_serviceAcceptanceByElderly"
               formControlName="isServiceAcceptanceByElderly"
             />
             <app-error-message
@@ -660,8 +664,8 @@
           <td class="td-cell custom-cell">
             <app-select
               [selectWidth]="'175px'"
-              [options]="selectOptions_elderlyNeedsSatisfactionStatus"
               [defaultPlaceHolder]="false"
+              [options]="selectOptions_elderlyNeedsSatisfactionStatus"
               formControlName="isElderlyNeedsSatisfactionStatus"
             />
             <app-error-message
@@ -681,8 +685,8 @@
           <td class="td-cell custom-cell">
             <app-select
               [selectWidth]="'175px'"
-              [options]="selectOptions_trueOrFalse"
               [defaultPlaceHolder]="false"
+              [options]="selectOptions_trueOrFalse"
               formControlName="isElderlyInServiceArea"
             />
             <app-error-message
@@ -733,7 +737,6 @@
               [buttonIcon]="'nextpage'"
               [buttonText]="'下一頁'"
             />
-
             <app-button
               [buttonIcon]="'close'"
               [buttonText]="'關閉'"

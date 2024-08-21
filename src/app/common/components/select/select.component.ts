@@ -31,6 +31,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
  * 附加客製化樣式 [attachClassName]="[...'樣式字串']" 可傳入多個 {需把客製化樣式定義在元件的.scss檔}
  *
  * 選擇事件 (selectionChange)="selectOption($event)"
+ * 
+ * disabled 預設為false 可提供布林值 禁用輸入框;
  */
 @Component({
   selector: 'app-select',
@@ -52,6 +54,7 @@ export class SelectComponent implements OnInit, ControlValueAccessor {
   @Input() defaultPlaceHolder: boolean = true;
   @Input() optionSelected: string = '';
   @Input() attachClassName: string[] = [];
+  @Input() disabled: boolean = false;
 
   @Output() selectionChange = new EventEmitter<string>();
 
@@ -71,6 +74,11 @@ export class SelectComponent implements OnInit, ControlValueAccessor {
 
   registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
+  }
+
+  // 當控件被禁用或啟用時，Angular 會調用這個方法
+  setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
   }
 
   ngOnInit() {

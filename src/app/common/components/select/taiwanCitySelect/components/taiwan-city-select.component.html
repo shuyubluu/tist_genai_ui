@@ -1,4 +1,8 @@
-<select class="taiwanSelect" (change)="onCityChange($event)">
+<select
+  class="taiwanSelect"
+  [disabled]="disabled"
+  (change)="onCityChange($event)"
+>
   <option value="">請選擇縣市</option>
   <option *ngFor="let city of cities" [value]="city.countycode[0]">
     {{ city.countyname[0] }}
@@ -8,6 +12,7 @@
 <select
   *ngIf="!onlyCity"
   class="taiwanSelect"
+  [disabled]="disabled"
   (change)="onDistrictChange($event)"
 >
   <option value="">請選擇鄉鎮市區</option>
@@ -19,6 +24,7 @@
 <select
   *ngIf="!onlyCity"
   class="taiwanSelect"
+  [disabled]="disabled"
   (change)="onVillageChange($event)"
 >
   <option value="">請選擇村(里)</option>

@@ -49,7 +49,7 @@ export class Hd110FormComponent implements OnInit {
   // 是否需填其他-自填指標
   isOtherFieldsRequired: boolean = false;
   // 個案來源select選項
-  selectOptions_caseSource: Array<string> = [
+  selectOptions_caseSource: string[] = [
     '主動發掘',
     '個案求助',
     '民眾通報',
@@ -58,30 +58,27 @@ export class Hd110FormComponent implements OnInit {
     '長照中心派案',
   ];
   // 性別select選項
-  selectOptions_gender: Array<string> = ['男', '女'];
+  selectOptions_gender: string[] = ['男', '女'];
   // 福利身分select選項
-  selectOptions_welfareStatus: Array<string> = [
+  selectOptions_welfareStatus: string[] = [
     '一般戶',
     '低收入戶',
     '中低收入戶',
     '邊緣戶',
   ];
   // 是非題select選項
-  selectOptions_trueOrFalse: Array<string> = ['是', '否'];
+  selectOptions_trueOrFalse: string[] = ['是', '否'];
   // 個案風險select選項
-  selectOptions_caseClassification: Array<string> = [
+  selectOptions_caseClassification: string[] = [
     '低風險',
     '中風險',
     '高風險',
     '無',
   ];
   // 長者接受服務的意願select選項
-  selectOptions_serviceAcceptanceByElderly: Array<string> = [
-    '有意願',
-    '無意願',
-  ];
+  selectOptions_serviceAcceptanceByElderly: string[] = ['有意願', '無意願'];
   // 長者接受服務的意願select選項
-  selectOptions_elderlyNeedsSatisfactionStatus: Array<string> = [
+  selectOptions_elderlyNeedsSatisfactionStatus: string[] = [
     '可提供',
     '不可提供',
   ];
@@ -151,6 +148,7 @@ export class Hd110FormComponent implements OnInit {
       caseSource: new FormControl('', [Validators.required]),
       // 填表日期
       formFillingDate: new FormControl('', [Validators.required]),
+
       // 2.轉介單位資料
       // 轉介單位
       referralUnit: new FormControl('', [Validators.required]),
@@ -178,6 +176,7 @@ export class Hd110FormComponent implements OnInit {
       referralUnit_fax: new FormControl(''),
       // 轉介單位其他
       referralUnit_other: new FormControl(''),
+
       // 3.基本資料
       // 姓名
       name: new FormControl('', [Validators.required]),
@@ -210,6 +209,8 @@ export class Hd110FormComponent implements OnInit {
       welfareStatus: new FormControl('', [Validators.required]),
       // 社會福利補助
       socialWelfareAssistance: new FormControl('', [Validators.required]),
+
+      // 4.開案條件
       // 是否老年人口
       isOlderPerson: new FormControl('', [Validators.required]),
       // 是否符合弱勢群體
@@ -239,14 +240,14 @@ export class Hd110FormComponent implements OnInit {
     // 是的話用開啟所有轉介單位資料欄位
     // 否則一律關閉
     if (this.isReferral === false) {
-      this.form.get('referralUnit')?.setValue('');
-      this.form.get('contactPerson')?.setValue('');
-      this.form.get('referralUnit_mobilePhone_firstFourDigits')?.setValue('');
-      this.form.get('referralUnit_mobilePhone_lastSixDigits')?.setValue('');
-      this.form.get('referralUnit_phone_areaCode')?.setValue('');
-      this.form.get('referralUnit_phone_phoneNumber')?.setValue('');
-      this.form.get('referralUnit_fax')?.setValue('');
-      this.form.get('referralUnit_other')?.setValue('');
+      this.form.get('referralUnit')?.reset();
+      this.form.get('contactPerson')?.reset();
+      this.form.get('referralUnit_mobilePhone_firstFourDigits')?.reset();
+      this.form.get('referralUnit_mobilePhone_lastSixDigits')?.reset();
+      this.form.get('referralUnit_phone_areaCode')?.reset();
+      this.form.get('referralUnit_phone_phoneNumber')?.reset();
+      this.form.get('referralUnit_fax')?.reset();
+      this.form.get('referralUnit_other')?.reset();
       this.form.get('referralUnit')?.disable();
       this.form.get('contactPerson')?.disable();
       this.form.get('referralUnit_mobilePhone_firstFourDigits')?.disable();
@@ -295,14 +296,14 @@ export class Hd110FormComponent implements OnInit {
       this.form.get('referralUnit_other')?.enable();
     } else {
       this.isReferral = false;
-      this.form.get('referralUnit')?.setValue('');
-      this.form.get('contactPerson')?.setValue('');
-      this.form.get('referralUnit_mobilePhone_firstFourDigits')?.setValue('');
-      this.form.get('referralUnit_mobilePhone_lastSixDigits')?.setValue('');
-      this.form.get('referralUnit_phone_areaCode')?.setValue('');
-      this.form.get('referralUnit_phone_phoneNumber')?.setValue('');
-      this.form.get('referralUnit_fax')?.setValue('');
-      this.form.get('referralUnit_other')?.setValue('');
+      this.form.get('referralUnit')?.reset();
+      this.form.get('contactPerson')?.reset();
+      this.form.get('referralUnit_mobilePhone_firstFourDigits')?.reset();
+      this.form.get('referralUnit_mobilePhone_lastSixDigits')?.reset();
+      this.form.get('referralUnit_phone_areaCode')?.reset();
+      this.form.get('referralUnit_phone_phoneNumber')?.reset();
+      this.form.get('referralUnit_fax')?.reset();
+      this.form.get('referralUnit_other')?.reset();
       this.form.get('referralUnit')?.disable();
       this.form.get('contactPerson')?.disable();
       this.form.get('referralUnit_mobilePhone_firstFourDigits')?.disable();
@@ -328,6 +329,7 @@ export class Hd110FormComponent implements OnInit {
       ['2', '3', '4', '5', '6'].includes(check)
     );
   }
+
   // 是否符合服務處重點關注議題改變
   handleSelectChange_isPriorityIssue(option: string) {
     if (option === '是') {
@@ -336,13 +338,15 @@ export class Hd110FormComponent implements OnInit {
     } else {
       this.isOtherFieldsRequired = false;
       this.form.get('isSelfReportedMetric')?.disable();
-      this.form.get('isSelfReportedMetric')?.setValue('');
+      this.form.get('isSelfReportedMetric')?.reset();
     }
   }
+  
   // 暫存草稿
   save() {
     this.message.create('success', '草稿暫存成功');
   }
+
   // 點選下一頁後執行操作判斷
   onNextPage() {
     // if (this.form.valid) {
@@ -356,6 +360,8 @@ export class Hd110FormComponent implements OnInit {
     //   this.message.create('warning', '所有必須填寫的項目請先完成填寫');
     // }
   }
+
+  // 顯示送審modal
   showConfirmationModal() {
     this.modal.confirm({
       nzTitle: '是否送審?',

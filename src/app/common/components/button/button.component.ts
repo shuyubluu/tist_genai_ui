@@ -17,6 +17,7 @@ import {
   ACCEPT,
   NEXTPAGE,
   PREVIOUSPAGE,
+  DOWNLOAD,
 } from '../../utils/buttonHelper';
 
 /**
@@ -35,6 +36,7 @@ import {
  * - 'delete'：返回 DELETE (刪除圖示)
  * - 'save'：返回 SAVE (更新圖示)
  * - 'upload'：返回 UPLOAD (上傳圖示)
+ * - 'download'：返回 DOWNLOAD (下載圖示)
  * - 'reload'：返回 RELOAD (重載圖示)
  * - 'pencial'：返回 PENCIAL (繪製圖示)
  * - 'return'：返回 RETURN (回首頁圖示)
@@ -86,6 +88,8 @@ export class ButtonComponent implements OnInit {
         return SAVE; // 更新圖示
       case 'upload':
         return UPLOAD; // 上傳圖示
+      case 'download':
+        return DOWNLOAD; // 下載圖示
       case 'reload':
         return RELOAD; // 重載圖示
       case 'pencial':

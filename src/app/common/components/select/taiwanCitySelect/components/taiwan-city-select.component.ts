@@ -18,6 +18,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
  *
  * 隱藏鄉鎮市區及村里:
  * - [onlyCity]="true" (預設為false)
+ * 
+ * disabled 預設為false 可提供布林值 禁用輸入框;
  */
 
 @Component({
@@ -36,6 +38,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class TaiwanCitySelectComponent implements OnInit, ControlValueAccessor {
   @Input() onlyCity: boolean = false;
+  @Input() disabled: boolean = false;
 
   // 存放API回傳的縣市資料
   cities: Cities[] = [];
@@ -76,6 +79,11 @@ export class TaiwanCitySelectComponent implements OnInit, ControlValueAccessor {
 
   registerOnTouched(fn: any): void {
     this.onTouched = fn;
+  }
+
+  // 當控件被禁用或啟用時，Angular 會調用這個方法
+  setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
   }
 
   // 選擇縣市資料後，取得該縣市的鄉鎮市區資料

@@ -7,6 +7,7 @@ export const CLOSE = '../../../../../assets/img/button/cross.png';
 export const DELETE = '../../../../../assets/img/button/delete.png';
 export const SAVE = '../../../../../assets/img/button/disk.png';
 export const UPLOAD = '../../../../../assets/img/button/arrow_up.png';
+export const DOWNLOAD = './../../../../assets/img/button/download.png';
 export const PENCIAL = '../../../../../assets/img/button/pencil.png';
 export const RETURN = '../../../../../assets/img/button/arrow_undo.png';
 export const RELOAD = '../../../../../assets/img/button/arrow_refresh.png';

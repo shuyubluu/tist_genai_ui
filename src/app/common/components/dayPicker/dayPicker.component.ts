@@ -24,7 +24,7 @@ import { SharedModule } from '../../shared/shared.module';
 /**
  * 日期選擇元件
  *
- * disabled 預設為false 可提供布林值 禁用輸入框;
+ * disabled 預設為false 可提供布林值 禁止選擇日期;
  */
 
 @Component({
