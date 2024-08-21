@@ -35,7 +35,13 @@ export const routes: Routes = [
         path: 'hd120',
         loadChildren: () =>
           import('./pages/hd120/hd120.routes').then((m) => m.HD120_ROUTES),
-        data: { tabName: '個案基本資料表' },
+        data: { tabName: '個案開案資料表' },
+      },
+      {
+        path: 'hd130',
+        loadChildren: () =>
+          import('./pages/hd130/hd130.routes').then((m) => m.HD130_ROUTES),
+        data: { tabName: '個案初評表' },
       },
     ],
   },

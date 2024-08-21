@@ -341,18 +341,19 @@ export class Hd110FormComponent implements OnInit {
       this.form.get('isSelfReportedMetric')?.reset();
     }
   }
-  
+
   // 暫存草稿
   save() {
     this.message.create('success', '草稿暫存成功');
   }
 
   // 點選下一頁後執行操作判斷
-  onNextPage() {
+  async onNextPage() {
     // if (this.form.valid) {
     // if (this.isCaseOpened === '開案') {
-    this.router.navigate(['/hd120']);
+    await this.router.navigate(['/hd120']);
     this.message.create('success', '開案成功');
+    this.closeTab('個案開案評估表');
     // } else {
     //   this.showConfirmationModal();
     // }

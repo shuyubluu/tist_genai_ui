@@ -106,6 +106,10 @@ $angular-ngzorro-theme: mat.define-light-theme(
   background-color: #f1f6fd;
 }
 
+.disableBackground {
+  background-color: #f0f0f0;
+}
+
 html,
 body {
   height: 100%;

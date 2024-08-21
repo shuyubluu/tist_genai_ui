@@ -1,4 +1,3 @@
-import { filter } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
@@ -9,7 +8,6 @@ import { DayPickerComponent } from '../../../../common/components/dayPicker/dayP
 import { SharedModule } from '../../../../common/shared/shared.module';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ErrorMessageComponent } from '../../../../common/components/message/error-message.component';
-import { taiwanIdValidator } from '../../../../common/validator/taiwan-id-validator';
 import { TaiwanCitySelectComponent } from '../../../../common/components/select/taiwanCitySelect/components/taiwan-city-select.component';
 import { TabService } from '../../../../common/layouts/tab/tab.service';
 import { NzModalModule } from 'ng-zorro-antd/modal';
@@ -1009,20 +1007,23 @@ export class Hd120FormComponent implements OnInit {
       ['2', '3', '4', '5', '6', '7', '8', '9', '10', '11'].includes(check)
     );
   }
+
   // 暫存草稿
   save() {
     this.message.create('success', '草稿暫存成功');
   }
 
   // 點選上一頁後執行操作判斷
-  onPreviousPage() {
-    this.router.navigate(['/hd110']);
+  async onPreviousPage() {
+    await this.router.navigate(['/hd110']);
+    this.closeTab('個案開案資料表');
   }
 
   // 點選下一頁後執行操作判斷
-  onNextPage() {
+  async onNextPage() {
     // if (this.form.valid) {
-    this.router.navigate(['/hd130']);
+    await this.router.navigate(['/hd130']);
+    this.closeTab('個案開案資料表');
     // } else {
     //   this.message.create('warning', '所有必須填寫的項目請先完成填寫');
     // }

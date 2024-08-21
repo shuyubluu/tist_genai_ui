@@ -1,10 +1,11 @@
-<h1 class="inner-title">個案開案資料表</h1>
+<h1 class="inner-title">1-2 個案開案資料表</h1>
 <div class="mt"></div>
 <div class="table-container">
   <ng-container>
     <form [formGroup]="form">
       <nz-table class="bordered-table">
         <tr>
+          <!-- !TODO -->
           <th class="custom-header" colSpan="4" nzAlign="center">個案狀態</th>
         </tr>
         <tr>
@@ -75,6 +76,7 @@
           </td>
         </tr>
         <tr>
+          <!-- !TODO -->
           <th class="custom-header" colSpan="4" nzAlign="center">基本資料</th>
         </tr>
         <tr>
@@ -82,13 +84,21 @@
             個案來源
           </th>
           <td class="td-cell disableBackground">
-            <app-input [inputWidth]="'175px'" formControlName="caseSource" />
+            <app-input
+              [inputWidth]="'175px'"
+              [maxLength]="30"
+              formControlName="caseSource"
+            />
           </td>
           <th class="th-cell disableBackground bold-text" nzAlign="center">
             姓名
           </th>
-          <td class="td-celldisableBackground">
-            <app-input [inputWidth]="'175px'" formControlName="name" />
+          <td class="td-cell disableBackground">
+            <app-input
+              [inputWidth]="'175px'"
+              [maxLength]="30"
+              formControlName="name"
+            />
           </td>
         </tr>
         <tr>
@@ -115,7 +125,11 @@
             身份證字號
           </th>
           <td class="td-cell disableBackground">
-            <app-input [inputWidth]="'175px'" formControlName="idNumber" />
+            <app-input
+              [inputWidth]="'175px'"
+              [maxLength]="10"
+              formControlName="idNumber"
+            />
           </td>
           <th class="th-cell disableBackground bold-text" nzAlign="center">
             手機(4碼+6碼)
@@ -202,6 +216,7 @@
               [maxLength]="30"
               formControlName="registeredAddress"
             />
+            <!-- !TODO -->
             <!-- <nz-checkbox-wrapper
               style="width: 100%"
               (nzOnChange)="isSameCommunicationAddressChange($event)"
@@ -823,6 +838,7 @@
           </td>
         </tr>
         <tr>
+          <!-- !TODO -->
           <th class="custom-header" colSpan="4" nzAlign="center">福利狀況</th>
         </tr>
         <tr>
@@ -1969,6 +1985,7 @@
             <app-button [buttonIcon]="'pencial'" [buttonText]="'繪製'" />
             <app-button [buttonIcon]="'upload'" [buttonText]="'匯入'" />
             <app-button [buttonIcon]="'download'" [buttonText]="'匯出'" />
+            <!-- !TODO -->
           </td>
           <th class="th-cell custom-header bold-text" nzAlign="center">
             生態圖
@@ -1977,6 +1994,7 @@
             <app-button [buttonIcon]="'pencial'" [buttonText]="'繪製'" />
             <app-button [buttonIcon]="'upload'" [buttonText]="'匯入'" />
             <app-button [buttonIcon]="'download'" [buttonText]="'匯出'" />
+            <!-- !TODO -->
           </td>
         </tr>
         <tr>
@@ -2042,6 +2060,7 @@
             服務團隊
           </th>
           <td class="td-cell custom-cell">
+            <!-- !TODO -->
             <app-select
               [selectWidth]="'175px'"
               [defaultPlaceHolder]="false"
@@ -2060,6 +2079,7 @@
           </th>
           <td colspan="3" class="td-cell custom-cell">
             <nz-checkbox-wrapper style="width: 100%">
+              <!-- !TODO -->
               <div nz-row>
                 <div nz-col nzSpan="4">
                   <label nz-checkbox nzValue="1">志工1</label>
@@ -2083,7 +2103,7 @@
             />
             <app-button
               (click)="onPreviousPage()"
-              [buttonIcon]="'nextpage'"
+              [buttonIcon]="'previouspage'"
               [buttonText]="'上一頁'"
             />
             <app-button

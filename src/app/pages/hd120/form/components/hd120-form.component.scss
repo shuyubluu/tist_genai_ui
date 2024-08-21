@@ -14,16 +14,6 @@
   margin: 1px 0px;
 }
 
-.result-isPassed {
-  color: blue;
-  font-weight: bold;
-}
-
-.result-isFailed {
-  color: red;
-  font-weight: bold;
-}
-
 .grid {
   display: grid;
   grid-template-columns: 2fr 2fr 2fr 1fr;
@@ -41,10 +31,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.disableBackground {
-  background-color: #f0f0f0;
 }
 
 @media screen and (max-width: 1024px) {
