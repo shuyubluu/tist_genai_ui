@@ -43,6 +43,12 @@ export const routes: Routes = [
           import('./pages/hd130/hd130.routes').then((m) => m.HD130_ROUTES),
         data: { tabName: '個案初評表' },
       },
+      {
+        path: 'hd140',
+        loadChildren: () =>
+          import('./pages/hd140/hd140.routes').then((m) => m.HD140_ROUTES),
+        data: { tabName: '例行訪視記錄表' },
+      },
     ],
   },
   {

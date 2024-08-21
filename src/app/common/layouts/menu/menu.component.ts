@@ -26,7 +26,10 @@ export class MenuComponent implements OnInit {
       {
         title: '個案管理',
         icon: '',
-        children: [{ title: '01- 個案資料清單', open: false, link: '/hd100' }],
+        children: [
+          { title: '01- 個案資料清單', open: false, link: '/hd100' },
+          { title: '02- 例行訪視記錄表', open: false, link: '/hd140' },
+        ],
       },
       {
         title: '志工管理',
