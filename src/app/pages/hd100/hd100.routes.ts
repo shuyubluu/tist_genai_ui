@@ -8,4 +8,12 @@ export const HD100_ROUTES: Routes = [
         (m) => m.Hd100ListComponent
       ),
   },
+  {
+    path: 'form',
+    loadComponent: () =>
+      import('./form/components/hd100-form.component').then(
+        (m) => m.Hd100FormComponent
+      ),
+    data: { tabName: '個案結案表' },
+  },
 ];

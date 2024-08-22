@@ -1,0 +1,368 @@
+<h1 class="inner-title">1-6 生活品質問卷</h1>
+<div class="mt"></div>
+<div class="table-container">
+  <ng-container>
+    <form [formGroup]="form">
+      <nz-table class="bordered-table">
+        <tr>
+          <th class="custom-header" colSpan="4" nzAlign="center">訪視概況</th>
+        </tr>
+        <tr>
+          <!-- !TODO -->
+          <th class="th-cell disableBackground bold-text" nzAlign="center">
+            個案姓名
+          </th>
+          <td class="td-cell disableBackground">
+            <app-input
+              [inputWidth]="'175px'"
+              [maxLength]="30"
+              formControlName="caseName"
+            />
+          </td>
+          <th class="th-cell custom-header bold-text" nzAlign="center">
+            訪視日期
+          </th>
+          <td class="td-cell custom-cell">
+            <app-dayPicker formControlName="visitDate" />
+            <app-error-message
+              [control]="form.get('visitDate')"
+              [isTouched]="false"
+              errorKey="required"
+              errorMessage="這是必選的選項。"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th class="custom-header" colSpan="4" nzAlign="center">調查問卷</th>
+        </tr>
+        <tr>
+          <th
+            colSpan="1"
+            class="th-cell custom-header bold-text"
+            nzAlign="center"
+          >
+            生理
+          </th>
+          <td colSpan="3" class="td-cell custom-cell">
+            <div class="bold-text">
+              近6個月內，您覺得身體不適的情況有獲得改善。
+            </div>
+            <app-select
+              [selectWidth]="'175px'"
+              [defaultPlaceHolder]="false"
+              [options]="selectOptions_sheet"
+              formControlName="physiology"
+            />
+            <app-error-message
+              [control]="form.get('physiology')"
+              [isTouched]="false"
+              errorKey="required"
+              errorMessage="這是必選的選項。"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th
+            colSpan="1"
+            class="th-cell custom-header bold-text"
+            nzAlign="center"
+          >
+            獨立
+          </th>
+          <td colSpan="3" class="td-cell custom-cell">
+            <div class="bold-text">
+              近6個月內，您覺得自己在部份生活自理能力有維持或提升。
+            </div>
+            <app-select
+              [selectWidth]="'175px'"
+              [defaultPlaceHolder]="false"
+              [options]="selectOptions_sheet"
+              formControlName="independent_question1"
+            />
+            <app-error-message
+              [control]="form.get('independent_question1')"
+              [isTouched]="false"
+              errorKey="required"
+              errorMessage="這是必選的選項。"
+            />
+            <div class="bold-text">
+              近6個月內，您覺得自己或家人的生活壓力有獲得減輕。
+            </div>
+            <app-select
+              [selectWidth]="'175px'"
+              [defaultPlaceHolder]="false"
+              [options]="selectOptions_sheet"
+              formControlName="independent_question2"
+            />
+            <app-error-message
+              [control]="form.get('independent_question2')"
+              [isTouched]="false"
+              errorKey="required"
+              errorMessage="這是必選的選項。"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th
+            colSpan="1"
+            class="th-cell custom-header bold-text"
+            nzAlign="center"
+          >
+            心理
+          </th>
+          <td colSpan="3" class="td-cell custom-cell">
+            <div class="bold-text">
+              近6個月內，您仍常有負面的感受（如孤單、傷心、緊張、焦慮、憂鬱等）。
+            </div>
+            <app-select
+              [selectWidth]="'175px'"
+              [defaultPlaceHolder]="false"
+              [options]="selectOptions_sheet"
+              formControlName="psychological_question1"
+            />
+            <app-error-message
+              [control]="form.get('psychological_question1')"
+              [isTouched]="false"
+              errorKey="required"
+              errorMessage="這是必選的選項。"
+            />
+            <div class="bold-text">近6個月內，您感覺被尊重和接納。</div>
+            <app-select
+              [selectWidth]="'175px'"
+              [defaultPlaceHolder]="false"
+              [options]="selectOptions_sheet"
+              formControlName="psychological_question2"
+            />
+            <app-error-message
+              [control]="form.get('psychological_question2')"
+              [isTouched]="false"
+              errorKey="required"
+              errorMessage="這是必選的選項。"
+            />
+            <div class="bold-text">
+              近6個月內，您在日常生活中更常獲得成就感。
+            </div>
+            <app-select
+              [selectWidth]="'175px'"
+              [defaultPlaceHolder]="false"
+              [options]="selectOptions_sheet"
+              formControlName="psychological_question3"
+            />
+            <app-error-message
+              [control]="form.get('psychological_question3')"
+              [isTouched]="false"
+              errorKey="required"
+              errorMessage="這是必選的選項。"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th
+            colSpan="1"
+            class="th-cell custom-header bold-text"
+            nzAlign="center"
+          >
+            社會
+          </th>
+          <td colSpan="3" class="td-cell custom-cell">
+            <div class="bold-text">
+              近6個月內，您覺得自己增加了人際互動的機會。
+            </div>
+            <app-select
+              [selectWidth]="'175px'"
+              [defaultPlaceHolder]="false"
+              [options]="selectOptions_sheet"
+              formControlName="social"
+            />
+            <app-error-message
+              [control]="form.get('social')"
+              [isTouched]="false"
+              errorKey="required"
+              errorMessage="這是必選的選項。"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th
+            colSpan="1"
+            class="th-cell custom-header bold-text"
+            nzAlign="center"
+          >
+            環境
+          </th>
+          <td colSpan="3" class="td-cell custom-cell">
+            <div class="bold-text">
+              近6個月內，您能方便得到每日生活所需的資訊。
+            </div>
+            <app-select
+              [selectWidth]="'175px'"
+              [defaultPlaceHolder]="false"
+              [options]="selectOptions_sheet"
+              formControlName="environment_question1"
+            />
+            <app-error-message
+              [control]="form.get('environment_question1')"
+              [isTouched]="false"
+              errorKey="required"
+              errorMessage="這是必選的選項。"
+            />
+            <div class="bold-text">近6個月內，您更有機會做自己想做的事情。</div>
+            <app-select
+              [selectWidth]="'175px'"
+              [defaultPlaceHolder]="false"
+              [options]="selectOptions_sheet"
+              formControlName="environment_question2"
+            />
+            <app-error-message
+              [control]="form.get('environment_question2')"
+              [isTouched]="false"
+              errorKey="required"
+              errorMessage="這是必選的選項。"
+            />
+            <div class="bold-text">近6個月內，您在日常生活中感到安全。</div>
+            <app-select
+              [selectWidth]="'175px'"
+              [defaultPlaceHolder]="false"
+              [options]="selectOptions_sheet"
+              formControlName="environment_question3"
+            />
+            <app-error-message
+              [control]="form.get('environment_question3')"
+              [isTouched]="false"
+              errorKey="required"
+              errorMessage="這是必選的選項。"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th
+            colSpan="1"
+            class="th-cell custom-header bold-text"
+            nzAlign="center"
+          >
+            整體
+          </th>
+          <td colSpan="3" class="td-cell custom-cell">
+            <div class="bold-text">
+              整體來說，弘道提供服務後，您對生活感到滿意。
+            </div>
+            <app-select
+              [selectWidth]="'175px'"
+              [defaultPlaceHolder]="false"
+              [options]="selectOptions_sheet"
+              formControlName="overall"
+            />
+            <app-error-message
+              [control]="form.get('overall')"
+              [isTouched]="false"
+              errorKey="required"
+              errorMessage="這是必選的選項。"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th
+            colSpan="1"
+            class="th-cell custom-header bold-text"
+            nzAlign="center"
+          >
+            填寫人員
+          </th>
+          <td colSpan="3" class="td-cell custom-cell">
+            <div>王小明</div>
+          </td>
+        </tr>
+        <tr>
+          <th class="custom-header" colSpan="4" nzAlign="center">
+            問卷結果統計
+          </th>
+        </tr>
+        <tr>
+          <th
+            colSpan="1"
+            class="th-cell custom-header bold-text"
+            nzAlign="center"
+          >
+            填寫結果統計：
+          </th>
+          <td colSpan="3" class="td-cell custom-cell">
+            <span class="my-3"
+              >生理面：{{
+                physiology_score(form.get("physiology")?.value).toFixed(1)
+              }}</span
+            >
+            <span class="my-3"
+              >獨立面：{{
+                independent_score(
+                  form.get("independent_question1")?.value,
+                  form.get("independent_question2")?.value
+                ).toFixed(1)
+              }}</span
+            >
+            <span class="my-3"
+              >心理面：{{
+                psychological_score(
+                  form.get("psychological_question1")?.value,
+                  form.get("psychological_question2")?.value,
+                  form.get("psychological_question3")?.value
+                ).toFixed(1)
+              }}</span
+            >
+            <span class="my-3"
+              >社會面：{{
+                social_score(form.get("social")?.value).toFixed(1)
+              }}</span
+            >
+            <span class="my-3"
+              >環境面：{{
+                environment_score(
+                  form.get("environment_question1")?.value,
+                  form.get("environment_question2")?.value,
+                  form.get("environment_question3")?.value
+                ).toFixed(1)
+              }}</span
+            >
+            <span class="my-3"
+              >整體面：{{
+                overall_score(form.get("overall")?.value).toFixed(1)
+              }}</span
+            >
+          </td>
+        </tr>
+        <tr>
+          <th
+            colSpan="1"
+            class="th-cell custom-header bold-text"
+            nzAlign="center"
+          >
+            上次填寫結果：
+          </th>
+          <td colSpan="3" class="td-cell custom-cell">
+            <!-- !TODO -->
+            <span class="my-3">生理面：5.0</span>
+            <span class="my-3">獨立面：5.0</span>
+            <span class="my-3">心理面：4.0</span>
+            <span class="my-3">社會面：2.0</span>
+            <span class="my-3">環境面：1.0</span>
+            <span class="my-3">整體面：5.0</span>
+          </td>
+        </tr>
+        <tr>
+          <th colspan="4" class="custom-header">
+            <!-- !TODO -->
+            <app-button
+              [buttonIcon]="'save'"
+              [buttonText]="'儲存'"
+              (click)="save()"
+            />
+            <app-button
+              [buttonIcon]="'close'"
+              [buttonText]="'關閉'"
+              (click)="closeTab('生活品質問卷')"
+            />
+          </th>
+        </tr>
+      </nz-table>
+    </form>
+  </ng-container>
+</div>

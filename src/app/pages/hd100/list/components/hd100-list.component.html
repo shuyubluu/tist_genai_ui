@@ -11,7 +11,7 @@
           <td class="td-cell custom-cell">
             <app-select
               [selectWidth]="'175px'"
-              [defaultPlaceHolder]="false"  
+              [defaultPlaceHolder]="false"
               [options]="selectOptions_serviceStatus"
               formControlName="serviceStatus"
             />
@@ -40,7 +40,7 @@
           <td class="td-cell custom-cell">
             <app-select
               [selectWidth]="'175px'"
-              [defaultPlaceHolder]="false"  
+              [defaultPlaceHolder]="false"
               [options]="selectOptions_caseClassification"
               formControlName="caseClassification"
             />
@@ -48,6 +48,7 @@
         </tr>
         <tr>
           <th colspan="4" class="custom-header">
+            <!-- !TODO -->
             <app-button
               [buttonIcon]="'search'"
               [buttonText]="'搜尋個案'"
@@ -91,13 +92,14 @@
           </thead>
           <tbody>
             <tr
-              *ngFor="let searchResult of searchResultData; let i = index"
+              *ngFor="let searchResult of newSearchResultData; let i = index"
               [ngClass]="{
                 'even-row': i % 2 === 1,
                 'custom-cell': i % 2 !== 1
               }"
             >
-              <td class="td-cell2" nzAlign="center">
+              <td class="td-cell3" nzAlign="center">
+                <!-- !TODO -->
                 <app-button [buttonIcon]="'view'" [buttonText]="'檢視'" />
               </td>
               <td class="td-cell2" nzAlign="center">
@@ -128,5 +130,10 @@
     </div>
   </form>
   <div class="mt-10"></div>
-  <app-pagination></app-pagination>
+  <nz-pagination
+    [nzPageIndex]="currentPage"
+    [nzPageSize]="pageSize"
+    (nzPageIndexChange)="onPageIndexChange($event)"
+    [nzTotal]="searchResultData.length"
+  />
 </div>

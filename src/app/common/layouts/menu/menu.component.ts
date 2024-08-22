@@ -28,7 +28,9 @@ export class MenuComponent implements OnInit {
         icon: '',
         children: [
           { title: '01- 個案資料清單', open: false, link: '/hd100' },
-          { title: '02- 例行訪視記錄表', open: false, link: '/hd140' },
+          { title: '02- 例行訪視表清單', open: false, link: '/hd140' },
+          { title: '03- 個案複評表清單', open: false, link: '/hd150' },
+          { title: '04- 生活品質問卷清單', open: false, link: '/hd160' },
         ],
       },
       {

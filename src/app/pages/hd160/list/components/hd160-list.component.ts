@@ -5,14 +5,13 @@ import { InputComponent } from '../../../../common/components/input/input.compon
 import { SelectComponent } from '../../../../common/components/select/select.component';
 import { RouterModule } from '@angular/router';
 import { DayPickerComponent } from '../../../../common/components/dayPicker/dayPicker.component';
-import { PaginationComponent } from '../../../../common/components/pagination/pagination.component';
 import { SharedModule } from '../../../../common/shared/shared.module';
 import { TabService } from '../../../../common/layouts/tab/tab.service';
 import { FormControl, FormGroup } from '@angular/forms';
-import { SearchResultData } from '../service/hd100-list.interface';
+import { SearchResultData } from '../service/hd160-list.interface';
 
 @Component({
-  selector: 'app-hd100-list',
+  selector: 'app-hd160-list',
   standalone: true,
   imports: [
     SharedModule,
@@ -21,12 +20,11 @@ import { SearchResultData } from '../service/hd100-list.interface';
     SelectComponent,
     RouterModule,
     DayPickerComponent,
-    PaginationComponent,
   ],
-  templateUrl: './hd100-list.component.html',
-  styleUrl: './hd100-list.component.scss',
+  templateUrl: './hd160-list.component.html',
+  styleUrl: './hd160-list.component.scss',
 })
-export class Hd100ListComponent implements OnInit {
+export class Hd160ListComponent implements OnInit {
   // 搜尋條件表單
   form: FormGroup;
   // 是否顯示搜尋結果
@@ -38,28 +36,15 @@ export class Hd100ListComponent implements OnInit {
   // 搜尋結果模擬資料
   searchResultData: SearchResultData[] = [
     {
-      serviceStatus: '持續服務',
-      caseName: '王大明',
-      gender: '男',
-      dateOfBirth: '113/01/01',
-      responsiblePerson: '王小明',
-      caseOpeningDate: '113/01/01',
-      caseClassification: '高風險',
+      visitDate: '113/01/01',
+      filler: '王大明',
+      physiologyScore: 4.0,
+      independentScore: 3.6,
+      psychologicalScore: 2.3,
+      socialScore: 3.0,
+      environmentScore: 1.7,
+      overallScore: 2.0,
     },
-  ];
-  // 服務狀態select選項
-  selectOptions_serviceStatus: string[] = [
-    '持續服務',
-    '暫停服務',
-    '結案',
-    '無',
-  ];
-  // 個案分級select選項
-  selectOptions_caseClassification: string[] = [
-    '高風險',
-    '中風險',
-    '低風險',
-    '無',
   ];
 
   // 分頁器切割後的資料
@@ -76,14 +61,8 @@ export class Hd100ListComponent implements OnInit {
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
-      // 服務狀態
-      serviceStatus: new FormControl(''),
-      // 個案姓名
-      caseName: new FormControl(''),
-      // 開案日期
-      caseOpeningDate: new FormControl(''),
-      // 個案分級
-      caseClassification: new FormControl(''),
+      // 訪視日期
+      visitDate: new FormControl(''),
     });
   }
 
@@ -93,18 +72,16 @@ export class Hd100ListComponent implements OnInit {
       this.searchResultData.push(this.searchResultData[i]);
     }
   }
-
-  // 搜尋個案資料
   search() {
     this.isShowSearchResult = true;
   }
 
   // 新增個案資料
   create() {
-    this.router.navigate(['/hd110']);
+    this.router.navigate(['/hd160/form']);
   }
 
-  // 關閉個案資料清單
+  // 關閉個案複評表清單
   closeTab(identifier: string) {
     this.tabService.closeTab(identifier);
   }

@@ -29,7 +29,6 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 export class Hd130FormComponent implements OnInit {
   // 個案初判表單
   form: FormGroup;
-
   // 訪視方式select選項
   selectOptions_visitMethod: string[] = ['面訪', '電訪', '視訊'];
 
@@ -206,7 +205,7 @@ export class Hd130FormComponent implements OnInit {
     this.closeTab('個案初評表');
   }
 
-  // 關閉個案開案評估表
+  // 關閉個案初評表
   closeTab(identifier: string) {
     this.tabService.closeTab(identifier);
   }

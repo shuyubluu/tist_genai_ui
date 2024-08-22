@@ -1029,7 +1029,7 @@ export class Hd120FormComponent implements OnInit {
     // }
   }
 
-  // 關閉個案開案評估表
+  // 關閉個案開案資料表
   closeTab(identifier: string) {
     this.tabService.closeTab(identifier);
   }

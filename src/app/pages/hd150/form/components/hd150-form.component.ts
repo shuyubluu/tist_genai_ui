@@ -12,7 +12,7 @@ import { ErrorMessageComponent } from '../../../../common/components/message/err
 import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
-  selector: 'app-hd140-form',
+  selector: 'app-hd150-form',
   standalone: true,
   imports: [
     SharedModule,
@@ -23,17 +23,14 @@ import { NzMessageService } from 'ng-zorro-antd/message';
     DayPickerComponent,
     ErrorMessageComponent,
   ],
-  templateUrl: './hd140-form.component.html',
-  styleUrl: './hd140-form.component.scss',
+  templateUrl: './hd150-form.component.html',
+  styleUrl: './hd150-form.component.scss',
 })
-export class Hd140FormComponent implements OnInit {
-  // 搜尋條件表單
+export class Hd150FormComponent implements OnInit {
+  // 個案初判表單
   form: FormGroup;
-
   // 訪視方式select選項
   selectOptions_visitMethod: string[] = ['面訪', '電訪', '視訊'];
-  // 是非題select選項
-  selectOptions_trueOrFalse: string[] = ['是', '否'];
   // 最新風險等級select選項
   selectOptions_latestRiskLevel: string[] = ['低風險', '中風險', '高風險'];
   // 訪視結果select選項
@@ -53,16 +50,26 @@ export class Hd140FormComponent implements OnInit {
       visitDate: new FormControl('', [Validators.required]),
       // 訪視方式
       visitMethod: new FormControl('', [Validators.required]),
-      // 本次訪視目的
-      visitPurpose: new FormControl('', [Validators.required]),
-      // 訪視紀錄
-      visitRecord: new FormControl('', [Validators.required]),
-      // 下次追蹤事項
-      followUpItems: new FormControl('', [Validators.required]),
-      // 是否連結其他資源
-      linkedToOtherResources: new FormControl('', [Validators.required]),
+      // 文字描述_生理
+      textDescription_physical: new FormControl('', [Validators.required]),
+      // 文字描述_心理
+      textDescription_psychological: new FormControl('', [Validators.required]),
+      // 文字描述_家庭
+      textDescription_family: new FormControl('', [Validators.required]),
+      // 文字描述_社會
+      textDescription_social: new FormControl('', [Validators.required]),
+      // 文字描述_經濟
+      textDescription_economic: new FormControl('', [Validators.required]),
+      // 文字描述_居住環境
+      textDescription_livingEnvironment: new FormControl('', [
+        Validators.required,
+      ]),
+      // 文字描述_心外出
+      textDescription_outdoorActivity: new FormControl('', [
+        Validators.required,
+      ]),
 
-      // 3.本次評估需求項目
+      // 2.需求評估
       // 福利身分別
       welfareStatus: new FormControl(''),
       // 長照需求
@@ -92,13 +99,13 @@ export class Hd140FormComponent implements OnInit {
       // 其他照顧需求
       otherCareNeeds: new FormControl(''),
 
-      // 5.處遇內容
-      // 處遇目標內容
-      treatmentGoalsContent: new FormControl('', [Validators.required]),
+      // 3.處遇內容
+      // 處遇目標
+      treatmentGoals: new FormControl('', [Validators.required]),
       // 處遇計畫/服務安排
       serviceArrangement: new FormControl('', [Validators.required]),
 
-      // 5.個案資訊更新
+      // 4.個案資訊更新
       // 最新風險等級
       latestRiskLevel: new FormControl('', [Validators.required]),
       // 訪視結果
@@ -110,24 +117,6 @@ export class Hd140FormComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    // 禁用經濟需求其他
-    this.form.get('economicNeeds_other')?.disable();
-    // 禁用社會餐與其他
-    this.form.get('socialMealNeeds_other')?.disable();
-    // 禁用自我保護需求其他
-    this.form.get('selfProtectionNeeds_other')?.disable();
-  }
-
-  // 是否連結其他資源選項改變
-  handleSelectChange_linkedToOtherResources(option: string) {
-    if (option === '是') {
-      this.message.create(
-        'warning',
-        '請回1-2個案開案資料表更新資源福利使用內容'
-      );
-    }
-  }
   // 福利身分別選項改變
   welfareStatusChange(checkGroup: string[]) {
     this.form.get('welfareStatus')?.setValue(checkGroup);
@@ -198,6 +187,17 @@ export class Hd140FormComponent implements OnInit {
     this.form.get('otherCareNeeds')?.setValue(checkGroup);
   }
 
+  ngOnInit(): void {
+    // 禁用個案姓名
+    this.form.get('caseName')?.disable();
+    // 禁用經濟需求其他
+    this.form.get('economicNeeds_other')?.disable();
+    // 禁用社會餐與其他
+    this.form.get('socialMealNeeds_other')?.disable();
+    // 禁用自我保護需求其他
+    this.form.get('selfProtectionNeeds_other')?.disable();
+  }
+
   // 暫存草稿
   save() {
     this.message.create('success', '草稿暫存成功');
@@ -206,13 +206,13 @@ export class Hd140FormComponent implements OnInit {
     }
   }
 
-  // 送審
+  // 完成送審
   review() {
     this.message.create('success', '送審成功');
-    this.closeTab('[例行訪視表]:::資料新增');
+    this.closeTab('[個案複評表]:::資料新增');
   }
 
-  // 關閉個案開案評估表
+  // 關閉個案複評表
   closeTab(identifier: string) {
     this.tabService.closeTab(identifier);
   }
