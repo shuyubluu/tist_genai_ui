@@ -72,6 +72,8 @@ export class Hd160ListComponent implements OnInit {
       this.searchResultData.push(this.searchResultData[i]);
     }
   }
+
+  // 搜尋
   search() {
     this.isShowSearchResult = true;
   }
@@ -81,7 +83,7 @@ export class Hd160ListComponent implements OnInit {
     this.router.navigate(['/hd160/form']);
   }
 
-  // 關閉個案複評表清單
+  // 關閉生活品質問卷清單
   closeTab(identifier: string) {
     this.tabService.closeTab(identifier);
   }

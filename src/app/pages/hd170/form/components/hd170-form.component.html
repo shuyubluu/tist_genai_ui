@@ -1,0 +1,485 @@
+<h1 class="inner-title">1-8 轉介單</h1>
+<div class="mt"></div>
+<div class="table-container">
+  <ng-container>
+    <form [formGroup]="form">
+      <nz-table class="bordered-table">
+        <tr>
+          <th class="custom-header" colSpan="4" nzAlign="center">單位資料</th>
+        </tr>
+        <tr>
+          <th
+            colspan="1"
+            class="th-cell disableBackground bold-text"
+            nzAlign="center"
+          >
+            轉介單位
+          </th>
+          <td colspan="3" class="td-cell disableBackground">
+            <!-- !TODO -->
+            <app-select
+              [selectWidth]="'175px'"
+              [defaultPlaceHolder]="false"
+              [options]="selectOptions_referralUnit"
+              formControlName="referralUnit"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th class="th-cell disableBackground bold-text" nzAlign="center">
+            電話
+          </th>
+          <td class="td-cell disableBackground">
+            <app-input
+              [inputWidth]="'175px'"
+              [maxLength]="11"
+              formControlName="unitPhone"
+            />
+          </td>
+          <th class="th-cell disableBackground bold-text" nzAlign="center">
+            傳真
+          </th>
+          <td class="td-cell disableBackground">
+            <app-input
+              [inputWidth]="'175px'"
+              [maxLength]="10"
+              formControlName="unitFax"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th class="custom-header" colSpan="4" nzAlign="center">基本資料</th>
+        </tr>
+        <tr>
+          <th class="th-cell disableBackground bold-text" nzAlign="center">
+            姓名
+          </th>
+          <td class="td-cell disableBackground">
+            <app-input
+              [inputWidth]="'175px'"
+              [maxLength]="30"
+              formControlName="name"
+            />
+          </td>
+          <th class="th-cell disableBackground bold-text" nzAlign="center">
+            性別
+          </th>
+          <td class="td-cell disableBackground">
+            <app-select
+              [selectWidth]="'175px'"
+              [defaultPlaceHolder]="false"
+              [options]="selectOptions_gender"
+              formControlName="gender"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th class="th-cell disableBackground bold-text" nzAlign="center">
+            生日
+          </th>
+          <td class="td-cell disableBackground">
+            <app-dayPicker formControlName="dateOfBirth" />
+          </td>
+          <th class="th-cell disableBackground bold-text" nzAlign="center">
+            身份證字號
+          </th>
+          <td class="td-cell disableBackground">
+            <app-input
+              [inputWidth]="'175px'"
+              [maxLength]="10"
+              formControlName="idNumber"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th class="th-cell disableBackground bold-text" nzAlign="center">
+            手機(4碼+6碼)
+          </th>
+          <td class="td-cell disableBackground">
+            <app-input
+              [inputWidth]="'95px'"
+              [maxLength]="4"
+              [type]="'NUMBER'"
+              formControlName="mobileNumber_firstFourDigits"
+            />
+            <span class="mr-5">-</span>
+            <app-input
+              [inputWidth]="'175px'"
+              [maxLength]="6"
+              [type]="'NUMBER'"
+              formControlName="mobileNumber_lastSixDigits"
+            />
+          </td>
+          <th class="th-cell disableBackground bold-text" nzAlign="center">
+            電話(區碼+電話)
+          </th>
+          <td class="td-cell disableBackground">
+            <app-input
+              [inputWidth]="'90px'"
+              [maxLength]="4"
+              [type]="'NUMBER'"
+              formControlName="phoneNumber_areaCode"
+            />
+            <span class="mr-5">-</span>
+            <app-input
+              [inputWidth]="'175px'"
+              [maxLength]="8"
+              [type]="'NUMBER'"
+              formControlName="phoneNumber_phoneNumber"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th
+            colSpan="1"
+            class="th-cell disableBackground bold-text"
+            nzAlign="center"
+          >
+            通訊地址
+          </th>
+          <td colSpan="3" class="td-cell disableBackground">
+            <app-taiwan-city-select
+              formControlName="communicationAddress_select"
+            />
+            <app-input
+              [inputWidth]="'175px'"
+              [maxLength]="30"
+              formControlName="communicationAddress"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th class="th-cell disableBackground bold-text" nzAlign="center">
+            福利身分
+          </th>
+          <td class="td-cell disableBackground">
+            <app-select
+              [selectWidth]="'175px'"
+              [defaultPlaceHolder]="false"
+              [options]="selectOptions_welfareStatus"
+              formControlName="welfareStatus"
+            />
+          </td>
+          <th class="th-cell disableBackground bold-text" nzAlign="center">
+            社會福利補助
+          </th>
+          <td class="td-cell disableBackground">
+            <nz-checkbox-wrapper
+              style="width: 100%"
+              (nzOnChange)="socialWelfareSubsidyChange($event)"
+            >
+              <div nz-row>
+                <div nz-col nzSpan="8">
+                  <label nz-checkbox [nzDisabled]="true" nzValue="1">無</label>
+                </div>
+                <div nz-col nzSpan="8">
+                  <label nz-checkbox [nzDisabled]="true" nzValue="2"
+                    >身心障礙</label
+                  >
+                </div>
+                <div nz-col nzSpan="8">
+                  <label nz-checkbox [nzDisabled]="true" nzValue="3"
+                    >原住民</label
+                  >
+                </div>
+                <div nz-col nzSpan="8">
+                  <label nz-checkbox [nzDisabled]="true" nzValue="4"
+                    >新住民</label
+                  >
+                </div>
+                <div nz-col nzSpan="8">
+                  <label nz-checkbox [nzDisabled]="true" nzValue="5"
+                    >榮民</label
+                  >
+                </div>
+                <div nz-col nzSpan="8">
+                  <label nz-checkbox [nzDisabled]="true" nzValue="6"
+                    >榮眷</label
+                  >
+                </div>
+              </div>
+            </nz-checkbox-wrapper>
+          </td>
+        </tr>
+        <tr>
+          <th class="th-cell disableBackground bold-text" nzAlign="center">
+            家系圖
+          </th>
+          <td class="td-cell disableBackground">
+            <app-button [buttonIcon]="'pencial'" [buttonText]="'繪製'" />
+            <app-button [buttonIcon]="'upload'" [buttonText]="'匯入'" />
+            <app-button [buttonIcon]="'download'" [buttonText]="'匯出'" />
+            <!-- !TODO -->
+          </td>
+          <th class="th-cell disableBackground bold-text" nzAlign="center">
+            生態圖
+          </th>
+          <td class="td-cell disableBackground">
+            <app-button [buttonIcon]="'pencial'" [buttonText]="'繪製'" />
+            <app-button [buttonIcon]="'upload'" [buttonText]="'匯入'" />
+            <app-button [buttonIcon]="'download'" [buttonText]="'匯出'" />
+            <!-- !TODO -->
+          </td>
+        </tr>
+        <tr>
+          <th class="custom-header" colSpan="4" nzAlign="center">緊急聯絡人</th>
+        </tr>
+        <tr>
+          <th
+            colspan="1"
+            class="th-cell disableBackground bold-text"
+            nzAlign="center"
+          >
+            緊急聯絡人(最多三位)
+          </th>
+          <td colspan="3" class="td-cell disableBackground">
+            <label class="my-1">
+              緊急聯絡人：
+              <app-input
+                [inputWidth]="'175px'"
+                [maxLength]="30"
+                formControlName="emergencyContact1"
+              />
+            </label>
+            <label>
+              關係：
+              <app-input
+                [inputWidth]="'175px'"
+                [maxLength]="10"
+                formControlName="emergencyContact1_relationship"
+            /></label>
+            <label>
+              聯絡電話：
+              <app-input
+                [inputWidth]="'175px'"
+                [maxLength]="30"
+                formControlName="emergencyContact1_phone"
+              />
+            </label>
+            <br />
+            <label class="my-1">
+              緊急聯絡人：
+              <app-input
+                [inputWidth]="'175px'"
+                [maxLength]="30"
+                formControlName="emergencyContact2"
+              />
+            </label>
+            <label>
+              關係：
+              <app-input
+                [inputWidth]="'175px'"
+                [maxLength]="10"
+                formControlName="emergencyContact2_relationship"
+            /></label>
+            <label>
+              聯絡電話：
+              <app-input
+                [inputWidth]="'175px'"
+                [maxLength]="30"
+                formControlName="emergencyContact2_phone"
+              />
+            </label>
+            <br />
+            <label class="my-1">
+              緊急聯絡人：
+              <app-input
+                [inputWidth]="'175px'"
+                [maxLength]="30"
+                formControlName="emergencyContact3"
+              />
+            </label>
+            <label>
+              關係：
+              <app-input
+                [inputWidth]="'175px'"
+                [maxLength]="10"
+                formControlName="emergencyContact3_relationship"
+            /></label>
+            <label>
+              聯絡電話：
+              <app-input
+                [inputWidth]="'175px'"
+                [maxLength]="30"
+                formControlName="emergencyContact3_phone"
+              />
+            </label>
+          </td>
+        </tr>
+        <tr>
+          <th class="custom-header" colSpan="4" nzAlign="center">轉介內容</th>
+        </tr>
+        <tr>
+          <th
+            colspan="1"
+            class="th-cell custom-header bold-text"
+            nzAlign="center"
+          >
+            個案概況與處遇摘要
+          </th>
+          <td colspan="3" class="td-cell custom-cell">
+            <nz-textarea-count [nzMaxCharacterCount]="500" data-count="0/500">
+              <textarea
+                rows="4"
+                nz-input
+                [maxlength]="500"
+                formControlName="caseSummaryAndTreatment"
+              ></textarea>
+            </nz-textarea-count>
+            <app-error-message
+              [control]="form.get('caseSummaryAndTreatment')"
+              [isTouched]="false"
+              errorKey="required"
+              errorMessage="這是必填欄位。"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th
+            colspan="1"
+            class="th-cell custom-header bold-text"
+            nzAlign="center"
+          >
+            轉介目的
+          </th>
+          <td colspan="3" class="td-cell custom-cell">
+            <nz-textarea-count [nzMaxCharacterCount]="500" data-count="0/500">
+              <textarea
+                rows="4"
+                nz-input
+                [maxlength]="500"
+                formControlName="referralPurpose"
+              ></textarea>
+            </nz-textarea-count>
+            <app-error-message
+              [control]="form.get('referralPurpose')"
+              [isTouched]="false"
+              errorKey="required"
+              errorMessage="這是必填欄位。"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th class="custom-header" colSpan="4" nzAlign="center">
+            受理轉介單位
+          </th>
+        </tr>
+        <tr>
+          <th
+            colspan="1"
+            class="th-cell custom-header bold-text"
+            nzAlign="center"
+          >
+            聯絡人
+          </th>
+          <td colspan="3" class="td-cell custom-cell">
+            <app-input
+              [inputWidth]="'175px'"
+              [maxLength]="30"
+              formControlName="referralUnitContactPerson"
+            />
+            <app-error-message
+              [control]="form.get('referralUnitContactPerson')"
+              [isTouched]="false"
+              errorKey="required"
+              errorMessage="這是必填欄位。"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th class="th-cell custom-header bold-text" nzAlign="center">電話</th>
+          <td class="td-cell custom-cell">
+            <app-input
+              [inputWidth]="'175px'"
+              [maxLength]="11"
+              [type]="'NUMBER'"
+              formControlName="referralUnitPhone"
+            />
+            <app-error-message
+              [control]="form.get('referralUnitPhone')"
+              [isTouched]="false"
+              errorKey="required"
+              errorMessage="這是必填欄位。"
+            />
+          </td>
+          <th class="th-cell custom-header bold-text" nzAlign="center">傳真</th>
+          <td class="td-cell custom-cell">
+            <app-input
+              [inputWidth]="'175px'"
+              [maxLength]="10"
+              formControlName="referralUnitFax"
+            />
+            <app-error-message
+              [control]="form.get('referralUnitFax')"
+              [isTouched]="false"
+              errorKey="required"
+              errorMessage="這是必填欄位。"
+            />
+          </td>
+        </tr>
+        <tr>
+          <!-- !TODO -->
+          <th
+            colspan="1"
+            class="th-cell custom-header bold-text"
+            nzAlign="center"
+          >
+            填單人
+          </th>
+          <td colspan="3" class="td-cell custom-cell">王大明</td>
+        </tr>
+        <tr>
+          <th class="custom-header" colSpan="4" nzAlign="center">主管簽核</th>
+        </tr>
+        <tr>
+          <th
+            colSpan="1"
+            class="th-cell custom-header bold-text"
+            nzAlign="center"
+          >
+            單位主管意見
+          </th>
+          <!-- !TODO -->
+          <td colSpan="3" class="td-cell custom-cell">
+            <app-button [buttonIcon]="'accept'" [buttonText]="'同意'" />
+            <app-button [buttonIcon]="'close'" [buttonText]="'退回'" />
+            <nz-textarea-count [nzMaxCharacterCount]="500" data-count="0/500">
+              <textarea
+                rows="4"
+                nz-input
+                [maxlength]="500"
+                formControlName="supervisorComments"
+              ></textarea>
+            </nz-textarea-count>
+            <app-error-message
+              [control]="form.get('supervisorComments')"
+              [isTouched]="false"
+              errorKey="required"
+              errorMessage="這是必填欄位。"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th colspan="4" class="custom-header">
+            <!-- !TODO -->
+            <app-button
+              [buttonIcon]="'save'"
+              [buttonText]="'草稿儲存'"
+              (click)="save()"
+            />
+            <app-button
+              [buttonIcon]="'accept'"
+              [buttonText]="'送審'"
+              (click)="review()"
+            />
+            <app-button
+              [buttonIcon]="'close'"
+              [buttonText]="'關閉'"
+              (click)="closeTab('轉介單')"
+            />
+          </th>
+        </tr>
+      </nz-table>
+    </form>
+  </ng-container>
+</div>

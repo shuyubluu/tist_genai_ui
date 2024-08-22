@@ -3,7 +3,29 @@
 }
 
 .td-cell {
+  width: 25%;
+}
+
+.td-cell2 {
+  width: 12.5%;
+}
+
+.td-cell3 {
   width: 5%;
+}
+
+.custom-header2 {
+  background: linear-gradient(to bottom, #d5dcbe, #b5ca7f);
+}
+
+.message {
+  background: #f2ddf1 url(../../../../../assets/img/information.png) 8px 50%
+    no-repeat;
+  border: 1px solid #fa58f4;
+  color: #b4055f;
+  margin: 10px 0 5px 0;
+  padding: 5px 5px 5px 30px;
+  font-size: 20px;
 }
 
 @media screen and (max-width: 1024px) {

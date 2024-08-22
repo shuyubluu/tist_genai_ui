@@ -61,6 +61,18 @@ export const routes: Routes = [
           import('./pages/hd160/hd160.routes').then((m) => m.HD160_ROUTES),
         data: { tabName: '生活品質問卷清單' },
       },
+      {
+        path: 'hd170',
+        loadChildren: () =>
+          import('./pages/hd170/hd170.routes').then((m) => m.HD170_ROUTES),
+        data: { tabName: '轉介單清單' },
+      },
+      {
+        path: 'hd180',
+        loadChildren: () =>
+          import('./pages/hd180/hd180.routes').then((m) => m.HD180_ROUTES),
+        data: { tabName: '個案結案名冊' },
+      },
     ],
   },
   {

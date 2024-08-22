@@ -70,6 +70,8 @@ export class Hd140ListComponent implements OnInit {
       this.searchResultData.push(this.searchResultData[i]);
     }
   }
+
+  // 搜尋
   search() {
     this.isShowSearchResult = true;
   }

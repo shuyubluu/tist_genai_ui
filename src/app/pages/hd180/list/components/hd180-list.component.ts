@@ -8,10 +8,10 @@ import { DayPickerComponent } from '../../../../common/components/dayPicker/dayP
 import { SharedModule } from '../../../../common/shared/shared.module';
 import { TabService } from '../../../../common/layouts/tab/tab.service';
 import { FormControl, FormGroup } from '@angular/forms';
-import { SearchResultData } from '../service/hd150-list.interface';
+import { SearchResultData } from '../service/hd180-list.interface';
 
 @Component({
-  selector: 'app-hd150-list',
+  selector: 'app-hd180-list',
   standalone: true,
   imports: [
     SharedModule,
@@ -21,10 +21,10 @@ import { SearchResultData } from '../service/hd150-list.interface';
     RouterModule,
     DayPickerComponent,
   ],
-  templateUrl: './hd150-list.component.html',
-  styleUrl: './hd150-list.component.scss',
+  templateUrl: './hd180-list.component.html',
+  styleUrl: './hd180-list.component.scss',
 })
-export class Hd150ListComponent implements OnInit {
+export class Hd180ListComponent implements OnInit {
   // 搜尋條件表單
   form: FormGroup;
   // 是否顯示搜尋結果
@@ -36,13 +36,13 @@ export class Hd150ListComponent implements OnInit {
   // 搜尋結果模擬資料
   searchResultData: SearchResultData[] = [
     {
-      caseOpeningDate: '113/01/01',
-      caseClassification: '高風險',
       caseName: '王大明',
-      visitTime: '113/06/01',
-      responsiblePerson: '王小明',
+      gender: '男',
+      closureDate: '113/02/08',
+      closureReason: '案主失聯',
     },
   ];
+
   // 分頁器切割後的資料
   get newSearchResultData(): SearchResultData[] {
     return this.searchResultData.slice(
@@ -57,8 +57,10 @@ export class Hd150ListComponent implements OnInit {
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
-      // 查詢年份
-      queryYear: new FormControl(''),
+      // 結案日期
+      closureDate: new FormControl(''),
+      // 個案姓名
+      caseName: new FormControl(''),
     });
   }
 
@@ -74,12 +76,7 @@ export class Hd150ListComponent implements OnInit {
     this.isShowSearchResult = true;
   }
 
-  // 新增個案資料
-  create() {
-    this.router.navigate(['/hd150/form']);
-  }
-
-  // 關閉個案複評表清單
+  // 關閉個案結案名冊
   closeTab(identifier: string) {
     this.tabService.closeTab(identifier);
   }

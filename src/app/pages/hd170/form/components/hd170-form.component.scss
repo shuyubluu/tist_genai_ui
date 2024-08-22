@@ -6,6 +6,10 @@
   width: 5%;
 }
 
+.my-1 {
+  margin: 0px 1px;
+}
+
 @media screen and (max-width: 1024px) {
   .bordered-table tr {
     display: flex;

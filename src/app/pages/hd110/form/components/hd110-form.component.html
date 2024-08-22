@@ -292,7 +292,11 @@
             身份證字號
           </th>
           <td class="td-cell custom-cell">
-            <app-input [inputWidth]="'175px'" formControlName="idNumber" />
+            <app-input
+              [inputWidth]="'175px'"
+              [maxLength]="10"
+              formControlName="idNumber"
+            />
             <app-error-message
               [control]="form.get('idNumber')"
               [isTouched]="false"
