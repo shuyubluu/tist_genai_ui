@@ -1,3 +1,7 @@
+<app-case-information
+  *ngIf="caseInformationService.isChoiceCase"
+  [currentTab]="'個案開案資料表'"
+/>
 <h1 class="inner-title">1-2 個案開案資料表</h1>
 <div class="mt"></div>
 <div class="table-container">
@@ -782,7 +786,7 @@
                     >假牙</label
                   >
                 </div>
-                <div class="border-2 div-Center" nz-col nzSpan="4">
+                <div class="border-2 divCenter" nz-col nzSpan="4">
                   <label
                     nz-checkbox
                     [nzDisabled]="isDisableAssistiveDeviceUsageOthers"
@@ -2099,15 +2103,17 @@
             <!-- !TODO -->
             <app-button
               [buttonIcon]="'save'"
-              [buttonText]="'草稿暫存'"
+              [buttonText]="'儲存'"
               (click)="save()"
             />
             <app-button
+              *ngIf="!caseInformationService.isChoiceCase"
               (click)="onPreviousPage()"
               [buttonIcon]="'previouspage'"
               [buttonText]="'上一頁'"
             />
             <app-button
+              *ngIf="!caseInformationService.isChoiceCase"
               (click)="onNextPage()"
               [buttonIcon]="'nextpage'"
               [buttonText]="'下一頁'"

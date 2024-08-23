@@ -10,6 +10,8 @@ import { TabService } from '../../../../common/layouts/tab/tab.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ErrorMessageComponent } from '../../../../common/components/message/error-message.component';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { CaseInformationService } from '../../../../common/components/caseInformation/serivce/case-information.service';
+import { CaseInformationComponent } from '../../../../common/components/caseInformation/components/case-information.component';
 
 @Component({
   selector: 'app-hd130-form',
@@ -22,6 +24,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
     RouterModule,
     DayPickerComponent,
     ErrorMessageComponent,
+    CaseInformationComponent,
   ],
   templateUrl: './hd130-form.component.html',
   styleUrl: './hd130-form.component.scss',
@@ -29,12 +32,14 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 export class Hd130FormComponent implements OnInit {
   // 個案初判表單
   form: FormGroup;
+
   // 訪視方式select選項
   selectOptions_visitMethod: string[] = ['面訪', '電訪', '視訊'];
 
   constructor(
+    public caseInformationService: CaseInformationService, // caseInformationService
     private tabService: TabService, // 關閉tab的Service
-    private router: Router, // 路由
+    public router: Router, // 路由
     private message: NzMessageService // 訊息
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl

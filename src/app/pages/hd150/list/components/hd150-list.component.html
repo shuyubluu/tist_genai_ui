@@ -1,3 +1,4 @@
+<app-case-information [currentTab]="'個案複評表清單'" />
 <h1 class="inner-title">1-5 個案複評表清單</h1>
 <div class="mt"></div>
 <div class="table-container">
@@ -42,7 +43,7 @@
   </ng-container>
 </div>
 <div class="mt"></div>
-<div class="hd100-list-search" *ngIf="isShowSearchResult">
+<div class="hd100-list-search">
   <div class="message">搜尋結果: 共{{ searchResultData.length }}筆</div>
   <form>
     <div class="mt"></div>
@@ -55,8 +56,7 @@
               <th class="th-cell" nzAlign="center">風險等級</th>
               <th class="th-cell" nzAlign="center">個案姓名</th>
               <th class="th-cell" nzAlign="center">志工訪視區</th>
-              <th class="th-cell" nzAlign="center">檢視</th>
-              <th class="th-cell" nzAlign="center">編輯</th>
+              <th class="th-cell" nzAlign="center">操作</th>
             </tr>
           </thead>
           <tbody>
@@ -80,12 +80,9 @@
                 {{ searchResult.visitTime }}
                 {{ searchResult.responsiblePerson }} 訪
               </td>
+              <!-- !TODO -->
               <td class="td-cell3" nzAlign="center">
-                <!-- !TODO -->
-                <app-button [buttonText]="'檢視'" />
-              </td>
-              <td class="td-cell3" nzAlign="center">
-                <app-button [buttonText]="'編輯'" />
+                <app-button [buttonText]="'編輯'" (click)="edit()" />
               </td>
             </tr>
           </tbody>

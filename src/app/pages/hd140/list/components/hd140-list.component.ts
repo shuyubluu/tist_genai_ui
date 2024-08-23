@@ -9,6 +9,8 @@ import { SharedModule } from '../../../../common/shared/shared.module';
 import { TabService } from '../../../../common/layouts/tab/tab.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { SearchResultData } from '../service/hd140-list.interface';
+import { CaseInformationComponent } from '../../../../common/components/caseInformation/components/case-information.component';
+import { CaseInformationService } from '../../../../common/components/caseInformation/serivce/case-information.service';
 
 @Component({
   selector: 'app-hd140-list',
@@ -20,6 +22,7 @@ import { SearchResultData } from '../service/hd140-list.interface';
     SelectComponent,
     RouterModule,
     DayPickerComponent,
+    CaseInformationComponent,
   ],
   templateUrl: './hd140-list.component.html',
   styleUrl: './hd140-list.component.scss',
@@ -27,8 +30,6 @@ import { SearchResultData } from '../service/hd140-list.interface';
 export class Hd140ListComponent implements OnInit {
   // 搜尋條件表單
   form: FormGroup;
-  // 是否顯示搜尋結果
-  isShowSearchResult: boolean = false;
   // 分頁器當前頁數
   currentPage: number = 1;
   // 分頁器一頁多少筆數據
@@ -52,6 +53,7 @@ export class Hd140ListComponent implements OnInit {
   }
 
   constructor(
+    public caseInformationService: CaseInformationService, // caseInformationService
     private tabService: TabService, // 關閉tab的Service
     private router: Router
   ) {
@@ -73,12 +75,19 @@ export class Hd140ListComponent implements OnInit {
 
   // 搜尋
   search() {
-    this.isShowSearchResult = true;
+    // !TODO搜尋邏輯
+  }
+
+  // 編輯
+  edit() {
+    this.router.navigate(['/hd140/form']);
+    this.caseInformationService.isChoiceCase = true;
   }
 
   // 新增個案資料
   create() {
     this.router.navigate(['/hd140/form']);
+    this.caseInformationService.isChoiceCase = false;
   }
 
   // 關閉例行訪視記錄表

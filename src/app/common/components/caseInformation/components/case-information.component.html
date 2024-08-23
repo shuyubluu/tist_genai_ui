@@ -1,0 +1,72 @@
+<span class="caseTitle mr-5"
+  >姓名:{{ caseInformationService.caseData[0].name }}</span
+>
+<span class="caseTitle mr-5"
+  >身分證字號:{{ caseInformationService.caseData[0].idNumber }}</span
+>
+<span class="caseTitle mr-5"
+  >開案日期:{{ caseInformationService.caseData[0].caseOpeningDate }}</span
+>
+<div class="divGrid">
+  <span
+    class="checkFormButton"
+    [ngClass]="{ highlightButton: router.url === '/hd110' }"
+    (click)="goToHd110()"
+    >個案開案評估表</span
+  >
+  <span
+    class="checkFormButton"
+    [ngClass]="{ highlightButton: router.url === '/hd120' }"
+    (click)="goToHd120()"
+    >個案基本資料表</span
+  >
+  <span
+    class="checkFormButton"
+    [ngClass]="{ highlightButton: router.url === '/hd130' }"
+    (click)="goToHd130()"
+    >個案初評表</span
+  >
+  <span
+    class="checkFormButton"
+    [ngClass]="{
+      highlightButton: router.url === '/hd140' || router.url === '/hd140/form'
+    }"
+    (click)="goToHd140()"
+    >{{
+      router.url === "/hd140/form" ? "例行訪視紀錄表" : "例行訪視紀錄清單"
+    }}</span
+  >
+  <span
+    class="checkFormButton"
+    [ngClass]="{
+      highlightButton: router.url === '/hd150' || router.url === '/hd150/form'
+    }"
+    (click)="goToHd150()"
+    >{{ router.url === "/hd150/form" ? "個案複評表" : "個案複評清單" }}</span
+  >
+  <span
+    class="checkFormButton"
+    [ngClass]="{
+      highlightButton: router.url === '/hd160' || router.url === '/hd160/form'
+    }"
+    (click)="goToHd160()"
+    >{{
+      router.url === "/hd160/form" ? "生活品質問卷" : "生活品質問卷清單"
+    }}</span
+  >
+  <span
+    class="checkFormButton"
+    [ngClass]="{ highlightButton: router.url === '/hd100/form' }"
+    (click)="goToHd100Form()"
+    >個案結案表</span
+  >
+  <span
+    class="checkFormButton"
+    [ngClass]="{
+      highlightButton: router.url === '/hd170' || router.url === '/hd170/form'
+    }"
+    (click)="goToHd170()"
+    >{{ router.url === "/hd170/form" ? "轉介單" : "轉介單清單" }}</span
+  >
+</div>
+<div class="mt"></div>

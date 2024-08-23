@@ -4,5 +4,6 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class Hd100ListService {
-  constructor() {}
+  // 是否已選取個案
+  isChoiceCase: boolean = false;
 }

@@ -1,9 +1,12 @@
 export interface SearchResultData {
-  serviceStatus: string;
   caseName: string;
   gender: string;
   dateOfBirth: string;
-  responsiblePerson: string;
+  phone: string;
+  fillFormDate: string;
   caseOpeningDate: string;
+  caseOpeningResult: string;
+  serviceStatus: string;
   caseClassification: string;
+  status: string;
 }

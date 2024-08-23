@@ -12,6 +12,8 @@ import { TaiwanCitySelectComponent } from '../../../../common/components/select/
 import { TabService } from '../../../../common/layouts/tab/tab.service';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { CaseInformationService } from '../../../../common/components/caseInformation/serivce/case-information.service';
+import { CaseInformationComponent } from '../../../../common/components/caseInformation/components/case-information.component';
 
 @Component({
   selector: 'app-hd120-form',
@@ -26,6 +28,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
     ErrorMessageComponent,
     TaiwanCitySelectComponent,
     NzModalModule,
+    CaseInformationComponent,
   ],
   templateUrl: './hd120-form.component.html',
   styleUrl: './hd120-form.component.scss',
@@ -165,7 +168,8 @@ export class Hd120FormComponent implements OnInit {
   constructor(
     private tabService: TabService, // 關閉tab的Service
     private router: Router, // 路由
-    private message: NzMessageService // 訊息
+    private message: NzMessageService, // 訊息
+    public caseInformationService: CaseInformationService // caseInformationService
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({

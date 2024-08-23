@@ -9,6 +9,8 @@ import { SharedModule } from '../../../../common/shared/shared.module';
 import { TabService } from '../../../../common/layouts/tab/tab.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { SearchResultData } from '../service/hd180-list.interface';
+import { CaseInformationComponent } from '../../../../common/components/caseInformation/components/case-information.component';
+import { CaseInformationService } from '../../../../common/components/caseInformation/serivce/case-information.service';
 
 @Component({
   selector: 'app-hd180-list',
@@ -20,6 +22,7 @@ import { SearchResultData } from '../service/hd180-list.interface';
     SelectComponent,
     RouterModule,
     DayPickerComponent,
+    CaseInformationComponent,
   ],
   templateUrl: './hd180-list.component.html',
   styleUrl: './hd180-list.component.scss',
@@ -27,8 +30,6 @@ import { SearchResultData } from '../service/hd180-list.interface';
 export class Hd180ListComponent implements OnInit {
   // 搜尋條件表單
   form: FormGroup;
-  // 是否顯示搜尋結果
-  isShowSearchResult: boolean = false;
   // 分頁器當前頁數
   currentPage: number = 1;
   // 分頁器一頁多少筆數據
@@ -53,7 +54,8 @@ export class Hd180ListComponent implements OnInit {
 
   constructor(
     private tabService: TabService, // 關閉tab的Service
-    private router: Router
+    private router: Router, // 路由
+    public caseInformationService: CaseInformationService // caseInformationService
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
@@ -73,7 +75,14 @@ export class Hd180ListComponent implements OnInit {
 
   // 搜尋
   search() {
-    this.isShowSearchResult = true;
+    // !TODO:搜尋邏輯
+  }
+
+  // 編輯
+  async edit() {
+    await this.router.navigate(['/hd100/form']);
+    this.closeTab('個案結案名冊');
+    this.caseInformationService.isChoiceCase = true;
   }
 
   // 關閉個案結案名冊

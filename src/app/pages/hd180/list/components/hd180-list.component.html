@@ -22,7 +22,6 @@
             />
           </td>
         </tr>
-
         <tr>
           <th colspan="4" class="custom-header">
             <app-button
@@ -42,7 +41,7 @@
   </ng-container>
 </div>
 <div class="mt"></div>
-<div class="hd100-list-search" *ngIf="isShowSearchResult">
+<div class="hd100-list-search">
   <div class="message">搜尋結果: 共{{ searchResultData.length }}筆</div>
   <form>
     <div class="mt"></div>
@@ -51,11 +50,11 @@
         <table class="bordered-table">
           <thead>
             <tr class="custom-header2 bold-text">
-              <th class="th-cell" nzAlign="center">-</th>
               <th class="th-cell" nzAlign="center">個案姓名</th>
               <th class="th-cell" nzAlign="center">性別</th>
               <th class="th-cell" nzAlign="center">結案日期</th>
               <th class="th-cell" nzAlign="center">結案原因</th>
+              <th class="th-cell" nzAlign="center">操作</th>
             </tr>
           </thead>
           <tbody>
@@ -67,9 +66,6 @@
               }"
             >
               <!-- !TODO -->
-              <td class="td-cell3" nzAlign="center">
-                <app-button [buttonText]="'檢視'" />
-              </td>
               <td class="td-cell2" nzAlign="center">
                 {{ searchResult.caseName }}
               </td>
@@ -81,6 +77,9 @@
               </td>
               <td class="td-cell2" nzAlign="center">
                 {{ searchResult.closureReason }}
+              </td>
+              <td class="td-cell3" nzAlign="center">
+                <app-button [buttonText]="'編輯'" (click)="edit()" />
               </td>
             </tr>
           </tbody>

@@ -1,0 +1,37 @@
+.caseTitle {
+  color: blue;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.divGrid {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.mr-5 {
+  margin-right: 5px;
+}
+
+.checkFormButton {
+  width: 150px;
+  padding: 3px 10px;
+  border-radius: 5px;
+  border: 1px solid #cccccc;
+  background: #545454;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  &:hover {
+    background: #2c2c2c;
+  }
+}
+
+.highlightButton {
+  background: #cbd814;
+  &:hover {
+    background: #818a0d;
+  }
+}

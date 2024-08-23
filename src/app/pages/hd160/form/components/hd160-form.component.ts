@@ -10,6 +10,8 @@ import { TabService } from '../../../../common/layouts/tab/tab.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ErrorMessageComponent } from '../../../../common/components/message/error-message.component';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { CaseInformationComponent } from '../../../../common/components/caseInformation/components/case-information.component';
+import { CaseInformationService } from '../../../../common/components/caseInformation/serivce/case-information.service';
 
 @Component({
   selector: 'app-hd160-form',
@@ -22,6 +24,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
     RouterModule,
     DayPickerComponent,
     ErrorMessageComponent,
+    CaseInformationComponent,
   ],
   templateUrl: './hd160-form.component.html',
   styleUrl: './hd160-form.component.scss',
@@ -40,7 +43,8 @@ export class Hd160FormComponent implements OnInit {
 
   constructor(
     private tabService: TabService, // 關閉tab的Service
-    private message: NzMessageService // 訊息
+    private message: NzMessageService, // 訊息
+    public caseInformationService: CaseInformationService // caseInformationService
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({

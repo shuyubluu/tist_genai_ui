@@ -1,3 +1,4 @@
+<app-case-information [currentTab]="'個案複評表'" />
 <h1 class="inner-title">1-5 個案複評表</h1>
 <div class="mt"></div>
 <div class="table-container">
@@ -724,7 +725,7 @@
             <!-- !TODO -->
             <app-button
               [buttonIcon]="'save'"
-              [buttonText]="'草稿暫存'"
+              [buttonText]="'儲存'"
               (click)="save()"
             />
             <app-button
@@ -735,7 +736,7 @@
             <app-button
               [buttonIcon]="'close'"
               [buttonText]="'關閉'"
-              (click)="closeTab('[個案複評表]:::資料新增')"
+              (click)="closeTab('個案複評表')"
             />
           </th>
         </tr>

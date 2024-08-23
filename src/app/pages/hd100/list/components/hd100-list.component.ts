@@ -10,6 +10,7 @@ import { SharedModule } from '../../../../common/shared/shared.module';
 import { TabService } from '../../../../common/layouts/tab/tab.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { SearchResultData } from '../service/hd100-list.interface';
+import { CaseInformationService } from '../../../../common/components/caseInformation/serivce/case-information.service';
 
 @Component({
   selector: 'app-hd100-list',
@@ -29,8 +30,6 @@ import { SearchResultData } from '../service/hd100-list.interface';
 export class Hd100ListComponent implements OnInit {
   // 搜尋條件表單
   form: FormGroup;
-  // 是否顯示搜尋結果
-  isShowSearchResult: boolean = false;
   // 分頁器當前頁數
   currentPage: number = 1;
   // 分頁器一頁多少筆數據
@@ -38,13 +37,16 @@ export class Hd100ListComponent implements OnInit {
   // 搜尋結果模擬資料
   searchResultData: SearchResultData[] = [
     {
-      serviceStatus: '持續服務',
       caseName: '王大明',
       gender: '男',
-      dateOfBirth: '113/01/01',
-      responsiblePerson: '王小明',
-      caseOpeningDate: '113/01/01',
-      caseClassification: '高風險',
+      dateOfBirth: '50/01/01',
+      phone: '0912345678',
+      fillFormDate: '113/01/01',
+      caseOpeningDate: '113/02/01',
+      caseOpeningResult: '已開案',
+      serviceStatus: '初評',
+      caseClassification: '中',
+      status: '已送審',
     },
   ];
   // 服務狀態select選項
@@ -72,7 +74,8 @@ export class Hd100ListComponent implements OnInit {
 
   constructor(
     private tabService: TabService, // 關閉tab的Service
-    private router: Router
+    private router: Router, // 路由
+    private caseInformationService: CaseInformationService // caseInformationService
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
@@ -96,12 +99,19 @@ export class Hd100ListComponent implements OnInit {
 
   // 搜尋個案資料
   search() {
-    this.isShowSearchResult = true;
+    // !TODO: 搜尋邏輯
   }
 
   // 新增個案資料
   create() {
     this.router.navigate(['/hd110']);
+    this.caseInformationService.isChoiceCase = false;
+  }
+
+  // 檢視個案資料
+  view() {
+    this.router.navigate(['/hd110']);
+    this.caseInformationService.isChoiceCase = true;
   }
 
   // 關閉個案資料清單

@@ -19,6 +19,8 @@ import { TaiwanCitySelectComponent } from '../../../../common/components/select/
 import { TabService } from '../../../../common/layouts/tab/tab.service';
 import { NzModalModule, NzModalService } from 'ng-zorro-antd/modal';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { CaseInformationService } from '../../../../common/components/caseInformation/serivce/case-information.service';
+import { CaseInformationComponent } from "../../../../common/components/caseInformation/components/case-information.component";
 
 @Component({
   selector: 'app-hd110-form',
@@ -33,7 +35,8 @@ import { NzMessageService } from 'ng-zorro-antd/message';
     ErrorMessageComponent,
     TaiwanCitySelectComponent,
     NzModalModule,
-  ],
+    CaseInformationComponent
+],
   templateUrl: './hd110-form.component.html',
   styleUrl: './hd110-form.component.scss',
 })
@@ -48,6 +51,7 @@ export class Hd110FormComponent implements OnInit {
   isDisableNoneOthers: boolean = false;
   // 是否需填其他-自填指標
   isOtherFieldsRequired: boolean = false;
+
   // 個案來源select選項
   selectOptions_caseSource: string[] = [
     '主動發掘',
@@ -82,6 +86,7 @@ export class Hd110FormComponent implements OnInit {
     '可提供',
     '不可提供',
   ];
+
   // 判定是否開案
   get isCaseOpened(): string | undefined {
     if (this.caseNotOpenedResult) {
@@ -139,7 +144,8 @@ export class Hd110FormComponent implements OnInit {
     private tabService: TabService, // 關閉tab的Service
     private router: Router, // 路由
     private modal: NzModalService, // 彈窗
-    private message: NzMessageService // 訊息
+    private message: NzMessageService, // 訊息
+    public caseInformationService: CaseInformationService // caseInformationService
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
@@ -236,9 +242,6 @@ export class Hd110FormComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-    // 刷新時判定是否為轉介
-    // 是的話用開啟所有轉介單位資料欄位
-    // 否則一律關閉
     if (this.isReferral === false) {
       this.form.get('referralUnit')?.reset();
       this.form.get('contactPerson')?.reset();

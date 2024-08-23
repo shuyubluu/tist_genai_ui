@@ -1,28 +1,56 @@
-<nz-table class="bordered-table-login">
-    <tr>
-        <th colspan="6" class="custom-header bold-text">
-            <img src="favicon.ico">
-            <p>弘道老人福利基金會-預照管理系統</p>
-        </th>
-    </tr>
-    <tr>
-        <th class="tr-cell custom-header bold-text" nzAlign="center">讀卡機</th>
-        <td class="td-cell custom-cell">
-            <app-select [selectWidth]="'250px'" [options]="selectOptions_1" [defaultPlaceHolder]="false" [optionSelected]="'USB Smart Card Reader 0000'" ></app-select>
-        </td>
-    </tr>
-    <tr>
-        <th class="tr-cell custom-header bold-text" nzAlign="center">PIN碼</th>
-        <td class="td-cell custom-cell">
-            <app-input [inputWidth]="'250px'" [type]="'PWD'" [contentEntered]="contentEntered_1" [placeholder]="'請輸入密碼'"></app-input>
-        </td>
-    </tr>
-    <tr>
-        <th colspan="6" class="custom-header bold-text">
-            <a href="/">
-                <app-button [buttonText]="'登入'"></app-button>
-            </a>
-            <app-button [buttonText]="'註冊'"></app-button>
-        </th>
-    </tr>
-</nz-table>
+<div class="login-page">
+  <div class="login-container">
+    <h2>帳號登入</h2>
+    <form [formGroup]="form">
+      <div class="form-group">
+        <label for="account">帳號：</label>
+        <app-input
+          [inputWidth]="'300px'"
+          [maxLength]="30"
+          formControlName="account"
+        />
+        <app-error-message
+          [control]="form.get('account')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="這是必填欄位。"
+        />
+      </div>
+      <div class="form-group">
+        <label for="password">密碼：</label>
+        <app-input
+          [inputWidth]="'300px'"
+          [maxLength]="30"
+          [type]="'PWD'"
+          formControlName="password"
+        />
+        <app-error-message
+          [control]="form.get('password')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="這是必填欄位。"
+        />
+        <a href="javascript:void(0)" class="forgot-password">忘記密碼？</a>
+      </div>
+      <div class="form-group">
+        <label for="captcha">驗證碼：</label>
+        <div class="captcha-container">
+          <div class="captcha-image">Uygn8k</div>
+          <button class="update-button">更新</button>
+        </div>
+        <app-input
+          [inputWidth]="'300px'"
+          [maxLength]="6"
+          formControlName="captcha"
+        />
+        <app-error-message
+          [control]="form.get('captcha')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="這是必填欄位。"
+        />
+      </div>
+      <button class="login-button" (click)="login()">登入</button>
+    </form>
+  </div>
+</div>

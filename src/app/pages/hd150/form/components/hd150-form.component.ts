@@ -10,6 +10,8 @@ import { TabService } from '../../../../common/layouts/tab/tab.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ErrorMessageComponent } from '../../../../common/components/message/error-message.component';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { CaseInformationComponent } from '../../../../common/components/caseInformation/components/case-information.component';
+import { CaseInformationService } from '../../../../common/components/caseInformation/serivce/case-information.service';
 
 @Component({
   selector: 'app-hd150-form',
@@ -22,6 +24,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
     RouterModule,
     DayPickerComponent,
     ErrorMessageComponent,
+    CaseInformationComponent,
   ],
   templateUrl: './hd150-form.component.html',
   styleUrl: './hd150-form.component.scss',
@@ -39,7 +42,8 @@ export class Hd150FormComponent implements OnInit {
   constructor(
     private tabService: TabService, // 關閉tab的Service
     private router: Router, // 路由
-    private message: NzMessageService // 訊息
+    private message: NzMessageService, // 訊息
+    public caseInformationService: CaseInformationService // caseInformationService
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
@@ -209,7 +213,7 @@ export class Hd150FormComponent implements OnInit {
   // 完成送審
   review() {
     this.message.create('success', '送審成功');
-    this.closeTab('[個案複評表]:::資料新增');
+    this.closeTab('個案複評表');
   }
 
   // 關閉個案複評表

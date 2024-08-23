@@ -1,3 +1,4 @@
+<app-case-information [currentTab]="'生活品質問卷清單'" />
 <h1 class="inner-title">1-6 生活品質問卷清單</h1>
 <div class="mt"></div>
 <div class="table-container">
@@ -36,7 +37,7 @@
   </ng-container>
 </div>
 <div class="mt"></div>
-<div class="hd100-list-search" *ngIf="isShowSearchResult">
+<div class="hd100-list-search">
   <div class="message">搜尋結果: 共{{ searchResultData.length }}筆</div>
   <form>
     <div class="mt"></div>
@@ -53,9 +54,7 @@
               <th class="th-cell" nzAlign="center">社會面分數</th>
               <th class="th-cell" nzAlign="center">環境面分數</th>
               <th class="th-cell" nzAlign="center">整體面分數</th>
-              <th class="th-cell" nzAlign="center">檢視</th>
-              <th class="th-cell" nzAlign="center">編輯</th>
-              <th class="th-cell" nzAlign="center">刪除</th>
+              <th class="th-cell" nzAlign="center">操作</th>
             </tr>
           </thead>
           <tbody>
@@ -92,12 +91,7 @@
               </td>
               <!-- !TODO -->
               <td class="td-cell3" nzAlign="center">
-                <app-button [buttonText]="'檢視'" />
-              </td>
-              <td class="td-cell3" nzAlign="center">
-                <app-button [buttonText]="'編輯'" />
-              </td>
-              <td class="td-cell3" nzAlign="center">
+                <app-button [buttonText]="'編輯'" (click)="edit()" />
                 <app-button [buttonIcon]="'delete'" [buttonText]="'刪除'" />
               </td>
             </tr>
