@@ -37,16 +37,14 @@ export class Hd100ListComponent implements OnInit {
   // 搜尋結果模擬資料
   searchResultData: SearchResultData[] = [
     {
+      serviceStatus: '初評',
       caseName: '王大明',
       gender: '男',
       dateOfBirth: '50/01/01',
-      phone: '0912345678',
-      fillFormDate: '113/01/01',
+      responsiblePerson: '吳小美',
       caseOpeningDate: '113/02/01',
       caseOpeningResult: '已開案',
-      serviceStatus: '初評',
       caseClassification: '中',
-      status: '已送審',
     },
   ];
   // 服務狀態select選項

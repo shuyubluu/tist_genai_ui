@@ -42,6 +42,7 @@ export class Hd140ListComponent implements OnInit {
       caseName: '王大明',
       visitTime: '113/06/01',
       responsiblePerson: '王小明',
+      responsiblePersonJobTitle: '社工',
     },
   ];
   // 分頁器切割後的資料

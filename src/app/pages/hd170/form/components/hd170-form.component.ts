@@ -12,6 +12,8 @@ import { ErrorMessageComponent } from '../../../../common/components/message/err
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { CaseInformationComponent } from '../../../../common/components/caseInformation/components/case-information.component';
 import { CaseInformationService } from '../../../../common/components/caseInformation/serivce/case-information.service';
+import { TaiwanCitySelectComponent } from '../../../../common/components/select/taiwanCitySelect/components/taiwan-city-select.component';
+import { EmergencyContact } from '../service/hd170-form.interface';
 
 @Component({
   selector: 'app-hd170-form',
@@ -25,6 +27,7 @@ import { CaseInformationService } from '../../../../common/components/caseInform
     DayPickerComponent,
     ErrorMessageComponent,
     CaseInformationComponent,
+    TaiwanCitySelectComponent,
   ],
   templateUrl: './hd170-form.component.html',
   styleUrl: './hd170-form.component.scss',
@@ -46,6 +49,15 @@ export class Hd170FormComponent implements OnInit {
     '低收入戶',
     '中低收入戶',
     '邊緣戶',
+  ];
+
+  // 緊急聯絡人區塊假資料
+  emergencyContact: EmergencyContact[] = [
+    {
+      emergencyContact_emergencyContact: '大壯',
+      emergencyContact_relationship: '父親',
+      emergencyContact_phone: '0912345678',
+    },
   ];
 
   constructor(
@@ -162,24 +174,11 @@ export class Hd170FormComponent implements OnInit {
     this.form.get('communicationAddress')?.disable();
     // 禁用福利身份select
     this.form.get('welfareStatus')?.disable();
-    // 禁用緊急聯絡人1
-    this.form.get('emergencyContact1')?.disable();
-    // 禁用緊急聯絡人1關係
-    this.form.get('emergencyContact1_relationship')?.disable();
-    // 禁用緊急聯絡人1電話
-    this.form.get('emergencyContact1_phone')?.disable();
-    // 禁用緊急聯絡人2
-    this.form.get('emergencyContact2')?.disable();
-    // 禁用緊急聯絡人2關係
-    this.form.get('emergencyContact2_relationship')?.disable();
-    // 禁用緊急聯絡人2電話
-    this.form.get('emergencyContact2_phone')?.disable();
-    // 禁用緊急聯絡人3
-    this.form.get('emergencyContact3')?.disable();
-    // 禁用緊急聯絡人3關係
-    this.form.get('emergencyContact3_relationship')?.disable();
-    // 禁用緊急聯絡人3電話
-    this.form.get('emergencyContact3_phone')?.disable();
+
+    // 生成緊急聯絡人假資料三筆
+    for (let i = 0; i < 2; i++) {
+      this.emergencyContact.push(this.emergencyContact[i]);
+    }
   }
 
   // 社會福利補助選項改變

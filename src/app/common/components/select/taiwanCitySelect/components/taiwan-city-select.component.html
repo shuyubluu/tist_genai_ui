@@ -1,9 +1,9 @@
 <select
-  class="taiwanSelect"
+  class="countySelect"
   [disabled]="disabled"
   (change)="onCityChange($event)"
 >
-  <option value="">請選擇縣市</option>
+  <option value="">選擇縣市</option>
   <option *ngFor="let city of cities" [value]="city.countycode[0]">
     {{ city.countyname[0] }}
   </option>
@@ -11,11 +11,11 @@
 
 <select
   *ngIf="!onlyCity"
-  class="taiwanSelect"
+  class="districtSelect"
   [disabled]="disabled"
   (change)="onDistrictChange($event)"
 >
-  <option value="">請選擇鄉鎮市區</option>
+  <option value="">選擇鄉鎮市區</option>
   <option *ngFor="let district of districts" [value]="district.towncode[0]">
     {{ district.townname[0] }}
   </option>
@@ -23,11 +23,11 @@
 
 <select
   *ngIf="!onlyCity"
-  class="taiwanSelect"
+  class="villageSelect"
   [disabled]="disabled"
   (change)="onVillageChange($event)"
 >
-  <option value="">請選擇村(里)</option>
+  <option value="">選擇村(里)</option>
   <option *ngFor="let village of villages" [value]="village.villageId[0]">
     {{ village.villageName[0] }}
   </option>

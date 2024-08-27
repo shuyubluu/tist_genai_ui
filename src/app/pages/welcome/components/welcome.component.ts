@@ -91,7 +91,5 @@ export class WelcomeComponent {
     });
   }
 
-  handleModalLinkClick(): void {
-    this.openModal('待簽核清單', '', this.contentTemplate);
-  }
+
 }

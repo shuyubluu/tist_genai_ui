@@ -82,6 +82,8 @@ export class Hd120FormComponent implements OnInit {
   isDisableCohabitantsNone: boolean = false;
   // 同住者是否禁用無選項以外的項目
   isDisableCohabitantsOthers: boolean = false;
+  // 緊急聯絡人modal是否顯示
+  isVisible_emergencyContact: boolean = false;
   // 個案服務狀態select選項
   selectOptions_caseServiceStatus: string[] = ['持續服務', '暫停服務', '結案'];
   // 個案分級select選項
@@ -369,26 +371,14 @@ export class Hd120FormComponent implements OnInit {
       cohabitants_other: new FormControl('', [Validators.required]),
 
       // 7.緊急聯絡人
-      // 緊急聯絡人1
-      emergencyContact1: new FormControl('', [Validators.required]),
-      // 緊急聯絡人1關係
-      emergencyContact1_relationship: new FormControl('', [
-        Validators.required,
-      ]),
-      // 緊急聯絡人1電話
-      emergencyContact1_phone: new FormControl('', [Validators.required]),
-      // 緊急聯絡人2
-      emergencyContact2: new FormControl(''),
-      // 緊急聯絡人2關係
-      emergencyContact2_relationship: new FormControl(''),
-      // 緊急聯絡人2電話
-      emergencyContact2_phone: new FormControl(''),
-      // 緊急聯絡人3
-      emergencyContact3: new FormControl(''),
-      // 緊急聯絡人3關係
-      emergencyContact3_relationship: new FormControl(''),
-      // 緊急聯絡人3電話
-      emergencyContact3_phone: new FormControl(''),
+      // 緊急聯絡人
+      emergencyContact: new FormArray([]),
+      // 緊急聯絡人_緊急聯絡人
+      emergencyContact_emergencyContact: new FormControl(''),
+      // 緊急聯絡人_關係
+      emergencyContact_relationship: new FormControl(''),
+      // 緊急聯絡人_連絡電話
+      emergencyContact_phone: new FormControl(''),
 
       // 9.法務相關
       // 個資同意書
@@ -1010,6 +1000,53 @@ export class Hd120FormComponent implements OnInit {
     this.isDisableCohabitantsNone = checkGroup.some((check) =>
       ['2', '3', '4', '5', '6', '7', '8', '9', '10', '11'].includes(check)
     );
+  }
+
+  // 顯示緊急聯絡人的modal
+  showEmergencyContactModal(): void {
+    this.isVisible_emergencyContact = true;
+  }
+
+  // 刪除所選的緊急聯絡人
+  deleteEmergencyContact(index: number): void {
+    (this.form.get('emergencyContact') as FormArray).removeAt(index);
+  }
+
+  // 緊急聯絡人modal的確認按鈕
+  handleEmergencyContactModalOk(): void {
+    // 取得三個表單控制項的值
+    const emergencyContact = this.form.get(
+      'emergencyContact_emergencyContact'
+    )?.value;
+    const relationship = this.form.get('emergencyContact_relationship')?.value;
+    const phone = this.form.get('emergencyContact_phone')?.value;
+    // 判斷資料是否皆有填寫
+    if (emergencyContact === '' || relationship === '' || phone === '') {
+      this.message.create('error', '請填寫完整資料');
+      return;
+    }
+    // 將這些值組合成一個物件
+    const emergencyContactObj = {
+      emergencyContact_emergencyContact: emergencyContact,
+      emergencyContact_relationship: relationship,
+      emergencyContact_phone: phone,
+    };
+    // 將物件加入到 emergencyContact 的 FormArray 中
+    (this.form.get('emergencyContact') as FormArray).push(
+      new FormControl(emergencyContactObj)
+    );
+    // 清空輸入框
+    this.form.get('emergencyContact_emergencyContact')?.reset();
+    this.form.get('emergencyContact_relationship')?.reset();
+    this.form.get('emergencyContact_phone')?.reset();
+    this.message.create('success', '新增成功');
+    this.isVisible_emergencyContact = false;
+  }
+
+  // 緊急聯絡人modal的取消按鈕
+  handleEmergencyContactModalCancel(): void {
+    this.isVisible_emergencyContact = false;
+    this.message.create('error', '取消');
   }
 
   // 暫存草稿

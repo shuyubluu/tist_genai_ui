@@ -1,17 +1,18 @@
-.th-cell {
-  width: 5%;
-}
-
-.td-cell {
-  width: 5%;
-}
-
 .mr-5 {
   margin-right: 5px;
 }
 
 .my-1 {
   margin: 1px 0px;
+}
+
+.square {
+  margin-right: 5px;
+  border: 2px solid #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 3px;
 }
 
 .grid {
@@ -21,39 +22,4 @@
 
 .fontSize-16 {
   font-size: 16px;
-}
-
-.border-2 {
-  border: 2px solid #000;
-}
-
-.divCenter {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-@media screen and (max-width: 1024px) {
-  .bordered-table tr {
-    display: flex;
-    flex-wrap: wrap;
-    border: 1px solid #cccccc;
-    margin-bottom: 8px;
-  }
-
-  .bordered-table th,
-  .bordered-table td {
-    flex: 1 1 100%;
-    display: block;
-    width: 100%;
-    box-sizing: border-box;
-    border: none;
-    text-align: center;
-    padding: 10px;
-    border-bottom: 1px solid #cccccc;
-  }
-
-  .bordered-table th {
-    background-color: #e6f0fb;
-  }
 }

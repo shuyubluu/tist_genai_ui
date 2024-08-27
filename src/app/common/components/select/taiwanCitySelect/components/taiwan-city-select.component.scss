@@ -2,7 +2,6 @@ select {
   border-radius: 5px;
   border: 1px solid #b6b6b6;
   margin: 0px 3px;
-  width: 150px;
   height: 30px;
 
   &:focus,
@@ -12,4 +11,16 @@ select {
     border-width: 1.2px;
     border-style: solid;
   }
+}
+
+.countySelect {
+  width: 90px;
+}
+
+.districtSelect {
+  width: 125px;
+}
+
+.villageSelect {
+  width: 95px;
 }

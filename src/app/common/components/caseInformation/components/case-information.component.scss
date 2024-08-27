@@ -1,21 +1,50 @@
+// 個資子標題
 .caseTitle {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 5px;
+  background: #e1f5f8;
+  color: #4e73e1;
+}
+
+// 個資內容
+.caseContent {
   color: blue;
   font-size: 20px;
   font-weight: bold;
+  padding: 5px;
+  border-bottom: #dddfeb solid 1px;
 }
 
-.divGrid {
+// 置中對齊
+.divCenter {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
 }
 
+// 個資欄位拆分三行
+.grid-column-3 {
+  display: grid;
+  grid-template-columns: repeat(6, auto);
+  justify-content: flex-start;
+  align-items: center;
+  grid-gap: 10px;
+}
+
+// 下邊距2px
+.mb-2 {
+  margin-bottom: 2px;
+}
+
+// 右邊距5px
 .mr-5 {
   margin-right: 5px;
 }
 
+// 頁籤
 .checkFormButton {
-  width: 150px;
+  font-size: 20px;
   padding: 3px 10px;
   border-radius: 5px;
   border: 1px solid #cccccc;
@@ -29,6 +58,7 @@
   }
 }
 
+// 已被選擇的頁籤
 .highlightButton {
   background: #cbd814;
   &:hover {

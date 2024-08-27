@@ -4,4 +4,5 @@ export interface SearchResultData {
   caseName: string;
   visitTime: string;
   responsiblePerson: string;
+  responsiblePersonJobTitle: string;
 }

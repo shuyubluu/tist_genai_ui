@@ -2,2130 +2,1977 @@
   *ngIf="caseInformationService.isChoiceCase"
   [currentTab]="'個案開案資料表'"
 />
-<h1 class="inner-title">1-2 個案開案資料表</h1>
 <div class="mt"></div>
-<div class="table-container">
-  <ng-container>
-    <form [formGroup]="form">
-      <nz-table class="bordered-table">
-        <tr>
-          <!-- !TODO -->
-          <th class="custom-header" colSpan="4" nzAlign="center">個案狀態</th>
-        </tr>
-        <tr>
-          <th class="th-cell custom-header bold-text" nzAlign="center">
-            個案服務狀態
-          </th>
-          <td class="td-cell custom-cell">
-            <app-select
-              [selectWidth]="'175px'"
-              [defaultPlaceHolder]="false"
-              [options]="selectOptions_caseServiceStatus"
-              formControlName="caseServiceStatus"
-            />
-          </td>
-          <th class="th-cell custom-header bold-text" nzAlign="center">
-            個案分級
-          </th>
-          <td class="td-cell custom-cell">
-            <app-select
-              [selectWidth]="'175px'"
-              [defaultPlaceHolder]="false"
-              [options]="selectOptions_caseLevel"
-              formControlName="caseLevel"
-            />
-          </td>
-        </tr>
-        <tr>
-          <th class="th-cell custom-header bold-text" nzAlign="center">
-            開案日期
-          </th>
-          <td class="td-cell custom-cell">
-            <app-dayPicker formControlName="caseStartDate" />
-            <app-error-message
-              [control]="form.get('caseStartDate')"
-              errorKey="required"
-              [isTouched]="false"
-              errorMessage="這是必選的選項。"
-            />
-          </td>
-          <th class="th-cell custom-header bold-text" nzAlign="center">
-            結案日期
-          </th>
-          <td class="td-cell custom-cell">
-            <app-dayPicker formControlName="caseEndDate" />
-          </td>
-        </tr>
-        <tr>
-          <th class="th-cell custom-header bold-text" nzAlign="center">
-            結案原因
-          </th>
-          <td class="td-cell custom-cell">
-            <app-input
-              [inputWidth]="'175px'"
-              [maxLength]="50"
-              formControlName="caseClosureReason"
-            />
-          </td>
-          <th class="th-cell custom-header bold-text" nzAlign="center">
-            是否轉介
-          </th>
-          <td class="td-cell custom-cell">
-            <app-select
-              [selectWidth]="'175px'"
-              [defaultPlaceHolder]="false"
-              [options]="selectOptions_trueOrFalse"
-              formControlName="isReferred"
-            />
-          </td>
-        </tr>
-        <tr>
-          <!-- !TODO -->
-          <th class="custom-header" colSpan="4" nzAlign="center">基本資料</th>
-        </tr>
-        <tr>
-          <th class="th-cell disableBackground bold-text" nzAlign="center">
-            個案來源
-          </th>
-          <td class="td-cell disableBackground">
-            <app-input
-              [inputWidth]="'175px'"
-              [maxLength]="30"
-              formControlName="caseSource"
-            />
-          </td>
-          <th class="th-cell disableBackground bold-text" nzAlign="center">
-            姓名
-          </th>
-          <td class="td-cell disableBackground">
-            <app-input
-              [inputWidth]="'175px'"
-              [maxLength]="30"
-              formControlName="name"
-            />
-          </td>
-        </tr>
-        <tr>
-          <th class="th-cell disableBackground bold-text" nzAlign="center">
-            性別
-          </th>
-          <td class="td-cell disableBackground">
-            <app-select
-              [selectWidth]="'175px'"
-              [defaultPlaceHolder]="false"
-              [options]="selectOptions_gender"
-              formControlName="gender"
-            />
-          </td>
-          <th class="th-cell disableBackground bold-text" nzAlign="center">
-            生日
-          </th>
-          <td class="td-cell disableBackground">
-            <app-dayPicker formControlName="dateOfBirth" />
-          </td>
-        </tr>
-        <tr>
-          <th class="th-cell disableBackground bold-text" nzAlign="center">
-            身份證字號
-          </th>
-          <td class="td-cell disableBackground">
-            <app-input
-              [inputWidth]="'175px'"
-              [maxLength]="10"
-              formControlName="idNumber"
-            />
-          </td>
-          <th class="th-cell disableBackground bold-text" nzAlign="center">
-            手機(4碼+6碼)
-          </th>
-          <td class="td-cell disableBackground">
-            <app-input
-              [inputWidth]="'95px'"
-              [maxLength]="4"
-              [type]="'NUMBER'"
-              formControlName="mobileNumber_firstFourDigits"
-            />
-            <span class="mr-5">-</span>
-            <app-input
-              [inputWidth]="'175px'"
-              [maxLength]="6"
-              [type]="'NUMBER'"
-              formControlName="mobileNumber_lastSixDigits"
-            />
-          </td>
-        </tr>
-        <tr>
-          <th class="th-cell disableBackground bold-text" nzAlign="center">
-            電話(區碼+電話)
-          </th>
-          <td class="td-cell disableBackground">
-            <app-input
-              [inputWidth]="'90px'"
-              [maxLength]="4"
-              [type]="'NUMBER'"
-              formControlName="phoneNumber_areaCode"
-            />
-            <span class="mr-5">-</span>
-            <app-input
-              [inputWidth]="'175px'"
-              [maxLength]="8"
-              [type]="'NUMBER'"
-              formControlName="phoneNumber_phoneNumber"
-            />
-          </td>
-          <th class="th-cell custom-header bold-text" nzAlign="center">
-            map定位座標
-          </th>
-          <td class="td-cell custom-cell">
-            <app-input
-              [inputWidth]="'175px'"
-              [maxLength]="50"
-              formControlName="mapCoordinates"
-            />
-          </td>
-        </tr>
-        <tr>
-          <th
-            colSpan="1"
-            class="th-cell disableBackground bold-text"
-            nzAlign="center"
-          >
-            通訊地址
-          </th>
-          <td colSpan="3" class="td-cell disableBackground">
-            <app-taiwan-city-select
-              formControlName="communicationAddress_select"
-            />
-            <app-input
-              [inputWidth]="'175px'"
-              [maxLength]="30"
-              formControlName="communicationAddress"
-            />
-          </td>
-        </tr>
-        <tr>
-          <th
-            colSpan="1"
-            class="th-cell custom-header bold-text"
-            nzAlign="center"
-          >
-            戶籍地址
-          </th>
-          <td colSpan="3" class="td-cell custom-cell">
-            <app-taiwan-city-select
-              formControlName="registeredAddress_select"
-            />
-            <app-input
-              [inputWidth]="'175px'"
-              [maxLength]="30"
-              formControlName="registeredAddress"
-            />
-            <!-- !TODO -->
-            <!-- <nz-checkbox-wrapper
+<form [formGroup]="form">
+  <div class="grid-container">
+    <!-- !TODO -->
+    <div class="title">個案狀態</div>
+    <div class="grid-columns-2">
+      <div class="label disableBackground">服務狀態</div>
+      <div>
+        <app-select
+          [selectWidth]="'100px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_caseServiceStatus"
+          formControlName="caseServiceStatus"
+        />
+      </div>
+      <div class="label disableBackground">個案分級</div>
+      <div>
+        <app-select
+          [selectWidth]="'100px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_caseLevel"
+          formControlName="caseLevel"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-2">
+      <div class="label">開案日期</div>
+      <div class="column-Message">
+        <app-dayPicker formControlName="caseStartDate" />
+        <app-error-message
+          [control]="form.get('caseStartDate')"
+          errorKey="required"
+          [isTouched]="false"
+          errorMessage="必選"
+        />
+      </div>
+      <div class="label disableBackground">結案日期</div>
+      <div>
+        <app-dayPicker formControlName="caseEndDate" />
+      </div>
+    </div>
+    <div class="grid-columns-2">
+      <div class="label disableBackground">結案原因</div>
+      <div>
+        <app-input
+          [inputWidth]="'150px'"
+          [maxLength]="50"
+          formControlName="caseClosureReason"
+        />
+      </div>
+      <div class="label disableBackground">是否轉介</div>
+      <div>
+        <app-select
+          [selectWidth]="'70px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_trueOrFalse"
+          formControlName="isReferred"
+        />
+      </div>
+    </div>
+    <div>
+      <!-- !TODO -->
+      <div class="title">基本資料</div>
+    </div>
+    <div class="grid-columns-2">
+      <div class="label disableBackground">個案來源</div>
+      <div>
+        <app-input
+          [inputWidth]="'100px'"
+          [maxLength]="30"
+          formControlName="caseSource"
+        />
+      </div>
+      <div class="label disableBackground">姓名</div>
+      <div>
+        <app-input
+          [inputWidth]="'130px'"
+          [maxLength]="30"
+          formControlName="name"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-2">
+      <div class="label disableBackground">性別</div>
+      <div>
+        <app-select
+          [selectWidth]="'70px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_gender"
+          formControlName="gender"
+        />
+      </div>
+      <div class="label disableBackground">生日</div>
+      <div>
+        <app-dayPicker formControlName="dateOfBirth" />
+      </div>
+    </div>
+    <div class="grid-columns-2">
+      <div class="label disableBackground">身份證字號</div>
+      <div>
+        <app-input
+          [inputWidth]="'100px'"
+          [maxLength]="10"
+          formControlName="idNumber"
+        />
+      </div>
+      <div class="label disableBackground">手機</div>
+      <div>
+        <app-input
+          [inputWidth]="'70px'"
+          [maxLength]="4"
+          [type]="'NUMBER'"
+          formControlName="mobileNumber_firstFourDigits"
+        />
+        <span class="mr-5">-</span>
+        <app-input
+          [inputWidth]="'90px'"
+          [maxLength]="6"
+          [type]="'NUMBER'"
+          formControlName="mobileNumber_lastSixDigits"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-2">
+      <div class="label disableBackground">電話</div>
+      <div>
+        <app-input
+          [inputWidth]="'70px'"
+          [maxLength]="4"
+          [type]="'NUMBER'"
+          formControlName="phoneNumber_areaCode"
+        />
+        <span class="mr-5">-</span>
+        <app-input
+          [inputWidth]="'90px'"
+          [maxLength]="8"
+          [type]="'NUMBER'"
+          formControlName="phoneNumber_phoneNumber"
+        />
+      </div>
+      <div class="label">map定位座標</div>
+      <div>
+        <app-input
+          [inputWidth]="'100px'"
+          [maxLength]="50"
+          formControlName="mapCoordinates"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label disableBackground">通訊地址</div>
+      <div>
+        <app-taiwan-city-select formControlName="communicationAddress_select" />
+        <app-input
+          [inputWidth]="'300px'"
+          [maxLength]="30"
+          formControlName="communicationAddress"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">戶籍地址</div>
+      <div>
+        <app-taiwan-city-select formControlName="registeredAddress_select" />
+        <app-input
+          [inputWidth]="'300px'"
+          [maxLength]="30"
+          formControlName="registeredAddress"
+        />
+        <!-- !TODO -->
+        <!-- <nz-checkbox-wrapper
               style="width: 100%"
               (nzOnChange)="isSameCommunicationAddressChange($event)"
             >
               <label nz-checkbox [nzDisabled]="isDisableReligiousAffiliationOthers" nzValue="1">同通訊地址</label>
             </nz-checkbox-wrapper> -->
-          </td>
-        </tr>
-        <tr>
-          <th class="th-cell custom-header bold-text" nzAlign="center">
-            教育程度
-          </th>
-          <td class="td-cell custom-cell">
-            <app-select
-              [selectWidth]="'175px'"
-              [options]="selectOptions_educationLevel"
-              [defaultPlaceHolder]="false"
-              formControlName="educationLevel"
-            />
-            <app-error-message
-              [control]="form.get('educationLevel')"
-              errorKey="required"
-              [isTouched]="false"
-              errorMessage="這是必選的選項。"
-            />
-          </td>
-          <th class="th-cell custom-header bold-text" nzAlign="center">
-            婚姻狀況
-          </th>
-          <td class="td-cell custom-cell">
-            <app-select
-              (ngModelChange)="maritalStatusChange($event)"
-              [selectWidth]="'175px'"
-              [defaultPlaceHolder]="false"
-              [options]="selectOptions_maritalStatus"
-              formControlName="maritalStatus"
-            />
-            <app-input
-              [inputWidth]="'175px'"
-              [maxLength]="30"
-              [placeholder]="'選擇其他才可填寫'"
-              formControlName="maritalStatus_other"
-            />
-            <app-error-message
-              [control]="form.get('maritalStatus')"
-              errorKey="required"
-              [isTouched]="false"
-              errorMessage="這是必選的選項。"
-            />
-            <app-error-message
-              [control]="form.get('maritalStatus_other')"
-              errorKey="required"
-              [isTouched]="false"
-              errorMessage="這是必填的欄位。"
-            />
-          </td>
-        </tr>
-        <tr>
-          <th
-            colspan="1"
-            class="th-cell custom-header bold-text"
-            nzAlign="center"
-          >
-            宗教信仰
-          </th>
-          <td colspan="3" class="td-cell custom-cell">
-            <nz-checkbox-wrapper
-              style="width: 100%"
-              (nzOnChange)="religiousAffiliationChange($event)"
-            >
-              <div nz-row>
-                <div nz-col nzSpan="2">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableReligiousAffiliationNone"
-                    nzValue="1"
-                    >無</label
-                  >
-                </div>
-                <div nz-col nzSpan="2">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableReligiousAffiliationOthers"
-                    nzValue="2"
-                    >道教</label
-                  >
-                </div>
-                <div nz-col nzSpan="2">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableReligiousAffiliationOthers"
-                    nzValue="3"
-                    >佛教</label
-                  >
-                </div>
-                <div nz-col nzSpan="2">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableReligiousAffiliationOthers"
-                    nzValue="4"
-                    >基督教</label
-                  >
-                </div>
-                <div nz-col nzSpan="2">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableReligiousAffiliationOthers"
-                    nzValue="5"
-                    >天主教</label
-                  >
-                </div>
-                <div nz-col nzSpan="2">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableReligiousAffiliationOthers"
-                    nzValue="6"
-                    >一貫道</label
-                  >
-                </div>
-                <div nz-col nzSpan="2">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableReligiousAffiliationOthers"
-                    nzValue="7"
-                    >回教</label
-                  >
-                </div>
-                <div nz-col nzSpan="2">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableReligiousAffiliationOthers"
-                    nzValue="8"
-                    >民間信仰</label
-                  >
-                </div>
-                <div nz-col nzSpan="24">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableReligiousAffiliationOthers"
-                    nzValue="9"
-                    >其他
-                  </label>
-                  <label>
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [maxLength]="30"
-                      formControlName="religiousAffiliation_other"
-                  /></label>
-                </div>
-              </div>
-            </nz-checkbox-wrapper>
-            <app-error-message
-              [control]="form.get('religiousAffiliation')"
-              [isTouched]="false"
-              errorKey="required"
-              errorMessage="這是必選的選項。"
-            />
-            <app-error-message
-              [control]="form.get('religiousAffiliation_other')"
-              [isTouched]="false"
-              errorKey="required"
-              errorMessage="這是必填欄位。"
-            />
-          </td>
-        </tr>
-        <tr>
-          <th class="th-cell custom-header bold-text" nzAlign="center">
-            習慣用語
-          </th>
-          <td class="td-cell custom-cell">
-            <nz-checkbox-wrapper
-              style="width: 100%"
-              (nzOnChange)="commonLanguageChange($event)"
-            >
-              <div nz-row>
-                <div nz-col nzSpan="6">
-                  <label nz-checkbox nzValue="1">國語</label>
-                </div>
-                <div nz-col nzSpan="6">
-                  <label nz-checkbox nzValue="2">台語</label>
-                </div>
-                <div nz-col nzSpan="6">
-                  <label nz-checkbox nzValue="3">日語</label>
-                </div>
-                <div nz-col nzSpan="6">
-                  <label nz-checkbox nzValue="4">客家話</label>
-                </div>
-                <div nz-col nzSpan="24">
-                  <label nz-checkbox nzValue="5">其他 </label>
-                  <label>
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [maxLength]="30"
-                      formControlName="commonLanguage_other"
-                  /></label>
-                </div>
-              </div>
-            </nz-checkbox-wrapper>
-            <app-error-message
-              [control]="form.get('commonLanguage')"
-              [isTouched]="false"
-              errorKey="required"
-              errorMessage="這是必選的選項。"
-            />
-            <app-error-message
-              [control]="form.get('commonLanguage_other')"
-              [isTouched]="false"
-              errorKey="required"
-              errorMessage="這是必填欄位。"
-            />
-          </td>
-          <th class="th-cell custom-header bold-text" nzAlign="center">
-            飲食習慣
-          </th>
-          <td class="td-cell custom-cell">
-            <nz-checkbox-wrapper
-              style="width: 100%"
-              (nzOnChange)="eatingHabitsChange($event)"
-            >
-              <div nz-row>
-                <div nz-col nzSpan="6">
-                  <label nz-checkbox nzValue="1">葷</label>
-                </div>
-                <div nz-col nzSpan="6">
-                  <label nz-checkbox nzValue="2">全素</label>
-                </div>
-                <div nz-col nzSpan="6">
-                  <label nz-checkbox nzValue="3">蛋奶素</label>
-                </div>
-                <div nz-col nzSpan="6">
-                  <label nz-checkbox nzValue="4">鍋邊素</label>
-                </div>
-                <div nz-col nzSpan="6">
-                  <label nz-checkbox nzValue="5">初一十五素</label>
-                </div>
-              </div>
-            </nz-checkbox-wrapper>
-          </td>
-        </tr>
-        <tr>
-          <th
-            colSpan="1"
-            class="th-cell custom-header bold-text"
-            nzAlign="center"
-          >
-            現有疾病狀態
-          </th>
-          <td colSpan="3" class="td-cell custom-cell">
-            <nz-checkbox-wrapper
-              style="width: 100%"
-              (nzOnChange)="currentHealthConditionsChange($event)"
-            >
-              <div nz-row>
-                <div nz-col nzSpan="4">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableCurrentHealthConditionsNone"
-                    nzValue="1"
-                    >無</label
-                  >
-                </div>
-                <div nz-col nzSpan="4">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableCurrentHealthConditionsOthers"
-                    nzValue="2"
-                    >中風</label
-                  >
-                </div>
-                <div nz-col nzSpan="4">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableCurrentHealthConditionsOthers"
-                    nzValue="3"
-                    >高血壓</label
-                  >
-                </div>
-                <div nz-col nzSpan="4">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableCurrentHealthConditionsOthers"
-                    nzValue="4"
-                    >心臟病</label
-                  >
-                </div>
-                <div nz-col nzSpan="4">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableCurrentHealthConditionsOthers"
-                    nzValue="5"
-                    >糖尿病</label
-                  >
-                </div>
-                <div nz-col nzSpan="4">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableCurrentHealthConditionsOthers"
-                    nzValue="6"
-                    >腎臟疾病</label
-                  >
-                </div>
-                <div nz-col nzSpan="4">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableCurrentHealthConditionsOthers"
-                    nzValue="7"
-                    >骨骼系統(關節炎、骨折)</label
-                  >
-                </div>
-                <div nz-col nzSpan="4">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableCurrentHealthConditionsOthers"
-                    nzValue="8"
-                    >巴金森氏症</label
-                  >
-                </div>
-                <div nz-col nzSpan="4">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableCurrentHealthConditionsOthers"
-                    nzValue="9"
-                    >失智症</label
-                  >
-                </div>
-                <div nz-col nzSpan="4">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableCurrentHealthConditionsOthers"
-                    nzValue="10"
-                    >癌症</label
-                  >
-                </div>
-                <div nz-col nzSpan="4">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableCurrentHealthConditionsOthers"
-                    nzValue="11"
-                    >眼部疾病</label
-                  >
-                </div>
-                <div nz-col nzSpan="4">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableCurrentHealthConditionsOthers"
-                    nzValue="12"
-                    >精神疾病</label
-                  >
-                </div>
-                <div nz-col nzSpan="24">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableCurrentHealthConditionsOthers"
-                    nzValue="13"
-                    >其他</label
-                  >
-                  <label>
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [maxLength]="30"
-                      formControlName="currentHealthConditions_other"
-                  /></label>
-                </div>
-              </div>
-            </nz-checkbox-wrapper>
-            <app-error-message
-              [control]="form.get('currentHealthConditions')"
-              [isTouched]="false"
-              errorKey="required"
-              errorMessage="這是必選的選項。"
-            />
-            <app-error-message
-              [control]="form.get('currentHealthConditions_other')"
-              [isTouched]="false"
-              errorKey="required"
-              errorMessage="這是必填欄位。"
-            />
-          </td>
-        </tr>
-        <tr>
-          <th
-            colspan="1"
-            class="th-cell custom-header bold-text"
-            nzAlign="center"
-          >
-            就醫狀態
-          </th>
-          <td colspan="3" class="td-cell custom-cell">
-            <div class="grid bold-text fontSize-16">
-              <span>就診醫院</span>
-              <span>科別</span>
-              <span>頻率</span>
-              <app-button
-                [buttonIcon]="'add'"
-                [buttonText]="'新增'"
-                (click)="showMedicalStatusModal()"
+      </div>
+    </div>
+    <div class="grid-columns-2">
+      <div class="label">教育程度</div>
+      <div class="column-Message">
+        <app-select
+          [selectWidth]="'100px'"
+          [options]="selectOptions_educationLevel"
+          [defaultPlaceHolder]="false"
+          formControlName="educationLevel"
+        />
+        <app-error-message
+          [control]="form.get('educationLevel')"
+          errorKey="required"
+          [isTouched]="false"
+          errorMessage="必選"
+        />
+      </div>
+      <div class="label">婚姻狀況</div>
+      <div class="column-Message">
+        <app-select
+          (ngModelChange)="maritalStatusChange($event)"
+          [selectWidth]="'70px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_maritalStatus"
+          formControlName="maritalStatus"
+        />
+        @if(form.get('maritalStatus')?.value === '其他'){
+        <app-input
+          [inputWidth]="'100px'"
+          [maxLength]="30"
+          formControlName="maritalStatus_other"
+        />
+        <app-error-message
+          [control]="form.get('maritalStatus_other')"
+          errorKey="required"
+          [isTouched]="false"
+          errorMessage="必填"
+        />
+        }
+        <app-error-message
+          [control]="form.get('maritalStatus')"
+          errorKey="required"
+          [isTouched]="false"
+          errorMessage="必選"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">宗教信仰</div>
+      <div>
+        <nz-checkbox-wrapper
+          style="width: 100%"
+          (nzOnChange)="religiousAffiliationChange($event)"
+        >
+          <div nz-row>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableReligiousAffiliationNone"
+                nzValue="1"
+                >無</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableReligiousAffiliationOthers"
+                nzValue="2"
+                >道教</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableReligiousAffiliationOthers"
+                nzValue="3"
+                >佛教</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableReligiousAffiliationOthers"
+                nzValue="4"
+                >基督教</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableReligiousAffiliationOthers"
+                nzValue="5"
+                >天主教</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableReligiousAffiliationOthers"
+                nzValue="6"
+                >一貫道</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableReligiousAffiliationOthers"
+                nzValue="7"
+                >回教</label
+              >
+            </div>
+
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableReligiousAffiliationOthers"
+                nzValue="8"
+                >民間信仰</label
+              >
+            </div>
+            <div nz-col>
+              <app-error-message
+                [control]="form.get('religiousAffiliation')"
+                [isTouched]="false"
+                errorKey="required"
+                errorMessage="必選"
               />
             </div>
-            <div
-              class="grid"
-              *ngFor="
-                let status of form.get('medicalStatus')?.value;
-                let index = index
-              "
-            >
-              <span>{{ status.medicalStatus_medicalCategory }}</span>
-              <span>{{ status.medicalStatus_department }}</span>
-              <span>{{ status.medicalStatus_frequency }}</span>
-              <app-button
-                [buttonIcon]="'delete'"
-                [buttonText]="'刪除該筆資料'"
-                (click)="deleteMedicalStatus(index)"
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableReligiousAffiliationOthers"
+                nzValue="9"
+                >其他
+              </label>
+              <label>
+                <app-input
+                  [inputWidth]="'100px'"
+                  [maxLength]="30"
+                  formControlName="religiousAffiliation_other"
+              /></label>
+              <label>
+                <app-error-message
+                  [control]="form.get('religiousAffiliation_other')"
+                  [isTouched]="false"
+                  errorKey="required"
+                  errorMessage="必填"
+              /></label>
+            </div>
+          </div>
+        </nz-checkbox-wrapper>
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">習慣用語</div>
+      <div>
+        <nz-checkbox-wrapper
+          style="width: 100%"
+          (nzOnChange)="commonLanguageChange($event)"
+        >
+          <div nz-row>
+            <div nz-col>
+              <label nz-checkbox nzValue="1">國語</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="2">台語</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="3">日語</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="4">客家話</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="5">其他 </label>
+              <label>
+                <app-input
+                  [inputWidth]="'100px'"
+                  [maxLength]="30"
+                  formControlName="commonLanguage_other"
+              /></label>
+            </div>
+            <div nz-col>
+              <app-error-message
+                [control]="form.get('commonLanguage')"
+                [isTouched]="false"
+                errorKey="required"
+                errorMessage="必選"
+              />
+              <app-error-message
+                [control]="form.get('commonLanguage_other')"
+                [isTouched]="false"
+                errorKey="required"
+                errorMessage="必填"
               />
             </div>
-            <nz-modal
-              [(nzVisible)]="isVisible_medicalStatus"
-              nzTitle="【新增】就醫狀態"
-              (nzOnCancel)="handleMedicalStatusModalCancel()"
-              (nzOnOk)="handleMedicalStatusModalOk()"
-              [nzOkText]="'新增'"
-              [nzCancelText]="'取消'"
-              nzWidth="250px"
-            >
-              <ng-container *nzModalContent>
-                <label>
-                  就診醫院：
-                  <app-input
-                    [inputWidth]="'175px'"
-                    [maxLength]="15"
-                    formControlName="medicalStatus_medicalCategory"
-                /></label>
-                <label>
-                  科別：
-                  <app-input
-                    [inputWidth]="'175px'"
-                    [maxLength]="15"
-                    formControlName="medicalStatus_department"
-                  />
-                </label>
-                <label
-                  >頻率：
-                  <app-input
-                    [inputWidth]="'175px'"
-                    [maxLength]="10"
-                    formControlName="medicalStatus_frequency"
-                  />
-                  <app-error-message
-                    [condition]="
-                      form.get('medicalStatus_medicalCategory')?.value
-                        .length === 0
-                    "
-                    [isCustom]="true"
-                    errorMessage="就診醫院是必填欄位。"
-                  />
-                  <app-error-message
-                    [condition]="
-                      form.get('medicalStatus_department')?.value.length === 0
-                    "
-                    [isCustom]="true"
-                    errorMessage="科別是必填欄位。"
-                  />
-                  <app-error-message
-                    [condition]="
-                      form.get('medicalStatus_frequency')?.value.length === 0
-                    "
-                    [isCustom]="true"
-                    errorMessage="頻率是必填欄位。"
-                  />
-                </label>
-              </ng-container>
-            </nz-modal>
-            <app-error-message
-              [condition]="form.get('medicalStatus')?.value.length === 0"
-              [isCustom]="true"
-              errorKey="required"
-              errorMessage="最少要新增一筆資料。"
-            />
-          </td>
-        </tr>
-        <tr>
-          <th
-            colSpan="1"
-            class="th-cell custom-header bold-text"
-            nzAlign="center"
-          >
-            輔具使用
-          </th>
-          <td colSpan="3" class="td-cell custom-cell">
-            <nz-checkbox-wrapper
-              style="width: 100%"
-              (nzOnChange)="assistiveDeviceUsageChange($event)"
-            >
-              <div nz-row>
-                <div nz-col nzSpan="2">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableAssistiveDeviceUsageNone"
-                    nzValue="1"
-                    >無</label
-                  >
-                </div>
-                <div nz-col nzSpan="2">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableAssistiveDeviceUsageOthers"
-                    nzValue="2"
-                    >單手拐杖</label
-                  >
-                </div>
-                <div nz-col nzSpan="2">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableAssistiveDeviceUsageOthers"
-                    nzValue="3"
-                    >助行器</label
-                  >
-                </div>
-                <div nz-col nzSpan="2">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableAssistiveDeviceUsageOthers"
-                    nzValue="4"
-                    >腋下拐杖</label
-                  >
-                </div>
-                <div nz-col nzSpan="2">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableAssistiveDeviceUsageOthers"
-                    nzValue="5"
-                    >輪椅</label
-                  >
-                </div>
-                <div nz-col nzSpan="2">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableAssistiveDeviceUsageOthers"
-                    nzValue="6"
-                    >氣墊床</label
-                  >
-                </div>
-                <div nz-col nzSpan="2">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableAssistiveDeviceUsageOthers"
-                    nzValue="7"
-                    >助聽器</label
-                  >
-                </div>
-                <div nz-col nzSpan="2">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableAssistiveDeviceUsageOthers"
-                    nzValue="8"
-                    >便盆椅</label
-                  >
-                </div>
-                <div nz-col nzSpan="2">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableAssistiveDeviceUsageOthers"
-                    nzValue="9"
-                    >假牙</label
-                  >
-                </div>
-                <div class="border-2 divCenter" nz-col nzSpan="4">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableAssistiveDeviceUsageOthers"
-                    nzValue="10"
-                    >義肢</label
-                  >
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableAssistiveDeviceUsageProsthesis"
-                    nzValue="11"
-                    >上肢</label
-                  >
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableAssistiveDeviceUsageProsthesis"
-                    nzValue="12"
-                    >下肢</label
-                  >
-                </div>
-                <div nz-col nzSpan="24">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableAssistiveDeviceUsageOthers"
-                    nzValue="13"
-                    >其他</label
-                  >
-                  <label>
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [maxLength]="30"
-                      formControlName="assistiveDeviceUsage_other"
-                  /></label>
-                </div>
-              </div>
-            </nz-checkbox-wrapper>
-            <app-error-message
-              [control]="form.get('assistiveDeviceUsage')"
-              [isTouched]="false"
-              errorKey="required"
-              errorMessage="這是必選的選項。"
-            />
-            <app-error-message
-              [condition]="isChoiceProsthesis"
-              [isCustom]="true"
-              errorMessage="義肢選項勾選後必須選擇一項。"
-            />
-            <app-error-message
-              [control]="form.get('assistiveDeviceUsage_other')"
-              [isTouched]="false"
-              errorKey="required"
-              errorMessage="這是必填欄位。"
-            />
-          </td>
-        </tr>
-        <tr>
+          </div>
+        </nz-checkbox-wrapper>
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">飲食習慣</div>
+      <div>
+        <nz-checkbox-wrapper
+          style="width: 100%"
+          (nzOnChange)="eatingHabitsChange($event)"
+        >
+          <div nz-row>
+            <div nz-col>
+              <label nz-checkbox nzValue="1">葷</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="2">全素</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="3">蛋奶素</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="4">鍋邊素</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="5">初一十五素</label>
+            </div>
+          </div>
+        </nz-checkbox-wrapper>
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">現有疾病狀態</div>
+      <div>
+        <nz-checkbox-wrapper
+          style="width: 100%"
+          (nzOnChange)="currentHealthConditionsChange($event)"
+        >
+          <div nz-row>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableCurrentHealthConditionsNone"
+                nzValue="1"
+                >無</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableCurrentHealthConditionsOthers"
+                nzValue="2"
+                >中風</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableCurrentHealthConditionsOthers"
+                nzValue="3"
+                >高血壓</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableCurrentHealthConditionsOthers"
+                nzValue="4"
+                >心臟病</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableCurrentHealthConditionsOthers"
+                nzValue="5"
+                >糖尿病</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableCurrentHealthConditionsOthers"
+                nzValue="6"
+                >腎臟疾病</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableCurrentHealthConditionsOthers"
+                nzValue="7"
+                >骨骼系統(關節炎、骨折)</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableCurrentHealthConditionsOthers"
+                nzValue="8"
+                >巴金森氏症</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableCurrentHealthConditionsOthers"
+                nzValue="9"
+                >失智症</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableCurrentHealthConditionsOthers"
+                nzValue="10"
+                >癌症</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableCurrentHealthConditionsOthers"
+                nzValue="11"
+                >眼部疾病</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableCurrentHealthConditionsOthers"
+                nzValue="12"
+                >精神疾病</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableCurrentHealthConditionsOthers"
+                nzValue="13"
+                >其他</label
+              >
+              <label>
+                <app-input
+                  [inputWidth]="'100px'"
+                  [maxLength]="30"
+                  formControlName="currentHealthConditions_other"
+              /></label>
+              <label
+                ><app-error-message
+                  [control]="form.get('currentHealthConditions')"
+                  [isTouched]="false"
+                  errorKey="required"
+                  errorMessage="必選" />
+                <app-error-message
+                  [control]="form.get('currentHealthConditions_other')"
+                  [isTouched]="false"
+                  errorKey="required"
+                  errorMessage="必填"
+              /></label>
+            </div>
+          </div>
+        </nz-checkbox-wrapper>
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">就醫狀態</div>
+      <div>
+        <div class="grid bold-text fontSize-16">
+          <span>就診醫院</span>
+          <span>科別</span>
+          <span>頻率</span>
+          <app-button
+            [buttonIcon]="'add'"
+            [buttonText]="'新增'"
+            (click)="showMedicalStatusModal()"
+          />
+        </div>
+        <div
+          class="grid"
+          *ngFor="
+            let status of form.get('medicalStatus')?.value;
+            let index = index
+          "
+        >
+          <span>{{ status.medicalStatus_medicalCategory }}</span>
+          <span>{{ status.medicalStatus_department }}</span>
+          <span>{{ status.medicalStatus_frequency }}</span>
+          <app-button
+            [buttonIcon]="'delete'"
+            [buttonText]="'刪除該筆資料'"
+            (click)="deleteMedicalStatus(index)"
+          />
+        </div>
+        <nz-modal
+          [(nzVisible)]="isVisible_medicalStatus"
+          nzTitle="【新增】就醫狀態"
+          (nzOnCancel)="handleMedicalStatusModalCancel()"
+          (nzOnOk)="handleMedicalStatusModalOk()"
+          [nzOkText]="'新增'"
+          [nzCancelText]="'取消'"
+          nzWidth="250px"
+        >
+          <ng-container *nzModalContent>
+            <label>
+              就診醫院：
+              <app-input
+                [inputWidth]="'175px'"
+                [maxLength]="15"
+                formControlName="medicalStatus_medicalCategory"
+            /></label>
+            <label>
+              科別：
+              <app-input
+                [inputWidth]="'175px'"
+                [maxLength]="15"
+                formControlName="medicalStatus_department"
+              />
+            </label>
+            <label
+              >頻率：
+              <app-input
+                [inputWidth]="'175px'"
+                [maxLength]="10"
+                formControlName="medicalStatus_frequency"
+              />
+              <app-error-message
+                [condition]="
+                  form.get('medicalStatus_medicalCategory')?.value.length === 0
+                "
+                [isCustom]="true"
+                errorMessage="就診醫院是必填欄位。"
+              />
+              <app-error-message
+                [condition]="
+                  form.get('medicalStatus_department')?.value.length === 0
+                "
+                [isCustom]="true"
+                errorMessage="科別是必填欄位。"
+              />
+              <app-error-message
+                [condition]="
+                  form.get('medicalStatus_frequency')?.value.length === 0
+                "
+                [isCustom]="true"
+                errorMessage="頻率是必填欄位。"
+              />
+            </label>
+          </ng-container>
+        </nz-modal>
+        <app-error-message
+          [condition]="form.get('medicalStatus')?.value.length === 0"
+          [isCustom]="true"
+          errorKey="required"
+          errorMessage="最少要新增一筆資料。"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">輔具使用</div>
+      <div>
+        <nz-checkbox-wrapper
+          style="width: 100%"
+          (nzOnChange)="assistiveDeviceUsageChange($event)"
+        >
+          <div nz-row>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableAssistiveDeviceUsageNone"
+                nzValue="1"
+                >無</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableAssistiveDeviceUsageOthers"
+                nzValue="2"
+                >單手拐杖</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableAssistiveDeviceUsageOthers"
+                nzValue="3"
+                >助行器</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableAssistiveDeviceUsageOthers"
+                nzValue="4"
+                >腋下拐杖</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableAssistiveDeviceUsageOthers"
+                nzValue="5"
+                >輪椅</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableAssistiveDeviceUsageOthers"
+                nzValue="6"
+                >氣墊床</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableAssistiveDeviceUsageOthers"
+                nzValue="7"
+                >助聽器</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableAssistiveDeviceUsageOthers"
+                nzValue="8"
+                >便盆椅</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableAssistiveDeviceUsageOthers"
+                nzValue="9"
+                >假牙</label
+              >
+            </div>
+            <div class="square" nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableAssistiveDeviceUsageOthers"
+                nzValue="10"
+                >義肢</label
+              >
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableAssistiveDeviceUsageProsthesis"
+                nzValue="11"
+                >上肢</label
+              >
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableAssistiveDeviceUsageProsthesis"
+                nzValue="12"
+                >下肢</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableAssistiveDeviceUsageOthers"
+                nzValue="13"
+                >其他</label
+              >
+              <label>
+                <app-input
+                  [inputWidth]="'100px'"
+                  [maxLength]="30"
+                  formControlName="assistiveDeviceUsage_other"
+              /></label>
+              <label>
+                <app-error-message
+                  [control]="form.get('assistiveDeviceUsage')"
+                  [isTouched]="false"
+                  errorKey="required"
+                  errorMessage="必選"
+                />
+                <app-error-message
+                  [condition]="isChoiceProsthesis"
+                  [isCustom]="true"
+                  errorMessage="義肢選項勾選後必須選擇一項。"
+                />
+                <app-error-message
+                  [control]="form.get('assistiveDeviceUsage_other')"
+                  [isTouched]="false"
+                  errorKey="required"
+                  errorMessage="必填"
+                />
+              </label>
+            </div>
+          </div>
+        </nz-checkbox-wrapper>
+      </div>
+    </div>
+    <div>
+      <!-- !TODO -->
+      <div class="title">福利狀況</div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label disableBackground">福利身分</div>
+      <div>
+        <app-select
+          [selectWidth]="'120px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_welfareStatus"
+          formControlName="welfareStatus"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label disableBackground">社會福利補助</div>
+      <div>
+        <nz-checkbox-wrapper
+          style="width: 100%"
+          (nzOnChange)="socialWelfareSubsidyChange($event)"
+        >
+          <div nz-row>
+            <div nz-col>
+              <label nz-checkbox [nzDisabled]="true" nzValue="1">無</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox [nzDisabled]="true" nzValue="2"
+                >身心障礙</label
+              >
+            </div>
+            <div nz-col>
+              <label nz-checkbox [nzDisabled]="true" nzValue="3">原住民</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox [nzDisabled]="true" nzValue="4">新住民</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox [nzDisabled]="true" nzValue="5">榮民</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox [nzDisabled]="true" nzValue="6">榮眷</label>
+            </div>
+          </div>
+        </nz-checkbox-wrapper>
+      </div>
+    </div>
+    <div class="grid-columns-2">
+      <div
+        class="label"
+        [ngClass]="{
+          disableBackground: !isPhysicalAndMentalDisability
+        }"
+      >
+        身障證明障礙類別
+      </div>
+      <div>
+        <app-select
+          [selectWidth]="'120px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_disabilityCertificateCategory"
+          formControlName="disabilityCertificateCategory"
+        />
+      </div>
+      <div
+        class="label"
+        [ngClass]="{
+          disableBackground: !isPhysicalAndMentalDisability
+        }"
+      >
+        障礙等級
+      </div>
+      <div>
+        <app-select
+          [selectWidth]="'100px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_disabilityLevel"
+          formControlName="disabilityLevel"
+        />
+      </div>
+    </div>
+    <div>
+      <div class="title">經濟來源</div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">長期每月經濟來源</div>
+      <div>
+        <nz-checkbox-wrapper
+          style="width: 100%"
+          (nzOnChange)="longTermMonthlyIncomeSourceChange($event)"
+        >
+          <div nz-row>
+            <div class="my-1" nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableLongTermMonthlyIncomeSourceNone"
+                nzValue="1"
+                >無</label
+              >
+            </div>
+            <div class="my-1" nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableLongTermMonthlyIncomeSourceOthers"
+                nzValue="2"
+                >子女供應</label
+              >
+              <label>
+                <app-input
+                  [inputWidth]="'90px'"
+                  [placeholder]="'輸入金額'"
+                  [type]="'NUMBER'"
+                  [maxLength]="8"
+                  formControlName="childrenSupport"
+                />
+              </label>
+            </div>
+            <div class="my-1" nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableLongTermMonthlyIncomeSourceOthers"
+                nzValue="3"
+                >退休俸</label
+              >
+              <label>
+                <app-input
+                  [inputWidth]="'90px'"
+                  [placeholder]="'輸入金額'"
+                  [type]="'NUMBER'"
+                  [maxLength]="8"
+                  formControlName="retirementPension"
+                />
+              </label>
+            </div>
+            <div class="my-1" nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableLongTermMonthlyIncomeSourceOthers"
+                nzValue="4"
+                >自己工作收入</label
+              >
+              <label>
+                <app-input
+                  [inputWidth]="'90px'"
+                  [placeholder]="'輸入金額'"
+                  [type]="'NUMBER'"
+                  [maxLength]="8"
+                  formControlName="ownEmploymentIncome"
+                />
+              </label>
+            </div>
+            <div class="my-1" nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableLongTermMonthlyIncomeSourceOthers"
+                nzValue="5"
+                >配偶工作收入</label
+              >
+              <label>
+                <app-input
+                  [inputWidth]="'90px'"
+                  [placeholder]="'輸入金額'"
+                  [type]="'NUMBER'"
+                  [maxLength]="8"
+                  formControlName="spouseEmploymentIncome"
+                />
+              </label>
+            </div>
+            <div class="my-1" nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableLongTermMonthlyIncomeSourceOthers"
+                nzValue="6"
+                >自己或配偶工作積蓄</label
+              >
+              <label>
+                <app-input
+                  [inputWidth]="'90px'"
+                  [placeholder]="'輸入金額'"
+                  [type]="'NUMBER'"
+                  [maxLength]="8"
+                  formControlName="personalOrSpouseSavings"
+                />
+              </label>
+            </div>
+            <div class="my-1" nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableLongTermMonthlyIncomeSourceOthers"
+                nzValue="7"
+                >老年年金</label
+              >
+              <label>
+                <app-input
+                  [inputWidth]="'90px'"
+                  [placeholder]="'輸入金額'"
+                  [type]="'NUMBER'"
+                  [maxLength]="8"
+                  formControlName="seniorPension"
+                />
+              </label>
+            </div>
+            <div class="my-1" nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableLongTermMonthlyIncomeSourceOthers"
+                nzValue="8"
+                >民間單位補助</label
+              >
+              <label>
+                <app-input
+                  [inputWidth]="'90px'"
+                  [placeholder]="'輸入金額'"
+                  [type]="'NUMBER'"
+                  [maxLength]="8"
+                  formControlName="privateSectorSubsidy"
+                />
+              </label>
+            </div>
+            <div class="my-1" nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableLongTermMonthlyIncomeSourceOthers"
+                nzValue="9"
+                >社會福利補助</label
+              >
+              <label>
+                <app-select
+                  [selectWidth]="'175px'"
+                  [defaultPlaceHolder]="false"
+                  [options]="selectOptions_socialWelfareAssistance"
+                  formControlName="socialWelfareAssistance"
+                />
+                <app-input
+                  [inputWidth]="'90px'"
+                  [placeholder]="'輸入金額'"
+                  [type]="'NUMBER'"
+                  [maxLength]="8"
+                  formControlName="socialWelfareAssistance_input"
+                />
+              </label>
+            </div>
+            <div class="my-1" nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableLongTermMonthlyIncomeSourceOthers"
+                nzValue="10"
+                >其他收入</label
+              >
+              <label>
+                <app-input
+                  [inputWidth]="'90px'"
+                  [placeholder]="'收入類別'"
+                  [maxLength]="15"
+                  formControlName="otherIncome"
+                />
+                <app-input
+                  [inputWidth]="'90px'"
+                  [placeholder]="'輸入金額'"
+                  [type]="'NUMBER'"
+                  [maxLength]="8"
+                  formControlName="otherIncome_input"
+                />
+              </label>
+            </div>
+            <div nz-col>
+              <app-error-message
+                [control]="form.get('longTermMonthlyIncomeSource')"
+                [isTouched]="false"
+                errorKey="required"
+                errorMessage="必選"
+              />
+              <app-error-message
+                [control]="form.get('socialWelfareAssistance')"
+                [isTouched]="false"
+                errorKey="required"
+                errorMessage="社會福利補助擇一"
+              />
+            </div>
+          </div>
+        </nz-checkbox-wrapper>
+      </div>
+    </div>
+    <div>
+      <div class="title">特殊議題</div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">特殊議題</div>
+      <div>
+        <nz-checkbox-wrapper
+          style="width: 100%"
+          (nzOnChange)="specialIssuesChange($event)"
+        >
+          <div nz-row>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableSpecialIssuesNone"
+                nzValue="1"
+                >無</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableSpecialIssuesOthers"
+                nzValue="2"
+                >全時獨居</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableSpecialIssuesOthers"
+                nzValue="3"
+                >白天獨居</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableSpecialIssuesOthers"
+                nzValue="4"
+                >老人照顧</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableSpecialIssuesOthers"
+                nzValue="5"
+                >雙重老化</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="true"
+                nzValue="6"
+                [nzChecked]="isDementia"
+                >失智(確診個案)</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="true"
+                nzValue="7"
+                [nzChecked]="isPhysicalAndMentalDisability"
+                >身心障礙</label
+              >
+            </div>
+            <div nz-col>
+              <app-error-message
+                [control]="form.get('specialIssues')"
+                [isTouched]="false"
+                errorKey="required"
+                errorMessage="必選"
+              />
+            </div>
+          </div>
+        </nz-checkbox-wrapper>
+      </div>
+    </div>
+    <div>
+      <div class="title">福利使用</div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">是否使用其他服務</div>
+      <div>
+        <nz-checkbox-wrapper
+          style="width: 100%"
+          (nzOnChange)="usingOtherHongDaoServicesChange($event)"
+        >
+          <div nz-row>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableUsingOtherHongDaoServicesNone"
+                nzValue="1"
+                >無</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableUsingOtherHongDaoServicesOthers"
+                nzValue="2"
+                >獨老標案</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableUsingOtherHongDaoServicesOthers"
+                nzValue="3"
+                >送餐服務</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableUsingOtherHongDaoServicesOthers"
+                nzValue="4"
+                >日常照顧</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableUsingOtherHongDaoServicesOthers"
+                nzValue="5"
+                >居家服務</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableUsingOtherHongDaoServicesOthers"
+                nzValue="6"
+                >A單位服務</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableUsingOtherHongDaoServicesOthers"
+                nzValue="7"
+                >其他長照服務</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableUsingOtherHongDaoServicesOthers"
+                nzValue="8"
+                [nzChecked]="isPhysicalAndMentalDisability"
+                >區據點(含C、失智據點、好客廳等)</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableUsingOtherHongDaoServicesOthers"
+                nzValue="9"
+                [nzChecked]="isPhysicalAndMentalDisability"
+                >其他</label
+              >
+              <label>
+                <app-input
+                  [inputWidth]="'100px'"
+                  [maxLength]="30"
+                  formControlName="usingOtherHongDaoServices_other"
+                />
+              </label>
+              <label>
+                <app-error-message
+                  [control]="form.get('usingOtherHongDaoServices')"
+                  [isTouched]="false"
+                  errorKey="required"
+                  errorMessage="必選"
+                />
+                <app-error-message
+                  [control]="form.get('usingOtherHongDaoServices_other')"
+                  [isTouched]="false"
+                  errorKey="required"
+                  errorMessage="必填"
+                />
+              </label>
+            </div>
+          </div>
+        </nz-checkbox-wrapper>
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">福利使用概況</div>
+      <div>
+        <nz-checkbox-wrapper
+          style="width: 100%"
+          (nzOnChange)="welfareUsageOverviewChange($event)"
+        >
+          <div nz-row>
+            <div class="my-1" nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableWelfareUsageOverviewNone"
+                nzValue="1"
+                >無</label
+              >
+            </div>
+            <div class="my-1" nz-col nzSpan="24">
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableWelfareUsageOverviewOthers"
+                nzValue="2"
+                >送餐服務</label
+              >
+              <label>
+                單位名稱：
+                <app-input
+                  [inputWidth]="'100px'"
+                  [maxLength]="30"
+                  formControlName="mealDeliveryService_unitName"
+                />
+                服務主責人員：
+                <app-input
+                  [inputWidth]="'100px'"
+                  [maxLength]="30"
+                  formControlName="mealDeliveryService_serviceResponsiblePerson"
+                />
+                聯絡電話：
+                <app-input
+                  [inputWidth]="'100px'"
+                  [maxLength]="30"
+                  formControlName="mealDeliveryService_contactPhone"
+                />
+              </label>
+            </div>
+            <div class="my-1" nz-col nzSpan="24">
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableWelfareUsageOverviewOthers"
+                nzValue="3"
+                >日間照顧</label
+              >
+              <label>
+                單位名稱：
+                <app-input
+                  [inputWidth]="'100px'"
+                  [maxLength]="30"
+                  formControlName="daytimeCare_unitName"
+                />
+                主責人員：
+                <app-input
+                  [inputWidth]="'100px'"
+                  [maxLength]="30"
+                  formControlName="daytimeCare_serviceResponsiblePerson"
+                />
+                聯絡電話：
+                <app-input
+                  [inputWidth]="'100px'"
+                  [maxLength]="30"
+                  formControlName="daytimeCare_contactPhone"
+                />
+              </label>
+            </div>
+            <div class="my-1" nz-col nzSpan="24">
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableWelfareUsageOverviewOthers"
+                nzValue="4"
+                >居家服務</label
+              >
+              <label>
+                單位名稱：
+                <app-input
+                  [inputWidth]="'100px'"
+                  [maxLength]="30"
+                  formControlName="homeCareService_unitName"
+                />
+                主責人員：
+                <app-input
+                  [inputWidth]="'100px'"
+                  [maxLength]="30"
+                  formControlName="homeCareService_serviceResponsiblePerson"
+                />
+                聯絡電話：
+                <app-input
+                  [inputWidth]="'100px'"
+                  [maxLength]="30"
+                  formControlName="homeCareService_contactPhone"
+                />
+              </label>
+            </div>
+            <div class="my-1" nz-col nzSpan="24">
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableWelfareUsageOverviewOthers"
+                nzValue="5"
+                >A單位服務</label
+              >
+              <label>
+                單位名稱：
+                <app-input
+                  [inputWidth]="'100px'"
+                  [maxLength]="30"
+                  formControlName="unitAService_unitName"
+                />
+                主責人員：
+                <app-input
+                  [inputWidth]="'100px'"
+                  [maxLength]="30"
+                  formControlName="unitAService_serviceResponsiblePerson"
+                />
+                聯絡電話：
+                <app-input
+                  [inputWidth]="'100px'"
+                  [maxLength]="30"
+                  formControlName="unitAService_contactPhone"
+                />
+              </label>
+            </div>
+            <div class="my-1" nz-col nzSpan="24">
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableWelfareUsageOverviewOthers"
+                nzValue="6"
+                >其他長照服務</label
+              >
+              <label>
+                單位名稱：
+                <app-input
+                  [inputWidth]="'100px'"
+                  [maxLength]="30"
+                  formControlName="otherUnitService_unitName"
+                />
+                主責人員：
+                <app-input
+                  [inputWidth]="'100px'"
+                  [maxLength]="30"
+                  formControlName="otherUnitService_serviceResponsiblePerson"
+                />
+                聯絡電話：
+                <app-input
+                  [inputWidth]="'100px'"
+                  [maxLength]="30"
+                  formControlName="otherUnitService_contactPhone"
+                />
+              </label>
+            </div>
+            <div class="my-1" nz-col nzSpan="24">
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableWelfareUsageOverviewOthers"
+                nzValue="7"
+                [nzChecked]="isPhysicalAndMentalDisability"
+                >交通服務</label
+              >
+              <label>
+                單位名稱：
+                <app-input
+                  [inputWidth]="'100px'"
+                  [maxLength]="30"
+                  formControlName="transportationService_unitName"
+                />
+                主責人員：
+                <app-input
+                  [inputWidth]="'100px'"
+                  [maxLength]="30"
+                  formControlName="transportationService_serviceResponsiblePerson"
+                />
+                聯絡電話：
+                <app-input
+                  [inputWidth]="'100px'"
+                  [maxLength]="30"
+                  formControlName="transportationService_contactPhone"
+                />
+              </label>
+            </div>
+            <div class="my-1" nz-col nzSpan="24">
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableWelfareUsageOverviewOthers"
+                nzValue="8"
+                [nzChecked]="isPhysicalAndMentalDisability"
+                >社區據點</label
+              >
+              <label>
+                單位名稱：
+                <app-input
+                  [inputWidth]="'100px'"
+                  [maxLength]="30"
+                  formControlName="communityCenter_unitName"
+                />
+                主責人員：
+                <app-input
+                  [inputWidth]="'100px'"
+                  [maxLength]="30"
+                  formControlName="communityCenter_serviceResponsiblePerson"
+                />
+                聯絡電話：
+                <app-input
+                  [inputWidth]="'100px'"
+                  [maxLength]="30"
+                  formControlName="communityCenter_contactPhone"
+                />
+              </label>
+            </div>
+            <div class="my-1" nz-col nzSpan="24">
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableWelfareUsageOverviewOthers"
+                nzValue="9"
+                [nzChecked]="isPhysicalAndMentalDisability"
+                >緊急救援系統</label
+              >
+              <label>
+                單位名稱：
+                <app-input
+                  [inputWidth]="'100px'"
+                  [maxLength]="30"
+                  formControlName="emergencyRescueSystem_unitName"
+                />
+                主責人員：
+                <app-input
+                  [inputWidth]="'100px'"
+                  [maxLength]="30"
+                  formControlName="emergencyRescueSystem_serviceResponsiblePerson"
+                />
+                聯絡電話：
+                <app-input
+                  [inputWidth]="'100px'"
+                  [maxLength]="30"
+                  formControlName="emergencyRescueSystem_contactPhone"
+                />
+              </label>
+            </div>
+            <div class="my-1" nz-col nzSpan="24">
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableWelfareUsageOverviewOthers"
+                nzValue="10"
+                >其他</label
+              >
+              <label>
+                <app-input
+                  [inputWidth]="'100px'"
+                  [placeholder]="'福利使用概況'"
+                  [maxLength]="30"
+                  formControlName="welfareUsageOverview_other"
+                />
+                單位名稱：
+                <app-input
+                  [inputWidth]="'100px'"
+                  [maxLength]="30"
+                  formControlName="welfareUsageOverview_other_unitName"
+                />
+                主責人員：
+                <app-input
+                  [inputWidth]="'100px'"
+                  [maxLength]="30"
+                  formControlName="welfareUsageOverview_other_serviceResponsiblePerson"
+                />
+                聯絡電話：
+                <app-input
+                  [inputWidth]="'100px'"
+                  [maxLength]="30"
+                  formControlName="welfareUsageOverview_other_contactPhone"
+                />
+              </label>
+            </div>
+          </div>
+        </nz-checkbox-wrapper>
+        <app-error-message
+          [control]="form.get('welfareUsageOverview')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必選"
+        />
+        <app-error-message
+          [control]="form.get('welfareUsageOverview_other')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必填"
+        />
+      </div>
+    </div>
+    <div>
+      <div class="title">居住環境</div>
+    </div>
+    <div class="grid-columns-2">
+      <div class="label">住屋種類</div>
+      <div class="column-Message">
+        <app-select
+          [selectWidth]="'100px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_housingType"
+          formControlName="housingType"
+        />
+        <app-error-message
+          [control]="form.get('housingType')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必選"
+        />
+      </div>
+      <div class="label">住屋所有權</div>
+      <div class="column-Message">
+        <app-select
+          [selectWidth]="'90px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_housingOwnership"
+          formControlName="housingOwnership"
+        />
+        <app-error-message
+          [control]="form.get('housingOwnership')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必選"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">住屋概況</div>
+      <div>
+        <nz-checkbox-wrapper
+          style="width: 100%"
+          (nzOnChange)="housingConditionChange($event)"
+        >
+          <div nz-row>
+            <div nz-col>
+              <label nz-checkbox nzValue="1">電梯</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="2">管理員</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="3">套房</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="4"> 雅房</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="5">違建</label>
+            </div>
+          </div>
+        </nz-checkbox-wrapper>
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">居住環境</div>
+      <div>
+        <nz-checkbox-wrapper
+          style="width: 100%"
+          (nzOnChange)="livingEnvironmentChange($event)"
+        >
+          <div nz-row>
+            <div nz-col>
+              <label nz-checkbox nzValue="1">乾淨整齊</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="2">尚算乾淨</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="3">髒亂</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="4">有異味</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="5">堆放許多雜物</label>
+            </div>
+            <div nz-col>
+              <app-error-message
+                [control]="form.get('livingEnvironment')"
+                [isTouched]="false"
+                errorKey="required"
+                errorMessage="必選"
+              />
+            </div>
+          </div>
+        </nz-checkbox-wrapper>
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">同住者</div>
+      <div>
+        <nz-checkbox-wrapper
+          style="width: 100%"
+          (nzOnChange)="cohabitantsChange($event)"
+        >
+          <div nz-row>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableCohabitantsNone"
+                nzValue="1"
+                >無</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableCohabitantsOthers"
+                nzValue="2"
+                >配偶</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableCohabitantsOthers"
+                nzValue="3"
+                >未婚子女</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableCohabitantsOthers"
+                nzValue="4"
+                >已婚子女</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableCohabitantsOthers"
+                nzValue="5"
+                >孫子女</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableCohabitantsOthers"
+                nzValue="6"
+                >兄弟姊妹</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableCohabitantsOthers"
+                nzValue="7"
+                >朋友</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableCohabitantsOthers"
+                nzValue="8"
+                >同居人</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableCohabitantsOthers"
+                nzValue="9"
+                >台籍看護</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableCohabitantsOthers"
+                nzValue="10"
+                >外籍看護</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableCohabitantsOthers"
+                nzValue="11"
+                >其他</label
+              >
+              <label>
+                <app-input
+                  [inputWidth]="'100px'"
+                  [maxLength]="30"
+                  formControlName="cohabitants_other"
+                />
+              </label>
+              <label>
+                <app-error-message
+                  [control]="form.get('cohabitants')"
+                  [isTouched]="false"
+                  errorKey="required"
+                  errorMessage="必選"
+                />
+                <app-error-message
+                  [control]="form.get('cohabitants_other')"
+                  [isTouched]="false"
+                  errorKey="required"
+                  errorMessage="必填"
+                />
+              </label>
+            </div>
+          </div>
+        </nz-checkbox-wrapper>
+      </div>
+    </div>
+    <div>
+      <div class="title">緊急聯絡人</div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">緊急聯絡人</div>
+      <div>
+        <div class="grid bold-text fontSize-16">
+          <span>緊急聯絡人</span>
+          <span>關係</span>
+          <span>連絡電話</span>
+          <app-button
+            *ngIf="form.get('emergencyContact')?.value.length < 3"
+            [buttonIcon]="'add'"
+            [buttonText]="'新增'"
+            (click)="showEmergencyContactModal()"
+          />
+        </div>
+        <div
+          class="grid"
+          *ngFor="
+            let status of form.get('emergencyContact')?.value;
+            let index = index
+          "
+        >
+          <span>{{ status.emergencyContact_emergencyContact }}</span>
+          <span>{{ status.emergencyContact_relationship }}</span>
+          <span>{{ status.emergencyContact_phone }}</span>
+          <app-button
+            [buttonIcon]="'delete'"
+            [buttonText]="'刪除該筆資料'"
+            (click)="deleteEmergencyContact(index)"
+          />
+        </div>
+        <nz-modal
+          [(nzVisible)]="isVisible_emergencyContact"
+          nzTitle="【新增】緊急聯絡人"
+          (nzOnCancel)="handleEmergencyContactModalCancel()"
+          (nzOnOk)="handleEmergencyContactModalOk()"
+          [nzOkText]="'新增'"
+          [nzCancelText]="'取消'"
+          nzWidth="250px"
+        >
+          <ng-container *nzModalContent>
+            <label>
+              緊急聯絡人：
+              <app-input
+                [inputWidth]="'175px'"
+                [maxLength]="15"
+                formControlName="emergencyContact_emergencyContact"
+            /></label>
+            <label>
+              關係：
+              <app-input
+                [inputWidth]="'175px'"
+                [maxLength]="15"
+                formControlName="emergencyContact_relationship"
+              />
+            </label>
+            <label
+              >連絡電話：
+              <app-input
+                [inputWidth]="'175px'"
+                [maxLength]="11"
+                [type]="'NUMBER'"
+                formControlName="emergencyContact_phone"
+              />
+              <app-error-message
+                [condition]="
+                  form.get('emergencyContact_emergencyContact')?.value
+                    .length === 0
+                "
+                [isCustom]="true"
+                errorMessage="緊急聯絡人是必填欄位。"
+              />
+              <app-error-message
+                [condition]="
+                  form.get('emergencyContact_relationship')?.value.length === 0
+                "
+                [isCustom]="true"
+                errorMessage="關係是必填欄位。"
+              />
+              <app-error-message
+                [condition]="
+                  form.get('emergencyContact_phone')?.value.length === 0
+                "
+                [isCustom]="true"
+                errorMessage="連絡電話是必填欄位。"
+              />
+            </label>
+          </ng-container>
+        </nz-modal>
+        <app-error-message
+          [condition]="form.get('emergencyContact')?.value.length === 0"
+          [isCustom]="true"
+          errorKey="required"
+          errorMessage="最少要新增一筆資料。"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-2">
+      <div class="label">家系圖</div>
+      <div>
+        <app-button [buttonIcon]="'pencial'" [buttonText]="'繪製'" />
+        <app-button [buttonIcon]="'upload'" [buttonText]="'匯入'" />
+        <app-button [buttonIcon]="'download'" [buttonText]="'匯出'" />
+        <!-- !TODO -->
+      </div>
+      <div class="label">生態圖</div>
+      <div>
+        <app-button [buttonIcon]="'pencial'" [buttonText]="'繪製'" />
+        <app-button [buttonIcon]="'upload'" [buttonText]="'匯入'" />
+        <app-button [buttonIcon]="'download'" [buttonText]="'匯出'" />
+        <!-- !TODO -->
+      </div>
+    </div>
+    <div>
+      <div class="title">法務相關</div>
+    </div>
+    <div class="grid-columns-2">
+      <div class="label">個資同意書</div>
+      <div class="column-Message">
+        <app-select
+          [selectWidth]="'90px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_includeHasNotConfirmed"
+          formControlName="personalDataConsentForm"
+        />
+        <app-error-message
+          [control]="form.get('personalDataConsentForm')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必選"
+        />
+      </div>
+      <div class="label">肖像權同意書</div>
+      <div class="column-Message">
+        <app-select
+          [selectWidth]="'90px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_includeHasNotConfirmed"
+          formControlName="imageRightsConsentForm"
+        />
+        <app-error-message
+          [control]="form.get('imageRightsConsentForm')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必選"
+        />
+      </div>
+    </div>
+    <div>
+      <div class="title">服務人員</div>
+    </div>
+    <div class="grid-columns-2">
+      <div class="label">主責人</div>
+      <div class="column-Message">
+        <app-input
+          [inputWidth]="'100px'"
+          [maxLength]="30"
+          formControlName="mainResponsiblePerson"
+        />
+        <app-error-message
+          [control]="form.get('mainResponsiblePerson')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必填"
+        />
+      </div>
+      <div class="label">服務團隊</div>
+      <div>
+        <!-- !TODO -->
+        <app-select
+          [selectWidth]="'100px'"
+          [defaultPlaceHolder]="false"
+          [options]="['志工站1', '志工站2', '志工站3']"
+          formControlName="serviceTeam"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-1 border-bottom-0">
+      <div class="label">服務志工</div>
+      <div>
+        <nz-checkbox-wrapper style="width: 100%">
           <!-- !TODO -->
-          <th class="custom-header" colSpan="4" nzAlign="center">福利狀況</th>
-        </tr>
-        <tr>
-          <th class="th-cell disableBackground bold-text" nzAlign="center">
-            福利身分
-          </th>
-          <td class="td-cell disableBackground">
-            <app-select
-              [selectWidth]="'175px'"
-              [defaultPlaceHolder]="false"
-              [options]="selectOptions_welfareStatus"
-              formControlName="welfareStatus"
-            />
-          </td>
-          <th class="th-cell disableBackground bold-text" nzAlign="center">
-            社會福利補助
-          </th>
-          <td class="td-cell disableBackground">
-            <nz-checkbox-wrapper
-              style="width: 100%"
-              (nzOnChange)="socialWelfareSubsidyChange($event)"
-            >
-              <div nz-row>
-                <div nz-col nzSpan="8">
-                  <label nz-checkbox [nzDisabled]="true" nzValue="1">無</label>
-                </div>
-                <div nz-col nzSpan="8">
-                  <label nz-checkbox [nzDisabled]="true" nzValue="2"
-                    >身心障礙</label
-                  >
-                </div>
-                <div nz-col nzSpan="8">
-                  <label nz-checkbox [nzDisabled]="true" nzValue="3"
-                    >原住民</label
-                  >
-                </div>
-                <div nz-col nzSpan="8">
-                  <label nz-checkbox [nzDisabled]="true" nzValue="4"
-                    >新住民</label
-                  >
-                </div>
-                <div nz-col nzSpan="8">
-                  <label nz-checkbox [nzDisabled]="true" nzValue="5"
-                    >榮民</label
-                  >
-                </div>
-                <div nz-col nzSpan="8">
-                  <label nz-checkbox [nzDisabled]="true" nzValue="6"
-                    >榮眷</label
-                  >
-                </div>
-              </div>
-            </nz-checkbox-wrapper>
-          </td>
-        </tr>
-        <tr>
-          <th
-            class="th-cell custom-header bold-text"
-            [ngClass]="{
-              disableBackground: !isPhysicalAndMentalDisability,
-              'custom-header': isPhysicalAndMentalDisability,
-            }"
-            nzAlign="center"
-          >
-            身障證明障礙類別
-          </th>
-          <td
-            class="td-cell custom-cell"
-            [ngClass]="{
-              disableBackground: !isPhysicalAndMentalDisability,
-              'custom-cell': isPhysicalAndMentalDisability
-            }"
-          >
-            <app-select
-              [selectWidth]="'175px'"
-              [defaultPlaceHolder]="false"
-              [options]="selectOptions_disabilityCertificateCategory"
-              formControlName="disabilityCertificateCategory"
-            />
-          </td>
-          <th
-            class="th-cell custom-header bold-text"
-            [ngClass]="{
-            disableBackground: !isPhysicalAndMentalDisability,
-            'custom-header': isPhysicalAndMentalDisability,
-          }"
-            nzAlign="center"
-          >
-            障礙等級
-          </th>
-          <td
-            class="td-cell custom-cell"
-            [ngClass]="{
-              disableBackground: !isPhysicalAndMentalDisability,
-              'custom-cell': isPhysicalAndMentalDisability
-            }"
-          >
-            <app-select
-              [selectWidth]="'175px'"
-              [defaultPlaceHolder]="false"
-              [options]="selectOptions_disabilityLevel"
-              formControlName="disabilityLevel"
-            />
-          </td>
-        </tr>
-        <tr>
-          <th class="custom-header" colSpan="4" nzAlign="center">經濟來源</th>
-        </tr>
-        <tr>
-          <th
-            colspan="1"
-            class="th-cell custom-header bold-text"
-            nzAlign="center"
-          >
-            長期每月經濟來源
-          </th>
-          <td colspan="3" class="td-cell custom-cell">
-            <nz-checkbox-wrapper
-              style="width: 100%"
-              (nzOnChange)="longTermMonthlyIncomeSourceChange($event)"
-            >
-              <div nz-row>
-                <div class="my-1" nz-col nzSpan="10">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableLongTermMonthlyIncomeSourceNone"
-                    nzValue="1"
-                    >無</label
-                  >
-                </div>
-                <div class="my-1" nz-col nzSpan="10">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableLongTermMonthlyIncomeSourceOthers"
-                    nzValue="2"
-                    >子女供應</label
-                  >
-                  <label>
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [placeholder]="'請輸入金額'"
-                      [type]="'NUMBER'"
-                      [maxLength]="8"
-                      formControlName="childrenSupport"
-                    />
-                  </label>
-                </div>
-                <div class="my-1" nz-col nzSpan="10">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableLongTermMonthlyIncomeSourceOthers"
-                    nzValue="3"
-                    >退休俸</label
-                  >
-                  <label>
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [placeholder]="'請輸入金額'"
-                      [type]="'NUMBER'"
-                      [maxLength]="8"
-                      formControlName="retirementPension"
-                    />
-                  </label>
-                </div>
-                <div class="my-1" nz-col nzSpan="10">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableLongTermMonthlyIncomeSourceOthers"
-                    nzValue="4"
-                    >自己工作收入</label
-                  >
-                  <label>
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [placeholder]="'請輸入金額'"
-                      [type]="'NUMBER'"
-                      [maxLength]="8"
-                      formControlName="ownEmploymentIncome"
-                    />
-                  </label>
-                </div>
-                <div class="my-1" nz-col nzSpan="10">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableLongTermMonthlyIncomeSourceOthers"
-                    nzValue="5"
-                    >配偶工作收入</label
-                  >
-                  <label>
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [placeholder]="'請輸入金額'"
-                      [type]="'NUMBER'"
-                      [maxLength]="8"
-                      formControlName="spouseEmploymentIncome"
-                    />
-                  </label>
-                </div>
-                <div class="my-1" nz-col nzSpan="10">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableLongTermMonthlyIncomeSourceOthers"
-                    nzValue="6"
-                    >自己或配偶工作積蓄</label
-                  >
-                  <label>
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [placeholder]="'請輸入金額'"
-                      [type]="'NUMBER'"
-                      [maxLength]="8"
-                      formControlName="personalOrSpouseSavings"
-                    />
-                  </label>
-                </div>
-                <div class="my-1" nz-col nzSpan="10">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableLongTermMonthlyIncomeSourceOthers"
-                    nzValue="7"
-                    >老年年金</label
-                  >
-                  <label>
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [placeholder]="'請輸入金額'"
-                      [type]="'NUMBER'"
-                      [maxLength]="8"
-                      formControlName="seniorPension"
-                    />
-                  </label>
-                </div>
-                <div class="my-1" nz-col nzSpan="10">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableLongTermMonthlyIncomeSourceOthers"
-                    nzValue="8"
-                    >民間單位補助</label
-                  >
-                  <label>
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [placeholder]="'請輸入金額'"
-                      [type]="'NUMBER'"
-                      [maxLength]="8"
-                      formControlName="privateSectorSubsidy"
-                    />
-                  </label>
-                </div>
-                <div class="my-1" nz-col nzSpan="12">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableLongTermMonthlyIncomeSourceOthers"
-                    nzValue="9"
-                    >社會福利補助</label
-                  >
-                  <label>
-                    <app-select
-                      [selectWidth]="'175px'"
-                      [defaultPlaceHolder]="false"
-                      [options]="selectOptions_socialWelfareAssistance"
-                      formControlName="socialWelfareAssistance"
-                    />
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [placeholder]="'請輸入金額'"
-                      [type]="'NUMBER'"
-                      [maxLength]="8"
-                      formControlName="socialWelfareAssistance_input"
-                    />
-                  </label>
-                </div>
-                <div class="my-1" nz-col nzSpan="12">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableLongTermMonthlyIncomeSourceOthers"
-                    nzValue="10"
-                    >其他收入</label
-                  >
-                  <label>
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [placeholder]="'請輸入收入類別'"
-                      [maxLength]="15"
-                      formControlName="otherIncome"
-                    />
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [placeholder]="'請輸入金額'"
-                      [type]="'NUMBER'"
-                      [maxLength]="8"
-                      formControlName="otherIncome_input"
-                    />
-                  </label>
-                </div>
-              </div>
-            </nz-checkbox-wrapper>
-            <app-error-message
-              [control]="form.get('longTermMonthlyIncomeSource')"
-              [isTouched]="false"
-              errorKey="required"
-              errorMessage="這是必選的選項。"
-            />
-            <app-error-message
-              [control]="form.get('socialWelfareAssistance')"
-              [isTouched]="false"
-              errorKey="required"
-              errorMessage="社會福利補助選項必須擇一。"
-            />
-          </td>
-        </tr>
-        <tr>
-          <th class="custom-header" colSpan="4" nzAlign="center">特殊議題</th>
-        </tr>
-        <tr>
-          <th
-            colspan="1"
-            class="th-cell custom-header bold-text"
-            nzAlign="center"
-          >
-            特殊議題
-          </th>
-          <td colspan="3" class="td-cell custom-cell">
-            <nz-checkbox-wrapper
-              style="width: 100%"
-              (nzOnChange)="specialIssuesChange($event)"
-            >
-              <div nz-row>
-                <div nz-col nzSpan="3">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableSpecialIssuesNone"
-                    nzValue="1"
-                    >無</label
-                  >
-                </div>
-                <div nz-col nzSpan="3">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableSpecialIssuesOthers"
-                    nzValue="2"
-                    >全時獨居</label
-                  >
-                </div>
-                <div nz-col nzSpan="3">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableSpecialIssuesOthers"
-                    nzValue="3"
-                    >白天獨居</label
-                  >
-                </div>
-                <div nz-col nzSpan="3">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableSpecialIssuesOthers"
-                    nzValue="4"
-                    >老人照顧</label
-                  >
-                </div>
-                <div nz-col nzSpan="3">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableSpecialIssuesOthers"
-                    nzValue="5"
-                    >雙重老化</label
-                  >
-                </div>
-                <div nz-col nzSpan="3">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="true"
-                    nzValue="6"
-                    [nzChecked]="isDementia"
-                    >失智(確診個案)</label
-                  >
-                </div>
-                <div nz-col nzSpan="3">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="true"
-                    nzValue="7"
-                    [nzChecked]="isPhysicalAndMentalDisability"
-                    >身心障礙</label
-                  >
-                </div>
-              </div>
-            </nz-checkbox-wrapper>
-            <app-error-message
-              [control]="form.get('specialIssues')"
-              [isTouched]="false"
-              errorKey="required"
-              errorMessage="這是必選的選項。"
-            />
-          </td>
-        </tr>
-        <tr>
-          <th class="custom-header" colSpan="4" nzAlign="center">福利使用</th>
-        </tr>
-        <tr>
-          <th
-            colspan="1"
-            class="th-cell custom-header bold-text"
-            nzAlign="center"
-          >
-            是否使用弘道其他服務
-          </th>
-          <td colspan="3" class="td-cell custom-cell">
-            <nz-checkbox-wrapper
-              style="width: 100%"
-              (nzOnChange)="usingOtherHongDaoServicesChange($event)"
-            >
-              <div nz-row>
-                <div nz-col nzSpan="5">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableUsingOtherHongDaoServicesNone"
-                    nzValue="1"
-                    >無</label
-                  >
-                </div>
-                <div nz-col nzSpan="5">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableUsingOtherHongDaoServicesOthers"
-                    nzValue="2"
-                    >獨老標案</label
-                  >
-                </div>
-                <div nz-col nzSpan="5">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableUsingOtherHongDaoServicesOthers"
-                    nzValue="3"
-                    >送餐服務</label
-                  >
-                </div>
-                <div nz-col nzSpan="5">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableUsingOtherHongDaoServicesOthers"
-                    nzValue="4"
-                    >日常照顧</label
-                  >
-                </div>
-                <div nz-col nzSpan="5">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableUsingOtherHongDaoServicesOthers"
-                    nzValue="5"
-                    >居家服務</label
-                  >
-                </div>
-                <div nz-col nzSpan="5">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableUsingOtherHongDaoServicesOthers"
-                    nzValue="6"
-                    >A單位服務</label
-                  >
-                </div>
-                <div nz-col nzSpan="5">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableUsingOtherHongDaoServicesOthers"
-                    nzValue="7"
-                    >其他長照服務</label
-                  >
-                </div>
-                <div nz-col nzSpan="6">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableUsingOtherHongDaoServicesOthers"
-                    nzValue="8"
-                    [nzChecked]="isPhysicalAndMentalDisability"
-                    >區據點(含C、失智據點、好客廳等)</label
-                  >
-                </div>
-                <div nz-col nzSpan="24">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableUsingOtherHongDaoServicesOthers"
-                    nzValue="9"
-                    [nzChecked]="isPhysicalAndMentalDisability"
-                    >其他</label
-                  >
-                  <label>
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [maxLength]="30"
-                      formControlName="usingOtherHongDaoServices_other"
-                    />
-                  </label>
-                </div>
-              </div>
-            </nz-checkbox-wrapper>
-            <app-error-message
-              [control]="form.get('usingOtherHongDaoServices')"
-              [isTouched]="false"
-              errorKey="required"
-              errorMessage="這是必選的選項。"
-            />
-            <app-error-message
-              [control]="form.get('usingOtherHongDaoServices_other')"
-              [isTouched]="false"
-              errorKey="required"
-              errorMessage="這是必填欄位。"
-            />
-          </td>
-        </tr>
-        <tr>
-          <th
-            colspan="1"
-            class="th-cell custom-header bold-text"
-            nzAlign="center"
-          >
-            福利使用概況
-          </th>
-          <td colspan="3" class="td-cell custom-cell">
-            <nz-checkbox-wrapper
-              style="width: 100%"
-              (nzOnChange)="welfareUsageOverviewChange($event)"
-            >
-              <div nz-row>
-                <div class="my-1" nz-col nzSpan="24">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableWelfareUsageOverviewNone"
-                    nzValue="1"
-                    >無</label
-                  >
-                </div>
-                <div class="my-1" nz-col nzSpan="24">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableWelfareUsageOverviewOthers"
-                    nzValue="2"
-                    >送餐服務</label
-                  >
-                  <label>
-                    單位名稱：
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [maxLength]="30"
-                      formControlName="mealDeliveryService_unitName"
-                    />
-                    服務主責人員：
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [maxLength]="30"
-                      formControlName="mealDeliveryService_serviceResponsiblePerson"
-                    />
-                    聯絡電話：
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [maxLength]="30"
-                      formControlName="mealDeliveryService_contactPhone"
-                    />
-                  </label>
-                </div>
-                <div class="my-1" nz-col nzSpan="24">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableWelfareUsageOverviewOthers"
-                    nzValue="3"
-                    >日間照顧</label
-                  >
-                  <label>
-                    單位名稱：
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [maxLength]="30"
-                      formControlName="daytimeCare_unitName"
-                    />
-                    服務主責人員：
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [maxLength]="30"
-                      formControlName="daytimeCare_serviceResponsiblePerson"
-                    />
-                    聯絡電話：
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [maxLength]="30"
-                      formControlName="daytimeCare_contactPhone"
-                    />
-                  </label>
-                </div>
-                <div class="my-1" nz-col nzSpan="24">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableWelfareUsageOverviewOthers"
-                    nzValue="4"
-                    >居家服務</label
-                  >
-                  <label>
-                    單位名稱：
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [maxLength]="30"
-                      formControlName="homeCareService_unitName"
-                    />
-                    服務主責人員：
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [maxLength]="30"
-                      formControlName="homeCareService_serviceResponsiblePerson"
-                    />
-                    聯絡電話：
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [maxLength]="30"
-                      formControlName="homeCareService_contactPhone"
-                    />
-                  </label>
-                </div>
-                <div class="my-1" nz-col nzSpan="24">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableWelfareUsageOverviewOthers"
-                    nzValue="5"
-                    >A單位服務</label
-                  >
-                  <label>
-                    單位名稱：
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [maxLength]="30"
-                      formControlName="unitAService_unitName"
-                    />
-                    服務主責人員：
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [maxLength]="30"
-                      formControlName="unitAService_serviceResponsiblePerson"
-                    />
-                    聯絡電話：
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [maxLength]="30"
-                      formControlName="unitAService_contactPhone"
-                    />
-                  </label>
-                </div>
-                <div class="my-1" nz-col nzSpan="24">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableWelfareUsageOverviewOthers"
-                    nzValue="6"
-                    >其他長照服務</label
-                  >
-                  <label>
-                    單位名稱：
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [maxLength]="30"
-                      formControlName="otherUnitService_unitName"
-                    />
-                    服務主責人員：
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [maxLength]="30"
-                      formControlName="otherUnitService_serviceResponsiblePerson"
-                    />
-                    聯絡電話：
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [maxLength]="30"
-                      formControlName="otherUnitService_contactPhone"
-                    />
-                  </label>
-                </div>
-                <div class="my-1" nz-col nzSpan="24">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableWelfareUsageOverviewOthers"
-                    nzValue="7"
-                    [nzChecked]="isPhysicalAndMentalDisability"
-                    >交通服務</label
-                  >
-                  <label>
-                    單位名稱：
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [maxLength]="30"
-                      formControlName="transportationService_unitName"
-                    />
-                    服務主責人員：
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [maxLength]="30"
-                      formControlName="transportationService_serviceResponsiblePerson"
-                    />
-                    聯絡電話：
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [maxLength]="30"
-                      formControlName="transportationService_contactPhone"
-                    />
-                  </label>
-                </div>
-                <div class="my-1" nz-col nzSpan="24">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableWelfareUsageOverviewOthers"
-                    nzValue="8"
-                    [nzChecked]="isPhysicalAndMentalDisability"
-                    >社區據點</label
-                  >
-                  <label>
-                    單位名稱：
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [maxLength]="30"
-                      formControlName="communityCenter_unitName"
-                    />
-                    服務主責人員：
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [maxLength]="30"
-                      formControlName="communityCenter_serviceResponsiblePerson"
-                    />
-                    聯絡電話：
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [maxLength]="30"
-                      formControlName="communityCenter_contactPhone"
-                    />
-                  </label>
-                </div>
-                <div class="my-1" nz-col nzSpan="24">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableWelfareUsageOverviewOthers"
-                    nzValue="9"
-                    [nzChecked]="isPhysicalAndMentalDisability"
-                    >緊急救援系統</label
-                  >
-                  <label>
-                    單位名稱：
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [maxLength]="30"
-                      formControlName="emergencyRescueSystem_unitName"
-                    />
-                    服務主責人員：
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [maxLength]="30"
-                      formControlName="emergencyRescueSystem_serviceResponsiblePerson"
-                    />
-                    聯絡電話：
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [maxLength]="30"
-                      formControlName="emergencyRescueSystem_contactPhone"
-                    />
-                  </label>
-                </div>
-                <div class="my-1" nz-col nzSpan="24">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableWelfareUsageOverviewOthers"
-                    nzValue="10"
-                    >其他</label
-                  >
-                  <label>
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [placeholder]="'請輸入福利使用概況類型'"
-                      [maxLength]="30"
-                      formControlName="welfareUsageOverview_other"
-                    />
-                    單位名稱：
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [maxLength]="30"
-                      formControlName="welfareUsageOverview_other_unitName"
-                    />
-                    服務主責人員：
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [maxLength]="30"
-                      formControlName="welfareUsageOverview_other_serviceResponsiblePerson"
-                    />
-                    聯絡電話：
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [maxLength]="30"
-                      formControlName="welfareUsageOverview_other_contactPhone"
-                    />
-                  </label>
-                </div>
-              </div>
-            </nz-checkbox-wrapper>
-            <app-error-message
-              [control]="form.get('welfareUsageOverview')"
-              [isTouched]="false"
-              errorKey="required"
-              errorMessage="這是必選的選項。"
-            />
-            <app-error-message
-              [control]="form.get('welfareUsageOverview_other')"
-              [isTouched]="false"
-              errorKey="required"
-              errorMessage="這是必填欄位。"
-            />
-          </td>
-        </tr>
-        <tr>
-          <th class="custom-header" colSpan="4" nzAlign="center">居住環境</th>
-        </tr>
-        <tr>
-          <th class="th-cell custom-header bold-text" nzAlign="center">
-            住屋種類
-          </th>
-          <td class="td-cell custom-cell">
-            <app-select
-              [selectWidth]="'175px'"
-              [defaultPlaceHolder]="false"
-              [options]="selectOptions_housingType"
-              formControlName="housingType"
-            />
-            <app-error-message
-              [control]="form.get('housingType')"
-              [isTouched]="false"
-              errorKey="required"
-              errorMessage="這是必選的選項。"
-            />
-          </td>
-          <th class="th-cell custom-header bold-text" nzAlign="center">
-            住屋概況
-          </th>
-          <td class="td-cell custom-cell">
-            <nz-checkbox-wrapper
-              style="width: 100%"
-              (nzOnChange)="housingConditionChange($event)"
-            >
-              <div nz-row>
-                <div nz-col nzSpan="8">
-                  <label nz-checkbox nzValue="1">電梯</label>
-                </div>
-                <div nz-col nzSpan="8">
-                  <label nz-checkbox nzValue="2">管理員</label>
-                </div>
-                <div nz-col nzSpan="8">
-                  <label nz-checkbox nzValue="3">套房</label>
-                </div>
-                <div nz-col nzSpan="8">
-                  <label nz-checkbox nzValue="4"> 雅房</label>
-                </div>
-                <div nz-col nzSpan="8">
-                  <label nz-checkbox nzValue="5">違建</label>
-                </div>
-              </div>
-            </nz-checkbox-wrapper>
-          </td>
-        </tr>
-        <tr>
-          <th class="th-cell custom-header bold-text" nzAlign="center">
-            住屋所有權
-          </th>
-          <td class="td-cell custom-cell">
-            <app-select
-              [selectWidth]="'175px'"
-              [defaultPlaceHolder]="false"
-              [options]="selectOptions_housingOwnership"
-              formControlName="housingOwnership"
-            />
-            <app-error-message
-              [control]="form.get('housingOwnership')"
-              [isTouched]="false"
-              errorKey="required"
-              errorMessage="這是必選的選項。"
-            />
-          </td>
-          <th class="th-cell custom-header bold-text" nzAlign="center">
-            居住環境
-          </th>
-          <td class="td-cell custom-cell">
-            <nz-checkbox-wrapper
-              style="width: 100%"
-              (nzOnChange)="livingEnvironmentChange($event)"
-            >
-              <div nz-row>
-                <div nz-col nzSpan="8">
-                  <label nz-checkbox nzValue="1">乾淨整齊</label>
-                </div>
-                <div nz-col nzSpan="8">
-                  <label nz-checkbox nzValue="2">尚算乾淨</label>
-                </div>
-                <div nz-col nzSpan="8">
-                  <label nz-checkbox nzValue="3">髒亂</label>
-                </div>
-                <div nz-col nzSpan="8">
-                  <label nz-checkbox nzValue="4">有異味</label>
-                </div>
-                <div nz-col nzSpan="8">
-                  <label nz-checkbox nzValue="5">堆放許多雜物</label>
-                </div>
-              </div>
-            </nz-checkbox-wrapper>
-            <app-error-message
-              [control]="form.get('livingEnvironment')"
-              [isTouched]="false"
-              errorKey="required"
-              errorMessage="這是必選的選項。"
-            />
-          </td>
-        </tr>
-        <tr>
-          <th
-            colspan="1"
-            class="th-cell custom-header bold-text"
-            nzAlign="center"
-          >
-            同住者
-          </th>
-          <td colspan="3" class="td-cell custom-cell">
-            <nz-checkbox-wrapper
-              style="width: 100%"
-              (nzOnChange)="cohabitantsChange($event)"
-            >
-              <div nz-row>
-                <div nz-col nzSpan="2">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableCohabitantsNone"
-                    nzValue="1"
-                    >無</label
-                  >
-                </div>
-                <div nz-col nzSpan="2">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableCohabitantsOthers"
-                    nzValue="2"
-                    >配偶</label
-                  >
-                </div>
-                <div nz-col nzSpan="2">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableCohabitantsOthers"
-                    nzValue="3"
-                    >未婚子女</label
-                  >
-                </div>
-                <div nz-col nzSpan="2">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableCohabitantsOthers"
-                    nzValue="4"
-                    >已婚子女</label
-                  >
-                </div>
-                <div nz-col nzSpan="2">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableCohabitantsOthers"
-                    nzValue="5"
-                    >孫子女</label
-                  >
-                </div>
-                <div nz-col nzSpan="2">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableCohabitantsOthers"
-                    nzValue="6"
-                    >兄弟姊妹</label
-                  >
-                </div>
-                <div nz-col nzSpan="2">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableCohabitantsOthers"
-                    nzValue="7"
-                    >朋友</label
-                  >
-                </div>
-                <div nz-col nzSpan="2">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableCohabitantsOthers"
-                    nzValue="8"
-                    >同居人</label
-                  >
-                </div>
-                <div nz-col nzSpan="2">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableCohabitantsOthers"
-                    nzValue="9"
-                    >台籍看護</label
-                  >
-                </div>
-                <div nz-col nzSpan="2">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableCohabitantsOthers"
-                    nzValue="10"
-                    >外籍看護</label
-                  >
-                </div>
-                <div nz-col nzSpan="24">
-                  <label
-                    nz-checkbox
-                    [nzDisabled]="isDisableCohabitantsOthers"
-                    nzValue="11"
-                    >其他</label
-                  >
-                  <label>
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [maxLength]="30"
-                      formControlName="cohabitants_other"
-                    />
-                  </label>
-                </div>
-              </div>
-            </nz-checkbox-wrapper>
-            <app-error-message
-              [control]="form.get('cohabitants')"
-              [isTouched]="false"
-              errorKey="required"
-              errorMessage="這是必選的選項。"
-            />
-            <app-error-message
-              [control]="form.get('cohabitants_other')"
-              [isTouched]="false"
-              errorKey="required"
-              errorMessage="這是必填欄位。"
-            />
-          </td>
-        </tr>
-        <tr>
-          <th class="custom-header" colSpan="4" nzAlign="center">緊急聯絡人</th>
-        </tr>
-        <tr>
-          <th
-            colspan="1"
-            class="th-cell custom-header bold-text"
-            nzAlign="center"
-          >
-            緊急聯絡人(最多三位)
-          </th>
-          <td colspan="3" class="td-cell custom-cell">
-            <label class="my-1">
-              緊急聯絡人：
-              <app-input
-                [inputWidth]="'175px'"
-                [maxLength]="30"
-                formControlName="emergencyContact1"
-              />
-            </label>
-            <label>
-              關係：
-              <app-input
-                [inputWidth]="'175px'"
-                [maxLength]="10"
-                formControlName="emergencyContact1_relationship"
-            /></label>
-            <label>
-              聯絡電話：
-              <app-input
-                [inputWidth]="'175px'"
-                [maxLength]="30"
-                formControlName="emergencyContact1_phone"
-              />
-            </label>
-            <br />
-            <label class="my-1">
-              緊急聯絡人：
-              <app-input
-                [inputWidth]="'175px'"
-                [maxLength]="30"
-                formControlName="emergencyContact2"
-              />
-            </label>
-            <label>
-              關係：
-              <app-input
-                [inputWidth]="'175px'"
-                [maxLength]="10"
-                formControlName="emergencyContact2_relationship"
-            /></label>
-            <label>
-              聯絡電話：
-              <app-input
-                [inputWidth]="'175px'"
-                [maxLength]="30"
-                formControlName="emergencyContact2_phone"
-              />
-            </label>
-            <br />
-            <label class="my-1">
-              緊急聯絡人：
-              <app-input
-                [inputWidth]="'175px'"
-                [maxLength]="30"
-                formControlName="emergencyContact3"
-              />
-            </label>
-            <label>
-              關係：
-              <app-input
-                [inputWidth]="'175px'"
-                [maxLength]="10"
-                formControlName="emergencyContact3_relationship"
-            /></label>
-            <label>
-              聯絡電話：
-              <app-input
-                [inputWidth]="'175px'"
-                [maxLength]="30"
-                formControlName="emergencyContact3_phone"
-              />
-            </label>
-            <app-error-message
-              [control]="form.get('emergencyContact1')"
-              [isTouched]="false"
-              errorKey="required"
-              errorMessage="緊急聯絡人第一欄必填。"
-            />
-            <app-error-message
-              [control]="form.get('emergencyContact1_relationship')"
-              [isTouched]="false"
-              errorKey="required"
-              errorMessage="緊急聯絡人第一欄必填"
-            />
-            <app-error-message
-              [control]="form.get('emergencyContact1_phone')"
-              [isTouched]="false"
-              errorKey="required"
-              errorMessage="緊急聯絡人電話第一欄必填"
-            />
-          </td>
-        </tr>
-        <tr>
-          <th class="th-cell custom-header bold-text" nzAlign="center">
-            家系圖
-          </th>
-          <td class="td-cell custom-cell">
-            <app-button [buttonIcon]="'pencial'" [buttonText]="'繪製'" />
-            <app-button [buttonIcon]="'upload'" [buttonText]="'匯入'" />
-            <app-button [buttonIcon]="'download'" [buttonText]="'匯出'" />
-            <!-- !TODO -->
-          </td>
-          <th class="th-cell custom-header bold-text" nzAlign="center">
-            生態圖
-          </th>
-          <td class="td-cell custom-cell">
-            <app-button [buttonIcon]="'pencial'" [buttonText]="'繪製'" />
-            <app-button [buttonIcon]="'upload'" [buttonText]="'匯入'" />
-            <app-button [buttonIcon]="'download'" [buttonText]="'匯出'" />
-            <!-- !TODO -->
-          </td>
-        </tr>
-        <tr>
-          <th class="custom-header" colSpan="4" nzAlign="center">法務相關</th>
-        </tr>
-        <tr>
-          <th class="th-cell custom-header bold-text" nzAlign="center">
-            個資同意書
-          </th>
-          <td class="td-cell custom-cell">
-            <app-select
-              [selectWidth]="'175px'"
-              [defaultPlaceHolder]="false"
-              [options]="selectOptions_includeHasNotConfirmed"
-              formControlName="personalDataConsentForm"
-            />
-            <app-error-message
-              [control]="form.get('personalDataConsentForm')"
-              [isTouched]="false"
-              errorKey="required"
-              errorMessage="這是必選的選項。"
-            />
-          </td>
-          <th class="th-cell custom-header bold-text" nzAlign="center">
-            肖像權同意書
-          </th>
-          <td class="td-cell custom-cell">
-            <app-select
-              [selectWidth]="'175px'"
-              [defaultPlaceHolder]="false"
-              [options]="selectOptions_includeHasNotConfirmed"
-              formControlName="imageRightsConsentForm"
-            />
-            <app-error-message
-              [control]="form.get('imageRightsConsentForm')"
-              [isTouched]="false"
-              errorKey="required"
-              errorMessage="這是必選的選項。"
-            />
-          </td>
-        </tr>
-        <tr>
-          <th class="custom-header" colSpan="4" nzAlign="center">服務人員</th>
-        </tr>
-        <tr>
-          <th class="th-cell custom-header bold-text" nzAlign="center">
-            主責人
-          </th>
-          <td class="td-cell custom-cell">
-            <app-input
-              [inputWidth]="'175px'"
-              [maxLength]="30"
-              formControlName="mainResponsiblePerson"
-            />
-            <app-error-message
-              [control]="form.get('mainResponsiblePerson')"
-              [isTouched]="false"
-              errorKey="required"
-              errorMessage="這是必填欄位。"
-            />
-          </td>
-          <th class="th-cell custom-header bold-text" nzAlign="center">
-            服務團隊
-          </th>
-          <td class="td-cell custom-cell">
-            <!-- !TODO -->
-            <app-select
-              [selectWidth]="'175px'"
-              [defaultPlaceHolder]="false"
-              [options]="['志工站1', '志工站2', '志工站3']"
-              formControlName="serviceTeam"
-            />
-          </td>
-        </tr>
-        <tr>
-          <th
-            colspan="1"
-            class="th-cell custom-header bold-text"
-            nzAlign="center"
-          >
-            服務志工
-          </th>
-          <td colspan="3" class="td-cell custom-cell">
-            <nz-checkbox-wrapper style="width: 100%">
-              <!-- !TODO -->
-              <div nz-row>
-                <div nz-col nzSpan="4">
-                  <label nz-checkbox nzValue="1">志工1</label>
-                </div>
-                <div nz-col nzSpan="4">
-                  <label nz-checkbox nzValue="2">志工2</label>
-                </div>
-                <div nz-col nzSpan="4">
-                  <label nz-checkbox nzValue="3">志工3</label>
-                </div>
-              </div>
-            </nz-checkbox-wrapper>
-          </td>
-        </tr>
-        <tr>
-          <td class="td-cell custom-header" colSpan="4">
-            <!-- !TODO -->
-            <app-button
-              [buttonIcon]="'save'"
-              [buttonText]="'儲存'"
-              (click)="save()"
-            />
-            <app-button
-              *ngIf="!caseInformationService.isChoiceCase"
-              (click)="onPreviousPage()"
-              [buttonIcon]="'previouspage'"
-              [buttonText]="'上一頁'"
-            />
-            <app-button
-              *ngIf="!caseInformationService.isChoiceCase"
-              (click)="onNextPage()"
-              [buttonIcon]="'nextpage'"
-              [buttonText]="'下一頁'"
-            />
-            <app-button
-              [buttonIcon]="'close'"
-              [buttonText]="'關閉'"
-              (click)="closeTab('個案開案資料表')"
-            />
-          </td>
-        </tr>
-      </nz-table>
-    </form>
-  </ng-container>
-</div>
+          <div nz-row>
+            <div nz-col>
+              <label nz-checkbox nzValue="1">志工1</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="2">志工2</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="3">志工3</label>
+            </div>
+          </div>
+        </nz-checkbox-wrapper>
+      </div>
+    </div>
+  </div>
+  <div class="buttonArea">
+    <!-- !TODO -->
+    <app-button [buttonIcon]="'save'" [buttonText]="'儲存'" (click)="save()" />
+    <app-button
+      *ngIf="!caseInformationService.isChoiceCase"
+      (click)="onPreviousPage()"
+      [buttonIcon]="'previouspage'"
+      [buttonText]="'上一頁'"
+    />
+    <app-button
+      *ngIf="!caseInformationService.isChoiceCase"
+      (click)="onNextPage()"
+      [buttonIcon]="'nextpage'"
+      [buttonText]="'下一頁'"
+    />
+    <app-button
+      [buttonIcon]="'close'"
+      [buttonText]="'關閉'"
+      (click)="closeTab('個案開案資料表')"
+    />
+  </div>
+</form>

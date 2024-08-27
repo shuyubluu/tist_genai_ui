@@ -2,712 +2,610 @@
   *ngIf="caseInformationService.isChoiceCase"
   [currentTab]="'個案初評表'"
 />
-<h1 class="inner-title">1-3 個案初評表</h1>
 <div class="mt"></div>
-<div class="table-container">
-  <ng-container>
-    <form [formGroup]="form">
-      <nz-table class="bordered-table">
-        <tr>
-          <th class="custom-header" colSpan="4" nzAlign="center">訪視概況</th>
-        </tr>
-        <tr>
-          <!-- !TODO -->
-          <th
-            colSpan="1"
-            class="th-cell disableBackground bold-text"
-            nzAlign="center"
-          >
-            個案姓名
-          </th>
-          <td colSpan="3" class="td-cell disableBackground">
-            <app-input
-              [inputWidth]="'175px'"
-              [maxLength]="30"
-              formControlName="caseName"
-            />
-          </td>
-        </tr>
-        <tr>
-          <th class="th-cell custom-header bold-text" nzAlign="center">
-            訪視日期
-          </th>
-          <td class="td-cell custom-cell">
-            <app-dayPicker formControlName="visitDate" />
-            <app-error-message
-              [control]="form.get('visitDate')"
-              [isTouched]="false"
-              errorKey="required"
-              errorMessage="這是必選的選項。"
-            />
-          </td>
-          <th class="th-cell custom-header bold-text" nzAlign="center">
-            訪視方式
-          </th>
-          <td class="td-cell custom-cell">
-            <app-select
-              [selectWidth]="'175px'"
-              [defaultPlaceHolder]="false"
-              [options]="selectOptions_visitMethod"
-              formControlName="visitMethod"
-            />
-            <app-error-message
-              [control]="form.get('visitMethod')"
-              [isTouched]="false"
-              errorKey="required"
-              errorMessage="這是必選的選項。"
-            />
-          </td>
-        </tr>
-        <tr>
-          <th
-            colSpan="1"
-            class="th-cell custom-header bold-text"
-            nzAlign="center"
-          >
-            文字描述-生理
-          </th>
-          <td colSpan="3" class="td-cell custom-cell">
-            <nz-textarea-count [nzMaxCharacterCount]="1000" data-count="0/1000">
-              <textarea
-                rows="4"
-                nz-input
-                [maxlength]="1000"
-                [placeholder]="'請填寫問題及需求及概述及現有資源使用狀況。'"
-                formControlName="textDescription_physical"
-              ></textarea>
-            </nz-textarea-count>
-            <app-error-message
-              [control]="form.get('textDescription_physical')"
-              [isTouched]="false"
-              errorKey="required"
-              errorMessage="這是必填欄位。"
-            />
-          </td>
-        </tr>
-        <tr>
-          <th
-            colSpan="1"
-            class="th-cell custom-header bold-text"
-            nzAlign="center"
-          >
-            文字描述-心理
-          </th>
-          <td colSpan="3" class="td-cell custom-cell">
-            <nz-textarea-count [nzMaxCharacterCount]="1000" data-count="0/1000">
-              <textarea
-                rows="4"
-                nz-input
-                [maxlength]="1000"
-                [placeholder]="'請填寫問題及需求及概述及現有資源使用狀況。'"
-                formControlName="textDescription_psychological"
-              ></textarea>
-            </nz-textarea-count>
-            <app-error-message
-              [control]="form.get('textDescription_psychological')"
-              [isTouched]="false"
-              errorKey="required"
-              errorMessage="這是必填欄位。"
-            />
-          </td>
-        </tr>
-        <tr>
-          <th
-            colSpan="1"
-            class="th-cell custom-header bold-text"
-            nzAlign="center"
-          >
-            文字描述-家庭
-          </th>
-          <td colSpan="3" class="td-cell custom-cell">
-            <nz-textarea-count [nzMaxCharacterCount]="1000" data-count="0/1000">
-              <textarea
-                rows="4"
-                nz-input
-                [maxlength]="1000"
-                [placeholder]="'請填寫問題及需求及概述及現有資源使用狀況。'"
-                formControlName="textDescription_family"
-              ></textarea>
-            </nz-textarea-count>
-            <app-error-message
-              [control]="form.get('textDescription_family')"
-              [isTouched]="false"
-              errorKey="required"
-              errorMessage="這是必填欄位。"
-            />
-          </td>
-        </tr>
-        <tr>
-          <th
-            colSpan="1"
-            class="th-cell custom-header bold-text"
-            nzAlign="center"
-          >
-            文字描述-社會
-          </th>
-          <td colSpan="3" class="td-cell custom-cell">
-            <nz-textarea-count [nzMaxCharacterCount]="1000" data-count="0/1000">
-              <textarea
-                rows="4"
-                nz-input
-                [maxlength]="1000"
-                [placeholder]="'請填寫問題及需求及概述及現有資源使用狀況。'"
-                formControlName="textDescription_social"
-              ></textarea>
-            </nz-textarea-count>
-            <app-error-message
-              [control]="form.get('textDescription_social')"
-              [isTouched]="false"
-              errorKey="required"
-              errorMessage="這是必填欄位。"
-            />
-          </td>
-        </tr>
-        <tr>
-          <th
-            colSpan="1"
-            class="th-cell custom-header bold-text"
-            nzAlign="center"
-          >
-            文字描述-經濟
-          </th>
-          <td colSpan="3" class="td-cell custom-cell">
-            <nz-textarea-count [nzMaxCharacterCount]="1000" data-count="0/1000">
-              <textarea
-                rows="4"
-                nz-input
-                [maxlength]="1000"
-                [placeholder]="'請填寫問題及需求及概述及現有資源使用狀況。'"
-                formControlName="textDescription_economic"
-              ></textarea>
-            </nz-textarea-count>
-            <app-error-message
-              [control]="form.get('textDescription_economic')"
-              [isTouched]="false"
-              errorKey="required"
-              errorMessage="這是必填欄位。"
-            />
-          </td>
-        </tr>
-        <tr>
-          <th
-            colSpan="1"
-            class="th-cell custom-header bold-text"
-            nzAlign="center"
-          >
-            文字描述-居住環境
-          </th>
-          <td colSpan="3" class="td-cell custom-cell">
-            <nz-textarea-count [nzMaxCharacterCount]="1000" data-count="0/1000">
-              <textarea
-                rows="4"
-                nz-input
-                [maxlength]="1000"
-                [placeholder]="'請填寫問題及需求及概述及現有資源使用狀況。'"
-                formControlName="textDescription_livingEnvironment"
-              ></textarea>
-            </nz-textarea-count>
-            <app-error-message
-              [control]="form.get('textDescription_livingEnvironment')"
-              [isTouched]="false"
-              errorKey="required"
-              errorMessage="這是必填欄位。"
-            />
-          </td>
-        </tr>
-        <tr>
-          <th
-            colSpan="1"
-            class="th-cell custom-header bold-text"
-            nzAlign="center"
-          >
-            文字描述-外出
-          </th>
-          <td colSpan="3" class="td-cell custom-cell">
-            <nz-textarea-count [nzMaxCharacterCount]="1000" data-count="0/1000">
-              <textarea
-                rows="4"
-                nz-input
-                [maxlength]="1000"
-                [placeholder]="'請填寫問題及需求及概述及現有資源使用狀況。'"
-                formControlName="textDescription_outdoorActivity"
-              ></textarea>
-            </nz-textarea-count>
-            <app-error-message
-              [control]="form.get('textDescription_outdoorActivity')"
-              [isTouched]="false"
-              errorKey="required"
-              errorMessage="這是必填欄位。"
-            />
-          </td>
-        </tr>
-        <tr>
-          <th class="custom-header" colSpan="4" nzAlign="center">需求評估</th>
-        </tr>
-        <tr>
-          <th class="th-cell custom-header bold-text" nzAlign="center">
-            福利身分別
-          </th>
-          <td class="td-cell custom-cell">
-            <nz-checkbox-wrapper
-              style="width: 100%"
-              (nzOnChange)="welfareStatusChange($event)"
-            >
-              <div nz-row>
-                <div nz-col nzSpan="12">
-                  <label nz-checkbox nzValue="1">身障證明申請</label>
-                </div>
-                <div nz-col nzSpan="12">
-                  <label nz-checkbox nzValue="2">低收</label>
-                </div>
-                <div nz-col nzSpan="12">
-                  <label nz-checkbox nzValue="3">中低收申請</label>
-                </div>
-                <div nz-col nzSpan="12">
-                  <label nz-checkbox nzValue="4">中低收老人津貼申請</label>
-                </div>
-              </div>
-            </nz-checkbox-wrapper>
-          </td>
-          <th class="th-cell custom-header bold-text" nzAlign="center">
-            長照需求
-          </th>
-          <td class="td-cell custom-cell">
-            <nz-checkbox-wrapper
-              style="width: 100%"
-              (nzOnChange)="longTermCareNeedsChange($event)"
-            >
-              <div nz-row>
-                <div nz-col nzSpan="8">
-                  <label nz-checkbox nzValue="1">居家服務</label>
-                </div>
-                <div nz-col nzSpan="8">
-                  <label nz-checkbox nzValue="2">日間照顧</label>
-                </div>
-                <div nz-col nzSpan="8">
-                  <label nz-checkbox nzValue="3">機構安置</label>
-                </div>
-                <div nz-col nzSpan="8">
-                  <label nz-checkbox nzValue="4">喘息服務</label>
-                </div>
-                <div nz-col nzSpan="8">
-                  <label nz-checkbox nzValue="5">照顧指導</label>
-                </div>
-                <div nz-col nzSpan="8">
-                  <label nz-checkbox nzValue="6">家庭托顧</label>
-                </div>
-              </div>
-            </nz-checkbox-wrapper>
-          </td>
-        </tr>
-        <tr>
-          <th class="th-cell custom-header bold-text" nzAlign="center">
-            餐食需求
-          </th>
-          <td class="td-cell custom-cell">
-            <nz-checkbox-wrapper
-              style="width: 100%"
-              (nzOnChange)="mealNeedsChange($event)"
-            >
-              <div nz-row>
-                <div nz-col nzSpan="12">
-                  <label nz-checkbox nzValue="1">長照護送</label>
-                </div>
-                <div nz-col nzSpan="12">
-                  <label nz-checkbox nzValue="2">非長照護送</label>
-                </div>
-                <div nz-col nzSpan="12">
-                  <label nz-checkbox nzValue="3">營養評估</label>
-                </div>
-                <div nz-col nzSpan="12">
-                  <label nz-checkbox nzValue="4">待餐物資</label>
-                </div>
-              </div>
-            </nz-checkbox-wrapper>
-          </td>
-          <th class="th-cell custom-header bold-text" nzAlign="center">
-            醫療需求
-          </th>
-          <td class="td-cell custom-cell">
-            <nz-checkbox-wrapper
-              style="width: 100%"
-              (nzOnChange)="medicalNeedsChange($event)"
-            >
-              <div nz-row>
-                <div nz-col nzSpan="12">
-                  <label nz-checkbox nzValue="1">了解醫囑</label>
-                </div>
-                <div nz-col nzSpan="12">
-                  <label nz-checkbox nzValue="2">陪同門診、門診手術</label>
-                </div>
-                <div nz-col nzSpan="12">
-                  <label nz-checkbox nzValue="3">居家護理</label>
-                </div>
-                <div nz-col nzSpan="12">
-                  <label nz-checkbox nzValue="4">復健</label>
-                </div>
-                <div nz-col nzSpan="12">
-                  <label nz-checkbox nzValue="5">衛教宣導</label>
-                </div>
-                <div nz-col nzSpan="12">
-                  <label nz-checkbox nzValue="6">用藥安全指導</label>
-                </div>
-              </div>
-            </nz-checkbox-wrapper>
-          </td>
-        </tr>
-        <tr>
-          <th
-            colspan="1"
-            class="th-cell custom-header bold-text"
-            nzAlign="center"
-          >
-            經濟需求
-          </th>
-          <td colspan="3" class="td-cell custom-cell">
-            <nz-checkbox-wrapper
-              style="width: 100%"
-              (nzOnChange)="economicNeedsChange($event)"
-            >
-              <div nz-row>
-                <div nz-col nzSpan="8">
-                  <label nz-checkbox nzValue="1">住院看護費用</label>
-                </div>
-                <div nz-col nzSpan="8">
-                  <label nz-checkbox nzValue="2">急難救助金申請</label>
-                </div>
-                <div nz-col nzSpan="8">
-                  <label nz-checkbox nzValue="3">醫療補助費用</label>
-                </div>
-                <div nz-col nzSpan="8">
-                  <label nz-checkbox nzValue="4">機構緊急安置費用</label>
-                </div>
-                <div nz-col nzSpan="8">
-                  <label nz-checkbox nzValue="5"
-                    >長照服務費用缺口(交通費等居服費用超出、空窗期費用等)</label
-                  >
-                </div>
-                <div nz-col nzSpan="8">
-                  <label nz-checkbox nzValue="6">送物資生活用品提供</label>
-                </div>
-                <div nz-col nzSpan="8">
-                  <label nz-checkbox nzValue="7">房租費用</label>
-                </div>
-                <div nz-col nzSpan="12">
-                  <label nz-checkbox nzValue="8">其他</label>
-                  <label>
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [maxLength]="30"
-                      formControlName="economicNeeds_other"
-                    />
-                  </label>
-                </div>
-              </div>
-            </nz-checkbox-wrapper>
-          </td>
-        </tr>
-        <tr>
-          <th class="th-cell custom-header bold-text" nzAlign="center">
-            輔具需求
-          </th>
-          <td class="td-cell custom-cell">
-            <nz-checkbox-wrapper
-              style="width: 100%"
-              (nzOnChange)="assistiveDeviceNeedsChange($event)"
-            >
-              <div nz-row>
-                <div nz-col nzSpan="12">
-                  <label nz-checkbox nzValue="1">輔具堤供</label>
-                </div>
-                <div nz-col nzSpan="12">
-                  <label nz-checkbox nzValue="2">輔具申請</label>
-                </div>
-                <div nz-col nzSpan="12">
-                  <label nz-checkbox nzValue="3">輔具租借</label>
-                </div>
-                <div nz-col nzSpan="12">
-                  <label nz-checkbox nzValue="4">輔具修理 </label>
-                </div>
-              </div>
-            </nz-checkbox-wrapper>
-          </td>
-          <th class="th-cell custom-header bold-text" nzAlign="center">
-            環境需求
-          </th>
-          <td class="td-cell custom-cell">
-            <nz-checkbox-wrapper
-              style="width: 100%"
-              (nzOnChange)="environmentalNeedsChange($event)"
-            >
-              <div nz-row>
-                <div nz-col nzSpan="8">
-                  <label nz-checkbox nzValue="1">無障礙環境改善</label>
-                </div>
-                <div nz-col nzSpan="8">
-                  <label nz-checkbox nzValue="2">居家修繕</label>
-                </div>
-                <div nz-col nzSpan="8">
-                  <label nz-checkbox nzValue="3">居家環境清潔</label>
-                </div>
-              </div>
-            </nz-checkbox-wrapper>
-          </td>
-        </tr>
-        <tr>
-          <th class="th-cell custom-header bold-text" nzAlign="center">
-            社會參與
-          </th>
-          <td class="td-cell custom-cell">
-            <nz-checkbox-wrapper
-              style="width: 100%"
-              (nzOnChange)="socialMealNeedsChange($event)"
-            >
-              <div nz-row>
-                <div nz-col nzSpan="12">
-                  <label nz-checkbox nzValue="1">媒合據點活動</label>
-                </div>
-                <div nz-col nzSpan="12">
-                  <label nz-checkbox nzValue="2">志工關懷訪視服務</label>
-                </div>
-                <div nz-col nzSpan="12">
-                  <label nz-checkbox nzValue="3">參與敬老旅遊或長者活動</label>
-                </div>
-                <div nz-col nzSpan="24">
-                  <label nz-checkbox nzValue="4">其他</label>
-                  <label>
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [maxLength]="30"
-                      formControlName="socialMealNeeds_other"
-                    />
-                  </label>
-                </div>
-              </div>
-            </nz-checkbox-wrapper>
-          </td>
-          <th class="th-cell custom-header bold-text" nzAlign="center">
-            自我保護需求
-          </th>
-          <td class="td-cell custom-cell">
-            <nz-checkbox-wrapper
-              style="width: 100%"
-              (nzOnChange)="selfProtectionNeedsChange($event)"
-            >
-              <div nz-row>
-                <div nz-col nzSpan="12">
-                  <label nz-checkbox nzValue="1">自殺通報</label>
-                </div>
-                <div nz-col nzSpan="12">
-                  <label nz-checkbox nzValue="2">家暴通報</label>
-                </div>
-                <div nz-col nzSpan="12">
-                  <label nz-checkbox nzValue="3">性侵通報</label>
-                </div>
-                <div nz-col nzSpan="12">
-                  <label nz-checkbox nzValue="4">緊急救援守護連線</label>
-                </div>
-                <div nz-col nzSpan="24">
-                  <label nz-checkbox nzValue="5">其他</label>
-                  <label>
-                    <app-input
-                      [inputWidth]="'175px'"
-                      [maxLength]="30"
-                      formControlName="selfProtectionNeeds_other"
-                    />
-                  </label>
-                </div>
-              </div>
-            </nz-checkbox-wrapper>
-          </td>
-        </tr>
-        <tr>
-          <th class="th-cell custom-header bold-text" nzAlign="center">
-            鑑定需求
-          </th>
-          <td class="td-cell custom-cell">
-            <nz-checkbox-wrapper
-              style="width: 100%"
-              (nzOnChange)="assessmentNeedsChange($event)"
-            >
-              <div nz-row>
-                <div nz-col nzSpan="8">
-                  <label nz-checkbox nzValue="1">身障鑑定</label>
-                </div>
-                <div nz-col nzSpan="8">
-                  <label nz-checkbox nzValue="2">失智症鑑定</label>
-                </div>
-                <div nz-col nzSpan="8">
-                  <label nz-checkbox nzValue="3">重大傷病申請</label>
-                </div>
-                <div nz-col nzSpan="8">
-                  <label nz-checkbox nzValue="4">憂鬱/躁鬱鑑定</label>
-                </div>
-                <div nz-col nzSpan="8">
-                  <label nz-checkbox nzValue="5">監護鑑定</label>
-                </div>
-              </div>
-            </nz-checkbox-wrapper>
-          </td>
-          <th class="th-cell custom-header bold-text" nzAlign="center">
-            其他照顧需求
-          </th>
-          <td class="td-cell custom-cell">
-            <nz-checkbox-wrapper
-              style="width: 100%"
-              (nzOnChange)="otherCareNeedsChange($event)"
-            >
-              <div nz-row>
-                <div nz-col nzSpan="8">
-                  <label nz-checkbox nzValue="1">交通需求</label>
-                </div>
-                <div nz-col nzSpan="8">
-                  <label nz-checkbox nzValue="2">心理諮商需求</label>
-                </div>
-                <div nz-col nzSpan="8">
-                  <label nz-checkbox nzValue="3">善終預備</label>
-                </div>
-                <div nz-col nzSpan="8">
-                  <label nz-checkbox nzValue="4">法律需求</label>
-                </div>
-              </div>
-            </nz-checkbox-wrapper>
-          </td>
-        </tr>
-        <tr>
-          <th class="custom-header" colSpan="4" nzAlign="center">處遇內容</th>
-        </tr>
-        <tr>
-          <th
-            colSpan="1"
-            class="th-cell custom-header bold-text"
-            nzAlign="center"
-          >
-            處遇目標
-          </th>
-          <td colSpan="3" class="td-cell custom-cell">
-            <nz-textarea-count [nzMaxCharacterCount]="500" data-count="0/500">
-              <textarea
-                rows="4"
-                nz-input
-                [maxlength]="500"
-                [placeholder]="
-                  '應思考個案現況與基金會個案服務目標間的落差，據此設定處遇目標。'
-                "
-                formControlName="treatmentGoals"
-              ></textarea>
-            </nz-textarea-count>
-            <app-error-message
-              [control]="form.get('treatmentGoals')"
-              [isTouched]="false"
-              errorKey="required"
-              errorMessage="這是必填欄位。"
-            />
-          </td>
-        </tr>
-        <tr>
-          <th
-            colSpan="1"
-            class="th-cell custom-header bold-text"
-            nzAlign="center"
-          >
-            處遇計畫/服務安排
-          </th>
-          <td colSpan="3" class="td-cell custom-cell">
-            <nz-textarea-count [nzMaxCharacterCount]="2000" data-count="0/2000">
-              <textarea
-                rows="4"
-                nz-input
-                [maxlength]="2000"
-                [placeholder]="
-                  '需寫細項服務規劃，包含服務頻率、連結資源內容、分派給志工的任務等等。'
-                "
-                formControlName="serviceArrangement"
-              ></textarea>
-            </nz-textarea-count>
-            <app-error-message
-              [control]="form.get('serviceArrangement')"
-              [isTouched]="false"
-              errorKey="required"
-              errorMessage="這是必填欄位。"
-            />
-          </td>
-        </tr>
-        <tr>
-          <th class="custom-header" colSpan="4" nzAlign="center">複評日期</th>
-        </tr>
-        <tr>
-          <th
-            colSpan="1"
-            class="th-cell custom-header bold-text"
-            nzAlign="center"
-          >
-            應複評日期
-          </th>
-          <td colSpan="3" class="td-cell custom-cell">
-            <!-- !TODO -->
-            <div>113年10月10日</div>
-          </td>
-        </tr>
-        <tr>
-          <th class="custom-header" colSpan="4" nzAlign="center">主管簽核</th>
-        </tr>
-        <tr>
-          <th
-            colSpan="1"
-            class="th-cell custom-header bold-text"
-            nzAlign="center"
-          >
-            單位主管意見
-          </th>
-          <!-- !TODO -->
-          <td colSpan="3" class="td-cell custom-cell">
-            <app-button [buttonIcon]="'accept'" [buttonText]="'同意'" />
-            <app-button [buttonIcon]="'close'" [buttonText]="'退回'" />
-            <nz-textarea-count [nzMaxCharacterCount]="500" data-count="0/500">
-              <textarea
-                rows="4"
-                nz-input
-                [maxlength]="500"
-                formControlName="supervisorComments"
-              ></textarea>
-            </nz-textarea-count>
-            <app-error-message
-              [control]="form.get('supervisorComments')"
-              [isTouched]="false"
-              errorKey="required"
-              errorMessage="這是必填欄位。"
-            />
-          </td>
-        </tr>
-        <tr>
-          <th colspan="4" class="custom-header">
-            <!-- !TODO -->
-            <app-button
-              [buttonIcon]="'save'"
-              [buttonText]="'儲存'"
-              (click)="save()"
-            />
-            <app-button
-              *ngIf="!caseInformationService.isChoiceCase"
-              (click)="onPreviousPage()"
-              [buttonIcon]="'previouspage'"
-              [buttonText]="'上一頁'"
-            />
-            <app-button
-              *ngIf="!caseInformationService.isChoiceCase"
-              [buttonIcon]="'accept'"
-              [buttonText]="'完成送審'"
-              (click)="review()"
-            />
-            <app-button
-              [buttonIcon]="'close'"
-              [buttonText]="'關閉'"
-              (click)="closeTab('個案初評表')"
-            />
-          </th>
-        </tr>
-      </nz-table>
-    </form>
-  </ng-container>
-</div>
+<form [formGroup]="form">
+  <div class="grid-container">
+    <div>
+      <div class="title">訪視概況</div>
+    </div>
+    <div class="grid-columns-1">
+      <!-- !TODO -->
+      <div class="label disableBackground">個案姓名</div>
+      <div>
+        <app-input
+          [inputWidth]="'130px'"
+          [maxLength]="30"
+          formControlName="caseName"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-2">
+      <div class="label">訪視日期</div>
+      <div class="column-Message">
+        <app-dayPicker formControlName="visitDate" />
+        <app-error-message
+          [control]="form.get('visitDate')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必選"
+        />
+      </div>
+      <div class="label">訪視方式</div>
+      <div class="column-Message">
+        <app-select
+          [selectWidth]="'70px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_visitMethod"
+          formControlName="visitMethod"
+        />
+        <app-error-message
+          [control]="form.get('visitMethod')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必選"
+        />
+      </div>
+    </div>
+    <div>
+      <div class="title">文字描述</div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">生理</div>
+      <div>
+        <nz-textarea-count [nzMaxCharacterCount]="1000" data-count="0/1000">
+          <textarea
+            rows="4"
+            nz-input
+            [maxlength]="1000"
+            [placeholder]="'請填寫問題及需求及概述及現有資源使用狀況。'"
+            formControlName="textDescription_physical"
+          ></textarea>
+        </nz-textarea-count>
+        <app-error-message
+          [control]="form.get('textDescription_physical')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必填"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">心理</div>
+      <div>
+        <nz-textarea-count [nzMaxCharacterCount]="1000" data-count="0/1000">
+          <textarea
+            rows="4"
+            nz-input
+            [maxlength]="1000"
+            [placeholder]="'請填寫問題及需求及概述及現有資源使用狀況。'"
+            formControlName="textDescription_psychological"
+          ></textarea>
+        </nz-textarea-count>
+        <app-error-message
+          [control]="form.get('textDescription_psychological')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必填"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">家庭</div>
+      <div>
+        <nz-textarea-count [nzMaxCharacterCount]="1000" data-count="0/1000">
+          <textarea
+            rows="4"
+            nz-input
+            [maxlength]="1000"
+            [placeholder]="'請填寫問題及需求及概述及現有資源使用狀況。'"
+            formControlName="textDescription_family"
+          ></textarea>
+        </nz-textarea-count>
+        <app-error-message
+          [control]="form.get('textDescription_family')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必填"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">社會</div>
+      <div>
+        <nz-textarea-count [nzMaxCharacterCount]="1000" data-count="0/1000">
+          <textarea
+            rows="4"
+            nz-input
+            [maxlength]="1000"
+            [placeholder]="'請填寫問題及需求及概述及現有資源使用狀況。'"
+            formControlName="textDescription_social"
+          ></textarea>
+        </nz-textarea-count>
+        <app-error-message
+          [control]="form.get('textDescription_social')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必填"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">經濟</div>
+      <div>
+        <nz-textarea-count [nzMaxCharacterCount]="1000" data-count="0/1000">
+          <textarea
+            rows="4"
+            nz-input
+            [maxlength]="1000"
+            [placeholder]="'請填寫問題及需求及概述及現有資源使用狀況。'"
+            formControlName="textDescription_economic"
+          ></textarea>
+        </nz-textarea-count>
+        <app-error-message
+          [control]="form.get('textDescription_economic')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必填"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">居住環境</div>
+      <div>
+        <nz-textarea-count [nzMaxCharacterCount]="1000" data-count="0/1000">
+          <textarea
+            rows="4"
+            nz-input
+            [maxlength]="1000"
+            [placeholder]="'請填寫問題及需求及概述及現有資源使用狀況。'"
+            formControlName="textDescription_livingEnvironment"
+          ></textarea>
+        </nz-textarea-count>
+        <app-error-message
+          [control]="form.get('textDescription_livingEnvironment')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必填"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">外出</div>
+      <div>
+        <nz-textarea-count [nzMaxCharacterCount]="1000" data-count="0/1000">
+          <textarea
+            rows="4"
+            nz-input
+            [maxlength]="1000"
+            [placeholder]="'請填寫問題及需求及概述及現有資源使用狀況。'"
+            formControlName="textDescription_outdoorActivity"
+          ></textarea>
+        </nz-textarea-count>
+        <app-error-message
+          [control]="form.get('textDescription_outdoorActivity')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必填"
+        />
+      </div>
+    </div>
+    <div>
+      <div class="title">需求評估</div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">福利身分別</div>
+      <div class="column-Message">
+        <nz-checkbox-wrapper
+          style="width: 100%"
+          (nzOnChange)="welfareStatusChange($event)"
+        >
+          <div nz-row>
+            <div nz-col>
+              <label nz-checkbox nzValue="1">身障證明申請</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="2">低收</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="3">中低收申請</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="4">中低收老人津貼申請</label>
+            </div>
+          </div>
+        </nz-checkbox-wrapper>
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">長照需求</div>
+      <div class="column-Message">
+        <nz-checkbox-wrapper
+          style="width: 100%"
+          (nzOnChange)="longTermCareNeedsChange($event)"
+        >
+          <div nz-row>
+            <div nz-col>
+              <label nz-checkbox nzValue="1">居家服務</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="2">日間照顧</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="3">機構安置</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="4">喘息服務</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="5">照顧指導</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="6">家庭托顧</label>
+            </div>
+          </div>
+        </nz-checkbox-wrapper>
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">餐食需求</div>
+      <div class="column-Message">
+        <nz-checkbox-wrapper
+          style="width: 100%"
+          (nzOnChange)="mealNeedsChange($event)"
+        >
+          <div nz-row>
+            <div nz-col>
+              <label nz-checkbox nzValue="1">長照護送</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="2">非長照護送</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="3">營養評估</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="4">待餐物資</label>
+            </div>
+          </div>
+        </nz-checkbox-wrapper>
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">醫療需求</div>
+      <div class="column-Message">
+        <nz-checkbox-wrapper
+          style="width: 100%"
+          (nzOnChange)="medicalNeedsChange($event)"
+        >
+          <div nz-row>
+            <div nz-col>
+              <label nz-checkbox nzValue="1">了解醫囑</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="2">陪同門診、門診手術</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="3">居家護理</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="4">復健</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="5">衛教宣導</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="6">用藥安全指導</label>
+            </div>
+          </div>
+        </nz-checkbox-wrapper>
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">經濟需求</div>
+      <div class="column-Message">
+        <nz-checkbox-wrapper
+          style="width: 100%"
+          (nzOnChange)="economicNeedsChange($event)"
+        >
+          <div nz-row>
+            <div nz-col>
+              <label nz-checkbox nzValue="1">住院看護費用</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="2">急難救助金申請</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="3">醫療補助費用</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="4">機構緊急安置費用</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="5">長照服務費用缺口</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="6">送物資生活用品提供</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="7">房租費用</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="8">其他</label>
+              <label>
+                <app-input
+                  [inputWidth]="'100px'"
+                  [maxLength]="30"
+                  formControlName="economicNeeds_other"
+                />
+              </label>
+            </div>
+          </div>
+        </nz-checkbox-wrapper>
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">輔具需求</div>
+      <div class="column-Message">
+        <nz-checkbox-wrapper
+          style="width: 100%"
+          (nzOnChange)="assistiveDeviceNeedsChange($event)"
+        >
+          <div nz-row>
+            <div nz-col>
+              <label nz-checkbox nzValue="1">輔具堤供</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="2">輔具申請</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="3">輔具租借</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="4">輔具修理 </label>
+            </div>
+          </div>
+        </nz-checkbox-wrapper>
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">環境需求</div>
+      <div class="column-Message">
+        <nz-checkbox-wrapper
+          style="width: 100%"
+          (nzOnChange)="environmentalNeedsChange($event)"
+        >
+          <div nz-row>
+            <div nz-col>
+              <label nz-checkbox nzValue="1">無障礙環境改善</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="2">居家修繕</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="3">居家環境清潔</label>
+            </div>
+          </div>
+        </nz-checkbox-wrapper>
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">社會參與</div>
+      <div class="column-Message">
+        <nz-checkbox-wrapper
+          style="width: 100%"
+          (nzOnChange)="socialMealNeedsChange($event)"
+        >
+          <div nz-row>
+            <div nz-col>
+              <label nz-checkbox nzValue="1">媒合據點活動</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="2">志工關懷訪視服務</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="3">參與敬老旅遊或長者活動</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="4">其他</label>
+              <label>
+                <app-input
+                  [inputWidth]="'100px'"
+                  [maxLength]="30"
+                  formControlName="socialMealNeeds_other"
+                />
+              </label>
+            </div>
+          </div>
+        </nz-checkbox-wrapper>
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">自我保護需求</div>
+      <div class="column-Message">
+        <nz-checkbox-wrapper
+          style="width: 100%"
+          (nzOnChange)="selfProtectionNeedsChange($event)"
+        >
+          <div nz-row>
+            <div nz-col>
+              <label nz-checkbox nzValue="1">自殺通報</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="2">家暴通報</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="3">性侵通報</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="4">緊急救援守護連線</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="5">其他</label>
+              <label>
+                <app-input
+                  [inputWidth]="'100px'"
+                  [maxLength]="30"
+                  formControlName="selfProtectionNeeds_other"
+                />
+              </label>
+            </div>
+          </div>
+        </nz-checkbox-wrapper>
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">鑑定需求</div>
+      <div class="column-Message">
+        <nz-checkbox-wrapper
+          style="width: 100%"
+          (nzOnChange)="assessmentNeedsChange($event)"
+        >
+          <div nz-row>
+            <div nz-col>
+              <label nz-checkbox nzValue="1">身障鑑定</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="2">失智症鑑定</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="3">重大傷病申請</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="4">憂鬱/躁鬱鑑定</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="5">監護鑑定</label>
+            </div>
+          </div>
+        </nz-checkbox-wrapper>
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">其他照顧需求</div>
+      <div class="column-Message">
+        <nz-checkbox-wrapper
+          style="width: 100%"
+          (nzOnChange)="otherCareNeedsChange($event)"
+        >
+          <div nz-row>
+            <div nz-col>
+              <label nz-checkbox nzValue="1">交通需求</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="2">心理諮商需求</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="3">善終預備</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="4">法律需求</label>
+            </div>
+          </div>
+        </nz-checkbox-wrapper>
+      </div>
+    </div>
+    <div>
+      <div class="title">處遇內容</div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">處遇目標</div>
+      <div>
+        <nz-textarea-count [nzMaxCharacterCount]="500" data-count="0/500">
+          <textarea
+            rows="4"
+            nz-input
+            [maxlength]="500"
+            [placeholder]="
+              '應思考個案現況與基金會個案服務目標間的落差，據此設定處遇目標。'
+            "
+            formControlName="treatmentGoals"
+          ></textarea>
+        </nz-textarea-count>
+        <app-error-message
+          [control]="form.get('treatmentGoals')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必填"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">處遇計畫/服務安排</div>
+      <div>
+        <nz-textarea-count [nzMaxCharacterCount]="2000" data-count="0/2000">
+          <textarea
+            rows="4"
+            nz-input
+            [maxlength]="2000"
+            [placeholder]="
+              '需寫細項服務規劃，包含服務頻率、連結資源內容、分派給志工的任務等等。'
+            "
+            formControlName="serviceArrangement"
+          ></textarea>
+        </nz-textarea-count>
+        <app-error-message
+          [control]="form.get('serviceArrangement')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必填"
+        />
+      </div>
+    </div>
+    <div>
+      <div class="title">複評日期</div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">應複評日期</div>
+      <div class="column-Message">
+        <!-- !TODO -->
+        <div>113年10月10日</div>
+      </div>
+    </div>
+    <div>
+      <div class="title">主管簽核</div>
+    </div>
+    <div class="grid-columns-1 border-bottom-0">
+      <div class="label">單位主管意見</div>
+      <!-- !TODO -->
+      <div>
+        <app-button [buttonIcon]="'accept'" [buttonText]="'同意'" />
+        <app-button [buttonIcon]="'close'" [buttonText]="'退回'" />
+        <nz-textarea-count [nzMaxCharacterCount]="500" data-count="0/500">
+          <textarea
+            rows="4"
+            nz-input
+            [maxlength]="500"
+            formControlName="supervisorComments"
+          ></textarea>
+        </nz-textarea-count>
+        <app-error-message
+          [control]="form.get('supervisorComments')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必填"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="buttonArea">
+    <!-- !TODO -->
+    <app-button [buttonIcon]="'save'" [buttonText]="'儲存'" (click)="save()" />
+    <app-button
+      *ngIf="!caseInformationService.isChoiceCase"
+      (click)="onPreviousPage()"
+      [buttonIcon]="'previouspage'"
+      [buttonText]="'上一頁'"
+    />
+    <app-button
+      *ngIf="!caseInformationService.isChoiceCase"
+      [buttonIcon]="'accept'"
+      [buttonText]="'完成送審'"
+      (click)="review()"
+    />
+    <app-button
+      [buttonIcon]="'close'"
+      [buttonText]="'關閉'"
+      (click)="closeTab('個案初評表')"
+    />
+  </div>
+</form>

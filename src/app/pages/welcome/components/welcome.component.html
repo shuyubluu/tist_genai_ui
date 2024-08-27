@@ -1,5 +1,5 @@
 <div class="card-header">
-  <h5>待簽核表單</h5>
+  <h5>個案管理</h5>
   <form>
     <div class="mt"></div>
     <div class="table-container2">
@@ -26,34 +26,19 @@
                             <td class="td-cell-20 custom-cell" nzAlign="center"><app-button [buttonIcon]="'accept'"
                                     [buttonText]="'確認'"></app-button></td> -->
               <td class="custom-cell" nzAlign="center">
-                <p
-                  [innerHTML]="getInfoWithLink(item.info)"
-                  (click)="handleModalLinkClick()"
-                ></p>
+                <p [innerHTML]="getInfoWithLink(item.info)"></p>
               </td>
               <td class="custom-cell" nzAlign="center">
-                <p
-                  [innerHTML]="getInfoWithLink(item.info2)"
-                  (click)="handleModalLinkClick()"
-                ></p>
+                <p [innerHTML]="getInfoWithLink(item.info2)"></p>
               </td>
               <td class="custom-cell" nzAlign="center">
-                <p
-                  [innerHTML]="getInfoWithLink(item.info3)"
-                  (click)="handleModalLinkClick()"
-                ></p>
+                <p [innerHTML]="getInfoWithLink(item.info3)"></p>
               </td>
               <td class="custom-cell" nzAlign="center">
-                <p
-                  [innerHTML]="getInfoWithLink(item.info4)"
-                  (click)="handleModalLinkClick()"
-                ></p>
+                <p [innerHTML]="getInfoWithLink(item.info4)"></p>
               </td>
               <td class="custom-cell" nzAlign="center">
-                <p
-                  [innerHTML]="getInfoWithLink(item.info5)"
-                  (click)="handleModalLinkClick()"
-                ></p>
+                <p [innerHTML]="getInfoWithLink(item.info5)"></p>
               </td>
             </tr>
           </tbody>
