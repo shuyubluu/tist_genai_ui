@@ -1,5 +1,6 @@
 <app-volunteer-information
   *ngIf="volunteerInformationService.isChoiceVolunteer"
+  [currentTab]="'志工基本資料'"
 />
 <div class="mt"></div>
 <form [formGroup]="form">
@@ -566,7 +567,7 @@
       </div>
     </div>
     <div class="grid-columns-1">
-      <div class="label">上傳</div>
+      <div class="label">服務紀錄冊上傳</div>
       <div>
         <app-button [buttonIcon]="'upload'" [buttonText]="'上傳'" />
       </div>
@@ -663,19 +664,24 @@
         }
       </div>
     </div>
-    <div class="grid-columns-1">
+    <div class="grid-columns-1 border-bottom-0">
       <div class="label">志工權利義務告知聲明書</div>
-      <app-select
-        [selectWidth]="'80px'"
-        [defaultPlaceHolder]="false"
-        [options]="selectOptions_volunteerRightsAndDutiesDeclaration"
-        formControlName="volunteerRightsAndDutiesDeclaration"
-      />
+      <div class="colunns-Message">
+        <!-- <app-button [buttonIcon]="'upload'" [buttonText]="'聲明書上傳'" /> -->
+        <app-select
+          [selectWidth]="'90px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_volunteerRightsAndDutiesDeclaration"
+          formControlName="volunteerRightsAndDutiesDeclaration"
+        />
+        <app-button [buttonIcon]="'download'" [buttonText]="'範本下載'" />
+      </div>
     </div>
   </div>
   <div class="buttonArea">
     <!-- !TODO -->
     <app-button [buttonIcon]="'save'" [buttonText]="'儲存'" (click)="save()" />
+    <app-button [buttonIcon]="'delete'" [buttonText]="'刪除'" />
     <app-button
       [buttonIcon]="'close'"
       [buttonText]="'關閉'"

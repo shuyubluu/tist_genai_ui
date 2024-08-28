@@ -90,7 +90,7 @@ $angular-ngzorro-theme: mat.define-light-theme(
 // 表單拆分為一行
 .grid-columns-1 {
   display: grid;
-  grid-template-columns: 1fr 5fr;
+  grid-template-columns: 1fr 6fr;
   gap: 10px;
   padding: 10px;
   border-bottom: #dddfeb solid 1px;
@@ -99,7 +99,7 @@ $angular-ngzorro-theme: mat.define-light-theme(
 // 表單拆分為兩行
 .grid-columns-2 {
   display: grid;
-  grid-template-columns: repeat(2, 1fr 3fr);
+  grid-template-columns: repeat(2, 1fr 2.5fr);
   gap: 10px;
   padding: 10px;
   border-bottom: #dddfeb solid 1px;
@@ -176,17 +176,14 @@ $angular-ngzorro-theme: mat.define-light-theme(
   background-color: #f0f0f0;
 }
 
-.inner-title {
-  color: #31823e;
-  margin-bottom: 10px;
-  font-weight: bold;
-  justify-content: flex-start !important;
-  font-size: 16px;
-}
-
-.inner-title2 {
-  color: #0000ff;
-  font-size: 16px;
+// 搜尋結果訊息
+.message {
+  background: #f2ddf1 url(./assets/img/information.png) 8px 50% no-repeat;
+  border: 1px solid #fa58f4;
+  color: #b4055f;
+  margin: 10px 0 5px 0;
+  padding: 5px 5px 5px 30px;
+  font-size: 20px;
 }
 
 .table-container {

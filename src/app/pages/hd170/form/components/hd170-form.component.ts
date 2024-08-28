@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
 import { InputComponent } from '../../../../common/components/input/input.component';
 import { SelectComponent } from '../../../../common/components/select/select.component';
@@ -95,31 +94,11 @@ export class Hd170FormComponent implements OnInit {
       // 通訊地址
       communicationAddress: new FormControl(''),
       // 通訊地址下拉式選單
-      registeredAddress_select: new FormControl(),
+      communicationAddress_select: new FormControl(),
       // 福利身份
       welfareStatus: new FormControl(''),
       // 社會福利補助
       socialWelfareSubsidy: new FormControl(''),
-
-      // 3.緊急聯絡人
-      // 緊急聯絡人1
-      emergencyContact1: new FormControl(''),
-      // 緊急聯絡人1關係
-      emergencyContact1_relationship: new FormControl(''),
-      // 緊急聯絡人1電話
-      emergencyContact1_phone: new FormControl(''),
-      // 緊急聯絡人2
-      emergencyContact2: new FormControl(''),
-      // 緊急聯絡人2關係
-      emergencyContact2_relationship: new FormControl(''),
-      // 緊急聯絡人2電話
-      emergencyContact2_phone: new FormControl(''),
-      // 緊急聯絡人3
-      emergencyContact3: new FormControl(''),
-      // 緊急聯絡人3關係
-      emergencyContact3_relationship: new FormControl(''),
-      // 緊急聯絡人3電話
-      emergencyContact3_phone: new FormControl(''),
 
       // 4.轉介內容
       // 個案概況與處遇摘要

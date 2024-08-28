@@ -1,12 +1,13 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { VolunteerData } from './volunteer-information.interface';
 
 @Injectable({
   providedIn: 'root',
 })
-export class VolunteerInformationService implements OnInit {
-  // 是否已選取個案
-  isChoiceVolunteer: boolean = false;
+export class VolunteerInformationService {
+  private localStorageKey = 'isChoiceVolunteer';
+  private _isChoiceVolunteer: boolean = false;
+
   // 志工資料
   volunteerData: VolunteerData[] = [
     {
@@ -20,7 +21,18 @@ export class VolunteerInformationService implements OnInit {
     },
   ];
 
-  constructor() {}
+  constructor() {
+    // 如果 LocalStorage 中有值，則初始化
+    const storedValue = localStorage.getItem(this.localStorageKey);
+    this.isChoiceVolunteer = storedValue === 'true';
+  }
 
-  ngOnInit(): void {}
+  get isChoiceVolunteer(): boolean {
+    return this._isChoiceVolunteer;
+  }
+
+  set isChoiceVolunteer(value: boolean) {
+    this._isChoiceVolunteer = value;
+    localStorage.setItem(this.localStorageKey, String(value));
+  }
 }

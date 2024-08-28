@@ -5,6 +5,5 @@ export interface SearchResultData {
   dateOfBirth: string;
   responsiblePerson: string;
   caseOpeningDate: string;
-  caseOpeningResult: string;
   caseClassification: string;
 }

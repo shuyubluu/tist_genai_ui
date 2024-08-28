@@ -25,19 +25,27 @@ export class MenuComponent implements OnInit {
       },
       {
         title: '個案管理',
-        icon: '',
+        icon: 'solution',
         children: [
-          { title: '01- 個案資料清單', open: false, link: '/hd100' },
+          {
+            title: '01- 個案資料清單',
+            open: false,
+            link: '/hd100',
+          },
           // { title: '02- 例行訪視表清單', open: false, link: '/hd140' },
           // { title: '03- 個案複評表清單', open: false, link: '/hd150' },
           // { title: '04- 生活品質問卷清單', open: false, link: '/hd160' },
           // { title: '05- 轉介單清單', open: false, link: '/hd170' },
-          { title: '02- 個案結案名冊', open: false, link: '/hd180' },
+          {
+            title: '02- 個案結案名冊',
+            open: false,
+            link: '/hd180',
+          },
         ],
       },
       {
         title: '志工管理',
-        icon: '',
+        icon: 'team',
         children: [{ title: '01- 志工資料清單', open: false, link: '/hd200' }],
       },
       {

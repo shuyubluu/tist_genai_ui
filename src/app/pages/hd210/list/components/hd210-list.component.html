@@ -1,0 +1,85 @@
+<app-volunteer-information
+  *ngIf="volunteerInformationService.isChoiceVolunteer"
+  [currentTab]="'教育訓練'"
+/>
+<div class="mt"></div>
+<form [formGroup]="form">
+  <div class="grid-container">
+    <div class="grid-columns-2 border-bottom-0">
+      <div class="label">日期區間</div>
+      <div>
+        <app-dayPicker formControlName="dateRange" />
+      </div>
+      <div class="label">法定訓練完成情況</div>
+      <div>
+        <div>
+          <div>
+            基礎訓<span *ngIf="basicTraining" class="checked">完成</span>
+            <span *ngIf="!basicTraining" class="notChecked">未完成</span>
+          </div>
+          <div>
+            特殊訓(社福)<span *ngIf="specialTraining" class="checked"
+              >完成</span
+            >
+            <span *ngIf="!specialTraining" class="notChecked">未完成</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="buttonArea">
+    <app-button
+      [buttonIcon]="'search'"
+      [buttonText]="'搜尋'"
+      (click)="search()"
+    />
+    <app-button [buttonIcon]="'add'" [buttonText]="'新增'" (click)="create()" />
+    <app-button
+      [buttonIcon]="'close'"
+      [buttonText]="'關閉'"
+      (click)="closeTab('教育訓練')"
+    />
+  </div>
+</form>
+<div class="mt"></div>
+<div class="message">搜尋結果: 共{{ searchResultData.length }}筆</div>
+<form>
+  <div class="mt"></div>
+  <div class="grid-search-container">
+    <div class="grid-columns searchTitle">
+      <div>受獎日期</div>
+      <div>表揚單位</div>
+      <div>獎項名稱</div>
+      <div>操作</div>
+    </div>
+    <div
+      class="grid-columns tableBorder"
+      *ngFor="let searchResult of newSearchResultData; let i = index"
+      [ngClass]="{
+        'even-row': i % 2 === 1,
+        'odd-row': i % 2 !== 1
+      }"
+    >
+      <div>
+        {{ searchResult.trainingDate }}
+      </div>
+      <div>
+        {{ searchResult.trainingUnit }}
+      </div>
+      <div>
+        {{ searchResult.trainingCourse }}
+      </div>
+      <!-- !TODO -->
+      <div>
+        <app-button [buttonText]="'檢視'" (click)="view()" />
+      </div>
+    </div>
+  </div>
+</form>
+<div class="mt-10"></div>
+<nz-pagination
+  [nzPageIndex]="currentPage"
+  [nzPageSize]="pageSize"
+  (nzPageIndexChange)="onPageIndexChange($event)"
+  [nzTotal]="searchResultData.length"
+/>

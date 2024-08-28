@@ -79,6 +79,18 @@ export const routes: Routes = [
           import('./pages/hd200/hd200.routes').then((m) => m.HD200_ROUTES),
         data: { tabName: '志工資料清單' },
       },
+      {
+        path: 'hd210',
+        loadChildren: () =>
+          import('./pages/hd210/hd210.routes').then((m) => m.HD210_ROUTES),
+        data: { tabName: '教育訓練' },
+      },
+      {
+        path: 'hd220',
+        loadChildren: () =>
+          import('./pages/hd220/hd220.routes').then((m) => m.HD220_ROUTES),
+        data: { tabName: '獎勵表揚' },
+      },
     ],
   },
   {

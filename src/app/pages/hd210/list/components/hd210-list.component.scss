@@ -1,0 +1,18 @@
+.grid-columns {
+  display: grid;
+  place-items: center;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 2px;
+}
+
+.checked {
+  color: green;
+  font-weight: bold;
+  margin-left: 2px;
+}
+
+.notChecked {
+  color: red;
+  font-weight: bold;
+  margin-left: 2px;
+}

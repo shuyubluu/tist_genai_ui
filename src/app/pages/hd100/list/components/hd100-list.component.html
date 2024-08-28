@@ -1,4 +1,3 @@
-<h1 class="inner-title">1 個案資料清單</h1>
 <div class="mt"></div>
 <form [formGroup]="form">
   <div class="grid-container">
@@ -70,7 +69,6 @@
         <div>生日</div>
         <div>主責人</div>
         <div>開案日期</div>
-        <div>開案結果</div>
         <div>個案分級</div>
         <div>操作</div>
       </div>
@@ -101,15 +99,12 @@
           {{ searchResult.caseOpeningDate }}
         </div>
         <div>
-          {{ searchResult.caseOpeningResult }}
-        </div>
-        <div>
           {{ searchResult.caseClassification }}
         </div>
         <!-- !TODO -->
         <div>
           <app-button [buttonText]="'檢視'" (click)="view()" />
-          <app-button [buttonText]="'編輯'" (click)="edit()"/>
+          <app-button [buttonText]="'編輯'" (click)="edit()" />
           <app-button [buttonText]="'刪除'" />
         </div>
       </div>

@@ -1,0 +1,129 @@
+<app-volunteer-information
+  *ngIf="volunteerInformationService.isChoiceVolunteer"
+  [currentTab]="'教育訓練表'"
+/>
+<div class="mt"></div>
+<form [formGroup]="form">
+  <div class="grid-container">
+    <div class="grid-columns-1">
+      <div class="label">填表日期</div>
+      <div>
+        <app-dayPicker formControlName="submissionDate" />
+      </div>
+    </div>
+    <div>
+      <div class="title">訓練內容</div>
+      <div class="grid-columns-1">
+        <div class="label">受訓日期</div>
+        <div>
+          <app-dayPicker formControlName="trainingDate_start" />
+          <span class="mx-1">-</span>
+          <app-dayPicker formControlName="trainingDate_end" />
+        </div>
+      </div>
+      <div class="grid-columns-1">
+        <div class="label">訓練單位</div>
+        <div>
+          <app-select
+            [selectWidth]="'90px'"
+            [defaultPlaceHolder]="false"
+            [options]="selectOptions_trainingUnit"
+            formControlName="trainingUnit"
+          />
+          <app-input
+            *ngIf="form.get('trainingUnit')?.value === '外單位'"
+            [inputWidth]="'130px'"
+            [maxLength]="30"
+            formControlName="trainingUnit_outside"
+          />
+          <span *ngIf="form.get('trainingUnit')?.value === '本單位'"
+            >財團法人弘道老人福利基金會</span
+          >
+        </div>
+      </div>
+      <div class="grid-columns-2">
+        <div class="label">訓練課程</div>
+        <div>
+          <app-select
+            (ngModelChange)="handleTrainingCourse($event)"
+            [selectWidth]="'130px'"
+            [defaultPlaceHolder]="false"
+            [options]="selectOptions_trainingCourse"
+            formControlName="trainingCourse"
+          />
+        </div>
+        <div class="label">課程名稱</div>
+        <div>
+          <app-input
+            [inputWidth]="'120px'"
+            [maxLength]="20"
+            formControlName="courseName"
+          />
+        </div>
+      </div>
+      <div class="grid-columns-2">
+        <div class="label">課程領域</div>
+        <div>
+          <app-select
+            [selectWidth]="'110px'"
+            [defaultPlaceHolder]="false"
+            [options]="selectOptions_courseField"
+            formControlName="courseField"
+          />
+        </div>
+        <div class="label">訓練次數</div>
+        <div>
+          <app-input
+            [inputWidth]="'70px'"
+            [maxLength]="1"
+            [type]="'NUMBER'"
+            formControlName="trainingSessions"
+          />
+        </div>
+      </div>
+      <div class="grid-columns-2">
+        <div class="label">訓練時數-小時</div>
+        <div>
+          <app-select
+            [selectWidth]="'70px'"
+            [defaultPlaceHolder]="false"
+            [options]="selectOptions_trainingHours"
+            formControlName="trainingHours"
+          />
+        </div>
+        <div class="label">訓練時數-分鐘</div>
+        <div>
+          <app-select
+            [selectWidth]="'70px'"
+            [defaultPlaceHolder]="false"
+            [options]="selectOptions_trainingMinutes"
+            formControlName="trainingMinutes"
+          />
+        </div>
+      </div>
+      <div class="grid-columns-2 border-bottom-0">
+        <div class="label">核定字號</div>
+        <div>
+          <app-input
+            [inputWidth]="'130px'"
+            [maxLength]="25"
+            formControlName="approvalNumber"
+          />
+        </div>
+        <div class="label">核定日期</div>
+        <div>
+          <app-dayPicker formControlName="approvalDate" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="buttonArea">
+    <!-- !TODO -->
+    <app-button [buttonIcon]="'save'" [buttonText]="'儲存'" (click)="save()" />
+    <app-button
+      [buttonIcon]="'close'"
+      [buttonText]="'關閉'"
+      (click)="closeTab('教育訓練表')"
+    />
+  </div>
+</form>

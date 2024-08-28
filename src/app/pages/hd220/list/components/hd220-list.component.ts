@@ -8,11 +8,12 @@ import { DayPickerComponent } from '../../../../common/components/dayPicker/dayP
 import { SharedModule } from '../../../../common/shared/shared.module';
 import { TabService } from '../../../../common/layouts/tab/tab.service';
 import { FormControl, FormGroup } from '@angular/forms';
-import { SearchResultData } from '../service/hd200-list.interface';
-import { VolunteerInformationService } from '../../../../common/components/volunteerInformation/service/volunteer-information.service';
+import { VolunteerInformationComponent } from '../../../../common/components/volunteerInformation/components/volunteer-information.component';
+import { VolunteerInformationService } from './../../../../common/components/volunteerInformation/service/volunteer-information.service';
+import { SearchResultData } from '../service/hd220-list.interface';
 
 @Component({
-  selector: 'app-hd200-list',
+  selector: 'app-hd220-list',
   standalone: true,
   imports: [
     SharedModule,
@@ -21,36 +22,27 @@ import { VolunteerInformationService } from '../../../../common/components/volun
     SelectComponent,
     RouterModule,
     DayPickerComponent,
+    VolunteerInformationComponent,
   ],
-  templateUrl: './hd200-list.component.html',
-  styleUrl: './hd200-list.component.scss',
+  templateUrl: './hd220-list.component.html',
+  styleUrl: './hd220-list.component.scss',
 })
-export class Hd200ListComponent implements OnInit {
+export class Hd220ListComponent implements OnInit {
   // 搜尋條件表單
   form: FormGroup;
   // 分頁器當前頁數
   currentPage: number = 1;
   // 分頁器一頁多少筆數據
   pageSize: number = 10;
+  // 表揚單位select選項
+  selectOptions_recognizingUnit: string[] = ['外單位', '本單位'];
   // 搜尋結果模擬資料
   searchResultData: SearchResultData[] = [
     {
-      serviceStatus: '服務中',
-      volunteerName: '張小美',
-      gender: '女',
-      birthDate: '113/02/01',
-      phoneNumber: '0912-345678',
-      serviceUnit: '000 志工站',
-      yearJoined: '093年',
+      awardDate: '113/02/01',
+      recognizingUnit: '外單位',
+      awardName: '金駝獎',
     },
-  ];
-  // 服務單位select選項
-  selectOptions_serviceUnit: string[] = [
-    '000 志工站',
-    '001 志工站',
-    '002 志工站',
-    '003 志工站',
-    '004 志工站',
   ];
 
   // 分頁器切割後的資料
@@ -68,12 +60,10 @@ export class Hd200ListComponent implements OnInit {
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
-      // 姓名
-      name: new FormControl(''),
-      // 身分證字號
-      idNumber: new FormControl(''),
-      // 服務單位
-      serviceUnit: new FormControl(''),
+      // 受獎日期
+      awardDate: new FormControl(''),
+      // 表揚單位
+      recognizingUnit: new FormControl(''),
     });
   }
 
@@ -91,23 +81,23 @@ export class Hd200ListComponent implements OnInit {
 
   // 新增
   async create() {
-    await this.router.navigate(['/hd200/form']);
+    await this.router.navigate(['/hd220/form']);
     this.volunteerInformationService.isChoiceVolunteer = false;
   }
 
   // 檢視
   async view() {
-    await this.router.navigate(['/hd200/form']);
+    await this.router.navigate(['/hd220/form']);
     this.volunteerInformationService.isChoiceVolunteer = true;
   }
 
   // 編輯
   async edit() {
-    await this.router.navigate(['/hd200/form']);
+    await this.router.navigate(['/hd220/form']);
     this.volunteerInformationService.isChoiceVolunteer = true;
   }
 
-  // 關閉志工資料清單
+  // 關閉教育訓練清單
   closeTab(identifier: string) {
     this.tabService.closeTab(identifier);
   }

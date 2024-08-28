@@ -35,22 +35,22 @@ export class VolunteerInformationComponent implements OnInit {
     }
   }
 
-  // 前往hd120
-  async goToHd120() {
-    await this.router.navigate(['/hd120']);
-    if (this.currentTab === '個案開案資料表') {
+  // 前往hd210
+  async goToHd210() {
+    await this.router.navigate(['/hd210']);
+    if (this.currentTab === '教育訓練' || this.currentTab === '教育訓練單') {
       return;
     }
     this.closeTab(this.currentTab);
   }
 
-  // 前往hd130
-  async goToHd130() {
-    await this.router.navigate(['/hd130']);
-    if (this.currentTab !== '個案初評表') {
-      this.closeTab(this.currentTab);
-    } else {
+  // 前往hd220
+  async goToHd220() {
+    await this.router.navigate(['/hd220']);
+    if (this.currentTab === '獎勵表揚' || this.currentTab === '獎勵表揚單') {
       return;
+    } else {
+      this.closeTab(this.currentTab);
     }
   }
 
