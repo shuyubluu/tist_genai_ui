@@ -1,0 +1,685 @@
+<app-volunteer-information
+  *ngIf="volunteerInformationService.isChoiceVolunteer"
+/>
+<div class="mt"></div>
+<form [formGroup]="form">
+  <div class="grid-container">
+    <div class="title">志工入隊</div>
+    <div class="grid-columns-1">
+      <div class="label">志工編號</div>
+      <div>11300200001</div>
+    </div>
+    <div class="grid-columns-2">
+      <div class="label">填表日期</div>
+      <div>
+        <app-dayPicker formControlName="formDate" />
+      </div>
+      <div class="label">志工入隊日期</div>
+      <div>
+        <app-dayPicker formControlName="volunteerJoinDate" />
+      </div>
+    </div>
+    <div class="title">資訊</div>
+    <div class="grid-columns-1">
+      <div class="label">服務單位</div>
+      <div>
+        <app-select
+          [selectWidth]="'120px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_serviceUnit_1"
+          formControlName="serviceUnit_select1"
+        />
+        <app-select
+          [selectWidth]="'120px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_serviceUnit_2"
+          formControlName="serviceUnit_select2"
+        />
+        <app-select
+          [selectWidth]="'120px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_serviceUnit_3"
+          formControlName="serviceUnit_select3"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-2">
+      <div class="label">單位名稱</div>
+      <div>
+        <app-select
+          [selectWidth]="'120px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_unitName"
+          formControlName="unitName"
+        />
+      </div>
+      <div class="label">主責人</div>
+      <div>
+        <app-input
+          [inputWidth]="'100px'"
+          [maxLength]="30"
+          formControlName="primaryContact"
+        />
+      </div>
+    </div>
+    <div class="title">基本資料</div>
+    <div class="grid-columns-1">
+      <div class="label">志工狀態</div>
+      <div>
+        <app-select
+          [selectWidth]="'70px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_volunteerStatus"
+          formControlName="volunteerStatus"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-2">
+      <div class="label">姓名</div>
+      <div>
+        <app-input
+          [inputWidth]="'130px'"
+          [maxLength]="30"
+          formControlName="name"
+        />
+      </div>
+      <div class="label">性別</div>
+      <div>
+        <app-select
+          [selectWidth]="'70px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_gender"
+          formControlName="gender"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-2">
+      <div class="label">生日</div>
+      <div>
+        <app-dayPicker formControlName="birthDate" />
+      </div>
+      <div class="label">身份證字號</div>
+      <div>
+        <app-input
+          [inputWidth]="'100px'"
+          [maxLength]="10"
+          formControlName="idNumber"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-2">
+      <div class="label">手機</div>
+      <div>
+        <app-input
+          [inputWidth]="'70px'"
+          [maxLength]="4"
+          [type]="'NUMBER'"
+          formControlName="phonePrefix"
+        />
+        <span class="mr-5">-</span>
+        <app-input
+          [inputWidth]="'90px'"
+          [maxLength]="6"
+          [type]="'NUMBER'"
+          formControlName="phoneSuffix"
+        />
+      </div>
+      <div class="label">電話</div>
+      <div>
+        <app-input
+          [inputWidth]="'70px'"
+          [maxLength]="4"
+          [type]="'NUMBER'"
+          formControlName="areaCode"
+        />
+        <span class="mr-5">-</span>
+        <app-input
+          [inputWidth]="'90px'"
+          [maxLength]="8"
+          [type]="'NUMBER'"
+          formControlName="phoneNumber"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-2">
+      <div class="label">LINE帳號</div>
+      <div>
+        <app-input
+          [inputWidth]="'120px'"
+          [maxLength]="30"
+          formControlName="lineId"
+        />
+      </div>
+      <div class="label">E-mail</div>
+      <div>
+        <app-input
+          [inputWidth]="'200px'"
+          [maxLength]="30"
+          formControlName="email"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">飲食習慣</div>
+      <div>
+        <nz-checkbox-wrapper
+          style="width: 100%"
+          (nzOnChange)="eatingHabitsChange($event)"
+        >
+          <div nz-row>
+            <div nz-col>
+              <label nz-checkbox nzValue="1">葷</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="2">全素</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="3">蛋奶素</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="4">鍋邊素</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="5">初一十五素</label>
+            </div>
+          </div>
+        </nz-checkbox-wrapper>
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">學歷</div>
+      <div>
+        <app-select
+          [selectWidth]="'70px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_education"
+          formControlName="education"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">語言</div>
+      <div>
+        <nz-checkbox-wrapper
+          style="width: 100%"
+          (nzOnChange)="languagesChange($event)"
+        >
+          <div nz-row>
+            <div nz-col>
+              <label nz-checkbox nzValue="1">國語</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="2">台語</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="3">客家語</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="4">英語</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="5">日語</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="6">手語</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="7">其他</label>
+              <label>
+                <app-input
+                  [inputWidth]="'100px'"
+                  [maxLength]="30"
+                  formControlName="languages_other"
+                />
+              </label>
+            </div>
+          </div>
+        </nz-checkbox-wrapper>
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">通訊地址</div>
+      <div>
+        <app-taiwan-city-select formControlName="address_select" />
+        <app-input
+          [inputWidth]="'300px'"
+          [maxLength]="30"
+          formControlName="address"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">宗教信仰</div>
+      <div>
+        <nz-checkbox-wrapper
+          style="width: 100%"
+          (nzOnChange)="religiousAffiliationChange($event)"
+        >
+          <div nz-row>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableReligiousAffiliationNone"
+                nzValue="1"
+                >無</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableReligiousAffiliationOthers"
+                nzValue="2"
+                >道教</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableReligiousAffiliationOthers"
+                nzValue="3"
+                >佛教</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableReligiousAffiliationOthers"
+                nzValue="4"
+                >基督教</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableReligiousAffiliationOthers"
+                nzValue="5"
+                >天主教</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableReligiousAffiliationOthers"
+                nzValue="6"
+                >一貫道</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableReligiousAffiliationOthers"
+                nzValue="7"
+                >回教</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableReligiousAffiliationOthers"
+                nzValue="8"
+                >民間信仰</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="isDisableReligiousAffiliationOthers"
+                nzValue="9"
+                >其他
+              </label>
+              <label>
+                <app-input
+                  [inputWidth]="'100px'"
+                  [maxLength]="30"
+                  formControlName="religiousAffiliation_other"
+              /></label>
+            </div>
+          </div>
+        </nz-checkbox-wrapper>
+      </div>
+    </div>
+    <div class="grid-columns-2">
+      <div class="label">婚姻狀況</div>
+      <div class="column-Message">
+        <app-select
+          (ngModelChange)="maritalStatusChange($event)"
+          [selectWidth]="'70px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_maritalStatus"
+          formControlName="maritalStatus"
+        />
+        @if(form.get('maritalStatus')?.value === '其他'){
+        <app-input
+          [inputWidth]="'100px'"
+          [maxLength]="30"
+          formControlName="maritalStatus_other"
+        />
+        }
+      </div>
+      <div class="label">是否為原住民</div>
+      <div>
+        <app-select
+          [selectWidth]="'70px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_trueOrFalse"
+          formControlName="isIndigenous"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-2">
+      <div class="label">是否為新住民</div>
+      <div>
+        <app-select
+          [selectWidth]="'70px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_trueOrFalse"
+          formControlName="isNewResident"
+        />
+      </div>
+      <div class="label">是否為外國籍</div>
+      <div>
+        <app-select
+          [selectWidth]="'70px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_trueOrFalse"
+          formControlName="isForeignNational"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">是否加入救災志工</div>
+      <div>
+        <app-select
+          [selectWidth]="'70px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_trueOrFalse"
+          formControlName="isDisasterReliefVolunteer"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">專長</div>
+      <div>
+        <app-select
+          [selectWidth]="'100px'"
+          [options]="selectOptions_specialty"
+          formControlName="specialty"
+        />
+        <app-select
+          [selectWidth]="'100px'"
+          [options]="selectOptions_specialty"
+          formControlName="specialty"
+        />
+        <app-select
+          [selectWidth]="'100px'"
+          [options]="selectOptions_specialty"
+          formControlName="specialty"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">證照</div>
+      <div>
+        <app-select
+          [selectWidth]="'230px'"
+          [options]="selectOptions_certification"
+          formControlName="certification"
+        />
+        <app-select
+          [selectWidth]="'230px'"
+          [options]="selectOptions_certification"
+          formControlName="certification"
+        />
+        <app-select
+          [selectWidth]="'230px'"
+          [options]="selectOptions_certification"
+          formControlName="certification"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">志工來源</div>
+      <div>
+        <nz-checkbox-wrapper
+          style="width: 100%"
+          (nzOnChange)="volunteerSourceChange($event)"
+        >
+          <div nz-row>
+            <div nz-col>
+              <label nz-checkbox nzValue="1">親友</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="2">電視、廣播等傳播媒體</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="3">海報、宣傳簡介</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="4">本會志工介紹</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="5">其他</label>
+              <label>
+                <app-input
+                  [inputWidth]="'100px'"
+                  [maxLength]="30"
+                  formControlName="volunteerSource_other"
+                />
+              </label>
+            </div>
+          </div>
+        </nz-checkbox-wrapper>
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">志工職稱</div>
+      <div>
+        <app-select
+          [selectWidth]="'100px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_volunteerTitle"
+          formControlName="volunteerTitle"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">希望服務區域</div>
+      <!-- !TODO -->
+      <div></div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">服務交通工具</div>
+      <div>
+        <nz-checkbox-wrapper
+          style="width: 100%"
+          (nzOnChange)="serviceTransportationChange($event)"
+        >
+          <div nz-row>
+            <div nz-col>
+              <label nz-checkbox nzValue="1">汽車</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="2">機車</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="3">腳踏車</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="4">大眾運輸</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="5">走路</label>
+            </div>
+          </div>
+        </nz-checkbox-wrapper>
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">擁有交通工具</div>
+      <div>
+        <nz-checkbox-wrapper
+          style="width: 100%"
+          (nzOnChange)="hasTransportationChange($event)"
+        >
+          <div nz-row>
+            <div nz-col>
+              <label nz-checkbox nzValue="1">汽車</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="2">機車</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="3">腳踏車</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="4">廂型車</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="5">卡車</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="6">遊覽車</label>
+            </div>
+          </div>
+        </nz-checkbox-wrapper>
+      </div>
+    </div>
+    <div class="title">識別</div>
+    <div class="grid-columns-2">
+      <div class="label">是否曾擔任志工</div>
+      <div>
+        <app-select
+          [selectWidth]="'70px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_trueOrFalse"
+          formControlName="hasVolunteerExperience"
+        />
+      </div>
+      <div class="label">志願服務紀錄冊</div>
+      <div>
+        <app-select
+          [selectWidth]="'80px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_volunteerServiceRecord"
+          formControlName="volunteerServiceRecord"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">上傳</div>
+      <div>
+        <app-button [buttonIcon]="'upload'" [buttonText]="'上傳'" />
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">榮譽卡</div>
+      <div>
+        <app-select
+          (ngModelChange)="handleHonorCard($event)"
+          [selectWidth]="'70px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_honorCard"
+          formControlName="honorCard"
+        />
+        @if(form.get('honorCard')?.value === '有'){
+        <app-select
+          [selectWidth]="'70px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_honorCard_status"
+          formControlName="honorCard_status"
+        />
+        <span
+          >發給單位：<app-taiwan-city-select
+            [onlyCity]="true"
+            formControlName="honorCard_issuedToCountyCity"
+        /></span>
+        <span>
+          編號：<app-input
+            [inputWidth]="'120px'"
+            [maxLength]="20"
+            formControlName="honorCard_serialNumber"
+          />
+        </span>
+        <div class="my-3">
+          發卡日期：<app-dayPicker formControlName="honorCard_issueDate" />
+          <span>
+            有效日期：<app-dayPicker formControlName="honorCard_expiryDate" />
+          </span>
+        </div>
+        <div>
+          年資起訖：<app-dayPicker formControlName="honorCard_servicePeriod" />
+          <span>
+            申請日期：<app-dayPicker
+              formControlName="honorCard_applicationDate"
+            />
+          </span>
+        </div>
+        }
+      </div>
+    </div>
+    <div class="grid-columns-2">
+      <div class="label">是否領取弘道志願服務證</div>
+      <app-select
+        [selectWidth]="'70px'"
+        [defaultPlaceHolder]="false"
+        [options]="selectOptions_trueOrFalse"
+        formControlName="receivedHongdaoVolunteerCertificate"
+      />
+      <div class="label">是否領取弘道志工背心</div>
+      <app-select
+        [selectWidth]="'70px'"
+        [defaultPlaceHolder]="false"
+        [options]="selectOptions_trueOrFalse"
+        formControlName="receivedHongdaoVolunteerVest"
+      />
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">是否領取弘道志工制服</div>
+      <div>
+        <app-select
+          (ngModelChange)="handleReceivedHongdaoVolunteerUniform($event)"
+          [selectWidth]="'70px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_trueOrFalse"
+          formControlName="receivedHongdaoVolunteerUniform"
+        />
+        @if(form.get('receivedHongdaoVolunteerUniform')?.value === '是'){
+        <span
+          >數量：<app-input
+            [inputWidth]="'70px'"
+            [maxLength]="3"
+            [type]="'NUMBER'"
+            formControlName="receivedHongdaoVolunteerUniform_quantity"
+          />
+          <span
+            >尺寸：
+            <app-select
+              [selectWidth]="'70px'"
+              [defaultPlaceHolder]="false"
+              [options]="selectOptions_receivedHongdaoVolunteerUniform_size"
+              formControlName="receivedHongdaoVolunteerUniform_size"
+          /></span>
+        </span>
+        }
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">志工權利義務告知聲明書</div>
+      <app-select
+        [selectWidth]="'80px'"
+        [defaultPlaceHolder]="false"
+        [options]="selectOptions_volunteerRightsAndDutiesDeclaration"
+        formControlName="volunteerRightsAndDutiesDeclaration"
+      />
+    </div>
+  </div>
+  <div class="buttonArea">
+    <!-- !TODO -->
+    <app-button [buttonIcon]="'save'" [buttonText]="'儲存'" (click)="save()" />
+    <app-button
+      [buttonIcon]="'close'"
+      [buttonText]="'關閉'"
+      (click)="closeTab('志工基本資料')"
+    />
+  </div>
+</form>

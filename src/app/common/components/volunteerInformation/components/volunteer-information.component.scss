@@ -1,0 +1,67 @@
+// 個資子標題
+.volunteerTitle {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 5px;
+  background: #e1f5f8;
+  color: #4e73e1;
+}
+
+// 個資內容
+.volunteerContent {
+  color: blue;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 5px;
+  border-bottom: #dddfeb solid 1px;
+}
+
+// 置中對齊
+.divCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// 個資欄位拆分三行
+.grid-column-3 {
+  display: grid;
+  grid-template-columns: repeat(2, 110px 150px) repeat(2, 100px);
+  justify-content: flex-start;
+  align-items: center;
+  grid-gap: 10px;
+}
+
+// 下邊距2px
+.mb-2 {
+  margin-bottom: 2px;
+}
+
+// 右邊距5px
+.mr-5 {
+  margin-right: 5px;
+}
+
+// 頁籤
+.checkFormButton {
+  font-size: 20px;
+  padding: 3px 10px;
+  border-radius: 5px;
+  border: 1px solid #cccccc;
+  background: #545454;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  &:hover {
+    background: #2c2c2c;
+  }
+}
+
+// 已被選擇的頁籤
+.highlightButton {
+  background: #cbd814;
+  &:hover {
+    background: #818a0d;
+  }
+}

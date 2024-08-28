@@ -79,6 +79,12 @@ export class Hd140ListComponent implements OnInit {
     // !TODO搜尋邏輯
   }
 
+  // 檢視
+  view() {
+    this.router.navigate(['/hd140/form']);
+    this.caseInformationService.isChoiceCase = true;
+  }
+
   // 編輯
   edit() {
     this.router.navigate(['/hd140/form']);

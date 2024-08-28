@@ -78,6 +78,13 @@ export class Hd180ListComponent implements OnInit {
     // !TODO:搜尋邏輯
   }
 
+  // 檢視
+  async view() {
+    await this.router.navigate(['/hd100/form']);
+    this.closeTab('個案結案名冊');
+    this.caseInformationService.isChoiceCase = true;
+  }
+
   // 編輯
   async edit() {
     await this.router.navigate(['/hd100/form']);

@@ -78,6 +78,12 @@ export class Hd160ListComponent implements OnInit {
   // 搜尋
   search() {}
 
+  // 檢視
+  view() {
+    this.router.navigate(['/hd160/form']);
+    this.caseInformationService.isChoiceCase = true;
+  }
+
   // 編輯
   edit() {
     this.router.navigate(['/hd160/form']);

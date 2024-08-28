@@ -74,6 +74,12 @@ export class Hd170ListComponent implements OnInit {
     // !TODO: 搜尋邏輯
   }
 
+  // 檢視
+  view() {
+    this.router.navigate(['/hd170/form']);
+    this.caseInformationService.isChoiceCase = true;
+  }
+
   // 編輯
   edit() {
     this.router.navigate(['/hd170/form']);

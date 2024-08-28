@@ -1,0 +1,97 @@
+<span>
+  <div class="grid-column-3 mb-2">
+    <div class="volunteerTitle">姓名</div>
+    <div class="volunteerContent">
+      {{ volunteerInformationService.volunteerData[0].name }} ({{
+        volunteerInformationService.volunteerData[0].age
+      }}歲)
+    </div>
+    <div class="volunteerTitle">志工編號</div>
+    <div class="volunteerContent">
+      {{ volunteerInformationService.volunteerData[0].volunteerId }}
+    </div>
+    <div class="volunteerTitle">紀錄冊號</div>
+    <div class="volunteerContent">
+      {{ volunteerInformationService.volunteerData[0].recordBookId }}
+    </div>
+  </div>
+  <div class="grid-column-3 mb-2">
+    <div class="volunteerTitle">服務單位</div>
+    <div class="volunteerContent">
+      {{ volunteerInformationService.volunteerData[0].serviceUnit }}
+    </div>
+    <div class="volunteerTitle">榮譽卡期限</div>
+    <div class="volunteerContent">
+      {{ volunteerInformationService.volunteerData[0].honorCardExpiry }}
+    </div>
+    <div class="volunteerTitle">保險狀態</div>
+    <div class="volunteerContent">
+      {{ volunteerInformationService.volunteerData[0].insuranceStatus }}
+    </div>
+  </div>
+  <div class="divCenter">
+    <span
+      class="checkFormButton"
+      [ngClass]="{ highlightButton: router.url === '/hd200/form' }"
+      (click)="goToHd200Form()"
+      >基本資料</span
+    >
+    <span
+      class="checkFormButton"
+      [ngClass]="{
+        highlightButton: router.url === '/hd210' || router.url === '/hd210/form'
+      }"
+      (click)="goToHd120()"
+      >教育訓練</span
+    >
+    <span
+      class="checkFormButton"
+      [ngClass]="{
+        highlightButton: router.url === '/hd220' || router.url === '/hd220/form'
+      }"
+      (click)="goToHd130()"
+      >獎勵表揚</span
+    >
+    <span
+      class="checkFormButton"
+      [ngClass]="{
+        highlightButton: router.url === '/hd230' || router.url === '/hd230/form'
+      }"
+      (click)="goToHd140()"
+      >服務時數</span
+    >
+    <span
+      class="checkFormButton"
+      [ngClass]="{
+        highlightButton: router.url === '/hd240' || router.url === '/hd240/form'
+      }"
+      (click)="goToHd150()"
+      >保險</span
+    >
+    <span
+      class="checkFormButton"
+      [ngClass]="{
+        highlightButton: router.url === '/hd250' || router.url === '/hd250/form'
+      }"
+      (click)="goToHd160()"
+      >考核</span
+    >
+    <span
+      class="checkFormButton"
+      [ngClass]="{
+        highlightButton:
+          router.url === '/hd200/list2' || router.url === '/hd200/form2'
+      }"
+      (click)="goToHd100Form()"
+      >個督紀錄</span
+    >
+    <span
+      class="checkFormButton"
+      [ngClass]="{
+        highlightButton: router.url === '/hd260/form'
+      }"
+      (click)="goToHd170()"
+      >退隊表</span
+    >
+  </div>
+</span>

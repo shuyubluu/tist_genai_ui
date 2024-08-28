@@ -5,15 +5,14 @@ import { InputComponent } from '../../../../common/components/input/input.compon
 import { SelectComponent } from '../../../../common/components/select/select.component';
 import { RouterModule } from '@angular/router';
 import { DayPickerComponent } from '../../../../common/components/dayPicker/dayPicker.component';
-import { PaginationComponent } from '../../../../common/components/pagination/pagination.component';
 import { SharedModule } from '../../../../common/shared/shared.module';
 import { TabService } from '../../../../common/layouts/tab/tab.service';
 import { FormControl, FormGroup } from '@angular/forms';
-import { SearchResultData } from '../service/hd100-list.interface';
-import { CaseInformationService } from '../../../../common/components/caseInformation/serivce/case-information.service';
+import { SearchResultData } from '../service/hd200-list.interface';
+import { VolunteerInformationService } from '../../../../common/components/volunteerInformation/service/volunteer-information.service';
 
 @Component({
-  selector: 'app-hd100-list',
+  selector: 'app-hd200-list',
   standalone: true,
   imports: [
     SharedModule,
@@ -22,12 +21,11 @@ import { CaseInformationService } from '../../../../common/components/caseInform
     SelectComponent,
     RouterModule,
     DayPickerComponent,
-    PaginationComponent,
   ],
-  templateUrl: './hd100-list.component.html',
-  styleUrl: './hd100-list.component.scss',
+  templateUrl: './hd200-list.component.html',
+  styleUrl: './hd200-list.component.scss',
 })
-export class Hd100ListComponent implements OnInit {
+export class Hd200ListComponent implements OnInit {
   // 搜尋條件表單
   form: FormGroup;
   // 分頁器當前頁數
@@ -37,29 +35,22 @@ export class Hd100ListComponent implements OnInit {
   // 搜尋結果模擬資料
   searchResultData: SearchResultData[] = [
     {
-      serviceStatus: '初評',
-      caseName: '王大明',
-      gender: '男',
-      dateOfBirth: '50/01/01',
-      responsiblePerson: '吳小美',
-      caseOpeningDate: '113/02/01',
-      caseOpeningResult: '已開案',
-      caseClassification: '中',
+      serviceStatus: '服務中',
+      volunteerName: '張小美',
+      gender: '女',
+      birthDate: '113/02/01',
+      phoneNumber: '0912-345678',
+      serviceUnit: '000 志工站',
+      yearJoined: '093年',
     },
   ];
-  // 服務狀態select選項
-  selectOptions_serviceStatus: string[] = [
-    '持續服務',
-    '暫停服務',
-    '結案',
-    '無',
-  ];
-  // 個案分級select選項
-  selectOptions_caseClassification: string[] = [
-    '高風險',
-    '中風險',
-    '低風險',
-    '無',
+  // 服務單位select選項
+  selectOptions_serviceUnit: string[] = [
+    '000 志工站',
+    '001 志工站',
+    '002 志工站',
+    '003 志工站',
+    '004 志工站',
   ];
 
   // 分頁器切割後的資料
@@ -69,22 +60,19 @@ export class Hd100ListComponent implements OnInit {
       this.currentPage * this.pageSize
     );
   }
-
   constructor(
     private tabService: TabService, // 關閉tab的Service
     private router: Router, // 路由
-    private caseInformationService: CaseInformationService // caseInformationService
+    public volunteerInformationService: VolunteerInformationService // volunteerInformationService
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
-      // 服務狀態
-      serviceStatus: new FormControl(''),
-      // 個案姓名
-      caseName: new FormControl(''),
-      // 開案日期
-      caseOpeningDate: new FormControl(''),
-      // 個案分級
-      caseClassification: new FormControl(''),
+      // 姓名
+      name: new FormControl(''),
+      // 身分證字號
+      idNumber: new FormControl(''),
+      // 服務單位
+      serviceUnit: new FormControl(''),
     });
   }
 
@@ -95,30 +83,30 @@ export class Hd100ListComponent implements OnInit {
     }
   }
 
-  // 搜尋個案資料
+  // 搜尋
   search() {
-    // !TODO: 搜尋邏輯
+    // !TODO:搜尋邏輯
   }
 
-  // 新增個案資料
-  create() {
-    this.router.navigate(['/hd110']);
-    this.caseInformationService.isChoiceCase = false;
+  // 新增
+  async create() {
+    await this.router.navigate(['/hd200/form']);
+    this.volunteerInformationService.isChoiceVolunteer = false;
   }
 
-  // 檢視個案資料
-  view() {
-    this.router.navigate(['/hd110']);
-    this.caseInformationService.isChoiceCase = true;
+  // 檢視
+  async view() {
+    await this.router.navigate(['/hd200/form']);
+    this.volunteerInformationService.isChoiceVolunteer = true;
   }
 
-  // 編輯個案資料
-  edit() {
-    this.router.navigate(['/hd110']);
-    this.caseInformationService.isChoiceCase = true;
+  // 編輯
+  async edit() {
+    await this.router.navigate(['/hd200/form']);
+    this.volunteerInformationService.isChoiceVolunteer = true;
   }
 
-  // 關閉個案資料清單
+  // 關閉志工資料清單
   closeTab(identifier: string) {
     this.tabService.closeTab(identifier);
   }

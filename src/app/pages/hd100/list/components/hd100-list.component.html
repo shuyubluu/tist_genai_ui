@@ -94,7 +94,6 @@
         <div>
           {{ searchResult.dateOfBirth }}
         </div>
-
         <div>
           {{ searchResult.responsiblePerson }}
         </div>
@@ -104,14 +103,13 @@
         <div>
           {{ searchResult.caseOpeningResult }}
         </div>
-
         <div>
           {{ searchResult.caseClassification }}
         </div>
         <!-- !TODO -->
         <div>
           <app-button [buttonText]="'檢視'" (click)="view()" />
-          <app-button [buttonText]="'編輯'" />
+          <app-button [buttonText]="'編輯'" (click)="edit()"/>
           <app-button [buttonText]="'刪除'" />
         </div>
       </div>
