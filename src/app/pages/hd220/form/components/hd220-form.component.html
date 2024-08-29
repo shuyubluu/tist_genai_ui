@@ -1,1 +1,93 @@
-<p>hd220-form works!</p>
+<app-volunteer-information
+  *ngIf="volunteerInformationService.isChoiceVolunteer"
+  [currentTab]="'獎勵表揚表'"
+/>
+<div class="mt"></div>
+<form [formGroup]="form">
+  <div class="grid-container">
+    <div class="grid-columns-2">
+      <div class="label">填表日期</div>
+      <div>
+        <app-dayPicker formControlName="formDate" />
+      </div>
+      <div class="label">表揚單位</div>
+      <div>
+        <app-select
+          [selectWidth]="'100px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_praiseUnit"
+          formControlName="praiseUnit"
+        />
+      </div>
+    </div>
+    <div>
+      <div class="title">表揚內容</div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">外單位表揚</div>
+      <div>
+        表揚單位名稱：
+        <app-input
+          [inputWidth]="'130px'"
+          [maxLength]="30"
+          formControlName="externalUnit_praiseUnitName"
+        />
+        <div class="my-2">
+          獎項名稱：
+          <app-input
+            [inputWidth]="'120px'"
+            [maxLength]="20"
+            formControlName="externalUnit_awardName"
+          />
+        </div>
+        <div>
+          具體事蹟：
+          <nz-textarea-count [nzMaxCharacterCount]="500" data-count="0/500">
+            <textarea
+              rows="4"
+              nz-input
+              [maxlength]="500"
+              formControlName="externalUnit_specificDeeds"
+            ></textarea>
+          </nz-textarea-count>
+        </div>
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">本單位表揚</div>
+      <div>
+        本單位表揚：
+        <app-select
+          [selectWidth]="'250px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_unitPraise"
+          formControlName="unitPraise"
+        />
+        <div>
+          具體事蹟：
+          <nz-textarea-count [nzMaxCharacterCount]="500" data-count="0/500">
+            <textarea
+              rows="4"
+              nz-input
+              [maxlength]="500"
+              formControlName="specificDeeds"
+            ></textarea>
+          </nz-textarea-count>
+        </div>
+      </div>
+    </div>
+    <div class="grid-columns-1 border-bottom-0">
+      <div class="label">受獎日期</div>
+      <div><app-dayPicker formControlName="awardDate" /></div>
+    </div>
+  </div>
+  <div class="buttonArea">
+    <!-- !TODO -->
+    <app-button [buttonIcon]="'save'" [buttonText]="'儲存'" (click)="save()" />
+    <app-button
+      [buttonIcon]="'close'"
+      [buttonText]="'關閉'"
+      (click)="closeTab('獎勵表揚表')"
+    />
+  </div>
+</form>

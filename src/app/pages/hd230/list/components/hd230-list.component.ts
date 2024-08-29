@@ -10,10 +10,10 @@ import { TabService } from '../../../../common/layouts/tab/tab.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { VolunteerInformationComponent } from '../../../../common/components/volunteerInformation/components/volunteer-information.component';
 import { VolunteerInformationService } from './../../../../common/components/volunteerInformation/service/volunteer-information.service';
-import { SearchResultData } from '../service/hd220-list.interface';
+import { SearchResultData } from '../service/hd230-list.interface';
 
 @Component({
-  selector: 'app-hd220-list',
+  selector: 'app-hd230-list',
   standalone: true,
   imports: [
     SharedModule,
@@ -24,24 +24,34 @@ import { SearchResultData } from '../service/hd220-list.interface';
     DayPickerComponent,
     VolunteerInformationComponent,
   ],
-  templateUrl: './hd220-list.component.html',
-  styleUrl: './hd220-list.component.scss',
+  templateUrl: './hd230-list.component.html',
+  styleUrl: './hd230-list.component.scss',
 })
-export class Hd220ListComponent implements OnInit {
+export class Hd230ListComponent implements OnInit {
   // 搜尋條件表單
   form: FormGroup;
   // 分頁器當前頁數
   currentPage: number = 1;
   // 分頁器一頁多少筆數據
   pageSize: number = 10;
-  // 表揚單位select選項
-  selectOptions_recognizingUnit: string[] = ['外單位', '本單位'];
+  // 服務內容select選項
+  selectOptions_serviceContent: string[] = [
+    '關懷訪視',
+    '電話問安',
+    '健康促進',
+    '共餐服務',
+    '門診服務(陪就醫)',
+    '活動支援服務',
+    '行政支援',
+    '其他',
+  ];
   // 搜尋結果模擬資料
   searchResultData: SearchResultData[] = [
     {
-      awardDate: '113/02/01',
-      recognizingUnit: '外單位',
-      awardName: '金駝獎',
+      serviceHoursRange: '113/02/01 - 113/02/28',
+      serviceContent: '外單位',
+      serviceHours: '2.0',
+      loginMethod: '系統登入',
     },
   ];
 
@@ -60,10 +70,12 @@ export class Hd220ListComponent implements OnInit {
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
-      // 受獎日期
-      awardDate: new FormControl(''),
-      // 表揚單位
-      recognizingUnit: new FormControl(''),
+      // 服務時數區間_起始
+      serviceHoursRange_start: new FormControl(''),
+      // 服務時數區間_結束
+      serviceHoursRange_end: new FormControl(''),
+      // 服務內容
+      serviceContent: new FormControl(''),
     });
   }
 
@@ -79,25 +91,13 @@ export class Hd220ListComponent implements OnInit {
     // !TODO:搜尋邏輯
   }
 
-  // 新增
-  async create() {
-    await this.router.navigate(['/hd220/form']);
-    this.volunteerInformationService.isChoiceVolunteer = false;
-  }
-
   // 檢視
   async view() {
     await this.router.navigate(['/hd220/form']);
     this.volunteerInformationService.isChoiceVolunteer = true;
   }
 
-  // 編輯
-  async edit() {
-    await this.router.navigate(['/hd220/form']);
-    this.volunteerInformationService.isChoiceVolunteer = true;
-  }
-
-  // 關閉獎勵表揚
+  // 關閉服務時數
   closeTab(identifier: string) {
     this.tabService.closeTab(identifier);
   }

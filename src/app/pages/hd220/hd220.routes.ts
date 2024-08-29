@@ -14,6 +14,6 @@ export const HD220_ROUTES: Routes = [
       import('./form/components/hd220-form.component').then(
         (m) => m.Hd220FormComponent
       ),
-    data: { tabName: '獎勵表楊表' },
+    data: { tabName: '獎勵表揚表' },
   },
 ];

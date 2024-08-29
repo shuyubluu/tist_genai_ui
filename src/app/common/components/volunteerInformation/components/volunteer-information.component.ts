@@ -54,39 +54,30 @@ export class VolunteerInformationComponent implements OnInit {
     }
   }
 
-  // 前往hd140
-  async goToHd140() {
-    await this.router.navigate(['/hd140']);
-    if (
-      this.currentTab !== '例行訪視表清單' &&
-      this.currentTab !== '例行訪視表'
-    ) {
+  // 前往hd230
+  async goToHd230() {
+    await this.router.navigate(['/hd230']);
+    if (this.currentTab !== '服務時數') {
       this.closeTab(this.currentTab);
     } else {
       return;
     }
   }
 
-  // 前往hd150
-  async goToHd150() {
-    await this.router.navigate(['/hd150']);
-    if (
-      this.currentTab !== '個案複評表清單' &&
-      this.currentTab !== '個案複評表'
-    ) {
+  // 前往hd240
+  async goToHd240() {
+    await this.router.navigate(['/hd240']);
+    if (this.currentTab !== '保險') {
       this.closeTab(this.currentTab);
     } else {
       return;
     }
   }
 
-  // 前往hd160
-  async goToHd160() {
-    await this.router.navigate(['/hd160']);
-    if (
-      this.currentTab !== '生活品質問卷清單' &&
-      this.currentTab !== '生活品質問卷'
-    ) {
+  // 前往hd250
+  async goToHd250() {
+    await this.router.navigate(['/hd250']);
+    if (this.currentTab !== '評核表') {
       this.closeTab(this.currentTab);
     } else {
       return;

@@ -91,6 +91,24 @@ export const routes: Routes = [
           import('./pages/hd220/hd220.routes').then((m) => m.HD220_ROUTES),
         data: { tabName: '獎勵表揚' },
       },
+      {
+        path: 'hd230',
+        loadChildren: () =>
+          import('./pages/hd230/hd230.routes').then((m) => m.HD230_ROUTES),
+        data: { tabName: '服務時數' },
+      },
+      {
+        path: 'hd240',
+        loadChildren: () =>
+          import('./pages/hd240/hd240.routes').then((m) => m.HD240_ROUTES),
+        data: { tabName: '保險' },
+      },
+      {
+        path: 'hd250',
+        loadChildren: () =>
+          import('./pages/hd250/hd250.routes').then((m) => m.HD250_ROUTES),
+        data: { tabName: '評核表' },
+      },
     ],
   },
   {

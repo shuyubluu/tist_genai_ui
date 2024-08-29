@@ -10,10 +10,10 @@ import { TabService } from '../../../../common/layouts/tab/tab.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { VolunteerInformationComponent } from '../../../../common/components/volunteerInformation/components/volunteer-information.component';
 import { VolunteerInformationService } from './../../../../common/components/volunteerInformation/service/volunteer-information.service';
-import { SearchResultData } from '../service/hd220-list.interface';
+import { SearchResultData } from '../service/hd240-list.interface';
 
 @Component({
-  selector: 'app-hd220-list',
+  selector: 'app-hd240-list',
   standalone: true,
   imports: [
     SharedModule,
@@ -24,24 +24,27 @@ import { SearchResultData } from '../service/hd220-list.interface';
     DayPickerComponent,
     VolunteerInformationComponent,
   ],
-  templateUrl: './hd220-list.component.html',
-  styleUrl: './hd220-list.component.scss',
+  templateUrl: './hd240-list.component.html',
+  styleUrl: './hd240-list.component.scss',
 })
-export class Hd220ListComponent implements OnInit {
+export class Hd240ListComponent implements OnInit {
   // 搜尋條件表單
   form: FormGroup;
   // 分頁器當前頁數
   currentPage: number = 1;
   // 分頁器一頁多少筆數據
   pageSize: number = 10;
-  // 表揚單位select選項
-  selectOptions_recognizingUnit: string[] = ['外單位', '本單位'];
+  // 投保狀態select選項
+  selectOptions_insuranceStatus: string[] = ['在保', '退保/過期'];
+
   // 搜尋結果模擬資料
   searchResultData: SearchResultData[] = [
     {
-      awardDate: '113/02/01',
-      recognizingUnit: '外單位',
-      awardName: '金駝獎',
+      insuranceCompany: '富邦',
+      insuranceType: '志工團隊',
+      fundingSource: '總會',
+      insuranceStatus: '已加保',
+      insurancePeriod: '投保期間',
     },
   ];
 
@@ -60,10 +63,12 @@ export class Hd220ListComponent implements OnInit {
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
-      // 受獎日期
-      awardDate: new FormControl(''),
-      // 表揚單位
-      recognizingUnit: new FormControl(''),
+      // 投保期間_起始
+      insurancePeriod_start: new FormControl(''),
+      // 投保期間_結束
+      insurancePeriod_end: new FormControl(''),
+      // 投保狀態
+      insuranceStatus: new FormControl(''),
     });
   }
 
@@ -79,25 +84,13 @@ export class Hd220ListComponent implements OnInit {
     // !TODO:搜尋邏輯
   }
 
-  // 新增
-  async create() {
-    await this.router.navigate(['/hd220/form']);
-    this.volunteerInformationService.isChoiceVolunteer = false;
-  }
-
   // 檢視
   async view() {
-    await this.router.navigate(['/hd220/form']);
+    await this.router.navigate(['/hd240/form']);
     this.volunteerInformationService.isChoiceVolunteer = true;
   }
 
-  // 編輯
-  async edit() {
-    await this.router.navigate(['/hd220/form']);
-    this.volunteerInformationService.isChoiceVolunteer = true;
-  }
-
-  // 關閉獎勵表揚
+  // 關閉保險
   closeTab(identifier: string) {
     this.tabService.closeTab(identifier);
   }
