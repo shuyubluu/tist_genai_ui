@@ -16,4 +16,12 @@ export const HD200_ROUTES: Routes = [
       ),
     data: { tabName: '志工基本資料' },
   },
+  {
+    path: 'list2',
+    loadComponent: () =>
+      import('./list2/components/hd200-list2.component').then(
+        (m) => m.Hd200List2Component
+      ),
+    data: { tabName: '個督紀錄' },
+  },
 ];

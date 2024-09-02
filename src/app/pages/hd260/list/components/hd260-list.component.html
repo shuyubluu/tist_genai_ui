@@ -1,0 +1,79 @@
+<form [formGroup]="form">
+  <div class="grid-container">
+    <div class="grid-columns-2">
+      <div class="label">退隊日期</div>
+      <div>
+        <app-dayPicker formControlName="resignationDate_start" />
+        <span class="mx-2">-</span>
+        <app-dayPicker formControlName="resignationDate_end" />
+      </div>
+      <div class="label">姓名</div>
+      <div>
+        <app-input
+          [inputWidth]="'130px'"
+          [maxLength]="30"
+          formControlName="name"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-1 border-bottom-0">
+      <div class="label">志工編號</div>
+      <div>
+        <app-input
+          [inputWidth]="'120px'"
+          [maxLength]="20"
+          formControlName="volunteerID"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="buttonArea">
+    <app-button
+      [buttonIcon]="'search'"
+      [buttonText]="'搜尋'"
+      (click)="search()"
+    />
+    <app-button
+      [buttonIcon]="'close'"
+      [buttonText]="'關閉'"
+      (click)="closeTab('志工退隊名冊')"
+    />
+  </div>
+</form>
+<div class="message">搜尋結果: 共{{ searchResultData.length }}筆</div>
+<form>
+  <div class="mt"></div>
+  <div class="grid-search-container">
+    <div class="grid-columns searchTitle">
+      <div>退隊日期</div>
+      <div>姓名</div>
+      <div>操作</div>
+    </div>
+    <div
+      class="grid-columns tableBorder"
+      *ngFor="let searchResult of newSearchResultData; let i = index"
+      [ngClass]="{
+        'even-row': i % 2 === 1,
+        'odd-row': i % 2 !== 1
+      }"
+    >
+      <div>
+        {{ searchResult.resignationDate }}
+      </div>
+      <div>
+        {{ searchResult.name }}
+      </div>
+      <!-- !TODO -->
+      <div>
+        <app-button [buttonText]="'檢視'" (click)="view()" />
+      </div>
+    </div>
+  </div>
+</form>
+<div class="mt-10"></div>
+<nz-pagination
+  [nzPageIndex]="currentPage"
+  [nzPageSize]="pageSize"
+  (nzPageIndexChange)="onPageIndexChange($event)"
+  [nzTotal]="searchResultData.length"
+/>

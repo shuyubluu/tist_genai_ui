@@ -84,20 +84,20 @@ export class VolunteerInformationComponent implements OnInit {
     }
   }
 
-  // 前往hd100Form
-  async goToHd100Form() {
-    await this.router.navigate(['/hd100/form']);
-    if (this.currentTab !== '個案結案表') {
+  // 前往hd200List
+  async goToHd200List2() {
+    await this.router.navigate(['/hd200/list2']);
+    if (this.currentTab !== '個督紀錄') {
       this.closeTab(this.currentTab);
     } else {
       return;
     }
   }
 
-  // 前往hd170
-  async goToHd170() {
-    await this.router.navigate(['/hd170']);
-    if (this.currentTab !== '轉介單清單' && this.currentTab !== '轉介單') {
+  // 前往hd260Form
+  async goToHd260Form() {
+    await this.router.navigate(['/hd260/form']);
+    if (this.currentTab !== '退隊表') {
       this.closeTab(this.currentTab);
     } else {
       return;

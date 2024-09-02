@@ -93,7 +93,7 @@ export class Hd230ListComponent implements OnInit {
 
   // 檢視
   async view() {
-    await this.router.navigate(['/hd220/form']);
+    await this.router.navigate(['/hd280/form']);
     this.volunteerInformationService.isChoiceVolunteer = true;
   }
 

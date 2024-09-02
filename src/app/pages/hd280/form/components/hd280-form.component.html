@@ -1,0 +1,112 @@
+<app-volunteer-information
+  *ngIf="volunteerInformationService.isChoiceVolunteer"
+  [currentTab]="'服務時數管理表'"
+/>
+<div class="mt"></div>
+<form [formGroup]="form">
+  <div class="grid-container">
+    <div class="grid-columns-1">
+      <div class="label">填表日期</div>
+      <div><app-dayPicker formControlName="fillingDate" /></div>
+    </div>
+    <div>
+      <div class="title">服務內容</div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">服務項目</div>
+      <div>0060老人服務</div>
+    </div>
+    <div class="grid-columns-2">
+      <div class="label">服務日期</div>
+      <div>
+        <app-dayPicker formControlName="serviceDate_start" />
+        <span class="mx-2">-</span>
+        <app-dayPicker formControlName="serviceDate_end" />
+      </div>
+      <div class="label">服務內容</div>
+      <div>
+        <app-select
+          [selectWidth]="'150px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_serviceContent"
+          formControlName="serviceContent"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-2">
+      <div class="label">服務時數-小時</div>
+      <app-select
+        [selectWidth]="'70px'"
+        [defaultPlaceHolder]="false"
+        [options]="selectOptions_serviceHours"
+        formControlName="serviceContent"
+      />
+      <div class="label">服務時數-分鐘</div>
+      <app-select
+        [selectWidth]="'70px'"
+        [defaultPlaceHolder]="false"
+        [options]="selectOptions_serviceMinutes"
+        formControlName="serviceMinutes"
+      />
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">受服務人次</div>
+      <app-input
+        [inputWidth]="'100px'"
+        [maxLength]="8"
+        [type]="'NUMBER'"
+        formControlName="serviceSessions"
+      />
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">服務單位</div>
+      <div>
+        <app-select
+          [selectWidth]="'120px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_serviceUnit"
+          formControlName="serviceUnit"
+        />
+      </div>
+    </div>
+    <!-- !TODO -->
+    <div class="grid-columns-1 border-bottom-0">
+      <div class="label">服務志工</div>
+      <div>
+        <nz-checkbox-wrapper
+          style="width: 100%"
+          (nzOnChange)="serviceVolunteerChange($event)"
+        >
+          <div nz-row>
+            <div nz-col>
+              <label nz-checkbox nzValue="1">吳小美(11300200001)</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="2">陳大天(11300200002)</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="3">張大壯(11300200003)</label>
+            </div>
+          </div>
+        </nz-checkbox-wrapper>
+      </div>
+    </div>
+  </div>
+  <div class="buttonArea">
+    <app-button
+      *ngIf="
+        hd280ListService.isCreate &&
+        !volunteerInformationService.isChoiceVolunteer
+      "
+      [buttonIcon]="'add'"
+      [buttonText]="'新增'"
+      (click)="create()"
+    />
+    <app-button [buttonIcon]="'delete'" [buttonText]="'刪除'" />
+    <app-button
+      [buttonIcon]="'close'"
+      [buttonText]="'關閉'"
+      (click)="closeTab('服務時數管理表')"
+    />
+  </div>
+</form>

@@ -1,0 +1,260 @@
+<form [formGroup]="form">
+  <div class="grid-container">
+    <div class="grid-columns-1">
+      <div class="label">填表日期</div>
+      <div><app-dayPicker formControlName="fillingDate" /></div>
+    </div>
+    <div>
+      <div class="title">保險內容</div>
+    </div>
+    <div class="grid-columns-2">
+      <div class="label">保險公司</div>
+      <div>
+        <app-select
+          [selectWidth]="'100px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_insuranceStatus"
+          formControlName="insuranceCompany_select"
+        />
+        <app-input
+          [inputWidth]="'130px'"
+          [maxLength]="30"
+          formControlName="insuranceCompany_keyword"
+        />
+      </div>
+      <div class="label">經費來源</div>
+      <div>
+        <app-select
+          [selectWidth]="'90px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_fundingSource"
+          formControlName="fundingSource"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-2">
+      <div class="label">投保類別</div>
+      <div>
+        <app-select
+          [selectWidth]="'100px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_insuranceType"
+          formControlName="insuranceType"
+        />
+      </div>
+      <div class="label">投保日期起迄</div>
+      <div>
+        <app-dayPicker formControlName="insuranceDate_start" />
+        <span class="mx-2">-</span>
+        <app-dayPicker formControlName="insuranceDate_end" />
+      </div>
+    </div>
+    <div class="grid-columns-2">
+      <div class="label">保障內容</div>
+      <div>
+        <app-input
+          [inputWidth]="'180px'"
+          [maxLength]="50"
+          formControlName="coverageDetails"
+        />
+      </div>
+      <div class="label">投保費用</div>
+      <div>
+        <app-input
+          [inputWidth]="'90px'"
+          [maxLength]="8"
+          [type]="'NUMBER'"
+          formControlName="insuranceCost"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-2">
+      <div class="label">政府補助/人</div>
+      <div>
+        <app-input
+          [inputWidth]="'90px'"
+          [maxLength]="8"
+          [type]="'NUMBER'"
+          formControlName="governmentSubsidy"
+        />
+      </div>
+      <div class="label">單位自籌/人</div>
+      <div>
+        <app-input
+          [inputWidth]="'90px'"
+          [maxLength]="8"
+          [type]="'NUMBER'"
+          formControlName="selfFunding"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">理賠內容</div>
+      <div>
+        <app-input
+          [inputWidth]="'180px'"
+          [maxLength]="50"
+          formControlName="claimDetails"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">死亡/殘廢</div>
+      <div>
+        <app-input
+          [inputWidth]="'70px'"
+          [maxLength]="8"
+          [type]="'NUMBER'"
+          formControlName="deathOrDisabilityCoverage_million"
+        />
+        <span class="mr-5">百萬</span>
+        <app-input
+          [inputWidth]="'70px'"
+          [maxLength]="8"
+          [type]="'NUMBER'"
+          formControlName="deathOrDisabilityCoverage_tenThousand"
+        />
+        <span class="mr-5">萬</span>
+        <app-input
+          [inputWidth]="'70px'"
+          [maxLength]="8"
+          [type]="'NUMBER'"
+          formControlName="deathOrDisabilityCoverage_thousand"
+        />
+        <span class="mr-5">千</span>
+        <app-input
+          [inputWidth]="'70px'"
+          [maxLength]="8"
+          [type]="'NUMBER'"
+          formControlName="deathOrDisabilityCoverage_hundred"
+        />
+        <span>百</span>
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">傷害醫療</div>
+      <div>
+        <app-input
+          [inputWidth]="'70px'"
+          [maxLength]="8"
+          [type]="'NUMBER'"
+          formControlName="injuryMedicalCoverage_tenThousand"
+        />
+        <span class="mr-5">萬</span>
+        <app-input
+          [inputWidth]="'70px'"
+          [maxLength]="8"
+          [type]="'NUMBER'"
+          formControlName="injuryMedicalCoverage_thousand"
+        />
+        <span class="mr-5">千</span>
+        <app-input
+          [inputWidth]="'70px'"
+          [maxLength]="8"
+          [type]="'NUMBER'"
+          formControlName="injuryMedicalCoverage_hundred"
+        />
+        <span>百</span>
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">住院日額</div>
+      <div>
+        <app-input
+          [inputWidth]="'70px'"
+          [maxLength]="8"
+          [type]="'NUMBER'"
+          formControlName="hospitalizationDailyAllowance_tenThousand"
+        />
+        <span class="mr-5">萬</span>
+        <app-input
+          [inputWidth]="'70px'"
+          [maxLength]="8"
+          [type]="'NUMBER'"
+          formControlName="hospitalizationDailyAllowance_thousand"
+        />
+        <span class="mr-5">千</span>
+        <app-input
+          [inputWidth]="'70px'"
+          [maxLength]="8"
+          [type]="'NUMBER'"
+          formControlName="hospitalizationDailyAllowance_hundred"
+        />
+        <span>百</span>
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">服務外的保障範圍</div>
+      <div>
+        <nz-checkbox-wrapper
+          style="width: 100%"
+          (nzOnChange)="coverageOutsideServiceScopeChange($event)"
+        >
+          <div nz-row>
+            <div nz-col>
+              <label nz-checkbox nzValue="1">志工會議</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="2">教育訓練</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="3">外縣市活動</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="4">其他</label>
+              <span
+                ><app-input
+                  [inputWidth]="'100px'"
+                  [maxLength]="30"
+                  formControlName="coverageOutsideServiceScope_other"
+                />
+              </span>
+            </div>
+          </div>
+        </nz-checkbox-wrapper>
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">投保單位</div>
+      <div>
+        <app-select
+          [selectWidth]="'120px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_insuredUnit"
+          formControlName="insuredUnit"
+        />
+      </div>
+    </div>
+    <!-- !TODO -->
+    <div class="grid-columns-1 border-bottom-0">
+      <div class="label">投保人員</div>
+      <div>
+        <nz-checkbox-wrapper
+          style="width: 100%"
+          (nzOnChange)="insuredPersonChange($event)"
+        >
+          <div nz-row>
+            <div nz-col>
+              <label nz-checkbox nzValue="1">吳小美</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="2">陳大天</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="3">張大壯</label>
+            </div>
+          </div>
+        </nz-checkbox-wrapper>
+      </div>
+    </div>
+  </div>
+  <div class="buttonArea">
+    <!-- !TODO -->
+    <app-button [buttonIcon]="'add'" [buttonText]="'新增'" (click)="create()" />
+    <app-button
+      [buttonIcon]="'close'"
+      [buttonText]="'關閉'"
+      (click)="closeTab('保險專區::: 新增')"
+    />
+  </div>
+</form>

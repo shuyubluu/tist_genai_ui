@@ -1,0 +1,99 @@
+<form [formGroup]="form">
+  <div class="grid-container">
+    <div class="grid-columns-2">
+      <div class="label">服務單位</div>
+      <div>
+        <app-select
+          [selectWidth]="'120px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_serviceUnit"
+          formControlName="serviceUnit"
+        />
+      </div>
+      <div class="label">姓名</div>
+      <div>
+        <app-input
+          [inputWidth]="'130px'"
+          [maxLength]="30"
+          formControlName="volunteerName"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-1 border-bottom-0">
+      <div class="label">志工編號</div>
+      <div>
+        <app-input
+          [inputWidth]="'120px'"
+          [maxLength]="20"
+          formControlName="volunteerId"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="buttonArea">
+    <app-button
+      [buttonIcon]="'search'"
+      [buttonText]="'搜尋'"
+      (click)="search()"
+    />
+    <app-button
+      [buttonIcon]="'add'"
+      [buttonText]="'新增'"
+      (click)="create()"
+    />
+    <app-button
+      [buttonIcon]="'close'"
+      [buttonText]="'關閉'"
+      (click)="closeTab('服務時數')"
+    />
+  </div>
+</form>
+<div class="message">搜尋結果: 共{{ searchResultData.length }}筆</div>
+<form>
+  <div class="mt"></div>
+  <div class="grid-search-container">
+    <div class="grid-columns searchTitle">
+      <div>服務單位</div>
+      <div>志工姓名</div>
+      <div>志工編號</div>
+      <div>服務時數</div>
+      <div>服務總時數</div>
+      <div>操作</div>
+    </div>
+    <div
+      class="grid-columns tableBorder"
+      *ngFor="let searchResult of newSearchResultData; let i = index"
+      [ngClass]="{
+        'even-row': i % 2 === 1,
+        'odd-row': i % 2 !== 1
+      }"
+    >
+      <div>
+        {{ searchResult.serviceUnit }}
+      </div>
+      <div>
+        {{ searchResult.volunteerName }}
+      </div>
+      <div>
+        {{ searchResult.volunteerId }}
+      </div>
+      <div>
+        {{ searchResult.serviceHours }}
+      </div>
+      <div>
+        {{ searchResult.totalServiceHours }}
+      </div>
+      <!-- !TODO -->
+      <div>
+        <app-button [buttonText]="'檢視'" (click)="view()" />
+      </div>
+    </div>
+  </div>
+</form>
+<div class="mt-10"></div>
+<nz-pagination
+  [nzPageIndex]="currentPage"
+  [nzPageSize]="pageSize"
+  (nzPageIndexChange)="onPageIndexChange($event)"
+  [nzTotal]="searchResultData.length"
+/>

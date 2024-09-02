@@ -9,7 +9,7 @@ import { SharedModule } from '../../../../common/shared/shared.module';
 import { TabService } from '../../../../common/layouts/tab/tab.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { VolunteerInformationService } from '../../../../common/components/volunteerInformation/service/volunteer-information.service';
+import { Hd220ListService } from '../../list/service/hd220-list.service';
 import { VolunteerInformationComponent } from '../../../../common/components/volunteerInformation/components/volunteer-information.component';
 
 @Component({
@@ -45,7 +45,7 @@ export class Hd220FormComponent implements OnInit {
   constructor(
     private tabService: TabService, // 關閉tab的Service
     private message: NzMessageService, // 訊息
-    public volunteerInformationService: VolunteerInformationService // volunteerInformationService
+    public hd220ListService: Hd220ListService // hd220ListService
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
@@ -70,9 +70,10 @@ export class Hd220FormComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  // 暫存草稿
-  save() {
-    this.message.create('success', '儲存成功');
+  // 新增獎勵表揚表
+  create() {
+    this.message.create('success', '新增成功');
+    this.closeTab('獎勵表揚表');
   }
 
   // 關閉獎勵表揚表

@@ -1,1 +1,575 @@
-<p>hd250-form works!</p>
+<app-volunteer-information [currentTab]="'服務品質評估表'" />
+<div class="mt"></div>
+<form [formGroup]="form">
+  <div class="grid-container">
+    <div class="grid-columns-1">
+      <div class="label">志工姓名</div>
+      <div>
+        <app-input
+          [inputWidth]="'130px'"
+          [maxLength]="30"
+          formControlName="volunteerName"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-2">
+      <div class="label">入站/隊日期</div>
+      <div>
+        <app-dayPicker formControlName="entryDate" />
+      </div>
+      <div class="label">填寫日期</div>
+      <div>
+        <app-dayPicker formControlName="submissionDate" />
+      </div>
+    </div>
+    <div class="title">服務品質評估表</div>
+    <div class="grid-columns-3">
+      <div class="label">項目</div>
+      <div class="label">服務內容</div>
+      <div class="label">主責人填寫欄</div>
+    </div>
+    <div class="grid-columns-3">
+      <div class="label">服務倫理</div>
+      <div class="bold-text">
+        <div class="row-1">
+          1.尊重隱私權，不擅自洩漏服務對象資料和志工個人資訊。
+        </div>
+        <div class="row-1">
+          2.尊重個人權利，可主動反應服務對象狀況或受服務意見。
+        </div>
+        <div class="row-1">
+          3.遵守規範，不因個人行為因素，使本會名譽或服務對象利益受損。
+        </div>
+        <div class="row-2">
+          4.遵守倫理，不得與服務對象及家屬有非服務關係之金錢往來，並拒絕收取報酬。
+        </div>
+      </div>
+      <div class="bold-text">
+        <div class="row-1">
+          <label>
+            志工評分
+            <app-input
+              [inputWidth]="'70px'"
+              [type]="'NUMBER'"
+              [maxLength]="3"
+              [isScore]="true"
+              formControlName="serviceEthics_volunteer_1"
+            />
+          </label>
+          <label>
+            督導評分
+            <app-input
+              [inputWidth]="'70px'"
+              [type]="'NUMBER'"
+              [maxLength]="4"
+              [isScore]="true"
+              formControlName="serviceEthics_supervisor_1"
+            />
+          </label>
+        </div>
+        <div class="row-1">
+          <label>
+            志工評分
+            <app-input
+              [inputWidth]="'70px'"
+              [type]="'NUMBER'"
+              [maxLength]="3"
+              [isScore]="true"
+              formControlName="serviceEthics_volunteer_2"
+            />
+          </label>
+          <label>
+            督導評分
+            <app-input
+              [inputWidth]="'70px'"
+              [type]="'NUMBER'"
+              [maxLength]="4"
+              [isScore]="true"
+              formControlName="serviceEthics_supervisor_2"
+            />
+          </label>
+        </div>
+        <div class="row-1">
+          <label>
+            志工評分
+            <app-input
+              [inputWidth]="'70px'"
+              [type]="'NUMBER'"
+              [maxLength]="3"
+              [isScore]="true"
+              formControlName="serviceEthics_volunteer_3"
+            />
+          </label>
+          <label>
+            督導評分
+            <app-input
+              [inputWidth]="'70px'"
+              [type]="'NUMBER'"
+              [maxLength]="4"
+              [isScore]="true"
+              formControlName="serviceEthics_supervisor_3"
+            />
+          </label>
+        </div>
+        <div class="row-2">
+          <label>
+            志工評分
+            <app-input
+              [inputWidth]="'70px'"
+              [type]="'NUMBER'"
+              [maxLength]="3"
+              [isScore]="true"
+              formControlName="serviceEthics_volunteer_4"
+            />
+          </label>
+          <label>
+            督導評分
+            <app-input
+              [inputWidth]="'70px'"
+              [type]="'NUMBER'"
+              [maxLength]="4"
+              [isScore]="true"
+              formControlName="serviceEthics_supervisor_4"
+            />
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="grid-columns-3">
+      <div class="label">出勤狀況</div>
+      <div class="bold-text">
+        <div class="row-1">
+          5.遵守出勤規定，並確實完成行政作業。(如:服務時數、服務紀錄等)
+        </div>
+        <div class="row-2">
+          6.遵守應勤裝備，著志工制服或志工背心，並視各服務處規定配戴志工證。
+        </div>
+        <div class="row-2">
+          7.準時抵達服務/開會地點，不遲到早退，如因故無法出席，有依規定辦理請假及暫停服務之申請。
+        </div>
+        <div class="row-2">
+          8.搭配單位要求，定期參與會務活動。(如：志工會議、在職教育訓練等)
+        </div>
+      </div>
+      <div class="bold-text">
+        <div class="row-1">
+          <label>
+            志工評分
+            <app-input
+              [inputWidth]="'70px'"
+              [type]="'NUMBER'"
+              [maxLength]="3"
+              [isScore]="true"
+              formControlName="attendanceStatus_volunteer_1"
+            />
+          </label>
+          <label>
+            督導評分
+            <app-input
+              [inputWidth]="'70px'"
+              [type]="'NUMBER'"
+              [maxLength]="4"
+              [isScore]="true"
+              formControlName="attendanceStatus_supervisor_1"
+            />
+          </label>
+        </div>
+        <div class="row-2">
+          <label>
+            志工評分
+            <app-input
+              [inputWidth]="'70px'"
+              [type]="'NUMBER'"
+              [maxLength]="3"
+              [isScore]="true"
+              formControlName="attendanceStatus_volunteer_2"
+            />
+          </label>
+          <label>
+            督導評分
+            <app-input
+              [inputWidth]="'70px'"
+              [type]="'NUMBER'"
+              [maxLength]="4"
+              [isScore]="true"
+              formControlName="attendanceStatus_supervisor_2"
+            />
+          </label>
+        </div>
+        <div class="row-2">
+          <label>
+            志工評分
+            <app-input
+              [inputWidth]="'70px'"
+              [type]="'NUMBER'"
+              [maxLength]="3"
+              [isScore]="true"
+              formControlName="attendanceStatus_volunteer_3"
+            />
+          </label>
+          <label>
+            督導評分
+            <app-input
+              [inputWidth]="'70px'"
+              [type]="'NUMBER'"
+              [maxLength]="4"
+              [isScore]="true"
+              formControlName="attendanceStatus_supervisor_3"
+            />
+          </label>
+        </div>
+        <div class="row-2">
+          <label>
+            志工評分
+            <app-input
+              [inputWidth]="'70px'"
+              [type]="'NUMBER'"
+              [maxLength]="3"
+              [isScore]="true"
+              formControlName="attendanceStatus_volunteer_4"
+            />
+          </label>
+          <label>
+            督導評分
+            <app-input
+              [inputWidth]="'70px'"
+              [type]="'NUMBER'"
+              [maxLength]="4"
+              [isScore]="true"
+              formControlName="attendanceStatus_supervisor_4"
+            />
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="grid-columns-3">
+      <div class="label">服務品質</div>
+      <div class="bold-text">
+        <div class="row-1">
+          9.能積極主動參與會務活動，且具備親切之服務態度。
+        </div>
+        <div class="row-2">
+          10.針對服務內容具備正確知識與技能，能按照需求提供相對應之服務。(如:家訪技巧、行政庶務方法等)
+        </div>
+        <div class="row-1">
+          11.清楚單位分配之各項服務工作或任務，並能確實完成。
+        </div>
+        <div class="row-2">
+          12.遵守單位服務規定，每年完成服務時數要求。如:志工站須達30小時、志工隊須達10小時。
+        </div>
+      </div>
+      <div class="bold-text">
+        <div class="row-1">
+          <label>
+            志工評分
+            <app-input
+              [inputWidth]="'70px'"
+              [type]="'NUMBER'"
+              [maxLength]="3"
+              [isScore]="true"
+              formControlName="serviceQuality_volunteer_1"
+            />
+          </label>
+          <label>
+            督導評分
+            <app-input
+              [inputWidth]="'70px'"
+              [type]="'NUMBER'"
+              [maxLength]="4"
+              [isScore]="true"
+              formControlName="serviceQuality_supervisor_1"
+            />
+          </label>
+        </div>
+        <div class="row-2">
+          <label>
+            志工評分
+            <app-input
+              [inputWidth]="'70px'"
+              [type]="'NUMBER'"
+              [maxLength]="3"
+              [isScore]="true"
+              formControlName="serviceQuality_volunteer_2"
+            />
+          </label>
+          <label>
+            督導評分
+            <app-input
+              [inputWidth]="'70px'"
+              [type]="'NUMBER'"
+              [maxLength]="4"
+              [isScore]="true"
+              formControlName="serviceQuality_supervisor_2"
+            />
+          </label>
+        </div>
+        <div class="row-1">
+          <label>
+            志工評分
+            <app-input
+              [inputWidth]="'70px'"
+              [type]="'NUMBER'"
+              [maxLength]="3"
+              [isScore]="true"
+              formControlName="serviceQuality_volunteer_3"
+            />
+          </label>
+          <label>
+            督導評分
+            <app-input
+              [inputWidth]="'70px'"
+              [type]="'NUMBER'"
+              [maxLength]="4"
+              [isScore]="true"
+              formControlName="serviceQuality_supervisor_3"
+            />
+          </label>
+        </div>
+        <div class="row-2">
+          <label>
+            志工評分
+            <app-input
+              [inputWidth]="'70px'"
+              [type]="'NUMBER'"
+              [maxLength]="3"
+              [isScore]="true"
+              formControlName="serviceQuality_volunteer_4"
+            />
+          </label>
+          <label>
+            督導評分
+            <app-input
+              [inputWidth]="'70px'"
+              [type]="'NUMBER'"
+              [maxLength]="4"
+              [isScore]="true"
+              formControlName="serviceQuality_supervisor_4"
+            />
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="grid-columns-3">
+      <div class="label">團隊精神</div>
+      <div class="bold-text">
+        <div class="row-2">
+          13.具備責任心並與夥伴維繫良好關係，能相互支持、信任與支援配合。
+        </div>
+        <div class="row-1">
+          14.遭遇任何問題會及時向站長、志工督導反映，不造成團隊紛爭。
+        </div>
+        <div class="row-2">
+          15.積極參與以及推廣本會辦理之各項服務/活動(如：寒冬助老或各服務處特殊活動等)
+        </div>
+      </div>
+      <div class="bold-text">
+        <div class="row-2">
+          <label>
+            志工評分
+            <app-input
+              [inputWidth]="'70px'"
+              [type]="'NUMBER'"
+              [maxLength]="3"
+              [isScore]="true"
+              formControlName="teamSpirit_volunteer_1"
+            />
+          </label>
+          <label>
+            督導評分
+            <app-input
+              [inputWidth]="'70px'"
+              [type]="'NUMBER'"
+              [maxLength]="3"
+              [isScore]="true"
+              formControlName="teamSpirit_supervisor_1"
+            />
+          </label>
+        </div>
+        <div class="row-1">
+          <label>
+            志工評分
+            <app-input
+              [inputWidth]="'70px'"
+              [type]="'NUMBER'"
+              [maxLength]="3"
+              [isScore]="true"
+              formControlName="teamSpirit_volunteer_2"
+            />
+          </label>
+          <label>
+            督導評分
+            <app-input
+              [inputWidth]="'70px'"
+              [type]="'NUMBER'"
+              [maxLength]="3"
+              [isScore]="true"
+              formControlName="teamSpirit_supervisor_2"
+            />
+          </label>
+        </div>
+        <div class="row-2">
+          <label>
+            志工評分
+            <app-input
+              [inputWidth]="'70px'"
+              [type]="'NUMBER'"
+              [maxLength]="3"
+              [isScore]="true"
+              formControlName="teamSpirit_volunteer_3"
+            />
+          </label>
+          <label>
+            督導評分
+            <app-input
+              [inputWidth]="'70px'"
+              [type]="'NUMBER'"
+              [maxLength]="4"
+              [isScore]="true"
+              formControlName="teamSpirit_supervisor_3"
+            />
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="grid-columns-2">
+      <div class="label">小計</div>
+      <div class="grid-col-2 bold-text">
+        <div>志工評分： {{ calcVolunteerScore }}</div>
+        <div>督導評分： {{ calcSupervisorScore }}</div>
+      </div>
+      <div class="label">加總成績</div>
+      <div class="bold-text">
+        {{ totalScore }}
+      </div>
+    </div>
+    <div class="title">志工評估結果</div>
+    <div class="grid-columns-2">
+      <div class="label">評估結果</div>
+      <div class="bold-text">
+        {{ assessmentResults }}
+      </div>
+      <div class="label">原因</div>
+      <div>
+        <app-input
+          *ngIf="assessmentResults === '三個月內為期改善'"
+          [inputWidth]="'130px'"
+          [maxLength]="30"
+          formControlName="improvementReason"
+        />
+        <app-input
+          *ngIf="assessmentResults === '不予通過'"
+          [inputWidth]="'130px'"
+          [maxLength]="30"
+          formControlName="rejectionReason"
+        />
+      </div>
+    </div>
+    <div
+      *ngIf="assessmentResults === '三個月內為期改善'"
+      class="grid-columns-1"
+    >
+      <div class="label">第一次為期改善是否通過</div>
+      <div class="column-Message">
+        <div>
+          <label>
+            評核日期：
+            <app-dayPicker
+              formControlName="firstImprovementPassed_evaluationDate"
+          /></label>
+        </div>
+        <div class="mx-2">
+          <app-select
+            [selectWidth]="'70px'"
+            [defaultPlaceHolder]="false"
+            [options]="selectOptions_trueOrFalse"
+            formControlName="firstImprovementPassed"
+          />
+        </div>
+        <div *ngIf="form.get('firstImprovementPassed')?.value === '否'">
+          <app-input
+            [inputWidth]="'130px'"
+            [maxLength]="30"
+            formControlName="firstImprovementFailedReason"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      *ngIf="form.get('firstImprovementPassed')?.value === '否'"
+      class="grid-columns-1"
+    >
+      <div class="label">第二次為期改善是否通過</div>
+      <div class="column-Message">
+        <div>
+          <label>
+            評核日期：
+            <app-dayPicker
+              formControlName="secondImprovementPassed_evaluationDate"
+          /></label>
+        </div>
+        <div class="mx-2">
+          <app-select
+            [selectWidth]="'70px'"
+            [defaultPlaceHolder]="false"
+            [options]="selectOptions_trueOrFalse"
+            formControlName="secondImprovementPassed"
+          />
+        </div>
+        <div *ngIf="form.get('firstImprovementPassed')?.value === '否'">
+          <app-input
+            [inputWidth]="'130px'"
+            [maxLength]="30"
+            formControlName="secondImprovementFailedReason"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="grid-columns-2">
+      <div class="label">志工督導</div>
+      <div>
+        <app-input
+          [inputWidth]="'130px'"
+          [maxLength]="30"
+          formControlName="volunteerSupervisor"
+        />
+      </div>
+      <div class="label">主責人姓名</div>
+      <div>
+        <app-input
+          [inputWidth]="'130px'"
+          [maxLength]="30"
+          formControlName="responsiblePersonName"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-1 border-bottom-0">
+      <div class="label">主責人姓名</div>
+      <div>
+        <app-input
+          [inputWidth]="'130px'"
+          [maxLength]="30"
+          formControlName="unitSupervisor"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="buttonArea">
+    <app-button
+      *ngIf="hd250ListService.isCreate"
+      [buttonIcon]="'accept'"
+      [buttonText]="'送審'"
+      (click)="review()"
+    />
+    <app-button
+      *ngIf="hd250ListService.isEdit"
+      [buttonIcon]="'save'"
+      [buttonText]="'儲存'"
+      (click)="save()"
+    />
+    <app-button
+      [buttonIcon]="'close'"
+      [buttonText]="'關閉'"
+      (click)="closeTab('服務品質評估表')"
+    />
+  </div>
+</form>

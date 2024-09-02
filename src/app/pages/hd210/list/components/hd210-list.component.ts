@@ -11,6 +11,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { VolunteerInformationComponent } from '../../../../common/components/volunteerInformation/components/volunteer-information.component';
 import { VolunteerInformationService } from './../../../../common/components/volunteerInformation/service/volunteer-information.service';
 import { SearchResultData } from '../service/hd210-list.interface';
+import { Hd210ListService } from '../service/hd210-list.service';
 
 @Component({
   selector: 'app-hd210-list',
@@ -58,6 +59,7 @@ export class Hd210ListComponent {
   constructor(
     private tabService: TabService, // 關閉tab的Service
     private router: Router, // 路由
+    private hd210ListService: Hd210ListService, // hd210ListService
     public volunteerInformationService: VolunteerInformationService // volunteerInformationService
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
@@ -82,19 +84,15 @@ export class Hd210ListComponent {
   // 新增
   async create() {
     await this.router.navigate(['/hd210/form']);
-    this.volunteerInformationService.isChoiceVolunteer = false;
+    this.volunteerInformationService.isChoiceVolunteer = true;
+    this.hd210ListService.isCreate = true;
   }
 
   // 檢視
   async view() {
     await this.router.navigate(['/hd210/form']);
     this.volunteerInformationService.isChoiceVolunteer = true;
-  }
-
-  // 編輯
-  async edit() {
-    await this.router.navigate(['/hd210/form']);
-    this.volunteerInformationService.isChoiceVolunteer = true;
+    this.hd210ListService.isCreate = false;
   }
 
   // 關閉教育訓練清單

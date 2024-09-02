@@ -1,3 +1,4 @@
+import { Hd210ListService } from './../../list/service/hd210-list.service';
 import { Component, OnInit } from '@angular/core';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
 import { InputComponent } from '../../../../common/components/input/input.component';
@@ -63,6 +64,7 @@ export class Hd210FormComponent implements OnInit {
   constructor(
     private tabService: TabService, // 關閉tab的Service
     private message: NzMessageService, // 訊息
+    public hd210ListService: Hd210ListService, // hd210ListService
     public volunteerInformationService: VolunteerInformationService // volunteerInformationService
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
@@ -124,9 +126,10 @@ export class Hd210FormComponent implements OnInit {
     }
   }
 
-  // 暫存草稿
-  save() {
-    this.message.create('success', '儲存成功');
+  // 新增教育訓練表
+  create() {
+    this.message.create('success', '新增成功');
+    this.closeTab('教育訓練表');
   }
 
   // 關閉教育訓練表

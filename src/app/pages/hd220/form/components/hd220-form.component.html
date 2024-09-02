@@ -1,7 +1,4 @@
-<app-volunteer-information
-  *ngIf="volunteerInformationService.isChoiceVolunteer"
-  [currentTab]="'獎勵表揚表'"
-/>
+<app-volunteer-information [currentTab]="'獎勵表揚表'" />
 <div class="mt"></div>
 <form [formGroup]="form">
   <div class="grid-container">
@@ -83,7 +80,12 @@
   </div>
   <div class="buttonArea">
     <!-- !TODO -->
-    <app-button [buttonIcon]="'save'" [buttonText]="'儲存'" (click)="save()" />
+    <app-button
+      *ngIf="hd220ListService.isCreate"
+      [buttonIcon]="'add'"
+      [buttonText]="'新增'"
+      (click)="create()"
+    />
     <app-button
       [buttonIcon]="'close'"
       [buttonText]="'關閉'"

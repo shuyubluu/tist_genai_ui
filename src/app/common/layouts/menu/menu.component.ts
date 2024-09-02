@@ -46,7 +46,12 @@ export class MenuComponent implements OnInit {
       {
         title: '志工管理',
         icon: 'team',
-        children: [{ title: '01- 志工資料清單', open: false, link: '/hd200' }],
+        children: [
+          { title: '01- 志工資料清單', open: false, link: '/hd200' },
+          { title: '02- 保險專區', open: false, link: '/hd270' },
+          { title: '03- 服務時數管理', open: false, link: '/hd280' },
+          { title: '04- 志工退隊名冊', open: false, link: '/hd260' },
+        ],
       },
       {
         title: '報表專區',

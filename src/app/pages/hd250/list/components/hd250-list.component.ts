@@ -1,3 +1,4 @@
+import { Hd250ListService } from './../service/hd250-list.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
@@ -66,6 +67,7 @@ export class Hd250ListComponent implements OnInit {
   constructor(
     private tabService: TabService, // 關閉tab的Service
     private router: Router, // 路由
+    private hd250ListService: Hd250ListService, // hd250ListService
     public volunteerInformationService: VolunteerInformationService // volunteerInformationService
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
@@ -95,18 +97,24 @@ export class Hd250ListComponent implements OnInit {
   async create() {
     await this.router.navigate(['/hd250/form']);
     this.volunteerInformationService.isChoiceVolunteer = true;
+    this.hd250ListService.isCreate = true;
+    this.hd250ListService.isEdit = false;
   }
 
   // 檢視
   async view() {
     await this.router.navigate(['/hd250/form']);
     this.volunteerInformationService.isChoiceVolunteer = true;
+    this.hd250ListService.isCreate = false;
+    this.hd250ListService.isEdit = false;
   }
 
   // 編輯
   async edit() {
     await this.router.navigate(['/hd250/form']);
     this.volunteerInformationService.isChoiceVolunteer = true;
+    this.hd250ListService.isCreate = false;
+    this.hd250ListService.isEdit = true;
   }
 
   // 關閉保險

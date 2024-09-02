@@ -1,3 +1,4 @@
+import { Hd220ListService } from './../service/hd220-list.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
@@ -9,7 +10,6 @@ import { SharedModule } from '../../../../common/shared/shared.module';
 import { TabService } from '../../../../common/layouts/tab/tab.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { VolunteerInformationComponent } from '../../../../common/components/volunteerInformation/components/volunteer-information.component';
-import { VolunteerInformationService } from './../../../../common/components/volunteerInformation/service/volunteer-information.service';
 import { SearchResultData } from '../service/hd220-list.interface';
 
 @Component({
@@ -56,7 +56,7 @@ export class Hd220ListComponent implements OnInit {
   constructor(
     private tabService: TabService, // 關閉tab的Service
     private router: Router, // 路由
-    public volunteerInformationService: VolunteerInformationService // volunteerInformationService
+    private hd220ListService: Hd220ListService // hd220ListService
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
@@ -82,19 +82,13 @@ export class Hd220ListComponent implements OnInit {
   // 新增
   async create() {
     await this.router.navigate(['/hd220/form']);
-    this.volunteerInformationService.isChoiceVolunteer = false;
+    this.hd220ListService.isCreate = true;
   }
 
   // 檢視
   async view() {
     await this.router.navigate(['/hd220/form']);
-    this.volunteerInformationService.isChoiceVolunteer = true;
-  }
-
-  // 編輯
-  async edit() {
-    await this.router.navigate(['/hd220/form']);
-    this.volunteerInformationService.isChoiceVolunteer = true;
+    this.hd220ListService.isCreate = false;
   }
 
   // 關閉獎勵表揚

@@ -44,7 +44,7 @@ export class Hd240ListComponent implements OnInit {
       insuranceType: '志工團隊',
       fundingSource: '總會',
       insuranceStatus: '已加保',
-      insurancePeriod: '投保期間',
+      insurancePeriod: '2024/01/01 ~ 2024/12/31',
     },
   ];
 
@@ -85,10 +85,10 @@ export class Hd240ListComponent implements OnInit {
   }
 
   // 檢視
-  async view() {
-    await this.router.navigate(['/hd240/form']);
-    this.volunteerInformationService.isChoiceVolunteer = true;
-  }
+  // async view() {
+  //   await this.router.navigate(['/hd240/form']);
+  //   this.volunteerInformationService.isChoiceVolunteer = true;
+  // }
 
   // 關閉保險
   closeTab(identifier: string) {

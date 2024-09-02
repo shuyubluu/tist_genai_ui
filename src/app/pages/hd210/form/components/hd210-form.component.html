@@ -119,7 +119,12 @@
   </div>
   <div class="buttonArea">
     <!-- !TODO -->
-    <app-button [buttonIcon]="'save'" [buttonText]="'儲存'" (click)="save()" />
+    <app-button
+      *ngIf="hd210ListService.isCreate"
+      [buttonIcon]="'add'"
+      [buttonText]="'新增'"
+      (click)="create()"
+    />
     <app-button
       [buttonIcon]="'close'"
       [buttonText]="'關閉'"

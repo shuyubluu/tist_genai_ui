@@ -35,6 +35,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
  * 自定義表單驗證 formControlName="input的formControlName" 綁定表單驗證的ControlName
  *
  * maxLength [maxLength]="此輸入框最大的輸入字數" 為輸入框最大字數
+ *
+ * isScore [isScore]="布林值" 預設為false 是否為評分輸入框
  */
 @Component({
   selector: 'app-input',
@@ -58,6 +60,7 @@ export class InputComponent implements OnInit, ControlValueAccessor {
   @Input() type: string = '';
   @Input() placeholder: string = '';
   @Input() maxLength?: number;
+  @Input() isScore: boolean = false; // 是否為評分輸入框
 
   @Output() inputTextChange = new EventEmitter<string>();
 
@@ -89,7 +92,16 @@ export class InputComponent implements OnInit, ControlValueAccessor {
 
   onInput(event: Event) {
     const target = event.target as HTMLInputElement;
-    let value = target.value;
+    let value: any = target.value;
+
+    // 如果啟用了評分輸入框，則檢查數值範圍
+    if (this.isScore) {
+      // 移除前導零，但保留單獨的零
+      value = value.replace(/^0+(?=\d)/, '');
+
+      if (value < 0) value = 0;
+      if (value > 100) value = 100;
+    }
 
     if (this.maxLength !== undefined && value.length > this.maxLength) {
       value = value.slice(0, this.maxLength);
