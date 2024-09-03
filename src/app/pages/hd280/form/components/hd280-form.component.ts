@@ -12,6 +12,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { VolunteerInformationService } from '../../../../common/components/volunteerInformation/service/volunteer-information.service';
 import { VolunteerInformationComponent } from '../../../../common/components/volunteerInformation/components/volunteer-information.component';
 import { Hd280ListService } from '../../list/service/hd280-list.service';
+import { ErrorMessageComponent } from '../../../../common/components/message/error-message.component';
 
 @Component({
   selector: 'app-hd280-form',
@@ -24,6 +25,7 @@ import { Hd280ListService } from '../../list/service/hd280-list.service';
     RouterModule,
     DayPickerComponent,
     VolunteerInformationComponent,
+    ErrorMessageComponent,
   ],
   templateUrl: './hd280-form.component.html',
   styleUrl: './hd280-form.component.scss',

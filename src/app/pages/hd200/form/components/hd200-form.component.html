@@ -12,23 +12,42 @@
     </div>
     <div class="grid-columns-2">
       <div class="label">填表日期</div>
-      <div>
+      <div class="column-Message">
         <app-dayPicker formControlName="formDate" />
+        <app-error-message
+          [control]="form.get('formDate')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必選"
+        />
       </div>
       <div class="label">志工入隊日期</div>
-      <div>
+      <div class="column-Message">
         <app-dayPicker formControlName="volunteerJoinDate" />
+        <app-error-message
+          [control]="form.get('volunteerJoinDate')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必選"
+        />
       </div>
     </div>
     <div class="title">資訊</div>
     <div class="grid-columns-1">
       <div class="label">服務單位</div>
-      <div>
+      <div class="column-Message">
         <app-select
           [selectWidth]="'120px'"
           [defaultPlaceHolder]="false"
           [options]="selectOptions_serviceUnit_1"
           formControlName="serviceUnit_select1"
+        />
+        <app-error-message
+          class="mr-5"
+          [control]="form.get('serviceUnit_select1')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必選"
         />
         <app-select
           [selectWidth]="'120px'"
@@ -36,68 +55,118 @@
           [options]="selectOptions_serviceUnit_2"
           formControlName="serviceUnit_select2"
         />
+        <app-error-message
+          class="mr-5"
+          [control]="form.get('serviceUnit_select2')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必選"
+        />
         <app-select
           [selectWidth]="'120px'"
           [defaultPlaceHolder]="false"
           [options]="selectOptions_serviceUnit_3"
           formControlName="serviceUnit_select3"
         />
+        <app-error-message
+          class="mr-5"
+          [control]="form.get('serviceUnit_select3')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必選"
+        />
       </div>
     </div>
     <div class="grid-columns-2">
       <div class="label">單位名稱</div>
-      <div>
+      <div class="column-Message">
         <app-select
           [selectWidth]="'120px'"
           [defaultPlaceHolder]="false"
           [options]="selectOptions_unitName"
           formControlName="unitName"
         />
+        <app-error-message
+          [control]="form.get('unitName')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必選"
+        />
       </div>
       <div class="label">主責人</div>
-      <div>
+      <div class="column-Message">
         <app-input
           [inputWidth]="'100px'"
           [maxLength]="30"
           formControlName="primaryContact"
+        />
+        <app-error-message
+          [control]="form.get('primaryContact')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必填"
         />
       </div>
     </div>
     <div class="title">基本資料</div>
     <div class="grid-columns-1">
       <div class="label">志工狀態</div>
-      <div>
+      <div class="column-Message">
         <app-select
           [selectWidth]="'70px'"
           [defaultPlaceHolder]="false"
           [options]="selectOptions_volunteerStatus"
           formControlName="volunteerStatus"
         />
+        <app-error-message
+          [control]="form.get('volunteerStatus')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必選"
+        />
       </div>
     </div>
     <div class="grid-columns-2">
       <div class="label">姓名</div>
-      <div>
+      <div class="column-Message">
         <app-input
           [inputWidth]="'130px'"
           [maxLength]="30"
           formControlName="name"
         />
+        <app-error-message
+          [control]="form.get('name')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必填"
+        />
       </div>
       <div class="label">性別</div>
-      <div>
+      <div class="column-Message">
         <app-select
           [selectWidth]="'70px'"
           [defaultPlaceHolder]="false"
           [options]="selectOptions_gender"
           formControlName="gender"
         />
+        <app-error-message
+          [control]="form.get('gender')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必選"
+        />
       </div>
     </div>
     <div class="grid-columns-2">
       <div class="label">生日</div>
-      <div>
+      <div class="column-Message">
         <app-dayPicker formControlName="birthDate" />
+        <app-error-message
+          [control]="form.get('birthDate')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必選"
+        />
       </div>
       <div class="label">身份證字號</div>
       <div>
@@ -124,6 +193,25 @@
           [type]="'NUMBER'"
           formControlName="phoneSuffix"
         />
+        <app-error-message
+          [isCustom]="true"
+          [condition]="
+            form.get('phonePrefix')?.value === '' ||
+            form.get('phoneSuffix')?.value === ''
+          "
+          [isTouched]="false"
+          errorMessage="必填"
+        />
+        <app-error-message
+          [control]="form.get('phonePrefix')"
+          errorKey="invalidMobilePhone_firstFourDigits"
+          errorMessage="手機號碼為09開頭"
+        />
+        <app-error-message
+          [control]="form.get('phoneSuffix')"
+          errorKey="invalidMobilePhone_lastSixDigits"
+          errorMessage="請輸入有效的後六碼"
+        />
       </div>
       <div class="label">電話</div>
       <div>
@@ -140,6 +228,16 @@
           [type]="'NUMBER'"
           formControlName="phoneNumber"
         />
+        <app-error-message
+          [control]="form.get('areaCode')"
+          errorKey="invalidHomePhone_areaCode"
+          errorMessage="請輸入有效的區碼"
+        />
+        <app-error-message
+          [control]="form.get('phoneNumber')"
+          errorKey="invalidHomePhone_phoneNumber"
+          errorMessage="請輸入有效的電話"
+        />
       </div>
     </div>
     <div class="grid-columns-2">
@@ -152,11 +250,16 @@
         />
       </div>
       <div class="label">E-mail</div>
-      <div>
+      <div class="column-Message">
         <app-input
           [inputWidth]="'200px'"
           [maxLength]="30"
           formControlName="email"
+        />
+        <app-error-message
+          [control]="form.get('email')"
+          errorKey="email"
+          errorMessage="mail格式錯誤"
         />
       </div>
     </div>
@@ -240,12 +343,24 @@
     </div>
     <div class="grid-columns-1">
       <div class="label">通訊地址</div>
-      <div>
+      <div class="column-Message">
         <app-taiwan-city-select formControlName="address_select" />
         <app-input
           [inputWidth]="'300px'"
           [maxLength]="30"
           formControlName="address"
+        />
+        <app-error-message
+          [control]="form.get('address_select')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必選"
+        />
+        <app-error-message
+          [control]="form.get('address')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必填"
         />
       </div>
     </div>
@@ -358,12 +473,18 @@
         }
       </div>
       <div class="label">是否為原住民</div>
-      <div>
+      <div class="column-Message">
         <app-select
           [selectWidth]="'70px'"
           [defaultPlaceHolder]="false"
           [options]="selectOptions_trueOrFalse"
           formControlName="isIndigenous"
+        />
+        <app-error-message
+          [control]="form.get('isIndigenous')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必選"
         />
       </div>
     </div>
@@ -378,23 +499,35 @@
         />
       </div>
       <div class="label">是否為外國籍</div>
-      <div>
+      <div class="column-Message">
         <app-select
           [selectWidth]="'70px'"
           [defaultPlaceHolder]="false"
           [options]="selectOptions_trueOrFalse"
           formControlName="isForeignNational"
         />
+        <app-error-message
+          [control]="form.get('isForeignNational')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必選"
+        />
       </div>
     </div>
     <div class="grid-columns-1">
       <div class="label">是否加入救災志工</div>
-      <div>
+      <div class="column-Message">
         <app-select
           [selectWidth]="'70px'"
           [defaultPlaceHolder]="false"
           [options]="selectOptions_trueOrFalse"
           formControlName="isDisasterReliefVolunteer"
+        />
+        <app-error-message
+          [control]="form.get('isDisasterReliefVolunteer')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必選"
         />
       </div>
     </div>
@@ -474,12 +607,18 @@
     </div>
     <div class="grid-columns-1">
       <div class="label">志工職稱</div>
-      <div>
+      <div class="column-Message">
         <app-select
           [selectWidth]="'100px'"
           [defaultPlaceHolder]="false"
           [options]="selectOptions_volunteerTitle"
           formControlName="volunteerTitle"
+        />
+        <app-error-message
+          [control]="form.get('volunteerTitle')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必選"
         />
       </div>
     </div>
@@ -569,7 +708,7 @@
     <div class="grid-columns-1">
       <div class="label">服務紀錄冊上傳</div>
       <div>
-        <app-button [buttonIcon]="'upload'" [buttonText]="'上傳'" />
+        <app-button [attachClassName]="['success']" [buttonText]="'上傳'" />
       </div>
     </div>
     <div class="grid-columns-1">
@@ -674,16 +813,16 @@
           [options]="selectOptions_volunteerRightsAndDutiesDeclaration"
           formControlName="volunteerRightsAndDutiesDeclaration"
         />
-        <app-button [buttonIcon]="'download'" [buttonText]="'範本下載'" />
+        <app-button [attachClassName]="['danger']" [buttonText]="'範本下載'" />
       </div>
     </div>
   </div>
   <div class="buttonArea">
     <!-- !TODO -->
-    <app-button [buttonIcon]="'save'" [buttonText]="'儲存'" (click)="save()" />
-    <app-button [buttonIcon]="'delete'" [buttonText]="'刪除'" />
+    <app-button [buttonText]="'儲存'" (click)="save()" />
+    <app-button [attachClassName]="['warning']" [buttonText]="'刪除'" />
     <app-button
-      [buttonIcon]="'close'"
+      [attachClassName]="['danger']"
       [buttonText]="'關閉'"
       (click)="closeTab('志工基本資料')"
     />

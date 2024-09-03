@@ -593,16 +593,16 @@
   </div>
   <div class="buttonArea">
     <!-- !TODO -->
-    <app-button [buttonIcon]="'save'" [buttonText]="'儲存'" (click)="save()" />
+    <app-button [buttonText]="'儲存'" (click)="save()" />
     <app-button
       *ngIf="!caseInformationService.isChoiceCase"
       (click)="onNextPage()"
-      [buttonIcon]="'nextpage'"
       [buttonText]="'下一頁'"
+      [attachClassName]="['success']"
     />
     <app-button
-      [buttonIcon]="'close'"
       [buttonText]="'關閉'"
+      [attachClassName]="['danger']"
       (click)="closeTab('個案開案評估表')"
     />
   </div>

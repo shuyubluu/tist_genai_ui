@@ -11,20 +11,15 @@
         <app-input
           [inputWidth]="'130px'"
           [maxLength]="30"
-          formControlName="name"
+          formControlName="uploadDate"
         />
       </div>
     </div>
   </div>
   <div class="buttonArea">
+    <app-button [buttonText]="'搜尋'" (click)="search()" />
     <app-button
-      [buttonIcon]="'search'"
-      [buttonText]="'搜尋'"
-      (click)="search()"
-    />
-    <app-button [buttonIcon]="'add'" [buttonText]="'新增'" (click)="create()" />
-    <app-button
-      [buttonIcon]="'close'"
+      [attachClassName]="['danger']"
       [buttonText]="'關閉'"
       (click)="closeTab('個督紀錄')"
     />
@@ -52,9 +47,15 @@
       </div>
       <!-- !TODO -->
       <div>
-        <app-button [buttonText]="'檢視'" (click)="view()" />
-        <app-button [buttonIcon]="'upload'" [buttonText]="'紀錄表'" />
-        <app-button [buttonText]="'編輯'" (click)="edit()" />
+        <app-button [buttonText]="'檢視'" />
+        <app-button
+          [attachClassName]="['success']"
+          [buttonText]="'上傳紀錄表'"
+        />
+        <app-button
+          [attachClassName]="['danger']"
+          [buttonText]="'下載紀錄表'"
+        />
       </div>
     </div>
   </div>

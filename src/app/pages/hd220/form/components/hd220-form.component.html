@@ -4,16 +4,28 @@
   <div class="grid-container">
     <div class="grid-columns-2">
       <div class="label">填表日期</div>
-      <div>
+      <div class="column-Message">
         <app-dayPicker formControlName="formDate" />
+        <app-error-message
+          [control]="form.get('formDate')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必選"
+        />
       </div>
       <div class="label">表揚單位</div>
-      <div>
+      <div class="column-Message">
         <app-select
           [selectWidth]="'100px'"
           [defaultPlaceHolder]="false"
           [options]="selectOptions_praiseUnit"
           formControlName="praiseUnit"
+        />
+        <app-error-message
+          [control]="form.get('praiseUnit')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必選"
         />
       </div>
     </div>
@@ -48,18 +60,32 @@
             ></textarea>
           </nz-textarea-count>
         </div>
+        <app-error-message
+          [control]="form.get('externalUnit_specificDeeds')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必填"
+        />
       </div>
     </div>
     <div class="grid-columns-1">
       <div class="label">本單位表揚</div>
       <div>
-        本單位表揚：
-        <app-select
-          [selectWidth]="'250px'"
-          [defaultPlaceHolder]="false"
-          [options]="selectOptions_unitPraise"
-          formControlName="unitPraise"
-        />
+        <div class="column-Message">
+          本單位表揚：
+          <app-select
+            [selectWidth]="'250px'"
+            [defaultPlaceHolder]="false"
+            [options]="selectOptions_unitPraise"
+            formControlName="unitPraise"
+          />
+          <app-error-message
+            [control]="form.get('unitPraise')"
+            [isTouched]="false"
+            errorKey="required"
+            errorMessage="必選"
+          />
+        </div>
         <div>
           具體事蹟：
           <nz-textarea-count [nzMaxCharacterCount]="500" data-count="0/500">
@@ -71,23 +97,37 @@
             ></textarea>
           </nz-textarea-count>
         </div>
+        <app-error-message
+          [control]="form.get('specificDeeds')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必填"
+        />
       </div>
     </div>
     <div class="grid-columns-1 border-bottom-0">
       <div class="label">受獎日期</div>
-      <div><app-dayPicker formControlName="awardDate" /></div>
+      <div class="column-Message">
+        <app-dayPicker formControlName="awardDate" />
+        <app-error-message
+          [control]="form.get('awardDate')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必選"
+        />
+      </div>
     </div>
   </div>
   <div class="buttonArea">
     <!-- !TODO -->
     <app-button
       *ngIf="hd220ListService.isCreate"
-      [buttonIcon]="'add'"
+      [attachClassName]="['success']"
       [buttonText]="'新增'"
       (click)="create()"
     />
     <app-button
-      [buttonIcon]="'close'"
+      [attachClassName]="['danger']"
       [buttonText]="'關閉'"
       (click)="closeTab('獎勵表揚表')"
     />

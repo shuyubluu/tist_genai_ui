@@ -336,11 +336,11 @@
   </div>
   <div class="buttonArea">
     <!-- !TODO -->
-    <app-button [buttonIcon]="'save'" [buttonText]="'儲存'" (click)="save()" />
-    <app-button [buttonIcon]="'delete'" [buttonText]="'刪除'" />
+    <app-button [buttonText]="'儲存'" (click)="save()" />
+    <app-button [attachClassName]="['warning']" [buttonText]="'刪除'" />
 
     <app-button
-      [buttonIcon]="'close'"
+      [attachClassName]="['danger']"
       [buttonText]="'關閉'"
       (click)="closeTab('生活品質問卷')"
     />

@@ -7,8 +7,14 @@
   <div class="grid-container">
     <div class="grid-columns-1">
       <div class="label">填表日期</div>
-      <div>
+      <div class="column-Message">
         <app-dayPicker formControlName="submissionDate" />
+        <app-error-message
+          [control]="form.get('submissionDate')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必選"
+        />
       </div>
     </div>
     <div>
@@ -23,12 +29,18 @@
       </div>
       <div class="grid-columns-1">
         <div class="label">訓練單位</div>
-        <div>
+        <div class="column-Message">
           <app-select
             [selectWidth]="'90px'"
             [defaultPlaceHolder]="false"
             [options]="selectOptions_trainingUnit"
             formControlName="trainingUnit"
+          />
+          <app-error-message
+            [control]="form.get('trainingUnit')"
+            [isTouched]="false"
+            errorKey="required"
+            errorMessage="必選"
           />
           <app-input
             *ngIf="form.get('trainingUnit')?.value === '外單位'"
@@ -39,17 +51,30 @@
           <span *ngIf="form.get('trainingUnit')?.value === '本單位'"
             >財團法人弘道老人福利基金會</span
           >
+          <app-error-message
+            *ngIf="form.get('trainingUnit')?.value === '外單位'"
+            [control]="form.get('trainingUnit_outside')"
+            [isTouched]="false"
+            errorKey="required"
+            errorMessage="必填"
+          />
         </div>
       </div>
       <div class="grid-columns-2">
         <div class="label">訓練課程</div>
-        <div>
+        <div class="column-Message">
           <app-select
             (ngModelChange)="handleTrainingCourse($event)"
             [selectWidth]="'130px'"
             [defaultPlaceHolder]="false"
             [options]="selectOptions_trainingCourse"
             formControlName="trainingCourse"
+          />
+          <app-error-message
+            [control]="form.get('trainingCourse')"
+            [isTouched]="false"
+            errorKey="required"
+            errorMessage="必選"
           />
         </div>
         <div class="label">課程名稱</div>
@@ -63,41 +88,65 @@
       </div>
       <div class="grid-columns-2">
         <div class="label">課程領域</div>
-        <div>
+        <div class="column-Message">
           <app-select
             [selectWidth]="'110px'"
             [defaultPlaceHolder]="false"
             [options]="selectOptions_courseField"
             formControlName="courseField"
           />
+          <app-error-message
+            [control]="form.get('courseField')"
+            [isTouched]="false"
+            errorKey="required"
+            errorMessage="必選"
+          />
         </div>
         <div class="label">訓練次數</div>
-        <div>
+        <div class="column-Message">
           <app-input
             [inputWidth]="'70px'"
             [maxLength]="1"
             [type]="'NUMBER'"
             formControlName="trainingSessions"
           />
+          <app-error-message
+            [control]="form.get('trainingSessions')"
+            [isTouched]="false"
+            errorKey="required"
+            errorMessage="必填"
+          />
         </div>
       </div>
       <div class="grid-columns-2">
         <div class="label">訓練時數-小時</div>
-        <div>
+        <div class="column-Message">
           <app-select
             [selectWidth]="'70px'"
             [defaultPlaceHolder]="false"
             [options]="selectOptions_trainingHours"
             formControlName="trainingHours"
           />
+          <app-error-message
+            [control]="form.get('trainingHours')"
+            [isTouched]="false"
+            errorKey="required"
+            errorMessage="必選"
+          />
         </div>
         <div class="label">訓練時數-分鐘</div>
-        <div>
+        <div class="column-Message">
           <app-select
             [selectWidth]="'70px'"
             [defaultPlaceHolder]="false"
             [options]="selectOptions_trainingMinutes"
             formControlName="trainingMinutes"
+          />
+          <app-error-message
+            [control]="form.get('trainingMinutes')"
+            [isTouched]="false"
+            errorKey="required"
+            errorMessage="必選"
           />
         </div>
       </div>
@@ -121,12 +170,12 @@
     <!-- !TODO -->
     <app-button
       *ngIf="hd210ListService.isCreate"
-      [buttonIcon]="'add'"
+      [attachClassName]="['success']"
       [buttonText]="'新增'"
       (click)="create()"
     />
     <app-button
-      [buttonIcon]="'close'"
+      [attachClassName]="['danger']"
       [buttonText]="'關閉'"
       (click)="closeTab('教育訓練表')"
     />

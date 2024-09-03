@@ -1,19 +1,30 @@
 <div class="d-flex">
-    <div class="navbar-text auto_logout">
-        <span class="">自動登出時間</span>
-        <span class="countdown">{{ minutes }}:{{ seconds }}</span>
-        <span class="reset" (click)="resetLogoutCountdown()">
-            <img src="../../../../assets/img/icons-reset.svg" alt="reset countdown clock icon" />
-        </span>
-    </div>
+  <div class="navbar-text auto_logout">
+    <span class="">自動登出時間</span>
+    <span class="countdown">{{ minutes }}:{{ seconds }}</span>
+    <span class="reset" (click)="resetLogoutCountdown()">
+      <img
+        src="../../../../assets/img/icons-reset.svg"
+        alt="reset countdown clock icon"
+      />
+    </span>
+  </div>
 </div>
 
 <ng-template #contentTemplate>
-    <div class="modal-content">
-        <p style='color: brown;'>您即將登出,是否繼續使用該系統？</p>
-        <div class="button-container">
-            <app-button type="button" (click)="extendedUse()" [buttonText]="'是'" [buttonIcon]="'accept'"></app-button>
-            <app-button type="button" (click)="closeModal()" [buttonText]="'否'" [buttonIcon]="'close'"></app-button>
-        </div>
+  <div class="modal-content">
+    <p style="color: brown">您即將登出,是否繼續使用該系統？</p>
+    <div class="button-container">
+      <app-button
+        type="button"
+        (click)="extendedUse()"
+        [buttonText]="'是'"
+      ></app-button>
+      <app-button
+        type="button"
+        (click)="closeModal()"
+        [buttonText]="'否'"
+      ></app-button>
     </div>
+  </div>
 </ng-template>

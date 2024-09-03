@@ -51,7 +51,6 @@ export class Hd200List2Component implements OnInit {
 
   constructor(
     private tabService: TabService, // 關閉tab的Service
-    private router: Router, // 路由
     public volunteerInformationService: VolunteerInformationService // volunteerInformationService
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
@@ -71,24 +70,6 @@ export class Hd200List2Component implements OnInit {
   // 搜尋
   search() {
     // !TODO:搜尋邏輯
-  }
-
-  // 新增
-  async create() {
-    await this.router.navigate(['/hd200/form']);
-    this.volunteerInformationService.isChoiceVolunteer = false;
-  }
-
-  // 檢視
-  async view() {
-    await this.router.navigate(['/hd200/form']);
-    this.volunteerInformationService.isChoiceVolunteer = true;
-  }
-
-  // 編輯
-  async edit() {
-    await this.router.navigate(['/hd200/form']);
-    this.volunteerInformationService.isChoiceVolunteer = true;
   }
 
   // 關閉個督紀錄

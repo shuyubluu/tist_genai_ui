@@ -8,7 +8,5 @@
   [placeholder]="placeholder"
   (blur)="onTouched()"
   [attr.maxLength]="maxLength ? maxLength : null"
-  [min]="isScore ? 0 : null"
-  [max]="isScore ? 100 : null"
   oninput="this.maxLength > 0 ? this.value = this.value.slice(0, this.maxLength) : null"
 />

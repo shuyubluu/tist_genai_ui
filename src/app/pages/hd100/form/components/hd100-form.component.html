@@ -74,8 +74,8 @@
       <div class="label">單位主管意見</div>
       <!-- !TODO -->
       <div>
-        <app-button [buttonIcon]="'accept'" [buttonText]="'同意'" />
-        <app-button [buttonIcon]="'close'" [buttonText]="'退回'" />
+        <app-button [attachClassName]="['success']" [buttonText]="'同意'" />
+        <app-button [attachClassName]="['danger']" [buttonText]="'退回'" />
         <nz-textarea-count [nzMaxCharacterCount]="500" data-count="0/500">
           <textarea
             rows="4"
@@ -95,19 +95,15 @@
   </div>
   <div class="buttonArea">
     <div>
+      <app-button [buttonText]="'儲存'" (click)="save()" />
       <app-button
-        [buttonIcon]="'save'"
-        [buttonText]="'儲存'"
-        (click)="save()"
-      />
-      <app-button
-        [buttonIcon]="'accept'"
         [buttonText]="'送審'"
+        [attachClassName]="['success']"
         (click)="review()"
       />
       <app-button
-        [buttonIcon]="'close'"
         [buttonText]="'關閉'"
+        [attachClassName]="['danger']"
         (click)="closeTab('個案結案表')"
       />
     </div>

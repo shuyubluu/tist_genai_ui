@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
 import { InputComponent } from '../../../../common/components/input/input.component';
 import { SelectComponent } from '../../../../common/components/select/select.component';
@@ -11,6 +10,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { VolunteerInformationComponent } from '../../../../common/components/volunteerInformation/components/volunteer-information.component';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Hd250ListService } from '../../list/service/hd250-list.service';
+import { ErrorMessageComponent } from '../../../../common/components/message/error-message.component';
+import { rangeValidator } from '../../../../common/validator/range-validator';
 
 @Component({
   selector: 'app-hd250-form',
@@ -23,6 +24,7 @@ import { Hd250ListService } from '../../list/service/hd250-list.service';
     RouterModule,
     DayPickerComponent,
     VolunteerInformationComponent,
+    ErrorMessageComponent,
   ],
   templateUrl: './hd250-form.component.html',
   styleUrl: './hd250-form.component.scss',
@@ -53,7 +55,7 @@ export class Hd250FormComponent implements OnInit {
         this.form.get('teamSpirit_volunteer_3')?.value * 0.05
     );
   }
-  // 志工評分計算
+  // 督導評分計算
   get calcSupervisorScore(): number {
     return Math.ceil(
       this.form.get('serviceEthics_supervisor_1')?.value * 0.05 +
@@ -98,97 +100,154 @@ export class Hd250FormComponent implements OnInit {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
       // 志工姓名
-      volunteerName: new FormControl(''),
+      volunteerName: new FormControl('', [Validators.required]),
       // 入站/隊日期
-      entryDate: new FormControl(''),
+      entryDate: new FormControl('', [Validators.required]),
       // 填寫日期
-      submissionDate: new FormControl(''),
+      submissionDate: new FormControl('', [Validators.required]),
 
       // 1.服務倫理
       // 服務倫理_志工評分_1
       serviceEthics_volunteer_1: new FormControl(''),
       // 服務倫理_督導評分_1
-      serviceEthics_supervisor_1: new FormControl('', [Validators.required]),
+      serviceEthics_supervisor_1: new FormControl('', [
+        Validators.required,
+        rangeValidator(0, 100),
+      ]),
       // 服務倫理_志工評分_2
       serviceEthics_volunteer_2: new FormControl(''),
       // 服務倫理_督導評分_2
-      serviceEthics_supervisor_2: new FormControl('', [Validators.required]),
+      serviceEthics_supervisor_2: new FormControl('', [
+        Validators.required,
+        rangeValidator(0, 100),
+      ]),
       // 服務倫理_志工評分_3
       serviceEthics_volunteer_3: new FormControl(''),
       // 服務倫理_督導評分_3
-      serviceEthics_supervisor_3: new FormControl('', [Validators.required]),
+      serviceEthics_supervisor_3: new FormControl('', [
+        Validators.required,
+        rangeValidator(0, 100),
+      ]),
       // 服務倫理_志工評分_4
       serviceEthics_volunteer_4: new FormControl(''),
       // 服務倫理_督導評分_4
-      serviceEthics_supervisor_4: new FormControl('', [Validators.required]),
+      serviceEthics_supervisor_4: new FormControl('', [
+        Validators.required,
+        rangeValidator(0, 100),
+      ]),
 
       // 2.出勤狀況
       // 出勤狀況_志工評分_1
       attendanceStatus_volunteer_1: new FormControl(''),
       // 出勤狀況_督導評分_1
-      attendanceStatus_supervisor_1: new FormControl('', [Validators.required]),
+      attendanceStatus_supervisor_1: new FormControl('', [
+        Validators.required,
+        rangeValidator(0, 100),
+      ]),
       // 出勤狀況_志工評分_2
       attendanceStatus_volunteer_2: new FormControl(''),
       // 出勤狀況_督導評分_2
-      attendanceStatus_supervisor_2: new FormControl('', [Validators.required]),
+      attendanceStatus_supervisor_2: new FormControl('', [
+        Validators.required,
+        rangeValidator(0, 100),
+      ]),
       // 出勤狀況_志工評分_3
       attendanceStatus_volunteer_3: new FormControl(''),
       // 出勤狀況_督導評分_3
-      attendanceStatus_supervisor_3: new FormControl('', [Validators.required]),
+      attendanceStatus_supervisor_3: new FormControl('', [
+        Validators.required,
+        rangeValidator(0, 100),
+      ]),
       // 出勤狀況_志工評分_4
       attendanceStatus_volunteer_4: new FormControl(''),
       // 出勤狀況_督導評分_4
-      attendanceStatus_supervisor_4: new FormControl('', [Validators.required]),
+      attendanceStatus_supervisor_4: new FormControl('', [
+        Validators.required,
+        rangeValidator(0, 100),
+      ]),
 
       // 3.服務品質
       // 服務品質_志工評分_1
       serviceQuality_volunteer_1: new FormControl(''),
       // 服務品質_督導評分_1
-      serviceQuality_supervisor_1: new FormControl('', [Validators.required]),
+      serviceQuality_supervisor_1: new FormControl('', [
+        Validators.required,
+        rangeValidator(0, 100),
+      ]),
       // 服務品質_志工評分_2
       serviceQuality_volunteer_2: new FormControl(''),
       // 服務品質_督導評分_2
-      serviceQuality_supervisor_2: new FormControl('', [Validators.required]),
+      serviceQuality_supervisor_2: new FormControl('', [
+        Validators.required,
+        rangeValidator(0, 100),
+      ]),
       // 服務品質_志工評分_3
       serviceQuality_volunteer_3: new FormControl(''),
       // 服務品質_督導評分_3
-      serviceQuality_supervisor_3: new FormControl('', [Validators.required]),
+      serviceQuality_supervisor_3: new FormControl('', [
+        Validators.required,
+        rangeValidator(0, 100),
+      ]),
       // 服務品質_志工評分_4
       serviceQuality_volunteer_4: new FormControl(''),
       // 服務品質_督導評分_4
-      serviceQuality_supervisor_4: new FormControl('', [Validators.required]),
+      serviceQuality_supervisor_4: new FormControl('', [
+        Validators.required,
+        rangeValidator(0, 100),
+      ]),
 
       // 4.團隊精神
       // 團隊精神_志工評分_1
       teamSpirit_volunteer_1: new FormControl(''),
       // 團隊精神_督導評分_1
-      teamSpirit_supervisor_1: new FormControl('', [Validators.required]),
+      teamSpirit_supervisor_1: new FormControl('', [
+        Validators.required,
+        rangeValidator(0, 100),
+      ]),
       // 團隊精神_志工評分_2
       teamSpirit_volunteer_2: new FormControl(''),
       // 團隊精神_督導評分_2
-      teamSpirit_supervisor_2: new FormControl('', [Validators.required]),
+      teamSpirit_supervisor_2: new FormControl('', [
+        Validators.required,
+        rangeValidator(0, 100),
+      ]),
       // 團隊精神_志工評分_3
       teamSpirit_volunteer_3: new FormControl(''),
       // 團隊精神_督導評分_3
-      teamSpirit_supervisor_3: new FormControl('', [Validators.required]),
+      teamSpirit_supervisor_3: new FormControl('', [
+        Validators.required,
+        rangeValidator(0, 100),
+      ]),
 
       // 5.志工評估結果
       // 為期改善原因
-      improvementReason: new FormControl(''),
+      improvementReason: new FormControl('', [
+        Validators.required,
+        rangeValidator(0, 100),
+      ]),
       // 第一次為期改善是否通過_評核日期
       firstImprovementPassed_evaluationDate: new FormControl(''),
       // 第一次為期改善是否通過
       firstImprovementPassed: new FormControl(''),
       // 第一次為期改善未通過原因
-      firstImprovementFailedReason: new FormControl(''),
+      firstImprovementFailedReason: new FormControl('', [
+        Validators.required,
+        rangeValidator(0, 100),
+      ]),
       // 第二次為期改善是否通過_評核日期
       secondImprovementPassed_evaluationDate: new FormControl(''),
       // 第二次為期改善是否通過
       secondImprovementPassed: new FormControl(''),
       // 第二次為期改善未通過原因
-      secondImprovementFailedReason: new FormControl(''),
+      secondImprovementFailedReason: new FormControl('', [
+        Validators.required,
+        rangeValidator(0, 100),
+      ]),
       // 不予通過原因
-      rejectionReason: new FormControl(''),
+      rejectionReason: new FormControl('', [
+        Validators.required,
+        rangeValidator(0, 100),
+      ]),
       // 志工督導
       volunteerSupervisor: new FormControl(''),
       // 主責人姓名

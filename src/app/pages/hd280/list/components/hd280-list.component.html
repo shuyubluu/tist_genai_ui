@@ -31,18 +31,14 @@
     </div>
   </div>
   <div class="buttonArea">
+    <app-button [buttonText]="'搜尋'" (click)="search()" />
     <app-button
-      [buttonIcon]="'search'"
-      [buttonText]="'搜尋'"
-      (click)="search()"
-    />
-    <app-button
-      [buttonIcon]="'add'"
+      [attachClassName]="['success']"
       [buttonText]="'新增'"
       (click)="create()"
     />
     <app-button
-      [buttonIcon]="'close'"
+      [attachClassName]="['danger']"
       [buttonText]="'關閉'"
       (click)="closeTab('服務時數')"
     />
@@ -56,7 +52,7 @@
       <div>服務單位</div>
       <div>志工姓名</div>
       <div>志工編號</div>
-      <div>服務時數</div>
+      <!-- <div>服務時數</div> -->
       <div>服務總時數</div>
       <div>操作</div>
     </div>
@@ -77,9 +73,9 @@
       <div>
         {{ searchResult.volunteerId }}
       </div>
-      <div>
+      <!-- <div>
         {{ searchResult.serviceHours }}
-      </div>
+      </div> -->
       <div>
         {{ searchResult.totalServiceHours }}
       </div>

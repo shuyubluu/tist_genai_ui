@@ -1,3 +1,4 @@
+import { Hd270ListService } from './../service/hd270-list.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
@@ -77,7 +78,8 @@ export class Hd270ListComponent implements OnInit {
 
   constructor(
     private tabService: TabService, // 關閉tab的Service
-    private router: Router // 路由
+    private router: Router, // 路由
+    public hd270ListService: Hd270ListService // hd270ListService
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
@@ -109,10 +111,17 @@ export class Hd270ListComponent implements OnInit {
   // 新增
   async create() {
     await this.router.navigate(['/hd270/form']);
+    this.hd270ListService.isCreate = true;
   }
   // 檢視
   view() {
     this.isShowViewData = true;
+  }
+
+  // 申請退保
+  async surrender() {
+    await this.router.navigate(['/hd270/form']);
+    this.hd270ListService.isCreate = false;
   }
 
   // 關閉當前的tab

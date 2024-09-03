@@ -38,19 +38,15 @@
   </div>
   <div colspan="4" class="buttonArea">
     <!-- !TODO -->
+    <app-button [buttonText]="'搜尋個案'" (click)="search()" />
     <app-button
-      [buttonIcon]="'search'"
-      [buttonText]="'搜尋個案'"
-      (click)="search()"
-    />
-    <app-button
-      [buttonIcon]="'add'"
       [buttonText]="'新增個案'"
+      [attachClassName]="['success']"
       (click)="create()"
     />
     <app-button
-      [buttonIcon]="'close'"
       [buttonText]="'關閉'"
+      [attachClassName]="['danger']"
       (click)="closeTab('個案資料清單')"
     />
   </div>
@@ -104,8 +100,12 @@
         <!-- !TODO -->
         <div>
           <app-button [buttonText]="'檢視'" (click)="view()" />
-          <app-button [buttonText]="'編輯'" (click)="edit()" />
-          <app-button [buttonText]="'刪除'" />
+          <app-button
+            [buttonText]="'編輯'"
+            [attachClassName]="['warning']"
+            (click)="edit()"
+          />
+          <app-button [buttonText]="'刪除'" [attachClassName]="['danger']" />
         </div>
       </div>
     </div>

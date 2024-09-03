@@ -548,8 +548,8 @@
           <span>科別</span>
           <span>頻率</span>
           <app-button
-            [buttonIcon]="'add'"
             [buttonText]="'新增'"
+            [attachClassName]="['success']"
             (click)="showMedicalStatusModal()"
           />
         </div>
@@ -564,8 +564,8 @@
           <span>{{ status.medicalStatus_department }}</span>
           <span>{{ status.medicalStatus_frequency }}</span>
           <app-button
-            [buttonIcon]="'delete'"
-            [buttonText]="'刪除該筆資料'"
+            [attachClassName]="['danger']"
+            [buttonText]="'刪除'"
             (click)="deleteMedicalStatus(index)"
           />
         </div>
@@ -1767,7 +1767,7 @@
           <span>連絡電話</span>
           <app-button
             *ngIf="form.get('emergencyContact')?.value.length < 3"
-            [buttonIcon]="'add'"
+            [attachClassName]="['success']"
             [buttonText]="'新增'"
             (click)="showEmergencyContactModal()"
           />
@@ -1783,8 +1783,8 @@
           <span>{{ status.emergencyContact_relationship }}</span>
           <span>{{ status.emergencyContact_phone }}</span>
           <app-button
-            [buttonIcon]="'delete'"
-            [buttonText]="'刪除該筆資料'"
+            [attachClassName]="['danger']"
+            [buttonText]="'刪除'"
             (click)="deleteEmergencyContact(index)"
           />
         </div>
@@ -1857,16 +1857,16 @@
     <div class="grid-columns-2">
       <div class="label">家系圖</div>
       <div>
-        <app-button [buttonIcon]="'pencial'" [buttonText]="'繪製'" />
-        <app-button [buttonIcon]="'upload'" [buttonText]="'匯入'" />
-        <app-button [buttonIcon]="'download'" [buttonText]="'匯出'" />
+        <app-button [buttonText]="'繪製'" />
+        <app-button [attachClassName]="['success']" [buttonText]="'匯入'" />
+        <app-button [attachClassName]="['danger']" [buttonText]="'匯出'" />
         <!-- !TODO -->
       </div>
       <div class="label">生態圖</div>
       <div>
-        <app-button [buttonIcon]="'pencial'" [buttonText]="'繪製'" />
-        <app-button [buttonIcon]="'upload'" [buttonText]="'匯入'" />
-        <app-button [buttonIcon]="'download'" [buttonText]="'匯出'" />
+        <app-button [buttonText]="'繪製'" />
+        <app-button [attachClassName]="['success']" [buttonText]="'匯入'" />
+        <app-button [attachClassName]="['danger']" [buttonText]="'匯出'" />
         <!-- !TODO -->
       </div>
     </div>
@@ -1956,21 +1956,21 @@
   </div>
   <div class="buttonArea">
     <!-- !TODO -->
-    <app-button [buttonIcon]="'save'" [buttonText]="'儲存'" (click)="save()" />
+    <app-button [buttonText]="'儲存'" (click)="save()" />
     <app-button
       *ngIf="!caseInformationService.isChoiceCase"
       (click)="onPreviousPage()"
-      [buttonIcon]="'previouspage'"
+      [attachClassName]="['warning']"
       [buttonText]="'上一頁'"
     />
     <app-button
       *ngIf="!caseInformationService.isChoiceCase"
       (click)="onNextPage()"
-      [buttonIcon]="'nextpage'"
+      [attachClassName]="['success']"
       [buttonText]="'下一頁'"
     />
     <app-button
-      [buttonIcon]="'close'"
+      [attachClassName]="['danger']"
       [buttonText]="'關閉'"
       (click)="closeTab('個案開案資料表')"
     />

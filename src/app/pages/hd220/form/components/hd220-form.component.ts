@@ -11,6 +11,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Hd220ListService } from '../../list/service/hd220-list.service';
 import { VolunteerInformationComponent } from '../../../../common/components/volunteerInformation/components/volunteer-information.component';
+import { ErrorMessageComponent } from '../../../../common/components/message/error-message.component';
 
 @Component({
   selector: 'app-hd220-form',
@@ -23,6 +24,7 @@ import { VolunteerInformationComponent } from '../../../../common/components/vol
     RouterModule,
     DayPickerComponent,
     VolunteerInformationComponent,
+    ErrorMessageComponent,
   ],
   templateUrl: './hd220-form.component.html',
   styleUrl: './hd220-form.component.scss',

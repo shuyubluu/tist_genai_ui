@@ -28,13 +28,9 @@
     </div>
   </div>
   <div class="buttonArea">
+    <app-button [buttonText]="'搜尋'" (click)="search()" />
     <app-button
-      [buttonIcon]="'search'"
-      [buttonText]="'搜尋'"
-      (click)="search()"
-    />
-    <app-button
-      [buttonIcon]="'close'"
+      [attachClassName]="['danger']"
       [buttonText]="'關閉'"
       (click)="closeTab('志工退隊名冊')"
     />

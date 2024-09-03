@@ -60,7 +60,8 @@ export class InputComponent implements OnInit, ControlValueAccessor {
   @Input() type: string = '';
   @Input() placeholder: string = '';
   @Input() maxLength?: number;
-  @Input() isScore: boolean = false; // 是否為評分輸入框
+  // 是否為評分輸入框
+  // @Input() isScore: boolean = false; 
 
   @Output() inputTextChange = new EventEmitter<string>();
 
@@ -92,16 +93,22 @@ export class InputComponent implements OnInit, ControlValueAccessor {
 
   onInput(event: Event) {
     const target = event.target as HTMLInputElement;
-    let value: any = target.value;
+    let value: string = target.value;
 
     // 如果啟用了評分輸入框，則檢查數值範圍
-    if (this.isScore) {
-      // 移除前導零，但保留單獨的零
-      value = value.replace(/^0+(?=\d)/, '');
+    // if (this.isScore) {
+    // 移除前導零，但保留單獨的零
+    //   value = value.replace(/^0+(?=\d)/, '');
+    // 將 value 轉換為數字
+    //   let numericValue: number = parseFloat(value);
 
-      if (value < 0) value = 0;
-      if (value > 100) value = 100;
-    }
+    //   if (numericValue < 0) numericValue = 0;
+    //   if (numericValue > 100) numericValue = 100;
+
+    // 將數字轉回字串，以保持後續處理一致性
+    //   value = numericValue.toString();
+    //   console.log(value);
+    // }
 
     if (this.maxLength !== undefined && value.length > this.maxLength) {
       value = value.slice(0, this.maxLength);

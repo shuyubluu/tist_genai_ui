@@ -9,6 +9,8 @@ import { SharedModule } from '../../../../common/shared/shared.module';
 import { TabService } from '../../../../common/layouts/tab/tab.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { Hd270ListService } from '../../list/service/hd270-list.service';
+import { ErrorMessageComponent } from '../../../../common/components/message/error-message.component';
 
 @Component({
   selector: 'app-hd270-form',
@@ -20,6 +22,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
     SelectComponent,
     RouterModule,
     DayPickerComponent,
+    ErrorMessageComponent,
   ],
   templateUrl: './hd270-form.component.html',
   styleUrl: './hd270-form.component.scss',
@@ -44,12 +47,15 @@ export class Hd270FormComponent implements OnInit {
 
   constructor(
     private tabService: TabService, // 關閉tab的Service
-    private message: NzMessageService // 訊息
+    private message: NzMessageService, // 訊息
+    public hd270ListService: Hd270ListService // hd270ListService
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
       // 填表日期
       fillingDate: new FormControl('', [Validators.required]),
+      // 退保日期
+      terminationDate: new FormControl('', [Validators.required]),
       // 保險公司_下拉式選單
       insuranceCompany_select: new FormControl('', [Validators.required]),
       // 保險公司_搜尋關鍵字
@@ -147,7 +153,7 @@ export class Hd270FormComponent implements OnInit {
   // 新增
   create() {
     this.message.create('success', '新增成功');
-    this.closeTab('保險專區::: 新增');
+    this.closeTab('保險專區表');
   }
 
   // 關閉當前的tab

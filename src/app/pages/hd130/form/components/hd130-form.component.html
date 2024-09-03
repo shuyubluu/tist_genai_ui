@@ -568,8 +568,8 @@
       <div class="label">單位主管意見</div>
       <!-- !TODO -->
       <div>
-        <app-button [buttonIcon]="'accept'" [buttonText]="'同意'" />
-        <app-button [buttonIcon]="'close'" [buttonText]="'退回'" />
+        <app-button [attachClassName]="['success']" [buttonText]="'同意'" />
+        <app-button [attachClassName]="['danger']" [buttonText]="'退回'" />
         <nz-textarea-count [nzMaxCharacterCount]="500" data-count="0/500">
           <textarea
             rows="4"
@@ -589,21 +589,21 @@
   </div>
   <div class="buttonArea">
     <!-- !TODO -->
-    <app-button [buttonIcon]="'save'" [buttonText]="'儲存'" (click)="save()" />
+    <app-button [buttonText]="'儲存'" (click)="save()" />
     <app-button
       *ngIf="!caseInformationService.isChoiceCase"
       (click)="onPreviousPage()"
-      [buttonIcon]="'previouspage'"
+      [attachClassName]="['warning']"
       [buttonText]="'上一頁'"
     />
     <app-button
       *ngIf="!caseInformationService.isChoiceCase"
-      [buttonIcon]="'accept'"
+      [attachClassName]="['success']"
       [buttonText]="'完成送審'"
       (click)="review()"
     />
     <app-button
-      [buttonIcon]="'close'"
+      [attachClassName]="['danger']"
       [buttonText]="'關閉'"
       (click)="closeTab('個案初評表')"
     />

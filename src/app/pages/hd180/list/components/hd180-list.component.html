@@ -17,13 +17,9 @@
     </div>
   </div>
   <div class="buttonArea">
+    <app-button [buttonText]="'搜尋'" (click)="search()" />
     <app-button
-      [buttonIcon]="'search'"
-      [buttonText]="'搜尋'"
-      (click)="search()"
-    />
-    <app-button
-      [buttonIcon]="'close'"
+      [attachClassName]="['danger']"
       [buttonText]="'關閉'"
       (click)="closeTab('個案結案名冊')"
     />
@@ -65,7 +61,11 @@
         </div>
         <div>
           <app-button [buttonText]="'檢視'" (click)="view()" />
-          <app-button [buttonText]="'編輯'" (click)="edit()" />
+          <app-button
+            [buttonText]="'編輯'"
+            [attachClassName]="['warning']"
+            (click)="edit()"
+          />
         </div>
       </div>
     </div>

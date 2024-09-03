@@ -19,14 +19,14 @@
     </div>
   </div>
   <div class="buttonArea">
+    <app-button [buttonText]="'搜尋'" (click)="search()" />
     <app-button
-      [buttonIcon]="'search'"
-      [buttonText]="'搜尋'"
-      (click)="search()"
+      [attachClassName]="['success']"
+      [buttonText]="'新增'"
+      (click)="create()"
     />
-    <app-button [buttonIcon]="'add'" [buttonText]="'新增'" (click)="create()" />
     <app-button
-      [buttonIcon]="'close'"
+      [attachClassName]="['danger']"
       [buttonText]="'關閉'"
       (click)="closeTab('獎勵表揚')"
     />

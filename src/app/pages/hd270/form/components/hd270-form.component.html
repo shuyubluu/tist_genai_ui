@@ -1,45 +1,90 @@
 <form [formGroup]="form">
   <div class="grid-container">
-    <div class="grid-columns-1">
+    <div class="grid-columns-2">
       <div class="label">填表日期</div>
-      <div><app-dayPicker formControlName="fillingDate" /></div>
+      <div class="column-Message">
+        <app-dayPicker formControlName="fillingDate" />
+        <app-error-message
+          [control]="form.get('fillingDate')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必選"
+        />
+      </div>
+      @if(!hd270ListService.isCreate){
+      <div class="label">退保日期</div>
+      <div class="column-Message">
+        <app-dayPicker formControlName="terminationDate" />
+        <app-error-message
+          [control]="form.get('terminationDate')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必選"
+        />
+      </div>
+      }
     </div>
     <div>
       <div class="title">保險內容</div>
     </div>
     <div class="grid-columns-2">
       <div class="label">保險公司</div>
-      <div>
+      <div class="column-Message">
         <app-select
           [selectWidth]="'100px'"
           [defaultPlaceHolder]="false"
           [options]="selectOptions_insuranceStatus"
           formControlName="insuranceCompany_select"
         />
+        <app-error-message
+          class="mr-5"
+          [control]="form.get('insuranceCompany_select')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必選"
+        />
         <app-input
           [inputWidth]="'130px'"
           [maxLength]="30"
           formControlName="insuranceCompany_keyword"
         />
+        <app-error-message
+          [control]="form.get('insuranceCompany_keyword')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必填"
+        />
       </div>
       <div class="label">經費來源</div>
-      <div>
+      <div class="column-Message">
         <app-select
           [selectWidth]="'90px'"
           [defaultPlaceHolder]="false"
           [options]="selectOptions_fundingSource"
           formControlName="fundingSource"
         />
+        <app-error-message
+          [control]="form.get('fundingSource')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必選"
+        />
       </div>
     </div>
     <div class="grid-columns-2">
       <div class="label">投保類別</div>
-      <div>
+      <div class="column-Message">
         <app-select
           [selectWidth]="'100px'"
           [defaultPlaceHolder]="false"
           [options]="selectOptions_insuranceType"
           formControlName="insuranceType"
+        />
+        <app-error-message
+          [control]="form.get('insuranceType')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必選"
         />
       </div>
       <div class="label">投保日期起迄</div>
@@ -47,60 +92,100 @@
         <app-dayPicker formControlName="insuranceDate_start" />
         <span class="mx-2">-</span>
         <app-dayPicker formControlName="insuranceDate_end" />
+        <app-error-message
+          [isCustom]="true"
+          [condition]="
+            form.get('insuranceDate_start')?.value === '' ||
+            form.get('insuranceDate_end')?.value === ''
+          "
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必選"
+        />
       </div>
     </div>
     <div class="grid-columns-2">
       <div class="label">保障內容</div>
-      <div>
+      <div class="column-Message">
         <app-input
           [inputWidth]="'180px'"
           [maxLength]="50"
           formControlName="coverageDetails"
         />
+        <app-error-message
+          [control]="form.get('coverageDetails')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必填"
+        />
       </div>
       <div class="label">投保費用</div>
-      <div>
+      <div class="column-Message">
         <app-input
           [inputWidth]="'90px'"
           [maxLength]="8"
           [type]="'NUMBER'"
           formControlName="insuranceCost"
         />
+        <app-error-message
+          [control]="form.get('insuranceCost')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必填"
+        />
       </div>
     </div>
     <div class="grid-columns-2">
       <div class="label">政府補助/人</div>
-      <div>
+      <div class="column-Message">
         <app-input
           [inputWidth]="'90px'"
           [maxLength]="8"
           [type]="'NUMBER'"
           formControlName="governmentSubsidy"
         />
+        <app-error-message
+          [control]="form.get('governmentSubsidy')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必填"
+        />
       </div>
       <div class="label">單位自籌/人</div>
-      <div>
+      <div class="column-Message">
         <app-input
           [inputWidth]="'90px'"
           [maxLength]="8"
           [type]="'NUMBER'"
           formControlName="selfFunding"
         />
+        <app-error-message
+          [control]="form.get('selfFunding')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必填"
+        />
       </div>
     </div>
     <div class="grid-columns-1">
       <div class="label">理賠內容</div>
-      <div>
+      <div class="column-Message">
         <app-input
           [inputWidth]="'180px'"
           [maxLength]="50"
           formControlName="claimDetails"
         />
+        <app-error-message
+          [control]="form.get('claimDetails')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必填"
+        />
       </div>
     </div>
     <div class="grid-columns-1">
       <div class="label">死亡/殘廢</div>
-      <div>
+      <div class="column-Message">
         <app-input
           [inputWidth]="'70px'"
           [maxLength]="8"
@@ -129,11 +214,23 @@
           formControlName="deathOrDisabilityCoverage_hundred"
         />
         <span>百</span>
+        <app-error-message
+          [isCustom]="true"
+          [condition]="
+            form.get('deathOrDisabilityCoverage_million')?.value === '' ||
+            form.get('deathOrDisabilityCoverage_tenThousand')?.value === '' ||
+            form.get('deathOrDisabilityCoverage_thousand')?.value === '' ||
+            form.get('deathOrDisabilityCoverage_hundred')?.value === ''
+          "
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必填"
+        />
       </div>
     </div>
     <div class="grid-columns-1">
       <div class="label">傷害醫療</div>
-      <div>
+      <div class="column-Message">
         <app-input
           [inputWidth]="'70px'"
           [maxLength]="8"
@@ -155,11 +252,22 @@
           formControlName="injuryMedicalCoverage_hundred"
         />
         <span>百</span>
+        <app-error-message
+          [isCustom]="true"
+          [condition]="
+            form.get('injuryMedicalCoverage_tenThousand')?.value === '' ||
+            form.get('injuryMedicalCoverage_thousand')?.value === '' ||
+            form.get('injuryMedicalCoverage_hundred')?.value === ''
+          "
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必填"
+        />
       </div>
     </div>
     <div class="grid-columns-1">
       <div class="label">住院日額</div>
-      <div>
+      <div class="column-Message">
         <app-input
           [inputWidth]="'70px'"
           [maxLength]="8"
@@ -181,6 +289,18 @@
           formControlName="hospitalizationDailyAllowance_hundred"
         />
         <span>百</span>
+        <app-error-message
+          [isCustom]="true"
+          [condition]="
+            form.get('hospitalizationDailyAllowance_tenThousand')?.value ===
+              '' ||
+            form.get('hospitalizationDailyAllowance_thousand')?.value === '' ||
+            form.get('hospitalizationDailyAllowance_hundred')?.value === ''
+          "
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必填"
+        />
       </div>
     </div>
     <div class="grid-columns-1">
@@ -209,6 +329,22 @@
                   formControlName="coverageOutsideServiceScope_other"
                 />
               </span>
+            </div>
+            <div nz-col>
+              <app-error-message
+                [control]="form.get('coverageOutsideServiceScope')"
+                [isTouched]="false"
+                errorKey="required"
+                errorMessage="必選"
+              />
+            </div>
+            <div nz-col>
+              <app-error-message
+                [control]="form.get('coverageOutsideServiceScope_other')"
+                [isTouched]="false"
+                errorKey="required"
+                errorMessage="必填"
+              />
             </div>
           </div>
         </nz-checkbox-wrapper>
@@ -250,11 +386,15 @@
   </div>
   <div class="buttonArea">
     <!-- !TODO -->
-    <app-button [buttonIcon]="'add'" [buttonText]="'新增'" (click)="create()" />
     <app-button
-      [buttonIcon]="'close'"
+      [attachClassName]="['success']"
+      [buttonText]="'新增'"
+      (click)="create()"
+    />
+    <app-button
+      [attachClassName]="['danger']"
       [buttonText]="'關閉'"
-      (click)="closeTab('保險專區::: 新增')"
+      (click)="closeTab('保險專區表')"
     />
   </div>
 </form>

@@ -7,7 +7,15 @@
   <div class="grid-container">
     <div class="grid-columns-1">
       <div class="label">填表日期</div>
-      <div><app-dayPicker formControlName="fillingDate" /></div>
+      <div class="column-Message">
+        <app-dayPicker formControlName="fillingDate" />
+        <app-error-message
+          [control]="form.get('fillingDate')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必選"
+        />
+      </div>
     </div>
     <div>
       <div class="title">服務內容</div>
@@ -22,32 +30,64 @@
         <app-dayPicker formControlName="serviceDate_start" />
         <span class="mx-2">-</span>
         <app-dayPicker formControlName="serviceDate_end" />
+        <app-error-message
+          [isCustom]="true"
+          [condition]="
+            form.get('serviceDate_start')?.value === '' ||
+            form.get('serviceDate_end')?.value === ''
+          "
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必選"
+        />
       </div>
       <div class="label">服務內容</div>
-      <div>
+      <div class="column-Message">
         <app-select
           [selectWidth]="'150px'"
           [defaultPlaceHolder]="false"
           [options]="selectOptions_serviceContent"
           formControlName="serviceContent"
         />
+        <app-error-message
+          [control]="form.get('serviceContent')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必選"
+        />
       </div>
     </div>
     <div class="grid-columns-2">
       <div class="label">服務時數-小時</div>
-      <app-select
-        [selectWidth]="'70px'"
-        [defaultPlaceHolder]="false"
-        [options]="selectOptions_serviceHours"
-        formControlName="serviceContent"
-      />
+      <div class="column-Message">
+        <app-select
+          [selectWidth]="'70px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_serviceHours"
+          formControlName="serviceContent"
+        />
+        <app-error-message
+          [control]="form.get('serviceContent')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必選"
+        />
+      </div>
       <div class="label">服務時數-分鐘</div>
-      <app-select
-        [selectWidth]="'70px'"
-        [defaultPlaceHolder]="false"
-        [options]="selectOptions_serviceMinutes"
-        formControlName="serviceMinutes"
-      />
+      <div class="column-Message">
+        <app-select
+          [selectWidth]="'70px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_serviceMinutes"
+          formControlName="serviceMinutes"
+        />
+        <app-error-message
+          [control]="form.get('serviceContent')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必選"
+        />
+      </div>
     </div>
     <div class="grid-columns-1">
       <div class="label">受服務人次</div>
@@ -98,13 +138,13 @@
         hd280ListService.isCreate &&
         !volunteerInformationService.isChoiceVolunteer
       "
-      [buttonIcon]="'add'"
+      [attachClassName]="['success']"
       [buttonText]="'新增'"
       (click)="create()"
     />
-    <app-button [buttonIcon]="'delete'" [buttonText]="'刪除'" />
+    <app-button [attachClassName]="['warning']" [buttonText]="'刪除'" />
     <app-button
-      [buttonIcon]="'close'"
+      [attachClassName]="['danger']"
       [buttonText]="'關閉'"
       (click)="closeTab('服務時數管理表')"
     />

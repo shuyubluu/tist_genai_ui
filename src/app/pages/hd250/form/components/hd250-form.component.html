@@ -4,22 +4,40 @@
   <div class="grid-container">
     <div class="grid-columns-1">
       <div class="label">志工姓名</div>
-      <div>
+      <div class="column-Message">
         <app-input
           [inputWidth]="'130px'"
           [maxLength]="30"
           formControlName="volunteerName"
         />
+        <app-error-message
+          [control]="form.get('volunteerName')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必填"
+        />
       </div>
     </div>
     <div class="grid-columns-2">
       <div class="label">入站/隊日期</div>
-      <div>
+      <div class="column-Message">
         <app-dayPicker formControlName="entryDate" />
+        <app-error-message
+          [control]="form.get('entryDate')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必選"
+        />
       </div>
       <div class="label">填寫日期</div>
-      <div>
+      <div class="column-Message">
         <app-dayPicker formControlName="submissionDate" />
+        <app-error-message
+          [control]="form.get('submissionDate')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必選"
+        />
       </div>
     </div>
     <div class="title">服務品質評估表</div>
@@ -50,9 +68,7 @@
             志工評分
             <app-input
               [inputWidth]="'70px'"
-              [type]="'NUMBER'"
               [maxLength]="3"
-              [isScore]="true"
               formControlName="serviceEthics_volunteer_1"
             />
           </label>
@@ -60,21 +76,23 @@
             督導評分
             <app-input
               [inputWidth]="'70px'"
-              [type]="'NUMBER'"
               [maxLength]="4"
-              [isScore]="true"
               formControlName="serviceEthics_supervisor_1"
             />
           </label>
         </div>
+        <app-error-message
+          *ngIf="form.get('serviceEthics_supervisor_1')?.value > 0"
+          [control]="form.get('serviceEthics_supervisor_1')"
+          errorKey="rangeError"
+          errorMessage="不符合評分標準"
+        />
         <div class="row-1">
           <label>
             志工評分
             <app-input
               [inputWidth]="'70px'"
-              [type]="'NUMBER'"
               [maxLength]="3"
-              [isScore]="true"
               formControlName="serviceEthics_volunteer_2"
             />
           </label>
@@ -82,21 +100,23 @@
             督導評分
             <app-input
               [inputWidth]="'70px'"
-              [type]="'NUMBER'"
               [maxLength]="4"
-              [isScore]="true"
               formControlName="serviceEthics_supervisor_2"
             />
           </label>
         </div>
+        <app-error-message
+          *ngIf="form.get('serviceEthics_supervisor_2')?.value > 0"
+          [control]="form.get('serviceEthics_supervisor_2')"
+          errorKey="rangeError"
+          errorMessage="不符合評分標準"
+        />
         <div class="row-1">
           <label>
             志工評分
             <app-input
               [inputWidth]="'70px'"
-              [type]="'NUMBER'"
               [maxLength]="3"
-              [isScore]="true"
               formControlName="serviceEthics_volunteer_3"
             />
           </label>
@@ -104,21 +124,23 @@
             督導評分
             <app-input
               [inputWidth]="'70px'"
-              [type]="'NUMBER'"
               [maxLength]="4"
-              [isScore]="true"
               formControlName="serviceEthics_supervisor_3"
             />
           </label>
         </div>
+        <app-error-message
+          *ngIf="form.get('serviceEthics_supervisor_3')?.value > 0"
+          [control]="form.get('serviceEthics_supervisor_3')"
+          errorKey="rangeError"
+          errorMessage="不符合評分標準"
+        />
         <div class="row-2">
           <label>
             志工評分
             <app-input
               [inputWidth]="'70px'"
-              [type]="'NUMBER'"
               [maxLength]="3"
-              [isScore]="true"
               formControlName="serviceEthics_volunteer_4"
             />
           </label>
@@ -126,13 +148,17 @@
             督導評分
             <app-input
               [inputWidth]="'70px'"
-              [type]="'NUMBER'"
               [maxLength]="4"
-              [isScore]="true"
               formControlName="serviceEthics_supervisor_4"
             />
           </label>
         </div>
+        <app-error-message
+          *ngIf="form.get('serviceEthics_supervisor_4')?.value > 0"
+          [control]="form.get('serviceEthics_supervisor_4')"
+          errorKey="rangeError"
+          errorMessage="不符合評分標準"
+        />
       </div>
     </div>
     <div class="grid-columns-3">
@@ -157,9 +183,7 @@
             志工評分
             <app-input
               [inputWidth]="'70px'"
-              [type]="'NUMBER'"
               [maxLength]="3"
-              [isScore]="true"
               formControlName="attendanceStatus_volunteer_1"
             />
           </label>
@@ -167,21 +191,23 @@
             督導評分
             <app-input
               [inputWidth]="'70px'"
-              [type]="'NUMBER'"
               [maxLength]="4"
-              [isScore]="true"
               formControlName="attendanceStatus_supervisor_1"
             />
           </label>
         </div>
+        <app-error-message
+          *ngIf="form.get('attendanceStatus_supervisor_1')?.value > 0"
+          [control]="form.get('attendanceStatus_supervisor_1')"
+          errorKey="rangeError"
+          errorMessage="不符合評分標準"
+        />
         <div class="row-2">
           <label>
             志工評分
             <app-input
               [inputWidth]="'70px'"
-              [type]="'NUMBER'"
               [maxLength]="3"
-              [isScore]="true"
               formControlName="attendanceStatus_volunteer_2"
             />
           </label>
@@ -189,21 +215,23 @@
             督導評分
             <app-input
               [inputWidth]="'70px'"
-              [type]="'NUMBER'"
               [maxLength]="4"
-              [isScore]="true"
               formControlName="attendanceStatus_supervisor_2"
             />
           </label>
         </div>
+        <app-error-message
+          *ngIf="form.get('attendanceStatus_supervisor_2')?.value > 0"
+          [control]="form.get('attendanceStatus_supervisor_2')"
+          errorKey="rangeError"
+          errorMessage="不符合評分標準"
+        />
         <div class="row-2">
           <label>
             志工評分
             <app-input
               [inputWidth]="'70px'"
-              [type]="'NUMBER'"
               [maxLength]="3"
-              [isScore]="true"
               formControlName="attendanceStatus_volunteer_3"
             />
           </label>
@@ -211,21 +239,23 @@
             督導評分
             <app-input
               [inputWidth]="'70px'"
-              [type]="'NUMBER'"
               [maxLength]="4"
-              [isScore]="true"
               formControlName="attendanceStatus_supervisor_3"
             />
           </label>
         </div>
+        <app-error-message
+          *ngIf="form.get('attendanceStatus_supervisor_3')?.value > 0"
+          [control]="form.get('attendanceStatus_supervisor_3')"
+          errorKey="rangeError"
+          errorMessage="不符合評分標準"
+        />
         <div class="row-2">
           <label>
             志工評分
             <app-input
               [inputWidth]="'70px'"
-              [type]="'NUMBER'"
               [maxLength]="3"
-              [isScore]="true"
               formControlName="attendanceStatus_volunteer_4"
             />
           </label>
@@ -233,13 +263,17 @@
             督導評分
             <app-input
               [inputWidth]="'70px'"
-              [type]="'NUMBER'"
               [maxLength]="4"
-              [isScore]="true"
               formControlName="attendanceStatus_supervisor_4"
             />
           </label>
         </div>
+        <app-error-message
+          *ngIf="form.get('attendanceStatus_supervisor_4')?.value > 0"
+          [control]="form.get('attendanceStatus_supervisor_4')"
+          errorKey="rangeError"
+          errorMessage="不符合評分標準"
+        />
       </div>
     </div>
     <div class="grid-columns-3">
@@ -264,9 +298,7 @@
             志工評分
             <app-input
               [inputWidth]="'70px'"
-              [type]="'NUMBER'"
               [maxLength]="3"
-              [isScore]="true"
               formControlName="serviceQuality_volunteer_1"
             />
           </label>
@@ -274,21 +306,23 @@
             督導評分
             <app-input
               [inputWidth]="'70px'"
-              [type]="'NUMBER'"
               [maxLength]="4"
-              [isScore]="true"
               formControlName="serviceQuality_supervisor_1"
             />
           </label>
         </div>
+        <app-error-message
+          *ngIf="form.get('serviceQuality_supervisor_1')?.value > 0"
+          [control]="form.get('serviceQuality_supervisor_1')"
+          errorKey="rangeError"
+          errorMessage="不符合評分標準"
+        />
         <div class="row-2">
           <label>
             志工評分
             <app-input
               [inputWidth]="'70px'"
-              [type]="'NUMBER'"
               [maxLength]="3"
-              [isScore]="true"
               formControlName="serviceQuality_volunteer_2"
             />
           </label>
@@ -296,21 +330,23 @@
             督導評分
             <app-input
               [inputWidth]="'70px'"
-              [type]="'NUMBER'"
               [maxLength]="4"
-              [isScore]="true"
               formControlName="serviceQuality_supervisor_2"
             />
           </label>
         </div>
+        <app-error-message
+          *ngIf="form.get('serviceQuality_supervisor_2')?.value > 0"
+          [control]="form.get('serviceQuality_supervisor_2')"
+          errorKey="rangeError"
+          errorMessage="不符合評分標準"
+        />
         <div class="row-1">
           <label>
             志工評分
             <app-input
               [inputWidth]="'70px'"
-              [type]="'NUMBER'"
               [maxLength]="3"
-              [isScore]="true"
               formControlName="serviceQuality_volunteer_3"
             />
           </label>
@@ -318,21 +354,23 @@
             督導評分
             <app-input
               [inputWidth]="'70px'"
-              [type]="'NUMBER'"
               [maxLength]="4"
-              [isScore]="true"
               formControlName="serviceQuality_supervisor_3"
             />
           </label>
         </div>
+        <app-error-message
+          *ngIf="form.get('serviceQuality_supervisor_3')?.value > 0"
+          [control]="form.get('serviceQuality_supervisor_3')"
+          errorKey="rangeError"
+          errorMessage="不符合評分標準"
+        />
         <div class="row-2">
           <label>
             志工評分
             <app-input
               [inputWidth]="'70px'"
-              [type]="'NUMBER'"
               [maxLength]="3"
-              [isScore]="true"
               formControlName="serviceQuality_volunteer_4"
             />
           </label>
@@ -340,13 +378,17 @@
             督導評分
             <app-input
               [inputWidth]="'70px'"
-              [type]="'NUMBER'"
               [maxLength]="4"
-              [isScore]="true"
               formControlName="serviceQuality_supervisor_4"
             />
           </label>
         </div>
+        <app-error-message
+          *ngIf="form.get('serviceQuality_supervisor_4')?.value > 0"
+          [control]="form.get('serviceQuality_supervisor_4')"
+          errorKey="rangeError"
+          errorMessage="不符合評分標準"
+        />
       </div>
     </div>
     <div class="grid-columns-3">
@@ -368,9 +410,7 @@
             志工評分
             <app-input
               [inputWidth]="'70px'"
-              [type]="'NUMBER'"
               [maxLength]="3"
-              [isScore]="true"
               formControlName="teamSpirit_volunteer_1"
             />
           </label>
@@ -378,21 +418,23 @@
             督導評分
             <app-input
               [inputWidth]="'70px'"
-              [type]="'NUMBER'"
-              [maxLength]="3"
-              [isScore]="true"
+              [maxLength]="4"
               formControlName="teamSpirit_supervisor_1"
             />
           </label>
         </div>
+        <app-error-message
+          *ngIf="form.get('teamSpirit_supervisor_1')?.value > 0"
+          [control]="form.get('teamSpirit_supervisor_1')"
+          errorKey="rangeError"
+          errorMessage="不符合評分標準"
+        />
         <div class="row-1">
           <label>
             志工評分
             <app-input
               [inputWidth]="'70px'"
-              [type]="'NUMBER'"
               [maxLength]="3"
-              [isScore]="true"
               formControlName="teamSpirit_volunteer_2"
             />
           </label>
@@ -400,21 +442,23 @@
             督導評分
             <app-input
               [inputWidth]="'70px'"
-              [type]="'NUMBER'"
-              [maxLength]="3"
-              [isScore]="true"
+              [maxLength]="4"
               formControlName="teamSpirit_supervisor_2"
             />
           </label>
         </div>
+        <app-error-message
+          *ngIf="form.get('teamSpirit_supervisor_2')?.value > 0"
+          [control]="form.get('teamSpirit_supervisor_2')"
+          errorKey="rangeError"
+          errorMessage="不符合評分標準"
+        />
         <div class="row-2">
           <label>
             志工評分
             <app-input
               [inputWidth]="'70px'"
-              [type]="'NUMBER'"
               [maxLength]="3"
-              [isScore]="true"
               formControlName="teamSpirit_volunteer_3"
             />
           </label>
@@ -422,13 +466,17 @@
             督導評分
             <app-input
               [inputWidth]="'70px'"
-              [type]="'NUMBER'"
               [maxLength]="4"
-              [isScore]="true"
               formControlName="teamSpirit_supervisor_3"
             />
           </label>
         </div>
+        <app-error-message
+          *ngIf="form.get('teamSpirit_supervisor_3')?.value > 0"
+          [control]="form.get('teamSpirit_supervisor_3')"
+          errorKey="rangeError"
+          errorMessage="不符合評分標準"
+        />
       </div>
     </div>
     <div class="grid-columns-2">
@@ -449,18 +497,32 @@
         {{ assessmentResults }}
       </div>
       <div class="label">原因</div>
-      <div>
+      <div class="column-Message">
         <app-input
           *ngIf="assessmentResults === '三個月內為期改善'"
           [inputWidth]="'130px'"
           [maxLength]="30"
           formControlName="improvementReason"
         />
+        <app-error-message
+          *ngIf="assessmentResults === '三個月內為期改善'"
+          [control]="form.get('improvementReason')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必填"
+        />
         <app-input
           *ngIf="assessmentResults === '不予通過'"
           [inputWidth]="'130px'"
           [maxLength]="30"
           formControlName="rejectionReason"
+        />
+        <app-error-message
+          *ngIf="assessmentResults === '不予通過'"
+          [control]="form.get('rejectionReason')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必填"
         />
       </div>
     </div>
@@ -485,11 +547,20 @@
             formControlName="firstImprovementPassed"
           />
         </div>
-        <div *ngIf="form.get('firstImprovementPassed')?.value === '否'">
+        <div
+          class="column-Message"
+          *ngIf="form.get('firstImprovementPassed')?.value === '否'"
+        >
           <app-input
             [inputWidth]="'130px'"
             [maxLength]="30"
             formControlName="firstImprovementFailedReason"
+          />
+          <app-error-message
+            [control]="form.get('firstImprovementFailedReason')"
+            [isTouched]="false"
+            errorKey="required"
+            errorMessage="必填"
           />
         </div>
       </div>
@@ -515,11 +586,20 @@
             formControlName="secondImprovementPassed"
           />
         </div>
-        <div *ngIf="form.get('firstImprovementPassed')?.value === '否'">
+        <div
+          class="column-Message"
+          *ngIf="form.get('secondImprovementPassed')?.value === '否'"
+        >
           <app-input
             [inputWidth]="'130px'"
             [maxLength]="30"
             formControlName="secondImprovementFailedReason"
+          />
+          <app-error-message
+            [control]="form.get('secondImprovementFailedReason')"
+            [isTouched]="false"
+            errorKey="required"
+            errorMessage="必填"
           />
         </div>
       </div>
@@ -555,19 +635,18 @@
   </div>
   <div class="buttonArea">
     <app-button
-      *ngIf="hd250ListService.isCreate"
-      [buttonIcon]="'accept'"
-      [buttonText]="'送審'"
-      (click)="review()"
-    />
-    <app-button
       *ngIf="hd250ListService.isEdit"
-      [buttonIcon]="'save'"
       [buttonText]="'儲存'"
       (click)="save()"
     />
     <app-button
-      [buttonIcon]="'close'"
+      *ngIf="hd250ListService.isCreate"
+      [attachClassName]="['success']"
+      [buttonText]="'送審'"
+      (click)="review()"
+    />
+    <app-button
+      [attachClassName]="['danger']"
       [buttonText]="'關閉'"
       (click)="closeTab('服務品質評估表')"
     />

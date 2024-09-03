@@ -20,7 +20,7 @@ import { TabService } from '../../../../common/layouts/tab/tab.service';
 import { NzModalModule, NzModalService } from 'ng-zorro-antd/modal';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { CaseInformationService } from '../../../../common/components/caseInformation/serivce/case-information.service';
-import { CaseInformationComponent } from "../../../../common/components/caseInformation/components/case-information.component";
+import { CaseInformationComponent } from '../../../../common/components/caseInformation/components/case-information.component';
 
 @Component({
   selector: 'app-hd110-form',
@@ -35,8 +35,8 @@ import { CaseInformationComponent } from "../../../../common/components/caseInfo
     ErrorMessageComponent,
     TaiwanCitySelectComponent,
     NzModalModule,
-    CaseInformationComponent
-],
+    CaseInformationComponent,
+  ],
   templateUrl: './hd110-form.component.html',
   styleUrl: './hd110-form.component.scss',
 })
@@ -169,15 +169,13 @@ export class Hd110FormComponent implements OnInit {
         taiwanMobilePhoneValidator_lastSixDigits(),
       ]),
       // 轉介單位電話_區碼
-      referralUnit_phone_areaCode: new FormControl(
-        '',
-        taiwanHomePhoneValidator_areaCode()
-      ),
+      referralUnit_phone_areaCode: new FormControl('', [
+        taiwanHomePhoneValidator_areaCode(),
+      ]),
       // 轉介單位電話_電話
-      referralUnit_phone_phoneNumber: new FormControl(
-        '',
-        taiwanHomePhoneValidator_phoneNumber()
-      ),
+      referralUnit_phone_phoneNumber: new FormControl('', [
+        taiwanHomePhoneValidator_phoneNumber(),
+      ]),
       // 轉介單位傳真
       referralUnit_fax: new FormControl(''),
       // 轉介單位其他
@@ -241,6 +239,7 @@ export class Hd110FormComponent implements OnInit {
       isElderlyInServiceArea: new FormControl('', [Validators.required]),
     });
   }
+
   ngOnInit(): void {
     if (this.isReferral === false) {
       this.form.get('referralUnit')?.reset();
@@ -279,6 +278,7 @@ export class Hd110FormComponent implements OnInit {
       this.form.get('isSelfReportedMetric')?.enable();
     }
   }
+
   // 當個案來源的select發生變化時
   onCaseSourceSelectChange() {
     // 如果是轉介案才可以填寫轉介單位資料

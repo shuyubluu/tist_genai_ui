@@ -14,6 +14,6 @@ export const HD270_ROUTES: Routes = [
       import('./form/components/hd270-form.component').then(
         (m) => m.Hd270FormComponent
       ),
-    data: { tabName: '保險專區::: 新增' },
+    data: { tabName: '保險專區表' },
   },
 ];

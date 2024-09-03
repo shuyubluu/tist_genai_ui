@@ -10,14 +10,14 @@
     </div>
   </div>
   <div class="buttonArea">
+    <app-button [buttonText]="'搜尋'" (click)="search()" />
     <app-button
-      [buttonIcon]="'search'"
-      [buttonText]="'搜尋'"
-      (click)="search()"
+      [attachClassName]="['success']"
+      [buttonText]="'新增'"
+      (click)="create()"
     />
-    <app-button [buttonIcon]="'add'" [buttonText]="'新增'" (click)="create()" />
     <app-button
-      [buttonIcon]="'close'"
+      [attachClassName]="['danger']"
       [buttonText]="'關閉'"
       (click)="closeTab('轉介單清單')"
     />
@@ -52,8 +52,12 @@
         <!-- !TODO -->
         <div>
           <app-button [buttonText]="'檢視'" (click)="view()" />
-          <app-button [buttonText]="'編輯'" (click)="edit()" />
-          <app-button [buttonIcon]="'print'" [buttonText]="'回覆單'" />
+          <app-button
+            [buttonText]="'編輯'"
+            [attachClassName]="['warning']"
+            (click)="edit()"
+          />
+          <app-button [attachClassName]="['success']" [buttonText]="'回覆單'" />
         </div>
       </div>
     </div>

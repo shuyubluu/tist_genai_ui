@@ -2,5 +2,6 @@
         class="button-icon" />{{ buttonText }}</button> -->
 
 <button [ngClass]="getAttachClass()">
-    <ng-container *ngIf="withIcon"><img [src]="getIconClass()" class="button-icon" /></ng-container>
-    {{buttonText}}</button>
+  <!-- <ng-container *ngIf="withIcon"><img [src]="getIconClass()" class="button-icon" /></ng-container> -->
+  {{ buttonText }}
+</button>

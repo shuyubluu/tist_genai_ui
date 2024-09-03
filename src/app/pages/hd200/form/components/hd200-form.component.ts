@@ -12,6 +12,12 @@ import { ErrorMessageComponent } from '../../../../common/components/message/err
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { VolunteerInformationComponent } from '../../../../common/components/volunteerInformation/components/volunteer-information.component';
 import { VolunteerInformationService } from './../../../../common/components/volunteerInformation/service/volunteer-information.service';
+import {
+  taiwanHomePhoneValidator_areaCode,
+  taiwanHomePhoneValidator_phoneNumber,
+  taiwanMobilePhoneValidator_firstFourDigits,
+  taiwanMobilePhoneValidator_lastSixDigits,
+} from '../../../../common/validator/taiwan-phone-validators';
 
 @Component({
   selector: 'app-hd200-form',
@@ -336,13 +342,21 @@ export class Hd200FormComponent implements OnInit {
       // 身份證字號
       idNumber: new FormControl('', [Validators.required]),
       // 手機前四碼
-      phonePrefix: new FormControl('', [Validators.required]),
+      phonePrefix: new FormControl('', [
+        Validators.required,
+        taiwanMobilePhoneValidator_firstFourDigits(),
+      ]),
       // 手機後六碼
-      phoneSuffix: new FormControl('', [Validators.required]),
+      phoneSuffix: new FormControl('', [
+        Validators.required,
+        taiwanMobilePhoneValidator_lastSixDigits(),
+      ]),
       // 電話區碼
-      areaCode: new FormControl(''),
+      areaCode: new FormControl('', [taiwanHomePhoneValidator_areaCode()]),
       // 電話號碼
-      phoneNumber: new FormControl(''),
+      phoneNumber: new FormControl('', [
+        taiwanHomePhoneValidator_phoneNumber(),
+      ]),
       // LINE帳號
       lineId: new FormControl(''),
       // E-mail
@@ -384,9 +398,9 @@ export class Hd200FormComponent implements OnInit {
       // 志工來源_其他
       volunteerSource_other: new FormControl(''),
       // 志工職稱
-      volunteerTitle: new FormControl(''),
+      volunteerTitle: new FormControl('', [Validators.required]),
       // 希望服務區域
-      desiredServiceArea: new FormControl(''),
+      desiredServiceArea: new FormControl('', [Validators.required]),
       // 服務交通工具
       serviceTransportation: new FormControl(''),
       // 擁有交通工具

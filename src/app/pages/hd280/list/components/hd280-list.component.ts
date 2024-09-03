@@ -91,9 +91,8 @@ export class Hd280ListComponent implements OnInit {
 
   // 檢視
   async view() {
-    await this.router.navigate(['/hd280/form']);
-    this.volunteerInformationService.isChoiceVolunteer = false;
-    this.hd280ListService.isCreate = false;
+    await this.router.navigate(['/hd230']);
+    this.volunteerInformationService.isChoiceVolunteer = true;
   }
 
   // 關閉當前的tab

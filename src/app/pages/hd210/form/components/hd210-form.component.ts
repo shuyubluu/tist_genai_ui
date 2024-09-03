@@ -86,13 +86,13 @@ export class Hd210FormComponent implements OnInit {
       // 課程名稱
       courseName: new FormControl(''),
       // 課程領域
-      courseField: new FormControl(''),
+      courseField: new FormControl('', [Validators.required]),
       // 訓練次數
-      trainingSessions: new FormControl(1),
+      trainingSessions: new FormControl(1, [Validators.required]),
       // 訓練時數-小時
-      trainingHours: new FormControl(''),
+      trainingHours: new FormControl('', [Validators.required]),
       // 訓練時數-分鐘
-      trainingMinutes: new FormControl(''),
+      trainingMinutes: new FormControl('', [Validators.required]),
       // 核定字號
       approvalNumber: new FormControl(''),
       // 核定日期

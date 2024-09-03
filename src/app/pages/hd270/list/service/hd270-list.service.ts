@@ -5,4 +5,6 @@ import { Injectable } from '@angular/core';
 })
 export class Hd270ListService {
   constructor() {}
+
+  isCreate: boolean = false;
 }
