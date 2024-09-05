@@ -1,29 +1,51 @@
-.grid-columns-3{
-    display: grid;
-    grid-template-columns: 0.5fr 3fr 1.75fr;
-    gap: 10px;
-    padding: 10px;
-    border-bottom: #dddfeb solid 1px;
+.grid-columns-3 {
+  display: grid;
+  grid-template-columns: 0.5fr 3fr 1.75fr;
+  gap: 10px;
+  padding: 10px;
+  border-bottom: #dddfeb solid 1px;
 }
 
-.row-1{
-    height: 35px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    margin: 2px 0px;
+.row-1 {
+  height: 35px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 2px 0px;
 }
 
-.row-2{
-    height: 50px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    margin: 2px 0px;
+.row-2 {
+  height: 50px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: 2px 0px;
 }
 
-.grid-col-2{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
+.grid-col-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.grid-col-3 {
+  display: grid;
+  justify-items: center;
+  grid-template-columns: repeat(3, 1fr);
+  height: 35px;
+  margin: 2px 0px;
+}
+
+.grid-col-3-row-2 {
+  display: grid;
+  justify-items: center;
+  grid-template-columns: repeat(3, 1fr);
+  height: 50px;
+  margin: 2px 0px;
+}
+
+.divRight {
+  display: flex;
+  justify-content: right;
+  align-items: center;
 }

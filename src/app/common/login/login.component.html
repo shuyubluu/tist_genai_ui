@@ -9,12 +9,6 @@
           [maxLength]="30"
           formControlName="account"
         />
-        <app-error-message
-          [control]="form.get('account')"
-          [isTouched]="false"
-          errorKey="required"
-          errorMessage="必填"
-        />
       </div>
       <div class="form-group">
         <label for="password">密碼：</label>
@@ -23,12 +17,6 @@
           [maxLength]="30"
           [type]="'PWD'"
           formControlName="password"
-        />
-        <app-error-message
-          [control]="form.get('password')"
-          [isTouched]="false"
-          errorKey="required"
-          errorMessage="必填"
         />
         <a href="javascript:void(0)" class="forgot-password">忘記密碼？</a>
       </div>
@@ -42,12 +30,6 @@
           [inputWidth]="'300px'"
           [maxLength]="6"
           formControlName="captcha"
-        />
-        <app-error-message
-          [control]="form.get('captcha')"
-          [isTouched]="false"
-          errorKey="required"
-          errorMessage="必填"
         />
       </div>
       <button class="login-button" (click)="login()">登入</button>

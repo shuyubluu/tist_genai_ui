@@ -38,7 +38,7 @@ export class VolunteerInformationComponent implements OnInit {
   // 前往hd210
   async goToHd210() {
     await this.router.navigate(['/hd210']);
-    if (this.currentTab === '教育訓練' || this.currentTab === '教育訓練單') {
+    if (this.currentTab === '教育訓練' || this.currentTab === '教育訓練表') {
       return;
     }
     this.closeTab(this.currentTab);
@@ -47,7 +47,7 @@ export class VolunteerInformationComponent implements OnInit {
   // 前往hd220
   async goToHd220() {
     await this.router.navigate(['/hd220']);
-    if (this.currentTab === '獎勵表揚' || this.currentTab === '獎勵表揚單') {
+    if (this.currentTab === '獎勵表揚' || this.currentTab === '獎勵表揚表') {
       return;
     } else {
       this.closeTab(this.currentTab);
@@ -57,10 +57,13 @@ export class VolunteerInformationComponent implements OnInit {
   // 前往hd230
   async goToHd230() {
     await this.router.navigate(['/hd230']);
-    if (this.currentTab !== '服務時數') {
-      this.closeTab(this.currentTab);
-    } else {
+    if (
+      this.currentTab === '服務時數' ||
+      this.currentTab === '服務時數管理表'
+    ) {
       return;
+    } else {
+      this.closeTab(this.currentTab);
     }
   }
 
@@ -77,10 +80,10 @@ export class VolunteerInformationComponent implements OnInit {
   // 前往hd250
   async goToHd250() {
     await this.router.navigate(['/hd250']);
-    if (this.currentTab !== '評核表') {
-      this.closeTab(this.currentTab);
-    } else {
+    if (this.currentTab === '評核表' || this.currentTab === '服務品質評估表') {
       return;
+    } else {
+      this.closeTab(this.currentTab);
     }
   }
 

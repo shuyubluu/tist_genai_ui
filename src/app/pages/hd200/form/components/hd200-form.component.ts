@@ -18,6 +18,7 @@ import {
   taiwanMobilePhoneValidator_firstFourDigits,
   taiwanMobilePhoneValidator_lastSixDigits,
 } from '../../../../common/validator/taiwan-phone-validators';
+import { TaiwanCitySelectRadioComponent } from '../../../../common/components/select/taiwanCitySelect_radio/components/taiwan-city-select-radio.component';
 
 @Component({
   selector: 'app-hd200-form',
@@ -32,6 +33,7 @@ import {
     TaiwanCitySelectComponent,
     ErrorMessageComponent,
     VolunteerInformationComponent,
+    TaiwanCitySelectRadioComponent,
   ],
   templateUrl: './hd200-form.component.html',
   styleUrl: './hd200-form.component.scss',
@@ -43,12 +45,82 @@ export class Hd200FormComponent implements OnInit {
   isDisableReligiousAffiliationNone: boolean = false;
   // 宗教信仰是否禁用無選項以外的項目
   isDisableReligiousAffiliationOthers: boolean = false;
+  // 是否顯示希望服務區域modal
+  isVisible: boolean = false;
+  // 當前所選的
+  currentSelectedDesiredServiceArea: string[] = [];
+  // 用來暫存希望服務區域
+  tempDesiredServiceArea: string[] = [];
   // 服務單位select選項1
-  selectOptions_serviceUnit_1: string[] = ['團隊1', '團隊1', '團隊1'];
+  selectOptions_serviceUnit_1: string[] = [
+    '事業發展處',
+    '臺北服務處',
+    '新北服務處',
+    '臺中服務處',
+    '彰化服務處',
+    '嘉義服務處',
+    '高雄服務處',
+    '屏東服務處',
+  ];
   // 服務單位select選項2
-  selectOptions_serviceUnit_2: string[] = ['2志工隊ˇ', '3志工隊ˇ', '4志工隊ˇ'];
+  selectOptions_serviceUnit_2: string[] = [
+    '事業發展中心- 高齡友善推廣組(總會事業)',
+    '不老夢想-不老夢想號組(總會事業夢想)',
+    '松山社區服務中心- 社區服務組(台北社服松山)',
+    '五結社區服務中心- 社區服務組(台北社服五結)',
+    '桃園社區服務中心- 個案服務組(新北社服桃園)',
+    '新莊社區服務中心- 個案服務組(新北社服新莊)',
+    '西區社區服務中心- 個案服務組(台中社服西區)',
+    '台中中一區居家長照機構- 主任室(台中居一)',
+    '彰化社區服務中心- 社區服務北彰組(彰化社服彰化)',
+    '溪湖社區服務中心- 社區服務溪湖組(彰化社服溪湖)',
+    '溪湖社區服務中心- 社區服務南彰組(彰化社服溪湖)',
+    '大林社區服務中心- 社區服務大林組(嘉義社服大林)',
+    '市區社區服務中心- 社區服務市區組(嘉義社服市區)',
+    '不老食光- 不老食光鼓山店(高雄)',
+    '左營社區服務中心- 個案服務組(高雄社服左營)',
+    '前金社區服務中心- 社區服務組(高雄社服前金)',
+    '潮州社區服務中心- 個案服務組(屏東社服潮州)',
+  ];
   // 服務單位select選項3
-  selectOptions_serviceUnit_3: string[] = ['30志工站', '31志工站', '32志工站'];
+  selectOptions_serviceUnit_3: string[] = [
+    '彭祖體驗長者導師志工隊',
+    '不老夢想125號志工隊',
+    '北投(北投志工站)',
+    '南港(南港志工站)',
+    '松山(松山志工站)',
+    '中正(中正志工站)',
+    '內湖(內湖志工站)',
+    '宜蘭(宜蘭志工站)',
+    '八德(八德志工站)',
+    '龍潭(龍潭志工站)',
+    '平溪(平溪志工站)',
+    '樹林(樹林志工站)',
+    '三峽(三峽志工站)',
+    '雙板(雙板志工站)',
+    '新莊(新莊志工站)',
+    '清水(清水志工站)',
+    '太平(太平志工站)',
+    '南屯(南屯志工站)',
+    '北屯(北屯志工站)',
+    '大雅(大雅志工站)',
+    '中西(中西志工站)',
+    '埔里(埔里志工站)',
+    '西屯(西屯志工隊)',
+    '和美(和美志工站)',
+    '憶智樂活之家志工隊',
+    '田中(田中志工站)',
+    '員林(員林志工站)',
+    '大林(大林志工站)',
+    '嘉西(嘉西志工站)',
+    '大寮(大寮志工站)',
+    '三民區',
+    '前金(志工站)',
+    '前金區',
+    '萬丹(萬丹志工站)',
+    '潮州(潮州志工站)',
+    '林邊(林邊志工站)',
+  ];
   // 單位名稱select選項
   selectOptions_unitName: string[] = ['單位1', '單位2', '單位3'];
   // 志工狀態select選項
@@ -192,78 +264,6 @@ export class Hd200FormComponent implements OnInit {
     '一般保險公證人',
     '海事保險公證人',
     '專責報關人員',
-    '鍋爐操作技術士證',
-    '固定式起重機操作技術士證',
-    '移動式起重機操作技術士證',
-    '人字臂起重桿操作技術士證',
-    '第一種壓力容器操作技術士證',
-    '職業安全管理技術士證',
-    '職業衛生管理技術士證',
-    '職業安全衛生管理技術士證',
-    '物理性因子作業環境測定技術士證',
-    '化學性因子作業環境測定技術士證',
-    '堆高機操作技術士證',
-    '職業潛水技術士證',
-    '就業服務技術士證',
-    '高壓氣體特定設備操作技術士證',
-    '高壓氣體容器操作技術士證',
-    '特定瓦斯器具裝修技術士證',
-    '一般手工電銲技術士證',
-    '鋼筋技術士證',
-    '模板技術士證',
-    '半自動電銲技術士證',
-    '園藝技術士證',
-    '造園景觀技術士證',
-    '建築塗裝技術士證',
-    '營建防水技術士證',
-    '混凝土技術士證',
-    '測量技術士證',
-    '營造工程管理技術士證',
-    '機械停車設備裝修技術士證',
-    '升降機裝修技術士證',
-    '氬氣鎢極電銲技術士證',
-    '建築物室內設計技術士證',
-    '建築物室內裝修工程管理技術士證',
-    '下水道設施操作維護技術士證',
-    '家具木工技術士證',
-    '建築工程管理技術士證',
-    '裝潢木工技術士證',
-    '下水道用戶排水設備配管技術士證',
-    '喪禮服務技術士證',
-    '汽車修護技術士證',
-    '機器腳踏車修護技術士證',
-    '飛機修護技術士證',
-    '冷凍空調裝修技術士證',
-    '自來水管配管技術士證',
-    '氣體燃料導管配管技術士證',
-    '輸電地下電纜裝修技術士證',
-    '輸電架空線路裝修技術士證',
-    '變壓器裝修技術士證',
-    '工業用管配管技術士證',
-    '太陽光電設置技術士證',
-    '工業配線技術士證',
-    '配電線路裝修技術士證',
-    '配電電纜裝修技術士證',
-    '通信技術（電信線路）技術士證',
-    '用電設備檢驗技術士證',
-    '變電設備裝修技術士證',
-    '室內配線技術士證',
-    '網路架設技術士證',
-    '工業電子技術士證',
-    '視聽電子技術士證',
-    '儀表電子技術士證',
-    '數位電子技術士證',
-    '重機械操作技術士證',
-    '照顧服務員技術士證',
-    '保母人員技術士證',
-    '定向行動訓練技術士證',
-    '手語翻譯技術士證',
-    '中餐烹調技術士證',
-    '烘焙食品技術士證',
-    '西餐烹調技術士證',
-    '中式米食加工技術士證',
-    '中式麵食加工技術士證',
-    '食物製備技術士證',
   ];
   // 志工職稱select選項
   selectOptions_volunteerTitle: string[] = [
@@ -542,6 +542,30 @@ export class Hd200FormComponent implements OnInit {
       this.form.get('receivedHongdaoVolunteerUniform_quantity')?.reset();
       this.form.get('receivedHongdaoVolunteerUniform_size')?.reset();
     }
+  }
+
+  // 顯示希望服務區域modal
+  showModal(): void {
+    this.isVisible = true;
+    this.tempDesiredServiceArea = [
+      ...this.form.get('desiredServiceArea')?.value,
+    ];
+  }
+
+  // 希望服務區域modal確認按鈕事件
+  handleOk(): void {
+    this.isVisible = false;
+    this.currentSelectedDesiredServiceArea = [
+      ...this.form.get('desiredServiceArea')?.value,
+    ];
+    this.message.success('修改成功');
+  }
+
+  // 希望服務區域modal取消按鈕事件
+  handleCancel(): void {
+    this.isVisible = false;
+    this.form.get('desiredServiceArea')?.setValue(this.tempDesiredServiceArea); // 還原原本的表單值
+    this.message.error('操作取消');
   }
 
   // 暫存草稿

@@ -38,6 +38,7 @@ export class Hd260ListComponent implements OnInit {
     {
       resignationDate: '113/02/02',
       name: '吳小美',
+      importantNotesSummary: '評核未通過',
     },
   ];
 

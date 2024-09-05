@@ -37,7 +37,7 @@
       <div class="label">服務單位</div>
       <div class="column-Message">
         <app-select
-          [selectWidth]="'120px'"
+          [selectWidth]="'115px'"
           [defaultPlaceHolder]="false"
           [options]="selectOptions_serviceUnit_1"
           formControlName="serviceUnit_select1"
@@ -50,7 +50,7 @@
           errorMessage="必選"
         />
         <app-select
-          [selectWidth]="'120px'"
+          [selectWidth]="'300px'"
           [defaultPlaceHolder]="false"
           [options]="selectOptions_serviceUnit_2"
           formControlName="serviceUnit_select2"
@@ -63,7 +63,7 @@
           errorMessage="必選"
         />
         <app-select
-          [selectWidth]="'120px'"
+          [selectWidth]="'200px'"
           [defaultPlaceHolder]="false"
           [options]="selectOptions_serviceUnit_3"
           formControlName="serviceUnit_select3"
@@ -555,17 +555,17 @@
       <div class="label">證照</div>
       <div>
         <app-select
-          [selectWidth]="'230px'"
+          [selectWidth]="'180px'"
           [options]="selectOptions_certification"
           formControlName="certification"
         />
         <app-select
-          [selectWidth]="'230px'"
+          [selectWidth]="'180px'"
           [options]="selectOptions_certification"
           formControlName="certification"
         />
         <app-select
-          [selectWidth]="'230px'"
+          [selectWidth]="'180px'"
           [options]="selectOptions_certification"
           formControlName="certification"
         />
@@ -625,7 +625,28 @@
     <div class="grid-columns-1">
       <div class="label">希望服務區域</div>
       <!-- !TODO -->
-      <div></div>
+      <div>
+        <app-button
+          [buttonText]="'添加'"
+          [attachClassName]="['success']"
+          (click)="showModal()"
+        />
+        <span>{{ currentSelectedDesiredServiceArea }}</span>
+        <nz-modal
+          [(nzVisible)]="isVisible"
+          nzTitle="希望服務區域"
+          nzCancelText="取消"
+          (nzOnCancel)="handleCancel()"
+          nzOkText="確定"
+          (nzOnOk)="handleOk()"
+        >
+          <ng-container *nzModalContent>
+            <app-taiwan-city-select-radio
+              formControlName="desiredServiceArea"
+            />
+          </ng-container>
+        </nz-modal>
+      </div>
     </div>
     <div class="grid-columns-1">
       <div class="label">服務交通工具</div>

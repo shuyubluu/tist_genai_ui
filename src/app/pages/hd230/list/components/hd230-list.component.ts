@@ -97,6 +97,12 @@ export class Hd230ListComponent implements OnInit {
     this.volunteerInformationService.isChoiceVolunteer = true;
   }
 
+  // 編輯
+  async edit() {
+    await this.router.navigate(['/hd280/form']);
+    this.volunteerInformationService.isChoiceVolunteer = true;
+  }
+
   // 關閉服務時數
   closeTab(identifier: string) {
     this.tabService.closeTab(identifier);

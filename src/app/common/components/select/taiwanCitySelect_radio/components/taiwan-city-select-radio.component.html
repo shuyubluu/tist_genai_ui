@@ -1,0 +1,66 @@
+<div class="selectCountText" [ngClass]="{ full: selectList.length === 10 }">
+  {{ selectList.length === 10 ? "選項已滿" : "已選擇" }}：
+  {{ selectList.length }}/10
+  <span
+    ><app-button
+      [buttonText]="'清除全部'"
+      [attachClassName]="['danger']"
+      (click)="clearAll()"
+  /></span>
+</div>
+<div class="bold-text">已選擇地區：{{ selectList.join(", ") }}</div>
+<div class="select">
+  <div class="selectContainer">
+    <nz-checkbox-wrapper>
+      <div nz-row>
+        @for( taiwanCity of taiwanCityList; track taiwanCity.CityName; let i =
+        $index){
+        <div class="cityBlock" nz-col nzSpan="24">
+          <label
+            nz-checkbox
+            [nzValue]="taiwanCity.CityName"
+            [nzIndeterminate]="taiwanCity.indeterminate"
+            [(ngModel)]="taiwanCity.checked"
+            (ngModelChange)="onCityChecked(taiwanCity)"
+            [nzDisabled]="
+              selectList.length >= 10 &&
+              !taiwanCity.checked &&
+              !taiwanCity.indeterminate
+            "
+            >{{ taiwanCity.CityName }}</label
+          >
+          <app-button
+            *ngIf="!expandMenu.includes(i)"
+            [buttonText]="'展開'"
+            [attachClassName]="['success']"
+            (click)="expand(i)"
+          />
+          <app-button
+            *ngIf="expandMenu.includes(i)"
+            [buttonText]="'收合'"
+            [attachClassName]="['danger']"
+            (click)="close(i)"
+          />
+        </div>
+        @for( Area of taiwanCity.AreaList; track Area.AreaName;){
+        <div
+          *ngIf="expandMenu.includes(i)"
+          class="areaBlock"
+          nz-col
+          nzSpan="24"
+        >
+          <label
+            nz-checkbox
+            [nzValue]="taiwanCity.CityName + Area.AreaName"
+            [(ngModel)]="Area.checked"
+            [(nzChecked)]="Area.checked"
+            (ngModelChange)="onAreaChecked(taiwanCity, Area)"
+            [nzDisabled]="selectList.length >= 10 || taiwanCity.checked"
+            >{{ taiwanCity.CityName + Area.AreaName }}</label
+          >
+        </div>
+        } }
+      </div>
+    </nz-checkbox-wrapper>
+  </div>
+</div>

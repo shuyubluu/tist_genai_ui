@@ -22,7 +22,7 @@
       <div class="label">服務單位</div>
       <div>
         <app-select
-          [selectWidth]="'120px'"
+          [selectWidth]="'200px'"
           [defaultPlaceHolder]="false"
           [options]="selectOptions_serviceUnit"
           formControlName="serviceUnit"
@@ -32,9 +32,13 @@
   </div>
   <div class="buttonArea">
     <app-button [buttonText]="'搜尋'" (click)="search()" />
-    <app-button [attachClassName]="['success']" [buttonText]="'新增'" (click)="create()" />
     <app-button
-    [attachClassName]="['danger']"
+      [attachClassName]="['success']"
+      [buttonText]="'新增'"
+      (click)="create()"
+    />
+    <app-button
+      [attachClassName]="['danger']"
       [buttonText]="'關閉'"
       (click)="closeTab('志工資料清單')"
     />
@@ -87,7 +91,11 @@
       <!-- !TODO -->
       <div>
         <app-button [buttonText]="'檢視'" (click)="view()" />
-        <app-button [buttonText]="'編輯'" [attachClassName]="['warning']" (click)="edit()" />
+        <app-button
+          [buttonText]="'編輯'"
+          [attachClassName]="['warning']"
+          (click)="edit()"
+        />
       </div>
     </div>
   </div>

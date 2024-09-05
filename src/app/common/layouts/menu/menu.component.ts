@@ -55,12 +55,12 @@ export class MenuComponent implements OnInit {
       },
       {
         title: '報表專區',
-        icon: '',
+        icon: 'reconciliation',
         link: '#',
       },
       {
         title: '統計專區',
-        icon: '',
+        icon: 'area-chart',
         link: '#',
       },
       {

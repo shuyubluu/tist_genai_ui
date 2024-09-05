@@ -32,10 +32,10 @@
     <div class="mt"></div>
     <div class="grid-search-container">
       <div class="grid-columns searchTitle">
-        <div>開案日期</div>
+        <div>訪視日期</div>
         <div>風險等級</div>
         <div>訪視人員職稱</div>
-        <div>志工訪視區</div>
+        <div>訪視人員姓名</div>
         <div>操作</div>
       </div>
       <div
@@ -56,13 +56,13 @@
           {{ searchResult.responsiblePersonJobTitle }}
         </div>
         <div>
-          {{ searchResult.visitTime }}
           {{ searchResult.responsiblePerson }}
         </div>
         <!-- !TODO -->
         <div>
           <app-button [buttonText]="'檢視'" (click)="view()" />
           <app-button
+            *ngIf="searchResult.responsiblePersonJobTitle === '社工'"
             [buttonText]="'編輯'"
             [attachClassName]="['warning']"
             (click)="edit()"
