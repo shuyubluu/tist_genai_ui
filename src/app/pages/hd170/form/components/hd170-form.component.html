@@ -166,15 +166,27 @@
       <div class="label disableBackground">家系圖</div>
       <div>
         <app-button [buttonText]="'繪製'" />
-        <app-button [attachClassName]="['success']" [buttonText]="'匯入'" />
-        <app-button [attachClassName]="['danger']" [buttonText]="'匯出'" />
+        <nz-upload
+          nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+          [nzFileList]="familyTree_fileList"
+          (nzChange)="familyTree_handleChange($event)"
+        >
+          <app-button [attachClassName]="['success']" [buttonText]="'匯入'" />
+        </nz-upload>
+        <!-- <app-button [attachClassName]="['danger']" [buttonText]="'匯出'" /> -->
         <!-- !TODO -->
       </div>
       <div class="label disableBackground">生態圖</div>
       <div>
-        <app-button  [buttonText]="'繪製'" />
-        <app-button [attachClassName]="['success']" [buttonText]="'匯入'" />
-        <app-button [attachClassName]="['danger']" [buttonText]="'匯出'" />
+        <app-button [buttonText]="'繪製'" />
+        <nz-upload
+          nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+          [nzFileList]="ecologicalMap_fileList"
+          (nzChange)="ecologicalMap_handleChange($event)"
+        >
+          <app-button [attachClassName]="['success']" [buttonText]="'匯入'" />
+        </nz-upload>
+        <!-- <app-button [attachClassName]="['danger']" [buttonText]="'匯出'" /> -->
         <!-- !TODO -->
       </div>
     </div>
@@ -323,14 +335,14 @@
   </div>
   <div class="buttonArea">
     <!-- !TODO -->
-    <app-button  [buttonText]="'儲存'" (click)="save()" />
+    <app-button [buttonText]="'儲存'" (click)="save()" />
     <app-button
-    [attachClassName]="['success']"
+      [attachClassName]="['success']"
       [buttonText]="'送審'"
       (click)="review()"
     />
     <app-button
-    [attachClassName]="['danger']"
+      [attachClassName]="['danger']"
       [buttonText]="'關閉'"
       (click)="closeTab('轉介單')"
     />

@@ -19,6 +19,7 @@ import {
   taiwanMobilePhoneValidator_lastSixDigits,
 } from '../../../../common/validator/taiwan-phone-validators';
 import { TaiwanCitySelectRadioComponent } from '../../../../common/components/select/taiwanCitySelect_radio/components/taiwan-city-select-radio.component';
+import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 
 @Component({
   selector: 'app-hd200-form',
@@ -304,11 +305,20 @@ export class Hd200FormComponent implements OnInit {
     '完成',
     '未完成',
   ];
+  // 服務紀錄冊模擬匯入檔案
+  volunteerServiceRecord_fileList: NzUploadFile[] = [
+    {
+      uid: '1',
+      name: '志願服務紀錄冊.png',
+      status: 'done',
+    },
+  ];
 
   constructor(
     private tabService: TabService, // 關閉tab的Service
     private message: NzMessageService, // 訊息
-    public volunteerInformationService: VolunteerInformationService // volunteerInformationService
+    public volunteerInformationService: VolunteerInformationService, // volunteerInformationService
+    private msg: NzMessageService // NzMessageService
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
@@ -576,5 +586,14 @@ export class Hd200FormComponent implements OnInit {
   // 關閉志工基本資料
   closeTab(identifier: string) {
     this.tabService.closeTab(identifier);
+  }
+
+  // 服務紀錄測上傳點擊事件
+  volunteerServiceRecord_handleChange(info: NzUploadChangeParam): void {
+    if (info.file.status === 'done') {
+      this.msg.success(`${info.file.name} 上傳成功`);
+    } else if (info.file.status === 'error') {
+      this.msg.error(`${info.file.name} 上傳失敗.`);
+    }
   }
 }

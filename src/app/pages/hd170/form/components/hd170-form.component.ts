@@ -13,6 +13,7 @@ import { CaseInformationComponent } from '../../../../common/components/caseInfo
 import { CaseInformationService } from '../../../../common/components/caseInformation/serivce/case-information.service';
 import { TaiwanCitySelectComponent } from '../../../../common/components/select/taiwanCitySelect/components/taiwan-city-select.component';
 import { EmergencyContact } from '../service/hd170-form.interface';
+import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 
 @Component({
   selector: 'app-hd170-form',
@@ -49,13 +50,30 @@ export class Hd170FormComponent implements OnInit {
     '中低收入戶',
     '邊緣戶',
   ];
-
   // 緊急聯絡人區塊假資料
   emergencyContact: EmergencyContact[] = [
     {
       emergencyContact_emergencyContact: '大壯',
       emergencyContact_relationship: '父親',
       emergencyContact_phone: '0912345678',
+    },
+  ];
+  // 有無+尚未確認select選項
+  selectOptions_includeHasNotConfirmed: string[] = ['有', '無', '尚未確認'];
+  // 家系圖模擬匯入檔案
+  familyTree_fileList: NzUploadFile[] = [
+    {
+      uid: '1',
+      name: '家系圖1.png',
+      status: 'done',
+    },
+  ];
+  // 生態圖模擬匯入檔案
+  ecologicalMap_fileList: NzUploadFile[] = [
+    {
+      uid: '1',
+      name: '生態圖1.png',
+      status: 'done',
     },
   ];
 
@@ -200,5 +218,23 @@ export class Hd170FormComponent implements OnInit {
   // 關閉轉介單
   closeTab(identifier: string) {
     this.tabService.closeTab(identifier);
+  }
+
+  // 家系圖匯入點擊事件
+  familyTree_handleChange(info: NzUploadChangeParam): void {
+    if (info.file.status === 'done') {
+      this.message.success(`${info.file.name} 匯入成功`);
+    } else if (info.file.status === 'error') {
+      this.message.error(`${info.file.name} 匯入失敗.`);
+    }
+  }
+
+  // 生態圖匯入點擊事件
+  ecologicalMap_handleChange(info: NzUploadChangeParam): void {
+    if (info.file.status === 'done') {
+      this.message.success(`${info.file.name} 匯入成功`);
+    } else if (info.file.status === 'error') {
+      this.message.error(`${info.file.name} 匯入失敗.`);
+    }
   }
 }

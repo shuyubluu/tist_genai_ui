@@ -14,6 +14,7 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { CaseInformationService } from '../../../../common/components/caseInformation/serivce/case-information.service';
 import { CaseInformationComponent } from '../../../../common/components/caseInformation/components/case-information.component';
+import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 
 @Component({
   selector: 'app-hd120-form',
@@ -165,6 +166,22 @@ export class Hd120FormComponent implements OnInit {
   ];
   // 有無+尚未確認select選項
   selectOptions_includeHasNotConfirmed: string[] = ['有', '無', '尚未確認'];
+  // 家系圖模擬匯入檔案
+  familyTree_fileList: NzUploadFile[] = [
+    {
+      uid: '1',
+      name: '家系圖1.png',
+      status: 'done',
+    },
+  ];
+  // 生態圖模擬匯入檔案
+  ecologicalMap_fileList: NzUploadFile[] = [
+    {
+      uid: '1',
+      name: '生態圖1.png',
+      status: 'done',
+    },
+  ];
 
   // 個案開案資料表單
   constructor(
@@ -1073,5 +1090,23 @@ export class Hd120FormComponent implements OnInit {
   // 關閉個案開案資料表
   closeTab(identifier: string) {
     this.tabService.closeTab(identifier);
+  }
+
+  // 家系圖匯入點擊事件
+  familyTree_handleChange(info: NzUploadChangeParam): void {
+    if (info.file.status === 'done') {
+      this.message.success(`${info.file.name} 匯入成功`);
+    } else if (info.file.status === 'error') {
+      this.message.error(`${info.file.name} 匯入失敗.`);
+    }
+  }
+
+  // 生態圖匯入點擊事件
+  ecologicalMap_handleChange(info: NzUploadChangeParam): void {
+    if (info.file.status === 'done') {
+      this.message.success(`${info.file.name} 匯入成功`);
+    } else if (info.file.status === 'error') {
+      this.message.error(`${info.file.name} 匯入失敗.`);
+    }
   }
 }

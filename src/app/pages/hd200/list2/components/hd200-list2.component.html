@@ -46,16 +46,23 @@
         {{ searchResult.uploadDate }}
       </div>
       <!-- !TODO -->
-      <div>
+      <div class="divCenter">
         <app-button [buttonText]="'檢視'" />
-        <app-button
-          [attachClassName]="['success']"
-          [buttonText]="'上傳紀錄表'"
-        />
-        <app-button
+        <nz-upload
+          class="divCenter"
+          nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+          [nzFileList]="personalSupervisionRecord_fileList"
+          (nzChange)="personalSupervisionRecord_handleChange($event)"
+        >
+          <app-button
+            [attachClassName]="['success']"
+            [buttonText]="'上傳紀錄表'"
+          />
+        </nz-upload>
+        <!-- <app-button
           [attachClassName]="['danger']"
           [buttonText]="'下載紀錄表'"
-        />
+        /> -->
       </div>
     </div>
   </div>

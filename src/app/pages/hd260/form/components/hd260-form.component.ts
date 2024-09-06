@@ -11,6 +11,7 @@ import { VolunteerInformationService } from './../../../../common/components/vol
 import { VolunteerInformationComponent } from '../../../../common/components/volunteerInformation/components/volunteer-information.component';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { ErrorMessageComponent } from '../../../../common/components/message/error-message.component';
+import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 
 @Component({
   selector: 'app-hd260-form',
@@ -41,6 +42,22 @@ export class Hd260FormComponent implements OnInit {
     '自主退隊',
     '疾病/死亡',
     '其他',
+  ];
+  // 同意書模擬匯入檔案
+  consentForm_fileList: NzUploadFile[] = [
+    {
+      uid: '1',
+      name: '同意書.word',
+      status: 'done',
+    },
+  ];
+  // 檔案模擬匯入檔案
+  file_fileList: NzUploadFile[] = [
+    {
+      uid: '1',
+      name: '檔案.word',
+      status: 'done',
+    },
   ];
 
   constructor(
@@ -90,5 +107,23 @@ export class Hd260FormComponent implements OnInit {
   // 關閉當前的tab
   closeTab(identifier: string) {
     this.tabService.closeTab(identifier);
+  }
+
+  // 同意書上傳點擊事件
+  consentForm_handleChange(info: NzUploadChangeParam): void {
+    if (info.file.status === 'done') {
+      this.message.success(`${info.file.name} 上傳成功`);
+    } else if (info.file.status === 'error') {
+      this.message.error(`${info.file.name} 上傳失敗.`);
+    }
+  }
+
+  // 檔案上傳點擊事件
+  file_handleChange(info: NzUploadChangeParam): void {
+    if (info.file.status === 'done') {
+      this.message.success(`${info.file.name} 上傳成功`);
+    } else if (info.file.status === 'error') {
+      this.message.error(`${info.file.name} 上傳失敗.`);
+    }
   }
 }

@@ -624,7 +624,6 @@
     </div>
     <div class="grid-columns-1">
       <div class="label">希望服務區域</div>
-      <!-- !TODO -->
       <div>
         <app-button
           [buttonText]="'添加'"
@@ -729,7 +728,13 @@
     <div class="grid-columns-1">
       <div class="label">服務紀錄冊上傳</div>
       <div>
-        <app-button [attachClassName]="['success']" [buttonText]="'上傳'" />
+        <nz-upload
+        nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+        [nzFileList]="volunteerServiceRecord_fileList"
+        (nzChange)="volunteerServiceRecord_handleChange($event)"
+      >
+      <app-button [attachClassName]="['success']" [buttonText]="'上傳'" />
+    </nz-upload>
       </div>
     </div>
     <div class="grid-columns-1">

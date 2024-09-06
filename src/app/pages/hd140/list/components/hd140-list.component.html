@@ -2,11 +2,19 @@
 <div class="mt"></div>
 <form [formGroup]="form">
   <div class="grid-container">
-    <div class="grid-columns-1 border-bottom-0">
+    <div class="grid-columns-2 border-bottom-0">
       <div class="label">查詢區間</div>
       <div>
         <app-dayPicker formControlName="queryStartTime" /> 到
         <app-dayPicker formControlName="queryEndTime" />
+      </div>
+      <div class="label">訪視人員姓名</div>
+      <div>
+        <app-input
+          [inputWidth]="'130px'"
+          [maxLength]="30"
+          formControlName="responsiblePerson"
+        />
       </div>
     </div>
   </div>

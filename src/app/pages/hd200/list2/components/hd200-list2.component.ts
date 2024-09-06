@@ -11,6 +11,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { SearchResultData } from '../service/hd200-list2.interface';
 import { VolunteerInformationService } from '../../../../common/components/volunteerInformation/service/volunteer-information.service';
 import { VolunteerInformationComponent } from '../../../../common/components/volunteerInformation/components/volunteer-information.component';
+import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-hd200-list',
@@ -41,6 +43,15 @@ export class Hd200List2Component implements OnInit {
     },
   ];
 
+  // 個督紀錄模擬匯入檔案
+  personalSupervisionRecord_fileList: NzUploadFile[] = [
+    {
+      uid: '1',
+      name: '個督紀錄表.excel',
+      status: 'done',
+    },
+  ];
+
   // 分頁器切割後的資料
   get newSearchResultData(): SearchResultData[] {
     return this.searchResultData.slice(
@@ -51,7 +62,8 @@ export class Hd200List2Component implements OnInit {
 
   constructor(
     private tabService: TabService, // 關閉tab的Service
-    public volunteerInformationService: VolunteerInformationService // volunteerInformationService
+    public volunteerInformationService: VolunteerInformationService, // volunteerInformationService
+    private message: NzMessageService // NzMessageService
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
@@ -80,5 +92,14 @@ export class Hd200List2Component implements OnInit {
   // 當改變頁數時觸發
   onPageIndexChange(currentPage: number) {
     this.currentPage = currentPage;
+  }
+
+  // 個督紀錄匯入點擊事件
+  personalSupervisionRecord_handleChange(info: NzUploadChangeParam): void {
+    if (info.file.status === 'done') {
+      this.message.success(`${info.file.name} 上傳成功`);
+    } else if (info.file.status === 'error') {
+      this.message.error(`${info.file.name} 上傳失敗.`);
+    }
   }
 }

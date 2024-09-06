@@ -14,7 +14,7 @@
           [selectWidth]="'100px'"
           [defaultPlaceHolder]="false"
           [options]="selectOptions_caseServiceStatus"
-          formControlName="caseServiceStatuKs"
+          formControlName="caseServiceStatus"
         />
       </div>
       <div class="label disableBackground">個案分級</div>
@@ -1858,15 +1858,27 @@
       <div class="label">家系圖</div>
       <div>
         <app-button [buttonText]="'繪製'" />
-        <app-button [attachClassName]="['success']" [buttonText]="'匯入'" />
-        <app-button [attachClassName]="['danger']" [buttonText]="'匯出'" />
+        <nz-upload
+          nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+          [nzFileList]="familyTree_fileList"
+          (nzChange)="familyTree_handleChange($event)"
+        >
+          <app-button [attachClassName]="['success']" [buttonText]="'匯入'" />
+        </nz-upload>
+        <!-- <app-button [attachClassName]="['danger']" [buttonText]="'匯出'" /> -->
         <!-- !TODO -->
       </div>
       <div class="label">生態圖</div>
       <div>
         <app-button [buttonText]="'繪製'" />
-        <app-button [attachClassName]="['success']" [buttonText]="'匯入'" />
-        <app-button [attachClassName]="['danger']" [buttonText]="'匯出'" />
+        <nz-upload
+          nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+          [nzFileList]="ecologicalMap_fileList"
+          (nzChange)="ecologicalMap_handleChange($event)"
+        >
+          <app-button [attachClassName]="['success']" [buttonText]="'匯入'" />
+        </nz-upload>
+        <!-- <app-button [attachClassName]="['danger']" [buttonText]="'匯出'" /> -->
         <!-- !TODO -->
       </div>
     </div>

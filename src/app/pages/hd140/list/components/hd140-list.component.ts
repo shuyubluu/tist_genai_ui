@@ -70,6 +70,8 @@ export class Hd140ListComponent implements OnInit {
       queryStartTime: new FormControl(''),
       // 查詢結束時間
       queryEndTime: new FormControl(''),
+      // 訪視人員姓名
+      responsiblePerson: new FormControl(''),
     });
   }
 

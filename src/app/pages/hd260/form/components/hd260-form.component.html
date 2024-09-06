@@ -96,16 +96,28 @@
     <div class="grid-columns-2 border-bottom-0">
       <div class="label">同意書檔案下載</div>
       <div>
-        <app-button
-          *ngIf="form.get('equipmentReturned')?.value.length === 0"
-          [buttonText]="'上傳XXXXX同意書'"
-          [attachClassName]="['success']"
-        />
-        <app-button [buttonText]="'下載'" [attachClassName]="['danger']" />
+        <nz-upload
+          nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+          [nzFileList]="consentForm_fileList"
+          (nzChange)="consentForm_handleChange($event)"
+        >
+          <app-button
+            *ngIf="form.get('equipmentReturned')?.value.length === 0"
+            [buttonText]="'上傳同意書'"
+            [attachClassName]="['success']"
+          />
+        </nz-upload>
+        <!-- <app-button [buttonText]="'下載'" [attachClassName]="['danger']" /> -->
       </div>
       <div class="label">上傳檔案</div>
       <div>
-        <app-button [buttonText]="'上傳'" [attachClassName]="['success']" />
+        <nz-upload
+          nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+          [nzFileList]="file_fileList"
+          (nzChange)="file_handleChange($event)"
+        >
+          <app-button [buttonText]="'上傳'" [attachClassName]="['success']" />
+        </nz-upload>
       </div>
     </div>
   </div>

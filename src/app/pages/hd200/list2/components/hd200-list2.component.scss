@@ -4,3 +4,9 @@
   grid-template-columns: 1fr 2.5fr;
   grid-gap: 2px;
 }
+
+.divCenter{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
