@@ -1,0 +1,89 @@
+﻿<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="copyright" content="本網頁著作權屬台灣資服" />
+    <meta name="description" content="台灣資服" />
+    <title>繪製家系圖</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Cache-Control" content="no-store" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="css/basicg.css" />
+    <link rel="stylesheet" href="css/jquery-ui.min.css" />
+    <script src="js/comm/jquery-3.6.0.min.js"></script>
+    <script src="js/family.js"></script>
+    <script src="js/comm/diagram/lodash.js"></script>
+    <script src="js/comm/diagram/backbone.js"></script>
+    <script src="js/comm/diagram/joint.js"></script>
+    <script src="js/comm/diagram/tist-diagram.js"></script>
+  </head>
+  <body>
+    <div id="main_form">
+      <form name="main" action="*" method="post">
+        <table class="titleb">
+          <tr id="tr_family_json">
+            <td class="must" width="20%">
+              家系圖<br />
+              <input
+                type="button"
+                name="file_name"
+                value="清空家系圖"
+                onclick="clearPaper()"
+              />
+              <input
+                type="button"
+                name="file_name"
+                value="顯示家系圖code"
+                onclick="savePaper()"
+              />
+              <div style="display: none">
+                <input
+                  type="file"
+                  id="importJson"
+                  onchange="loadFile(this.files[0])"
+                />
+              </div>
+            </td>
+
+            <td class="title2" colspan="3">
+              請按滑鼠右鍵繪製，儲存後會替代原家系圖<font color="red"
+                >新增角色後請先至空白處按左鍵消除紅點</font
+              >
+              <div id="backButton">回上一頁</div>
+              <div id="paper"></div>
+            </td>
+          </tr>
+          <tr id="tr_family_json">
+            <td class="must" width="20%">家系圖Jason code<br /></td>
+            <td class="title2" colspan="3">
+              <textarea
+                style="width: 100%"
+                rows="10"
+                name="family_json"
+              ></textarea>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+    <script>
+      async function loadFile(file) {
+        let text = await file.text();
+        paper.clear();
+        paper.getOriginalPaper().options.width = 600;
+        paper.getOriginalPaper().options.height = 600;
+        var temppaper = document.getElementById("paper");
+        temppaper.style.width = 600;
+        temppaper.style.height = 600;
+        paper.fromJson(JSON.parse(text));
+      }
+
+      document
+        .getElementById("backButton")
+        .addEventListener("click", function () {
+          window.history.back();
+        });
+    </script>
+  </body>
+</html>

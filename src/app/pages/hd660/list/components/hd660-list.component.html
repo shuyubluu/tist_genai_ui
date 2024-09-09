@@ -1,0 +1,81 @@
+<form [formGroup]="form">
+  <div class="grid-container">
+    <div class="grid-columns-2 border-bottom-0">
+      <div class="label">發佈日期</div>
+      <div>
+        <app-dayPicker formControlName="publicationDate" />
+      </div>
+      <div class="label">發布單位</div>
+      <div>
+        <app-select
+          [selectWidth]="'200px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_publishingUnit"
+          formControlName="publishingUnit"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="buttonArea">
+    <app-button [buttonText]="'搜尋'" (click)="search()" />
+    <app-button
+      [buttonText]="'新增'"
+      [attachClassName]="['success']"
+      (click)="create()"
+    />
+    <app-button
+      [attachClassName]="['danger']"
+      [buttonText]="'關閉'"
+      (click)="closeTab('佈告欄維護')"
+    />
+  </div>
+</form>
+<div class="message">搜尋結果: 共{{ searchResultData.length }}筆</div>
+<form>
+  <div class="mt"></div>
+  <div class="grid-search-container">
+    <div class="grid-columns searchTitle">
+      <div>發佈日期</div>
+      <div>發佈單位</div>
+      <div>主旨標題</div>
+      <div>發佈者</div>
+      <div>操作</div>
+    </div>
+    <div
+      class="grid-columns tableBorder"
+      *ngFor="let searchResult of newSearchResultData; let i = index"
+      [ngClass]="{
+        'even-row': i % 2 === 1,
+        'odd-row': i % 2 !== 1
+      }"
+    >
+      <div>
+        {{ searchResult.publicationDate }}
+      </div>
+      <div>
+        {{ searchResult.publishingUnit }}
+      </div>
+      <div>
+        {{ searchResult.subjectTitle }}
+      </div>
+      <div>
+        {{ searchResult.publisher }}
+      </div>
+      <!-- !TODO -->
+      <div>
+        <app-button
+          [buttonText]="'編輯'"
+          [attachClassName]="['warning']"
+          (click)="edit()"
+        />
+      </div>
+    </div>
+  </div>
+</form>
+<div class="mt-10"></div>
+<nz-pagination
+  [nzPageIndex]="currentPage"
+  [nzPageSize]="pageSize"
+  (nzPageIndexChange)="onPageIndexChange($event)"
+  [nzTotal]="searchResultData.length"
+/>

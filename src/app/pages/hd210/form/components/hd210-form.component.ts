@@ -104,7 +104,7 @@ export class Hd210FormComponent implements OnInit {
     // 禁用訓練次數
     this.form.get('trainingSessions')?.disable();
     // 生成訓練時數-小時select選項
-    for (let i = 1; i <= 30; i++) {
+    for (let i = 0; i <= 30; i++) {
       this.selectOptions_trainingHours.push(i.toString());
     }
     // 禁用核定字號

@@ -1,0 +1,15 @@
+.mr-5 {
+  margin-right: 5px;
+}
+
+.color-red {
+  color: red;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.color-blue {
+  color: blue($color: #000000);
+  font-weight: bold;
+  font-size: 16px;
+}

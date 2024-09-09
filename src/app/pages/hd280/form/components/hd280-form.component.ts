@@ -119,7 +119,7 @@ export class Hd280FormComponent implements OnInit {
 
   ngOnInit(): void {
     // 生成訓練時數-小時select選項
-    for (let i = 1; i <= 30; i++) {
+    for (let i = 0; i <= 30; i++) {
       this.selectOptions_serviceHours.push(i.toString());
     }
   }

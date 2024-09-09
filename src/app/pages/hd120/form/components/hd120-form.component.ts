@@ -1,3 +1,4 @@
+import { DiagramService } from './../../../../../assets/diagram/service/diagram';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
@@ -51,8 +52,6 @@ export class Hd120FormComponent implements OnInit {
   isDisableAssistiveDeviceUsageNone: boolean = false;
   // 輔具使用是否禁用無選項以外的項目
   isDisableAssistiveDeviceUsageOthers: boolean = false;
-  // 輔具使用是否禁用義肢的附加選項
-  isDisableAssistiveDeviceUsageProsthesis: boolean = true;
   // 義肢的附加選項是否已擇一
   isChoiceProsthesis: boolean = false;
   // 社會福利補助是否禁用無選項
@@ -188,7 +187,8 @@ export class Hd120FormComponent implements OnInit {
     private tabService: TabService, // 關閉tab的Service
     private router: Router, // 路由
     private message: NzMessageService, // 訊息
-    public caseInformationService: CaseInformationService // caseInformationService
+    public caseInformationService: CaseInformationService, // caseInformationService
+    public diagramService: DiagramService // diagramService
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
@@ -265,6 +265,10 @@ export class Hd120FormComponent implements OnInit {
       medicalStatus_frequency: new FormControl(''),
       // 輔具使用
       assistiveDeviceUsage: new FormControl('', [Validators.required]),
+      // 上肢
+      upperLimb: new FormControl(),
+      // 下肢
+      lowerLimb: new FormControl(),
       // 輔具使用其他
       assistiveDeviceUsage_other: new FormControl('', [Validators.required]),
 
@@ -412,7 +416,6 @@ export class Hd120FormComponent implements OnInit {
       serviceVolunteer: new FormControl(''),
     });
   }
-
   ngOnInit(): void {
     // 禁用個案服務狀態select
     this.form.get('caseServiceStatus')?.disable();
@@ -456,6 +459,10 @@ export class Hd120FormComponent implements OnInit {
     this.form.get('commonLanguage_other')?.disable();
     // 禁用現有疾病狀態其他
     this.form.get('currentHealthConditions_other')?.disable();
+    // 禁用上肢選項
+    this.form.get('upperLimb')?.disable();
+    // 禁用下肢選項
+    this.form.get('lowerLimb')?.disable();
     // 禁用輔具使用其他
     this.form.get('assistiveDeviceUsage_other')?.disable();
     // 禁用福利身份select
@@ -692,7 +699,8 @@ export class Hd120FormComponent implements OnInit {
     }
     if (checkGroup.includes('10')) {
       this.isChoiceProsthesis = true;
-      this.isDisableAssistiveDeviceUsageProsthesis = false;
+      this.form.get('upperLimb')?.enable();
+      this.form.get('lowerLimb')?.enable();
       if (checkGroup.includes('11') || checkGroup.includes('12')) {
         this.isChoiceProsthesis = false;
       } else {
@@ -700,7 +708,10 @@ export class Hd120FormComponent implements OnInit {
       }
     } else {
       this.isChoiceProsthesis = false;
-      this.isDisableAssistiveDeviceUsageProsthesis = true;
+      this.form.get('upperLimb')?.disable();
+      this.form.get('upperLimb')?.reset();
+      this.form.get('lowerLimb')?.disable();
+      this.form.get('lowerLimb')?.reset();
     }
     this.isDisableAssistiveDeviceUsageNone = checkGroup.some((check) =>
       ['2', '3', '4', '5', '6', '7', '8', '9', '10', '13'].includes(check)

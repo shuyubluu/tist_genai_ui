@@ -127,6 +127,18 @@ export const routes: Routes = [
           import('./pages/hd280/hd280.routes').then((m) => m.HD280_ROUTES),
         data: { tabName: '服務時數管理' },
       },
+      {
+        path: 'hd650',
+        loadChildren: () =>
+          import('./pages/hd650/hd650.routes').then((m) => m.HD650_ROUTES),
+        data: { tabName: '系統維護參數' },
+      },
+      {
+        path: 'hd660',
+        loadChildren: () =>
+          import('./pages/hd660/hd660.routes').then((m) => m.HD660_ROUTES),
+        data: { tabName: '佈告欄維護' },
+      },
     ],
   },
   {

@@ -534,7 +534,7 @@ export class WelcomeComponent implements OnInit {
   }
 
   // 4.未簽核表單
-    // 顯示未簽核表單modal
+  // 顯示未簽核表單modal
   showApprovalZone_UnsignedFormsModal(): void {
     this.isApprovalZone_UnsignedFormsVisible = true;
   }

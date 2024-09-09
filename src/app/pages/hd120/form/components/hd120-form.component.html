@@ -290,7 +290,6 @@
                 >回教</label
               >
             </div>
-
             <div nz-col>
               <label
                 nz-checkbox
@@ -720,16 +719,10 @@
                 nzValue="10"
                 >義肢</label
               >
-              <label
-                nz-checkbox
-                [nzDisabled]="isDisableAssistiveDeviceUsageProsthesis"
-                nzValue="11"
+              <label nz-checkbox nzValue="11" formControlName="upperLimb"
                 >上肢</label
               >
-              <label
-                nz-checkbox
-                [nzDisabled]="isDisableAssistiveDeviceUsageProsthesis"
-                nzValue="12"
+              <label nz-checkbox nzValue="12" formControlName="lowerLimb"
                 >下肢</label
               >
             </div>
@@ -1857,7 +1850,10 @@
     <div class="grid-columns-2">
       <div class="label">家系圖</div>
       <div>
-        <app-button [buttonText]="'繪製'" />
+        <app-button
+          [buttonText]="'繪製'"
+          (click)="diagramService.openDiagramPage()"
+        />
         <nz-upload
           nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
           [nzFileList]="familyTree_fileList"
@@ -1870,7 +1866,10 @@
       </div>
       <div class="label">生態圖</div>
       <div>
-        <app-button [buttonText]="'繪製'" />
+        <app-button
+          [buttonText]="'繪製'"
+          (click)="diagramService.openDiagramPage()"
+        />
         <nz-upload
           nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
           [nzFileList]="ecologicalMap_fileList"

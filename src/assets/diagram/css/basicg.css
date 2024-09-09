@@ -1,0 +1,827 @@
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+A:link {COLOR: navy; TEXT-DECORATION: none}
+A:hover {COLOR: #6600FF; TEXT-DECORATION: underline}
+A {FONT-SIZE: 9pt; TEXT-DECORATION: none}
+
+TD {FONT-SIZE: 9pt; COLOR: black; FONT-FAMILY: arial;}
+P  {FONT-SIZE: 9pt; COLOR: black; FONT-FAMILY: arial}
+
+/* add by Nick 2022/4/8 */
+.ifm{
+	overflow: auto;
+	border: none;
+	width:100%;
+	margin: 0;
+}
+.qdata_ifm{
+	overflow: scroll;
+	border: none;
+	height:0%;
+	width:0%;
+}
+/* ==========end=========*/
+.header {
+	font-size: 1em;
+	color: #FFFFFF;
+	white-space: nowrap;
+	line-height: 25px;
+	background-color: #0099CC;
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	text-align: middle;
+}
+
+.must2 {
+	font-weight: bold;
+	text-align:left;
+	font-size: 1em;
+	COLOR: #FF0000;
+	LINE-HEIGHT: 20PX;
+	BACKGROUND-COLOR: #D0F3FD;
+	padding:4px;
+}
+
+.normal {
+	text-align:left;
+	font-size: 1em;
+	COLOR: #000000;
+	LINE-HEIGHT: 20PX;
+	BACKGROUND-COLOR: #D0F3FD;
+	padding:4px;
+}
+
+.content1 {
+	text-align:left;
+	font-size: 1em;
+	LINE-HEIGHT: 20PX;
+	BACKGROUND-COLOR: #FFFFFF;
+}
+.content {
+	font-size: 1em;
+	LINE-HEIGHT: 20PX;
+	BACKGROUND-COLOR: #FFFFFF;
+	padding:4;
+}
+.content select{
+	font-size: 1em;
+}
+.tb_title {
+	text-align:center;
+	font-weight: bold;
+	font-size: 1em;
+	COLOR: #000000;
+	LINE-HEIGHT: 20PX;
+	BACKGROUND-COLOR: #D0F3FD;
+	vertical-align: middle;
+}
+
+.tb_content {
+	font-size: 1em;
+	LINE-HEIGHT: 20PX;
+}
+.tab_button {
+ 	cursor: pointer;
+	FONT-SIZE: 12pt;
+	margin: .1em 0;
+	text-align: center;
+	font-family: Verdana,Arial,sans-serif;
+
+}
+.dis_button {
+	FONT-SIZE: 12pt;
+	margin: .1em 0;
+	text-align: center;
+	font-family: Verdana,Arial,sans-serif;
+	BACKGROUND-COLOR:white;
+	BORDER-bottom:none;
+}
+.title0 {
+	BACKGROUND-COLOR: #FFA488;
+}
+/* MODIFY BY EVAN 099.05.07 */
+.title1 {
+	/* font-weight: bold; */
+	color: #FFFFFF;
+	white-space: nowrap;
+	font-size: 13px;
+	line-height: 25px;
+	background-color: #0099CC;
+}
+/*
+	MODIFY BY EVAN 099.05.07
+*/
+.title2 {
+	text-align:left;
+	COLOR: #000000;
+	LINE-HEIGHT: 20PX;
+	BACKGROUND-COLOR: #ECE0F8;
+	padding:4px;
+}
+.title4 {
+	LINE-HEIGHT: 20PX;
+	BACKGROUND-COLOR: #FFFFFF;
+	padding:4px;
+}
+.title5 {
+	LINE-HEIGHT: 20PX;
+	BACKGROUND-COLOR: #D0A9F5;
+}
+.title6 {
+	color: #0000FF;
+	line-height: 18px;
+	BACKGROUND-COLOR: #FFFF80;
+}
+/*
+	MODIFY BY EVAN 099.05.07
+	MODIFY BY wayne 100.04.15
+*/
+
+.must {
+	text-align:left;
+	COLOR: #FF0000;
+	LINE-HEIGHT: 20PX;
+	BACKGROUND-COLOR: #ECE0F8;
+	padding:4px;
+}
+.tab{
+	cursor:hand;
+	color:#0000FF;
+	font-size:13px;
+	width:auto;
+	line-height: 20px;
+	border:0;
+	background-color:#FFFFFF;
+}
+.tabuc{
+	cursor:hand;
+	color:#0000FF;
+	font-size:13px;
+	width:auto;
+	line-height: 20px;
+	border:0;
+	align:center;
+	background-color:#FFBFBF;
+}
+.tabc{
+	cursor:hand;
+	color:#0000FF;
+	font-size:13px;
+	width:auto;
+	line-height: 20px;
+	border:0;
+	align:center;
+	background-color:#C1FFC1;
+}
+/* CREATE BY EVAN 099.05.07 */
+.page{
+	cursor:hand;
+	font-size:12px;
+	width:auto;
+	border:1px solid #5F5F5F;
+	margin:2px;
+	background-color:#FFFFFF;
+	padding-top:0px;
+	*padding-top:2px;
+}
+/* CREATE BY EVAN 099.05.07 */
+.page_fix1{
+	cursor:hand;
+	font-size:12px;
+	width:100px;
+	border:1px solid #5F5F5F;
+	margin:2px;
+	background-color:#FFFFFF;
+	padding-top:0px;
+	*padding-top:2px;
+}
+/* CREATE BY EVAN 099.05.07 */
+.page_fix2{
+	cursor:hand;
+	font-size:12px;
+	width:150px;
+	border:1px solid #5F5F5F;
+	margin:2px;
+	background-color:#FFFFFF;
+	padding-top:0px;
+	*padding-top:2px;
+}
+/* CREATE BY EVAN 099.05.07 */
+.page_fix3{
+	cursor:hand;
+	font-size:12px;
+	width:200px;
+	border:1px solid #5F5F5F;
+	margin:2px;
+	background-color:#FFFFFF;
+	padding-top:0px;
+	*padding-top:2px;
+}
+.tag_person
+{
+ font-size:11pt;
+ text-align:left;
+ font-weight:bold
+}
+.title_nob {
+	BACKGROUND-COLOR: #ffffff;
+	width:100%;
+	border:0;
+}
+/*
+	table style
+	MODIFY BY EVAN 099.05.07
+	MODIFY BY wayne 100.04.15
+	MODIFY BY Nick 105.04.15
+*/
+.titleb {
+	BACKGROUND-COLOR: #0099CC;
+	width:100%;
+	border: none;
+}
+
+.titlea {
+	BACKGROUND-COLOR: #0000FF;
+}
+.menu
+{
+	background-color: #ffffdf;
+	border-right:1 pt
+}
+
+.mouseoverhand {CURSOR: hand}
+
+.font1{font-size: 9pt; color: #FFFFFF;}
+
+.line1 {BACKGROUND-COLOR: #9ccf63}
+.submit {
+	BORDER-RIGHT: 0px; 
+	BORDER-TOP: 0px; 
+	FONT-SIZE: 9pt; 
+	BORDER-LEFT: 0px; 
+	COLOR: black; 
+	BORDER-BOTTOM: 0px; 
+	BACKGROUND-COLOR: #6699cc
+	}
+.input {
+	BORDER-RIGHT: #d2d2d2 1px solid; 
+	BORDER-TOP: #d2d2d2 1px solid; 
+	FONT-SIZE: 9pt; 
+	BORDER-LEFT: #d2d2d2 1px solid; 
+	COLOR: black; 
+	BORDER-BOTTOM: #d2d2d2 1px solid; 
+	HEIGHT: 20px
+	}
+.reset {
+	BORDER-RIGHT: 0px; 
+	BORDER-TOP: 0px; 
+	FONT-SIZE: 9pt; 
+	BORDER-LEFT: 0px; 
+	COLOR: white; 
+	BORDER-BOTTOM: 0px; 
+	BACKGROUND-COLOR: #6699cc
+	}
+.button {
+ 	cursor: pointer;
+	FONT-SIZE: 12pt;
+	margin: .1em 0;
+	text-align: center;
+	font-family: Verdana,Arial,sans-serif;
+
+	}
+.check {
+	BORDER-RIGHT: 0px; 
+	BORDER-TOP: 0px; 
+	BORDER-LEFT: 0px; 
+	BORDER-BOTTOM: 0px
+	}
+.radio {
+	BORDER-RIGHT: 0px; 
+	BORDER-TOP: 0px; 
+	BORDER-LEFT: 0px; 
+	BORDER-BOTTOM: 0px
+	}
+.textarea {
+	BORDER-RIGHT: #9ccf63 1px solid; 
+	BORDER-TOP: #9ccf63 1px solid; 
+	FONT-SIZE: 9pt; 
+	BORDER-LEFT: #9ccf63 1px solid; 
+	COLOR: black; 
+	BORDER-BOTTOM: #9ccf63 1px solid
+	}
+.label {
+	FONT-SIZE: 9pt; 
+	COLOR: black
+	}
+.item01 {COLOR: #6633ff}
+.text {
+	FONT-SIZE: 10pt; 
+	COLOR: black; 
+	height:22px;
+	/*BORDER-RIGHT: #d2d2d2 1px solid; 
+	BORDER-TOP: #d2d2d2 1px solid; 
+	FONT-SIZE: 9pt; 
+	BORDER-LEFT: #d2d2d2 1px solid; 
+	COLOR: black; 
+	BORDER-BOTTOM: #d2d2d2 1px solid*/
+	}
+.text1 {
+	font-family: "Verdana", "Arial", "Helvetica", "sans-serif";
+	font-weight: bold;
+	color: #CC3399;
+	}
+.pk {
+	BORDER-RIGHT: #d2d2d2 1px solid; 
+	BORDER-TOP: #d2d2d2 1px solid; 
+	BACKGROUND: #dcdcdc; 
+	BORDER-LEFT: #d2d2d2 1px solid; 
+	BORDER-BOTTOM: #d2d2d2 1px solid
+	}
+.pk2 
+{
+	BORDER-RIGHT: #d2d2d2 1px solid; 
+	BORDER-TOP: #d2d2d2 1px solid; 
+	BACKGROUND: #dcdcdc; 
+	BORDER-LEFT: #d2d2d2 1px solid; 
+	BORDER-BOTTOM: #d2d2d2 1px solid;
+	TEXT-ALIGN: right
+	}
+
+.auto {
+	BORDER-RIGHT: #d2d2d2 1px solid; 
+	BORDER-TOP: #d2d2d2 1px solid; 
+	FONT-SIZE: 9pt; 
+	BACKGROUND: #c0ffc0; 
+	BORDER-LEFT: #d2d2d2 1px solid; 
+	BORDER-BOTTOM: #d2d2d2 1px solid
+	}
+.number 
+{
+	BORDER-RIGHT: #d2d2d2 1px solid; 
+	BORDER-TOP: #d2d2d2 1px solid; 
+	BORDER-LEFT: #d2d2d2 1px solid; 
+	BORDER-BOTTOM: #d2d2d2 1px solid; 
+	BACKGROUND-COLOR: mistyrose; 
+	TEXT-ALIGN: right
+	}
+.month 
+{
+	BORDER-RIGHT: #d2d2d2 1px solid; 
+	BORDER-TOP: #d2d2d2 1px solid; 
+	BORDER-LEFT: #d2d2d2 1px solid; 
+	BORDER-BOTTOM: #d2d2d2 1px solid; 
+	BACKGROUND-COLOR: mistyrose; 
+	TEXT-ALIGN: right
+	}	
+.number2 
+{
+	BORDER-RIGHT: #d2d2d2 1px solid; 
+	BORDER-TOP: #d2d2d2 1px solid; 
+	BORDER-LEFT: #d2d2d2 1px solid; 
+	BORDER-BOTTOM: #d2d2d2 1px solid; 
+	BACKGROUND-COLOR: mistyrose; 
+	TEXT-ALIGN: right
+	}	
+.time {
+	BORDER-RIGHT: #d2d2d2 1px solid; 
+	BORDER-TOP: #d2d2d2 1px solid; 
+	BORDER-LEFT: #d2d2d2 1px solid; 
+	BORDER-BOTTOM: #d2d2d2 1px solid; 
+	BACKGROUND-COLOR: #d8d1d8
+	}
+.date {
+	BORDER-RIGHT: #d2d2d2 1px solid; 
+	BORDER-TOP: #d2d2d2 1px solid; 
+	/*BACKGROUND-IMAGE: url(../images/calendar1.gif);*/
+	BORDER-LEFT: #d2d2d2 1px solid; 
+	BORDER-BOTTOM: #d2d2d2 1px solid; 
+	BACKGROUND-REPEAT: no-repeat; 
+	BACKGROUND-COLOR: #ffffcc
+	}
+.ym
+{
+	border-right: #d2d2d2 1px solid;
+	border-top: #d2d2d2 1px solid;
+	border-left: #d2d2d2 1px solid;
+	border-bottom: #d2d2d2 1px solid;
+	background-color: #91C7FF; /*#ccdfda;*/
+}
+
+
+
+
+
+/*
+	MODIFY BY wayne 100.04.15
+*/
+.listMouOver {
+	LINE-HEIGHT: 20PX;
+	BACKGROUND-COLOR: #FFCCAA;
+}
+/*
+.listMouOver {
+	line-height: 18px;
+	background-color: #FFCCAA;
+}
+*/
+
+
+/*
+	MODIFY BY wayne 100.04.15
+*/
+.listMouOut {
+	LINE-HEIGHT: 20PX;
+	BACKGROUND-COLOR: #FFFFFF;
+}
+/*
+.listMouOut {
+	line-height: 18px;
+	background-color: #FFEEEE;
+}
+*/
+
+
+/*
+	MODIFY BY wayne 100.04.15
+*/
+.listClick {
+	LINE-HEIGHT: 20PX;
+	BACKGROUND-COLOR: #FFCCAA;
+}
+/*
+.listClick {
+	line-height: 18px;
+	background-color: #C0C0C0;
+}
+*/
+
+.trover {CURSOR: hand; BACKGROUND-COLOR: #FFF3E7}
+.trout {BACKGROUND-COLOR: #ffffff}
+.trover1 {BACKGROUND-COLOR: #FFF3E7}
+.trout1 {BACKGROUND-COLOR: #ffffff}
+.pk3
+{
+	border-right: #d2d2d2 1px solid;
+	border-top: #d2d2d2 1px solid;
+	background: #dcdcdc;
+	border-left: #d2d2d2 1px solid;
+	border-bottom: #d2d2d2 1px solid;
+	text-align: left;
+}
+/*��隤芣��*/
+.act_fnt
+{
+ color: blue;
+ font-weight:bold; 
+ background-color:#ffffff 
+}
+/*��隤芣��*/
+.act_fnt2
+{
+ /*font-family:璅扑擃�;*/
+ color: brown;
+}
+.act_fnt3
+{
+ /*font-family:璅扑擃�;*/
+ color: blue;
+ background-color:#ffffff 
+}
+.tag_key
+{ 
+  background-color: #fff7ec;
+  font-size:11pt  
+}
+.tax1
+{
+   BACKGROUND-COLOR: #ffffff;
+   font-size:10pt
+}
+.tag_upper
+{
+ text-transform:uppercase;
+ ime-mode:disabled
+}
+.tag_lower
+{
+ text-transform:lowercase
+}
+.TBCell {
+	background-color: #CCFF99;
+	color: blue;
+	font-size: 11pt;
+	text-align: center;
+	cursor: hand;
+	height: 25;
+	BORDER-RIGHT: #d2d2d2 3px solid;
+	BORDER-TOP: #d2d2d2 1px solid;
+	BORDER-LEFT: #d2d2d2 1px solid;
+	BORDER-BOTTOM: #d2d2d2 2px solid;
+}
+
+.btn_font1
+{
+  background-color: #CAE4E4;
+  font-size: 10pt;
+  color: #0200A0
+}
+/* text readonly 銝＊蝷箄撓�甈���*/
+.rdtext  
+{
+  border:none;
+  background-color:white;
+  /*width:100px;
+  text-align:center;*/
+  color:blue;
+  font-weight: bold;
+}
+/* number readonly 銝＊蝷箄撓�甈���*/
+.rdnum  
+{
+  border:none;
+  background-color:white;
+  /*width:100px;*/
+  text-align:right;
+  color:blue;
+  font-weight: bold;
+}
+/* text readonly 銝＊蝷箄撓�甈���*/
+.othmust  
+{
+  color:red;
+  font-weight:bold;   
+}
+/* By Nick */
+.tagselected {	
+	CURSOR: hand;
+	BACKGROUND-COLOR: #BBFFBB;
+	text-decoration: underline;
+	text-underline-style: single;
+	text-align: center;
+	color: #8EC68F;
+	height: 26;
+	font-size: 10pt;
+}
+.tagmouseout {
+	CURSOR: hand;
+	background-color: #CCFF99;
+	text-align: center;
+	height: 26;
+	font-size: 10pt;
+}
+.tagmouseon {
+	CURSOR: ;
+	background-color: #00FF40;
+	height:26;
+	text-align: center;
+	color:black;
+	font-weight:700;
+	font-size: 10pt;
+}
+
+/*DPNS  撠*/
+.menu_leftbg {
+	background-image: url(../img/m07.gif);
+	background-repeat: repeat-y;
+}
+.menu_bg {
+	background-image: url(../img/m05.gif);
+	background-repeat: no-repeat;
+	background-position: top;
+}
+
+.case_bg {
+	background-image: url(../img/b02.gif);
+	background-repeat: repeat-x;
+	background-position: center;
+}
+.top01 {
+	background-image: url(../img/top02.gif);
+	background-repeat: no-repeat;
+	background-color: #a3dbe0;
+}
+.top02 {
+	background-image: url(../img/top06.gif);
+	background-repeat: repeat-x;
+}
+.left_bg {
+	height: 100%;
+	background-color: #eff4f4;
+}
+.butonbg{
+	azimuth:right;
+	CLEAR: both;
+	margin-top:0px; margin-left:auto
+	margin-right:0px;
+	margin-bottom:0px;
+}
+
+.select { font-family: "Verdana", "Arial", "s?", "?"; font-size: 8pt; color: #32629E; background-color: #FFFFFF} 
+.item {
+	font-weight: bold;
+	color: #FFFFFF;
+	text-align: center;
+	white-space: nowrap;
+	font-size: 13px;
+	background-color: #09C;
+	line-height: 31px;
+}
+
+.select a:visited { font-family: "Verdana", "Arial", "s?", "?"; font-size: 8pt; color: #32629E; background-color: #FFFFFF} 
+.select a:hover { font-family: "Verdana", "Arial", "s?", "?"; font-size: 8pt; color: #0099CC; background-color: #FFFFFF} 
+.select a:link { font-family: "Verdana", "Arial", "s?", "?"; font-size: 8pt; color: #32629E; background-color: #FFFFFF} 
+.select-2 { font-family: "Verdana", "Arial", "s?", "?"; font-size: 8pt; color: #FFFFFF; background-color: #999999} 
+.textarea { font-family: "Verdana", "Arial", "s?", "?"; font-size: 8pt; color: #666666; background-color: #FFFFFF; border: 1px #ABACAC solid}
+.inpot {
+background-color:#ffffff;
+	color: #666666;
+	background-image: url(../img/inpot.gif);
+	background-repeat: no-repeat;
+	text-align: center;
+	line-height: 21px;
+	height: 21px;
+	width: 34px;
+	font-size: 12px;
+	border-style:none;
+}
+.gary_bg {
+	background-color: #F0F0F0;
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+
+.input_btn{
+background-color:#ffffff;
+	line-height: 19px;
+	color: #a69c78;
+	background-image: url(img/btn_bg.gif);
+	text-align: center;
+	height: 19px;
+	width: 58px;
+	border-style:none;
+	border-width:0px;
+}
+.import {
+	font-family: Verdana;
+	color: #666666;
+	letter-spacing: 1px;
+	border: 1px solid #E2E2E2;
+	font-size: 12px;
+	line-height: 17px;
+	height: 20px;
+	margin: 2px;
+}
+/*首頁公佈欄*/
+.case_top_left {
+	background-image: url(../img/case01.gif);
+	background-repeat: repeat-y;
+	background-position: top;
+}
+.case_top {
+	background-image: url(../img/case_topbg.gif);
+	background-repeat: repeat-x;
+	background-position: top;
+}
+.case_top_right {
+	background-image: url(../img/case02.gif);
+	bheight:100%;
+	background-position: top;
+}
+.case_left {
+	background-image: url(../img/case03.gif);
+	background-repeat: repeat-y;
+}
+.case_right {
+	background-image: url(../img/case04.gif);
+	background-repeat: repeat-y;
+}
+
+.point {
+	background-image: url(img/point.gif);
+	background-repeat: repeat-x;
+	background-position: center;
+}
+.point_big {
+	background-image: url(../img/point_2.gif);
+	background-repeat: repeat-x;
+}
+.line {
+	background-image: url(../img/line02.gif);
+	background-repeat: repeat-x;
+}
+.line_s {
+	background-image: url(../img/line_s.gif);
+	background-repeat: repeat-x;
+}
+.link-title {
+	font-size: 15px;
+	background-repeat: repeat-x;
+}
+.accordionDemo {
+	font-size: 15px;
+	background-repeat: repeat-x;
+}
+.ui-accordion-container {
+	font-size: 15px;
+	        margin-left:0px;
+	        padding:0px;
+}
+.ui-accordion-header {
+	font-size: 13px;
+	font-weight:bold;
+	text-decoration:none;
+	line-height:24pt;
+	padding-left:5px;
+	background-image: url(../img/02.jpg);
+	background-repeat: repeat-x;
+	width:100%;
+}
+.ui-accordion
+{height:500px;}
+.case_line {
+	background-image: url(../img/case_line.gif);
+	background-repeat: repeat-x;
+}
+.T10-b {
+	font-size: 15px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	line-height: 18px;
+	color: #635b3f;
+	letter-spacing: 1px;
+	font-weight: bold;
+}
+/* CREATE BY ben 099.06.10 */
+.transparent{
+	font-size: 12px;
+	border:none;
+	background-color:transparent;
+}
+
+.onBtn200{
+	CURSOR:HAND;
+	COLOR: #000000;
+	FONT-SIZE:14PX;
+	LINE-HEIGHT: 20PX;
+	WIDTH:200PX;
+	BORDER:1PX SOLID #5F5F5F;
+	MARGIN:2PX;
+	BACKGROUND-COLOR: #E3CEF6;
+	PADDING-TOP:0PX;
+}
+
+.othBtn200{
+	CURSOR:HAND;
+	COLOR: #000000;
+	FONT-SIZE:14PX;
+	LINE-HEIGHT: 20PX;
+	WIDTH:200PX;
+	BORDER:1PX SOLID #5F5F5F;
+	MARGIN:2PX;
+	BACKGROUND-COLOR: #FFFFFF;
+	PADDING-TOP:0PX;
+}
+.wrapper_running {
+	z-index:9999;
+	position: fixed; /*此行指定黑色背景區塊不會隨著網頁捲動而隨著移動*/
+	left: 0px; /*此行指定黑色背景區塊貼齊瀏覽器左方*/
+	top: 0px; /*此行指定黑色背景區塊貼齊瀏覽器上方*/
+	width: 100vw; /*此行指定黑色背景區塊的寬度為整個瀏覽器的寬度*/
+	height: 100vh; /*此行指定黑色背景區塊的高度為整個瀏覽器的高度*/
+	background-color: rgba(0,0,0,0.4); /*此行指定背景區塊的背景顏色40%的黑色*/
+	text-align: center; /*此行指定黑色背景區塊的內容會居中*/
+    /*
+	background: #aaaaaa url("images/ui-bg_flat_0_aaaaaa_40x100.png") 50% 50% repeat-x;
+	opacity: .3;
+	filter: Alpha(Opacity=30);
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height:100%;
+	*/
+}
+.message_running{
+	z-index:9990;
+	position:relative;
+	width: 280px;
+	height: 60px;
+	background-color:#ffffdd;
+	border-radius: 10px; /*此行指定內容區塊四個角落的圓角弧度*/
+	display: inline-block; /*此行指定內容區塊為行內但可設定寬高的模式*/
+	top:50%;
+}
+
+#backButton{
+	width:50px;
+	padding: 0px 5px;
+	border: 1px solid #000;
+	background-color: #fff;
+	cursor:pointer;
+	margin-bottom: 5px;
+}

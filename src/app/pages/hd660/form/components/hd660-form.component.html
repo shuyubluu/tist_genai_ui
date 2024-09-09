@@ -1,0 +1,73 @@
+<form [formGroup]="form">
+  <div class="grid-container">
+    <div class="grid-columns-2">
+      <div class="label">發佈日期</div>
+      <div><app-dayPicker formControlName="publicationDate" /></div>
+      <div class="label">發佈單位</div>
+      <div>
+        <app-select
+          [selectWidth]="'200px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_publishingUnit"
+          formControlName="publishingUnit"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-2">
+      <div class="label">主旨標題</div>
+      <div>
+        <app-input
+          [inputWidth]="'150px'"
+          [maxLength]="50"
+          formControlName="subjectTitle"
+        />
+      </div>
+      <div class="label">發佈人</div>
+      <!-- !TODO:自動代入填寫人 -->
+      <div>吳小美</div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">附件上傳</div>
+      <div>
+        <nz-upload
+          nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+          [nzFileList]="attachment_fileList"
+          (nzChange)="attachment_handleChange($event)"
+        >
+          <app-button [buttonText]="'上傳'" [attachClassName]="['success']" />
+        </nz-upload>
+      </div>
+    </div>
+    <div class="grid-columns-1 border-bottom-0">
+      <div class="label">公告內容</div>
+      <div>
+        <nz-textarea-count [nzMaxCharacterCount]="500" data-count="0/500">
+          <textarea
+            rows="4"
+            nz-input
+            [maxlength]="500"
+            formControlName="noticeContent"
+          ></textarea>
+        </nz-textarea-count>
+      </div>
+    </div>
+  </div>
+  <div class="buttonArea">
+    <app-button *ngIf="hd660ListService.isEdit" [buttonText]="'儲存'" />
+    <app-button
+      *ngIf="hd660ListService.isCreate"
+      [attachClassName]="['success']"
+      [buttonText]="'發佈'"
+    />
+    <app-button
+      *ngIf="hd660ListService.isEdit"
+      [attachClassName]="['warning']"
+      [buttonText]="'刪除'"
+    />
+    <app-button
+      [attachClassName]="['danger']"
+      [buttonText]="'關閉'"
+      (click)="closeTab('佈告欄維護表')"
+    />
+  </div>
+</form>
