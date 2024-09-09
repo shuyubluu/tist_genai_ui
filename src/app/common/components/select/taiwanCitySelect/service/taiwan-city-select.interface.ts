@@ -6,6 +6,7 @@ export interface Cities {
 export interface Districts {
   towncode: string;
   townname: string;
+  towncode01: string;
 }
 export interface Villages {
   villageId: string;

@@ -18,7 +18,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
  *
  * 隱藏鄉鎮市區及村里:
  * - [onlyCity]="true" (預設為false)
- * 
+ *
  * disabled 預設為false 可提供布林值 禁用輸入框;
  */
 

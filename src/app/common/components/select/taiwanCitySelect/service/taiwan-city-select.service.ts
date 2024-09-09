@@ -36,6 +36,7 @@ export class TaiwanCitySelectService {
   // 取得鄉鎮市區資料
   getDistrictData(countryCode: string): Observable<any> {
     this.countryCode = countryCode;
+
     return new Observable((observer) => {
       this.http
         .get(this.apiUrl_district + countryCode, { responseType: 'text' })

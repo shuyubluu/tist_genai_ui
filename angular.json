@@ -45,17 +45,10 @@
             "styles": [
               "src/styles.scss",
               "src/theme.scss",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/assets/css/basicg.css",
-              "src/assets/css/jquery-ui.min.css"
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
-              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
-              "src/assets/js/comm/jquery-3.6.0.min.js",
-              "src/assets/js/comm/diagram/lodash.js",
-              "src/assets/js/comm/diagram/backbone.js",
-              "src/assets/js/comm/diagram/joint.js",
-              "src/assets/js/comm/diagram/tist-diagram.js"
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
             ]
           },
           "configurations": {
