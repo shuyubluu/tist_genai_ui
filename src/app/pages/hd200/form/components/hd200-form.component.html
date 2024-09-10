@@ -37,9 +37,9 @@
       <div class="label">服務單位</div>
       <div class="column-Message">
         <app-select
-          [selectWidth]="'115px'"
+          [selectWidth]="'200px'"
           [defaultPlaceHolder]="false"
-          [options]="selectOptions_serviceUnit_1"
+          [options]="selectOptions_region"
           formControlName="serviceUnit_select1"
         />
         <app-error-message
@@ -50,9 +50,9 @@
           errorMessage="必選"
         />
         <app-select
-          [selectWidth]="'300px'"
+          [selectWidth]="'200px'"
           [defaultPlaceHolder]="false"
-          [options]="selectOptions_serviceUnit_2"
+          [options]="selectOptions_region"
           formControlName="serviceUnit_select2"
         />
         <app-error-message
@@ -65,7 +65,7 @@
         <app-select
           [selectWidth]="'200px'"
           [defaultPlaceHolder]="false"
-          [options]="selectOptions_serviceUnit_3"
+          [options]="selectOptions_region"
           formControlName="serviceUnit_select3"
         />
         <app-error-message
@@ -81,7 +81,7 @@
       <div class="label">單位名稱</div>
       <div class="column-Message">
         <app-select
-          [selectWidth]="'120px'"
+          [selectWidth]="'115px'"
           [defaultPlaceHolder]="false"
           [options]="selectOptions_unitName"
           formControlName="unitName"
@@ -729,12 +729,12 @@
       <div class="label">服務紀錄冊上傳</div>
       <div>
         <nz-upload
-        nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-        [nzFileList]="volunteerServiceRecord_fileList"
-        (nzChange)="volunteerServiceRecord_handleChange($event)"
-      >
-      <app-button [attachClassName]="['success']" [buttonText]="'上傳'" />
-    </nz-upload>
+          nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+          [nzFileList]="volunteerServiceRecord_fileList"
+          (nzChange)="volunteerServiceRecord_handleChange($event)"
+        >
+          <app-button [attachClassName]="['success']" [buttonText]="'上傳'" />
+        </nz-upload>
       </div>
     </div>
     <div class="grid-columns-1">

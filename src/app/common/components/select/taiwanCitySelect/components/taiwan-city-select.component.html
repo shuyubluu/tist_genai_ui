@@ -16,8 +16,8 @@
   (change)="onDistrictChange($event)"
 >
   <option value="">選擇鄉鎮市區</option>
-  <option *ngFor="let district of districts" [value]="district.towncode[0]">
-    {{ district.townname[0] }}
+  <option *ngFor="let district of districts" [value]="district.towncode01">
+    {{ district.townname }}
   </option>
 </select>
 

@@ -108,7 +108,7 @@
                 formControlName="passwordChangeInterval"
               />小時(含)內不可變更密碼
             </div>
-            <div nz-col>
+            <div nz-col class="my-2" nzSpan="24">
               <label nz-checkbox nzValue="4"></label>
               密碼變更時，不得重複前
               <app-input
@@ -171,5 +171,12 @@
       </div>
     </div>
   </div>
-  <div class="buttonArea"></div>
+  <div class="buttonArea">
+    <app-button [buttonText]="'保存'" (click)="save()" />
+    <app-button
+      [attachClassName]="['danger']"
+      [buttonText]="'關閉'"
+      (click)="closeTab('系統維護參數')"
+    />
+  </div>
 </form>

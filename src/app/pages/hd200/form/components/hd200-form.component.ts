@@ -52,8 +52,9 @@ export class Hd200FormComponent implements OnInit {
   currentSelectedDesiredServiceArea: string[] = [];
   // 用來暫存希望服務區域
   tempDesiredServiceArea: string[] = [];
-  // 服務單位select選項1
-  selectOptions_serviceUnit_1: string[] = [
+
+  // 單位名稱select選項
+  selectOptions_unitName: string[] = [
     '事業發展處',
     '臺北服務處',
     '新北服務處',
@@ -63,28 +64,9 @@ export class Hd200FormComponent implements OnInit {
     '高雄服務處',
     '屏東服務處',
   ];
-  // 服務單位select選項2
-  selectOptions_serviceUnit_2: string[] = [
-    '事業發展中心- 高齡友善推廣組(總會事業)',
-    '不老夢想-不老夢想號組(總會事業夢想)',
-    '松山社區服務中心- 社區服務組(台北社服松山)',
-    '五結社區服務中心- 社區服務組(台北社服五結)',
-    '桃園社區服務中心- 個案服務組(新北社服桃園)',
-    '新莊社區服務中心- 個案服務組(新北社服新莊)',
-    '西區社區服務中心- 個案服務組(台中社服西區)',
-    '台中中一區居家長照機構- 主任室(台中居一)',
-    '彰化社區服務中心- 社區服務北彰組(彰化社服彰化)',
-    '溪湖社區服務中心- 社區服務溪湖組(彰化社服溪湖)',
-    '溪湖社區服務中心- 社區服務南彰組(彰化社服溪湖)',
-    '大林社區服務中心- 社區服務大林組(嘉義社服大林)',
-    '市區社區服務中心- 社區服務市區組(嘉義社服市區)',
-    '不老食光- 不老食光鼓山店(高雄)',
-    '左營社區服務中心- 個案服務組(高雄社服左營)',
-    '前金社區服務中心- 社區服務組(高雄社服前金)',
-    '潮州社區服務中心- 個案服務組(屏東社服潮州)',
-  ];
-  // 服務單位select選項3
-  selectOptions_serviceUnit_3: string[] = [
+
+  // 服務單位select選項
+  selectOptions_region: string[] = [
     '彭祖體驗長者導師志工隊',
     '不老夢想125號志工隊',
     '北投(北投志工站)',
@@ -122,8 +104,6 @@ export class Hd200FormComponent implements OnInit {
     '潮州(潮州志工站)',
     '林邊(林邊志工站)',
   ];
-  // 單位名稱select選項
-  selectOptions_unitName: string[] = ['單位1', '單位2', '單位3'];
   // 志工狀態select選項
   selectOptions_volunteerStatus: string[] = [
     '暫停中',

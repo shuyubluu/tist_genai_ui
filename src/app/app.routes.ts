@@ -128,6 +128,12 @@ export const routes: Routes = [
         data: { tabName: '服務時數管理' },
       },
       {
+        path: 'hd640',
+        loadChildren: () =>
+          import('./pages/hd640/hd640.routes').then((m) => m.HD640_ROUTES),
+        data: { tabName: '社工帳號管理清單' },
+      },
+      {
         path: 'hd650',
         loadChildren: () =>
           import('./pages/hd650/hd650.routes').then((m) => m.HD650_ROUTES),

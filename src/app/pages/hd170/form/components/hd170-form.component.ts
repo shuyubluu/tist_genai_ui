@@ -14,6 +14,7 @@ import { CaseInformationService } from '../../../../common/components/caseInform
 import { TaiwanCitySelectComponent } from '../../../../common/components/select/taiwanCitySelect/components/taiwan-city-select.component';
 import { EmergencyContact } from '../service/hd170-form.interface';
 import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
+import { taiwanHomePhoneValidator } from '../../../../common/validator/taiwan-phone-validators';
 
 @Component({
   selector: 'app-hd170-form',

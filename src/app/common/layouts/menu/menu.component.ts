@@ -79,11 +79,17 @@ export class MenuComponent implements OnInit {
         title: '系統管理權限',
         icon: 'setting',
         children: [
-          { title: '01- 社工基本資料維護', open: false, link: '/hd600' },
+          { title: '01- 保險公司代碼維護', open: false, link: '/hd600' },
           { title: '02- 組織單位資料維護', open: false, link: '/hd610' },
           { title: '03- 角色權限資料維護', open: false, link: '/hd620' },
           { title: '04- 系統功能權限維護', open: false, link: '/hd630' },
-          { title: '05- 帳號管理', open: false, link: '/hd640' },
+          {
+            title: '05- 帳號管理',
+            children: [
+              { title: '社工帳號管理', icon: 'robot', link: '/hd640' },
+              // { title: '社工員', icon: 'user', link: '#' },
+            ],
+          },
           { title: '06- 系統參數維護', open: false, link: '/hd650' },
           { title: '07- 佈告欄維護', open: false, link: '/hd660' },
         ],
