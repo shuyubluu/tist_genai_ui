@@ -257,7 +257,12 @@ export class Hd250FormComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // 檢視模式，禁用表單
+    if (this.hd250ListService.isView) {
+      this.form.disable();
+    }
+  }
 
   // 完成送審
   review() {

@@ -159,11 +159,15 @@ export class Hd640ListComponent implements OnInit {
     this.router.navigate(['/hd640/form']);
     this.hd640ListService.isCreate = true;
     this.hd640ListService.isEdit = false;
+    this.hd640ListService.isView = false;
   }
 
   // 檢視社工資料
   view() {
     this.router.navigate(['/hd640/form']);
+    this.hd640ListService.isCreate = false;
+    this.hd640ListService.isEdit = false;
+    this.hd640ListService.isView = true;
   }
 
   // 編輯社工資料
@@ -171,6 +175,7 @@ export class Hd640ListComponent implements OnInit {
     this.router.navigate(['/hd640/form']);
     this.hd640ListService.isCreate = false;
     this.hd640ListService.isEdit = true;
+    this.hd640ListService.isView = false;
   }
 
   // 關閉當前的tab

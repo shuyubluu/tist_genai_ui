@@ -1,3 +1,4 @@
+import { Hd160ListService } from './../service/hd160-list.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
@@ -10,7 +11,7 @@ import { TabService } from '../../../../common/layouts/tab/tab.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { SearchResultData } from '../service/hd160-list.interface';
 import { CaseInformationComponent } from '../../../../common/components/caseInformation/components/case-information.component';
-import { CaseInformationService } from '../../../../common/components/caseInformation/serivce/case-information.service';
+import { CaseInformationService } from '../../../../common/components/caseInformation/service/case-information.service';
 
 @Component({
   selector: 'app-hd160-list',
@@ -59,7 +60,8 @@ export class Hd160ListComponent implements OnInit {
   constructor(
     private tabService: TabService, // 關閉tab的Service
     private router: Router, // 路由
-    public caseInformationService: CaseInformationService // caseInformationService
+    public caseInformationService: CaseInformationService, // caseInformationService
+    private hd160ListService: Hd160ListService // hd160ListService
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
@@ -82,18 +84,27 @@ export class Hd160ListComponent implements OnInit {
   view() {
     this.router.navigate(['/hd160/form']);
     this.caseInformationService.isChoiceCase = true;
+    this.hd160ListService.isCreate = false;
+    this.hd160ListService.isEdit = false;
+    this.hd160ListService.isView = true;
   }
 
   // 編輯
   edit() {
     this.router.navigate(['/hd160/form']);
     this.caseInformationService.isChoiceCase = true;
+    this.hd160ListService.isEdit = true;
+    this.hd160ListService.isCreate = false;
+    this.hd160ListService.isView = false;
   }
 
   // 新增個案資料
   create() {
     this.router.navigate(['/hd160/form']);
     this.caseInformationService.isChoiceCase = false;
+    this.hd160ListService.isEdit = false;
+    this.hd160ListService.isCreate = true;
+    this.hd160ListService.isView = false;
   }
 
   // 關閉生活品質問卷清單

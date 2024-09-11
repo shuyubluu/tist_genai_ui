@@ -112,6 +112,7 @@ export class Hd270ListComponent implements OnInit {
   async create() {
     await this.router.navigate(['/hd270/form']);
     this.hd270ListService.isCreate = true;
+    this.hd270ListService.isSurrender = false;
   }
   // 檢視
   view() {
@@ -122,6 +123,7 @@ export class Hd270ListComponent implements OnInit {
   async surrender() {
     await this.router.navigate(['/hd270/form']);
     this.hd270ListService.isCreate = false;
+    this.hd270ListService.isSurrender = true;
   }
 
   // 關閉當前的tab

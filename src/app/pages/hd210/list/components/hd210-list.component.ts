@@ -86,6 +86,7 @@ export class Hd210ListComponent {
     await this.router.navigate(['/hd210/form']);
     this.volunteerInformationService.isChoiceVolunteer = true;
     this.hd210ListService.isCreate = true;
+    this.hd210ListService.isView = false;
   }
 
   // 檢視
@@ -93,6 +94,7 @@ export class Hd210ListComponent {
     await this.router.navigate(['/hd210/form']);
     this.volunteerInformationService.isChoiceVolunteer = true;
     this.hd210ListService.isCreate = false;
+    this.hd210ListService.isView = true;
   }
 
   // 關閉教育訓練清單

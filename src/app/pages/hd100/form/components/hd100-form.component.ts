@@ -1,5 +1,5 @@
+import { Hd100ListService } from './../../list/service/hd100-list.service';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
 import { InputComponent } from '../../../../common/components/input/input.component';
 import { SelectComponent } from '../../../../common/components/select/select.component';
@@ -10,8 +10,9 @@ import { TabService } from '../../../../common/layouts/tab/tab.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ErrorMessageComponent } from '../../../../common/components/message/error-message.component';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { CaseInformationService } from '../../../../common/components/caseInformation/serivce/case-information.service';
+import { CaseInformationService } from '../../../../common/components/caseInformation/service/case-information.service';
 import { CaseInformationComponent } from '../../../../common/components/caseInformation/components/case-information.component';
+import { Hd180ListService } from '../../../hd180/list/service/hd180-list.service';
 
 @Component({
   selector: 'app-hd100-form',
@@ -47,7 +48,8 @@ export class Hd100FormComponent implements OnInit {
   constructor(
     private tabService: TabService, // 關閉tab的Service
     private message: NzMessageService, // 訊息
-    public caseInformationService: CaseInformationService // caseInformationService
+    public caseInformationService: CaseInformationService, // caseInformationService
+    public hd180ListService: Hd180ListService // hd180ListService
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
@@ -69,6 +71,10 @@ export class Hd100FormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // 檢視模式，禁用表單
+    if (this.hd180ListService.isView) {
+      this.form.disable();
+    }
     // 禁用填表日期選擇
     this.form.get('formFillingDate')?.disable();
     // 禁用結案原因其他輸入框

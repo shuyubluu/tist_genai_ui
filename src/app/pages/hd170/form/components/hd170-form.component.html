@@ -25,7 +25,6 @@
           [maxLength]="11"
           formControlName="unitPhone"
         />
-
       </div>
       <div class="label disableBackground">傳真</div>
       <div>
@@ -166,26 +165,50 @@
     <div class="grid-columns-2">
       <div class="label disableBackground">家系圖</div>
       <div>
-        <app-button [buttonText]="'繪製'" />
+        <app-button
+          [disabled]="hd170ListService.isView"
+          [attachClassName]="
+            hd170ListService.isView ? ['secondary'] : ['primary']
+          "
+          [buttonText]="'繪製'"
+        />
         <nz-upload
           nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
           [nzFileList]="familyTree_fileList"
           (nzChange)="familyTree_handleChange($event)"
         >
-          <app-button [attachClassName]="['success']" [buttonText]="'匯入'" />
+          <app-button
+            [disabled]="hd170ListService.isView"
+            [attachClassName]="
+              hd170ListService.isView ? ['secondary'] : ['success']
+            "
+            [buttonText]="'匯入'"
+          />
         </nz-upload>
         <!-- <app-button [attachClassName]="['danger']" [buttonText]="'匯出'" /> -->
         <!-- !TODO -->
       </div>
       <div class="label disableBackground">生態圖</div>
       <div>
-        <app-button [buttonText]="'繪製'" />
+        <app-button
+          [disabled]="hd170ListService.isView"
+          [attachClassName]="
+            hd170ListService.isView ? ['secondary'] : ['primary']
+          "
+          [buttonText]="'繪製'"
+        />
         <nz-upload
           nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
           [nzFileList]="ecologicalMap_fileList"
           (nzChange)="ecologicalMap_handleChange($event)"
         >
-          <app-button [attachClassName]="['success']" [buttonText]="'匯入'" />
+          <app-button
+            [disabled]="hd170ListService.isView"
+            [attachClassName]="
+              hd170ListService.isView ? ['secondary'] : ['success']
+            "
+            [buttonText]="'匯入'"
+          />
         </nz-upload>
         <!-- <app-button [attachClassName]="['danger']" [buttonText]="'匯出'" /> -->
         <!-- !TODO -->
@@ -336,8 +359,13 @@
   </div>
   <div class="buttonArea">
     <!-- !TODO -->
-    <app-button [buttonText]="'儲存'" (click)="save()" />
     <app-button
+      *ngIf="hd170ListService.isEdit"
+      [buttonText]="'儲存'"
+      (click)="save()"
+    />
+    <app-button
+      *ngIf="hd170ListService.isCreate"
       [attachClassName]="['success']"
       [buttonText]="'送審'"
       (click)="review()"

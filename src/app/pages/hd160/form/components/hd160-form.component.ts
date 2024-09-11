@@ -10,7 +10,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ErrorMessageComponent } from '../../../../common/components/message/error-message.component';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { CaseInformationComponent } from '../../../../common/components/caseInformation/components/case-information.component';
-import { CaseInformationService } from '../../../../common/components/caseInformation/serivce/case-information.service';
+import { CaseInformationService } from '../../../../common/components/caseInformation/service/case-information.service';
+import { Hd160ListService } from '../../list/service/hd160-list.service';
 
 @Component({
   selector: 'app-hd160-form',
@@ -43,7 +44,8 @@ export class Hd160FormComponent implements OnInit {
   constructor(
     private tabService: TabService, // 關閉tab的Service
     private message: NzMessageService, // 訊息
-    public caseInformationService: CaseInformationService // caseInformationService
+    public caseInformationService: CaseInformationService, // caseInformationService
+    public hd160ListService: Hd160ListService // hd160ListService
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
@@ -77,6 +79,10 @@ export class Hd160FormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // 檢視模式，禁用表單
+    if (this.hd160ListService.isView) {
+      this.form.disable();
+    }
     // 禁用個案姓名輸入框
     this.form.get('caseName')?.disable();
   }
@@ -159,6 +165,11 @@ export class Hd160FormComponent implements OnInit {
     return this.getScore(option);
   }
 
+  // 暫存草稿
+  send() {
+    this.message.create('success', '送出成功');
+    this.closeTab('生活品質問卷');
+  }
   // 暫存草稿
   save() {
     this.message.create('success', '儲存成功');

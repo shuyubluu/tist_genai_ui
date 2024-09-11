@@ -11,7 +11,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ErrorMessageComponent } from '../../../../common/components/message/error-message.component';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { CaseInformationComponent } from '../../../../common/components/caseInformation/components/case-information.component';
-import { CaseInformationService } from '../../../../common/components/caseInformation/serivce/case-information.service';
+import { CaseInformationService } from '../../../../common/components/caseInformation/service/case-information.service';
+import { Hd150ListService } from '../../list/service/hd150-list.service';
 
 @Component({
   selector: 'app-hd150-form',
@@ -43,7 +44,8 @@ export class Hd150FormComponent implements OnInit {
     private tabService: TabService, // 關閉tab的Service
     private router: Router, // 路由
     private message: NzMessageService, // 訊息
-    public caseInformationService: CaseInformationService // caseInformationService
+    public caseInformationService: CaseInformationService, // caseInformationService
+    public hd150ListService: Hd150ListService // hd150ListService
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
@@ -192,6 +194,10 @@ export class Hd150FormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // 檢視模式，禁用表單
+    if (this.hd150ListService.isView) {
+      this.form.disable();
+    }
     // 禁用個案姓名
     this.form.get('caseName')?.disable();
     // 禁用經濟需求其他
@@ -204,7 +210,7 @@ export class Hd150FormComponent implements OnInit {
 
   // 暫存草稿
   save() {
-    this.message.create('success', '草稿暫存成功');
+    this.message.create('success', '儲存存成功');
     if (this.form.get('visitOutcome')?.value === '結案') {
       this.router.navigate(['/hd100/form']);
     }

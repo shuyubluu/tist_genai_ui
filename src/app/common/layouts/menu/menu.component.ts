@@ -56,7 +56,35 @@ export class MenuComponent implements OnInit {
       {
         title: '報表專區',
         icon: 'reconciliation',
-        link: '#',
+        children: [
+          {
+            title: '01- 表單匯入',
+            children: [
+              { title: '志工教育訓練', icon: 'file-add', link: '/hd300' },
+              { title: '志工獎勵', icon: 'file-add', link: '/hd301' },
+              { title: '志工時數', icon: 'file-add', link: '/hd302' },
+              { title: '志願服務品質評估表', icon: 'file-add', link: '/hd303' },
+              { title: '個案基本資料表', icon: 'file-add', link: '/hd304' },
+              { title: '個案生活品質量表', icon: 'file-add', link: '/hd305' },
+            ],
+          },
+          {
+            title: '02- 表單匯出',
+            children: [
+              { title: '志工基本資料表', icon: 'export', link: '/hd306' },
+              { title: '志工教育時數', icon: 'export', link: '/hd307' },
+              { title: '志工時數', icon: 'export', link: '/hd308' },
+              { title: '志願服務績效證明書', icon: 'export', link: '/hd309' },
+              { title: '志工考核表', icon: 'export', link: '/hd310' },
+              { title: '志工紀錄冊', icon: 'export', link: '/hd311' },
+              { title: '個案基本資料表', icon: 'export', link: '/hd312' },
+              { title: '個案訪視紀錄', icon: 'export', link: '/hd313' },
+              { title: '個案清冊', icon: 'export', link: '/hd314' },
+              { title: '服務紀錄清冊', icon: 'export', link: '/hd315' },
+              { title: '個案生活品質量表清冊', icon: 'export', link: '/hd316' },
+            ],
+          },
+        ],
       },
       {
         title: '簽核專區',

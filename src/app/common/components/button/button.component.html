@@ -1,7 +1,7 @@
 <!-- <button nz-button nzSize="large" nzOutline><img src="../../../../../assets/img/button/magnifier.png" alt="icon"
         class="button-icon" />{{ buttonText }}</button> -->
 
-<button [ngClass]="getAttachClass()">
+<button [ngClass]="getAttachClass()" [disabled]="disabled">
   <!-- <ng-container *ngIf="withIcon"><img [src]="getIconClass()" class="button-icon" /></ng-container> -->
   {{ buttonText }}
 </button>

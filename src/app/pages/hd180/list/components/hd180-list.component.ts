@@ -1,3 +1,4 @@
+import { Hd180ListService } from './../service/hd180-list.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
@@ -10,7 +11,8 @@ import { TabService } from '../../../../common/layouts/tab/tab.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { SearchResultData } from '../service/hd180-list.interface';
 import { CaseInformationComponent } from '../../../../common/components/caseInformation/components/case-information.component';
-import { CaseInformationService } from '../../../../common/components/caseInformation/serivce/case-information.service';
+import { CaseInformationService } from '../../../../common/components/caseInformation/service/case-information.service';
+import { Hd100ListService } from '../../../hd100/list/service/hd100-list.service';
 
 @Component({
   selector: 'app-hd180-list',
@@ -55,7 +57,8 @@ export class Hd180ListComponent implements OnInit {
   constructor(
     private tabService: TabService, // 關閉tab的Service
     private router: Router, // 路由
-    public caseInformationService: CaseInformationService // caseInformationService
+    public caseInformationService: CaseInformationService, // caseInformationService
+    private hd180ListService: Hd180ListService // hd180ListService
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
@@ -83,6 +86,9 @@ export class Hd180ListComponent implements OnInit {
     await this.router.navigate(['/hd100/form']);
     this.closeTab('個案結案名冊');
     this.caseInformationService.isChoiceCase = true;
+    this.hd180ListService.isEdit = false;
+    this.hd180ListService.isView = true;
+    this.hd180ListService.isCanReview = false;
   }
 
   // 編輯
@@ -90,6 +96,9 @@ export class Hd180ListComponent implements OnInit {
     await this.router.navigate(['/hd100/form']);
     this.closeTab('個案結案名冊');
     this.caseInformationService.isChoiceCase = true;
+    this.hd180ListService.isEdit = true;
+    this.hd180ListService.isView = false;
+    this.hd180ListService.isCanReview = false;
   }
 
   // 關閉個案結案名冊

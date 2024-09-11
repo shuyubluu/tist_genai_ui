@@ -1,8 +1,9 @@
+import { Hd180ListService } from './../../../../pages/hd180/list/service/hd180-list.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { SharedModule } from '../../../shared/shared.module';
 import { ButtonComponent } from '../../button/button.component';
 import { InputComponent } from '../../input/input.component';
-import { CaseInformationService } from '../serivce/case-information.service';
+import { CaseInformationService } from '../service/case-information.service';
 import { Router } from '@angular/router';
 import { TabService } from '../../../layouts/tab/tab.service';
 
@@ -20,7 +21,8 @@ export class CaseInformationComponent implements OnInit {
   constructor(
     public caseInformationService: CaseInformationService, // caseInformationService
     public router: Router, // 路由
-    private tabService: TabService // 關閉tab的Service
+    private tabService: TabService, // 關閉tab的Service
+    private hd180ListService: Hd180ListService // hd180ListService
   ) {}
 
   ngOnInit(): void {}
@@ -95,6 +97,8 @@ export class CaseInformationComponent implements OnInit {
 
   // 前往hd100Form
   async goToHd100Form() {
+    this.hd180ListService.isEdit = true;
+    this.hd180ListService.isCanReview = true;
     await this.router.navigate(['/hd100/form']);
     if (this.currentTab !== '個案結案表') {
       this.closeTab(this.currentTab);

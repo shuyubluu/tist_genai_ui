@@ -9,4 +9,6 @@ export class Hd640ListService {
   isCreate: boolean = false;
   // 編輯模式
   isEdit: boolean = false;
+  // 檢視模式
+  isView: boolean = false;
 }

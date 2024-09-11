@@ -344,32 +344,50 @@
         >
           <div nz-row>
             <div nz-col>
-              <label nz-checkbox nzValue="1" [nzDisabled]="isDisableNone"
+              <label
+                nz-checkbox
+                nzValue="1"
+                [nzDisabled]="isDisableNone || hd100ListService.isView"
                 >無</label
               >
             </div>
             <div nz-col>
-              <label nz-checkbox nzValue="2" [nzDisabled]="isDisableNoneOthers"
+              <label
+                nz-checkbox
+                nzValue="2"
+                [nzDisabled]="isDisableNoneOthers || hd100ListService.isView"
                 >身心障礙</label
               >
             </div>
             <div nz-col>
-              <label nz-checkbox nzValue="3" [nzDisabled]="isDisableNoneOthers"
+              <label
+                nz-checkbox
+                nzValue="3"
+                [nzDisabled]="isDisableNoneOthers || hd100ListService.isView"
                 >原住民</label
               >
             </div>
             <div nz-col>
-              <label nz-checkbox nzValue="4" [nzDisabled]="isDisableNoneOthers"
+              <label
+                nz-checkbox
+                nzValue="4"
+                [nzDisabled]="isDisableNoneOthers || hd100ListService.isView"
                 >新住民</label
               >
             </div>
             <div nz-col>
-              <label nz-checkbox nzValue="5" [nzDisabled]="isDisableNoneOthers"
+              <label
+                nz-checkbox
+                nzValue="5"
+                [nzDisabled]="isDisableNoneOthers || hd100ListService.isView"
                 >榮民</label
               >
             </div>
             <div nz-col>
-              <label nz-checkbox nzValue="6" [nzDisabled]="isDisableNoneOthers"
+              <label
+                nz-checkbox
+                nzValue="6"
+                [nzDisabled]="isDisableNoneOthers || hd100ListService.isView"
                 >榮眷</label
               >
             </div>
@@ -593,7 +611,11 @@
   </div>
   <div class="buttonArea">
     <!-- !TODO -->
-    <app-button [buttonText]="'儲存'" (click)="save()" />
+    <app-button
+      *ngIf="!hd100ListService.isView"
+      [buttonText]="'儲存'"
+      (click)="save()"
+    />
     <app-button
       *ngIf="!caseInformationService.isChoiceCase"
       (click)="onNextPage()"

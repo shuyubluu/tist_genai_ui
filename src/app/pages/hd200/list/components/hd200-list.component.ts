@@ -1,3 +1,4 @@
+import { Hd200ListService } from './../service/hd200-list.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
@@ -95,7 +96,8 @@ export class Hd200ListComponent implements OnInit {
   constructor(
     private tabService: TabService, // 關閉tab的Service
     private router: Router, // 路由
-    public volunteerInformationService: VolunteerInformationService // volunteerInformationService
+    public volunteerInformationService: VolunteerInformationService, // volunteerInformationService
+    private hd200ListService: Hd200ListService // hd200ListService
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
@@ -124,18 +126,27 @@ export class Hd200ListComponent implements OnInit {
   async create() {
     await this.router.navigate(['/hd200/form']);
     this.volunteerInformationService.isChoiceVolunteer = false;
+    this.hd200ListService.isCreate = true;
+    this.hd200ListService.isEdit = false;
+    this.hd200ListService.isView = false;
   }
 
   // 檢視
   async view() {
     await this.router.navigate(['/hd200/form']);
     this.volunteerInformationService.isChoiceVolunteer = true;
+    this.hd200ListService.isCreate = false;
+    this.hd200ListService.isEdit = false;
+    this.hd200ListService.isView = true;
   }
 
   // 編輯
   async edit() {
     await this.router.navigate(['/hd200/form']);
     this.volunteerInformationService.isChoiceVolunteer = true;
+    this.hd200ListService.isCreate = false;
+    this.hd200ListService.isEdit = true;
+    this.hd200ListService.isView = false;
   }
 
   // 關閉志工資料清單

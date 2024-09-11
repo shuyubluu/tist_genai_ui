@@ -1,4 +1,3 @@
-import { Hd280ListService } from './../service/hd280-list.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
@@ -11,6 +10,7 @@ import { TabService } from '../../../../common/layouts/tab/tab.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { SearchResultData } from '../service/hd280-list.interface';
 import { VolunteerInformationService } from '../../../../common/components/volunteerInformation/service/volunteer-information.service';
+import { Hd230ListService } from '../../../hd230/list/service/hd230-list.service';
 
 @Component({
   selector: 'app-hd280-list',
@@ -93,7 +93,7 @@ export class Hd280ListComponent implements OnInit {
   constructor(
     private tabService: TabService, // 關閉tab的Service
     private router: Router, // 路由
-    private hd280ListService: Hd280ListService, // Hd280ListService
+    private hd230ListService: Hd230ListService, // hd230ListService
     public volunteerInformationService: VolunteerInformationService // volunteerInformationService
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
@@ -123,7 +123,9 @@ export class Hd280ListComponent implements OnInit {
   async create() {
     await this.router.navigate(['/hd280/form']);
     this.volunteerInformationService.isChoiceVolunteer = false;
-    this.hd280ListService.isCreate = true;
+    this.hd230ListService.isCreate = true;
+    this.hd230ListService.isView = false;
+    this.hd230ListService.isEdit = false;
   }
 
   // 檢視

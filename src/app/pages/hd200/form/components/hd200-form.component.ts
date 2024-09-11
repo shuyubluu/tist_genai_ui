@@ -20,6 +20,7 @@ import {
 } from '../../../../common/validator/taiwan-phone-validators';
 import { TaiwanCitySelectRadioComponent } from '../../../../common/components/select/taiwanCitySelect_radio/components/taiwan-city-select-radio.component';
 import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
+import { Hd200ListService } from '../../list/service/hd200-list.service';
 
 @Component({
   selector: 'app-hd200-form',
@@ -298,7 +299,7 @@ export class Hd200FormComponent implements OnInit {
     private tabService: TabService, // 關閉tab的Service
     private message: NzMessageService, // 訊息
     public volunteerInformationService: VolunteerInformationService, // volunteerInformationService
-    private msg: NzMessageService // NzMessageService
+    public hd200ListService: Hd200ListService // hd200ListService
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
@@ -433,6 +434,10 @@ export class Hd200FormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // 檢視模式，禁用表單'
+    if (this.hd200ListService.isView) {
+      this.form.disable();
+    }
     // 禁用語言其他
     this.form.get('languages_other')?.disable();
     // 禁用宗教信仰其他
@@ -558,9 +563,15 @@ export class Hd200FormComponent implements OnInit {
     this.message.error('操作取消');
   }
 
-  // 暫存草稿
+  // 儲存
   save() {
     this.message.create('success', '儲存成功');
+  }
+
+  // 新增
+  create() {
+    this.message.create('success', '新增成功');
+    this.closeTab('志工基本資料');
   }
 
   // 關閉志工基本資料
@@ -571,9 +582,9 @@ export class Hd200FormComponent implements OnInit {
   // 服務紀錄測上傳點擊事件
   volunteerServiceRecord_handleChange(info: NzUploadChangeParam): void {
     if (info.file.status === 'done') {
-      this.msg.success(`${info.file.name} 上傳成功`);
+      this.message.success(`${info.file.name} 上傳成功`);
     } else if (info.file.status === 'error') {
-      this.msg.error(`${info.file.name} 上傳失敗.`);
+      this.message.error(`${info.file.name} 上傳失敗.`);
     }
   }
 }

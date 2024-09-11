@@ -134,15 +134,24 @@
   </div>
   <div class="buttonArea">
     <app-button
+      *ngIf="hd230ListService.isEdit"
+      [buttonText]="'儲存'"
+      (click)="save()"
+    />
+    <app-button
       *ngIf="
-        hd280ListService.isCreate &&
+        hd230ListService.isCreate &&
         !volunteerInformationService.isChoiceVolunteer
       "
       [attachClassName]="['success']"
       [buttonText]="'新增'"
       (click)="create()"
     />
-    <app-button [attachClassName]="['warning']" [buttonText]="'刪除'" />
+    <app-button
+      *ngIf="hd230ListService.isEdit"
+      [attachClassName]="['warning']"
+      [buttonText]="'刪除'"
+    />
     <app-button
       [attachClassName]="['danger']"
       [buttonText]="'關閉'"

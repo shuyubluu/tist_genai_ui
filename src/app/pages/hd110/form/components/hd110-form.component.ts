@@ -1,3 +1,4 @@
+import { Hd100ListService } from './../../../hd100/list/service/hd100-list.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
@@ -19,7 +20,7 @@ import { TaiwanCitySelectComponent } from '../../../../common/components/select/
 import { TabService } from '../../../../common/layouts/tab/tab.service';
 import { NzModalModule, NzModalService } from 'ng-zorro-antd/modal';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { CaseInformationService } from '../../../../common/components/caseInformation/serivce/case-information.service';
+import { CaseInformationService } from '../../../../common/components/caseInformation/service/case-information.service';
 import { CaseInformationComponent } from '../../../../common/components/caseInformation/components/case-information.component';
 
 @Component({
@@ -145,7 +146,8 @@ export class Hd110FormComponent implements OnInit {
     private router: Router, // 路由
     private modal: NzModalService, // 彈窗
     private message: NzMessageService, // 訊息
-    public caseInformationService: CaseInformationService // caseInformationService
+    public caseInformationService: CaseInformationService, // caseInformationService
+    public hd100ListService: Hd100ListService // hd100ListService
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
@@ -241,6 +243,10 @@ export class Hd110FormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // 檢視模式下禁用表單
+    if (this.hd100ListService.isView) {
+      this.form.disable();
+    }
     if (this.isReferral === false) {
       this.form.get('referralUnit')?.reset();
       this.form.get('contactPerson')?.reset();

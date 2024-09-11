@@ -83,6 +83,10 @@ export class Hd260FormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // 若不是從志工管理頁簽進入，則禁用表單
+    if (!this.volunteerInformationService.isChoiceVolunteer) {
+      this.form.disable();
+    }
     // 禁用志工制服數量
     // this.form.get('volunteerUniformCount')?.disable();
   }

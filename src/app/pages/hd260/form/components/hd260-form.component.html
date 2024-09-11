@@ -72,13 +72,28 @@
         >
           <div nz-row>
             <div nz-col>
-              <label nz-checkbox nzValue="1">志工證</label>
+              <label
+                nz-checkbox
+                [nzDisabled]="!volunteerInformationService.isChoiceVolunteer"
+                nzValue="1"
+                >志工證</label
+              >
             </div>
             <div nz-col>
-              <label nz-checkbox nzValue="2">志工背心</label>
+              <label
+                nz-checkbox
+                [nzDisabled]="!volunteerInformationService.isChoiceVolunteer"
+                nzValue="2"
+                >志工背心</label
+              >
             </div>
             <div nz-col>
-              <label nz-checkbox nzValue="3">志工制服</label>
+              <label
+                nz-checkbox
+                [nzDisabled]="!volunteerInformationService.isChoiceVolunteer"
+                nzValue="3"
+                >志工制服</label
+              >
               <span> <span class="volunteerUniformCount">2</span> 件 </span>
             </div>
             <div nz-col>
@@ -102,9 +117,14 @@
           (nzChange)="consentForm_handleChange($event)"
         >
           <app-button
+            [disabled]="!volunteerInformationService.isChoiceVolunteer"
             *ngIf="form.get('equipmentReturned')?.value.length === 0"
             [buttonText]="'上傳同意書'"
-            [attachClassName]="['success']"
+            [attachClassName]="
+              !volunteerInformationService.isChoiceVolunteer
+                ? ['secondary']
+                : ['success']
+            "
           />
         </nz-upload>
         <!-- <app-button [buttonText]="'下載'" [attachClassName]="['danger']" /> -->
@@ -116,7 +136,15 @@
           [nzFileList]="file_fileList"
           (nzChange)="file_handleChange($event)"
         >
-          <app-button [buttonText]="'上傳'" [attachClassName]="['success']" />
+          <app-button
+            [disabled]="!volunteerInformationService.isChoiceVolunteer"
+            [buttonText]="'上傳'"
+            [attachClassName]="
+              !volunteerInformationService.isChoiceVolunteer
+                ? ['secondary']
+                : ['success']
+            "
+          />
         </nz-upload>
       </div>
     </div>

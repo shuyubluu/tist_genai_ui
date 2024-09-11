@@ -101,6 +101,10 @@ export class Hd210FormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // 檢視模式，禁用表單
+    if (this.hd210ListService.isView) {
+      this.form.disable();
+    }
     // 禁用訓練次數
     this.form.get('trainingSessions')?.disable();
     // 生成訓練時數-小時select選項

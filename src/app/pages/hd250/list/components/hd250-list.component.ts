@@ -99,6 +99,7 @@ export class Hd250ListComponent implements OnInit {
     this.volunteerInformationService.isChoiceVolunteer = true;
     this.hd250ListService.isCreate = true;
     this.hd250ListService.isEdit = false;
+    this.hd250ListService.isView = false;
   }
 
   // 檢視
@@ -107,6 +108,7 @@ export class Hd250ListComponent implements OnInit {
     this.volunteerInformationService.isChoiceVolunteer = true;
     this.hd250ListService.isCreate = false;
     this.hd250ListService.isEdit = false;
+    this.hd250ListService.isView = true;
   }
 
   // 編輯
@@ -115,6 +117,7 @@ export class Hd250ListComponent implements OnInit {
     this.volunteerInformationService.isChoiceVolunteer = true;
     this.hd250ListService.isCreate = false;
     this.hd250ListService.isEdit = true;
+    this.hd250ListService.isView = false;
   }
 
   // 關閉保險

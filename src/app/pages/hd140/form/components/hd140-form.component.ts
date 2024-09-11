@@ -1,3 +1,4 @@
+import { Hd100ListService } from './../../../hd100/list/service/hd100-list.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
@@ -11,7 +12,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ErrorMessageComponent } from '../../../../common/components/message/error-message.component';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { CaseInformationComponent } from '../../../../common/components/caseInformation/components/case-information.component';
-import { CaseInformationService } from '../../../../common/components/caseInformation/serivce/case-information.service';
+import { CaseInformationService } from '../../../../common/components/caseInformation/service/case-information.service';
+import { Hd140ListService } from '../../list/service/hd140-list.service';
 
 @Component({
   selector: 'app-hd140-form',
@@ -46,7 +48,8 @@ export class Hd140FormComponent implements OnInit {
     private tabService: TabService, // 關閉tab的Service
     private router: Router, // 路由
     private message: NzMessageService, // 訊息
-    public caseInformationService: CaseInformationService // caseInformationService
+    public caseInformationService: CaseInformationService, // caseInformationService
+    public hd140ListService: Hd140ListService // hd140ListService
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
@@ -115,6 +118,10 @@ export class Hd140FormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // 檢視模式，禁用表單
+    if (this.hd140ListService.isView) {
+      this.form.disable();
+    }
     // 禁用經濟需求其他
     this.form.get('economicNeeds_other')?.disable();
     // 禁用社會餐與其他
@@ -204,7 +211,7 @@ export class Hd140FormComponent implements OnInit {
 
   // 暫存草稿
   save() {
-    this.message.create('success', '草稿暫存成功');
+    this.message.create('success', '儲存成功');
     if (this.form.get('visitOutcome')?.value === '結案') {
       this.router.navigate(['/hd100/form']);
     }

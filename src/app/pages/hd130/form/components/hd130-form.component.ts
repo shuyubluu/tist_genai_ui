@@ -10,8 +10,9 @@ import { TabService } from '../../../../common/layouts/tab/tab.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ErrorMessageComponent } from '../../../../common/components/message/error-message.component';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { CaseInformationService } from '../../../../common/components/caseInformation/serivce/case-information.service';
+import { CaseInformationService } from '../../../../common/components/caseInformation/service/case-information.service';
 import { CaseInformationComponent } from '../../../../common/components/caseInformation/components/case-information.component';
+import { Hd100ListService } from '../../../hd100/list/service/hd100-list.service';
 
 @Component({
   selector: 'app-hd130-form',
@@ -40,7 +41,8 @@ export class Hd130FormComponent implements OnInit {
     public caseInformationService: CaseInformationService, // caseInformationService
     private tabService: TabService, // 關閉tab的Service
     public router: Router, // 路由
-    private message: NzMessageService // 訊息
+    private message: NzMessageService, // 訊息
+    public hd100ListService: Hd100ListService // hd100ListService
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
@@ -183,6 +185,10 @@ export class Hd130FormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // 檢視模式，禁用表單
+    if (this.hd100ListService.isView) {
+      this.form.disable();
+    }
     // 禁用個案姓名
     this.form.get('caseName')?.disable();
     // 禁用經濟需求其他

@@ -13,9 +13,10 @@ import { TaiwanCitySelectComponent } from '../../../../common/components/select/
 import { TabService } from '../../../../common/layouts/tab/tab.service';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { CaseInformationService } from '../../../../common/components/caseInformation/serivce/case-information.service';
+import { CaseInformationService } from '../../../../common/components/caseInformation/service/case-information.service';
 import { CaseInformationComponent } from '../../../../common/components/caseInformation/components/case-information.component';
 import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
+import { Hd100ListService } from '../../../hd100/list/service/hd100-list.service';
 
 @Component({
   selector: 'app-hd120-form',
@@ -188,7 +189,8 @@ export class Hd120FormComponent implements OnInit {
     private router: Router, // 路由
     private message: NzMessageService, // 訊息
     public caseInformationService: CaseInformationService, // caseInformationService
-    public diagramService: DiagramService // diagramService
+    public diagramService: DiagramService, // diagramService
+    public hd100ListService: Hd100ListService // hd100ListService
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
@@ -417,6 +419,10 @@ export class Hd120FormComponent implements OnInit {
     });
   }
   ngOnInit(): void {
+    // 檢視模式下，禁用表單
+    if (this.hd100ListService.isView) {
+      this.form.disable();
+    }
     // 禁用個案服務狀態select
     this.form.get('caseServiceStatus')?.disable();
     // 禁用個案分級select

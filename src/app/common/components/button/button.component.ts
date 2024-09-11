@@ -1,24 +1,24 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SharedModule } from '../../shared/shared.module';
-import {
-  SEARCH,
-  BOARD,
-  ADD,
-  PRINT,
-  CLOSE,
-  DELETE,
-  SAVE,
-  UPLOAD,
-  PENCIAL,
-  RETURN,
-  RELOAD,
-  COPY,
-  DATE,
-  ACCEPT,
-  NEXTPAGE,
-  PREVIOUSPAGE,
-  DOWNLOAD,
-} from '../../utils/buttonHelper';
+// import {
+//   SEARCH,
+//   BOARD,
+//   ADD,
+//   PRINT,
+//   CLOSE,
+//   DELETE,
+//   SAVE,
+//   UPLOAD,
+//   PENCIAL,
+//   RETURN,
+//   RELOAD,
+//   COPY,
+//   DATE,
+//   ACCEPT,
+//   NEXTPAGE,
+//   PREVIOUSPAGE,
+//   DOWNLOAD,
+// } from '../../utils/buttonHelper';
 
 /**
  * 按鈕元件
@@ -26,6 +26,8 @@ import {
  * 若 this.buttonIcon 的值不符合以上任一情況，則返回空字串。
  *
  * 按鈕文字 [buttonText]="'字串'"
+ *
+ * 禁用按鈕 [disabled]="輸入布林值" 預設為false。
  *
  * 附加客製化樣式 [attachClassName]="[...'樣式字串']" 可傳入多個 {需把客製化樣式定義在元件的.scss檔}
  *
@@ -65,6 +67,7 @@ export class ButtonComponent implements OnInit {
   // @Input() buttonIcon: string = '';
   @Input() buttonText: string = '';
   @Input() attachClassName: string[] = [''];
+  @Input() disabled: boolean = false;
 
   // withIcon: boolean = true;
 

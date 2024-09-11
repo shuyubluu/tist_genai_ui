@@ -10,11 +10,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ErrorMessageComponent } from '../../../../common/components/message/error-message.component';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { CaseInformationComponent } from '../../../../common/components/caseInformation/components/case-information.component';
-import { CaseInformationService } from '../../../../common/components/caseInformation/serivce/case-information.service';
+import { CaseInformationService } from '../../../../common/components/caseInformation/service/case-information.service';
 import { TaiwanCitySelectComponent } from '../../../../common/components/select/taiwanCitySelect/components/taiwan-city-select.component';
 import { EmergencyContact } from '../service/hd170-form.interface';
 import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
-import { taiwanHomePhoneValidator } from '../../../../common/validator/taiwan-phone-validators';
+import { Hd170ListService } from '../../list/service/hd170-list.service';
 
 @Component({
   selector: 'app-hd170-form',
@@ -81,7 +81,8 @@ export class Hd170FormComponent implements OnInit {
   constructor(
     private tabService: TabService, // 關閉tab的Service
     private message: NzMessageService, // 訊息
-    public caseInformationService: CaseInformationService // caseInformationService
+    public caseInformationService: CaseInformationService, // caseInformationService
+    public hd170ListService: Hd170ListService // hd170ListService
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
@@ -140,6 +141,10 @@ export class Hd170FormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // 檢視模式，禁用表單
+    if (this.hd170ListService.isView) {
+      this.form.disable();
+    }
     // 禁用轉介單位
     this.form.get('referralUnit')?.disable();
     // 禁用單位電話

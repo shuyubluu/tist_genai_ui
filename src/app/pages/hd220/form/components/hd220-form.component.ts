@@ -70,7 +70,12 @@ export class Hd220FormComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // 檢視模式，禁用表單
+    if (this.hd220ListService.isView) {
+      this.form.disable();
+    }
+  }
 
   // 新增獎勵表揚表
   create() {

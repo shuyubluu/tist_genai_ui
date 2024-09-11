@@ -336,8 +336,21 @@
   </div>
   <div class="buttonArea">
     <!-- !TODO -->
-    <app-button [buttonText]="'儲存'" (click)="save()" />
-    <app-button [attachClassName]="['warning']" [buttonText]="'刪除'" />
+    <app-button
+      *ngIf="hd160ListService.isCreate"
+      [buttonText]="'送出'"
+      (click)="send()"
+    />
+    <app-button
+      *ngIf="hd160ListService.isEdit"
+      [buttonText]="'儲存'"
+      (click)="save()"
+    />
+    <app-button
+      *ngIf="hd160ListService.isEdit"
+      [attachClassName]="['warning']"
+      [buttonText]="'刪除'"
+    />
 
     <app-button
       [attachClassName]="['danger']"

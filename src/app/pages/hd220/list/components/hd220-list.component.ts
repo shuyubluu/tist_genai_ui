@@ -83,12 +83,14 @@ export class Hd220ListComponent implements OnInit {
   async create() {
     await this.router.navigate(['/hd220/form']);
     this.hd220ListService.isCreate = true;
+    this.hd220ListService.isView = false;
   }
 
   // 檢視
   async view() {
     await this.router.navigate(['/hd220/form']);
     this.hd220ListService.isCreate = false;
+    this.hd220ListService.isView = true;
   }
 
   // 關閉獎勵表揚

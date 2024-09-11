@@ -176,7 +176,7 @@
               style="width: 100%"
               (nzOnChange)="isSameCommunicationAddressChange($event)"
             >
-              <label nz-checkbox [nzDisabled]="isDisableReligiousAffiliationOthers" nzValue="1">同通訊地址</label>
+              <label nz-checkbox [nzDisabled]="isDisableReligiousAffiliationOthers || hd100ListService.isView" nzValue="1">同通訊地址</label>
             </nz-checkbox-wrapper> -->
       </div>
     </div>
@@ -237,7 +237,9 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableReligiousAffiliationNone"
+                [nzDisabled]="
+                  isDisableReligiousAffiliationNone || hd100ListService.isView
+                "
                 nzValue="1"
                 >無</label
               >
@@ -245,7 +247,9 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableReligiousAffiliationOthers"
+                [nzDisabled]="
+                  isDisableReligiousAffiliationOthers || hd100ListService.isView
+                "
                 nzValue="2"
                 >道教</label
               >
@@ -253,7 +257,9 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableReligiousAffiliationOthers"
+                [nzDisabled]="
+                  isDisableReligiousAffiliationOthers || hd100ListService.isView
+                "
                 nzValue="3"
                 >佛教</label
               >
@@ -261,7 +267,9 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableReligiousAffiliationOthers"
+                [nzDisabled]="
+                  isDisableReligiousAffiliationOthers || hd100ListService.isView
+                "
                 nzValue="4"
                 >基督教</label
               >
@@ -269,7 +277,9 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableReligiousAffiliationOthers"
+                [nzDisabled]="
+                  isDisableReligiousAffiliationOthers || hd100ListService.isView
+                "
                 nzValue="5"
                 >天主教</label
               >
@@ -277,7 +287,9 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableReligiousAffiliationOthers"
+                [nzDisabled]="
+                  isDisableReligiousAffiliationOthers || hd100ListService.isView
+                "
                 nzValue="6"
                 >一貫道</label
               >
@@ -285,7 +297,9 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableReligiousAffiliationOthers"
+                [nzDisabled]="
+                  isDisableReligiousAffiliationOthers || hd100ListService.isView
+                "
                 nzValue="7"
                 >回教</label
               >
@@ -293,7 +307,9 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableReligiousAffiliationOthers"
+                [nzDisabled]="
+                  isDisableReligiousAffiliationOthers || hd100ListService.isView
+                "
                 nzValue="8"
                 >民間信仰</label
               >
@@ -309,7 +325,9 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableReligiousAffiliationOthers"
+                [nzDisabled]="
+                  isDisableReligiousAffiliationOthers || hd100ListService.isView
+                "
                 nzValue="9"
                 >其他
               </label>
@@ -340,19 +358,44 @@
         >
           <div nz-row>
             <div nz-col>
-              <label nz-checkbox nzValue="1">國語</label>
+              <label
+                nz-checkbox
+                [nzDisabled]="hd100ListService.isView"
+                nzValue="1"
+                >國語</label
+              >
             </div>
             <div nz-col>
-              <label nz-checkbox nzValue="2">台語</label>
+              <label
+                nz-checkbox
+                [nzDisabled]="hd100ListService.isView"
+                nzValue="2"
+                >台語</label
+              >
             </div>
             <div nz-col>
-              <label nz-checkbox nzValue="3">日語</label>
+              <label
+                nz-checkbox
+                [nzDisabled]="hd100ListService.isView"
+                nzValue="3"
+                >日語</label
+              >
             </div>
             <div nz-col>
-              <label nz-checkbox nzValue="4">客家話</label>
+              <label
+                nz-checkbox
+                [nzDisabled]="hd100ListService.isView"
+                nzValue="4"
+                >客家話</label
+              >
             </div>
             <div nz-col>
-              <label nz-checkbox nzValue="5">其他 </label>
+              <label
+                nz-checkbox
+                [nzDisabled]="hd100ListService.isView"
+                nzValue="5"
+                >其他
+              </label>
               <label>
                 <app-input
                   [inputWidth]="'100px'"
@@ -387,19 +430,44 @@
         >
           <div nz-row>
             <div nz-col>
-              <label nz-checkbox nzValue="1">葷</label>
+              <label
+                nz-checkbox
+                [nzDisabled]="hd100ListService.isView"
+                nzValue="1"
+                >葷</label
+              >
             </div>
             <div nz-col>
-              <label nz-checkbox nzValue="2">全素</label>
+              <label
+                nz-checkbox
+                [nzDisabled]="hd100ListService.isView"
+                nzValue="2"
+                >全素</label
+              >
             </div>
             <div nz-col>
-              <label nz-checkbox nzValue="3">蛋奶素</label>
+              <label
+                nz-checkbox
+                [nzDisabled]="hd100ListService.isView"
+                nzValue="3"
+                >蛋奶素</label
+              >
             </div>
             <div nz-col>
-              <label nz-checkbox nzValue="4">鍋邊素</label>
+              <label
+                nz-checkbox
+                [nzDisabled]="hd100ListService.isView"
+                nzValue="4"
+                >鍋邊素</label
+              >
             </div>
             <div nz-col>
-              <label nz-checkbox nzValue="5">初一十五素</label>
+              <label
+                nz-checkbox
+                [nzDisabled]="hd100ListService.isView"
+                nzValue="5"
+                >初一十五素</label
+              >
             </div>
           </div>
         </nz-checkbox-wrapper>
@@ -416,7 +484,10 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableCurrentHealthConditionsNone"
+                [nzDisabled]="
+                  isDisableCurrentHealthConditionsNone ||
+                  hd100ListService.isView
+                "
                 nzValue="1"
                 >無</label
               >
@@ -424,7 +495,10 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableCurrentHealthConditionsOthers"
+                [nzDisabled]="
+                  isDisableCurrentHealthConditionsOthers ||
+                  hd100ListService.isView
+                "
                 nzValue="2"
                 >中風</label
               >
@@ -432,7 +506,10 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableCurrentHealthConditionsOthers"
+                [nzDisabled]="
+                  isDisableCurrentHealthConditionsOthers ||
+                  hd100ListService.isView
+                "
                 nzValue="3"
                 >高血壓</label
               >
@@ -440,7 +517,10 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableCurrentHealthConditionsOthers"
+                [nzDisabled]="
+                  isDisableCurrentHealthConditionsOthers ||
+                  hd100ListService.isView
+                "
                 nzValue="4"
                 >心臟病</label
               >
@@ -448,7 +528,10 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableCurrentHealthConditionsOthers"
+                [nzDisabled]="
+                  isDisableCurrentHealthConditionsOthers ||
+                  hd100ListService.isView
+                "
                 nzValue="5"
                 >糖尿病</label
               >
@@ -456,7 +539,10 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableCurrentHealthConditionsOthers"
+                [nzDisabled]="
+                  isDisableCurrentHealthConditionsOthers ||
+                  hd100ListService.isView
+                "
                 nzValue="6"
                 >腎臟疾病</label
               >
@@ -464,7 +550,10 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableCurrentHealthConditionsOthers"
+                [nzDisabled]="
+                  isDisableCurrentHealthConditionsOthers ||
+                  hd100ListService.isView
+                "
                 nzValue="7"
                 >骨骼系統(關節炎、骨折)</label
               >
@@ -472,7 +561,10 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableCurrentHealthConditionsOthers"
+                [nzDisabled]="
+                  isDisableCurrentHealthConditionsOthers ||
+                  hd100ListService.isView
+                "
                 nzValue="8"
                 >巴金森氏症</label
               >
@@ -480,7 +572,10 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableCurrentHealthConditionsOthers"
+                [nzDisabled]="
+                  isDisableCurrentHealthConditionsOthers ||
+                  hd100ListService.isView
+                "
                 nzValue="9"
                 >失智症</label
               >
@@ -488,7 +583,10 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableCurrentHealthConditionsOthers"
+                [nzDisabled]="
+                  isDisableCurrentHealthConditionsOthers ||
+                  hd100ListService.isView
+                "
                 nzValue="10"
                 >癌症</label
               >
@@ -496,7 +594,10 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableCurrentHealthConditionsOthers"
+                [nzDisabled]="
+                  isDisableCurrentHealthConditionsOthers ||
+                  hd100ListService.isView
+                "
                 nzValue="11"
                 >眼部疾病</label
               >
@@ -504,7 +605,10 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableCurrentHealthConditionsOthers"
+                [nzDisabled]="
+                  isDisableCurrentHealthConditionsOthers ||
+                  hd100ListService.isView
+                "
                 nzValue="12"
                 >精神疾病</label
               >
@@ -512,7 +616,10 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableCurrentHealthConditionsOthers"
+                [nzDisabled]="
+                  isDisableCurrentHealthConditionsOthers ||
+                  hd100ListService.isView
+                "
                 nzValue="13"
                 >其他</label
               >
@@ -548,7 +655,10 @@
           <span>頻率</span>
           <app-button
             [buttonText]="'新增'"
-            [attachClassName]="['success']"
+            [disabled]="hd100ListService.isView"
+            [attachClassName]="
+              hd100ListService.isView ? ['secondary'] : ['success']
+            "
             (click)="showMedicalStatusModal()"
           />
         </div>
@@ -643,7 +753,9 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableAssistiveDeviceUsageNone"
+                [nzDisabled]="
+                  isDisableAssistiveDeviceUsageNone || hd100ListService.isView
+                "
                 nzValue="1"
                 >無</label
               >
@@ -651,7 +763,9 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableAssistiveDeviceUsageOthers"
+                [nzDisabled]="
+                  isDisableAssistiveDeviceUsageOthers || hd100ListService.isView
+                "
                 nzValue="2"
                 >單手拐杖</label
               >
@@ -659,7 +773,9 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableAssistiveDeviceUsageOthers"
+                [nzDisabled]="
+                  isDisableAssistiveDeviceUsageOthers || hd100ListService.isView
+                "
                 nzValue="3"
                 >助行器</label
               >
@@ -667,7 +783,9 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableAssistiveDeviceUsageOthers"
+                [nzDisabled]="
+                  isDisableAssistiveDeviceUsageOthers || hd100ListService.isView
+                "
                 nzValue="4"
                 >腋下拐杖</label
               >
@@ -675,7 +793,9 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableAssistiveDeviceUsageOthers"
+                [nzDisabled]="
+                  isDisableAssistiveDeviceUsageOthers || hd100ListService.isView
+                "
                 nzValue="5"
                 >輪椅</label
               >
@@ -683,7 +803,9 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableAssistiveDeviceUsageOthers"
+                [nzDisabled]="
+                  isDisableAssistiveDeviceUsageOthers || hd100ListService.isView
+                "
                 nzValue="6"
                 >氣墊床</label
               >
@@ -691,7 +813,9 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableAssistiveDeviceUsageOthers"
+                [nzDisabled]="
+                  isDisableAssistiveDeviceUsageOthers || hd100ListService.isView
+                "
                 nzValue="7"
                 >助聽器</label
               >
@@ -699,7 +823,9 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableAssistiveDeviceUsageOthers"
+                [nzDisabled]="
+                  isDisableAssistiveDeviceUsageOthers || hd100ListService.isView
+                "
                 nzValue="8"
                 >便盆椅</label
               >
@@ -707,7 +833,9 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableAssistiveDeviceUsageOthers"
+                [nzDisabled]="
+                  isDisableAssistiveDeviceUsageOthers || hd100ListService.isView
+                "
                 nzValue="9"
                 >假牙</label
               >
@@ -715,7 +843,9 @@
             <div class="square" nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableAssistiveDeviceUsageOthers"
+                [nzDisabled]="
+                  isDisableAssistiveDeviceUsageOthers || hd100ListService.isView
+                "
                 nzValue="10"
                 >義肢</label
               >
@@ -729,7 +859,9 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableAssistiveDeviceUsageOthers"
+                [nzDisabled]="
+                  isDisableAssistiveDeviceUsageOthers || hd100ListService.isView
+                "
                 nzValue="13"
                 >其他</label
               >
@@ -858,7 +990,10 @@
             <div class="my-1" nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableLongTermMonthlyIncomeSourceNone"
+                [nzDisabled]="
+                  isDisableLongTermMonthlyIncomeSourceNone ||
+                  hd100ListService.isView
+                "
                 nzValue="1"
                 >無</label
               >
@@ -866,7 +1001,10 @@
             <div class="my-1" nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableLongTermMonthlyIncomeSourceOthers"
+                [nzDisabled]="
+                  isDisableLongTermMonthlyIncomeSourceOthers ||
+                  hd100ListService.isView
+                "
                 nzValue="2"
                 >子女供應</label
               >
@@ -883,7 +1021,10 @@
             <div class="my-1" nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableLongTermMonthlyIncomeSourceOthers"
+                [nzDisabled]="
+                  isDisableLongTermMonthlyIncomeSourceOthers ||
+                  hd100ListService.isView
+                "
                 nzValue="3"
                 >退休俸</label
               >
@@ -900,7 +1041,10 @@
             <div class="my-1" nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableLongTermMonthlyIncomeSourceOthers"
+                [nzDisabled]="
+                  isDisableLongTermMonthlyIncomeSourceOthers ||
+                  hd100ListService.isView
+                "
                 nzValue="4"
                 >自己工作收入</label
               >
@@ -917,7 +1061,10 @@
             <div class="my-1" nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableLongTermMonthlyIncomeSourceOthers"
+                [nzDisabled]="
+                  isDisableLongTermMonthlyIncomeSourceOthers ||
+                  hd100ListService.isView
+                "
                 nzValue="5"
                 >配偶工作收入</label
               >
@@ -934,7 +1081,10 @@
             <div class="my-1" nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableLongTermMonthlyIncomeSourceOthers"
+                [nzDisabled]="
+                  isDisableLongTermMonthlyIncomeSourceOthers ||
+                  hd100ListService.isView
+                "
                 nzValue="6"
                 >自己或配偶工作積蓄</label
               >
@@ -951,7 +1101,10 @@
             <div class="my-1" nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableLongTermMonthlyIncomeSourceOthers"
+                [nzDisabled]="
+                  isDisableLongTermMonthlyIncomeSourceOthers ||
+                  hd100ListService.isView
+                "
                 nzValue="7"
                 >老年年金</label
               >
@@ -968,7 +1121,10 @@
             <div class="my-1" nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableLongTermMonthlyIncomeSourceOthers"
+                [nzDisabled]="
+                  isDisableLongTermMonthlyIncomeSourceOthers ||
+                  hd100ListService.isView
+                "
                 nzValue="8"
                 >民間單位補助</label
               >
@@ -985,7 +1141,10 @@
             <div class="my-1" nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableLongTermMonthlyIncomeSourceOthers"
+                [nzDisabled]="
+                  isDisableLongTermMonthlyIncomeSourceOthers ||
+                  hd100ListService.isView
+                "
                 nzValue="9"
                 >社會福利補助</label
               >
@@ -1008,7 +1167,10 @@
             <div class="my-1" nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableLongTermMonthlyIncomeSourceOthers"
+                [nzDisabled]="
+                  isDisableLongTermMonthlyIncomeSourceOthers ||
+                  hd100ListService.isView
+                "
                 nzValue="10"
                 >其他收入</label
               >
@@ -1060,7 +1222,9 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableSpecialIssuesNone"
+                [nzDisabled]="
+                  isDisableSpecialIssuesNone || hd100ListService.isView
+                "
                 nzValue="1"
                 >無</label
               >
@@ -1068,7 +1232,9 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableSpecialIssuesOthers"
+                [nzDisabled]="
+                  isDisableSpecialIssuesOthers || hd100ListService.isView
+                "
                 nzValue="2"
                 >全時獨居</label
               >
@@ -1076,7 +1242,9 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableSpecialIssuesOthers"
+                [nzDisabled]="
+                  isDisableSpecialIssuesOthers || hd100ListService.isView
+                "
                 nzValue="3"
                 >白天獨居</label
               >
@@ -1084,7 +1252,9 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableSpecialIssuesOthers"
+                [nzDisabled]="
+                  isDisableSpecialIssuesOthers || hd100ListService.isView
+                "
                 nzValue="4"
                 >老人照顧</label
               >
@@ -1092,7 +1262,9 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableSpecialIssuesOthers"
+                [nzDisabled]="
+                  isDisableSpecialIssuesOthers || hd100ListService.isView
+                "
                 nzValue="5"
                 >雙重老化</label
               >
@@ -1141,7 +1313,10 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableUsingOtherHongDaoServicesNone"
+                [nzDisabled]="
+                  isDisableUsingOtherHongDaoServicesNone ||
+                  hd100ListService.isView
+                "
                 nzValue="1"
                 >無</label
               >
@@ -1149,7 +1324,10 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableUsingOtherHongDaoServicesOthers"
+                [nzDisabled]="
+                  isDisableUsingOtherHongDaoServicesOthers ||
+                  hd100ListService.isView
+                "
                 nzValue="2"
                 >獨老標案</label
               >
@@ -1157,7 +1335,10 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableUsingOtherHongDaoServicesOthers"
+                [nzDisabled]="
+                  isDisableUsingOtherHongDaoServicesOthers ||
+                  hd100ListService.isView
+                "
                 nzValue="3"
                 >送餐服務</label
               >
@@ -1165,7 +1346,10 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableUsingOtherHongDaoServicesOthers"
+                [nzDisabled]="
+                  isDisableUsingOtherHongDaoServicesOthers ||
+                  hd100ListService.isView
+                "
                 nzValue="4"
                 >日常照顧</label
               >
@@ -1173,7 +1357,10 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableUsingOtherHongDaoServicesOthers"
+                [nzDisabled]="
+                  isDisableUsingOtherHongDaoServicesOthers ||
+                  hd100ListService.isView
+                "
                 nzValue="5"
                 >居家服務</label
               >
@@ -1181,7 +1368,10 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableUsingOtherHongDaoServicesOthers"
+                [nzDisabled]="
+                  isDisableUsingOtherHongDaoServicesOthers ||
+                  hd100ListService.isView
+                "
                 nzValue="6"
                 >A單位服務</label
               >
@@ -1189,7 +1379,10 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableUsingOtherHongDaoServicesOthers"
+                [nzDisabled]="
+                  isDisableUsingOtherHongDaoServicesOthers ||
+                  hd100ListService.isView
+                "
                 nzValue="7"
                 >其他長照服務</label
               >
@@ -1197,7 +1390,10 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableUsingOtherHongDaoServicesOthers"
+                [nzDisabled]="
+                  isDisableUsingOtherHongDaoServicesOthers ||
+                  hd100ListService.isView
+                "
                 nzValue="8"
                 [nzChecked]="isPhysicalAndMentalDisability"
                 >區據點(含C、失智據點、好客廳等)</label
@@ -1206,7 +1402,10 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableUsingOtherHongDaoServicesOthers"
+                [nzDisabled]="
+                  isDisableUsingOtherHongDaoServicesOthers ||
+                  hd100ListService.isView
+                "
                 nzValue="9"
                 [nzChecked]="isPhysicalAndMentalDisability"
                 >其他</label
@@ -1248,7 +1447,9 @@
             <div class="my-1" nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableWelfareUsageOverviewNone"
+                [nzDisabled]="
+                  isDisableWelfareUsageOverviewNone || hd100ListService.isView
+                "
                 nzValue="1"
                 >無</label
               >
@@ -1256,7 +1457,9 @@
             <div class="my-1" nz-col nzSpan="24">
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableWelfareUsageOverviewOthers"
+                [nzDisabled]="
+                  isDisableWelfareUsageOverviewOthers || hd100ListService.isView
+                "
                 nzValue="2"
                 >送餐服務</label
               >
@@ -1284,7 +1487,9 @@
             <div class="my-1" nz-col nzSpan="24">
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableWelfareUsageOverviewOthers"
+                [nzDisabled]="
+                  isDisableWelfareUsageOverviewOthers || hd100ListService.isView
+                "
                 nzValue="3"
                 >日間照顧</label
               >
@@ -1312,7 +1517,9 @@
             <div class="my-1" nz-col nzSpan="24">
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableWelfareUsageOverviewOthers"
+                [nzDisabled]="
+                  isDisableWelfareUsageOverviewOthers || hd100ListService.isView
+                "
                 nzValue="4"
                 >居家服務</label
               >
@@ -1340,7 +1547,9 @@
             <div class="my-1" nz-col nzSpan="24">
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableWelfareUsageOverviewOthers"
+                [nzDisabled]="
+                  isDisableWelfareUsageOverviewOthers || hd100ListService.isView
+                "
                 nzValue="5"
                 >A單位服務</label
               >
@@ -1368,7 +1577,9 @@
             <div class="my-1" nz-col nzSpan="24">
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableWelfareUsageOverviewOthers"
+                [nzDisabled]="
+                  isDisableWelfareUsageOverviewOthers || hd100ListService.isView
+                "
                 nzValue="6"
                 >其他長照服務</label
               >
@@ -1396,7 +1607,9 @@
             <div class="my-1" nz-col nzSpan="24">
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableWelfareUsageOverviewOthers"
+                [nzDisabled]="
+                  isDisableWelfareUsageOverviewOthers || hd100ListService.isView
+                "
                 nzValue="7"
                 [nzChecked]="isPhysicalAndMentalDisability"
                 >交通服務</label
@@ -1425,7 +1638,9 @@
             <div class="my-1" nz-col nzSpan="24">
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableWelfareUsageOverviewOthers"
+                [nzDisabled]="
+                  isDisableWelfareUsageOverviewOthers || hd100ListService.isView
+                "
                 nzValue="8"
                 [nzChecked]="isPhysicalAndMentalDisability"
                 >社區據點</label
@@ -1454,7 +1669,9 @@
             <div class="my-1" nz-col nzSpan="24">
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableWelfareUsageOverviewOthers"
+                [nzDisabled]="
+                  isDisableWelfareUsageOverviewOthers || hd100ListService.isView
+                "
                 nzValue="9"
                 [nzChecked]="isPhysicalAndMentalDisability"
                 >緊急救援系統</label
@@ -1483,7 +1700,9 @@
             <div class="my-1" nz-col nzSpan="24">
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableWelfareUsageOverviewOthers"
+                [nzDisabled]="
+                  isDisableWelfareUsageOverviewOthers || hd100ListService.isView
+                "
                 nzValue="10"
                 >其他</label
               >
@@ -1574,19 +1793,45 @@
         >
           <div nz-row>
             <div nz-col>
-              <label nz-checkbox nzValue="1">電梯</label>
+              <label
+                nz-checkbox
+                [nzDisabled]="hd100ListService.isView"
+                nzValue="1"
+                >電梯</label
+              >
             </div>
             <div nz-col>
-              <label nz-checkbox nzValue="2">管理員</label>
+              <label
+                nz-checkbox
+                [nzDisabled]="hd100ListService.isView"
+                nzValue="2"
+                >管理員</label
+              >
             </div>
             <div nz-col>
-              <label nz-checkbox nzValue="3">套房</label>
+              <label
+                nz-checkbox
+                [nzDisabled]="hd100ListService.isView"
+                nzValue="3"
+                >套房</label
+              >
             </div>
             <div nz-col>
-              <label nz-checkbox nzValue="4"> 雅房</label>
+              <label
+                nz-checkbox
+                [nzDisabled]="hd100ListService.isView"
+                nzValue="4"
+              >
+                雅房</label
+              >
             </div>
             <div nz-col>
-              <label nz-checkbox nzValue="5">違建</label>
+              <label
+                nz-checkbox
+                [nzDisabled]="hd100ListService.isView"
+                nzValue="5"
+                >違建</label
+              >
             </div>
           </div>
         </nz-checkbox-wrapper>
@@ -1601,19 +1846,44 @@
         >
           <div nz-row>
             <div nz-col>
-              <label nz-checkbox nzValue="1">乾淨整齊</label>
+              <label
+                nz-checkbox
+                [nzDisabled]="hd100ListService.isView"
+                nzValue="1"
+                >乾淨整齊</label
+              >
             </div>
             <div nz-col>
-              <label nz-checkbox nzValue="2">尚算乾淨</label>
+              <label
+                nz-checkbox
+                [nzDisabled]="hd100ListService.isView"
+                nzValue="2"
+                >尚算乾淨</label
+              >
             </div>
             <div nz-col>
-              <label nz-checkbox nzValue="3">髒亂</label>
+              <label
+                nz-checkbox
+                [nzDisabled]="hd100ListService.isView"
+                nzValue="3"
+                >髒亂</label
+              >
             </div>
             <div nz-col>
-              <label nz-checkbox nzValue="4">有異味</label>
+              <label
+                nz-checkbox
+                [nzDisabled]="hd100ListService.isView"
+                nzValue="4"
+                >有異味</label
+              >
             </div>
             <div nz-col>
-              <label nz-checkbox nzValue="5">堆放許多雜物</label>
+              <label
+                nz-checkbox
+                [nzDisabled]="hd100ListService.isView"
+                nzValue="5"
+                >堆放許多雜物</label
+              >
             </div>
             <div nz-col>
               <app-error-message
@@ -1638,7 +1908,9 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableCohabitantsNone"
+                [nzDisabled]="
+                  isDisableCohabitantsNone || hd100ListService.isView
+                "
                 nzValue="1"
                 >無</label
               >
@@ -1646,7 +1918,9 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableCohabitantsOthers"
+                [nzDisabled]="
+                  isDisableCohabitantsOthers || hd100ListService.isView
+                "
                 nzValue="2"
                 >配偶</label
               >
@@ -1654,7 +1928,9 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableCohabitantsOthers"
+                [nzDisabled]="
+                  isDisableCohabitantsOthers || hd100ListService.isView
+                "
                 nzValue="3"
                 >未婚子女</label
               >
@@ -1662,7 +1938,9 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableCohabitantsOthers"
+                [nzDisabled]="
+                  isDisableCohabitantsOthers || hd100ListService.isView
+                "
                 nzValue="4"
                 >已婚子女</label
               >
@@ -1670,7 +1948,9 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableCohabitantsOthers"
+                [nzDisabled]="
+                  isDisableCohabitantsOthers || hd100ListService.isView
+                "
                 nzValue="5"
                 >孫子女</label
               >
@@ -1678,7 +1958,9 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableCohabitantsOthers"
+                [nzDisabled]="
+                  isDisableCohabitantsOthers || hd100ListService.isView
+                "
                 nzValue="6"
                 >兄弟姊妹</label
               >
@@ -1686,7 +1968,9 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableCohabitantsOthers"
+                [nzDisabled]="
+                  isDisableCohabitantsOthers || hd100ListService.isView
+                "
                 nzValue="7"
                 >朋友</label
               >
@@ -1694,7 +1978,9 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableCohabitantsOthers"
+                [nzDisabled]="
+                  isDisableCohabitantsOthers || hd100ListService.isView
+                "
                 nzValue="8"
                 >同居人</label
               >
@@ -1702,7 +1988,9 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableCohabitantsOthers"
+                [nzDisabled]="
+                  isDisableCohabitantsOthers || hd100ListService.isView
+                "
                 nzValue="9"
                 >台籍看護</label
               >
@@ -1710,7 +1998,9 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableCohabitantsOthers"
+                [nzDisabled]="
+                  isDisableCohabitantsOthers || hd100ListService.isView
+                "
                 nzValue="10"
                 >外籍看護</label
               >
@@ -1718,7 +2008,9 @@
             <div nz-col>
               <label
                 nz-checkbox
-                [nzDisabled]="isDisableCohabitantsOthers"
+                [nzDisabled]="
+                  isDisableCohabitantsOthers || hd100ListService.isView
+                "
                 nzValue="11"
                 >其他</label
               >
@@ -1760,7 +2052,10 @@
           <span>連絡電話</span>
           <app-button
             *ngIf="form.get('emergencyContact')?.value.length < 3"
-            [attachClassName]="['success']"
+            [disabled]="hd100ListService.isView"
+            [attachClassName]="
+              hd100ListService.isView ? ['secondary'] : ['success']
+            "
             [buttonText]="'新增'"
             (click)="showEmergencyContactModal()"
           />
@@ -1852,6 +2147,10 @@
       <div>
         <app-button
           [buttonText]="'繪製'"
+          [disabled]="hd100ListService.isView"
+          [attachClassName]="
+            hd100ListService.isView ? ['secondary'] : ['primary']
+          "
           (click)="diagramService.openDiagramPage()"
         />
         <nz-upload
@@ -1859,7 +2158,13 @@
           [nzFileList]="familyTree_fileList"
           (nzChange)="familyTree_handleChange($event)"
         >
-          <app-button [attachClassName]="['success']" [buttonText]="'匯入'" />
+          <app-button
+            [disabled]="hd100ListService.isView"
+            [attachClassName]="
+              hd100ListService.isView ? ['secondary'] : ['success']
+            "
+            [buttonText]="'匯入'"
+          />
         </nz-upload>
         <!-- <app-button [attachClassName]="['danger']" [buttonText]="'匯出'" /> -->
         <!-- !TODO -->
@@ -1868,6 +2173,10 @@
       <div>
         <app-button
           [buttonText]="'繪製'"
+          [disabled]="hd100ListService.isView"
+          [attachClassName]="
+            hd100ListService.isView ? ['secondary'] : ['primary']
+          "
           (click)="diagramService.openDiagramPage()"
         />
         <nz-upload
@@ -1875,7 +2184,13 @@
           [nzFileList]="ecologicalMap_fileList"
           (nzChange)="ecologicalMap_handleChange($event)"
         >
-          <app-button [attachClassName]="['success']" [buttonText]="'匯入'" />
+          <app-button
+            [disabled]="hd100ListService.isView"
+            [attachClassName]="
+              hd100ListService.isView ? ['secondary'] : ['success']
+            "
+            [buttonText]="'匯入'"
+          />
         </nz-upload>
         <!-- <app-button [attachClassName]="['danger']" [buttonText]="'匯出'" /> -->
         <!-- !TODO -->
@@ -1952,13 +2267,28 @@
           <!-- !TODO -->
           <div nz-row>
             <div nz-col>
-              <label nz-checkbox nzValue="1">志工1</label>
+              <label
+                nz-checkbox
+                [nzDisabled]="hd100ListService.isView"
+                nzValue="1"
+                >志工1</label
+              >
             </div>
             <div nz-col>
-              <label nz-checkbox nzValue="2">志工2</label>
+              <label
+                nz-checkbox
+                [nzDisabled]="hd100ListService.isView"
+                nzValue="2"
+                >志工2</label
+              >
             </div>
             <div nz-col>
-              <label nz-checkbox nzValue="3">志工3</label>
+              <label
+                nz-checkbox
+                [nzDisabled]="hd100ListService.isView"
+                nzValue="3"
+                >志工3</label
+              >
             </div>
           </div>
         </nz-checkbox-wrapper>
@@ -1967,7 +2297,11 @@
   </div>
   <div class="buttonArea">
     <!-- !TODO -->
-    <app-button [buttonText]="'儲存'" (click)="save()" />
+    <app-button
+      *ngIf="!hd100ListService.isView"
+      [buttonText]="'儲存'"
+      (click)="save()"
+    />
     <app-button
       *ngIf="!caseInformationService.isChoiceCase"
       (click)="onPreviousPage()"

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
 import { InputComponent } from '../../../../common/components/input/input.component';
 import { SelectComponent } from '../../../../common/components/select/select.component';
@@ -185,6 +184,12 @@ export class Hd270FormComponent implements OnInit {
   // 投保人員選項改變
   insuredPersonChange(checkGroup: string[]) {
     this.form.get('insuredPerson')?.setValue(checkGroup);
+  }
+
+  // 送出
+  send() {
+    this.message.create('success', '送出成功');
+    this.closeTab('保險專區表');
   }
 
   // 新增

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
 import { InputComponent } from '../../../../common/components/input/input.component';
 import { SelectComponent } from '../../../../common/components/select/select.component';
@@ -13,6 +12,7 @@ import { VolunteerInformationService } from '../../../../common/components/volun
 import { VolunteerInformationComponent } from '../../../../common/components/volunteerInformation/components/volunteer-information.component';
 import { Hd280ListService } from '../../list/service/hd280-list.service';
 import { ErrorMessageComponent } from '../../../../common/components/message/error-message.component';
+import { Hd230ListService } from '../../../hd230/list/service/hd230-list.service';
 
 @Component({
   selector: 'app-hd280-form',
@@ -91,7 +91,7 @@ export class Hd280FormComponent implements OnInit {
   constructor(
     private tabService: TabService, // 關閉tab的Service
     private message: NzMessageService, // 訊息
-    public hd280ListService: Hd280ListService, // Hd280ListService
+    public hd230ListService: Hd230ListService, // Hd230ListService
     public volunteerInformationService: VolunteerInformationService // volunteerInformationService
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
@@ -118,6 +118,10 @@ export class Hd280FormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // 檢視模式，禁用表單
+    if (this.hd230ListService.isView) {
+      this.form.disable();
+    }
     // 生成訓練時數-小時select選項
     for (let i = 0; i <= 30; i++) {
       this.selectOptions_serviceHours.push(i.toString());
@@ -127,6 +131,11 @@ export class Hd280FormComponent implements OnInit {
   // 服務志工選項改變
   serviceVolunteerChange(checkGroup: string[]) {
     this.form.get('serviceVolunteer')?.setValue(checkGroup);
+  }
+
+  // 儲存
+  save() {
+    this.message.create('success', '儲存成功');
   }
 
   // 新增

@@ -11,6 +11,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { VolunteerInformationComponent } from '../../../../common/components/volunteerInformation/components/volunteer-information.component';
 import { VolunteerInformationService } from './../../../../common/components/volunteerInformation/service/volunteer-information.service';
 import { SearchResultData } from '../service/hd230-list.interface';
+import { Hd230ListService } from '../service/hd230-list.service';
 
 @Component({
   selector: 'app-hd230-list',
@@ -66,6 +67,7 @@ export class Hd230ListComponent implements OnInit {
   constructor(
     private tabService: TabService, // 關閉tab的Service
     private router: Router, // 路由
+    private hd230ListService: Hd230ListService, // Hd230ListService
     public volunteerInformationService: VolunteerInformationService // volunteerInformationService
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
@@ -95,12 +97,18 @@ export class Hd230ListComponent implements OnInit {
   async view() {
     await this.router.navigate(['/hd280/form']);
     this.volunteerInformationService.isChoiceVolunteer = true;
+    this.hd230ListService.isCreate = false;
+    this.hd230ListService.isView = true;
+    this.hd230ListService.isEdit = false;
   }
 
   // 編輯
   async edit() {
     await this.router.navigate(['/hd280/form']);
     this.volunteerInformationService.isChoiceVolunteer = true;
+    this.hd230ListService.isCreate = false;
+    this.hd230ListService.isView = false;
+    this.hd230ListService.isEdit = true;
   }
 
   // 關閉服務時數

@@ -387,9 +387,16 @@
   <div class="buttonArea">
     <!-- !TODO -->
     <app-button
+      *ngIf="hd270ListService.isCreate"
       [attachClassName]="['success']"
       [buttonText]="'新增'"
       (click)="create()"
+    />
+    <app-button
+      *ngIf="hd270ListService.isSurrender"
+      [attachClassName]="['success']"
+      [buttonText]="'送出申請'"
+      (click)="send()"
     />
     <app-button
       [attachClassName]="['danger']"

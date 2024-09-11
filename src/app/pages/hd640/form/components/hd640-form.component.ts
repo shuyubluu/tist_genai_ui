@@ -170,6 +170,10 @@ export class Hd640FormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // 檢視模式，禁用表單
+    if (this.hd640ListService.isView) {
+      this.form.disable();
+    }
     // 禁用任職組別
     this.form.get('team')?.disable();
     // 禁用任職區域
