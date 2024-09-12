@@ -128,6 +128,30 @@ export const routes: Routes = [
         data: { tabName: '服務時數管理' },
       },
       {
+        path: 'hd400',
+        loadChildren: () =>
+          import('./pages/hd400/hd400.routes').then((m) => m.HD400_ROUTES),
+        data: { tabName: '簽核專區' },
+      },
+      {
+        path: 'hd600',
+        loadChildren: () =>
+          import('./pages/hd600/hd600.routes').then((m) => m.HD600_ROUTES),
+        data: { tabName: '保險公司代碼維護清單' },
+      },
+      {
+        path: 'hd610',
+        loadChildren: () =>
+          import('./pages/hd610/hd610.routes').then((m) => m.HD610_ROUTES),
+        data: { tabName: '組織單位資料維護清單' },
+      },
+      {
+        path: 'hd620',
+        loadChildren: () =>
+          import('./pages/hd620/hd620.routes').then((m) => m.HD620_ROUTES),
+        data: { tabName: '角色資料權限維護清單' },
+      },
+      {
         path: 'hd640',
         loadChildren: () =>
           import('./pages/hd640/hd640.routes').then((m) => m.HD640_ROUTES),

@@ -1,0 +1,41 @@
+<form [formGroup]="form">
+  <div class="grid-container">
+    <div class="grid-columns-2 border-bottom-0">
+      <div class="label">角色名稱</div>
+      <div>
+        <app-input
+          [inputWidth]="'130px'"
+          [maxLength]="30"
+          formControlName="roleName"
+        />
+      </div>
+      <div class="label">層級</div>
+      <div>
+        <app-input
+          [inputWidth]="'70px'"
+          [maxLength]="5"
+          [type]="'NUMBER'"
+          formControlName="level"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="buttonArea">
+    <app-button
+      *ngIf="hd620ListService.isEdit"
+      [buttonText]="'儲存'"
+      (click)="save()"
+    />
+    <app-button
+      *ngIf="hd620ListService.isCreate"
+      [buttonText]="'新增'"
+      [attachClassName]="['success']"
+      (click)="create()"
+    />
+    <app-button
+      [attachClassName]="['danger']"
+      [buttonText]="'關閉'"
+      (click)="closeTab('角色資料權限維護')"
+    />
+  </div>
+</form>

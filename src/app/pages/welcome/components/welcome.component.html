@@ -1,4 +1,51 @@
 <div class="card-header">
+  <h5>統計專區</h5>
+  <div class="statisticsArea">
+    <div>
+      <div class="statisticsArea_title">總人數</div>
+      <div class="statisticsArea_content">120 人</div>
+    </div>
+    <div>
+      <div class="statisticsArea_title">男女性別比</div>
+      <div class="statisticsArea_content">120 人</div>
+    </div>
+    <div>
+      <div class="statisticsArea_title">平均年齡</div>
+      <div class="statisticsArea_content">120 人</div>
+    </div>
+    <div>
+      <div class="statisticsArea_title">全會最高齡</div>
+      <div class="statisticsArea_content">120 人</div>
+    </div>
+    <div>
+      <div class="statisticsArea_title">低收與中低收人數</div>
+      <div class="statisticsArea_content">120 人</div>
+    </div>
+  </div>
+  <div class="mt-20"></div>
+  <div class="statisticsArea">
+    <div>
+      <div class="statisticsArea_title">獨居人數</div>
+      <div class="statisticsArea_content">120 人</div>
+    </div>
+    <div>
+      <div class="statisticsArea_title">老老人數</div>
+      <div class="statisticsArea_content">120 人</div>
+    </div>
+    <div>
+      <div class="statisticsArea_title">雙老人數</div>
+      <div class="statisticsArea_content">120 人</div>
+    </div>
+    <div>
+      <div class="statisticsArea_title">身障人數</div>
+      <div class="statisticsArea_content">120 人</div>
+    </div>
+    <div>
+      <div class="statisticsArea_title">失智人數</div>
+      <div class="statisticsArea_content">120 人</div>
+    </div>
+  </div>
+  <div class="mt-20"></div>
   <h5>個案管理</h5>
   <form>
     <div class="mt"></div>
@@ -351,23 +398,21 @@
         <table class="bordered-table2">
           <thead>
             <tr class="custom-header3 bold-text">
-              <!-- <th class="tr-cell-20" nzAlign="center">簽核</th>
-                            <th class="tr-cell-20" nzAlign="center">同意簽核</th> -->
-              <th nzAlign="center">已送審表單</th>
-              <th nzAlign="center">組長已簽核表單</th>
+              <th nzAlign="center">待簽表單</th>
               <th nzAlign="center">退件表單</th>
-              <th nzAlign="center">未簽核表單</th>
+              <th nzAlign="center">已送審表單</th>
+              <th nzAlign="center">已簽核表單</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td class="custom-cell" nzAlign="center">
-                <div>{{ approvalZone_SubmittedFormsData.length }} 筆</div>
+                <div>16 筆</div>
                 <app-button
                   [buttonText]="'查看'"
-                  (click)="showApprovalZone_SubmittedFormsModal()"
+                  (click)="viewPendingForms()"
                 />
-                <nz-modal
+                <!-- <nz-modal
                   class="modal"
                   [(nzVisible)]="isApprovalZone_SubmittedFormsVisible"
                   nzTitle="本月應完成"
@@ -401,17 +446,15 @@
                       [nzTotal]="approvalZone_SubmittedFormsData.length"
                     />
                   </ng-container>
-                </nz-modal>
+                </nz-modal> -->
               </td>
               <td class="custom-cell" nzAlign="center">
-                <div>
-                  {{ approvalZone_ApprovedByTeamLeadFormsData.length }} 筆
-                </div>
+                <div>12 筆</div>
                 <app-button
                   [buttonText]="'查看'"
-                  (click)="showApprovalZone_ApprovedByTeamLeadFormsModal()"
+                  (click)="viewRejectedForms()"
                 />
-                <nz-modal
+                <!-- <nz-modal
                   class="modal"
                   [(nzVisible)]="isApprovalZone_ApprovedByTeamLeadFormsVisible"
                   nzTitle="本月應完成"
@@ -455,15 +498,15 @@
                       "
                     />
                   </ng-container>
-                </nz-modal>
+                </nz-modal> -->
               </td>
               <td class="custom-cell" nzAlign="center">
-                <div>{{ approvalZone_RejectedFormsData.length }} 筆</div>
+                <div>11 筆</div>
                 <app-button
                   [buttonText]="'查看'"
-                  (click)="showApprovalZone_RejectedFormsModal()"
+                  (click)="viewSubmittedForms()"
                 />
-                <nz-modal
+                <!-- <nz-modal
                   class="modal"
                   [(nzVisible)]="isApprovalZone_RejectedFormsVisible"
                   nzTitle="本月應完成"
@@ -497,15 +540,15 @@
                       [nzTotal]="approvalZone_RejectedFormsData.length"
                     />
                   </ng-container>
-                </nz-modal>
+                </nz-modal> -->
               </td>
               <td class="custom-cell" nzAlign="center">
-                <div>{{ approvalZone_UnsignedFormsData.length }} 筆</div>
+                <div>20 筆</div>
                 <app-button
                   [buttonText]="'查看'"
-                  (click)="showApprovalZone_UnsignedFormsModal()"
+                  (click)="viewApprovedForms()"
                 />
-                <nz-modal
+                <!-- <nz-modal
                   class="modal"
                   [(nzVisible)]="isApprovalZone_UnsignedFormsVisible"
                   nzTitle="本月應完成"
@@ -539,7 +582,7 @@
                       [nzTotal]="approvalZone_UnsignedFormsData.length"
                     />
                   </ng-container>
-                </nz-modal>
+                </nz-modal> -->
               </td>
             </tr>
           </tbody>

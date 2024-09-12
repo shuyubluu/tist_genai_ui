@@ -1,0 +1,104 @@
+<form [formGroup]="form">
+  <div class="grid-container">
+    <div class="grid-columns-2">
+      <div class="label">單位名稱</div>
+      <div>
+        <app-input
+          [inputWidth]="'130px'"
+          [maxLength]="30"
+          formControlName="unitName"
+        />
+      </div>
+      <div class="label">代碼</div>
+      <div>
+        <app-input
+          [inputWidth]="'70px'"
+          [maxLength]="5"
+          formControlName="code"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-1 border-bottom-0">
+      <div class="label">角色層級</div>
+      <div>
+        <app-select
+          [selectWidth]="'130px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_roleLevel"
+          formControlName="roleLevel"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="buttonArea">
+    <app-button [buttonText]="'搜尋'" (click)="search()" />
+    <app-button
+      [buttonText]="'新增'"
+      [attachClassName]="['success']"
+      (click)="create()"
+    />
+    <app-button
+      [attachClassName]="['danger']"
+      [buttonText]="'關閉'"
+      (click)="closeTab('組織單位資料維護清單')"
+    />
+  </div>
+</form>
+<div class="message">搜尋結果: 共{{ searchResultData.length }}筆</div>
+<form>
+  <div class="mt"></div>
+  <div class="grid-search-container">
+    <div class="grid-columns searchTitle">
+      <div>單位名稱</div>
+      <div>代碼</div>
+      <div>角色層級</div>
+      <div>操作</div>
+    </div>
+    <div
+      class="grid-columns tableBorder"
+      *ngFor="let searchResult of newSearchResultData; let i = index"
+      [ngClass]="{
+        'even-row': i % 2 === 1,
+        'odd-row': i % 2 !== 1
+      }"
+    >
+      <div>
+        {{ searchResult.unitName }}
+      </div>
+      <div>
+        {{ searchResult.code }}
+      </div>
+      <div>
+        {{ searchResult.roleLevel }}
+      </div>
+      <!-- !TODO -->
+      <div>
+        <app-button [buttonText]="'檢視'" (click)="view()" />
+        <app-button
+          [buttonText]="'編輯'"
+          [attachClassName]="['warning']"
+          (click)="edit()"
+        />
+        <app-button
+          *ngIf="searchResult.isCanUse === true"
+          [buttonText]="'停用'"
+          [attachClassName]="['danger']"
+          (click)="disable(i)"
+        />
+        <app-button
+          *ngIf="searchResult.isCanUse === false"
+          [buttonText]="'啟用'"
+          [attachClassName]="['success']"
+          (click)="enable(i)"
+        />
+      </div>
+    </div>
+  </div>
+</form>
+<div class="mt-10"></div>
+<nz-pagination
+  [nzPageIndex]="currentPage"
+  [nzPageSize]="pageSize"
+  (nzPageIndexChange)="onPageIndexChange($event)"
+  [nzTotal]="searchResultData.length"
+/>

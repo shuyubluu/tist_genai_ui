@@ -1,0 +1,51 @@
+<form [formGroup]="form">
+  <div class="grid-container">
+    <div class="grid-columns-2">
+      <div class="label">單位名稱</div>
+      <div>
+        <app-input
+          [inputWidth]="'130px'"
+          [maxLength]="30"
+          formControlName="unitName"
+        />
+      </div>
+      <div class="label">代碼</div>
+      <div>
+        <app-input
+          [inputWidth]="'70px'"
+          [maxLength]="5"
+          formControlName="code"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-1 border-bottom-0">
+      <div class="label">角色層級</div>
+      <div>
+        <app-select
+          [selectWidth]="'130px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_roleLevel"
+          formControlName="roleLevel"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="buttonArea">
+    <app-button
+      *ngIf="hd610ListService.isEdit"
+      [buttonText]="'儲存'"
+      (click)="save()"
+    />
+    <app-button
+      *ngIf="hd610ListService.isCreate"
+      [buttonText]="'新增'"
+      [attachClassName]="['success']"
+      (click)="create()"
+    />
+    <app-button
+      [attachClassName]="['danger']"
+      [buttonText]="'關閉'"
+      (click)="closeTab('組織單位資料維護')"
+    />
+  </div>
+</form>

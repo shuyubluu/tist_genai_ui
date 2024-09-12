@@ -1,0 +1,28 @@
+<form [formGroup]="form">
+  <div class="grid-container">
+    <div class="grid-columns-1 border-bottom-0">
+      <div class="label">保險公司名稱</div>
+      <div>
+        <app-input
+          [inputWidth]="'130px'"
+          [maxLength]="30"
+          formControlName="insuranceCompanyName"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="buttonArea">
+    <app-button *ngIf="hd600ListService.isEdit" [buttonText]="'儲存'" (click)="save()"/>
+    <app-button
+      *ngIf="hd600ListService.isCreate"
+      [buttonText]="'新增'"
+      [attachClassName]="['success']"
+      (click)="create()"
+    />
+    <app-button
+      [buttonText]="'關閉'"
+      [attachClassName]="['danger']"
+      (click)="closeTab('保險公司代碼維護')"
+    />
+  </div>
+</form>
