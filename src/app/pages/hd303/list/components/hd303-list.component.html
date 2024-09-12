@@ -1,0 +1,72 @@
+<form [formGroup]="form">
+  <div class="grid-container">
+    <div class="grid-columns-2 border-bottom-0">
+      <div class="label">上傳日期</div>
+      <div><app-dayPicker formControlName="uploadDate" /></div>
+      <div class="label">表單標題</div>
+      <div>
+        <app-input
+          [inputWidth]="'130px'"
+          [maxLength]="30"
+          formControlName="reportTitle"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="buttonArea">
+    <app-button [buttonText]="'搜尋'" (click)="search()" />
+    <app-button
+      [attachClassName]="['success']"
+      [buttonText]="'新增'"
+      (click)="create()"
+    />
+    <app-button
+      [attachClassName]="['danger']"
+      [buttonText]="'關閉'"
+      (click)="closeTab('志工考核表清單')"
+    />
+  </div>
+</form>
+<div class="message">搜尋結果: 共{{ searchResultData.length }}筆</div>
+<form>
+  <div class="mt"></div>
+  <div class="grid-search-container">
+    <div class="grid-columns searchTitle">
+      <div>上傳日期</div>
+      <div>表單標題</div>
+      <div>操作</div>
+    </div>
+    <div
+      class="grid-columns tableBorder"
+      *ngFor="let searchResult of newSearchResultData; let i = index"
+      [ngClass]="{
+        'even-row': i % 2 === 1,
+        'odd-row': i % 2 !== 1
+      }"
+    >
+      <div>
+        {{ searchResult.uploadDate }}
+      </div>
+      <div>
+        {{ searchResult.reportTitle }}
+      </div>
+
+      <!-- !TODO -->
+      <div>
+        <app-button [buttonText]="'檢視'" (click)="view()" />
+        <app-button
+          [buttonText]="'編輯'"
+          [attachClassName]="['warning']"
+          (click)="edit()"
+        />
+      </div>
+    </div>
+  </div>
+</form>
+<div class="mt-10"></div>
+<nz-pagination
+  [nzPageIndex]="currentPage"
+  [nzPageSize]="pageSize"
+  (nzPageIndexChange)="onPageIndexChange($event)"
+  [nzTotal]="searchResultData.length"
+/>

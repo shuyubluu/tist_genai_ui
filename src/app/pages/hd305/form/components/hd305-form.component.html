@@ -1,0 +1,61 @@
+<form [formGroup]="form">
+  <div class="grid-container">
+    <div class="grid-columns-2">
+      <div class="label">上傳日期</div>
+      <div><app-dayPicker formControlName="uploadDate" /></div>
+      <div class="label">表單標題</div>
+      <div>
+        <app-input
+          [inputWidth]="'130px'"
+          [maxLength]="30"
+          formControlName="reportTitle"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">表單上傳</div>
+      <div>
+        <nz-upload
+          nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+          [nzFileList]="form_fileList"
+          (nzChange)="form_handleChange($event)"
+        >
+          <app-button
+            [disabled]="hd305ListService.isView"
+            [attachClassName]="
+              hd305ListService.isView ? ['secondary'] : ['success']
+            "
+            [buttonText]="'上傳'"
+          />
+        </nz-upload>
+      </div>
+    </div>
+    <!-- !TODO -->
+    <div class="grid-columns-1">
+      <div class="label">匯入結果</div>
+      <div>已匯入</div>
+    </div>
+    <div class="grid-columns-1 border-bottom-0">
+      <div class="label">資料預覽</div>
+      <div></div>
+    </div>
+  </div>
+  <div class="buttonArea">
+    <app-button
+      *ngIf="hd305ListService.isEdit"
+      [buttonText]="'儲存'"
+      (click)="save()"
+    />
+    <app-button
+      *ngIf="hd305ListService.isCreate"
+      [attachClassName]="['success']"
+      [buttonText]="'新增'"
+      (click)="create()"
+    />
+    <app-button
+      [attachClassName]="['danger']"
+      [buttonText]="'關閉'"
+      (click)="closeTab('個案生活品質量表')"
+    />
+  </div>
+</form>
