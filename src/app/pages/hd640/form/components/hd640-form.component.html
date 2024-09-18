@@ -55,7 +55,7 @@
         <app-input
           [inputWidth]="'100px'"
           [maxLength]="20"
-          [type]="'PWD'"
+          [type]="'password'"
           formControlName="resetPassword"
         />
         <app-button
@@ -72,7 +72,7 @@
       <div class="column-Message">
         <app-input
           [inputWidth]="'100px'"
-          [type]="'NUMBER'"
+          [type]="'number'"
           [maxLength]="11"
           formControlName="officePhone"
         />
@@ -87,7 +87,7 @@
         <app-input
           [inputWidth]="'100px'"
           [maxLength]="10"
-          [type]="'NUMBER'"
+          [type]="'number'"
           formControlName="workMobile"
         />
         <app-error-message
@@ -113,7 +113,7 @@
       <div>
         <app-select
           (ngModelChange)="onTeamSelectChange($event)"
-          [selectWidth]="'50pc'"
+          [selectWidth]="'50%'"
           [options]="selectOptions_team"
           formControlName="team"
         />

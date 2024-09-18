@@ -18,34 +18,33 @@
         />
       </div>
     </div>
-    <div class="grid-columns-2">
+    <div class="grid-columns-1">
       <div class="label">任職單位</div>
       <div>
         <app-select
           [selectWidth]="'115px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_department"
           formControlName="department"
         />
       </div>
-      <div class="label">任職區域</div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">任職組別</div>
       <div>
         <app-select
-          [selectWidth]="'200px'"
-          [defaultPlaceHolder]="false"
-          [options]="selectOptions_region"
-          formControlName="region"
+          [selectWidth]="'50%'"
+          [options]="selectOptions_team"
+          formControlName="team"
         />
       </div>
     </div>
     <div class="grid-columns-1 border-bottom-0">
-      <div class="label">任職組別</div>
+      <div class="label">任職區域</div>
       <div>
         <app-select
-          [selectWidth]="'50pc'"
-          [defaultPlaceHolder]="false"
-          [options]="selectOptions_team"
-          formControlName="team"
+          [selectWidth]="'200px'"
+          [options]="selectOptions_region"
+          formControlName="region"
         />
       </div>
     </div>

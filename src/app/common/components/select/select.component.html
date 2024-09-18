@@ -1,11 +1,7 @@
-<!-- <nz-select nzSize="large" class="select-field-15" [ngModel]="selectedOption" (ngModelChange)="selectedOption = $event">
-    <nz-option nzValue="1" nzLabel="全部"></nz-option>
-    <nz-option nzValue="2" nzLabel="系統管理員"></nz-option>
-</nz-select> -->
-
 <nz-select
   nzSize="default"
   [(ngModel)]="selectedOption"
+  [ngStyle]="{ width: selectWidth }"
   [nzPlaceHolder]="placeHolder"
   [ngClass]="getSelectClass()"
   (ngModelChange)="onSelectChange($event)"

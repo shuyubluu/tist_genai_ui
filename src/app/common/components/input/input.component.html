@@ -1,7 +1,9 @@
 <input
+  *ngIf="isReady"
   nz-input
-  [type]="getInputType()"
   [ngClass]="getInputClass()"
+  [type]="type"
+  [ngStyle]="{ width: inputWidth }"
   [value]="enteredContent"
   (input)="onInput($event)"
   [disabled]="disabled"

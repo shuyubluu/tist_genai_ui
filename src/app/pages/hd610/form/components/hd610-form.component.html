@@ -1,12 +1,32 @@
 <form [formGroup]="form">
   <div class="grid-container">
-    <div class="grid-columns-2">
-      <div class="label">單位名稱</div>
+    <div class="grid-columns-1">
+      <div class="label">任職單位</div>
       <div>
-        <app-input
-          [inputWidth]="'130px'"
-          [maxLength]="30"
-          formControlName="unitName"
+        <app-select
+          [selectWidth]="'115px'"
+          [options]="selectOptions_department"
+          formControlName="department"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">任職組別</div>
+      <div>
+        <app-select
+          [selectWidth]="'50%'"
+          [options]="selectOptions_team"
+          formControlName="team"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-2 border-bottom-0">
+      <div class="label">任職區域</div>
+      <div>
+        <app-select
+          [selectWidth]="'200px'"
+          [options]="selectOptions_region"
+          formControlName="region"
         />
       </div>
       <div class="label">代碼</div>
@@ -15,17 +35,6 @@
           [inputWidth]="'70px'"
           [maxLength]="5"
           formControlName="code"
-        />
-      </div>
-    </div>
-    <div class="grid-columns-1 border-bottom-0">
-      <div class="label">角色層級</div>
-      <div>
-        <app-select
-          [selectWidth]="'130px'"
-          [defaultPlaceHolder]="false"
-          [options]="selectOptions_roleLevel"
-          formControlName="roleLevel"
         />
       </div>
     </div>
