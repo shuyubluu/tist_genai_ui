@@ -27,46 +27,44 @@
 </form>
 <div class="mt"></div>
 <div class="message">搜尋結果: 共{{ searchResultData.length }}筆</div>
-<form>
-  <div class="mt"></div>
-  <div class="grid-search-container">
-    <div class="grid-columns searchTitle">
-      <div>上傳日期</div>
-      <div>操作</div>
+<div class="mt"></div>
+<div class="grid-search-container">
+  <div class="grid-columns searchTitle">
+    <div>上傳日期</div>
+    <div>操作</div>
+  </div>
+  <div
+    class="grid-columns tableBorder"
+    *ngFor="let searchResult of newSearchResultData; let i = index"
+    [ngClass]="{
+      'even-row': i % 2 === 1,
+      'odd-row': i % 2 !== 1
+    }"
+  >
+    <div>
+      {{ searchResult.uploadDate }}
     </div>
-    <div
-      class="grid-columns tableBorder"
-      *ngFor="let searchResult of newSearchResultData; let i = index"
-      [ngClass]="{
-        'even-row': i % 2 === 1,
-        'odd-row': i % 2 !== 1
-      }"
-    >
-      <div>
-        {{ searchResult.uploadDate }}
-      </div>
-      <!-- !TODO -->
-      <div class="divCenter">
-        <app-button [buttonText]="'檢視'" />
-        <nz-upload
-          class="divCenter"
-          nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-          [nzFileList]="personalSupervisionRecord_fileList"
-          (nzChange)="personalSupervisionRecord_handleChange($event)"
-        >
-          <app-button
-            [attachClassName]="['success']"
-            [buttonText]="'上傳紀錄表'"
-          />
-        </nz-upload>
-        <!-- <app-button
+    <!-- !TODO -->
+    <div class="divCenter">
+      <app-button [buttonText]="'檢視'" />
+      <nz-upload
+        class="divCenter"
+        nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+        [nzFileList]="personalSupervisionRecord_fileList"
+        (nzChange)="personalSupervisionRecord_handleChange($event)"
+      >
+        <app-button
+          [attachClassName]="['success']"
+          [buttonText]="'上傳紀錄表'"
+        />
+      </nz-upload>
+      <!-- <app-button
           [attachClassName]="['danger']"
           [buttonText]="'下載紀錄表'"
         /> -->
-      </div>
     </div>
   </div>
-</form>
+</div>
 <div class="mt-10"></div>
 <nz-pagination
   [nzPageIndex]="currentPage"

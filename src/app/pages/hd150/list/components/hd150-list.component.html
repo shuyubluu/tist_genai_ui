@@ -30,40 +30,38 @@
 <div class="mt"></div>
 <div class="hd100-list-search">
   <div class="message">搜尋結果: 共{{ searchResultData.length }}筆</div>
-  <form>
-    <div class="mt"></div>
-    <div class="grid-search-container">
-      <div class="grid-columns searchTitle">
-        <div class="th-cell">開案日期</div>
-        <div class="th-cell">風險等級</div>
-        <div class="th-cell">操作</div>
+  <div class="mt"></div>
+  <div class="grid-search-container">
+    <div class="grid-columns searchTitle">
+      <div class="th-cell">開案日期</div>
+      <div class="th-cell">風險等級</div>
+      <div class="th-cell">操作</div>
+    </div>
+    <div
+      class="grid-columns tabelBorder"
+      *ngFor="let searchResult of newSearchResultData; let i = index"
+      [ngClass]="{
+        'even-row': i % 2 === 1,
+        'odd-row': i % 2 !== 1
+      }"
+    >
+      <div>
+        {{ searchResult.caseOpeningDate }}
       </div>
-      <div
-        class="grid-columns tabelBorder"
-        *ngFor="let searchResult of newSearchResultData; let i = index"
-        [ngClass]="{
-          'even-row': i % 2 === 1,
-          'odd-row': i % 2 !== 1
-        }"
-      >
-        <div>
-          {{ searchResult.caseOpeningDate }}
-        </div>
-        <div>
-          {{ searchResult.caseClassification }}
-        </div>
-        <!-- !TODO -->
-        <div>
-          <app-button [buttonText]="'檢視'" (click)="view()" />
-          <app-button
-            [buttonText]="'編輯'"
-            [attachClassName]="['warning']"
-            (click)="edit()"
-          />
-        </div>
+      <div>
+        {{ searchResult.caseClassification }}
+      </div>
+      <!-- !TODO -->
+      <div>
+        <app-button [buttonText]="'檢視'" (click)="view()" />
+        <app-button
+          [buttonText]="'編輯'"
+          [attachClassName]="['warning']"
+          (click)="edit()"
+        />
       </div>
     </div>
-  </form>
+  </div>
   <div class="mt-10"></div>
   <nz-pagination
     [nzPageIndex]="currentPage"

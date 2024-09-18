@@ -32,53 +32,50 @@
     />
   </div>
 </form>
-
 <div class="mt"></div>
 <div class="hd100-list-search">
   <div class="message">搜尋結果: 共{{ searchResultData.length }}筆</div>
-  <form>
-    <div class="mt"></div>
-    <div class="grid-search-container">
-      <div class="grid-columns searchTitle">
-        <div>訪視日期</div>
-        <div>風險等級</div>
-        <div>訪視人員職稱</div>
-        <div>訪視人員姓名</div>
-        <div>操作</div>
+  <div class="mt"></div>
+  <div class="grid-search-container">
+    <div class="grid-columns searchTitle">
+      <div>訪視日期</div>
+      <div>風險等級</div>
+      <div>訪視人員職稱</div>
+      <div>訪視人員姓名</div>
+      <div>操作</div>
+    </div>
+    <div
+      class="grid-columns tableBorder"
+      *ngFor="let searchResult of newSearchResultData; let i = index"
+      [ngClass]="{
+        'even-row': i % 2 === 1,
+        'odd-row': i % 2 !== 1
+      }"
+    >
+      <div>
+        {{ searchResult.caseOpeningDate }}
       </div>
-      <div
-        class="grid-columns tableBorder"
-        *ngFor="let searchResult of newSearchResultData; let i = index"
-        [ngClass]="{
-          'even-row': i % 2 === 1,
-          'odd-row': i % 2 !== 1
-        }"
-      >
-        <div>
-          {{ searchResult.caseOpeningDate }}
-        </div>
-        <div>
-          {{ searchResult.caseClassification }}
-        </div>
-        <div>
-          {{ searchResult.responsiblePersonJobTitle }}
-        </div>
-        <div>
-          {{ searchResult.responsiblePerson }}
-        </div>
-        <!-- !TODO -->
-        <div>
-          <app-button [buttonText]="'檢視'" (click)="view()" />
-          <app-button
-            *ngIf="searchResult.responsiblePersonJobTitle === '社工'"
-            [buttonText]="'編輯'"
-            [attachClassName]="['warning']"
-            (click)="edit()"
-          />
-        </div>
+      <div>
+        {{ searchResult.caseClassification }}
+      </div>
+      <div>
+        {{ searchResult.responsiblePersonJobTitle }}
+      </div>
+      <div>
+        {{ searchResult.responsiblePerson }}
+      </div>
+      <!-- !TODO -->
+      <div>
+        <app-button [buttonText]="'檢視'" (click)="view()" />
+        <app-button
+          *ngIf="searchResult.responsiblePersonJobTitle === '社工'"
+          [buttonText]="'編輯'"
+          [attachClassName]="['warning']"
+          (click)="edit()"
+        />
       </div>
     </div>
-  </form>
+  </div>
   <div class="mt-10"></div>
   <nz-pagination
     [nzPageIndex]="currentPage"

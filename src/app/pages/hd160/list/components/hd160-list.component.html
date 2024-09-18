@@ -23,68 +23,65 @@
     />
   </div>
 </form>
-
 <div class="mt"></div>
 <div class="hd100-list-search">
   <div class="message">搜尋結果: 共{{ searchResultData.length }}筆</div>
-  <form>
-    <div class="mt"></div>
-    <div class="grid-search-container">
-      <div class="grid-columns searchTitle">
-        <div>訪視日期</div>
-        <div>填寫人</div>
-        <div>生理面分數</div>
-        <div>獨立面分數</div>
-        <div>心理面分數</div>
-        <div>社會面分數</div>
-        <div>環境面分數</div>
-        <div>整體面分數</div>
-        <div>操作</div>
+  <div class="mt"></div>
+  <div class="grid-search-container">
+    <div class="grid-columns searchTitle">
+      <div>訪視日期</div>
+      <div>填寫人</div>
+      <div>生理面分數</div>
+      <div>獨立面分數</div>
+      <div>心理面分數</div>
+      <div>社會面分數</div>
+      <div>環境面分數</div>
+      <div>整體面分數</div>
+      <div>操作</div>
+    </div>
+    <div
+      class="grid-columns tableBorder"
+      *ngFor="let searchResult of newSearchResultData; let i = index"
+      [ngClass]="{
+        'even-row': i % 2 === 1,
+        'odd-row ': i % 2 !== 1
+      }"
+    >
+      <div>
+        {{ searchResult.visitDate }}
       </div>
-      <div
-        class="grid-columns tableBorder"
-        *ngFor="let searchResult of newSearchResultData; let i = index"
-        [ngClass]="{
-          'even-row': i % 2 === 1,
-          'odd-row ': i % 2 !== 1
-        }"
-      >
-        <div>
-          {{ searchResult.visitDate }}
-        </div>
-        <div>
-          {{ searchResult.filler }}
-        </div>
-        <div>
-          {{ searchResult.physiologyScore }}
-        </div>
-        <div>
-          {{ searchResult.independentScore }}
-        </div>
-        <div>
-          {{ searchResult.psychologicalScore }}
-        </div>
-        <div>
-          {{ searchResult.socialScore }}
-        </div>
-        <div>
-          {{ searchResult.environmentScore }}
-        </div>
-        <div>
-          {{ searchResult.overallScore }}
-        </div>
-        <!-- !TODO -->
-        <div>
-          <app-button [buttonText]="'檢視'" (click)="view()" />
-          <app-button
-            [buttonText]="'編輯'"
-            [attachClassName]="['warning']"
-            (click)="edit()"
-          />
-        </div>
+      <div>
+        {{ searchResult.filler }}
+      </div>
+      <div>
+        {{ searchResult.physiologyScore }}
+      </div>
+      <div>
+        {{ searchResult.independentScore }}
+      </div>
+      <div>
+        {{ searchResult.psychologicalScore }}
+      </div>
+      <div>
+        {{ searchResult.socialScore }}
+      </div>
+      <div>
+        {{ searchResult.environmentScore }}
+      </div>
+      <div>
+        {{ searchResult.overallScore }}
+      </div>
+      <!-- !TODO -->
+      <div>
+        <app-button [buttonText]="'檢視'" (click)="view()" />
+        <app-button
+          [buttonText]="'編輯'"
+          [attachClassName]="['warning']"
+          (click)="edit()"
+        />
       </div>
     </div>
-  </form>
+  </div>
   <div class="mt-10"></div>
   <nz-pagination
     [nzPageIndex]="currentPage"

@@ -1,17 +1,5 @@
 <form [formGroup]="form">
   <div class="grid-container">
-    <div class="grid-columns-2">
-      <div class="label">上傳日期</div>
-      <div><app-dayPicker formControlName="uploadDate" /></div>
-      <div class="label">表單標題</div>
-      <div>
-        <app-input
-          [inputWidth]="'130px'"
-          [maxLength]="30"
-          formControlName="reportTitle"
-        />
-      </div>
-    </div>
     <div class="grid-columns-1">
       <div class="label">表單上傳</div>
       <div>
@@ -20,13 +8,7 @@
           [nzFileList]="form_fileList"
           (nzChange)="form_handleChange($event)"
         >
-          <app-button
-            [disabled]="hd304ListService.isView"
-            [attachClassName]="
-              hd304ListService.isView ? ['secondary'] : ['success']
-            "
-            [buttonText]="'上傳'"
-          />
+          <app-button [attachClassName]="['success']" [buttonText]="'上傳'" />
         </nz-upload>
       </div>
     </div>
@@ -41,17 +23,7 @@
     </div>
   </div>
   <div class="buttonArea">
-    <app-button
-      *ngIf="hd304ListService.isEdit"
-      [buttonText]="'儲存'"
-      (click)="save()"
-    />
-    <app-button
-      *ngIf="hd304ListService.isCreate"
-      [attachClassName]="['success']"
-      [buttonText]="'新增'"
-      (click)="create()"
-    />
+    <app-button [buttonText]="'儲存'" (click)="save()" />
     <app-button
       [attachClassName]="['danger']"
       [buttonText]="'關閉'"

@@ -1,4 +1,3 @@
-import { Hd300ListService } from './../../list/service/hd300-list.service';
 import { Component, OnInit } from '@angular/core';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
 import { InputComponent } from '../../../../common/components/input/input.component';
@@ -31,16 +30,10 @@ export class Hd300FormComponent implements OnInit {
 
   constructor(
     private tabService: TabService, // 關閉tab的Service
-    public hd300ListService: Hd300ListService, // hd300ListService
     private message: NzMessageService // message
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
-    this.form = new FormGroup({
-      // 上傳日期
-      uploadDate: new FormControl(''),
-      // 報表名稱
-      reportTitle: new FormControl(''),
-    });
+    this.form = new FormGroup({});
   }
   // 模擬表單上傳檔案
   form_fileList: NzUploadFile[] = [
@@ -70,11 +63,5 @@ export class Hd300FormComponent implements OnInit {
   // 儲存
   save() {
     this.message.success('儲存成功');
-  }
-
-  // 新增
-  create() {
-    this.message.success('新增成功');
-    this.closeTab('志工教育訓練');
   }
 }

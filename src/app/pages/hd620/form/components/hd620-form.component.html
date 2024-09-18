@@ -1,6 +1,6 @@
 <form [formGroup]="form">
   <div class="grid-container">
-    <div class="grid-columns-2 border-bottom-0">
+    <div class="grid-columns-1">
       <div class="label">角色名稱</div>
       <div>
         <app-input
@@ -9,14 +9,310 @@
           formControlName="roleName"
         />
       </div>
-      <div class="label">層級</div>
+    </div>
+    <div class="grid-columns-1">
+      <div class="label">功能權限</div>
       <div>
-        <app-input
-          [inputWidth]="'70px'"
-          [maxLength]="5"
-          [type]="'number'"
-          formControlName="level"
-        />
+        <div class="bold-text">
+          <nz-checkbox-wrapper
+            style="width: 100%"
+            (nzOnChange)="handleCaseManagementChange($event)"
+          >
+            <div nz-row>
+              <div nz-col class="bold-text">個案管理：</div>
+              <div nz-col>
+                <label
+                  nz-checkbox
+                  [nzDisabled]="hd620ListService.isView"
+                  nzValue="1"
+                  >新增</label
+                >
+              </div>
+              <div nz-col>
+                <label
+                  nz-checkbox
+                  [nzDisabled]="hd620ListService.isView"
+                  nzValue="2"
+                  >檢視</label
+                >
+              </div>
+              <div nz-col>
+                <label
+                  nz-checkbox
+                  [nzDisabled]="hd620ListService.isView"
+                  nzValue="3"
+                  >編輯</label
+                >
+              </div>
+              <div nz-col>
+                <label
+                  nz-checkbox
+                  [nzDisabled]="hd620ListService.isView"
+                  nzValue="4"
+                  >列印</label
+                >
+              </div>
+              <div nz-col>
+                <label
+                  nz-checkbox
+                  [nzDisabled]="hd620ListService.isView"
+                  nzValue="5"
+                  >刪除</label
+                >
+              </div>
+            </div>
+          </nz-checkbox-wrapper>
+        </div>
+        <div class="bold-text">
+          <nz-checkbox-wrapper
+            style="width: 100%"
+            (nzOnChange)="handleVolunteerManagementChange($event)"
+          >
+            <div nz-row>
+              <div nz-col class="bold-text">志工管理：</div>
+              <div nz-col>
+                <label
+                  nz-checkbox
+                  [nzDisabled]="hd620ListService.isView"
+                  nzValue="1"
+                  >新增</label
+                >
+              </div>
+              <div nz-col>
+                <label
+                  nz-checkbox
+                  [nzDisabled]="hd620ListService.isView"
+                  nzValue="2"
+                  >檢視</label
+                >
+              </div>
+              <div nz-col>
+                <label
+                  nz-checkbox
+                  [nzDisabled]="hd620ListService.isView"
+                  nzValue="3"
+                  >編輯</label
+                >
+              </div>
+              <div nz-col>
+                <label
+                  nz-checkbox
+                  [nzDisabled]="hd620ListService.isView"
+                  nzValue="4"
+                  >列印</label
+                >
+              </div>
+              <div nz-col>
+                <label
+                  nz-checkbox
+                  [nzDisabled]="hd620ListService.isView"
+                  nzValue="5"
+                  >刪除</label
+                >
+              </div>
+            </div>
+          </nz-checkbox-wrapper>
+        </div>
+        <div class="bold-text">
+          <nz-checkbox-wrapper
+            style="width: 100%"
+            (nzOnChange)="handleReportSectionChange($event)"
+          >
+            <div nz-row>
+              <div nz-col class="bold-text">報表專區：</div>
+              <div nz-col>
+                <label
+                  nz-checkbox
+                  [nzDisabled]="hd620ListService.isView"
+                  nzValue="1"
+                  >新增</label
+                >
+              </div>
+              <div nz-col>
+                <label
+                  nz-checkbox
+                  [nzDisabled]="hd620ListService.isView"
+                  nzValue="2"
+                  >檢視</label
+                >
+              </div>
+              <div nz-col>
+                <label
+                  nz-checkbox
+                  [nzDisabled]="hd620ListService.isView"
+                  nzValue="3"
+                  >編輯</label
+                >
+              </div>
+              <div nz-col>
+                <label
+                  nz-checkbox
+                  [nzDisabled]="hd620ListService.isView"
+                  nzValue="4"
+                  >列印</label
+                >
+              </div>
+              <div nz-col>
+                <label
+                  nz-checkbox
+                  [nzDisabled]="hd620ListService.isView"
+                  nzValue="5"
+                  >刪除</label
+                >
+              </div>
+            </div>
+          </nz-checkbox-wrapper>
+        </div>
+        <div class="bold-text">
+          <nz-checkbox-wrapper
+            style="width: 100%"
+            (nzOnChange)="handleSignatureSectionChange($event)"
+          >
+            <div nz-row>
+              <div nz-col class="bold-text">簽核專區：</div>
+              <div nz-col>
+                <label
+                  nz-checkbox
+                  [nzDisabled]="hd620ListService.isView"
+                  nzValue="1"
+                  >新增</label
+                >
+              </div>
+              <div nz-col>
+                <label
+                  nz-checkbox
+                  [nzDisabled]="hd620ListService.isView"
+                  nzValue="2"
+                  >檢視</label
+                >
+              </div>
+              <div nz-col>
+                <label
+                  nz-checkbox
+                  [nzDisabled]="hd620ListService.isView"
+                  nzValue="3"
+                  >編輯</label
+                >
+              </div>
+              <div nz-col>
+                <label
+                  nz-checkbox
+                  [nzDisabled]="hd620ListService.isView"
+                  nzValue="4"
+                  >列印</label
+                >
+              </div>
+              <div nz-col>
+                <label
+                  nz-checkbox
+                  [nzDisabled]="hd620ListService.isView"
+                  nzValue="5"
+                  >刪除</label
+                >
+              </div>
+            </div>
+          </nz-checkbox-wrapper>
+        </div>
+        <div class="bold-text">
+          <nz-checkbox-wrapper
+            style="width: 100%"
+            (nzOnChange)="handleOutcomeStatisticsChange($event)"
+          >
+            <div nz-row>
+              <div nz-col class="bold-text">成果統計專區：</div>
+              <div nz-col>
+                <label
+                  nz-checkbox
+                  [nzDisabled]="hd620ListService.isView"
+                  nzValue="1"
+                  >新增</label
+                >
+              </div>
+              <div nz-col>
+                <label
+                  nz-checkbox
+                  [nzDisabled]="hd620ListService.isView"
+                  nzValue="2"
+                  >檢視</label
+                >
+              </div>
+              <div nz-col>
+                <label
+                  nz-checkbox
+                  [nzDisabled]="hd620ListService.isView"
+                  nzValue="3"
+                  >編輯</label
+                >
+              </div>
+              <div nz-col>
+                <label
+                  nz-checkbox
+                  [nzDisabled]="hd620ListService.isView"
+                  nzValue="4"
+                  >列印</label
+                >
+              </div>
+              <div nz-col>
+                <label
+                  nz-checkbox
+                  [nzDisabled]="hd620ListService.isView"
+                  nzValue="5"
+                  >刪除</label
+                >
+              </div>
+            </div>
+          </nz-checkbox-wrapper>
+        </div>
+        <div class="bold-text">
+          <nz-checkbox-wrapper
+            style="width: 100%"
+            (nzOnChange)="handleSystemAdminPermissionsChange($event)"
+          >
+            <div nz-row>
+              <div nz-col class="bold-text">系統管理權限：</div>
+              <div nz-col>
+                <label
+                  nz-checkbox
+                  [nzDisabled]="hd620ListService.isView"
+                  nzValue="1"
+                  >新增</label
+                >
+              </div>
+              <div nz-col>
+                <label
+                  nz-checkbox
+                  [nzDisabled]="hd620ListService.isView"
+                  nzValue="2"
+                  >檢視</label
+                >
+              </div>
+              <div nz-col>
+                <label
+                  nz-checkbox
+                  [nzDisabled]="hd620ListService.isView"
+                  nzValue="3"
+                  >編輯</label
+                >
+              </div>
+              <div nz-col>
+                <label
+                  nz-checkbox
+                  [nzDisabled]="hd620ListService.isView"
+                  nzValue="4"
+                  >列印</label
+                >
+              </div>
+              <div nz-col>
+                <label
+                  nz-checkbox
+                  [nzDisabled]="hd620ListService.isView"
+                  nzValue="5"
+                  >刪除</label
+                >
+              </div>
+            </div>
+          </nz-checkbox-wrapper>
+        </div>
       </div>
     </div>
   </div>
@@ -25,12 +321,6 @@
       *ngIf="hd620ListService.isEdit"
       [buttonText]="'儲存'"
       (click)="save()"
-    />
-    <app-button
-      *ngIf="hd620ListService.isCreate"
-      [buttonText]="'新增'"
-      [attachClassName]="['success']"
-      (click)="create()"
     />
     <app-button
       [attachClassName]="['danger']"

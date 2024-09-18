@@ -39,51 +39,49 @@
   </div>
 </form>
 <div class="message">搜尋結果: 共{{ searchResultData.length }}筆</div>
-<form>
-  <div class="mt"></div>
-  <div class="grid-search-container">
-    <div class="grid-columns searchTitle">
-      <div>表單名稱</div>
-      <div>個案姓名</div>
-      <div>申請人</div>
-      <div>填表日期</div>
-      <div>申請日期</div>
-      <div>簽核狀態</div>
-      <div>操作</div>
+<div class="mt"></div>
+<div class="grid-search-container">
+  <div class="grid-columns searchTitle">
+    <div>表單名稱</div>
+    <div>個案姓名</div>
+    <div>申請人</div>
+    <div>填表日期</div>
+    <div>申請日期</div>
+    <div>簽核狀態</div>
+    <div>操作</div>
+  </div>
+  <div
+    class="grid-columns tableBorder"
+    *ngFor="let searchResult of newSearchResultData; let i = index"
+    [ngClass]="{
+      'even-row': i % 2 === 1,
+      'odd-row': i % 2 !== 1
+    }"
+  >
+    <div>
+      {{ searchResult.formName }}
     </div>
-    <div
-      class="grid-columns tableBorder"
-      *ngFor="let searchResult of newSearchResultData; let i = index"
-      [ngClass]="{
-        'even-row': i % 2 === 1,
-        'odd-row': i % 2 !== 1
-      }"
-    >
-      <div>
-        {{ searchResult.formName }}
-      </div>
-      <div>
-        {{ searchResult.caseName }}
-      </div>
-      <div>
-        {{ searchResult.applicant }}
-      </div>
-      <div>
-        {{ searchResult.formFillDate }}
-      </div>
-      <div>
-        {{ searchResult.applicationDate }}
-      </div>
-      <div>
-        {{ searchResult.approvalStatus }}
-      </div>
-      <!-- !TODO -->
-      <div>
-        <app-button [buttonText]="'檢視'" (click)="view()" />
-      </div>
+    <div>
+      {{ searchResult.caseName }}
+    </div>
+    <div>
+      {{ searchResult.applicant }}
+    </div>
+    <div>
+      {{ searchResult.formFillDate }}
+    </div>
+    <div>
+      {{ searchResult.applicationDate }}
+    </div>
+    <div>
+      {{ searchResult.approvalStatus }}
+    </div>
+    <!-- !TODO -->
+    <div>
+      <app-button [buttonText]="'檢視'" (click)="view()" />
     </div>
   </div>
-</form>
+</div>
 <div class="mt-10"></div>
 <nz-pagination
   [nzPageIndex]="currentPage"
