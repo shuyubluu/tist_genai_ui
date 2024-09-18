@@ -695,6 +695,13 @@
                 [maxLength]="15"
                 formControlName="medicalStatus_medicalCategory"
             /></label>
+            <app-error-message
+              [condition]="
+                form.get('medicalStatus_medicalCategory')?.value.length === 0
+              "
+              [isCustom]="true"
+              errorMessage="必填"
+            />
             <label>
               科別：
               <app-input
@@ -703,6 +710,13 @@
                 formControlName="medicalStatus_department"
               />
             </label>
+            <app-error-message
+              [condition]="
+                form.get('medicalStatus_department')?.value.length === 0
+              "
+              [isCustom]="true"
+              errorMessage="必填"
+            />
             <label
               >頻率：
               <app-input
@@ -712,24 +726,10 @@
               />
               <app-error-message
                 [condition]="
-                  form.get('medicalStatus_medicalCategory')?.value.length === 0
-                "
-                [isCustom]="true"
-                errorMessage="就診醫院是必填欄位。"
-              />
-              <app-error-message
-                [condition]="
-                  form.get('medicalStatus_department')?.value.length === 0
-                "
-                [isCustom]="true"
-                errorMessage="科別是必填欄位。"
-              />
-              <app-error-message
-                [condition]="
                   form.get('medicalStatus_frequency')?.value.length === 0
                 "
                 [isCustom]="true"
-                errorMessage="頻率是必填欄位。"
+                errorMessage="必填"
               />
             </label>
           </ng-container>
@@ -2093,6 +2093,14 @@
                 [maxLength]="15"
                 formControlName="emergencyContact_emergencyContact"
             /></label>
+            <app-error-message
+              [condition]="
+                form.get('emergencyContact_emergencyContact')?.value.length ===
+                0
+              "
+              [isCustom]="true"
+              errorMessage="必填"
+            />
             <label>
               關係：
               <app-input
@@ -2101,6 +2109,13 @@
                 formControlName="emergencyContact_relationship"
               />
             </label>
+            <app-error-message
+              [condition]="
+                form.get('emergencyContact_relationship')?.value.length === 0
+              "
+              [isCustom]="true"
+              errorMessage="必填"
+            />
             <label
               >連絡電話：
               <app-input
@@ -2111,25 +2126,10 @@
               />
               <app-error-message
                 [condition]="
-                  form.get('emergencyContact_emergencyContact')?.value
-                    .length === 0
-                "
-                [isCustom]="true"
-                errorMessage="緊急聯絡人是必填欄位。"
-              />
-              <app-error-message
-                [condition]="
-                  form.get('emergencyContact_relationship')?.value.length === 0
-                "
-                [isCustom]="true"
-                errorMessage="關係是必填欄位。"
-              />
-              <app-error-message
-                [condition]="
                   form.get('emergencyContact_phone')?.value.length === 0
                 "
                 [isCustom]="true"
-                errorMessage="連絡電話是必填欄位。"
+                errorMessage="必填"
               />
             </label>
           </ng-container>

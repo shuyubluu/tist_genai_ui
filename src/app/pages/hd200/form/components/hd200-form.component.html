@@ -169,17 +169,22 @@
         />
       </div>
       <div class="label">身份證字號</div>
-      <div>
+      <div class="column-Message">
         <app-input
           [inputWidth]="'100px'"
           [maxLength]="10"
           formControlName="idNumber"
         />
+        <app-error-message
+          [control]="form.get('idNumber')"
+          errorKey="invalidTaiwanId"
+          errorMessage="格式錯誤"
+        />
       </div>
     </div>
     <div class="grid-columns-2">
       <div class="label">手機</div>
-      <div>
+      <div class="column-Message">
         <app-input
           [inputWidth]="'70px'"
           [maxLength]="4"
@@ -205,16 +210,16 @@
         <app-error-message
           [control]="form.get('phonePrefix')"
           errorKey="invalidMobilePhone_firstFourDigits"
-          errorMessage="手機號碼為09開頭"
+          errorMessage="手機為09開頭"
         />
         <app-error-message
           [control]="form.get('phoneSuffix')"
           errorKey="invalidMobilePhone_lastSixDigits"
-          errorMessage="請輸入有效的後六碼"
+          errorMessage="手機後六碼格式錯誤"
         />
       </div>
       <div class="label">電話</div>
-      <div>
+      <div class="column-Message">
         <app-input
           [inputWidth]="'70px'"
           [maxLength]="4"
@@ -231,12 +236,12 @@
         <app-error-message
           [control]="form.get('areaCode')"
           errorKey="invalidHomePhone_areaCode"
-          errorMessage="請輸入有效的區碼"
+          errorMessage="區碼格式錯誤"
         />
         <app-error-message
           [control]="form.get('phoneNumber')"
           errorKey="invalidHomePhone_phoneNumber"
-          errorMessage="請輸入有效的電話"
+          errorMessage="電話格式錯誤"
         />
       </div>
     </div>

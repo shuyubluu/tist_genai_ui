@@ -131,37 +131,49 @@ export const routes: Routes = [
         path: 'hd300',
         loadChildren: () =>
           import('./pages/hd300/hd300.routes').then((m) => m.HD300_ROUTES),
-        data: { tabName: '志工教育訓練' },
+        data: { tabName: '表單匯入_志工教育訓練' },
       },
       {
         path: 'hd301',
         loadChildren: () =>
           import('./pages/hd301/hd301.routes').then((m) => m.HD301_ROUTES),
-        data: { tabName: '志工獎勵' },
+        data: { tabName: '表單匯入_志工獎勵' },
       },
       {
         path: 'hd302',
         loadChildren: () =>
           import('./pages/hd302/hd302.routes').then((m) => m.HD302_ROUTES),
-        data: { tabName: '志工時數' },
+        data: { tabName: '表單匯入_志工時數' },
       },
       {
         path: 'hd303',
         loadChildren: () =>
           import('./pages/hd303/hd303.routes').then((m) => m.HD303_ROUTES),
-        data: { tabName: '志工考核表' },
+        data: { tabName: '表單匯入_志工考核表' },
       },
       {
         path: 'hd304',
         loadChildren: () =>
           import('./pages/hd304/hd304.routes').then((m) => m.HD304_ROUTES),
-        data: { tabName: '個案基本資料表' },
+        data: { tabName: '表單匯入_個案基本資料表' },
       },
       {
         path: 'hd305',
         loadChildren: () =>
           import('./pages/hd305/hd305.routes').then((m) => m.HD305_ROUTES),
-        data: { tabName: '個案生活品質量表' },
+        data: { tabName: '表單匯入_個案生活品質量表' },
+      },
+      {
+        path: 'hd306',
+        loadChildren: () =>
+          import('./pages/hd306/hd306.routes').then((m) => m.HD306_ROUTES),
+        data: { tabName: '表單匯出_志工清冊' },
+      },
+      {
+        path: 'hd307',
+        loadChildren: () =>
+          import('./pages/hd307/hd307.routes').then((m) => m.HD307_ROUTES),
+        data: { tabName: '表單匯出_個案清冊' },
       },
       {
         path: 'hd400',

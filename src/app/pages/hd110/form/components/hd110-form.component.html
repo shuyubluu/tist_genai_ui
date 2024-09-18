@@ -107,12 +107,12 @@
           <app-error-message
             [control]="form.get('referralUnit_mobilePhone_firstFourDigits')"
             errorKey="invalidMobilePhone_firstFourDigits"
-            errorMessage="手機號碼為09開頭"
+            errorMessage="手機為09開頭"
           />
           <app-error-message
             [control]="form.get('referralUnit_mobilePhone_lastSixDigits')"
             errorKey="invalidMobilePhone_lastSixDigits"
-            errorMessage="請輸入有效的後六碼"
+            errorMessage="手機後六碼格式錯誤"
           />
         </div>
       </div>
@@ -142,12 +142,12 @@
           <app-error-message
             [control]="form.get('referralUnit_phone_areaCode')"
             errorKey="invalidHomePhone_areaCode"
-            errorMessage="請輸入有效的區碼"
+            errorMessage="區碼格式錯誤"
           />
           <app-error-message
             [control]="form.get('referralUnit_phone_phoneNumber')"
             errorKey="invalidHomePhone_phoneNumber"
-            errorMessage="請輸入有效的電話"
+            errorMessage="電話格式錯誤"
           />
         </div>
       </div>
@@ -245,11 +245,11 @@
         <app-error-message
           [control]="form.get('idNumber')"
           errorKey="invalidTaiwanId"
-          errorMessage="請輸入有效的台灣身份證字號。"
+          errorMessage="格式錯誤"
         />
       </div>
     </div>
-    <div class="grid-columns-2">
+    <div class="grid-columns-2">  
       <div class="label">手機</div>
       <div class="column-Message">
         <app-input
@@ -269,12 +269,12 @@
           <app-error-message
             [control]="form.get('mobilePhone_firstFourDigits')"
             errorKey="invalidMobilePhone_firstFourDigits"
-            errorMessage="手機號碼為09開頭"
+            errorMessage="手機為09開頭"
           />
           <app-error-message
             [control]="form.get('mobilePhone_lastSixDigits')"
             errorKey="invalidMobilePhone_lastSixDigits"
-            errorMessage="請輸入有效的後六碼"
+            errorMessage="手機後六碼格式錯誤"
           />
         </div>
       </div>
@@ -297,12 +297,12 @@
           <app-error-message
             [control]="form.get('phone_areaCode')"
             errorKey="invalidHomePhone_areaCode"
-            errorMessage="請輸入有效的區碼"
+            errorMessage="區碼格式錯誤"
           />
           <app-error-message
             [control]="form.get('phone_phoneNumber')"
             errorKey="invalidHomePhone_phoneNumber"
-            errorMessage="請輸入有效的電話"
+            errorMessage="電話格式錯誤"
           />
         </div>
       </div>

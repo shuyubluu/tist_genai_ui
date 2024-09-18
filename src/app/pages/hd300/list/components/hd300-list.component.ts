@@ -1,4 +1,3 @@
-import { Hd300ListService } from './../service/hd300-list.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
@@ -49,8 +48,7 @@ export class Hd300ListComponent implements OnInit {
   }
   constructor(
     private tabService: TabService, // 關閉tab的Service
-    private router: Router, // 路由
-    private hd300ListService: Hd300ListService // hd300ListService
+    private router: Router // 路由
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
@@ -76,25 +74,16 @@ export class Hd300ListComponent implements OnInit {
   // 新增
   create() {
     this.router.navigate(['/hd300/form']);
-    this.hd300ListService.isCreate = true;
-    this.hd300ListService.isView = false;
-    this.hd300ListService.isEdit = false;
   }
 
   // 檢視
   view() {
     this.router.navigate(['/hd300/form']);
-    this.hd300ListService.isCreate = false;
-    this.hd300ListService.isView = true;
-    this.hd300ListService.isEdit = false;
   }
 
   // 編輯
   edit() {
     this.router.navigate(['/hd300/form']);
-    this.hd300ListService.isCreate = false;
-    this.hd300ListService.isView = false;
-    this.hd300ListService.isEdit = true;
   }
 
   // 關閉當前的tab

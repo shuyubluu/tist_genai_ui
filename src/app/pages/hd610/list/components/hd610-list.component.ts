@@ -42,6 +42,7 @@ export class Hd610ListComponent implements OnInit {
   ];
   // 任職單位select選項
   selectOptions_department: string[] = [
+    '總會(系統管理者)',
     '總會',
     '事業發展處',
     '臺北服務處',

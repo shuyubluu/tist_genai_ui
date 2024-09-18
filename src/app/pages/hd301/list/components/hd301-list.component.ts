@@ -9,7 +9,6 @@ import { SharedModule } from '../../../../common/shared/shared.module';
 import { TabService } from '../../../../common/layouts/tab/tab.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { SearchResultData } from '../service/hd301-list.interface';
-import { Hd301ListService } from '../service/hd301-list.service';
 
 @Component({
   selector: 'app-hd301-list',
@@ -49,8 +48,7 @@ export class Hd301ListComponent implements OnInit {
   }
   constructor(
     private tabService: TabService, // 關閉tab的Service
-    private router: Router, // 路由
-    private hd301ListService: Hd301ListService // hd301ListService
+    private router: Router // 路由
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
@@ -76,25 +74,16 @@ export class Hd301ListComponent implements OnInit {
   // 新增
   create() {
     this.router.navigate(['/hd301/form']);
-    this.hd301ListService.isCreate = true;
-    this.hd301ListService.isView = false;
-    this.hd301ListService.isEdit = false;
   }
 
   // 檢視
   view() {
     this.router.navigate(['/hd301/form']);
-    this.hd301ListService.isCreate = false;
-    this.hd301ListService.isView = true;
-    this.hd301ListService.isEdit = false;
   }
 
   // 編輯
   edit() {
     this.router.navigate(['/hd301/form']);
-    this.hd301ListService.isCreate = false;
-    this.hd301ListService.isView = false;
-    this.hd301ListService.isEdit = true;
   }
 
   // 關閉當前的tab

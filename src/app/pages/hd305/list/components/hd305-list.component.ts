@@ -9,7 +9,6 @@ import { SharedModule } from '../../../../common/shared/shared.module';
 import { TabService } from '../../../../common/layouts/tab/tab.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { SearchResultData } from '../service/hd305-list.interface';
-import { Hd305ListService } from '../service/hd305-list.service';
 
 @Component({
   selector: 'app-hd305-list',
@@ -47,10 +46,10 @@ export class Hd305ListComponent implements OnInit {
       this.currentPage * this.pageSize
     );
   }
+  
   constructor(
     private tabService: TabService, // 關閉tab的Service
-    private router: Router, // 路由
-    private hd305ListService: Hd305ListService // hd305ListService
+    private router: Router // 路由
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
@@ -76,25 +75,16 @@ export class Hd305ListComponent implements OnInit {
   // 新增
   create() {
     this.router.navigate(['/hd305/form']);
-    this.hd305ListService.isCreate = true;
-    this.hd305ListService.isView = false;
-    this.hd305ListService.isEdit = false;
   }
 
   // 檢視
   view() {
     this.router.navigate(['/hd305/form']);
-    this.hd305ListService.isCreate = false;
-    this.hd305ListService.isView = true;
-    this.hd305ListService.isEdit = false;
   }
 
   // 編輯
   edit() {
     this.router.navigate(['/hd305/form']);
-    this.hd305ListService.isCreate = false;
-    this.hd305ListService.isView = false;
-    this.hd305ListService.isEdit = true;
   }
 
   // 關閉當前的tab

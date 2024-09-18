@@ -1,0 +1,153 @@
+<form [formGroup]="form">
+  <div class="grid-container">
+    <div class="grid-columns-2">
+      <div class="label">服務單位</div>
+      <div>
+        <app-select
+          [selectWidth]="'200px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_serviceUnit"
+          formControlName="serviceUnit"
+        />
+      </div>
+      <div class="label">姓名</div>
+      <div>
+        <app-input
+          [inputWidth]="'130px'"
+          [maxLength]="30"
+          formControlName="name"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-2">
+      <div class="label">志工編號</div>
+      <div>
+        <app-input
+          [inputWidth]="'120px'"
+          [maxLength]="20"
+          formControlName="volunteerID"
+        />
+      </div>
+      <div class="label">身份證字號</div>
+      <div>
+        <app-input
+          [inputWidth]="'100px'"
+          [maxLength]="10"
+          formControlName="volunteerID"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-1 border-bottom-0">
+      <div class="label">入隊日期區間</div>
+      <div>
+        <app-dayPicker formControlName="joinDate_start" />
+        <span class="mx-2">-</span>
+        <app-dayPicker formControlName="joinDate_end" />
+      </div>
+    </div>
+  </div>
+  <div class="buttonArea">
+    <app-button [buttonText]="'搜尋'" (click)="search()" />
+    <app-button
+      [buttonText]="'報表匯出'"
+      [attachClassName]="['success']"
+      (click)="showModal()"
+    />
+    <nz-modal
+      [(nzVisible)]="isVisible"
+      nzTitle="表單匯出"
+      (nzOnCancel)="handleCancel()"
+      [nzCancelText]="'取消'"
+      (nzOnOk)="export()"
+      [nzOkText]="'匯出'"
+    >
+      <ng-container *nzModalContent>
+        <div class="bold-text">
+          當前已選志工的編號：<span>{{ currentSelectedVolunteer }}</span>
+        </div>
+        <div class="mt"></div>
+        <div class="bold-text">請選擇要匯出的檔案</div>
+        <nz-checkbox-wrapper
+          style="width: 100%"
+          (nzOnChange)="handleExportFileChange($event)"
+        >
+          <div nz-row>
+            <div nz-col>
+              <label nz-checkbox nzValue="1">志工基本資料表(Excel)</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="2">志工教育訓練(Excel)</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="3ˇ">志工時數(Excel)</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="4">志工考核表清冊(Excel)</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="5">志工紀錄冊(Word)</label>
+            </div>
+            <div nz-col>
+              <label nz-checkbox nzValue="6">志願服務績效證明書(Word)</label>
+            </div>
+          </div>
+        </nz-checkbox-wrapper>
+      </ng-container>
+    </nz-modal>
+    <app-button
+      [attachClassName]="['danger']"
+      [buttonText]="'關閉'"
+      (click)="closeTab('表單匯出_志工清冊')"
+    />
+  </div>
+</form>
+<div class="message">搜尋結果: 共{{ searchResultData.length }}筆</div>
+<div class="mt"></div>
+<div class="grid-search-container">
+  <div class="grid-columns searchTitle">
+    <div>服務單位</div>
+    <div>志工編號</div>
+    <div>姓名</div>
+    <div>性別</div>
+    <div>身份證字號</div>
+    <div>入隊日期</div>
+    <div>操作</div>
+  </div>
+  <div
+    class="grid-columns tableBorder"
+    *ngFor="let searchResult of newSearchResultData; let i = index"
+    [ngClass]="{
+      'even-row': i % 2 === 1,
+      'odd-row': i % 2 !== 1
+    }"
+  >
+    <div>{{ searchResult.serviceUnit }}</div>
+    <div>{{ searchResult.volunteerID }}</div>
+    <div>{{ searchResult.name }}</div>
+    <div>{{ searchResult.gender }}</div>
+    <div>{{ searchResult.idNumber }}</div>
+    <div>{{ searchResult.joinDate }}</div>
+    <!-- !TODO -->
+    <div>
+      <app-button
+        *ngIf="!searchResult.isChoice"
+        [attachClassName]="['success']"
+        (click)="pick(searchResult)"
+        [buttonText]="'選取'"
+      />
+      <app-button
+        *ngIf="searchResult.isChoice"
+        [attachClassName]="['danger']"
+        (click)="cancelPick(searchResult)"
+        [buttonText]="'取消選取'"
+      />
+    </div>
+  </div>
+</div>
+<div class="mt-10"></div>
+<nz-pagination
+  [nzPageIndex]="currentPage"
+  [nzPageSize]="pageSize"
+  (nzPageIndexChange)="onPageIndexChange($event)"
+  [nzTotal]="searchResultData.length"
+/>

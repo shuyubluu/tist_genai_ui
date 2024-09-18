@@ -1,4 +1,3 @@
-import { Hd180ListService } from './../../../hd180/list/service/hd180-list.service';
 import { Hd100ListService } from './../service/hd100-list.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';

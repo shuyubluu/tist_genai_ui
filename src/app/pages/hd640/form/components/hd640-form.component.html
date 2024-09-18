@@ -102,7 +102,7 @@
       <div>
         <app-select
           (ngModelChange)="onDepartmentSelectChange($event)"
-          [selectWidth]="'115px'"
+          [selectWidth]="'160px'"
           [options]="selectOptions_department"
           formControlName="department"
         />
@@ -221,6 +221,7 @@
                 <label
                   nz-checkbox
                   [nzDisabled]="hd640ListService.isView"
+                  formControlName="caseManagement_add"
                   nzValue="1"
                   >新增</label
                 >
@@ -229,6 +230,7 @@
                 <label
                   nz-checkbox
                   [nzDisabled]="hd640ListService.isView"
+                  formControlName="caseManagement_view"
                   nzValue="2"
                   >檢視</label
                 >
@@ -237,6 +239,7 @@
                 <label
                   nz-checkbox
                   [nzDisabled]="hd640ListService.isView"
+                  formControlName="caseManagement_edit"
                   nzValue="3"
                   >編輯</label
                 >
@@ -245,6 +248,7 @@
                 <label
                   nz-checkbox
                   [nzDisabled]="hd640ListService.isView"
+                  formControlName="caseManagement_print"
                   nzValue="4"
                   >列印</label
                 >
@@ -253,6 +257,7 @@
                 <label
                   nz-checkbox
                   [nzDisabled]="hd640ListService.isView"
+                  formControlName="caseManagement_delete"
                   nzValue="5"
                   >刪除</label
                 >
@@ -271,6 +276,7 @@
                 <label
                   nz-checkbox
                   [nzDisabled]="hd640ListService.isView"
+                  formControlName="volunteerManagement_add"
                   nzValue="1"
                   >新增</label
                 >
@@ -279,6 +285,7 @@
                 <label
                   nz-checkbox
                   [nzDisabled]="hd640ListService.isView"
+                  formControlName="volunteerManagement_view"
                   nzValue="2"
                   >檢視</label
                 >
@@ -287,6 +294,7 @@
                 <label
                   nz-checkbox
                   [nzDisabled]="hd640ListService.isView"
+                  formControlName="volunteerManagement_edit"
                   nzValue="3"
                   >編輯</label
                 >
@@ -295,6 +303,7 @@
                 <label
                   nz-checkbox
                   [nzDisabled]="hd640ListService.isView"
+                  formControlName="volunteerManagement_print"
                   nzValue="4"
                   >列印</label
                 >
@@ -303,6 +312,7 @@
                 <label
                   nz-checkbox
                   [nzDisabled]="hd640ListService.isView"
+                  formControlName="volunteerManagement_delete"
                   nzValue="5"
                   >刪除</label
                 >
@@ -321,6 +331,7 @@
                 <label
                   nz-checkbox
                   [nzDisabled]="hd640ListService.isView"
+                  formControlName="reportSection_add"
                   nzValue="1"
                   >新增</label
                 >
@@ -329,6 +340,7 @@
                 <label
                   nz-checkbox
                   [nzDisabled]="hd640ListService.isView"
+                  formControlName="reportSection_view"
                   nzValue="2"
                   >檢視</label
                 >
@@ -337,6 +349,7 @@
                 <label
                   nz-checkbox
                   [nzDisabled]="hd640ListService.isView"
+                  formControlName="reportSection_edit"
                   nzValue="3"
                   >編輯</label
                 >
@@ -345,6 +358,7 @@
                 <label
                   nz-checkbox
                   [nzDisabled]="hd640ListService.isView"
+                  formControlName="reportSection_print"
                   nzValue="4"
                   >列印</label
                 >
@@ -353,6 +367,7 @@
                 <label
                   nz-checkbox
                   [nzDisabled]="hd640ListService.isView"
+                  formControlName="reportSection_delete"
                   nzValue="5"
                   >刪除</label
                 >
@@ -371,6 +386,7 @@
                 <label
                   nz-checkbox
                   [nzDisabled]="hd640ListService.isView"
+                  formControlName="signatureSection_add"
                   nzValue="1"
                   >新增</label
                 >
@@ -379,6 +395,7 @@
                 <label
                   nz-checkbox
                   [nzDisabled]="hd640ListService.isView"
+                  formControlName="signatureSection_view"
                   nzValue="2"
                   >檢視</label
                 >
@@ -387,6 +404,7 @@
                 <label
                   nz-checkbox
                   [nzDisabled]="hd640ListService.isView"
+                  formControlName="signatureSection_edit"
                   nzValue="3"
                   >編輯</label
                 >
@@ -395,6 +413,7 @@
                 <label
                   nz-checkbox
                   [nzDisabled]="hd640ListService.isView"
+                  formControlName="signatureSection_print"
                   nzValue="4"
                   >列印</label
                 >
@@ -403,6 +422,7 @@
                 <label
                   nz-checkbox
                   [nzDisabled]="hd640ListService.isView"
+                  formControlName="signatureSection_delete"
                   nzValue="5"
                   >刪除</label
                 >
@@ -421,6 +441,7 @@
                 <label
                   nz-checkbox
                   [nzDisabled]="hd640ListService.isView"
+                  formControlName="outcomeStatistics_add"
                   nzValue="1"
                   >新增</label
                 >
@@ -429,6 +450,7 @@
                 <label
                   nz-checkbox
                   [nzDisabled]="hd640ListService.isView"
+                  formControlName="outcomeStatistics_view"
                   nzValue="2"
                   >檢視</label
                 >
@@ -437,6 +459,7 @@
                 <label
                   nz-checkbox
                   [nzDisabled]="hd640ListService.isView"
+                  formControlName="outcomeStatistics_edit"
                   nzValue="3"
                   >編輯</label
                 >
@@ -445,6 +468,7 @@
                 <label
                   nz-checkbox
                   [nzDisabled]="hd640ListService.isView"
+                  formControlName="outcomeStatistics_print"
                   nzValue="4"
                   >列印</label
                 >
@@ -453,6 +477,7 @@
                 <label
                   nz-checkbox
                   [nzDisabled]="hd640ListService.isView"
+                  formControlName="outcomeStatistics_delete"
                   nzValue="5"
                   >刪除</label
                 >
@@ -471,6 +496,7 @@
                 <label
                   nz-checkbox
                   [nzDisabled]="hd640ListService.isView"
+                  formControlName="systemAdminPermissions_add"
                   nzValue="1"
                   >新增</label
                 >
@@ -479,6 +505,7 @@
                 <label
                   nz-checkbox
                   [nzDisabled]="hd640ListService.isView"
+                  formControlName="systemAdminPermissions_view"
                   nzValue="2"
                   >檢視</label
                 >
@@ -487,6 +514,7 @@
                 <label
                   nz-checkbox
                   [nzDisabled]="hd640ListService.isView"
+                  formControlName="systemAdminPermissions_edit"
                   nzValue="3"
                   >編輯</label
                 >
@@ -495,6 +523,7 @@
                 <label
                   nz-checkbox
                   [nzDisabled]="hd640ListService.isView"
+                  formControlName="systemAdminPermissions_print"
                   nzValue="4"
                   >列印</label
                 >
@@ -503,6 +532,7 @@
                 <label
                   nz-checkbox
                   [nzDisabled]="hd640ListService.isView"
+                  formControlName="systemAdminPermissions_delete"
                   nzValue="5"
                   >刪除</label
                 >

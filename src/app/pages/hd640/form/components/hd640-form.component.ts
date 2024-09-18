@@ -1,3 +1,4 @@
+import { Hd640ListService } from './../../list/service/hd640-list.service';
 import { Component, OnInit } from '@angular/core';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
 import { InputComponent } from '../../../../common/components/input/input.component';
@@ -13,7 +14,6 @@ import {
 } from '../../../../common/validator/taiwan-phone-validators';
 import { ErrorMessageComponent } from '../../../../common/components/message/error-message.component';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { Hd640ListService } from '../../list/service/hd640-list.service';
 
 @Component({
   selector: 'app-hd640-form',
@@ -39,6 +39,7 @@ export class Hd640FormComponent implements OnInit {
   currentSelectRole: string[] = [];
   // 任職單位select選項
   selectOptions_department: string[] = [
+    '總會(系統管理者)',
     '總會',
     '事業發展處',
     '臺北服務處',
@@ -150,18 +151,85 @@ export class Hd640FormComponent implements OnInit {
       teamLeader: new FormControl(),
       // 站點主責人
       siteCoordinator: new FormControl(),
+
       // 個案管理
       caseManagement: new FormControl(''),
+      // 個案管理_新增
+      caseManagement_add: new FormControl(),
+      // 個案管理_檢視
+      caseManagement_view: new FormControl(),
+      // 個案管理_編輯
+      caseManagement_edit: new FormControl(),
+      // 個案管理_列印
+      caseManagement_print: new FormControl(),
+      // 個案管理_刪除
+      caseManagement_delete: new FormControl(),
+
       // 志工管理
       volunteerManagement: new FormControl(''),
+      // 志工管理_新增
+      volunteerManagement_add: new FormControl(),
+      // 志工管理_檢視
+      volunteerManagement_view: new FormControl(),
+      // 志工管理_編輯
+      volunteerManagement_edit: new FormControl(),
+      // 志工管理_列印
+      volunteerManagement_print: new FormControl(),
+      // 志工管理_刪除
+      volunteerManagement_delete: new FormControl(),
+
       // 報表專區
       reportSection: new FormControl(''),
+      // 報表專區_新增
+      reportSection_add: new FormControl(),
+      // 報表專區_檢視
+      reportSection_view: new FormControl(),
+      // 報表專區_編輯
+      reportSection_edit: new FormControl(),
+      // 報表專區_列印
+      reportSection_print: new FormControl(),
+      // 報表專區_刪除
+      reportSection_delete: new FormControl(),
+
       // 簽核專區
       signatureSection: new FormControl(''),
+      // 簽核專區_新增
+      signatureSection_add: new FormControl(),
+      // 簽核專區_檢視
+      signatureSection_view: new FormControl(),
+      // 簽核專區_編輯
+      signatureSection_edit: new FormControl(),
+      // 簽核專區_列印
+      signatureSection_print: new FormControl(),
+      // 簽核專區_刪除
+      signatureSection_delete: new FormControl(),
+
       // 成果統計專區
       outcomeStatistics: new FormControl(''),
+      // 成果統計專區_新增
+      outcomeStatistics_add: new FormControl(),
+      // 成果統計專區_檢視
+      outcomeStatistics_view: new FormControl(),
+      // 成果統計專區_編輯
+      outcomeStatistics_edit: new FormControl(),
+      // 成果統計專區_列印
+      outcomeStatistics_print: new FormControl(),
+      // 成果統計專區_刪除
+      outcomeStatistics_delete: new FormControl(),
+
       // 系統管理權限
       systemAdminPermissions: new FormControl(''),
+      // 系統管理權限_新增
+      systemAdminPermissions_add: new FormControl(),
+      // 系統管理權限_檢視
+      systemAdminPermissions_view: new FormControl(),
+      // 系統管理權限_編輯
+      systemAdminPermissions_edit: new FormControl(),
+      // 系統管理權限_列印
+      systemAdminPermissions_print: new FormControl(),
+      // 系統管理權限_刪除
+      systemAdminPermissions_delete: new FormControl(),
+
       // 單位檢視權限
       unitViewPermissions: new FormControl(''),
       // 全會
@@ -173,6 +241,10 @@ export class Hd640FormComponent implements OnInit {
     // 檢視模式，禁用表單
     if (this.hd640ListService.isView) {
       this.form.disable();
+    }
+    // 新增模式，禁用功能權限
+    if (this.hd640ListService.isCreate) {
+      this.disableFunctionPermissions();
     }
     // 禁用任職組別
     this.form.get('team')?.disable();
@@ -226,6 +298,242 @@ export class Hd640FormComponent implements OnInit {
   // 角色modal按下確認
   handleRoleOk(): void {
     this.currentSelectRole = this.form.get('role')?.value;
+    if (this.form.get('role')?.value.includes('系統管理者')) {
+      this.form.patchValue({
+        caseManagement_add: true,
+        caseManagement_view: true,
+        caseManagement_edit: true,
+        caseManagement_print: true,
+        caseManagement_delete: true,
+
+        volunteerManagement_add: true,
+        volunteerManagement_view: true,
+        volunteerManagement_edit: true,
+        volunteerManagement_print: true,
+        volunteerManagement_delete: true,
+
+        reportSection_add: true,
+        reportSection_view: true,
+        reportSection_edit: true,
+        reportSection_print: true,
+        reportSection_delete: true,
+
+        signatureSection_add: true,
+        signatureSection_view: true,
+        signatureSection_edit: true,
+        signatureSection_print: true,
+        signatureSection_delete: true,
+
+        outcomeStatistics_add: true,
+        outcomeStatistics_view: true,
+        outcomeStatistics_edit: true,
+        outcomeStatistics_print: true,
+        outcomeStatistics_delete: true,
+
+        systemAdminPermissions_add: true,
+        systemAdminPermissions_view: true,
+        systemAdminPermissions_edit: true,
+        systemAdminPermissions_print: true,
+        systemAdminPermissions_delete: true,
+      });
+    } else {
+      // 取消勾選所有功能權限
+      this.cancelAllFunctionPermission();
+    }
+    if (this.form.get('role')?.value.includes('系統管理者')) {
+      this.form.patchValue({
+        caseManagement_add: true,
+        caseManagement_view: true,
+        caseManagement_edit: true,
+        caseManagement_print: true,
+        caseManagement_delete: true,
+
+        volunteerManagement_add: true,
+        volunteerManagement_view: true,
+        volunteerManagement_edit: true,
+        volunteerManagement_print: true,
+        volunteerManagement_delete: true,
+
+        reportSection_add: true,
+        reportSection_view: true,
+        reportSection_edit: true,
+        reportSection_print: true,
+        reportSection_delete: true,
+
+        signatureSection_add: true,
+        signatureSection_view: true,
+        signatureSection_edit: true,
+        signatureSection_print: true,
+        signatureSection_delete: true,
+
+        outcomeStatistics_add: true,
+        outcomeStatistics_view: true,
+        outcomeStatistics_edit: true,
+        outcomeStatistics_print: true,
+        outcomeStatistics_delete: true,
+
+        systemAdminPermissions_add: true,
+        systemAdminPermissions_view: true,
+        systemAdminPermissions_edit: true,
+        systemAdminPermissions_print: true,
+        systemAdminPermissions_delete: true,
+      });
+    } else if (this.form.get('role')?.value.includes('總會(處長)')) {
+      this.form.patchValue({
+        caseManagement_add: false,
+        caseManagement_view: true,
+        caseManagement_edit: false,
+        caseManagement_print: false,
+        caseManagement_delete: false,
+
+        volunteerManagement_add: false,
+        volunteerManagement_view: true,
+        volunteerManagement_edit: false,
+        volunteerManagement_print: false,
+        volunteerManagement_delete: false,
+
+        reportSection_add: false,
+        reportSection_view: true,
+        reportSection_edit: false,
+        reportSection_print: false,
+        reportSection_delete: false,
+
+        signatureSection_add: false,
+        signatureSection_view: true,
+        signatureSection_edit: false,
+        signatureSection_print: false,
+        signatureSection_delete: false,
+
+        outcomeStatistics_add: false,
+        outcomeStatistics_view: true,
+        outcomeStatistics_edit: false,
+        outcomeStatistics_print: true,
+        outcomeStatistics_delete: false,
+
+        systemAdminPermissions_add: false,
+        systemAdminPermissions_view: false,
+        systemAdminPermissions_edit: false,
+        systemAdminPermissions_print: false,
+        systemAdminPermissions_delete: false,
+      });
+    } else if (this.form.get('role')?.value.includes('服務處(處長)')) {
+      this.form.patchValue({
+        caseManagement_add: false,
+        caseManagement_view: true,
+        caseManagement_edit: false,
+        caseManagement_print: false,
+        caseManagement_delete: false,
+
+        volunteerManagement_add: false,
+        volunteerManagement_view: true,
+        volunteerManagement_edit: false,
+        volunteerManagement_print: false,
+        volunteerManagement_delete: false,
+
+        reportSection_add: false,
+        reportSection_view: true,
+        reportSection_edit: false,
+        reportSection_print: false,
+        reportSection_delete: false,
+
+        signatureSection_add: false,
+        signatureSection_view: true,
+        signatureSection_edit: false,
+        signatureSection_print: false,
+        signatureSection_delete: false,
+
+        outcomeStatistics_add: false,
+        outcomeStatistics_view: true,
+        outcomeStatistics_edit: false,
+        outcomeStatistics_print: true,
+        outcomeStatistics_delete: false,
+
+        systemAdminPermissions_add: false,
+        systemAdminPermissions_view: false,
+        systemAdminPermissions_edit: false,
+        systemAdminPermissions_print: false,
+        systemAdminPermissions_delete: false,
+      });
+    } else if (this.form.get('role')?.value.includes('組長')) {
+      this.form.patchValue({
+        caseManagement_add: true,
+        caseManagement_view: true,
+        caseManagement_edit: true,
+        caseManagement_print: true,
+        caseManagement_delete: true,
+
+        volunteerManagement_add: true,
+        volunteerManagement_view: true,
+        volunteerManagement_edit: true,
+        volunteerManagement_print: true,
+        volunteerManagement_delete: true,
+
+        reportSection_add: true,
+        reportSection_view: true,
+        reportSection_edit: true,
+        reportSection_print: true,
+        reportSection_delete: true,
+
+        signatureSection_add: true,
+        signatureSection_view: true,
+        signatureSection_edit: true,
+        signatureSection_print: true,
+        signatureSection_delete: true,
+
+        outcomeStatistics_add: false,
+        outcomeStatistics_view: true,
+        outcomeStatistics_edit: false,
+        outcomeStatistics_print: true,
+        outcomeStatistics_delete: false,
+
+        systemAdminPermissions_add: true,
+        systemAdminPermissions_view: true,
+        systemAdminPermissions_edit: true,
+        systemAdminPermissions_print: true,
+        systemAdminPermissions_delete: true,
+      });
+    } else if (this.form.get('role')?.value.includes('站點主責人')) {
+      this.form.patchValue({
+        caseManagement_add: true,
+        caseManagement_view: true,
+        caseManagement_edit: true,
+        caseManagement_print: true,
+        caseManagement_delete: true,
+
+        volunteerManagement_add: true,
+        volunteerManagement_view: true,
+        volunteerManagement_edit: true,
+        volunteerManagement_print: true,
+        volunteerManagement_delete: true,
+
+        reportSection_add: true,
+        reportSection_view: true,
+        reportSection_edit: true,
+        reportSection_print: true,
+        reportSection_delete: false,
+
+        signatureSection_add: false,
+        signatureSection_view: true,
+        signatureSection_edit: false,
+        signatureSection_print: true,
+        signatureSection_delete: false,
+
+        outcomeStatistics_add: false,
+        outcomeStatistics_view: true,
+        outcomeStatistics_edit: false,
+        outcomeStatistics_print: true,
+        outcomeStatistics_delete: false,
+
+        systemAdminPermissions_add: false,
+        systemAdminPermissions_view: false,
+        systemAdminPermissions_edit: false,
+        systemAdminPermissions_print: false,
+        systemAdminPermissions_delete: false,
+      });
+    } else {
+      // 取消勾選所有功能權限
+      this.cancelAllFunctionPermission();
+    }
     this.isRoleVisible = false;
   }
 
@@ -274,6 +582,8 @@ export class Hd640FormComponent implements OnInit {
       // 如果沒有選任職單位則禁用任職區域
       this.form.get('region')?.disable();
       this.form.get('region')?.reset();
+      // 如果沒有選任職單位則禁用系統管理者
+      this.disableSysAdmin();
       // 如果沒有選任職單位則禁用總會(處長)
       this.disableGeneralDirector();
       // 如果沒有選任職單位則禁用服務處(處長)
@@ -285,6 +595,25 @@ export class Hd640FormComponent implements OnInit {
       // 如果沒有選擇總會則禁用全會選項
       this.form.get('headquartersManagement')?.disable();
       this.form.get('headquartersManagement')?.reset();
+    } else if (option === '總會(系統管理者)') {
+      // 如果選擇總會則啟用全會選項
+      this.form.get('headquartersManagement')?.enable();
+      // 如果任職單位有選擇總會則啟用任職組別
+      this.form.get('team')?.enable();
+      // 如果選擇任職單位但選總會則總會(處長)不能選擇
+      this.disableGeneralDirector();
+      // 如果選擇任職單位但選總會則服務處(處長)不能選擇
+      this.disableServiceDirector();
+      // 如果選擇總會則啟用系統管理者
+      this.form.get('sysAdmin')?.enable();
+      // 如果任職組別和任職區域有選擇禁用系統管理者
+      if (
+        (this.form.get('team')?.value !== '---' &&
+          this.form.get('team')?.value) ||
+        this.form.get('region')?.value
+      ) {
+        this.disableSysAdmin();
+      }
     } else if (option === '總會') {
       // 如果選擇總會則啟用全會選項
       this.form.get('headquartersManagement')?.enable();
@@ -292,6 +621,8 @@ export class Hd640FormComponent implements OnInit {
       this.form.get('team')?.enable();
       // 如果選擇任職單位但選總會則服務處(處長)不能選擇
       this.disableServiceDirector();
+      // 如果選擇任職單位但選總會則系統管理者不能選擇
+      this.disableSysAdmin();
       // 如果選擇總會則啟用總會(處長)
       this.form.get('generalDirector')?.enable();
       // 如果任職組別和任職區域有選擇禁用總會(處長)
@@ -308,6 +639,8 @@ export class Hd640FormComponent implements OnInit {
       this.form.get('headquartersManagement')?.reset();
       // 如果任職單位有選擇服務處則啟用任職組別
       this.form.get('team')?.enable();
+      // 如果選服務處則禁用系統管理者
+      this.disableSysAdmin();
       // 如果選服務處則總會(處長)不能選擇
       this.disableGeneralDirector();
       // 如果選擇服務則啟用服務處(處長)
@@ -333,8 +666,12 @@ export class Hd640FormComponent implements OnInit {
       this.disableTeamLeader();
       // 如果沒有選任職組別則禁用站點主責人
       this.disableSiteCoordinator();
+      // 如果沒有選任職組別且任職單位選擇總會(系統管理者)則啟用系統管理者
+      if (this.form.get('department')?.value === '總會(系統管理者)') {
+        this.form.get('sysAdmin')?.enable();
+      }
       // 如果沒有選任職組別且任職單位選擇總會則啟用總會(處長)
-      if (this.form.get('department')?.value === '總會') {
+      else if (this.form.get('department')?.value === '總會') {
         this.form.get('generalDirector')?.enable();
         // 如果沒有選任職組別且任職單位選擇服務處則啟用服務處(處長)
       } else if (
@@ -352,7 +689,9 @@ export class Hd640FormComponent implements OnInit {
         this.form.get('siteCoordinator')?.enable();
         // 如果有選任職組別則啟用區域
         this.form.get('region')?.enable();
-        // 如果選擇任職組別則啟用站點主責人
+        // 如果選擇任職組別則禁用總會(系統管理者)
+        this.disableSysAdmin();
+        // 如果選擇任職組別則禁用總會(處長)
         this.disableGeneralDirector();
         // 如果選擇任職組別禁用前一級的選項
         this.disableGeneralDirector();
@@ -375,6 +714,17 @@ export class Hd640FormComponent implements OnInit {
     }
   }
 
+  // 禁用系統管理者
+  disableSysAdmin() {
+    this.form.get('sysAdmin')?.disable();
+    this.form.get('generalDirector')?.reset();
+    this.currentSelectRole = this.currentSelectRole.filter(
+      (item) => item !== '系統管理者'
+    );
+    // 取消勾選所有功能權限
+    this.cancelAllFunctionPermission();
+  }
+
   // 禁用總會(處長)
   disableGeneralDirector() {
     this.form.get('generalDirector')?.disable();
@@ -382,6 +732,8 @@ export class Hd640FormComponent implements OnInit {
     this.currentSelectRole = this.currentSelectRole.filter(
       (item) => item !== '總會(處長)'
     );
+    // 取消勾選所有功能權限
+    this.cancelAllFunctionPermission();
   }
 
   // 禁用服務處(處長)
@@ -391,6 +743,8 @@ export class Hd640FormComponent implements OnInit {
     this.currentSelectRole = this.currentSelectRole.filter(
       (item) => item !== '服務處(處長)'
     );
+    // 取消勾選所有功能權限
+    this.cancelAllFunctionPermission();
   }
 
   // 禁用組長
@@ -400,6 +754,8 @@ export class Hd640FormComponent implements OnInit {
     this.currentSelectRole = this.currentSelectRole.filter(
       (item) => item !== '組長'
     );
+    // 取消勾選所有功能權限
+    this.cancelAllFunctionPermission();
   }
 
   // 禁用站點主責人
@@ -409,6 +765,88 @@ export class Hd640FormComponent implements OnInit {
     this.currentSelectRole = this.currentSelectRole.filter(
       (item) => item !== '站點主責人'
     );
+    // 取消勾選所有功能權限
+    this.cancelAllFunctionPermission();
+  }
+
+  // 取消勾選所有功能權限
+  cancelAllFunctionPermission() {
+    this.form.patchValue({
+      caseManagement_add: false,
+      caseManagement_view: false,
+      caseManagement_edit: false,
+      caseManagement_print: false,
+      caseManagement_delete: false,
+
+      volunteerManagement_add: false,
+      volunteerManagement_view: false,
+      volunteerManagement_edit: false,
+      volunteerManagement_print: false,
+      volunteerManagement_delete: false,
+
+      reportSection_add: false,
+      reportSection_view: false,
+      reportSection_edit: false,
+      reportSection_print: false,
+      reportSection_delete: false,
+
+      signatureSection_add: false,
+      signatureSection_view: false,
+      signatureSection_edit: false,
+      signatureSection_print: false,
+      signatureSection_delete: false,
+
+      outcomeStatistics_add: false,
+      outcomeStatistics_view: false,
+      outcomeStatistics_edit: false,
+      outcomeStatistics_print: false,
+      outcomeStatistics_delete: false,
+
+      systemAdminPermissions_add: false,
+      systemAdminPermissions_view: false,
+      systemAdminPermissions_edit: false,
+      systemAdminPermissions_print: false,
+      systemAdminPermissions_delete: false,
+    });
+  }
+
+  // 禁用功能權限
+  disableFunctionPermissions(): void {
+    this.form.get('caseManagement_add')?.disable();
+    this.form.get('caseManagement_view')?.disable();
+    this.form.get('caseManagement_edit')?.disable();
+    this.form.get('caseManagement_print')?.disable();
+    this.form.get('caseManagement_delete')?.disable();
+
+    this.form.get('volunteerManagement_add')?.disable();
+    this.form.get('volunteerManagement_view')?.disable();
+    this.form.get('volunteerManagement_edit')?.disable();
+    this.form.get('volunteerManagement_print')?.disable();
+    this.form.get('volunteerManagement_delete')?.disable();
+
+    this.form.get('reportSection_add')?.disable();
+    this.form.get('reportSection_view')?.disable();
+    this.form.get('reportSection_edit')?.disable();
+    this.form.get('reportSection_print')?.disable();
+    this.form.get('reportSection_delete')?.disable();
+
+    this.form.get('signatureSection_add')?.disable();
+    this.form.get('signatureSection_view')?.disable();
+    this.form.get('signatureSection_edit')?.disable();
+    this.form.get('signatureSection_print')?.disable();
+    this.form.get('signatureSection_delete')?.disable();
+
+    this.form.get('outcomeStatistics_add')?.disable();
+    this.form.get('outcomeStatistics_view')?.disable();
+    this.form.get('outcomeStatistics_edit')?.disable();
+    this.form.get('outcomeStatistics_print')?.disable();
+    this.form.get('outcomeStatistics_delete')?.disable();
+
+    this.form.get('systemAdminPermissions_add')?.disable();
+    this.form.get('systemAdminPermissions_view')?.disable();
+    this.form.get('systemAdminPermissions_edit')?.disable();
+    this.form.get('systemAdminPermissions_print')?.disable();
+    this.form.get('systemAdminPermissions_delete')?.disable();
   }
 
   // 個案管理選項勾選時觸發

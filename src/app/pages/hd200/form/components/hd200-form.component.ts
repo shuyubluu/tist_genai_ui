@@ -21,6 +21,7 @@ import {
 import { TaiwanCitySelectRadioComponent } from '../../../../common/components/select/taiwanCitySelect_radio/components/taiwan-city-select-radio.component';
 import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 import { Hd200ListService } from '../../list/service/hd200-list.service';
+import { taiwanIdValidator } from '../../../../common/validator/taiwan-id-validator';
 
 @Component({
   selector: 'app-hd200-form',
@@ -331,7 +332,7 @@ export class Hd200FormComponent implements OnInit {
       // 生日
       birthDate: new FormControl('', [Validators.required]),
       // 身份證字號
-      idNumber: new FormControl('', [Validators.required]),
+      idNumber: new FormControl('', [Validators.required, taiwanIdValidator()]),
       // 手機前四碼
       phonePrefix: new FormControl('', [
         Validators.required,
