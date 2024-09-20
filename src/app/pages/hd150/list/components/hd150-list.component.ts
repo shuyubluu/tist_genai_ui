@@ -40,6 +40,12 @@ export class Hd150ListComponent implements OnInit {
     {
       caseOpeningDate: '113/01/01',
       caseClassification: '高風險',
+      approvalStatus: '已簽核',
+    },
+    {
+      caseOpeningDate: '113/01/01',
+      caseClassification: '高風險',
+      approvalStatus: '待簽',
     },
   ];
   // 分頁器切割後的資料

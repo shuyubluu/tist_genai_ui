@@ -4,4 +4,5 @@ export interface SearchResultData {
   caseName: string;
   responsiblePersonJobTitle: string;
   responsiblePerson: string;
+  approvalStatus: string;
 }

@@ -2534,7 +2534,7 @@ export class TaiwanCitySelectRadioComponent implements ControlValueAccessor {
         if (!citySelected && cityList.AreaList.some((area) => area.checked)) {
           cityList.indeterminate = true; // 強制將縣市選擇狀態設為模糊
         }
-        
+
         // 如果城市被選中，則強制選中所有子區域
         if (citySelected) {
           area.checked = true; // 強制選中所有子區域

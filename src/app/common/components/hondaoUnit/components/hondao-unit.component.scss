@@ -1,0 +1,68 @@
+.select {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .selectContainer {
+    width: 500px;
+    height: 100%;
+
+    .departmentBlock {
+      padding: 0px 12px;
+      height: 50px;
+      display: grid;
+      grid-template-columns: 5fr 1fr;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 3px dashed #e4e4e4;
+      cursor: pointer;
+      border-radius: 3px;
+
+      &:hover {
+        background: #ffeedf;
+      }
+    }
+
+    .teamBlock {
+      padding: 0px 40px;
+      height: 50px;
+      display: grid;
+      grid-template-columns: 5fr 1fr;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      border-radius: 3px;
+
+      &:hover {
+        background: #ffeedf;
+      }
+    }
+
+    .regionBlock {
+      padding: 0px 56px;
+      height: 50px;
+      display: grid;
+      grid-template-columns: 5fr 1fr;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      border-radius: 3px;
+
+      &:hover {
+        background: #ffeedf;
+      }
+    }
+  }
+}
+
+.selectCountText {
+  color: #ff912f;
+  font-size: 16px;
+  font-weight: bold;
+
+  &.full {
+    color: red;
+  }
+}

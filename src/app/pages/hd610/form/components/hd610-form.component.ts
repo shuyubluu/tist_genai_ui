@@ -6,9 +6,10 @@ import { RouterModule } from '@angular/router';
 import { DayPickerComponent } from '../../../../common/components/dayPicker/dayPicker.component';
 import { SharedModule } from '../../../../common/shared/shared.module';
 import { TabService } from '../../../../common/layouts/tab/tab.service';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Hd610ListService } from '../../list/service/hd610-list.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { ErrorMessageComponent } from '../../../../common/components/message/error-message.component';
 
 @Component({
   selector: 'app-hd610-form',
@@ -20,6 +21,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
     SelectComponent,
     RouterModule,
     DayPickerComponent,
+    ErrorMessageComponent,
   ],
   templateUrl: './hd610-form.component.html',
   styleUrl: './hd610-form.component.scss',
@@ -27,6 +29,12 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 export class Hd610FormComponent implements OnInit {
   // 搜尋條件表單
   form: FormGroup;
+  // 任職單位是否自訂
+  isCustomDepartment: boolean = false;
+  // 任職組別是否自訂
+  isCustomTeam: boolean = false;
+  // 任職區域是否自訂
+  isCustomRegion: boolean = false;
   // 角色層級select選項
   selectOptions_roleLevel: string[] = [
     '系統管理者',
@@ -116,11 +124,17 @@ export class Hd610FormComponent implements OnInit {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
       // 任職單位
-      department: new FormControl(''),
+      department: new FormControl('', [Validators.required]),
+      // 任職單位_輸入框
+      department_input: new FormControl('', [Validators.required]),
       // 任職組別
       team: new FormControl(''),
+      // 任職組別_輸入框
+      team_input: new FormControl(''),
       // 任職區域
       region: new FormControl(''),
+      // 任職區域_輸入框
+      region_input: new FormControl(''),
       // 代碼
       code: new FormControl(''),
     });
@@ -130,10 +144,73 @@ export class Hd610FormComponent implements OnInit {
     // 檢視模式，禁用表單
     if (this.hd610ListService.isView) {
       this.form.disable();
-      // 編輯模式，禁用代碼欄位ㄋ
+      // 編輯模式，禁用代碼欄位
     } else if (this.hd610ListService.isEdit) {
       this.form.get('code')?.disable();
     }
+
+    // 如果任職單位輸入框是空的則禁用
+    if (this.form.get('department_input')?.value === '') {
+      this.form.get('department_input')?.disable();
+    }
+
+    // 如果任職組別輸入框是空的則禁用
+    if (this.form.get('team_input')?.value === '') {
+      this.form.get('team_input')?.disable();
+    }
+
+    // 如果任職區域輸入框是空的則禁用
+    if (this.form.get('region_input')?.value === '') {
+      this.form.get('region_input')?.disable();
+    }
+  }
+
+  // 開啟自訂任職單位
+  onCustomDepartment() {
+    this.isCustomDepartment = true;
+    this.form.get('department')?.disable();
+    this.form.get('department')?.reset();
+    this.form.get('department_input')?.enable();
+  }
+
+  // 取消自訂任職單位
+  onCancelCustomDepartment() {
+    this.isCustomDepartment = false;
+    this.form.get('department')?.enable();
+    this.form.get('department_input')?.disable();
+    this.form.get('department_input')?.reset();
+  }
+
+  // 開啟自訂任職組別
+  onCustomTeam() {
+    this.isCustomTeam = true;
+    this.form.get('team')?.disable();
+    this.form.get('team')?.reset();
+    this.form.get('team_input')?.enable();
+  }
+
+  // 取消自訂任職組別
+  onCancelCustomTeam() {
+    this.isCustomTeam = false;
+    this.form.get('team')?.enable();
+    this.form.get('team_input')?.disable();
+    this.form.get('team_input')?.reset();
+  }
+
+  // 開啟自訂任職區域
+  onCustomRegion() {
+    this.isCustomRegion = true;
+    this.form.get('region')?.disable();
+    this.form.get('region')?.reset();
+    this.form.get('region_input')?.enable();
+  }
+
+  // 取消自訂任職區域
+  onCancelCustomRegion() {
+    this.isCustomRegion = false;
+    this.form.get('region')?.enable();
+    this.form.get('region_input')?.disable();
+    this.form.get('region_input')?.reset();
   }
 
   // 儲存

@@ -33,9 +33,10 @@
   <div class="mt"></div>
   <div class="grid-search-container">
     <div class="grid-columns searchTitle">
-      <div class="th-cell">開案日期</div>
-      <div class="th-cell">風險等級</div>
-      <div class="th-cell">操作</div>
+      <div>開案日期</div>
+      <div>風險等級</div>
+      <div>簽核狀態</div>
+      <div>操作</div>
     </div>
     <div
       class="grid-columns tabelBorder"
@@ -50,6 +51,9 @@
       </div>
       <div>
         {{ searchResult.caseClassification }}
+      </div>
+      <div>
+        {{ searchResult.approvalStatus }}
       </div>
       <!-- !TODO -->
       <div>

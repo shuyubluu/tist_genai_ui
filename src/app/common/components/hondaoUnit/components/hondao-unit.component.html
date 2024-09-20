@@ -1,0 +1,90 @@
+<div class="bold-text">已選擇單位：{{ selectUnitList.join(", ") }}</div>
+<div class="select">
+  <div class="selectContainer">
+    <nz-checkbox-wrapper>
+      <div nz-row>
+        @for( headquarters of allUnitData; track headquarters; ){
+        <div class="cityBlock" nz-col nzSpan="24">
+          <label
+            nz-checkbox
+            [nzValue]="headquarters.code"
+            [nzIndeterminate]="headquarters.indeterminate"
+            [(ngModel)]="headquarters.checked"
+            (ngModelChange)="onHeadquartersChecked(headquarters)"
+            >{{ headquarters.headquarters }}</label
+          >
+        </div>
+        @for( unit of headquarters.unit; track unit; let i = $index){
+        <div class="departmentBlock" nz-col nzSpan="24">
+          <label
+            nz-checkbox
+            [nzValue]="unit.code"
+            [nzIndeterminate]="unit.indeterminate"
+            [(ngModel)]="unit.checked"
+            (ngModelChange)="onDepartmentChecked(headquarters, unit)"
+            [nzDisabled]="headquarters.checked"
+            >{{ unit.department }}</label
+          >
+          <app-button
+            *ngIf="!expandTeamMenu.includes(unit.code)"
+            [buttonText]="'展開'"
+            [attachClassName]="['success']"
+            (click)="expandTeam(unit.code)"
+          />
+          <app-button
+            *ngIf="expandTeamMenu.includes(unit.code)"
+            [buttonText]="'收合'"
+            [attachClassName]="['danger']"
+            (click)="closeTeam(unit.code)"
+          />
+        </div>
+        @for( team of unit.team; track team; let j = $index){
+        <div
+          *ngIf="expandTeamMenu.includes(unit.code)"
+          class="teamBlock"
+          nz-col
+          nzSpan="24"
+        >
+          <label
+            nz-checkbox
+            [nzValue]="team.code"
+            [nzIndeterminate]="team.indeterminate"
+            [(ngModel)]="team.checked"
+            (ngModelChange)="onTeamChecked(headquarters, unit, team)"
+            [nzDisabled]="unit.checked"
+            >{{ team.teamName }}</label
+          >
+          <app-button
+            *ngIf="!expandRegionMenu.includes(team.code)"
+            [buttonText]="'展開'"
+            [attachClassName]="['success']"
+            (click)="expandRegion(team.code)"
+          />
+          <app-button
+            *ngIf="expandRegionMenu.includes(team.code)"
+            [buttonText]="'收合'"
+            [attachClassName]="['danger']"
+            (click)="closeRegion(team.code)"
+          />
+        </div>
+        @for( region of team.region; track region; let k = $index){
+        <div
+          *ngIf="expandRegionMenu.includes(team.code)"
+          class="regionBlock"
+          nz-col
+          nzSpan="24"
+        >
+          <label
+            nz-checkbox
+            [nzValue]="region.code"
+            [(ngModel)]="region.checked"
+            (ngModelChange)="onRegionChecked(headquarters, unit, team, region)"
+            [nzDisabled]="unit.checked || team.checked"
+            >{{ region.regionName }}</label
+          >
+        </div>
+        } } }}
+      </div>
+    </nz-checkbox-wrapper>
+  </div>
+</div>

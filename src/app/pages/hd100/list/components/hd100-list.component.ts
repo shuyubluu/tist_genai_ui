@@ -52,6 +52,7 @@ export class Hd100ListComponent implements OnInit {
     '持續服務',
     '暫停服務',
     '結案',
+    '不予開案',
     '無',
   ];
   // 個案分級select選項

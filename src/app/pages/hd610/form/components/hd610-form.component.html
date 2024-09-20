@@ -2,11 +2,43 @@
   <div class="grid-container">
     <div class="grid-columns-1">
       <div class="label">任職單位</div>
-      <div>
+      <div class="column-Message">
         <app-select
           [selectWidth]="'160px'"
           [options]="selectOptions_department"
           formControlName="department"
+        />
+        <app-button
+          *ngIf="!isCustomDepartment"
+          class="mx-2"
+          [buttonText]="'自訂'"
+          [attachClassName]="['success']"
+          (click)="onCustomDepartment()"
+        />
+        <app-button
+          *ngIf="isCustomDepartment"
+          class="mx-2"
+          [buttonText]="'取消自訂'"
+          [attachClassName]="['danger']"
+          (click)="onCancelCustomDepartment()"
+        />
+        <app-input
+          *ngIf="isCustomDepartment"
+          [inputWidth]="'130px'"
+          [maxLength]="30"
+          formControlName="department_input"
+        />
+        <app-error-message
+          [control]="form.get('department')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必填"
+        />
+        <app-error-message
+          [control]="form.get('department_input')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必填"
         />
       </div>
     </div>
@@ -18,9 +50,29 @@
           [options]="selectOptions_team"
           formControlName="team"
         />
+        <app-button
+          *ngIf="!isCustomTeam"
+          class="mx-2"
+          [buttonText]="'自訂'"
+          [attachClassName]="['success']"
+          (click)="onCustomTeam()"
+        />
+        <app-button
+          *ngIf="isCustomTeam"
+          class="mx-2"
+          [buttonText]="'取消自訂'"
+          [attachClassName]="['danger']"
+          (click)="onCancelCustomTeam()"
+        />
+        <app-input
+          *ngIf="isCustomTeam"
+          [inputWidth]="'130px'"
+          [maxLength]="30"
+          formControlName="team_input"
+        />
       </div>
     </div>
-    <div class="grid-columns-2 border-bottom-0">
+    <div class="grid-columns-1">
       <div class="label">任職區域</div>
       <div>
         <app-select
@@ -28,7 +80,29 @@
           [options]="selectOptions_region"
           formControlName="region"
         />
+        <app-button
+          class="mx-2"
+          *ngIf="!isCustomRegion"
+          [buttonText]="'自訂'"
+          [attachClassName]="['success']"
+          (click)="onCustomRegion()"
+        />
+        <app-button
+          *ngIf="isCustomRegion"
+          class="mx-2"
+          [buttonText]="'取消自訂'"
+          [attachClassName]="['danger']"
+          (click)="onCancelCustomRegion()"
+        />
+        <app-input
+          *ngIf="isCustomRegion"
+          [inputWidth]="'130px'"
+          [maxLength]="30"
+          formControlName="region_input"
+        />
       </div>
+    </div>
+    <div class="grid-columns-1 border-bottom-0">
       <div class="label">代碼</div>
       <div>
         <app-input

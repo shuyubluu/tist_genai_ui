@@ -20,13 +20,23 @@
         />
       </div>
     </div>
-    <div class="grid-columns-2 border-bottom-0">
+    <div class="grid-columns-1">
       <div class="label">任職區域</div>
       <div>
         <app-select
           [selectWidth]="'200px'"
           [options]="selectOptions_region"
           formControlName="region"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-2 border-bottom-0">
+      <div class="label">單位主管</div>
+      <div>
+        <app-input
+          [inputWidth]="'130px'"
+          [maxLength]="30"
+          formControlName="unitSupervisor"
         />
       </div>
       <div class="label">代碼</div>
@@ -54,54 +64,56 @@
   </div>
 </form>
 <div class="message">搜尋結果: 共{{ searchResultData.length }}筆</div>
-  <div class="mt"></div>
-  <div class="grid-search-container">
-    <div class="grid-columns searchTitle">
-      <div>單位名稱</div>
-      <div>代碼</div>
-      <div>操作</div>
+<div class="mt"></div>
+<div class="grid-search-container">
+  <div class="grid-columns searchTitle">
+    <div>單位名稱</div>
+    <div>單位主管</div>
+    <div>代碼</div>
+    <div>操作</div>
+  </div>
+  <div
+    class="grid-columns tableBorder"
+    *ngFor="let searchResult of newSearchResultData; let i = index"
+    [ngClass]="{
+      'even-row': i % 2 === 1,
+      'odd-row': i % 2 !== 1
+    }"
+  >
+    <div>
+      <span class="color-blue">{{ searchResult.department }}</span>
+      <span *ngIf="searchResult.team"> / </span>
+      <span class="color-green">{{ searchResult.team }}</span>
+      <span *ngIf="searchResult.region"> / </span>
+      <span class="color-red">{{ searchResult.region }}</span>
     </div>
-    <div
-      class="grid-columns tableBorder"
-      *ngFor="let searchResult of newSearchResultData; let i = index"
-      [ngClass]="{
-        'even-row': i % 2 === 1,
-        'odd-row': i % 2 !== 1
-      }"
-    >
-      <div>
-        <span class="color-blue">{{ searchResult.department }}</span>
-        <span *ngIf="searchResult.team"> / </span>
-        <span class="color-green">{{ searchResult.team }}</span>
-        <span *ngIf="searchResult.region"> / </span>
-        <span class="color-red">{{ searchResult.region }}</span>
-      </div>
-      <div>
-        {{ searchResult.code }}
-      </div>
-      <!-- !TODO -->
-      <div>
-        <app-button [buttonText]="'檢視'" (click)="view()" />
-        <app-button
-          [buttonText]="'編輯'"
-          [attachClassName]="['warning']"
-          (click)="edit()"
-        />
-        <app-button
-          *ngIf="searchResult.isCanUse === true"
-          [buttonText]="'停用'"
-          [attachClassName]="['danger']"
-          (click)="disable(i)"
-        />
-        <app-button
-          *ngIf="searchResult.isCanUse === false"
-          [buttonText]="'啟用'"
-          [attachClassName]="['success']"
-          (click)="enable(i)"
-        />
-      </div>
+    <div>{{ searchResult.unitSupervisor }}</div>
+    <div>
+      {{ searchResult.code }}
+    </div>
+    <!-- !TODO -->
+    <div>
+      <app-button [buttonText]="'檢視'" (click)="view()" />
+      <app-button
+        [buttonText]="'編輯'"
+        [attachClassName]="['warning']"
+        (click)="edit()"
+      />
+      <app-button
+        *ngIf="searchResult.isCanUse === true"
+        [buttonText]="'停用'"
+        [attachClassName]="['danger']"
+        (click)="disable(i)"
+      />
+      <app-button
+        *ngIf="searchResult.isCanUse === false"
+        [buttonText]="'啟用'"
+        [attachClassName]="['success']"
+        (click)="enable(i)"
+      />
     </div>
   </div>
+</div>
 <div class="mt-10"></div>
 <nz-pagination
   [nzPageIndex]="currentPage"

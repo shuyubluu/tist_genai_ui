@@ -14,6 +14,7 @@ import {
 } from '../../../../common/validator/taiwan-phone-validators';
 import { ErrorMessageComponent } from '../../../../common/components/message/error-message.component';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { HondaoUnitComponent } from '../../../../common/components/hondaoUnit/components/hondao-unit.component';
 
 @Component({
   selector: 'app-hd640-form',
@@ -26,6 +27,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
     RouterModule,
     DayPickerComponent,
     ErrorMessageComponent,
+    HondaoUnitComponent,
   ],
   templateUrl: './hd640-form.component.html',
   styleUrl: './hd640-form.component.scss',
@@ -35,8 +37,14 @@ export class Hd640FormComponent implements OnInit {
   form: FormGroup;
   // 控制角色modal
   isRoleVisible: boolean = false;
+  // 控制單位檢視權限modal
+  isUnitViewPermissionsVisible: boolean = false;
   // 當前已選擇的角色
   currentSelectRole: string[] = [];
+  // 當前所選的單位檢視權限
+  currentSelectedUnitViewPermissions: string[] = [];
+  // 用來暫存單位檢視權限
+  tempUnitViewPermissions: string[] = [];
   // 任職單位select選項
   selectOptions_department: string[] = [
     '總會(系統管理者)',
@@ -231,9 +239,7 @@ export class Hd640FormComponent implements OnInit {
       systemAdminPermissions_delete: new FormControl(),
 
       // 單位檢視權限
-      unitViewPermissions: new FormControl(''),
-      // 全會
-      headquartersManagement: new FormControl(),
+      unitViewPermissions: new FormControl(),
     });
   }
 
@@ -879,9 +885,30 @@ export class Hd640FormComponent implements OnInit {
     this.form.get('systemAdminPermissions')?.setValue(checkGroup);
   }
 
-  // 單位檢視權限選項勾選時觸發
-  handleUnitViewPermissionsChange(checkGroup: string[]): void {
-    this.form.get('unitViewPermissions')?.setValue(checkGroup);
+  // 開啟單位檢視權限modal
+  showUnitViewPermissionsModal(): void {
+    this.isUnitViewPermissionsVisible = true;
+    this.tempUnitViewPermissions = [
+      ...this.form.get('unitViewPermissions')?.value,
+    ];
+  }
+
+  // 單位檢視權限modal確認按鈕事件
+  handleUnitViewPermissionsOk(): void {
+    this.isUnitViewPermissionsVisible = false;
+    this.currentSelectedUnitViewPermissions = [
+      ...this.form.get('unitViewPermissions')?.value,
+    ];
+    this.message.success('修改成功');
+  }
+
+  // 單位檢視權限modal取消按鈕事件
+  handleUnitViewPermissionsCancel(): void {
+    this.isUnitViewPermissionsVisible = false;
+    this.form
+      .get('unitViewPermissions')
+      ?.setValue(this.tempUnitViewPermissions);
+    this.message.error('操作取消');
   }
 
   // 儲存

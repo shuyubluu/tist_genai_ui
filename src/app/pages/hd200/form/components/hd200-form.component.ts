@@ -50,7 +50,7 @@ export class Hd200FormComponent implements OnInit {
   isDisableReligiousAffiliationOthers: boolean = false;
   // 是否顯示希望服務區域modal
   isVisible: boolean = false;
-  // 當前所選的
+  // 當前所選的希望服務區域
   currentSelectedDesiredServiceArea: string[] = [];
   // 用來暫存希望服務區域
   tempDesiredServiceArea: string[] = [];

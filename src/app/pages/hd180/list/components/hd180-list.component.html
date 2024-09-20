@@ -28,46 +28,46 @@
 <div class="mt"></div>
 <div class="hd100-list-search">
   <div class="message">搜尋結果: 共{{ searchResultData.length }}筆</div>
-    <div class="mt"></div>
-    <div class="grid-search-container">
-      <div class="grid-columns searchTitle">
-        <div class="th-cell">個案姓名</div>
-        <div class="th-cell">性別</div>
-        <div class="th-cell">結案日期</div>
-        <div class="th-cell">結案原因</div>
-        <div class="th-cell">操作</div>
+  <div class="mt"></div>
+  <div class="grid-search-container">
+    <div class="grid-columns searchTitle">
+      <div>個案姓名</div>
+      <div>性別</div>
+      <div>結案日期</div>
+      <div>結案原因</div>
+      <div>操作</div>
+    </div>
+    <div
+      class="grid-columns tableBorder"
+      *ngFor="let searchResult of newSearchResultData; let i = index"
+      [ngClass]="{
+        'even-row': i % 2 === 1,
+        'odd-row': i % 2 !== 1
+      }"
+    >
+      <!-- !TODO -->
+      <div>
+        {{ searchResult.caseName }}
       </div>
-      <div
-        class="grid-columns tableBorder"
-        *ngFor="let searchResult of newSearchResultData; let i = index"
-        [ngClass]="{
-          'even-row': i % 2 === 1,
-          'odd-row': i % 2 !== 1
-        }"
-      >
-        <!-- !TODO -->
-        <div>
-          {{ searchResult.caseName }}
-        </div>
-        <div>
-          {{ searchResult.gender }}
-        </div>
-        <div>
-          {{ searchResult.closureDate }}
-        </div>
-        <div>
-          {{ searchResult.closureReason }}
-        </div>
-        <div>
-          <app-button [buttonText]="'檢視'" (click)="view()" />
-          <app-button
-            [buttonText]="'編輯'"
-            [attachClassName]="['warning']"
-            (click)="edit()"
-          />
-        </div>
+      <div>
+        {{ searchResult.gender }}
+      </div>
+      <div>
+        {{ searchResult.closureDate }}
+      </div>
+      <div>
+        {{ searchResult.closureReason }}
+      </div>
+      <div>
+        <app-button [buttonText]="'檢視'" (click)="view()" />
+        <app-button
+          [buttonText]="'編輯'"
+          [attachClassName]="['warning']"
+          (click)="edit()"
+        />
       </div>
     </div>
+  </div>
   <div class="mt-10"></div>
   <nz-pagination
     [nzPageIndex]="currentPage"

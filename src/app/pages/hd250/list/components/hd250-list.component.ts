@@ -46,6 +46,7 @@ export class Hd250ListComponent implements OnInit {
       supervisorScore: '85',
       evaluationResult: '為期改善',
       improvementPassed: '否',
+      approvalStatus: '已簽核',
     },
     {
       assessmentDate: '113/08/03',
@@ -53,6 +54,7 @@ export class Hd250ListComponent implements OnInit {
       supervisorScore: '85',
       evaluationResult: '通過',
       improvementPassed: '',
+      approvalStatus: '待簽',
     },
   ];
 

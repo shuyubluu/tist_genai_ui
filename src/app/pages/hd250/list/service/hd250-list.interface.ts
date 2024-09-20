@@ -4,4 +4,5 @@ export interface SearchResultData {
   supervisorScore: string; // 督導計分
   evaluationResult: string; // 評核結果
   improvementPassed: string; // 為期改善是否通過
+  approvalStatus: string; // 簽核狀態
 }

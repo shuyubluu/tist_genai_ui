@@ -43,6 +43,7 @@ export class Hd140ListComponent implements OnInit {
       caseName: '王大明',
       responsiblePersonJobTitle: '社工',
       responsiblePerson: '王小明',
+      approvalStatus: '已簽核',
     },
     {
       caseOpeningDate: '113/02/01',
@@ -50,6 +51,7 @@ export class Hd140ListComponent implements OnInit {
       caseName: '王大明',
       responsiblePersonJobTitle: '志工',
       responsiblePerson: '陳大明',
+      approvalStatus: '待簽',
     },
   ];
   // 分頁器切割後的資料

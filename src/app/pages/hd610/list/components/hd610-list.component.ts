@@ -119,13 +119,15 @@ export class Hd610ListComponent implements OnInit {
       department: '總會(系統管理者)',
       team: '',
       region: '',
-      code: '000',
+      unitSupervisor: '王大壯',
+      code: '0',
       isCanUse: true,
     },
     {
       department: '總會',
       team: '',
       region: '',
+      unitSupervisor: '王小明',
       code: '00',
       isCanUse: true,
     },
@@ -133,21 +135,24 @@ export class Hd610ListComponent implements OnInit {
       department: '事業發展處',
       team: '',
       region: '',
-      code: '01',
-      isCanUse: true,
-    },
-    {
-      department: '事業發展處',
-      team: '事業發展中心- 高齡友善推廣組(總會事業)',
-      region: '',
+      unitSupervisor: '陳小華',
       code: 'A',
       isCanUse: true,
     },
     {
       department: '事業發展處',
       team: '事業發展中心- 高齡友善推廣組(總會事業)',
-      region: '彭祖體驗長者導師志工隊',
+      region: '',
+      unitSupervisor: '黃小美',
       code: 'AA',
+      isCanUse: true,
+    },
+    {
+      department: '事業發展處',
+      team: '事業發展中心- 高齡友善推廣組(總會事業)',
+      region: '彭祖體驗長者導師志工隊',
+      unitSupervisor: '林小晨',
+      code: 'AA1',
       isCanUse: true,
     },
   ];
@@ -173,6 +178,8 @@ export class Hd610ListComponent implements OnInit {
       team: new FormControl(''),
       // 任職區域
       region: new FormControl(''),
+      // 單位主管
+      unitSupervisor: new FormControl(''),
       // 代碼
       code: new FormControl(''),
     });

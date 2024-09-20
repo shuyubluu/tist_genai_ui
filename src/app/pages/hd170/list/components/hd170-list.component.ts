@@ -40,6 +40,12 @@ export class Hd170ListComponent implements OnInit {
     {
       formSubmissionDate: '113/01/01',
       filler: '王大明',
+      approvalStatus: '已簽核'
+    },
+    {
+      formSubmissionDate: '113/01/01',
+      filler: '王大明',
+      approvalStatus: '待簽'
     },
   ];
 

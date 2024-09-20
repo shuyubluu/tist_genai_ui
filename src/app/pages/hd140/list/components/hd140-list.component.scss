@@ -1,6 +1,6 @@
 .grid-columns {
   display: grid;
   place-items: center;
-  grid-template-columns: repeat(4, 1fr) 2fr;
+  grid-template-columns: repeat(5, 1fr) 2fr;
   grid-gap: 10px;
 }
