@@ -6,7 +6,6 @@
       <div>
         <app-select
           [selectWidth]="'100px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_serviceStatus"
           formControlName="serviceStatus"
         />
@@ -29,14 +28,13 @@
       <div>
         <app-select
           [selectWidth]="'100px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_caseClassification"
           formControlName="caseClassification"
         />
       </div>
     </div>
   </div>
-  <div colspan="4" class="buttonArea">
+  <div class="buttonArea">
     <!-- !TODO -->
     <app-button [buttonText]="'搜尋個案'" (click)="search()" />
     <app-button

@@ -112,28 +112,28 @@ export class Hd250FormComponent implements OnInit {
       // 服務倫理_督導評分_1
       serviceEthics_supervisor_1: new FormControl('', [
         Validators.required,
-        rangeValidator(0, 100),
+        rangeValidator(),
       ]),
       // 服務倫理_志工評分_2
       serviceEthics_volunteer_2: new FormControl(''),
       // 服務倫理_督導評分_2
       serviceEthics_supervisor_2: new FormControl('', [
         Validators.required,
-        rangeValidator(0, 100),
+        rangeValidator(),
       ]),
       // 服務倫理_志工評分_3
       serviceEthics_volunteer_3: new FormControl(''),
       // 服務倫理_督導評分_3
       serviceEthics_supervisor_3: new FormControl('', [
         Validators.required,
-        rangeValidator(0, 100),
+        rangeValidator(),
       ]),
       // 服務倫理_志工評分_4
       serviceEthics_volunteer_4: new FormControl(''),
       // 服務倫理_督導評分_4
       serviceEthics_supervisor_4: new FormControl('', [
         Validators.required,
-        rangeValidator(0, 100),
+        rangeValidator(),
       ]),
 
       // 2.出勤狀況
@@ -142,28 +142,28 @@ export class Hd250FormComponent implements OnInit {
       // 出勤狀況_督導評分_1
       attendanceStatus_supervisor_1: new FormControl('', [
         Validators.required,
-        rangeValidator(0, 100),
+        rangeValidator(),
       ]),
       // 出勤狀況_志工評分_2
       attendanceStatus_volunteer_2: new FormControl(''),
       // 出勤狀況_督導評分_2
       attendanceStatus_supervisor_2: new FormControl('', [
         Validators.required,
-        rangeValidator(0, 100),
+        rangeValidator(),
       ]),
       // 出勤狀況_志工評分_3
       attendanceStatus_volunteer_3: new FormControl(''),
       // 出勤狀況_督導評分_3
       attendanceStatus_supervisor_3: new FormControl('', [
         Validators.required,
-        rangeValidator(0, 100),
+        rangeValidator(),
       ]),
       // 出勤狀況_志工評分_4
       attendanceStatus_volunteer_4: new FormControl(''),
       // 出勤狀況_督導評分_4
       attendanceStatus_supervisor_4: new FormControl('', [
         Validators.required,
-        rangeValidator(0, 100),
+        rangeValidator(),
       ]),
 
       // 3.服務品質
@@ -172,28 +172,28 @@ export class Hd250FormComponent implements OnInit {
       // 服務品質_督導評分_1
       serviceQuality_supervisor_1: new FormControl('', [
         Validators.required,
-        rangeValidator(0, 100),
+        rangeValidator(),
       ]),
       // 服務品質_志工評分_2
       serviceQuality_volunteer_2: new FormControl(''),
       // 服務品質_督導評分_2
       serviceQuality_supervisor_2: new FormControl('', [
         Validators.required,
-        rangeValidator(0, 100),
+        rangeValidator(),
       ]),
       // 服務品質_志工評分_3
       serviceQuality_volunteer_3: new FormControl(''),
       // 服務品質_督導評分_3
       serviceQuality_supervisor_3: new FormControl('', [
         Validators.required,
-        rangeValidator(0, 100),
+        rangeValidator(),
       ]),
       // 服務品質_志工評分_4
       serviceQuality_volunteer_4: new FormControl(''),
       // 服務品質_督導評分_4
       serviceQuality_supervisor_4: new FormControl('', [
         Validators.required,
-        rangeValidator(0, 100),
+        rangeValidator(),
       ]),
 
       // 4.團隊精神
@@ -202,28 +202,28 @@ export class Hd250FormComponent implements OnInit {
       // 團隊精神_督導評分_1
       teamSpirit_supervisor_1: new FormControl('', [
         Validators.required,
-        rangeValidator(0, 100),
+        rangeValidator(),
       ]),
       // 團隊精神_志工評分_2
       teamSpirit_volunteer_2: new FormControl(''),
       // 團隊精神_督導評分_2
       teamSpirit_supervisor_2: new FormControl('', [
         Validators.required,
-        rangeValidator(0, 100),
+        rangeValidator(),
       ]),
       // 團隊精神_志工評分_3
       teamSpirit_volunteer_3: new FormControl(''),
       // 團隊精神_督導評分_3
       teamSpirit_supervisor_3: new FormControl('', [
         Validators.required,
-        rangeValidator(0, 100),
+        rangeValidator(),
       ]),
 
       // 5.志工評估結果
       // 為期改善原因
       improvementReason: new FormControl('', [
         Validators.required,
-        rangeValidator(0, 100),
+        rangeValidator(),
       ]),
       // 第一次為期改善是否通過_評核日期
       firstImprovementPassed_evaluationDate: new FormControl(''),
@@ -232,7 +232,7 @@ export class Hd250FormComponent implements OnInit {
       // 第一次為期改善未通過原因
       firstImprovementFailedReason: new FormControl('', [
         Validators.required,
-        rangeValidator(0, 100),
+        rangeValidator(),
       ]),
       // 第二次為期改善是否通過_評核日期
       secondImprovementPassed_evaluationDate: new FormControl(''),
@@ -241,12 +241,12 @@ export class Hd250FormComponent implements OnInit {
       // 第二次為期改善未通過原因
       secondImprovementFailedReason: new FormControl('', [
         Validators.required,
-        rangeValidator(0, 100),
+        rangeValidator(),
       ]),
       // 不予通過原因
       rejectionReason: new FormControl('', [
         Validators.required,
-        rangeValidator(0, 100),
+        rangeValidator(),
       ]),
       // 志工督導
       volunteerSupervisor: new FormControl(''),
@@ -262,6 +262,22 @@ export class Hd250FormComponent implements OnInit {
     if (this.hd250ListService.isView) {
       this.form.disable();
     }
+    // 禁用志工評分
+    this.form.get('serviceEthics_volunteer_1')?.disable();
+    this.form.get('serviceEthics_volunteer_2')?.disable();
+    this.form.get('serviceEthics_volunteer_3')?.disable();
+    this.form.get('serviceEthics_volunteer_4')?.disable();
+    this.form.get('attendanceStatus_volunteer_1')?.disable();
+    this.form.get('attendanceStatus_volunteer_2')?.disable();
+    this.form.get('attendanceStatus_volunteer_3')?.disable();
+    this.form.get('attendanceStatus_volunteer_4')?.disable();
+    this.form.get('serviceQuality_volunteer_1')?.disable();
+    this.form.get('serviceQuality_volunteer_2')?.disable();
+    this.form.get('serviceQuality_volunteer_3')?.disable();
+    this.form.get('serviceQuality_volunteer_4')?.disable();
+    this.form.get('teamSpirit_volunteer_1')?.disable();
+    this.form.get('teamSpirit_volunteer_2')?.disable();
+    this.form.get('teamSpirit_volunteer_3')?.disable();
   }
 
   // 完成送審

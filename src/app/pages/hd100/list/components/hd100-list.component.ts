@@ -100,6 +100,7 @@ export class Hd100ListComponent implements OnInit {
   // 搜尋個案資料
   search() {
     // !TODO: 搜尋邏輯
+    console.log(this.form.value);
   }
 
   // 新增個案資料

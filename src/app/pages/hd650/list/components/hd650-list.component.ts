@@ -87,6 +87,16 @@ export class Hd650ListComponent implements OnInit {
     this.form.get('passwordHistoryLimit')?.disable();
     // 禁用密碼到期未修改
     this.form.get('passwordExpirationCheckbox')?.disable();
+    // 禁用連續錯誤次數時間
+    this.form.get('time_1')?.disable();
+    // 禁用連續錯誤次數單位
+    this.form.get('timeUnit_1')?.disable();
+    // 禁用連續錯誤次數次數
+    this.form.get('passwordErrorCount')?.disable();
+    // 禁用連續錯誤次數鎖定時間
+    this.form.get('time_2')?.disable();
+    // 禁用連續錯誤次數鎖定單位
+    this.form.get('timeUnit_2')?.disable();
   }
 
   // 登入密碼規則選項改變時觸發
@@ -134,12 +144,24 @@ export class Hd650ListComponent implements OnInit {
 
   // 帳戶鎖定原則選項改變時觸發
   accountLockPolicyChange(checkGroup: string[]) {
-    this.form.get('loginPasswordRules')?.setValue(checkGroup);
+    this.form.get('accountLockPolicy')?.setValue(checkGroup);
     if (checkGroup.includes('1')) {
-      this.form.get('passwordMinLength')?.enable();
+      this.form.get('time_1')?.enable();
+      this.form.get('timeUnit_1')?.enable();
+      this.form.get('passwordErrorCount')?.enable();
+      this.form.get('time_2')?.enable();
+      this.form.get('timeUnit_2')?.enable();
     } else {
-      this.form.get('passwordMinLength')?.disable();
-      this.form.get('passwordMinLength')?.reset();
+      this.form.get('time_1')?.disable();
+      this.form.get('time_1')?.reset();
+      this.form.get('timeUnit_1')?.disable();
+      this.form.get('timeUnit_1')?.reset();
+      this.form.get('passwordErrorCount')?.disable();
+      this.form.get('passwordErrorCount')?.reset();
+      this.form.get('time_2')?.disable();
+      this.form.get('time_2')?.reset();
+      this.form.get('timeUnit_2')?.disable();
+      this.form.get('timeUnit_2')?.reset();
     }
   }
 

@@ -35,6 +35,7 @@
           formControlName="closureReason"
         />
         <app-input
+          *ngIf="form.get('closureReason')?.value === '其他'"
           [inputWidth]="'200px'"
           [maxLength]="30"
           formControlName="closureReason_other"

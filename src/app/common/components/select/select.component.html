@@ -10,7 +10,7 @@
 >
   <nz-option
     *ngFor="let option of options"
-    [nzValue]="option"
+    [nzValue]="option === '---' ? '' : option"
     [nzLabel]="option"
   ></nz-option>
 </nz-select>

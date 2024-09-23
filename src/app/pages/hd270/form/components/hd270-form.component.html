@@ -71,7 +71,7 @@
         />
       </div>
     </div>
-    <div class="grid-columns-2">
+    <div class="grid-columns-1">
       <div class="label">投保類別</div>
       <div class="column-Message">
         <app-select
@@ -87,8 +87,10 @@
           errorMessage="必選"
         />
       </div>
+    </div>
+    <div class="grid-columns-1">
       <div class="label">投保日期起迄</div>
-      <div>
+      <div class="column-Message">
         <app-dayPicker formControlName="insuranceDate_start" />
         <span class="mx-2">-</span>
         <app-dayPicker formControlName="insuranceDate_end" />
@@ -355,7 +357,6 @@
       <div>
         <app-select
           [selectWidth]="'200px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_insuredUnit"
           formControlName="insuredUnit"
         />

@@ -141,6 +141,8 @@ export class Hd110FormComponent implements OnInit {
     }
   }
 
+
+
   constructor(
     private tabService: TabService, // 關閉tab的Service
     private router: Router, // 路由

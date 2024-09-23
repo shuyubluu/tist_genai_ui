@@ -1,28 +1,26 @@
 <form [formGroup]="form">
   <div class="grid-container">
-    <div class="grid-columns-2">
+    <div class="grid-columns-1">
       <div class="label">申請日期</div>
       <div>
         <app-dayPicker formControlName="applicationDate_start" />
         <span class="mx-2">-</span>
         <app-dayPicker formControlName="applicationDate_end" />
       </div>
+    </div>
+    <div class="grid-columns-2 border-bottom-0">
       <div class="label">表單名稱</div>
       <div>
         <app-select
           [selectWidth]="'140px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_formName"
           formControlName="formName"
         />
       </div>
-    </div>
-    <div class="grid-columns-1 border-bottom-0">
       <div class="label">簽核狀態</div>
       <div>
         <app-select
           [selectWidth]="'90px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_approvalStatus"
           formControlName="approvalStatus"
         />

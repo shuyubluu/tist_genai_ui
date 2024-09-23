@@ -1,6 +1,25 @@
-<nz-date-picker
-  [(ngModel)]="selectedDate"
-  (ngModelChange)="onselect($event)"
-  (blur)="onTouched()"
-  [disabled]="disabled"
-></nz-date-picker>
+<input
+  class="date-input"
+  [placeholder]="'請選擇日期'"
+  [value]="formattedDate"
+  disabled
+/>
+<label>
+  <span class="date-icon" nz-icon nzType="table" nzTheme="outline"></span>
+  <nz-date-picker
+    class="date-picker"
+    [(ngModel)]="date"
+    (ngModelChange)="onDateChange($event)"
+    [nzFormat]="'yyyy-MM-dd'"
+    [nzDisabled]="disabled"
+  >
+  </nz-date-picker>
+</label>
+<span
+  *ngIf="!disabled"
+  class="date-delete"
+  nz-icon
+  nzType="delete"
+  nzTheme="outline"
+  (click)="clearDate()"
+></span>

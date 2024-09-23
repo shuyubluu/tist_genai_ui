@@ -5,7 +5,6 @@
       <div>
         <app-select
           [selectWidth]="'200px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_serviceUnit"
           formControlName="serviceUnit"
         />
@@ -45,45 +44,45 @@
   </div>
 </form>
 <div class="message">搜尋結果: 共{{ searchResultData.length }}筆</div>
-  <div class="mt"></div>
-  <div class="grid-search-container">
-    <div class="grid-columns searchTitle">
-      <div>服務單位</div>
-      <div>志工姓名</div>
-      <div>志工編號</div>
-      <!-- <div>服務時數</div> -->
-      <div>服務總時數</div>
-      <div>操作</div>
+<div class="mt"></div>
+<div class="grid-search-container">
+  <div class="grid-columns searchTitle">
+    <div>服務單位</div>
+    <div>志工姓名</div>
+    <div>志工編號</div>
+    <!-- <div>服務時數</div> -->
+    <div>服務總時數</div>
+    <div>操作</div>
+  </div>
+  <div
+    class="grid-columns tableBorder"
+    *ngFor="let searchResult of newSearchResultData; let i = index"
+    [ngClass]="{
+      'even-row': i % 2 === 1,
+      'odd-row': i % 2 !== 1
+    }"
+  >
+    <div>
+      {{ searchResult.serviceUnit }}
     </div>
-    <div
-      class="grid-columns tableBorder"
-      *ngFor="let searchResult of newSearchResultData; let i = index"
-      [ngClass]="{
-        'even-row': i % 2 === 1,
-        'odd-row': i % 2 !== 1
-      }"
-    >
-      <div>
-        {{ searchResult.serviceUnit }}
-      </div>
-      <div>
-        {{ searchResult.volunteerName }}
-      </div>
-      <div>
-        {{ searchResult.volunteerId }}
-      </div>
-      <!-- <div>
+    <div>
+      {{ searchResult.volunteerName }}
+    </div>
+    <div>
+      {{ searchResult.volunteerId }}
+    </div>
+    <!-- <div>
         {{ searchResult.serviceHours }}
       </div> -->
-      <div>
-        {{ searchResult.totalServiceHours }}
-      </div>
-      <!-- !TODO -->
-      <div>
-        <app-button [buttonText]="'檢視'" (click)="view()" />
-      </div>
+    <div>
+      {{ searchResult.totalServiceHours }}
+    </div>
+    <!-- !TODO -->
+    <div>
+      <app-button [buttonText]="'檢視'" (click)="view()" />
     </div>
   </div>
+</div>
 <div class="mt-10"></div>
 <nz-pagination
   [nzPageIndex]="currentPage"

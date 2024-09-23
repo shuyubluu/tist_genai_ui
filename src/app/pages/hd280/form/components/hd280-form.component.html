@@ -24,9 +24,9 @@
       <div class="label">服務項目</div>
       <div>0060老人服務</div>
     </div>
-    <div class="grid-columns-2">
+    <div class="grid-columns-1">
       <div class="label">服務日期</div>
-      <div>
+      <div class="column-Message">
         <app-dayPicker formControlName="serviceDate_start" />
         <span class="mx-2">-</span>
         <app-dayPicker formControlName="serviceDate_end" />
@@ -41,6 +41,8 @@
           errorMessage="必選"
         />
       </div>
+    </div>
+    <div class="grid-columns-1">
       <div class="label">服務內容</div>
       <div class="column-Message">
         <app-select
@@ -89,7 +91,7 @@
         />
       </div>
     </div>
-    <div class="grid-columns-1">
+    <div class="grid-columns-2">
       <div class="label">受服務人次</div>
       <app-input
         [inputWidth]="'100px'"
@@ -97,13 +99,10 @@
         [type]="'number'"
         formControlName="serviceSessions"
       />
-    </div>
-    <div class="grid-columns-1">
       <div class="label">服務單位</div>
       <div>
         <app-select
           [selectWidth]="'200px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_serviceUnit"
           formControlName="serviceUnit"
         />

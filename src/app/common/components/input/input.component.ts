@@ -79,7 +79,7 @@ export class InputComponent implements OnInit, ControlValueAccessor {
 
   // 當控件被禁用或啟用時，Angular 會調用這個方法
   setDisabledState(isDisabled: boolean): void {
-    this.disabled = isDisabled;
+    this.disabled = isDisabled; // 將禁用狀態寫入控件中
   }
 
   onInput(event: Event) {

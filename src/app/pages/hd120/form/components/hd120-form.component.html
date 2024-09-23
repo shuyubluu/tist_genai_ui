@@ -1708,8 +1708,8 @@
               >
               <label>
                 <app-input
-                  [inputWidth]="'100px'"
-                  [placeholder]="'福利使用概況'"
+                  [inputWidth]="'130px'"
+                  [placeholder]="'其他福利名稱'"
                   [maxLength]="30"
                   formControlName="welfareUsageOverview_other"
                 />
@@ -2253,9 +2253,8 @@
       <div>
         <!-- !TODO -->
         <app-select
-          [selectWidth]="'100px'"
-          [defaultPlaceHolder]="false"
-          [options]="['志工站1', '志工站2', '志工站3']"
+          [selectWidth]="'200px'"
+          [options]="selectOptions_serviceTeam"
           formControlName="serviceTeam"
         />
       </div>

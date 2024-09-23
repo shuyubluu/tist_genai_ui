@@ -113,7 +113,7 @@
       <div class="label">志工狀態</div>
       <div class="column-Message">
         <app-select
-          [selectWidth]="'70px'"
+          [selectWidth]="'90px'"
           [defaultPlaceHolder]="false"
           [options]="selectOptions_volunteerStatus"
           formControlName="volunteerStatus"
@@ -324,8 +324,7 @@
       <div class="label">學歷</div>
       <div>
         <app-select
-          [selectWidth]="'70px'"
-          [defaultPlaceHolder]="false"
+          [selectWidth]="'120px'"
           [options]="selectOptions_education"
           formControlName="education"
         />
@@ -543,7 +542,6 @@
         <app-select
           (ngModelChange)="maritalStatusChange($event)"
           [selectWidth]="'70px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_maritalStatus"
           formControlName="maritalStatus"
         />
@@ -885,7 +883,6 @@
       <div>
         <app-select
           [selectWidth]="'80px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_volunteerServiceRecord"
           formControlName="volunteerServiceRecord"
         />
