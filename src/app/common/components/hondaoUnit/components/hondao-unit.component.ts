@@ -33,38 +33,38 @@ export class HondaoUnitComponent implements ControlValueAccessor {
   // 所有單位資料
   allUnitData: UnitData[] = [
     {
-      code: '00',
+      code: 'A01',
       headquarters: '總會',
       indeterminate: false,
       checked: false,
       unit: [
         {
-          code: 'A',
+          code: 'A001',
           department: '事業發展處',
           indeterminate: false,
           checked: false,
           team: [
             {
-              code: 'AA',
+              code: 'A0001',
               teamName: '事業發展中心- 高齡友善推廣組(總會事業)',
               indeterminate: false,
               checked: false,
               region: [
                 {
-                  code: 'AA1',
+                  code: 'AA',
                   regionName: '彭祖體驗長者導師志工隊',
                   checked: false,
                 },
               ],
             },
             {
-              code: 'AB',
+              code: 'A0002',
               teamName: '不老夢想-不老夢想號組(總會事業夢想)',
               indeterminate: false,
               checked: false,
               region: [
                 {
-                  code: 'AB1',
+                  code: 'AB',
                   regionName: '不老夢想125號志工隊',
                   checked: false,
                 },
@@ -73,52 +73,52 @@ export class HondaoUnitComponent implements ControlValueAccessor {
           ],
         },
         {
-          code: 'B',
+          code: 'B001',
           department: '臺北服務處',
           indeterminate: false,
           checked: false,
           team: [
             {
-              code: 'BA',
+              code: 'B0001',
               teamName: '松山社區服務中心- 社區服務組(台北社服松山)',
               indeterminate: false,
               checked: false,
               region: [
                 {
-                  code: 'BA1',
+                  code: 'BA',
                   regionName: '北投(北投志工站)',
                   checked: false,
                 },
                 {
-                  code: 'BA2',
+                  code: 'BB',
                   regionName: '南港(南港志工站)',
                   checked: false,
                 },
                 {
-                  code: 'BA3',
+                  code: 'BC',
                   regionName: '松山(松山志工站)',
                   checked: false,
                 },
                 {
-                  code: 'BA4',
+                  code: 'BD',
                   regionName: '中正(中正志工站)',
                   checked: false,
                 },
                 {
-                  code: 'BA5',
+                  code: 'BE',
                   regionName: '內湖(內湖志工站)',
                   checked: false,
                 },
               ],
             },
             {
-              code: 'BB',
+              code: 'B0002',
               teamName: '五結社區服務中心- 社區服務組(台北社服五結)',
               indeterminate: false,
               checked: false,
               region: [
                 {
-                  code: 'BB1',
+                  code: 'BF',
                   regionName: '宜蘭(宜蘭志工站)',
                   checked: false,
                 },
@@ -127,57 +127,57 @@ export class HondaoUnitComponent implements ControlValueAccessor {
           ],
         },
         {
-          code: 'C',
+          code: 'C001',
           department: '新北服務處',
           indeterminate: false,
           checked: false,
           team: [
             {
-              code: 'CA',
+              code: 'C0001',
               teamName: '桃園社區服務中心- 個案服務組(新北社服桃園)',
               indeterminate: false,
               checked: false,
               region: [
                 {
-                  code: 'CA1',
+                  code: 'CA',
                   regionName: '八德(八德志工站)',
                   checked: false,
                 },
                 {
-                  code: 'CA2',
+                  code: 'CB',
                   regionName: '龍潭(龍潭志工站)',
                   checked: false,
                 },
               ],
             },
             {
-              code: 'CB',
+              code: 'C0002',
               teamName: '新莊社區服務中心- 個案服務組(新北社服新莊)',
               indeterminate: false,
               checked: false,
               region: [
                 {
-                  code: 'CB1',
+                  code: 'CC',
                   regionName: '平溪(平溪志工站)',
                   checked: false,
                 },
                 {
-                  code: 'CB2',
+                  code: 'CD',
                   regionName: '樹林(樹林志工站)',
                   checked: false,
                 },
                 {
-                  code: 'CB3',
+                  code: 'CE',
                   regionName: '三峽(三峽志工站)',
                   checked: false,
                 },
                 {
-                  code: 'CB4',
+                  code: 'CF',
                   regionName: '雙板(雙板志工站)',
                   checked: false,
                 },
                 {
-                  code: 'CB5',
+                  code: 'CG',
                   regionName: '新莊(新莊志工站)',
                   checked: false,
                 },
@@ -186,62 +186,62 @@ export class HondaoUnitComponent implements ControlValueAccessor {
           ],
         },
         {
-          code: 'D',
+          code: 'D001',
           department: '臺中服務處',
           indeterminate: false,
           checked: false,
           team: [
             {
-              code: 'DA',
+              code: 'D0001',
               teamName: '西區社區服務中心- 個案服務組(台中社服西區)',
               indeterminate: false,
               checked: false,
               region: [
                 {
-                  code: 'DA1',
+                  code: 'DA',
                   regionName: '清水(清水志工站)',
                   checked: false,
                 },
                 {
-                  code: 'DA2',
+                  code: 'DB',
                   regionName: '太平(太平志工站)',
                   checked: false,
                 },
                 {
-                  code: 'DA3',
+                  code: 'DC',
                   regionName: '南屯(南屯志工站)',
                   checked: false,
                 },
                 {
-                  code: 'DA4',
+                  code: 'DD',
                   regionName: '北屯(北屯志工站)',
                   checked: false,
                 },
                 {
-                  code: 'DA5',
+                  code: 'DE',
                   regionName: '大雅(大雅志工站)',
                   checked: false,
                 },
                 {
-                  code: 'DA6',
+                  code: 'DF',
                   regionName: '中西(中西志工站)',
                   checked: false,
                 },
                 {
-                  code: 'DA7',
+                  code: 'DG',
                   regionName: '埔里(埔里志工站)',
                   checked: false,
                 },
               ],
             },
             {
-              code: 'DB',
+              code: 'D0002',
               teamName: '台中中一區居家長照機構- 主任室(台中居一)',
               indeterminate: false,
               checked: false,
               region: [
                 {
-                  code: 'DB1',
+                  code: 'DH',
                   regionName: '西屯(西屯志工隊)',
                   checked: false,
                 },
@@ -250,50 +250,50 @@ export class HondaoUnitComponent implements ControlValueAccessor {
           ],
         },
         {
-          code: 'E',
+          code: 'E001',
           department: '彰化服務處',
           indeterminate: false,
           checked: false,
           team: [
             {
-              code: 'EA',
+              code: 'E0001',
               teamName: '彰化社區服務中心- 社區服務北彰組(彰化社服彰化)',
               indeterminate: false,
               checked: false,
               region: [
                 {
-                  code: 'EA1',
+                  code: 'EA',
                   regionName: '和美(和美志工站)',
                   checked: false,
                 },
               ],
             },
             {
-              code: 'EB',
+              code: 'E0002',
               teamName: '溪湖社區服務中心- 社區服務溪湖組(彰化社服溪湖)',
               indeterminate: false,
               checked: false,
               region: [
                 {
-                  code: 'EB1',
+                  code: 'EB',
                   regionName: '憶智樂活之家志工隊',
                   checked: false,
                 },
               ],
             },
             {
-              code: 'EC',
+              code: 'E0003',
               teamName: '溪湖社區服務中心- 社區服務南彰組(彰化社服溪湖)',
               indeterminate: false,
               checked: false,
               region: [
                 {
-                  code: 'EC1',
+                  code: 'EC',
                   regionName: '田中(田中志工站)',
                   checked: false,
                 },
                 {
-                  code: 'EC2',
+                  code: 'ED',
                   regionName: '員林(員林志工站)',
                   checked: false,
                 },
@@ -302,32 +302,32 @@ export class HondaoUnitComponent implements ControlValueAccessor {
           ],
         },
         {
-          code: 'F',
+          code: 'F001',
           department: '嘉義服務處',
           indeterminate: false,
           checked: false,
           team: [
             {
-              code: 'FA',
+              code: 'F0001',
               teamName: '大林社區服務中心- 社區服務大林組(嘉義社服大林)',
               indeterminate: false,
               checked: false,
               region: [
                 {
-                  code: 'FA1',
+                  code: 'FA',
                   regionName: '大林(大林志工站)',
                   checked: false,
                 },
               ],
             },
             {
-              code: 'FB',
+              code: 'F0002',
               teamName: '市區社區服務中心- 社區服務市區組(嘉義社服市區)',
               indeterminate: false,
               checked: false,
               region: [
                 {
-                  code: 'FB1',
+                  code: 'FB',
                   regionName: '嘉西(嘉西志工站)',
                   checked: false,
                 },
@@ -336,50 +336,50 @@ export class HondaoUnitComponent implements ControlValueAccessor {
           ],
         },
         {
-          code: 'G',
+          code: 'G001',
           department: '高雄服務處',
           indeterminate: false,
           checked: false,
           team: [
             {
-              code: 'GA',
+              code: 'G0001',
               teamName: '不老食光- 不老食光鼓山店(高雄)',
               indeterminate: false,
               checked: false,
               region: [
                 {
-                  code: 'GA1',
+                  code: 'GA',
                   regionName: '大寮(大寮志工站)',
                   checked: false,
                 },
               ],
             },
             {
-              code: 'GB',
+              code: 'G0002',
               teamName: '左營社區服務中心- 個案服務組(高雄社服左營)',
               indeterminate: false,
               checked: false,
               region: [
                 {
-                  code: 'GB1',
+                  code: 'GB',
                   regionName: '三民區',
                   checked: false,
                 },
               ],
             },
             {
-              code: 'GC',
+              code: 'G0003',
               teamName: '前金社區服務中心- 社區服務組(高雄社服前金)',
               indeterminate: false,
               checked: false,
               region: [
                 {
-                  code: 'GC1',
+                  code: 'GC',
                   regionName: '前金(志工站)',
                   checked: false,
                 },
                 {
-                  code: 'GC2',
+                  code: 'GD',
                   regionName: '前金區',
                   checked: false,
                 },
@@ -388,29 +388,29 @@ export class HondaoUnitComponent implements ControlValueAccessor {
           ],
         },
         {
-          code: 'H',
+          code: 'H001',
           department: '屏東服務處',
           indeterminate: false,
           checked: false,
           team: [
             {
-              code: 'HA',
+              code: 'H0001',
               teamName: '潮州社區服務中心- 個案服務組(屏東社服潮州)',
               indeterminate: false,
               checked: false,
               region: [
                 {
-                  code: 'HA1',
+                  code: 'HA',
                   regionName: '萬丹(萬丹志工站)',
                   checked: false,
                 },
                 {
-                  code: 'HA2',
+                  code: 'HB',
                   regionName: '潮州(潮州志工站)',
                   checked: false,
                 },
                 {
-                  code: 'HA3',
+                  code: 'HC',
                   regionName: '林邊(林邊志工站)',
                   checked: false,
                 },

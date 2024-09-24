@@ -47,10 +47,16 @@ export class DayPickerComponent implements ControlValueAccessor {
 
   date: Date | null = null;
   formattedDate: string | null = '';
+  isShowClearButton: boolean = false;
   onChange: (date: string | null) => void = () => {};
   onTouched: () => void = () => {};
 
   onDateChange(date: Date | null): void {
+    if (date !== null) {
+      this.isShowClearButton = true;
+    } else {
+      this.isShowClearButton = false;
+    }
     this.date = date;
     this.formattedDate = this.formatDateToTaiwanese(date);
     this.onChange(this.formattedDate);
@@ -86,6 +92,7 @@ export class DayPickerComponent implements ControlValueAccessor {
     return date <= 9 ? `0${date}` : `${date}`;
   }
 
+  // 清空日期
   clearDate(): void {
     this.onDateChange(null);
   }
