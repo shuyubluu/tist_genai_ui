@@ -20,9 +20,19 @@
       </div>
     </div>
     <div class="grid-columns-2 border-bottom-0">
-      <div class="label">開案日期</div>
+      <div class="label">開案日期區間</div>
       <div>
-        <app-dayPicker formControlName="caseOpeningDate" />
+        <app-dayPicker
+          [startRange]="30"
+          [endRange]="0"
+          formControlName="caseOpeningDate_start"
+        />
+        <span class="mx-2">-</span>
+        <app-dayPicker
+          [startRange]="30"
+          [endRange]="0"
+          formControlName="caseOpeningDate_end"
+        />
       </div>
       <div class="label">個案分級</div>
       <div>

@@ -8,7 +8,6 @@
           <label
             nz-checkbox
             [nzValue]="headquarters.code"
-            [nzIndeterminate]="headquarters.indeterminate"
             [(ngModel)]="headquarters.checked"
             (ngModelChange)="onHeadquartersChecked(headquarters)"
             >{{ headquarters.headquarters }}</label
@@ -19,10 +18,8 @@
           <label
             nz-checkbox
             [nzValue]="unit.code"
-            [nzIndeterminate]="unit.indeterminate"
             [(ngModel)]="unit.checked"
-            (ngModelChange)="onDepartmentChecked(headquarters, unit)"
-            [nzDisabled]="headquarters.checked"
+            (ngModelChange)="onDepartmentChecked(unit)"
             >{{ unit.department }}</label
           >
           <app-button
@@ -35,7 +32,7 @@
             *ngIf="expandTeamMenu.includes(unit.code)"
             [buttonText]="'收合'"
             [attachClassName]="['danger']"
-            (click)="closeTeam(unit.code)"
+            (click)="closeTeam(unit)"
           />
         </div>
         @for( team of unit.team; track team; let j = $index){
@@ -48,10 +45,8 @@
           <label
             nz-checkbox
             [nzValue]="team.code"
-            [nzIndeterminate]="team.indeterminate"
             [(ngModel)]="team.checked"
-            (ngModelChange)="onTeamChecked(headquarters, unit, team)"
-            [nzDisabled]="unit.checked"
+            (ngModelChange)="onTeamChecked(team)"
             >{{ team.teamName }}</label
           >
           <app-button
@@ -78,8 +73,7 @@
             nz-checkbox
             [nzValue]="region.code"
             [(ngModel)]="region.checked"
-            (ngModelChange)="onRegionChecked(headquarters, unit, team, region)"
-            [nzDisabled]="unit.checked || team.checked"
+            (ngModelChange)="onRegionChecked(region)"
             >{{ region.regionName }}</label
           >
         </div>

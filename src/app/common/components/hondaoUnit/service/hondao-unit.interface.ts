@@ -7,7 +7,6 @@ export interface Region {
 export interface Team {
   code: string;
   teamName: string;
-  indeterminate: boolean;
   checked: boolean;
   region: Region[];
 }
@@ -15,7 +14,6 @@ export interface Team {
 export interface Unit {
   code: string;
   department: string;
-  indeterminate: boolean;
   checked: boolean;
   team: Team[];
 }
@@ -23,7 +21,6 @@ export interface Unit {
 export interface UnitData {
   code: string;
   headquarters: string;
-  indeterminate: boolean;
   checked: boolean;
   unit: Unit[];
 }

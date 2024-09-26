@@ -50,8 +50,6 @@ export class InputComponent implements OnInit, ControlValueAccessor {
   @Input() type: string = 'text';
   @Input() placeholder: string = '';
   @Input() maxLength?: number;
-  // 是否為評分輸入框
-  // @Input() isScore: boolean = false;
 
   @Output() inputTextChange = new EventEmitter<string>();
 

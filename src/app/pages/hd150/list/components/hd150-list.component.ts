@@ -64,8 +64,10 @@ export class Hd150ListComponent implements OnInit {
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
-      // 查詢年份
-      queryYear: new FormControl(''),
+      // 查詢日期_起始
+      queryDate_start: new FormControl(''),
+      // 查詢日期_結束
+      queryDate_end: new FormControl(''),
     });
   }
 

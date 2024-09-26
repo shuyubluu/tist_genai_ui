@@ -83,8 +83,10 @@ export class Hd100ListComponent implements OnInit {
       serviceStatus: new FormControl(''),
       // 個案姓名
       caseName: new FormControl(''),
-      // 開案日期
-      caseOpeningDate: new FormControl(''),
+      // 開案日期_起始
+      caseOpeningDate_start: new FormControl(''),
+      // 開案日期_結束
+      caseOpeningDate_end: new FormControl(''),
       // 個案分級
       caseClassification: new FormControl(''),
     });

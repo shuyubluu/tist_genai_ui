@@ -35,19 +35,16 @@ export class HondaoUnitComponent implements ControlValueAccessor {
     {
       code: 'A01',
       headquarters: '總會',
-      indeterminate: false,
       checked: false,
       unit: [
         {
           code: 'A001',
           department: '事業發展處',
-          indeterminate: false,
           checked: false,
           team: [
             {
               code: 'A0001',
               teamName: '事業發展中心- 高齡友善推廣組(總會事業)',
-              indeterminate: false,
               checked: false,
               region: [
                 {
@@ -60,7 +57,6 @@ export class HondaoUnitComponent implements ControlValueAccessor {
             {
               code: 'A0002',
               teamName: '不老夢想-不老夢想號組(總會事業夢想)',
-              indeterminate: false,
               checked: false,
               region: [
                 {
@@ -75,13 +71,11 @@ export class HondaoUnitComponent implements ControlValueAccessor {
         {
           code: 'B001',
           department: '臺北服務處',
-          indeterminate: false,
           checked: false,
           team: [
             {
               code: 'B0001',
               teamName: '松山社區服務中心- 社區服務組(台北社服松山)',
-              indeterminate: false,
               checked: false,
               region: [
                 {
@@ -114,7 +108,6 @@ export class HondaoUnitComponent implements ControlValueAccessor {
             {
               code: 'B0002',
               teamName: '五結社區服務中心- 社區服務組(台北社服五結)',
-              indeterminate: false,
               checked: false,
               region: [
                 {
@@ -129,13 +122,11 @@ export class HondaoUnitComponent implements ControlValueAccessor {
         {
           code: 'C001',
           department: '新北服務處',
-          indeterminate: false,
           checked: false,
           team: [
             {
               code: 'C0001',
               teamName: '桃園社區服務中心- 個案服務組(新北社服桃園)',
-              indeterminate: false,
               checked: false,
               region: [
                 {
@@ -153,7 +144,6 @@ export class HondaoUnitComponent implements ControlValueAccessor {
             {
               code: 'C0002',
               teamName: '新莊社區服務中心- 個案服務組(新北社服新莊)',
-              indeterminate: false,
               checked: false,
               region: [
                 {
@@ -188,13 +178,11 @@ export class HondaoUnitComponent implements ControlValueAccessor {
         {
           code: 'D001',
           department: '臺中服務處',
-          indeterminate: false,
           checked: false,
           team: [
             {
               code: 'D0001',
               teamName: '西區社區服務中心- 個案服務組(台中社服西區)',
-              indeterminate: false,
               checked: false,
               region: [
                 {
@@ -237,7 +225,6 @@ export class HondaoUnitComponent implements ControlValueAccessor {
             {
               code: 'D0002',
               teamName: '台中中一區居家長照機構- 主任室(台中居一)',
-              indeterminate: false,
               checked: false,
               region: [
                 {
@@ -252,13 +239,11 @@ export class HondaoUnitComponent implements ControlValueAccessor {
         {
           code: 'E001',
           department: '彰化服務處',
-          indeterminate: false,
           checked: false,
           team: [
             {
               code: 'E0001',
               teamName: '彰化社區服務中心- 社區服務北彰組(彰化社服彰化)',
-              indeterminate: false,
               checked: false,
               region: [
                 {
@@ -271,7 +256,6 @@ export class HondaoUnitComponent implements ControlValueAccessor {
             {
               code: 'E0002',
               teamName: '溪湖社區服務中心- 社區服務溪湖組(彰化社服溪湖)',
-              indeterminate: false,
               checked: false,
               region: [
                 {
@@ -284,7 +268,6 @@ export class HondaoUnitComponent implements ControlValueAccessor {
             {
               code: 'E0003',
               teamName: '溪湖社區服務中心- 社區服務南彰組(彰化社服溪湖)',
-              indeterminate: false,
               checked: false,
               region: [
                 {
@@ -304,13 +287,11 @@ export class HondaoUnitComponent implements ControlValueAccessor {
         {
           code: 'F001',
           department: '嘉義服務處',
-          indeterminate: false,
           checked: false,
           team: [
             {
               code: 'F0001',
               teamName: '大林社區服務中心- 社區服務大林組(嘉義社服大林)',
-              indeterminate: false,
               checked: false,
               region: [
                 {
@@ -323,7 +304,6 @@ export class HondaoUnitComponent implements ControlValueAccessor {
             {
               code: 'F0002',
               teamName: '市區社區服務中心- 社區服務市區組(嘉義社服市區)',
-              indeterminate: false,
               checked: false,
               region: [
                 {
@@ -338,13 +318,11 @@ export class HondaoUnitComponent implements ControlValueAccessor {
         {
           code: 'G001',
           department: '高雄服務處',
-          indeterminate: false,
           checked: false,
           team: [
             {
               code: 'G0001',
               teamName: '不老食光- 不老食光鼓山店(高雄)',
-              indeterminate: false,
               checked: false,
               region: [
                 {
@@ -357,7 +335,6 @@ export class HondaoUnitComponent implements ControlValueAccessor {
             {
               code: 'G0002',
               teamName: '左營社區服務中心- 個案服務組(高雄社服左營)',
-              indeterminate: false,
               checked: false,
               region: [
                 {
@@ -370,7 +347,6 @@ export class HondaoUnitComponent implements ControlValueAccessor {
             {
               code: 'G0003',
               teamName: '前金社區服務中心- 社區服務組(高雄社服前金)',
-              indeterminate: false,
               checked: false,
               region: [
                 {
@@ -390,13 +366,11 @@ export class HondaoUnitComponent implements ControlValueAccessor {
         {
           code: 'H001',
           department: '屏東服務處',
-          indeterminate: false,
           checked: false,
           team: [
             {
               code: 'H0001',
               teamName: '潮州社區服務中心- 個案服務組(屏東社服潮州)',
-              indeterminate: false,
               checked: false,
               region: [
                 {
@@ -425,24 +399,30 @@ export class HondaoUnitComponent implements ControlValueAccessor {
   constructor() {}
 
   // 展開任職組別List
-  expandTeam(index: string) {
-    this.expandTeamMenu.push(index);
+  expandTeam(unitCode: string) {
+    this.expandTeamMenu.push(unitCode);
   }
 
   // 收合任職組別List
-  closeTeam(index: string) {
-    this.expandTeamMenu = this.expandTeamMenu.filter((item) => item !== index);
+  closeTeam(unit: Unit) {
+    const unitCode = unit.code;
+    this.expandTeamMenu = this.expandTeamMenu.filter(
+      (code: string) => code !== unitCode
+    );
+    unit.team.forEach((team: Team) => {
+      this.closeRegion(team.code);
+    });
   }
 
   // 展開任職區域List
-  expandRegion(index: string) {
-    this.expandRegionMenu.push(index);
+  expandRegion(teamCode: string) {
+    this.expandRegionMenu.push(teamCode);
   }
 
   // 收合任職區域List
-  closeRegion(index: string) {
+  closeRegion(teamCode: string) {
     this.expandRegionMenu = this.expandRegionMenu.filter(
-      (item) => item !== index
+      (code) => code !== teamCode
     );
   }
 
@@ -452,270 +432,58 @@ export class HondaoUnitComponent implements ControlValueAccessor {
     // 否則填加全會
     if (this.selectUnitList.includes(headquarters.headquarters)) {
       this.selectUnitList = this.selectUnitList.filter(
-        (item) => item !== headquarters.headquarters
+        (select) => select !== headquarters.headquarters
       );
     } else {
       this.selectUnitList.push(headquarters.headquarters);
     }
 
-    // 如果全會處於模糊狀態，則將全會設為全選
-    // 設置全選後並移除多餘的任職單位、組別、區域資料
-    if (headquarters.indeterminate) {
-      headquarters.indeterminate = false;
-      headquarters.checked = true;
-      headquarters.unit.forEach((unit: Unit) => {
-        this.selectUnitList = this.selectUnitList.filter(
-          (item) => item !== unit.department
-        );
-        unit.team.forEach((team: Team) => {
-          this.selectUnitList = this.selectUnitList.filter(
-            (item) => item !== team.teamName
-          );
-          team.region.forEach((region: Region) => {
-            this.selectUnitList = this.selectUnitList.filter(
-              (item) => item !== region.regionName
-            );
-          });
-        });
-      });
-    }
-
-    // 使任職單位組別、區域勾選選項同步於任職單位勾選選項
-    headquarters.unit.forEach((unit: Unit) => {
-      unit.indeterminate = false;
-      unit.checked = headquarters.checked;
-      unit.team.forEach((team: Team) => {
-        team.indeterminate = false;
-        team.checked = unit.checked;
-        team.region.forEach((region: Region) => {
-          region.checked = unit.checked;
-        });
-      });
-    });
-
     this.emitValue();
   }
 
   // 當選擇任職單位
-  onDepartmentChecked(headquarters: UnitData, unit: Unit) {
+  onDepartmentChecked(unit: Unit) {
     // 如果已選擇的單位資料包含該任職單位，則移除該任職單位
     // 否則填加該任職單位
     if (this.selectUnitList.includes(unit.department)) {
       this.selectUnitList = this.selectUnitList.filter(
-        (item) => item !== unit.department
+        (select) => select !== unit.department
       );
     } else {
       this.selectUnitList.push(unit.department);
-    }
-
-    // 如果該任職單位處於模糊狀態，則將該任職單位設為全選
-    // 設置全選後並移除多餘的任職組別、區域資料
-    if (unit.indeterminate) {
-      unit.indeterminate = false;
-      unit.checked = true;
-      unit.team.forEach((team: Team) => {
-        this.selectUnitList = this.selectUnitList.filter(
-          (item) => item !== team.teamName
-        );
-        team.region.forEach((region: Region) => {
-          this.selectUnitList = this.selectUnitList.filter(
-            (item) => item !== region.regionName
-          );
-        });
-      });
-    }
-
-    // 如果全會全選未勾選但有任職單位被勾選，則將任職單位設為模糊狀態
-    // 否則取消模糊狀態
-    if (
-      !headquarters.checked &&
-      headquarters.unit.some((unit: Unit) => unit.checked)
-    ) {
-      headquarters.indeterminate = true;
-      headquarters.checked = false;
-    } else {
-      headquarters.indeterminate = false;
-    }
-
-    // 使任職組別、區域勾選選項同步於任職單位勾選選項
-    unit.team.forEach((team: Team) => {
-      team.indeterminate = false;
-      team.checked = unit.checked;
-      team.region.forEach((region: Region) => {
-        region.checked = unit.checked;
-      });
-    });
-
-    // 如果所有任職單位都為全選，則將該全會設為全選
-    if (headquarters.unit.every((unit: Unit) => unit.checked)) {
-      this.removeUnitSetHeadquartersChecked(headquarters);
     }
 
     this.emitValue();
   }
 
   // 當選擇任職組別
-  onTeamChecked(headquarters: UnitData, unit: Unit, team: Team) {
+  onTeamChecked(team: Team) {
     // 如果已選擇的單位資料包含該任職組別，則移除該任職組別
     // 否則填加該任職組別
     if (this.selectUnitList.includes(team.teamName)) {
       this.selectUnitList = this.selectUnitList.filter(
-        (item) => item !== team.teamName
+        (select) => select !== team.teamName
       );
     } else {
       this.selectUnitList.push(team.teamName);
-    }
-
-    // 如果該任職組別處於模糊狀態，則將該任職組別設為全選
-    // 設置全選後並移除多餘的任職區域資料
-    if (team.indeterminate) {
-      this.removeRegionSetTeamChecked(team);
-    }
-
-    // 使任職區域勾選選項同步於任職組別勾選選項
-    team.region.forEach((region: Region) => {
-      region.checked = team.checked;
-    });
-
-    // 如果全會全選未勾選但有任職組別被勾選，則將全會設為模糊狀態
-    // 否則取消模糊狀態
-    if (!headquarters.checked && unit.team.some((team: Team) => team.checked)) {
-      headquarters.indeterminate = true;
-      headquarters.checked = false;
-    } else {
-      headquarters.indeterminate = false;
-    }
-
-    // 如果任職單位全選未勾選但有任職組別被勾選，則將任職單位設為模糊狀態
-    // 否則取消模糊狀態
-    if (!unit.checked && unit.team.some((team: Team) => team.checked)) {
-      unit.indeterminate = true;
-      unit.checked = false;
-    } else {
-      unit.indeterminate = false;
-    }
-
-    // 如果所有任職組別都為全選，則將該任職單位設為全選
-    if (unit.team.every((team: Team) => team.checked)) {
-      this.removeTeamSetUnitChecked(unit);
-    }
-
-    // 如果所有任職單位都為全選，則將該全會設為全選
-    if (headquarters.unit.every((unit: Unit) => unit.checked)) {
-      this.removeUnitSetHeadquartersChecked(headquarters);
     }
 
     this.emitValue();
   }
 
   // 當選擇任職區域
-  onRegionChecked(
-    headquarters: UnitData,
-    unit: Unit,
-    team: Team,
-    region: Region
-  ) {
+  onRegionChecked(region: Region) {
     // 如果已選擇的單位資料包含該任職區域，則移除該任職區域
     // 否則填加該任職區域
     if (this.selectUnitList.includes(region.regionName)) {
       this.selectUnitList = this.selectUnitList.filter(
-        (item) => item !== region.regionName
+        (select) => select !== region.regionName
       );
     } else {
       this.selectUnitList.push(region.regionName);
     }
 
-    // 如果全會全選未勾選但有任職區域被勾選，則將全會設為模糊狀態
-    // 否則取消模糊狀態
-    if (
-      !headquarters.checked &&
-      team.region.some((region: Region) => region.checked)
-    ) {
-      headquarters.indeterminate = true;
-      headquarters.checked = false;
-    } else {
-      headquarters.indeterminate = false;
-    }
-
-    // 如果任職單位全選未勾選但有任職區域被勾選，則將任職單位設為模糊狀態
-    // 否則取消模糊狀態
-    if (!unit.checked && team.region.some((region: Region) => region.checked)) {
-      unit.indeterminate = true;
-      unit.checked = false;
-    } else {
-      unit.indeterminate = false;
-    }
-
-    // 如果任職組別全選未勾選但有任職區域被勾選，則將任職組別設為模糊狀態
-    // 否則取消模糊狀態
-    if (!team.checked && team.region.some((region: Region) => region.checked)) {
-      team.indeterminate = true;
-      team.checked = false;
-    } else {
-      team.indeterminate = false;
-    }
-
-    // 如果所有任職區域都為全選，則將該任職組別設為全選
-    if (team.region.every((region: Region) => region.checked)) {
-      this.removeRegionSetTeamChecked(team);
-    }
-
-    // 如果所有任職組別都為全選，則將該任職單位設為全選
-    if (unit.team.every((team: Team) => team.checked)) {
-      this.removeTeamSetUnitChecked(unit);
-    }
-
-    // 如果所有任職單位都為全選，則將該全會設為全選
-    if (headquarters.unit.every((unit: Unit) => unit.checked)) {
-      this.removeUnitSetHeadquartersChecked(headquarters);
-    }
-
     this.emitValue();
-  }
-
-  // 將全會設為全選
-  // 並清除清單中多餘的任職單位
-  removeUnitSetHeadquartersChecked(unitData: UnitData) {
-    unitData.indeterminate = false;
-    unitData.checked = true;
-    unitData.unit.forEach((unit: Unit) => {
-      this.selectUnitList = this.selectUnitList.filter(
-        (item) => item !== unit.department
-      );
-    });
-    if (!this.selectUnitList.includes(unitData.headquarters)) {
-      this.selectUnitList.push(unitData.headquarters);
-    }
-  }
-
-  // 將任職單位設為全選
-  // 並清除清單中多餘的任職組別
-  removeTeamSetUnitChecked(unit: Unit) {
-    unit.indeterminate = false;
-    unit.checked = true;
-    unit.team.forEach((team: Team) => {
-      this.selectUnitList = this.selectUnitList.filter(
-        (item) => item !== team.teamName
-      );
-    });
-    if (!this.selectUnitList.includes(unit.department)) {
-      this.selectUnitList.push(unit.department);
-    }
-  }
-
-  // 將任職組別設為全選
-  // 並清除清單中多餘的任職區域
-  removeRegionSetTeamChecked(team: Team) {
-    team.indeterminate = false;
-    team.checked = true;
-    team.region.forEach((region: Region) => {
-      this.selectUnitList = this.selectUnitList.filter(
-        (item) => item !== region.regionName
-      );
-    });
-    if (!this.selectUnitList.includes(team.teamName)) {
-      this.selectUnitList.push(team.teamName);
-    }
   }
 
   // ControlValueAccessor 實作
@@ -740,6 +508,10 @@ export class HondaoUnitComponent implements ControlValueAccessor {
       const headquartersSelected = this.selectUnitList.includes(
         unitData.headquarters
       );
+      // 如果任職單位被選中，則將任職單位設為勾選狀態
+      if (headquartersSelected) {
+        unitData.checked = headquartersSelected;
+      }
 
       unitData.unit.forEach((unit) => {
         const unitSelected = this.selectUnitList.includes(unit.department);
@@ -748,98 +520,22 @@ export class HondaoUnitComponent implements ControlValueAccessor {
           unit.checked = unitSelected;
         }
 
-        // 如果全會沒被選中，但任職單位有被選到，則將全會設為模糊狀態
-        if (
-          !headquartersSelected &&
-          unitData.unit.some((unit: Unit) => unit.checked)
-        ) {
-          unitData.indeterminate = true;
-        }
-
         // 遍歷該任職單位的任職組別
         unit.team.forEach((team: Team) => {
           const teamSelected = this.selectUnitList.includes(team.teamName);
           // 如果任職組別被選中，則將任職組別設為勾選狀態
-          if (team.teamName) {
+          if (teamSelected) {
             team.checked = teamSelected;
-          }
-
-          // 如果任職單位沒被選中，但該任職組別有被選到，則將單位設為模糊狀態
-          if (!unitSelected && unit.team.some((team) => team.checked)) {
-            unit.indeterminate = true;
-          }
-
-          // 如果全會沒被選中，但任職組別有被選到，則將全會設為模糊狀態
-          if (!headquartersSelected && unit.team.some((team) => team.checked)) {
-            unitData.indeterminate = true;
           }
 
           // 遍歷該任職組別的任職區域
           team.region.forEach((region: Region) => {
-            // 如果任職組別沒被選中，但任職區域有被選到，則將任職組別設為模糊狀態
-            if (!teamSelected && team.region.some((region) => region.checked)) {
-              team.indeterminate = true;
-            }
-
-            // 如果任職單位沒被選中，但任職區域有被選到，則將任職單位設為模糊狀態
-            if (!unitSelected && team.region.some((region) => region.checked)) {
-              unit.indeterminate = true;
-            }
-
-            // 如果全會沒被選中，但任職區域有被選到，則將全會設為模糊狀態
-            if (
-              !headquartersSelected &&
-              team.region.some((region) => region.checked)
-            ) {
-              unitData.indeterminate = true;
-            }
-
-            // 如果任職單位被選中，則強制選中所有組別
-            if (unit.checked) {
-              unit.indeterminate = false;
-              unit.checked = true;
-              team.checked = true;
-              this.selectUnitList = this.selectUnitList.filter(
-                (item) => item !== team.teamName
-              );
-            } else {
-              team.checked = this.selectUnitList.includes(team.teamName);
-            }
-
-            // 如果任職組別被選中，則強制選中所有區域
-            if (team.checked) {
-              team.indeterminate = false;
-              team.checked = true;
-              region.checked = true;
-              this.selectUnitList = this.selectUnitList.filter(
-                (item) => item !== region.regionName
-              );
-            } else {
-              region.checked = this.selectUnitList.includes(region.regionName);
-            }
-
-            // 如果全會被選中，則強制選中所有任職單位
-            if (unitData.checked) {
-              unitData.indeterminate = false;
-              unitData.checked = true;
-              unit.indeterminate = false;
-              unit.checked = true;
-              this.selectUnitList = this.selectUnitList.filter(
-                (item) => item !== unit.department
-              );
-              team.indeterminate = false;
-              team.checked = true;
-              this.selectUnitList = this.selectUnitList.filter(
-                (item) => item !== team.teamName
-              );
-              region.checked = true;
-              this.selectUnitList = this.selectUnitList.filter(
-                (item) => item !== region.regionName
-              );
-            } else {
-              unitData.checked = this.selectUnitList.includes(
-                unitData.headquarters
-              );
+            const regionSelected = this.selectUnitList.includes(
+              region.regionName
+            );
+            // 如果任區域別被選中，則將任職區域設為勾選狀態
+            if (regionSelected) {
+              region.checked = regionSelected;
             }
           });
         });

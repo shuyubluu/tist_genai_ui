@@ -6,10 +6,10 @@
 
 :host ::ng-deep .ant-input:focus,
 :host ::ng-deep .ant-input:active {
-  border-color: rgb(0, 0, 0) !important; /* 点击后的边框颜色 */
+  border-color: rgb(0, 0, 0) !important;
   box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2) !important;
-  border-width: 1.2px !important; /* 设置边框宽度 */
-  border-style: solid !important; /* 设置边框样式为实线 */
+  border-width: 1.2px !important;
+  border-style: solid !important;
 }
 
 input {

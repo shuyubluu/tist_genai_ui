@@ -3,9 +3,19 @@
 <form [formGroup]="form">
   <div class="grid-container">
     <div class="grid-columns-1 border-bottom-0">
-      <div class="label">訪視日期</div>
+      <div class="label">訪視日期區間</div>
       <div>
-        <app-dayPicker formControlName="visitDate" />
+        <app-dayPicker
+          [startRange]="30"
+          [endRange]="0"
+          formControlName="visitDate_start"
+        />
+        <span class="mx-2">-</span>
+        <app-dayPicker
+          [startRange]="30"
+          [endRange]="0"
+          formControlName="visitDate_end"
+        />
       </div>
     </div>
   </div>
@@ -24,7 +34,6 @@
   </div>
 </form>
 <div class="mt"></div>
-<div class="hd100-list-search">
   <div class="message">搜尋結果: 共{{ searchResultData.length }}筆</div>
   <div class="mt"></div>
   <div class="grid-search-container">
@@ -89,4 +98,3 @@
     (nzPageIndexChange)="onPageIndexChange($event)"
     [nzTotal]="searchResultData.length"
   />
-</div>

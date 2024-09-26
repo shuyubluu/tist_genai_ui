@@ -1,6 +1,36 @@
 .grid-columns {
   display: grid;
   place-items: center;
-  grid-template-columns: repeat(5, 1fr) 2fr;
+  grid-template-columns: repeat(4, 1fr) 2fr;
   grid-gap: 10px;
+}
+
+.tabs-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2px;
+
+  .tab {
+    font-size: 20px;
+    padding: 3px 10px;
+    border-radius: 5px;
+    border: 1px solid #cccccc;
+    background: #545454;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    &:hover {
+      background: #2c2c2c;
+    }
+  }
+
+  // 已被選擇的頁籤
+  .tabHighlight {
+    background: #cbd814;
+    &:hover {
+      background: #818a0d;
+    }
+  }
 }

@@ -6,12 +6,18 @@
 <form [formGroup]="form">
   <div class="grid-container">
     <div class="grid-columns-1 border-bottom-0">
-      <div class="label">上傳日期</div>
+      <div class="label">上傳日期區間</div>
       <div>
-        <app-input
-          [inputWidth]="'130px'"
-          [maxLength]="30"
-          formControlName="uploadDate"
+        <app-dayPicker
+          [startRange]="30"
+          [endRange]="0"
+          formControlName="uploadDate_start"
+        />
+        <span class="mx-2">-</span>
+        <app-dayPicker
+          [startRange]="30"
+          [endRange]="0"
+          formControlName="uploadDate_end"
         />
       </div>
     </div>

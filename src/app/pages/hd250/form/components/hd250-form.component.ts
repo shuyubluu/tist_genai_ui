@@ -12,6 +12,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { Hd250ListService } from '../../list/service/hd250-list.service';
 import { ErrorMessageComponent } from '../../../../common/components/message/error-message.component';
 import { rangeValidator } from '../../../../common/validator/range-validator';
+import { DateValidators } from '../../../../common/validator/date-validator';
 
 @Component({
   selector: 'app-hd250-form',
@@ -102,9 +103,9 @@ export class Hd250FormComponent implements OnInit {
       // 志工姓名
       volunteerName: new FormControl('', [Validators.required]),
       // 入站/隊日期
-      entryDate: new FormControl('', [Validators.required]),
+      entryDate: new FormControl('', [DateValidators.dateValidator]),
       // 填寫日期
-      submissionDate: new FormControl('', [Validators.required]),
+      submissionDate: new FormControl('', [DateValidators.dateValidator]),
 
       // 1.服務倫理
       // 服務倫理_志工評分_1

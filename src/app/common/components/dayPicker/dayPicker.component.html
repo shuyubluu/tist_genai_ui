@@ -1,25 +1,64 @@
-<input
-  class="date-input"
-  [placeholder]="'請選擇日期'"
-  [value]="formattedDate"
-  disabled
-/>
-<label>
-  <span class="date-icon" nz-icon nzType="table" nzTheme="outline"></span>
-  <nz-date-picker
-    class="date-picker"
-    [(ngModel)]="date"
-    (ngModelChange)="onDateChange($event)"
-    [nzFormat]="'yyyy-MM-dd'"
-    [nzDisabled]="disabled"
+<div class="dayPicker-container">
+  <input
+    class="dayPicker-input"
+    type="text"
+    placeholder="請選擇日期"
+    [value]="
+      selectedYear === 0 || selectedMonth === 0 || selectedDay === 0
+        ? ''
+        : selectedYear +
+          '/' +
+          formatDate(selectedMonth) +
+          '/' +
+          formatDate(selectedDay)
+    "
+    readonly
+  />
+  <i
+    class="icon"
+    nz-popover
+    nzPopoverTitle="請選擇日期"
+    [nzPopoverTrigger]="disabled ? null : 'click'"
+    [nzPopoverContent]="contentTemplate"
+    nzPopoverPlacement="bottom"
+    >📅</i
   >
-  </nz-date-picker>
-</label>
-<span
-  *ngIf="isShowClearButton && !disabled"
-  class="date-delete"
-  nz-icon
-  nzType="delete"
-  nzTheme="outline"
-  (click)="clearDate()"
-></span>
+</div>
+<ng-template #contentTemplate>
+  <div>
+    <!-- 選擇年份 -->
+    <label
+      >民國
+      <select [(ngModel)]="selectedYear" (ngModelChange)="onYearChange()">
+        <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+      </select>
+      年
+    </label>
+
+    <!-- 選擇月份 -->
+    <label>
+      <select [(ngModel)]="selectedMonth" (ngModelChange)="onMonthChange()">
+        <option *ngFor="let month of months" [value]="month">
+          {{ month }}
+        </option>
+      </select>
+      月
+    </label>
+
+    <!-- 選擇日期 -->
+    <label>
+      <select [(ngModel)]="selectedDay" (ngModelChange)="onDayChange()">
+        <option *ngFor="let day of days" [value]="day">{{ day }}</option>
+      </select>
+      日
+    </label>
+  </div>
+  <div class="bottom-container">
+    <a class="bottom-button" href="javascript:void(0)" (click)="onTodayClick()"
+      >Today</a
+    >
+    <a class="bottom-button" href="javascript:void(0)" (click)="onClearClick()"
+      >Clear</a
+    >
+  </div>
+</ng-template>

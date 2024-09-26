@@ -11,4 +11,6 @@ export class Hd140ListService {
   isEdit: boolean = false;
   // 檢視模式
   isView: boolean = false;
+  // 當前瀏覽模式
+  currentViewMode: string = '社工';
 }

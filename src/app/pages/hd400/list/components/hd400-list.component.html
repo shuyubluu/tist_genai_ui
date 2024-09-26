@@ -3,9 +3,17 @@
     <div class="grid-columns-1">
       <div class="label">申請日期</div>
       <div>
-        <app-dayPicker formControlName="applicationDate_start" />
+        <app-dayPicker
+          [startRange]="30"
+          [endRange]="0"
+          formControlName="applicationDate_start"
+        />
         <span class="mx-2">-</span>
-        <app-dayPicker formControlName="applicationDate_end" />
+        <app-dayPicker
+          [startRange]="30"
+          [endRange]="0"
+          formControlName="applicationDate_end"
+        />
       </div>
     </div>
     <div class="grid-columns-2 border-bottom-0">

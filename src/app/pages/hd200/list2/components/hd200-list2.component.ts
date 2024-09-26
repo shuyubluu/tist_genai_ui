@@ -67,8 +67,10 @@ export class Hd200List2Component implements OnInit {
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
-      // 上傳日期
-      uploadDate: new FormControl(''),
+      // 上傳日期_起始
+      uploadDate_start: new FormControl(''),
+      // 上傳日期_結束
+      uploadDate_end: new FormControl(''),
     });
   }
 

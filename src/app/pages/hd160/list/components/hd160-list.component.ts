@@ -65,8 +65,10 @@ export class Hd160ListComponent implements OnInit {
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
-      // 訪視日期
-      visitDate: new FormControl(''),
+      // 訪視日期_起始
+      visitDate_start: new FormControl(''),
+      // 訪視日期_結束
+      visitDate_end: new FormControl(''),
     });
   }
 

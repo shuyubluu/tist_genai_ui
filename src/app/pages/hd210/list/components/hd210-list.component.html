@@ -8,7 +8,17 @@
     <div class="grid-columns-2 border-bottom-0">
       <div class="label">日期區間</div>
       <div>
-        <app-dayPicker formControlName="dateRange" />
+        <app-dayPicker
+          [startRange]="30"
+          [endRange]="0"
+          formControlName="dateRange_start"
+        />
+        <span class="mx-2">-</span>
+        <app-dayPicker
+          [startRange]="30"
+          [endRange]="0"
+          formControlName="dateRange_end"
+        />
       </div>
       <div class="label">法定訓練完成情況</div>
       <div>
@@ -43,37 +53,37 @@
 </form>
 <div class="mt"></div>
 <div class="message">搜尋結果: 共{{ searchResultData.length }}筆</div>
-  <div class="mt"></div>
-  <div class="grid-search-container">
-    <div class="grid-columns searchTitle">
-      <div>受獎日期</div>
-      <div>表揚單位</div>
-      <div>獎項名稱</div>
-      <div>操作</div>
+<div class="mt"></div>
+<div class="grid-search-container">
+  <div class="grid-columns searchTitle">
+    <div>受獎日期</div>
+    <div>表揚單位</div>
+    <div>獎項名稱</div>
+    <div>操作</div>
+  </div>
+  <div
+    class="grid-columns tableBorder"
+    *ngFor="let searchResult of newSearchResultData; let i = index"
+    [ngClass]="{
+      'even-row': i % 2 === 1,
+      'odd-row': i % 2 !== 1
+    }"
+  >
+    <div>
+      {{ searchResult.trainingDate }}
     </div>
-    <div
-      class="grid-columns tableBorder"
-      *ngFor="let searchResult of newSearchResultData; let i = index"
-      [ngClass]="{
-        'even-row': i % 2 === 1,
-        'odd-row': i % 2 !== 1
-      }"
-    >
-      <div>
-        {{ searchResult.trainingDate }}
-      </div>
-      <div>
-        {{ searchResult.trainingUnit }}
-      </div>
-      <div>
-        {{ searchResult.trainingCourse }}
-      </div>
-      <!-- !TODO -->
-      <div>
-        <app-button [buttonText]="'檢視'" (click)="view()" />
-      </div>
+    <div>
+      {{ searchResult.trainingUnit }}
+    </div>
+    <div>
+      {{ searchResult.trainingCourse }}
+    </div>
+    <!-- !TODO -->
+    <div>
+      <app-button [buttonText]="'檢視'" (click)="view()" />
     </div>
   </div>
+</div>
 <div class="mt-10"></div>
 <nz-pagination
   [nzPageIndex]="currentPage"

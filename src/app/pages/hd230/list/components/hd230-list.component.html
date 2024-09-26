@@ -8,9 +8,17 @@
     <div class="grid-columns-1">
       <div class="label">服務時期區間</div>
       <div>
-        <app-dayPicker formControlName="serviceHoursRange_start" />
+        <app-dayPicker
+          [startRange]="30"
+          [endRange]="0"
+          formControlName="serviceHoursRange_start"
+        />
         <span class="mx-2">-</span>
-        <app-dayPicker formControlName="serviceHoursRange_end" />
+        <app-dayPicker
+          [startRange]="30"
+          [endRange]="0"
+          formControlName="serviceHoursRange_end"
+        />
       </div>
     </div>
     <div class="grid-columns-1 border-bottom-0">

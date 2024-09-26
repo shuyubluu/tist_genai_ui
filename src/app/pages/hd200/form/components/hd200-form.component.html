@@ -17,7 +17,7 @@
         <app-error-message
           [control]="form.get('formDate')"
           [isTouched]="false"
-          errorKey="required"
+          errorKey="invalidDate"
           errorMessage="必選"
         />
       </div>
@@ -27,7 +27,7 @@
         <app-error-message
           [control]="form.get('volunteerJoinDate')"
           [isTouched]="false"
-          errorKey="required"
+          errorKey="invalidDate"
           errorMessage="必選"
         />
       </div>
@@ -164,7 +164,7 @@
         <app-error-message
           [control]="form.get('birthDate')"
           [isTouched]="false"
-          errorKey="required"
+          errorKey="invalidDate"
           errorMessage="必選"
         />
       </div>

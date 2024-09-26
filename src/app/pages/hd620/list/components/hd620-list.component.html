@@ -1,4 +1,4 @@
-<div class="grid-search-container">
+<div class="grid-search-container border-bottom-0">
   <div class="grid-columns searchTitle">
     <div>角色名稱</div>
     <div>層級</div>
@@ -28,4 +28,11 @@
       />
     </div>
   </div>
+</div>
+<div class="buttonArea">
+  <app-button
+    [attachClassName]="['danger']"
+    [buttonText]="'關閉'"
+    (click)="closeTab('角色權限資料維護清單')"
+  />
 </div>

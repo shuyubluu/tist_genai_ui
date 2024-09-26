@@ -13,6 +13,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { CaseInformationService } from '../../../../common/components/caseInformation/service/case-information.service';
 import { CaseInformationComponent } from '../../../../common/components/caseInformation/components/case-information.component';
 import { Hd100ListService } from '../../../hd100/list/service/hd100-list.service';
+import { DateValidators } from '../../../../common/validator/date-validator';
 
 @Component({
   selector: 'app-hd130-form',
@@ -31,6 +32,10 @@ import { Hd100ListService } from '../../../hd100/list/service/hd100-list.service
   styleUrl: './hd130-form.component.scss',
 })
 export class Hd130FormComponent implements OnInit {
+  onVisitDateChange(date: string) {
+    console.log(date);
+    console.log(this.form.get('visitDate')?.value);
+  }
   // 個案初判表單
   form: FormGroup;
 
@@ -50,7 +55,7 @@ export class Hd130FormComponent implements OnInit {
       // 個案姓名
       caseName: new FormControl(''),
       // 訪視日期
-      visitDate: new FormControl('', [Validators.required]),
+      visitDate: new FormControl('', [DateValidators.dateValidator]),
       // 訪視方式
       visitMethod: new FormControl('', [Validators.required]),
       // 文字描述_生理
@@ -112,6 +117,23 @@ export class Hd130FormComponent implements OnInit {
       // 單位主管意見
       supervisorComments: new FormControl('', [Validators.required]),
     });
+  }
+
+  ngOnInit(): void {
+    console.log(this.form.get('visitDate')?.value);
+
+    // 檢視模式，禁用表單
+    if (this.hd100ListService.isView) {
+      this.form.disable();
+    }
+    // 禁用個案姓名
+    this.form.get('caseName')?.disable();
+    // 禁用經濟需求其他
+    this.form.get('economicNeeds_other')?.disable();
+    // 禁用社會餐與其他
+    this.form.get('socialMealNeeds_other')?.disable();
+    // 禁用自我保護需求其他
+    this.form.get('selfProtectionNeeds_other')?.disable();
   }
 
   // 福利身分別選項改變
@@ -182,21 +204,6 @@ export class Hd130FormComponent implements OnInit {
   // 其他照顧需求選項改變
   otherCareNeedsChange(checkGroup: string[]) {
     this.form.get('otherCareNeeds')?.setValue(checkGroup);
-  }
-
-  ngOnInit(): void {
-    // 檢視模式，禁用表單
-    if (this.hd100ListService.isView) {
-      this.form.disable();
-    }
-    // 禁用個案姓名
-    this.form.get('caseName')?.disable();
-    // 禁用經濟需求其他
-    this.form.get('economicNeeds_other')?.disable();
-    // 禁用社會餐與其他
-    this.form.get('socialMealNeeds_other')?.disable();
-    // 禁用自我保護需求其他
-    this.form.get('selfProtectionNeeds_other')?.disable();
   }
 
   // 暫存草稿

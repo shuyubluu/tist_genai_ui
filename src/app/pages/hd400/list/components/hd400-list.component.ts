@@ -115,7 +115,9 @@ export class Hd400ListComponent implements OnInit {
   }
 
   // 檢視
-  view() {}
+  view() {
+    // !TODO:檢視邏輯
+  }
 
   // 當改變頁數時觸發
   onPageIndexChange(currentPage: number) {

@@ -35,28 +35,39 @@ export class Hd140ListComponent implements OnInit {
   currentPage: number = 1;
   // 分頁器一頁多少筆數據
   pageSize: number = 10;
-  // 搜尋結果模擬資料
-  searchResultData: SearchResultData[] = [
+  // 搜尋結果模擬資料_社工
+  searchResultData_socialWorker: SearchResultData[] = [
     {
       caseOpeningDate: '113/01/01',
       caseClassification: '高風險',
       caseName: '王大明',
-      responsiblePersonJobTitle: '社工',
       responsiblePerson: '王小明',
       approvalStatus: '已簽核',
     },
+  ];
+
+  // 搜尋結果模擬資料_志工
+  searchResultData_volunteer: SearchResultData[] = [
     {
       caseOpeningDate: '113/02/01',
       caseClassification: '中風險',
       caseName: '王大明',
-      responsiblePersonJobTitle: '志工',
       responsiblePerson: '陳大明',
       approvalStatus: '待簽',
     },
   ];
-  // 分頁器切割後的資料
-  get newSearchResultData(): SearchResultData[] {
-    return this.searchResultData.slice(
+
+  // 分頁器切割後的資料_社工
+  get newSearchResultData_socialWorker(): SearchResultData[] {
+    return this.searchResultData_socialWorker.slice(
+      (this.currentPage - 1) * this.pageSize,
+      this.currentPage * this.pageSize
+    );
+  }
+
+  // 分頁器切割後的資料_志工
+  get newSearchResultData_volunteer(): SearchResultData[] {
+    return this.searchResultData_volunteer.slice(
       (this.currentPage - 1) * this.pageSize,
       this.currentPage * this.pageSize
     );
@@ -66,7 +77,7 @@ export class Hd140ListComponent implements OnInit {
     public caseInformationService: CaseInformationService, // caseInformationService
     private tabService: TabService, // 關閉tab的Service
     private router: Router, // 路由
-    private hd140ListService: Hd140ListService // hd140ListService
+    public hd140ListService: Hd140ListService // hd140ListService
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
@@ -82,7 +93,10 @@ export class Hd140ListComponent implements OnInit {
   ngOnInit(): void {
     // 生成多筆模擬搜尋結果資料
     for (let i = 0; i < 20; i++) {
-      this.searchResultData.push(this.searchResultData[i]);
+      this.searchResultData_socialWorker.push(
+        this.searchResultData_socialWorker[i]
+      );
+      this.searchResultData_volunteer.push(this.searchResultData_volunteer[i]);
     }
   }
 
@@ -116,6 +130,10 @@ export class Hd140ListComponent implements OnInit {
     this.hd140ListService.isEdit = false;
     this.hd140ListService.isCreate = true;
     this.hd140ListService.isView = false;
+  }
+
+  handleCurrentViewMode(mode: string) {
+    this.hd140ListService.currentViewMode = mode;
   }
 
   // 關閉例行訪視記錄表

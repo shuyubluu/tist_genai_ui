@@ -22,6 +22,7 @@ import { TaiwanCitySelectRadioComponent } from '../../../../common/components/se
 import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 import { Hd200ListService } from '../../list/service/hd200-list.service';
 import { taiwanIdValidator } from '../../../../common/validator/taiwan-id-validator';
+import { DateValidators } from '../../../../common/validator/date-validator';
 
 @Component({
   selector: 'app-hd200-form',
@@ -306,9 +307,9 @@ export class Hd200FormComponent implements OnInit {
     this.form = new FormGroup({
       // 1.志工入隊
       // 填表日期
-      formDate: new FormControl('', [Validators.required]),
+      formDate: new FormControl('', [DateValidators.dateValidator]),
       // 志工入隊日期
-      volunteerJoinDate: new FormControl('', [Validators.required]),
+      volunteerJoinDate: new FormControl('', [DateValidators.dateValidator]),
 
       // 2.資訊
       // 服務單位select1
@@ -330,7 +331,7 @@ export class Hd200FormComponent implements OnInit {
       // 性別
       gender: new FormControl('', [Validators.required]),
       // 生日
-      birthDate: new FormControl('', [Validators.required]),
+      birthDate: new FormControl('', [DateValidators.dateValidator]),
       // 身份證字號
       idNumber: new FormControl('', [Validators.required, taiwanIdValidator()]),
       // 手機前四碼

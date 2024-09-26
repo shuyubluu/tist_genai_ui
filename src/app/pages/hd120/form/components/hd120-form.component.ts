@@ -17,6 +17,7 @@ import { CaseInformationService } from '../../../../common/components/caseInform
 import { CaseInformationComponent } from '../../../../common/components/caseInformation/components/case-information.component';
 import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 import { Hd100ListService } from '../../../hd100/list/service/hd100-list.service';
+import { DateValidators } from '../../../../common/validator/date-validator';
 
 @Component({
   selector: 'app-hd120-form',
@@ -239,7 +240,7 @@ export class Hd120FormComponent implements OnInit {
       // 個案分級
       caseLevel: new FormControl(''),
       // 開案日期
-      caseStartDate: new FormControl('', [Validators.required]),
+      caseStartDate: new FormControl('', [DateValidators.dateValidator]),
       // 結案日期
       caseEndDate: new FormControl(''),
       // 結案原因
@@ -466,8 +467,6 @@ export class Hd120FormComponent implements OnInit {
     this.form.get('caseServiceStatus')?.disable();
     // 禁用個案分級select
     this.form.get('caseLevel')?.disable();
-    // 禁用結案日期
-    this.form.get('caseEndDate')?.disable();
     // 禁用結案原因
     this.form.get('caseClosureReason')?.disable();
     // 禁用是否轉介select
@@ -478,8 +477,6 @@ export class Hd120FormComponent implements OnInit {
     this.form.get('name')?.disable();
     // 禁用性別
     this.form.get('gender')?.disable();
-    // 禁用生日
-    this.form.get('dateOfBirth')?.disable();
     // 禁用身份證字號
     this.form.get('idNumber')?.disable();
     // 禁用手機_前四碼

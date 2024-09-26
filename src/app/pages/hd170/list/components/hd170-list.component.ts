@@ -40,12 +40,12 @@ export class Hd170ListComponent implements OnInit {
     {
       formSubmissionDate: '113/01/01',
       filler: '王大明',
-      approvalStatus: '已簽核'
+      approvalStatus: '已簽核',
     },
     {
       formSubmissionDate: '113/01/01',
       filler: '王大明',
-      approvalStatus: '待簽'
+      approvalStatus: '待簽',
     },
   ];
 
@@ -65,8 +65,10 @@ export class Hd170ListComponent implements OnInit {
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
-      // 填單日期
-      formSubmissionDate: new FormControl(''),
+      // 填單日期_起始
+      formSubmissionDate_start: new FormControl(''),
+      // 填單日期_結束
+      formSubmissionDate_end: new FormControl(''),
     });
   }
 

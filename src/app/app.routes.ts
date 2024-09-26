@@ -197,7 +197,7 @@ export const routes: Routes = [
         path: 'hd620',
         loadChildren: () =>
           import('./pages/hd620/hd620.routes').then((m) => m.HD620_ROUTES),
-        data: { tabName: '角色資料權限維護清單' },
+        data: { tabName: '角色權限資料維護清單' },
       },
       {
         path: 'hd640',

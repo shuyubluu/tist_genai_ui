@@ -60,8 +60,10 @@ export class Hd220ListComponent implements OnInit {
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
-      // 受獎日期
-      awardDate: new FormControl(''),
+      // 受獎日期_起始
+      awardDate_start: new FormControl(''),
+      // 受獎日期_結束
+      awardDate_end: new FormControl(''),
       // 表揚單位
       recognizingUnit: new FormControl(''),
     });

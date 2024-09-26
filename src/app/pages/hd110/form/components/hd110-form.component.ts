@@ -22,6 +22,7 @@ import { NzModalModule, NzModalService } from 'ng-zorro-antd/modal';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { CaseInformationService } from '../../../../common/components/caseInformation/service/case-information.service';
 import { CaseInformationComponent } from '../../../../common/components/caseInformation/components/case-information.component';
+import { DateValidators } from '../../../../common/validator/date-validator';
 
 @Component({
   selector: 'app-hd110-form',
@@ -141,8 +142,6 @@ export class Hd110FormComponent implements OnInit {
     }
   }
 
-
-
   constructor(
     private tabService: TabService, // 關閉tab的Service
     private router: Router, // 路由
@@ -157,7 +156,7 @@ export class Hd110FormComponent implements OnInit {
       // 個案來源
       caseSource: new FormControl('', [Validators.required]),
       // 填表日期
-      formFillingDate: new FormControl('', [Validators.required]),
+      formFillingDate: new FormControl('', [DateValidators.dateValidator]),
 
       // 2.轉介單位資料
       // 轉介單位

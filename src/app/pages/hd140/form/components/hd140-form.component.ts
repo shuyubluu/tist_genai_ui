@@ -14,6 +14,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { CaseInformationComponent } from '../../../../common/components/caseInformation/components/case-information.component';
 import { CaseInformationService } from '../../../../common/components/caseInformation/service/case-information.service';
 import { Hd140ListService } from '../../list/service/hd140-list.service';
+import { DateValidators } from '../../../../common/validator/date-validator';
 
 @Component({
   selector: 'app-hd140-form',
@@ -57,7 +58,7 @@ export class Hd140FormComponent implements OnInit {
       // 個案姓名
       caseName: new FormControl(''),
       // 訪視日期
-      visitDate: new FormControl('', [Validators.required]),
+      visitDate: new FormControl('', [DateValidators.dateValidator]),
       // 訪視方式
       visitMethod: new FormControl('', [Validators.required]),
       // 本次訪視目的

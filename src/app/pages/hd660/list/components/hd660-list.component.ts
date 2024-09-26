@@ -98,8 +98,10 @@ export class Hd660ListComponent implements OnInit {
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
-      // 發佈日期
-      publicationDate: new FormControl(''),
+      // 發佈日期_起始
+      publicationDate_start: new FormControl(''),
+      // 發佈日期_結束
+      publicationDate_end: new FormControl(''),
       // 發佈單位
       publishingUnit: new FormControl(''),
     });

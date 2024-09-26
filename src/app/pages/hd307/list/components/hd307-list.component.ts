@@ -115,10 +115,14 @@ export class Hd307ListComponent implements OnInit {
       serviceStatus: new FormControl(''),
       // 個案姓名
       caseName: new FormControl(''),
-      // 開案日期
-      caseOpeningDate: new FormControl(''),
+      // 開案日期_起始
+      caseOpeningDate_start: new FormControl(''),
+      // 開案日期_結束
+      caseOpeningDate_end: new FormControl(''),
       // 個案分級
       caseClassification: new FormControl(''),
+      // 匯出檔案設定
+      exportFile: new FormControl(''),
       // 個案基本資料表_檔案類型
       caseBasicInfo_fileType: new FormControl(''),
       // 個案基本資料表_是否需要隱碼
@@ -145,7 +149,15 @@ export class Hd307ListComponent implements OnInit {
     }
     // 重製modal內的表單
     this.form.get('caseBasicInfo_fileType')?.reset();
+    this.form.get('caseBasicInfo_fileType')?.disable();
     this.form.get('caseBasicInfo_needsAnonymization')?.reset();
+    this.form.get('caseBasicInfo_needsAnonymization')?.disable();
+    this.form.get('caseBasicInfo_fileType')?.reset();
+    this.form.get('caseBasicInfo_needsAnonymization')?.reset();
+    this.form.get('caseVisitRecord_fileType')?.reset();
+    this.form.get('caseVisitRecord_fileType')?.disable();
+    this.form.get('caseVisitRecord_needsAnonymization')?.reset();
+    this.form.get('caseVisitRecord_needsAnonymization')?.disable();
     this.form.get('caseVisitRecord_fileType')?.reset();
     this.form.get('caseVisitRecord_needsAnonymization')?.reset();
     this.isVisible = true;
@@ -181,6 +193,24 @@ export class Hd307ListComponent implements OnInit {
   // 當匯出檔案的選項改變時觸發
   handleExportFileChange(checkGroup: string[]) {
     this.form.get('exportFile')?.setValue(checkGroup);
+    if (checkGroup.includes('1')) {
+      this.form.get('caseBasicInfo_fileType')?.enable();
+      this.form.get('caseBasicInfo_needsAnonymization')?.enable();
+    } else {
+      this.form.get('caseBasicInfo_fileType')?.reset();
+      this.form.get('caseBasicInfo_fileType')?.disable();
+      this.form.get('caseBasicInfo_needsAnonymization')?.reset();
+      this.form.get('caseBasicInfo_needsAnonymization')?.disable();
+    }
+    if (checkGroup.includes('2')) {
+      this.form.get('caseVisitRecord_fileType')?.enable();
+      this.form.get('caseVisitRecord_needsAnonymization')?.enable();
+    } else {
+      this.form.get('caseVisitRecord_fileType')?.reset();
+      this.form.get('caseVisitRecord_fileType')?.disable();
+      this.form.get('caseVisitRecord_needsAnonymization')?.reset();
+      this.form.get('caseVisitRecord_needsAnonymization')?.disable();
+    }
   }
 
   // 關閉當前的tab

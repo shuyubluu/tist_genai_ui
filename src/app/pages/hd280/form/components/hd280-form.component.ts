@@ -13,6 +13,7 @@ import { VolunteerInformationComponent } from '../../../../common/components/vol
 import { Hd280ListService } from '../../list/service/hd280-list.service';
 import { ErrorMessageComponent } from '../../../../common/components/message/error-message.component';
 import { Hd230ListService } from '../../../hd230/list/service/hd230-list.service';
+import { DateValidators } from '../../../../common/validator/date-validator';
 
 @Component({
   selector: 'app-hd280-form',
@@ -97,11 +98,11 @@ export class Hd280FormComponent implements OnInit {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
       // 填表日期
-      fillingDate: new FormControl('', [Validators.required]),
+      fillingDate: new FormControl('', [DateValidators.dateValidator]),
       // 服務日期_起始
-      serviceDate_start: new FormControl('', [Validators.required]),
+      serviceDate_start: new FormControl('', [DateValidators.dateValidator]),
       // 服務日期_結束
-      serviceDate_end: new FormControl('', [Validators.required]),
+      serviceDate_end: new FormControl('', [DateValidators.dateValidator]),
       // 服務內容
       serviceContent: new FormControl('', [Validators.required]),
       // 服務時數-小時

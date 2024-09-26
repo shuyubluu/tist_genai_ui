@@ -12,6 +12,7 @@ import { VolunteerInformationComponent } from '../../../../common/components/vol
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { ErrorMessageComponent } from '../../../../common/components/message/error-message.component';
 import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
+import { DateValidators } from '../../../../common/validator/date-validator';
 
 @Component({
   selector: 'app-hd260-form',
@@ -68,11 +69,11 @@ export class Hd260FormComponent implements OnInit {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
       // 填表日期
-      fillingDate: new FormControl('', [Validators.required]),
+      fillingDate: new FormControl('', [DateValidators.dateValidator]),
       // 填表人
       fillingPerson: new FormControl('', [Validators.required]),
       // 退隊日期
-      resignationDate: new FormControl('', [Validators.required]),
+      resignationDate: new FormControl('', [DateValidators.dateValidator]),
       // 重要事項概要
       importantNotesSummary: new FormControl('', [Validators.required]),
       // 備品是否繳回

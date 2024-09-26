@@ -1,14 +1,20 @@
 <form [formGroup]="form">
   <div class="grid-container">
-    <div class="grid-columns-1">
+    <div class="grid-columns-2 border-bottom-0">
       <div class="label">投保日期區間</div>
       <div>
-        <app-dayPicker formControlName="insurancePeriod_start" />
+        <app-dayPicker
+          [startRange]="30"
+          [endRange]="0"
+          formControlName="insurancePeriod_start"
+        />
         <span class="mx-2">-</span>
-        <app-dayPicker formControlName="insurancePeriod_end" />
+        <app-dayPicker
+          [startRange]="30"
+          [endRange]="0"
+          formControlName="insurancePeriod_end"
+        />
       </div>
-    </div>
-    <div class="grid-columns-1 border-bottom-0">
       <div class="label">投保狀態</div>
       <div>
         <app-select

@@ -5,8 +5,17 @@
     <div class="grid-columns-2 border-bottom-0">
       <div class="label">查詢區間</div>
       <div>
-        <app-dayPicker formControlName="queryStartTime" /> 到
-        <app-dayPicker formControlName="queryEndTime" />
+        <app-dayPicker
+          [startRange]="30"
+          [endRange]="0"
+          formControlName="queryStartTime"
+        />
+        <span class="mx-2">-</span>
+        <app-dayPicker
+          [startRange]="30"
+          [endRange]="0"
+          formControlName="queryEndTime"
+        />
       </div>
       <div class="label">訪視人員姓名</div>
       <div>
@@ -33,58 +42,124 @@
   </div>
 </form>
 <div class="mt"></div>
-<div class="hd100-list-search">
-  <div class="message">搜尋結果: 共{{ searchResultData.length }}筆</div>
-  <div class="mt"></div>
-  <div class="grid-search-container">
-    <div class="grid-columns searchTitle">
-      <div>訪視日期</div>
-      <div>風險等級</div>
-      <div>訪視人員職稱</div>
-      <div>訪視人員姓名</div>
-      <div>簽核狀態</div>
-      <div>操作</div>
+<div class="tabs-container">
+  <div
+    class="tab"
+    (click)="handleCurrentViewMode('社工')"
+    [ngClass]="{ tabHighlight: hd140ListService.currentViewMode === '社工' }"
+  >
+    社工
+  </div>
+  <div
+    class="tab"
+    (click)="handleCurrentViewMode('志工')"
+    [ngClass]="{ tabHighlight: hd140ListService.currentViewMode === '志工' }"
+  >
+    志工
+  </div>
+</div>
+<div class="mt"></div>
+@if(hd140ListService.currentViewMode === '社工') {
+<div class="message">
+  搜尋結果: 共{{ searchResultData_socialWorker.length }}筆
+</div>
+<div class="mt"></div>
+<div class="grid-search-container">
+  <div class="grid-columns searchTitle">
+    <div>訪視日期</div>
+    <div>風險等級</div>
+    <!-- <div>訪視人員職稱</div> -->
+    <div>訪視人員姓名</div>
+    <div>簽核狀態</div>
+    <div>操作</div>
+  </div>
+  <div
+    class="grid-columns tableBorder"
+    *ngFor="let searchResult of newSearchResultData_socialWorker; let i = index"
+    [ngClass]="{
+      'even-row': i % 2 === 1,
+      'odd-row': i % 2 !== 1
+    }"
+  >
+    <div>
+      {{ searchResult.caseOpeningDate }}
     </div>
-    <div
-      class="grid-columns tableBorder"
-      *ngFor="let searchResult of newSearchResultData; let i = index"
-      [ngClass]="{
-        'even-row': i % 2 === 1,
-        'odd-row': i % 2 !== 1
-      }"
-    >
-      <div>
-        {{ searchResult.caseOpeningDate }}
-      </div>
-      <div>
-        {{ searchResult.caseClassification }}
-      </div>
-      <div>
-        {{ searchResult.responsiblePersonJobTitle }}
-      </div>
-      <div>
-        {{ searchResult.responsiblePerson }}
-      </div>
-      <div>
-        {{ searchResult.approvalStatus }}
-      </div>
-      <!-- !TODO -->
-      <div>
-        <app-button [buttonText]="'檢視'" (click)="view()" />
-        <app-button
-          *ngIf="searchResult.responsiblePersonJobTitle === '社工'"
-          [buttonText]="'編輯'"
-          [attachClassName]="['warning']"
-          (click)="edit()"
-        />
-      </div>
+    <div>
+      {{ searchResult.caseClassification }}
+    </div>
+    <!-- <div>
+      {{ searchResult.responsiblePersonJobTitle }}
+    </div> -->
+    <div>
+      {{ searchResult.responsiblePerson }}
+    </div>
+    <div>
+      {{ searchResult.approvalStatus }}
+    </div>
+    <!-- !TODO -->
+    <div>
+      <app-button [buttonText]="'檢視'" (click)="view()" />
+      <app-button
+        [buttonText]="'編輯'"
+        [attachClassName]="['warning']"
+        (click)="edit()"
+      />
     </div>
   </div>
-  <div class="mt-10"></div>
-  <nz-pagination
-    [nzPageIndex]="currentPage"
-    [nzPageSize]="pageSize"
-    (nzPageIndexChange)="onPageIndexChange($event)"
-    [nzTotal]="searchResultData.length"
-  />
 </div>
+<div class="mt-10"></div>
+<nz-pagination
+  [nzPageIndex]="currentPage"
+  [nzPageSize]="pageSize"
+  (nzPageIndexChange)="onPageIndexChange($event)"
+  [nzTotal]="searchResultData_socialWorker.length"
+/>
+}@else {
+<div class="message">搜尋結果: 共{{ searchResultData_volunteer.length }}筆</div>
+<div class="mt"></div>
+<div class="grid-search-container">
+  <div class="grid-columns searchTitle">
+    <div>訪視日期</div>
+    <div>風險等級</div>
+    <!-- <div>訪視人員職稱</div> -->
+    <div>訪視人員姓名</div>
+    <div>簽核狀態</div>
+    <div>操作</div>
+  </div>
+  <div
+    class="grid-columns tableBorder"
+    *ngFor="let searchResult of newSearchResultData_volunteer; let i = index"
+    [ngClass]="{
+      'even-row': i % 2 === 1,
+      'odd-row': i % 2 !== 1
+    }"
+  >
+    <div>
+      {{ searchResult.caseOpeningDate }}
+    </div>
+    <div>
+      {{ searchResult.caseClassification }}
+    </div>
+    <!-- <div>
+      {{ searchResult.responsiblePersonJobTitle }}
+    </div> -->
+    <div>
+      {{ searchResult.responsiblePerson }}
+    </div>
+    <div>
+      {{ searchResult.approvalStatus }}
+    </div>
+    <!-- !TODO -->
+    <div>
+      <app-button [buttonText]="'檢視'" (click)="view()" />
+    </div>
+  </div>
+</div>
+<div class="mt-10"></div>
+<nz-pagination
+  [nzPageIndex]="currentPage"
+  [nzPageSize]="pageSize"
+  (nzPageIndexChange)="onPageIndexChange($event)"
+  [nzTotal]="searchResultData_volunteer.length"
+/>
+}

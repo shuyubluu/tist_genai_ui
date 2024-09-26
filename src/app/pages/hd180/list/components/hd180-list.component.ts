@@ -62,8 +62,10 @@ export class Hd180ListComponent implements OnInit {
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
-      // 結案日期
-      closureDate: new FormControl(''),
+      // 結案日期_起始
+      closureDate_start: new FormControl(''),
+      // 結案日期_結束
+      closureDate_end: new FormControl(''),
       // 個案姓名
       caseName: new FormControl(''),
     });

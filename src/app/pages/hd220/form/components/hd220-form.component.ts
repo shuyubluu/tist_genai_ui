@@ -12,6 +12,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { Hd220ListService } from '../../list/service/hd220-list.service';
 import { VolunteerInformationComponent } from '../../../../common/components/volunteerInformation/components/volunteer-information.component';
 import { ErrorMessageComponent } from '../../../../common/components/message/error-message.component';
+import { DateValidators } from '../../../../common/validator/date-validator';
 
 @Component({
   selector: 'app-hd220-form',
@@ -52,7 +53,7 @@ export class Hd220FormComponent implements OnInit {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
       // 填表日期
-      formDate: new FormControl('', [Validators.required]),
+      formDate: new FormControl('', [DateValidators.dateValidator]),
       // 表揚單位
       praiseUnit: new FormControl('', [Validators.required]),
       // 外單位_表揚單位名稱
@@ -66,7 +67,7 @@ export class Hd220FormComponent implements OnInit {
       // 具體事蹟
       specificDeeds: new FormControl('', [Validators.required]),
       // 受獎日期
-      awardDate: new FormControl('', [Validators.required]),
+      awardDate: new FormControl('', [DateValidators.dateValidator]),
     });
   }
 

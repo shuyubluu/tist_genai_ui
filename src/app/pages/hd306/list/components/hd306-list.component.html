@@ -39,9 +39,17 @@
     <div class="grid-columns-1 border-bottom-0">
       <div class="label">入隊日期區間</div>
       <div>
-        <app-dayPicker formControlName="joinDate_start" />
+        <app-dayPicker
+          [startRange]="30"
+          [endRange]="0"
+          formControlName="joinDate_start"
+        />
         <span class="mx-2">-</span>
-        <app-dayPicker formControlName="joinDate_end" />
+        <app-dayPicker
+          [startRange]="30"
+          [endRange]="0"
+          formControlName="joinDate_end"
+        />
       </div>
     </div>
   </div>

@@ -64,8 +64,10 @@ export class Hd210ListComponent {
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
-      // 日期區間
-      dateRange: new FormControl(''),
+      // 日期區間_起始
+      dateRange_start: new FormControl(''),
+      // 日期區間_結束
+      dateRange_end: new FormControl(''),
     });
   }
 

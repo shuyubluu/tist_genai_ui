@@ -27,11 +27,14 @@
     <div class="grid-columns-2">
       <div class="label">訪視日期</div>
       <div class="column-Message">
-        <app-dayPicker formControlName="visitDate" />
+        <app-dayPicker
+          (ngModelChange)="onVisitDateChange($event)"
+          formControlName="visitDate"
+        />
         <app-error-message
           [control]="form.get('visitDate')"
           [isTouched]="false"
-          errorKey="required"
+          errorKey="invalidDate"
           errorMessage="必選"
         />
       </div>

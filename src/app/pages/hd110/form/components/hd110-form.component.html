@@ -34,7 +34,7 @@
         <app-error-message
           [control]="form.get('formFillingDate')"
           [isTouched]="false"
-          errorKey="required"
+          errorKey="invalidDate"
           errorMessage="必選"
         />
       </div>
@@ -112,12 +112,12 @@
           <app-error-message
             [control]="form.get('referralUnit_mobilePhone_firstFourDigits')"
             errorKey="invalidMobilePhone_firstFourDigits"
-            errorMessage="手機為09開頭"
+            errorMessage="格式錯誤"
           />
           <app-error-message
             [control]="form.get('referralUnit_mobilePhone_lastSixDigits')"
             errorKey="invalidMobilePhone_lastSixDigits"
-            errorMessage="手機後六碼格式錯誤"
+            errorMessage="格式錯誤"
           />
         </div>
       </div>
@@ -226,7 +226,11 @@
     <div class="grid-columns-2">
       <div class="label">生日</div>
       <div class="column-Message">
-        <app-dayPicker formControlName="dateOfBirth" />
+        <app-dayPicker
+          [startRange]="100"
+          [endRange]="0"
+          formControlName="dateOfBirth"
+        />
         <app-error-message
           [control]="form.get('dateOfBirth')"
           [isTouched]="false"
@@ -274,12 +278,12 @@
           <app-error-message
             [control]="form.get('mobilePhone_firstFourDigits')"
             errorKey="invalidMobilePhone_firstFourDigits"
-            errorMessage="手機為09開頭"
+            errorMessage="格式錯誤"
           />
           <app-error-message
             [control]="form.get('mobilePhone_lastSixDigits')"
             errorKey="invalidMobilePhone_lastSixDigits"
-            errorMessage="手機後六碼格式錯誤"
+            errorMessage="格式錯誤"
           />
         </div>
       </div>

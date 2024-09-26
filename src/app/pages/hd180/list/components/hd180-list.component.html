@@ -2,9 +2,19 @@
 <form [formGroup]="form">
   <div class="grid-container">
     <div class="grid-columns-2 border-bottom-0">
-      <div class="label">結案日期</div>
+      <div class="label">結案日期區間</div>
       <div>
-        <app-dayPicker formControlName="closureDate" />
+        <app-dayPicker
+          [startRange]="30"
+          [endRange]="0"
+          formControlName="closureDate_start"
+        />
+        <span class="mx-2">-</span>
+        <app-dayPicker
+          [startRange]="30"
+          [endRange]="0"
+          formControlName="closureDate_end"
+        />
       </div>
       <div class="label">個案姓名</div>
       <div>
@@ -26,7 +36,6 @@
   </div>
 </form>
 <div class="mt"></div>
-<div class="hd100-list-search">
   <div class="message">搜尋結果: 共{{ searchResultData.length }}筆</div>
   <div class="mt"></div>
   <div class="grid-search-container">
@@ -75,4 +84,3 @@
     (nzPageIndexChange)="onPageIndexChange($event)"
     [nzTotal]="searchResultData.length"
   />
-</div>

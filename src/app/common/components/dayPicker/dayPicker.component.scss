@@ -1,17 +1,29 @@
-.date-input {
-  width: 110px;
-  height: 32px;
+.dayPicker-container {
+  position: relative;
+  display: inline-block;
+
+  .dayPicker-input {
+    width: 110px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid #b6b6b6;
+  }
+
+  .icon {
+    position: absolute;
+    right: 5%;
+    top: 10%;
+    cursor: pointer;
+  }
 }
 
-.date-icon {
-  cursor: pointer;
-  margin: 0px 5px;
-}
+.bottom-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 
-.date-picker {
-  display: none;
-}
-
-.date-delete {
-  cursor: pointer;
+  .bottom-button {
+    text-decoration: none;
+  }
 }

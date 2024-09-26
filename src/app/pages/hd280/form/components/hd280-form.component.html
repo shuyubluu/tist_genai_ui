@@ -12,7 +12,7 @@
         <app-error-message
           [control]="form.get('fillingDate')"
           [isTouched]="false"
-          errorKey="required"
+          errorKey="invalidDate"
           errorMessage="必選"
         />
       </div>
@@ -28,16 +28,18 @@
       <div class="label">服務日期</div>
       <div class="column-Message">
         <app-dayPicker formControlName="serviceDate_start" />
+        <app-error-message
+          [control]="form.get('serviceDate_start')"
+          [isTouched]="false"
+          errorKey="invalidDate"
+          errorMessage="必選"
+        />
         <span class="mx-2">-</span>
         <app-dayPicker formControlName="serviceDate_end" />
         <app-error-message
-          [isCustom]="true"
-          [condition]="
-            form.get('serviceDate_start')?.value === '' ||
-            form.get('serviceDate_end')?.value === ''
-          "
+          [control]="form.get('serviceDate_end')"
           [isTouched]="false"
-          errorKey="required"
+          errorKey="invalidDate"
           errorMessage="必選"
         />
       </div>

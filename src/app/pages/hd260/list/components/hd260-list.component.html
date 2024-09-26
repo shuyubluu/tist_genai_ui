@@ -3,9 +3,17 @@
     <div class="grid-columns-1">
       <div class="label">退隊日期</div>
       <div>
-        <app-dayPicker formControlName="resignationDate_start" />
+        <app-dayPicker
+          [startRange]="30"
+          [endRange]="0"
+          formControlName="resignationDate_start"
+        />
         <span class="mx-2">-</span>
-        <app-dayPicker formControlName="resignationDate_end" />
+        <app-dayPicker
+          [startRange]="30"
+          [endRange]="0"
+          formControlName="resignationDate_end"
+        />
       </div>
     </div>
     <div class="grid-columns-2 border-bottom-0">

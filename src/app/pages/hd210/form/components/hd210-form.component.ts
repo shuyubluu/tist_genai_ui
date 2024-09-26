@@ -13,6 +13,7 @@ import { ErrorMessageComponent } from '../../../../common/components/message/err
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { VolunteerInformationComponent } from '../../../../common/components/volunteerInformation/components/volunteer-information.component';
 import { VolunteerInformationService } from './../../../../common/components/volunteerInformation/service/volunteer-information.service';
+import { DateValidators } from '../../../../common/validator/date-validator';
 
 @Component({
   selector: 'app-hd210-form',
@@ -70,7 +71,7 @@ export class Hd210FormComponent implements OnInit {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
       // 填表日期
-      submissionDate: new FormControl('', [Validators.required]),
+      submissionDate: new FormControl('', [DateValidators.dateValidator]),
 
       // 1.訓練內容
       // 受訓日期_起始

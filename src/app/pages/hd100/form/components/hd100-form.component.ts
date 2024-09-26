@@ -13,6 +13,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { CaseInformationService } from '../../../../common/components/caseInformation/service/case-information.service';
 import { CaseInformationComponent } from '../../../../common/components/caseInformation/components/case-information.component';
 import { Hd180ListService } from '../../../hd180/list/service/hd180-list.service';
+import { DateValidators } from '../../../../common/validator/date-validator';
 
 @Component({
   selector: 'app-hd100-form',
@@ -57,7 +58,7 @@ export class Hd100FormComponent implements OnInit {
       // 填表日期
       formFillingDate: new FormControl(''),
       // 結案日期
-      closureDate: new FormControl('', [Validators.required]),
+      closureDate: new FormControl('', [DateValidators.dateValidator]),
       // 結案原因
       closureReason: new FormControl('', [Validators.required]),
       // 結案原因其他
