@@ -3,20 +3,12 @@ import { Router } from '@angular/router';
 import { ButtonComponent } from '../components/button/button.component';
 import { InputComponent } from '../components/input/input.component';
 import { SharedModule } from '../shared/shared.module';
-import { SelectComponent } from '../components/select/select.component';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ErrorMessageComponent } from '../components/message/error-message.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [
-    ButtonComponent,
-    InputComponent,
-    SharedModule,
-    SelectComponent,
-    ErrorMessageComponent,
-  ],
+  imports: [ButtonComponent, InputComponent, SharedModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })

@@ -122,6 +122,15 @@ export class Hd140ListComponent implements OnInit {
     this.hd140ListService.isView = false;
   }
 
+  // 檢視_志工
+  view_volunteer() {
+    this.router.navigate(['/hd140/form2']);
+    this.caseInformationService.isChoiceCase = true;
+    this.hd140ListService.isEdit = false;
+    this.hd140ListService.isCreate = false;
+    this.hd140ListService.isView = true;
+  }
+
   // 新增個案資料
   create() {
     this.router.navigate(['/hd140/form']);

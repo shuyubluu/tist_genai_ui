@@ -230,4 +230,11 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./common/login/login.routes').then((m) => m.LOGIN_ROUTES),
   },
+  {
+    path: 'change-password',
+    loadChildren: () =>
+      import('./pages/changePassword/change-password.routes').then(
+        (m) => m.ChangePassword_ROUTES
+      ),
+  },
 ];

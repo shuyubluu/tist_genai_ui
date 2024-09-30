@@ -1,0 +1,52 @@
+<form [formGroup]="form">
+  <div class="grid-container">
+    <div class="title">服務品質評估表</div>
+    <div class="grid-columns-3">
+      <div class="label">面向</div>
+      <div class="label">問題</div>
+      <div class="label">勾選</div>
+    </div>
+    <div class="grid-columns-3" *ngFor="let item of questionsData">
+      <div class="label">{{ item.problemAspects }}</div>
+      <div class="bold-text">
+        <div class="row-1" *ngFor="let content of item.questions">
+          {{ content.question }}
+        </div>
+      </div>
+      <div>
+        <div class="row-1" *ngFor="let content of item.questions">
+          <app-button
+            *ngIf="!content.isChoice"
+            [buttonText]="'選取'"
+            [disabled]="isDisable(item)"
+            [attachClassName]="isDisable(item) ? ['secondary'] : ['success']"
+            (click)="onChoice(content)"
+          />
+          <app-button
+            *ngIf="content.isChoice"
+            [buttonText]="'取消選取'"
+            [attachClassName]="['danger']"
+            (click)="onChoice(content)"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="grid-columns-3 border-bottom-0">
+      <div class="label">補充敘述</div>
+      <div>
+        <app-input
+          [inputWidth]="'300px'"
+          [maxLength]="50"
+          formControlName="additionalDescription"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="buttonArea">
+    <app-button
+      [attachClassName]="['danger']"
+      [buttonText]="'關閉'"
+      (click)="closeTab('簡易紀錄表')"
+    />
+  </div>
+</form>
