@@ -1,0 +1,559 @@
+@if(hd500ListService.currentStatisticsCode !== 'C1' &&
+hd500ListService.currentStatisticsCode !== 'C2' &&
+hd500ListService.currentStatisticsCode !== 'C3'){
+<form [formGroup]="form">
+  <div class="grid-container">
+    <div class="grid-columns-2 border-bottom-0">
+      <div class="label">查看單位</div>
+      <div class="column-Message">
+        <app-select
+          [selectWidth]="'90px'"
+          [defaultPlaceHolder]="false"
+          (ngModelChange)="onUnitChange($event)"
+          [options]="selectOptions_unit"
+          formControlName="unit"
+        />
+        <app-select
+          *ngIf="form.get('unit')?.value === '服務處'"
+          [selectWidth]="'160px'"
+          [defaultPlaceHolder]="false"
+          [options]="selectOptions_department"
+          formControlName="department"
+        />
+        <app-error-message
+          [control]="form.get('unit')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必選"
+        />
+        <app-error-message
+          [control]="form.get('department')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必選"
+        />
+      </div>
+      <div class="label">統計日期區間</div>
+      <div class="column-Message">
+        <app-dayPicker
+          [startRange]="30"
+          [endRange]="0"
+          formControlName="statisticsDate_start"
+        />
+        <app-error-message
+          [control]="form.get('statisticsDate_start')"
+          [isTouched]="false"
+          errorKey="invalidDate"
+          errorMessage="必選"
+        />
+        <span class="mx-2">-</span>
+        <app-dayPicker
+          [startRange]="30"
+          [endRange]="0"
+          formControlName="statisticsDate_end"
+        />
+        <app-error-message
+          [control]="form.get('statisticsDate_end')"
+          [isTouched]="false"
+          errorKey="invalidDate"
+          errorMessage="必選"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="buttonArea">
+    <!-- !TODO -->
+    <app-button [buttonText]="'搜尋'" (click)="search()" />
+    <app-button
+      [buttonText]="'關閉'"
+      [attachClassName]="['danger']"
+      (click)="closeTab('統計內容_' + hd500ListService.currentStatisticsName)"
+    />
+  </div>
+</form>
+<div class="mt"></div>
+}
+<!-- 個案基本情形_總人數 -->
+@if(hd500ListService.currentStatisticsCode === 'A1'){
+<div class="statistics-container">
+  <div class="statisticsTitle statistics-columns-3">
+    <div>單位名稱</div>
+    <div>人數</div>
+    <div>占比</div>
+  </div>
+  <div
+    class="tableBorder statistics-columns-3"
+    *ngFor="let data of totalCaseCount; let i = index"
+    [ngClass]="{
+      'even-row': i % 2 === 1,
+      'odd-row': i % 2 !== 1
+    }"
+  >
+    <div>{{ data.unitName }}</div>
+    <div>{{ data.numberOfPeople }}</div>
+    <div>{{ data.percentage }}</div>
+  </div>
+</div>
+}
+
+<!-- 個案基本情形_性別 -->
+@if(hd500ListService.currentStatisticsCode === 'A2'){
+<div class="statistics-container">
+  <div class="statisticsTitle statistics-columns-4">
+    <div>單位名稱</div>
+    <div>性別</div>
+    <div>人數</div>
+    <div>占比</div>
+  </div>
+  <div
+    class="tableBorder statistics-columns-4"
+    *ngFor="let data of totalCaseGender; let i = index"
+    [ngClass]="{
+      'even-row': i % 2 === 1,
+      'odd-row': i % 2 !== 1
+    }"
+  >
+    <div>{{ data.unitName }}</div>
+    <div>
+      <div class="custom-color-men">男性</div>
+      <div class="custom-color-women">女性</div>
+    </div>
+    <div>
+      <div class="custom-color-men">{{ data.numberOfPeople_men }}</div>
+      <div class="custom-color-women">{{ data.numberOfPeople_women }}</div>
+    </div>
+    <div>
+      <div class="custom-color-men">{{ data.percentage_men }}</div>
+      <div class="custom-color-women">{{ data.percentage_women }}</div>
+    </div>
+  </div>
+</div>
+}
+
+<!-- 個案基本情形_年齡 -->
+@if(hd500ListService.currentStatisticsCode === 'A3'){
+<div class="statistics-container">
+  <div class="statisticsTitle statistics-columns-3">
+    <div>年齡區間</div>
+    <div>人數</div>
+    <div>占比</div>
+  </div>
+  <div
+    class="tableBorder statistics-columns-3"
+    *ngFor="let data of totalCaseAge; let i = index"
+    [ngClass]="{
+      'even-row': i % 2 === 1,
+      'odd-row': i % 2 !== 1
+    }"
+  >
+    <div>{{ data.ageRange }}</div>
+    <div>{{ data.numberOfPeople }}</div>
+    <div>{{ data.percentage }}</div>
+  </div>
+</div>
+}
+
+<!-- 個案基本情形_身份別 -->
+@if(hd500ListService.currentStatisticsCode === 'A4'){
+<div class="statistics-container">
+  <div class="statisticsTitle statistics-columns-3">
+    <div>身份別</div>
+    <div>人數</div>
+    <div>占比</div>
+  </div>
+  <div
+    class="tableBorder statistics-columns-3"
+    *ngFor="let data of totalCaseIdentityType; let i = index"
+    [ngClass]="{
+      'even-row': i % 2 === 1,
+      'odd-row': i % 2 !== 1
+    }"
+  >
+    <div>{{ data.identityType }}</div>
+    <div>{{ data.numberOfPeople }}</div>
+    <div>{{ data.percentage }}</div>
+  </div>
+</div>
+}
+
+<!-- 個案基本情形_社福補助 -->
+@if(hd500ListService.currentStatisticsCode === 'A5'){
+<div class="statistics-container">
+  <div class="statisticsTitle statistics-columns-2">
+    <div>補助名稱</div>
+    <div>人數</div>
+  </div>
+  <div
+    class="tableBorder statistics-columns-2"
+    *ngFor="let data of totalCaseSocialWelfareSubsidy; let i = index"
+    [ngClass]="{
+      'even-row': i % 2 === 1,
+      'odd-row': i % 2 !== 1
+    }"
+  >
+    <div>{{ data.subsidyName }}</div>
+    <div>{{ data.numberOfPeople }}</div>
+  </div>
+</div>
+}
+
+<!-- 個案基本情形_特殊議題-->
+@if(hd500ListService.currentStatisticsCode === 'A6'){
+<div class="statistics-container">
+  <div class="statisticsTitle statistics-columns-2">
+    <div>議題名稱</div>
+    <div>人數</div>
+  </div>
+  <div
+    class="tableBorder statistics-columns-2"
+    *ngFor="let data of totalCaseSpecialIssues; let i = index"
+    [ngClass]="{
+      'even-row': i % 2 === 1,
+      'odd-row': i % 2 !== 1
+    }"
+  >
+    <div>{{ data.issueName }}</div>
+    <div>{{ data.numberOfPeople }}</div>
+  </div>
+</div>
+}
+
+<!-- 個案基本情形_風險-->
+@if(hd500ListService.currentStatisticsCode === 'A7'){
+<div class="statistics-container">
+  <div class="statisticsTitle statistics-columns-4">
+    <div>單位名稱</div>
+    <div>風險等級</div>
+    <div>人數</div>
+    <div>占比</div>
+  </div>
+  <div
+    class="tableBorder statistics-columns-4"
+    *ngFor="let data of totalCaseRisk; let i = index"
+    [ngClass]="{
+      'even-row': i % 2 === 1,
+      'odd-row': i % 2 !== 1
+    }"
+  >
+    <div>{{ data.unitName }}</div>
+    <div>
+      <div class="custom-color-high">高</div>
+      <div class="custom-color-medium">中</div>
+      <div class="custom-color-low">低</div>
+    </div>
+    <div>
+      <div class="custom-color-high">{{ data.numberOfPeople_high }}</div>
+      <div class="custom-color-medium">{{ data.numberOfPeople_medium }}</div>
+      <div class="custom-color-low">{{ data.numberOfPeople_low }}</div>
+    </div>
+    <div>
+      <div class="custom-color-high">{{ data.percentage_high }}</div>
+      <div class="custom-color-medium">{{ data.percentage_medium }}</div>
+      <div class="custom-color-low">{{ data.percentage_low }}</div>
+    </div>
+  </div>
+</div>
+}
+
+<!-- 個案基本情形_風險ｘ特殊議題-->
+@if(hd500ListService.currentStatisticsCode === 'A8'){
+<div class="statistics-container">
+  <div class="statisticsTitle statistics-columns-3">
+    <div>議題名稱</div>
+    <div>風險等級</div>
+    <div>人數</div>
+  </div>
+  <div
+    class="tableBorder statistics-columns-3"
+    *ngFor="let data of totalCaseRiskAndSpecialIssues; let i = index"
+    [ngClass]="{
+      'even-row': i % 2 === 1,
+      'odd-row': i % 2 !== 1
+    }"
+  >
+    <div>{{ data.issueName }}</div>
+    <div>
+      <div class="custom-color-high">高</div>
+      <div class="custom-color-medium">中</div>
+      <div class="custom-color-low">低</div>
+    </div>
+    <div>
+      <div class="custom-color-high">{{ data.numberOfPeople_high }}</div>
+      <div class="custom-color-medium">{{ data.numberOfPeople_medium }}</div>
+      <div class="custom-color-low">{{ data.numberOfPeople_low }}</div>
+    </div>
+  </div>
+</div>
+}
+
+<!-- 個案基本情形_風險ｘ身分別-->
+@if(hd500ListService.currentStatisticsCode === 'A9'){
+<div class="statistics-container">
+  <div class="statisticsTitle statistics-columns-3">
+    <div>身份別</div>
+    <div>風險等級</div>
+    <div>人數</div>
+  </div>
+  <div
+    class="tableBorder statistics-columns-3"
+    *ngFor="let data of totalCaseRiskAndIdentityType; let i = index"
+    [ngClass]="{
+      'even-row': i % 2 === 1,
+      'odd-row': i % 2 !== 1
+    }"
+  >
+    <div>{{ data.identityType }}</div>
+    <div>
+      <div class="custom-color-high">高</div>
+      <div class="custom-color-medium">中</div>
+      <div class="custom-color-low">低</div>
+    </div>
+    <div>
+      <div class="custom-color-high">{{ data.numberOfPeople_high }}</div>
+      <div class="custom-color-medium">{{ data.numberOfPeople_medium }}</div>
+      <div class="custom-color-low">{{ data.numberOfPeople_low }}</div>
+    </div>
+  </div>
+</div>
+}
+
+<!-- 個案基本情形_社福補助ｘ特殊議題-->
+@if(hd500ListService.currentStatisticsCode === 'A10'){
+<div class="statistics-container">
+  <div class="statisticsTitle statistics-columns-3">
+    <div>身份別</div>
+    <div>風險等級</div>
+    <div>人數</div>
+  </div>
+  <div
+    class="tableBorder statistics-columns-3"
+    *ngFor="
+      let data of totalCaseSocialWelfareSubsidyAndSpecialIssues;
+      let i = index
+    "
+    [ngClass]="{
+      'even-row': i % 2 === 1,
+      'odd-row': i % 2 !== 1
+    }"
+  >
+    <div>{{ data.subsidyName }}</div>
+    <div>
+      <div>獨居</div>
+      <div>姥姥</div>
+      <div>雙重老化</div>
+      <div>疾病狀態-失智症</div>
+    </div>
+    <div>
+      <div>{{ data.numberOfPeople_livingAlone }}</div>
+      <div>
+        {{ data.numberOfPeople_elderlyCouple }}
+      </div>
+      <div>
+        {{ data.numberOfPeople_doubleElderlyCouples }}
+      </div>
+      <div>
+        {{ data.numberOfPeople_dementiaStatus }}
+      </div>
+    </div>
+  </div>
+</div>
+}
+
+<!-- 開結案數據_開案數X結案數-->
+@if(hd500ListService.currentStatisticsCode === 'B1'){
+<div class="statisticsArea">
+  <div>
+    <div class="statisticsArea_title">關懷訪視</div>
+    <div class="statisticsArea_content">1,605,145 人</div>
+  </div>
+  <div>
+    <div class="statisticsArea_title">電話問安</div>
+    <div class="statisticsArea_content">1,932,323 人</div>
+  </div>
+</div>
+}
+
+<!-- 開結案數據_總案數-->
+@if(hd500ListService.currentStatisticsCode === 'B2'){
+<div class="contentTitle">人數</div>
+<div class="mt"></div>
+<div class="statistics-container">
+  <div class="statisticsTitle statistics-columns-3">
+    <div>月份</div>
+    <div>服務中</div>
+    <div>結案</div>
+  </div>
+  <div
+    class="tableBorder statistics-columns-3"
+    *ngFor="
+      let data of caseOpeningClosingDataTotalCasesAndPeople;
+      let i = index
+    "
+    [ngClass]="{
+      'even-row': i % 2 === 1,
+      'odd-row': i % 2 !== 1
+    }"
+  >
+    <div>{{ data.month }}</div>
+    <div>{{ data.activeCases }}</div>
+    <div>{{ data.closedCases }}</div>
+  </div>
+</div>
+<div class="mt"></div>
+<div class="contentTitle">人次</div>
+<div class="mt"></div>
+<div class="statistics-container">
+  <div class="statisticsTitle statistics-columns-3">
+    <div>月份</div>
+    <div>服務中</div>
+    <div>結案</div>
+  </div>
+  <div
+    class="tableBorder statistics-columns-3"
+    *ngFor="
+      let data of caseOpeningClosingDataTotalCaseCountVisits;
+      let i = index
+    "
+    [ngClass]="{
+      'even-row': i % 2 === 1,
+      'odd-row': i % 2 !== 1
+    }"
+  >
+    <div>{{ data.month }}</div>
+    <div>{{ data.activeCases }}</div>
+    <div>{{ data.closedCases }}</div>
+  </div>
+</div>
+}
+
+<!-- 開結案數據_開案來源-->
+@if(hd500ListService.currentStatisticsCode === 'B3'){
+<div class="statistics-container">
+  <div class="statisticsTitle statistics-columns-2">
+    <div>開案來源</div>
+    <div>人數</div>
+  </div>
+  <div
+    class="tableBorder statistics-columns-2"
+    *ngFor="let data of caseOpeningClosingDataCaseSource; let i = index"
+    [ngClass]="{
+      'even-row': i % 2 === 1,
+      'odd-row': i % 2 !== 1
+    }"
+  >
+    <div>{{ data.caseSource }}</div>
+    <div>{{ data.numberOfPeople }}</div>
+  </div>
+</div>
+}
+
+<!-- 開結案數據_結案原因-->
+@if(hd500ListService.currentStatisticsCode === 'B4'){
+<div class="statistics-container">
+  <div class="statisticsTitle statistics-columns-2">
+    <div>結案原因</div>
+    <div>人數</div>
+  </div>
+  <div
+    class="tableBorder statistics-columns-2"
+    *ngFor="let data of caseOpeningClosingDataCaseClosureReason; let i = index"
+    [ngClass]="{
+      'even-row': i % 2 === 1,
+      'odd-row': i % 2 !== 1
+    }"
+  >
+    <div>{{ data.caseClosureReason }}</div>
+    <div>{{ data.numberOfPeople }}</div>
+  </div>
+</div>
+}
+
+<!-- 服務與需求統計_最熱門評估需求前10-->
+@if(hd500ListService.currentStatisticsCode === 'C1'){
+<div class="statistics-container border-bottom-0">
+  <div class="statisticsTitle statistics-columns-2">
+    <div>評估需求</div>
+    <div>人數</div>
+  </div>
+  <div
+    class="tableBorder statistics-columns-2"
+    *ngFor="let data of serviceAndDemandStatsTop10DemandedNeeds; let i = index"
+    [ngClass]="{
+      'even-row': i % 2 === 1,
+      'odd-row': i % 2 !== 1
+    }"
+  >
+    <div>{{ data.demandedNeeds }}</div>
+    <div>{{ data.visitCount }}</div>
+  </div>
+</div>
+<div class="buttonArea">
+  <app-button
+    [buttonText]="'關閉'"
+    [attachClassName]="['danger']"
+    (click)="closeTab('統計內容_' + hd500ListService.currentStatisticsName)"
+  />
+</div>
+}
+
+<!-- 服務與需求統計_最熱門服務內容前10-->
+@if(hd500ListService.currentStatisticsCode === 'C2'){
+<div class="statistics-container border-bottom-0">
+  <div class="statisticsTitle statistics-columns-2">
+    <div>服務內容</div>
+    <div>人數</div>
+  </div>
+  <div
+    class="tableBorder statistics-columns-2"
+    *ngFor="
+      let data of serviceAndDemandStatsTop10ServiceContents;
+      let i = index
+    "
+    [ngClass]="{
+      'even-row': i % 2 === 1,
+      'odd-row': i % 2 !== 1
+    }"
+  >
+    <div>{{ data.serviceContents }}</div>
+    <div>{{ data.visitCount }}</div>
+  </div>
+</div>
+<div class="buttonArea">
+  <app-button
+    [buttonText]="'關閉'"
+    [attachClassName]="['danger']"
+    (click)="closeTab('統計內容_' + hd500ListService.currentStatisticsName)"
+  />
+</div>
+}
+
+<!-- 服務與需求統計_志工提供服務人次-->
+@if(hd500ListService.currentStatisticsCode === 'C3'){
+<div class="statistics-container border-bottom-0">
+  <div class="statisticsTitle statistics-columns-2">
+    <div>服務名稱</div>
+    <div>人數</div>
+  </div>
+  <div
+    class="tableBorder statistics-columns-2"
+    *ngFor="
+      let data of serviceAndDemandStatsVolunteerServiceCount;
+      let i = index
+    "
+    [ngClass]="{
+      'even-row': i % 2 === 1,
+      'odd-row': i % 2 !== 1
+    }"
+  >
+    <div>{{ data.volunteerService }}</div>
+    <div>{{ data.visitCount }}</div>
+  </div>
+</div>
+<div class="buttonArea">
+  <app-button
+    [buttonText]="'關閉'"
+    [attachClassName]="['danger']"
+    (click)="closeTab('統計內容_' + hd500ListService.currentStatisticsName)"
+  />
+</div>
+}

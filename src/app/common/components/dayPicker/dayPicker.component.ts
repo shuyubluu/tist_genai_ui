@@ -13,6 +13,8 @@ import { SharedModule } from '../../shared/shared.module';
  * startRange 預設為5 可提供數字值 選擇日期的起始範圍 由當前日期往前做延伸
  *
  * endRange 預設為5 可提供數字值 選擇日期的結束範圍 由當前日期往後做延伸
+ *
+ * 日期資料格式 範例：傳入{year: '113',month: '1',day: '1'} 則會顯示 113/01/01 
  */
 
 @Component({

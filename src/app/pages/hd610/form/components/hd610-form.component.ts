@@ -35,6 +35,8 @@ export class Hd610FormComponent implements OnInit {
   isCustomTeam: boolean = false;
   // 任職區域是否自訂
   isCustomRegion: boolean = false;
+  // 是否禁用任職區域按鈕
+  isDisabledRegionButton: boolean = false;
   // 角色層級select選項
   selectOptions_roleLevel: string[] = [
     '系統管理者',
@@ -130,13 +132,13 @@ export class Hd610FormComponent implements OnInit {
       // 任職組別
       team: new FormControl(''),
       // 任職組別_輸入框
-      team_input: new FormControl(''),
+      team_input: new FormControl('', [Validators.required]),
       // 任職區域
       region: new FormControl(''),
       // 任職區域_輸入框
-      region_input: new FormControl(''),
+      region_input: new FormControl('', [Validators.required]),
       // 代碼
-      code: new FormControl(''),
+      code: new FormControl('', [Validators.required]),
     });
   }
 
@@ -149,18 +151,39 @@ export class Hd610FormComponent implements OnInit {
       this.form.get('code')?.disable();
     }
 
-    // 如果任職單位輸入框是空的則禁用
+    // 禁用任職區域
+    this.form.get('region')?.disable();
+    this.isDisabledRegionButton = true;
+
+    // 如果任職單位輸入框為空則禁用
     if (this.form.get('department_input')?.value === '') {
       this.form.get('department_input')?.disable();
     }
 
-    // 如果任職組別輸入框是空的則禁用
-    if (this.form.get('team_input')?.value === '') {
+    // 如果任職團隊不是空的，則開啟任職組別
+    if (this.form.get('team')?.value !== '') {
+      this.form.get('region')?.enable();
+    }
+
+    // 如果任職團隊輸入框不是空的，則開啟任職組別，並自訂任職團隊輸入框
+    if (this.form.get('team_input')?.value !== '') {
+      this.form.get('region')?.enable();
+      this.isCustomTeam = true;
+    } else {
       this.form.get('team_input')?.disable();
     }
 
-    // 如果任職區域輸入框是空的則禁用
-    if (this.form.get('region_input')?.value === '') {
+    // 如果任職團隊不是空的，則開啟任職組別
+    if (this.form.get('region')?.value !== '') {
+      this.form.get('region')?.enable();
+      this.isDisabledRegionButton = false;
+    }
+
+    // 如果任職區域輸入框不是空的，則開啟任職區域輸入框，並自訂任職區域輸入框
+    if (this.form.get('region_input')?.value !== '') {
+      this.form.get('region_input')?.enable();
+      this.isCustomRegion = true;
+    } else {
       this.form.get('region_input')?.disable();
     }
   }
@@ -197,6 +220,16 @@ export class Hd610FormComponent implements OnInit {
     this.form.get('team_input')?.reset();
   }
 
+  // 選擇任職組別後觸發
+  onSelectTeam(option: string) {
+    this.onDisableCustomRegion(option);
+  }
+
+  // 自訂任職組別輸入時觸發
+  onCustomTeamInput(content: string) {
+    this.onDisableCustomRegion(content);
+  }
+
   // 開啟自訂任職區域
   onCustomRegion() {
     this.isCustomRegion = true;
@@ -211,6 +244,21 @@ export class Hd610FormComponent implements OnInit {
     this.form.get('region')?.enable();
     this.form.get('region_input')?.disable();
     this.form.get('region_input')?.reset();
+  }
+
+  // 禁止自訂任職區域
+  onDisableCustomRegion(content: string) {
+    if (content === '' || content === null) {
+      this.form.get('region')?.disable();
+      this.form.get('region')?.reset();
+      this.form.get('region_input')?.disable();
+      this.form.get('region_input')?.reset();
+      this.isDisabledRegionButton = true;
+      this.isCustomRegion = false;
+    } else {
+      this.form.get('region')?.enable();
+      this.isDisabledRegionButton = false;
+    }
   }
 
   // 儲存

@@ -182,6 +182,12 @@ export const routes: Routes = [
         data: { tabName: '簽核專區' },
       },
       {
+        path: 'hd500',
+        loadChildren: () =>
+          import('./pages/hd500/hd500.routes').then((m) => m.HD500_ROUTES),
+        data: { tabName: '統計專區' },
+      },
+      {
         path: 'hd600',
         loadChildren: () =>
           import('./pages/hd600/hd600.routes').then((m) => m.HD600_ROUTES),

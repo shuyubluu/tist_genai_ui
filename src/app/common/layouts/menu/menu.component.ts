@@ -81,19 +81,11 @@ export class MenuComponent implements OnInit {
         title: '簽核專區',
         icon: 'edit',
         link: '/hd400',
-        // children: [
-        //   { title: '01- 待簽表單', open: false, link: '/hd400' },
-        //   { title: '02- 代理簽核表單', open: false, link: '/hd410' },
-        //   { title: '03- 被退回表單', open: false, link: '/hd420' },
-        //   { title: '04- 已送審表單', open: false, link: '/hd430' },
-        //   { title: '05- 已簽核表單', open: false, link: '/hd440' },
-        //   { title: '06- 查詢表單', open: false, link: '/hd450' },
-        // ],
       },
       {
         title: '統計專區',
         icon: 'area-chart',
-        link: '#',
+        link: '/hd500',
       },
       {
         title: '系統管理權限',

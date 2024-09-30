@@ -50,7 +50,7 @@ export class Hd230ListComponent implements OnInit {
   searchResultData: SearchResultData[] = [
     {
       serviceHoursRange: '113/02/01 - 113/02/28',
-      serviceContent: '外單位',
+      serviceContent: '關懷訪視',
       serviceHours: '2.0',
       loginMethod: '系統登入',
     },

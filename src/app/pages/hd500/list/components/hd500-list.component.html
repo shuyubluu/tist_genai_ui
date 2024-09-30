@@ -1,0 +1,32 @@
+<div class="grid-search-container border-bottom-0">
+  <div class="grid-columns searchTitle">
+    <div>統計項目</div>
+    <div>統計內容</div>
+    <div>操作</div>
+  </div>
+  <div
+    class="grid-columns tableBorder"
+    *ngFor="let searchResult of searchResultData; let i = index"
+    [ngClass]="{
+      'even-row': i % 2 === 1,
+      'odd-row': i % 2 !== 1
+    }"
+  >
+    <!-- !TODO -->
+    <div>{{ searchResult.statisticsItems }}</div>
+    <div>{{ searchResult.contentStatistics }}</div>
+    <div>
+      <app-button
+        [buttonText]="'檢視'"
+        (click)="view(searchResult.code, searchResult.contentStatistics)"
+      />
+    </div>
+  </div>
+</div>
+<div class="buttonArea">
+  <app-button
+    [attachClassName]="['danger']"
+    [buttonText]="'關閉'"
+    (click)="closeTab('統計專區')"
+  />
+</div>

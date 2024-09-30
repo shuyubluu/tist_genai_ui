@@ -65,16 +65,15 @@
 </div>
 <div class="mt"></div>
 <div class="grid-search-container">
-  <div class="grid-columns searchTitle">
+  <div class="grid-columns_socialWorker searchTitle">
     <div>訪視日期</div>
     <div>風險等級</div>
-    <!-- <div>訪視人員職稱</div> -->
     <div>訪視人員姓名</div>
     <div>簽核狀態</div>
     <div>操作</div>
   </div>
   <div
-    class="grid-columns tableBorder"
+    class="grid-columns_socialWorker tableBorder"
     *ngFor="let searchResult of newSearchResultData_socialWorker; let i = index"
     [ngClass]="{
       'even-row': i % 2 === 1,
@@ -87,9 +86,6 @@
     <div>
       {{ searchResult.caseClassification }}
     </div>
-    <!-- <div>
-      {{ searchResult.responsiblePersonJobTitle }}
-    </div> -->
     <div>
       {{ searchResult.responsiblePerson }}
     </div>
@@ -118,16 +114,13 @@
 <div class="message">搜尋結果: 共{{ searchResultData_volunteer.length }}筆</div>
 <div class="mt"></div>
 <div class="grid-search-container">
-  <div class="grid-columns searchTitle">
+  <div class="grid-columns_volunteer searchTitle">
     <div>訪視日期</div>
-    <div>風險等級</div>
-    <!-- <div>訪視人員職稱</div> -->
     <div>訪視人員姓名</div>
-    <div>簽核狀態</div>
     <div>操作</div>
   </div>
   <div
-    class="grid-columns tableBorder"
+    class="grid-columns_volunteer tableBorder"
     *ngFor="let searchResult of newSearchResultData_volunteer; let i = index"
     [ngClass]="{
       'even-row': i % 2 === 1,
@@ -138,16 +131,7 @@
       {{ searchResult.caseOpeningDate }}
     </div>
     <div>
-      {{ searchResult.caseClassification }}
-    </div>
-    <!-- <div>
-      {{ searchResult.responsiblePersonJobTitle }}
-    </div> -->
-    <div>
       {{ searchResult.responsiblePerson }}
-    </div>
-    <div>
-      {{ searchResult.approvalStatus }}
     </div>
     <!-- !TODO -->
     <div>

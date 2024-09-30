@@ -33,7 +33,7 @@
           [control]="form.get('department')"
           [isTouched]="false"
           errorKey="required"
-          errorMessage="必填"
+          errorMessage="必選"
         />
         <app-error-message
           [control]="form.get('department_input')"
@@ -45,10 +45,11 @@
     </div>
     <div class="grid-columns-1">
       <div class="label">任職組別</div>
-      <div>
+      <div class="column-Message">
         <app-select
-          [selectWidth]="'50%'"
+          [selectWidth]="'400px'"
           [options]="selectOptions_team"
+          (ngModelChange)="onSelectTeam($event)"
           formControlName="team"
         />
         <app-button
@@ -69,19 +70,27 @@
           *ngIf="isCustomTeam"
           [inputWidth]="'130px'"
           [maxLength]="30"
+          (ngModelChange)="onCustomTeamInput($event)"
           formControlName="team_input"
+        />
+        <app-error-message
+          [control]="form.get('team_input')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必填"
         />
       </div>
     </div>
     <div class="grid-columns-1">
       <div class="label">任職區域</div>
-      <div>
+      <div class="column-Message">
         <app-select
           [selectWidth]="'200px'"
           [options]="selectOptions_region"
           formControlName="region"
         />
         <app-button
+          [disabled]="isDisabledRegionButton"
           class="mx-2"
           *ngIf="!isCustomRegion"
           [buttonText]="'自訂'"
@@ -89,6 +98,7 @@
           (click)="onCustomRegion()"
         />
         <app-button
+          [disabled]="isDisabledRegionButton"
           *ngIf="isCustomRegion"
           class="mx-2"
           [buttonText]="'取消自訂'"
@@ -101,15 +111,27 @@
           [maxLength]="30"
           formControlName="region_input"
         />
+        <app-error-message
+          [control]="form.get('region_input')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必填"
+        />
       </div>
     </div>
     <div class="grid-columns-1 border-bottom-0">
       <div class="label">代碼</div>
-      <div>
+      <div class="column-Message">
         <app-input
           [inputWidth]="'70px'"
           [maxLength]="5"
           formControlName="code"
+        />
+        <app-error-message
+          [control]="form.get('code')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必填"
         />
       </div>
     </div>

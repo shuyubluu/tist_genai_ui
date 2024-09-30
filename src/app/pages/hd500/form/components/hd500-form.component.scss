@@ -1,0 +1,97 @@
+// 表單區塊
+.statistics-container {
+  width: 100%;
+  height: auto;
+  border: #dddfeb solid 1.5px;
+
+  .statisticsTitle {
+    background: linear-gradient(to bottom, #d5dcbe, #b5ca7f);
+    font-weight: bold;
+    font-size: 18px;
+    color: #4e73e1;
+  }
+
+  .statistics-columns-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 2x;
+    place-items: center;
+  }
+
+  .statistics-columns-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 2x;
+    place-items: center;
+  }
+
+  .statistics-columns-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 2px;
+    place-items: center;
+  }
+}
+
+.statisticsArea {
+  width: 800px;
+  display: grid;
+  grid-template-columns: repeat(2, 160px);
+  gap: 10px;
+
+  .statisticsArea_title {
+    width: 160px;
+    height: 40px;
+    background: #d5a6e0;
+    font-size: 18px;
+    text-align: center;
+    line-height: 40px;
+    font-weight: bold;
+    border: 3px solid #cccccc;
+    border-bottom: 1px;
+    border-radius: 5px 5px 0px 0px;
+  }
+
+  .statisticsArea_content {
+    width: 160px;
+    height: 80px;
+    font-size: 20px;
+    text-align: center;
+    line-height: 80px;
+    font-weight: bold;
+    border: 3px solid #cccccc;
+    border-top: 0px;
+    border-radius: 0px 0px 5px 5px;
+  }
+}
+
+.custom-color-men {
+  color: #4e73e1;
+  font-weight: bold;
+}
+
+.custom-color-women {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+.custom-color-high {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+.custom-color-medium {
+  color: #ffc107;
+  font-weight: bold;
+}
+
+.custom-color-low {
+  color: #28a745;
+  font-weight: bold;
+}
+
+.contentTitle {
+  font-size: 22px;
+  font-weight: bold;
+  color: #6d8f29;
+}

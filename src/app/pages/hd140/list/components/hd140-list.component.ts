@@ -9,7 +9,10 @@ import { DayPickerComponent } from '../../../../common/components/dayPicker/dayP
 import { SharedModule } from '../../../../common/shared/shared.module';
 import { TabService } from '../../../../common/layouts/tab/tab.service';
 import { FormControl, FormGroup } from '@angular/forms';
-import { SearchResultData } from '../service/hd140-list.interface';
+import {
+  SearchResultData_socialWorker,
+  SearchResultData_volunteer,
+} from '../service/hd140-list.interface';
 import { CaseInformationComponent } from '../../../../common/components/caseInformation/components/case-information.component';
 import { CaseInformationService } from '../../../../common/components/caseInformation/service/case-information.service';
 
@@ -36,29 +39,25 @@ export class Hd140ListComponent implements OnInit {
   // 分頁器一頁多少筆數據
   pageSize: number = 10;
   // 搜尋結果模擬資料_社工
-  searchResultData_socialWorker: SearchResultData[] = [
+  searchResultData_socialWorker: SearchResultData_socialWorker[] = [
     {
       caseOpeningDate: '113/01/01',
       caseClassification: '高風險',
-      caseName: '王大明',
       responsiblePerson: '王小明',
       approvalStatus: '已簽核',
     },
   ];
 
   // 搜尋結果模擬資料_志工
-  searchResultData_volunteer: SearchResultData[] = [
+  searchResultData_volunteer: SearchResultData_volunteer[] = [
     {
       caseOpeningDate: '113/02/01',
-      caseClassification: '中風險',
-      caseName: '王大明',
       responsiblePerson: '陳大明',
-      approvalStatus: '待簽',
     },
   ];
 
   // 分頁器切割後的資料_社工
-  get newSearchResultData_socialWorker(): SearchResultData[] {
+  get newSearchResultData_socialWorker(): SearchResultData_socialWorker[] {
     return this.searchResultData_socialWorker.slice(
       (this.currentPage - 1) * this.pageSize,
       this.currentPage * this.pageSize
@@ -66,7 +65,7 @@ export class Hd140ListComponent implements OnInit {
   }
 
   // 分頁器切割後的資料_志工
-  get newSearchResultData_volunteer(): SearchResultData[] {
+  get newSearchResultData_volunteer(): SearchResultData_volunteer[] {
     return this.searchResultData_volunteer.slice(
       (this.currentPage - 1) * this.pageSize,
       this.currentPage * this.pageSize

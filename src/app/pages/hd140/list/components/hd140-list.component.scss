@@ -1,7 +1,14 @@
-.grid-columns {
+.grid-columns_socialWorker {
   display: grid;
   place-items: center;
-  grid-template-columns: repeat(4, 1fr) 2fr;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 10px;
+}
+
+.grid-columns_volunteer {
+  display: grid;
+  place-items: center;
+  grid-template-columns: repeat(3, 1fr);
   grid-gap: 10px;
 }
 

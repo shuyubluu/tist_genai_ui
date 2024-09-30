@@ -32,7 +32,7 @@
       <div class="label">任職組別</div>
       <div>
         <app-select
-          [selectWidth]="'50%'"
+          [selectWidth]="'400px'"
           [options]="selectOptions_team"
           formControlName="team"
         />
@@ -67,49 +67,49 @@
 <div class="mt"></div>
 <div class="hd100-list-search">
   <div class="message">搜尋結果: 共{{ searchResultData.length }}筆</div>
-    <div class="mt"></div>
-    <div class="grid-search-container">
-      <div class="grid-columns searchTitle">
-        <div>姓名</div>
-        <div>員工編號</div>
-        <div>角色</div>
-        <div>服務單位</div>
-        <div>操作</div>
+  <div class="mt"></div>
+  <div class="grid-search-container">
+    <div class="grid-columns searchTitle">
+      <div>姓名</div>
+      <div>員工編號</div>
+      <div>角色</div>
+      <div>服務單位</div>
+      <div>操作</div>
+    </div>
+    <div
+      class="grid-columns tableBorder"
+      *ngFor="let searchResult of newSearchResultData; let i = index"
+      [ngClass]="{
+        'even-row': i % 2 === 1,
+        'odd-row': i % 2 !== 1
+      }"
+    >
+      <div>
+        {{ searchResult.name }}
       </div>
-      <div
-        class="grid-columns tableBorder"
-        *ngFor="let searchResult of newSearchResultData; let i = index"
-        [ngClass]="{
-          'even-row': i % 2 === 1,
-          'odd-row': i % 2 !== 1
-        }"
-      >
-        <div>
-          {{ searchResult.name }}
-        </div>
-        <div>
-          {{ searchResult.employeeId }}
-        </div>
-        <div>
-          {{ searchResult.role }}
-        </div>
-        <div>
-          <span class="color-blue">{{ searchResult.department }}</span> /
-          <span class="color-green">{{ searchResult.team }}</span> /
-          <span class="color-red">{{ searchResult.region }}</span>
-        </div>
-        <!-- !TODO -->
-        <div>
-          <app-button [buttonText]="'檢視'" (click)="view()" />
-          <app-button
-            [buttonText]="'編輯'"
-            [attachClassName]="['warning']"
-            (click)="edit()"
-          />
-          <app-button [buttonText]="'刪除'" [attachClassName]="['danger']" />
-        </div>
+      <div>
+        {{ searchResult.employeeId }}
+      </div>
+      <div>
+        {{ searchResult.role }}
+      </div>
+      <div>
+        <span class="color-blue">{{ searchResult.department }}</span> /
+        <span class="color-green">{{ searchResult.team }}</span> /
+        <span class="color-red">{{ searchResult.region }}</span>
+      </div>
+      <!-- !TODO -->
+      <div>
+        <app-button [buttonText]="'檢視'" (click)="view()" />
+        <app-button
+          [buttonText]="'編輯'"
+          [attachClassName]="['warning']"
+          (click)="edit()"
+        />
+        <app-button [buttonText]="'刪除'" [attachClassName]="['danger']" />
       </div>
     </div>
+  </div>
   <div class="mt-10"></div>
   <nz-pagination
     [nzPageIndex]="currentPage"
