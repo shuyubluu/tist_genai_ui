@@ -408,7 +408,10 @@
     <div class="grid-columns-1">
       <div class="label">通訊地址</div>
       <div class="column-Message">
-        <app-taiwan-city-select formControlName="address_select" />
+        <app-taiwan-city-select
+          formControlName="address_select"
+          (ngModelChange)="onselect($event)"
+        />
         <app-input
           [inputWidth]="'300px'"
           [maxLength]="30"
@@ -417,7 +420,7 @@
         <app-error-message
           [control]="form.get('address_select')"
           [isTouched]="false"
-          errorKey="required"
+          errorKey="invalidAddress"
           errorMessage="必選"
         />
         <app-error-message
@@ -882,7 +885,7 @@
       <div class="label">志願服務紀錄冊</div>
       <div>
         <app-select
-          [selectWidth]="'80px'"
+          [selectWidth]="'90px'"
           [options]="selectOptions_volunteerServiceRecord"
           formControlName="volunteerServiceRecord"
         />

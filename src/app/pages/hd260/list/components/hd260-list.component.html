@@ -1,18 +1,25 @@
 <form [formGroup]="form">
   <div class="grid-container">
     <div class="grid-columns-1">
-      <div class="label">退隊日期</div>
-      <div>
+      <div class="label">退隊日期區間</div>
+      <div class="column-Message">
         <app-dayPicker
+          (ngModelChange)="onResignationDatChange($event)"
           [startRange]="30"
           [endRange]="0"
           formControlName="resignationDate_start"
         />
         <span class="mx-2">-</span>
         <app-dayPicker
+          (ngModelChange)="onResignationDatChange($event)"
           [startRange]="30"
           [endRange]="0"
           formControlName="resignationDate_end"
+        />
+        <app-error-message
+          [isCustom]="true"
+          [condition]="checkDateRange"
+          [errorMessage]="'格式錯誤'"
         />
       </div>
     </div>

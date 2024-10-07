@@ -1,73 +1,3 @@
-.table-container2 {
-  border-radius: 5px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(83, 83, 83, 0.1);
-  width: 60%;
-}
-
-.bordered-table2 {
-  width: 100%;
-  border-collapse: collapse;
-  border: 2px solid #cccccc;
-
-  th,
-  td {
-    border: 1px solid #cccccc;
-    padding: 6px;
-    text-align: left;
-  }
-}
-
-.tr-cell-20 {
-  width: 10%;
-}
-
-.td-cell-20 {
-  width: 10%;
-}
-
-.tr-cell-70 {
-  width: 70%;
-}
-
-.td-cell-70 {
-  width: 70%;
-}
-
-.custom-header {
-  background-color: #ffab3e;
-}
-
-.custom-header2 {
-  background: linear-gradient(to bottom, #e3e3e3, #dddddd);
-}
-
-.custom-header3 {
-  background-color: #c6e43f;
-}
-
-.custom-cell {
-  background-color: #ffffff;
-}
-
-.even-row .custom-cell {
-  background-color: #f9f9f9 !important;
-}
-
-.td-cell-80.custom-cell a {
-  color: #e95504; /* 设置链接文本颜色为橘色 */
-  text-decoration: none; /* 可选：移除下划线 */
-}
-
-.td-cell-80.custom-cell a:hover {
-  color: rgb(127, 70, 1); /* 鼠标悬停时的颜色，可选 */
-  text-decoration: underline; /* 鼠标悬停时显示下划线，可选 */
-}
-
-.card-header {
-  border-top: 0;
-}
-
 .grid-columns-3 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -95,7 +25,7 @@
     border-bottom: 1px;
     border-radius: 5px 5px 0px 0px;
   }
-  
+
   .statisticsArea_content {
     width: 160px;
     height: 80px;
@@ -105,8 +35,98 @@
     font-weight: bold;
     border: 3px solid #cccccc;
     border-top: 0px;
-    border-radius: 0px 0px 5px 5px ;
+    border-radius: 0px 0px 5px 5px;
   }
 }
 
+.managementArea {
+  width: 480px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
 
+  .managementArea_title {
+    width: 160px;
+    height: 40px;
+    background: linear-gradient(to bottom, #e6f0fb, #cfe6ff);
+    font-size: 18px;
+    text-align: center;
+    line-height: 40px;
+    font-weight: bold;
+    border: 3px solid #cccccc;
+    border-bottom: 1px;
+    border-radius: 5px 5px 0px 0px;
+  }
+
+  .managementArea_content {
+    width: 160px;
+    height: 80px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    border: 3px solid #cccccc;
+    border-top: 0px;
+    border-radius: 0px 0px 5px 5px;
+  }
+}
+
+.approvalSectionArea {
+  width: 640px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+
+  .approvalSection_title {
+    width: 160px;
+    height: 40px;
+    background: #c6e43f;
+    font-size: 18px;
+    text-align: center;
+    line-height: 40px;
+    font-weight: bold;
+    border: 3px solid #cccccc;
+    border-bottom: 1px;
+    border-radius: 5px 5px 0px 0px;
+  }
+
+  .approvalSection_content {
+    width: 160px;
+    height: 80px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    border: 3px solid #cccccc;
+    border-top: 0px;
+    border-radius: 0px 0px 5px 5px;
+  }
+}
+
+.latestAnnouncementArea {
+  width: 100%;
+  height: auto;
+  border: #dddfeb solid 1.5px;
+
+  .latestAnnouncementArea_title {
+    background: linear-gradient(to bottom, #e3e3e3, #dddddd);
+    font-weight: bold;
+    font-size: 18px;
+    color: #4e73e1;
+  }
+
+  .latestAnnouncementArea_grid {
+    display: grid;
+    place-items: center;
+    grid-template-columns: 1fr 7fr repeat(2, 1fr);
+    grid-gap: 2px;
+
+    .latestAnnouncementArea_subject {
+      color: #e95504;
+      text-decoration: none;
+
+      &:hover {
+        color: rgb(127, 70, 1);
+        text-decoration: underline;
+      }
+    }
+  }
+}

@@ -7,8 +7,9 @@ import { RouterModule } from '@angular/router';
 import { DayPickerComponent } from '../../../../common/components/dayPicker/dayPicker.component';
 import { SharedModule } from '../../../../common/shared/shared.module';
 import { TabService } from '../../../../common/layouts/tab/tab.service';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { ErrorMessageComponent } from '../../../../common/components/message/error-message.component';
 
 @Component({
   selector: 'app-hd600-form',
@@ -20,6 +21,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
     SelectComponent,
     RouterModule,
     DayPickerComponent,
+    ErrorMessageComponent,
   ],
   templateUrl: './hd600-form.component.html',
   styleUrl: './hd600-form.component.scss',
@@ -36,7 +38,7 @@ export class Hd600FormComponent implements OnInit {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
       // 保險公司名稱
-      insuranceCompanyName: new FormControl(''),
+      insuranceCompanyName: new FormControl('', [Validators.required]),
     });
   }
 
@@ -44,13 +46,13 @@ export class Hd600FormComponent implements OnInit {
 
   // 儲存
   save() {
-    this.message.success('儲存成功')
+    this.message.success('儲存成功');
   }
 
   // 新增
   create() {
-    this.message.success('新增成功')
-    this.closeTab('保險公司代碼維護')
+    this.message.success('新增成功');
+    this.closeTab('保險公司代碼維護');
   }
 
   // 關閉當前的tab

@@ -13,6 +13,8 @@ import {
   SearchResultData,
   ViewData_searchResultData,
 } from '../service/hd270-list.interface';
+import { ErrorMessageComponent } from '../../../../common/components/message/error-message.component';
+import { compareDate } from '../../../../common/utils/compareDate';
 
 @Component({
   selector: 'app-hd270-list',
@@ -24,6 +26,7 @@ import {
     SelectComponent,
     RouterModule,
     DayPickerComponent,
+    ErrorMessageComponent,
   ],
   templateUrl: './hd270-list.component.html',
   styleUrl: './hd270-list.component.scss',
@@ -39,6 +42,8 @@ export class Hd270ListComponent implements OnInit {
   viewData_currentPage: number = 1;
   // 分頁器一頁多少筆數據
   pageSize: number = 10;
+  // 檢查日期區間
+  checkDateRange: boolean = false;
   // 是否展示檢視資料
   isShowViewData: boolean = false;
   // 投保狀態select選項
@@ -106,6 +111,18 @@ export class Hd270ListComponent implements OnInit {
   // 搜尋
   search() {
     // !TODO:搜尋邏輯
+    // 如果日期有輸入，則檢查日期區間
+    if (
+      compareDate(
+        this.form.value.insurancePeriod_start,
+        this.form.value.insurancePeriod_end
+      )
+    ) {
+      this.checkDateRange = false;
+      return;
+    } else {
+      this.checkDateRange = true;
+    }
   }
 
   // 新增
@@ -139,5 +156,25 @@ export class Hd270ListComponent implements OnInit {
   // 當檢視資料改變頁數時觸發
   onViewDataPageIndexChange(currentPage: number) {
     this.viewData_currentPage = currentPage;
+  }
+
+  // 當投保日期區間改變觸發
+  onInsurancePeriodChange(date: { year: string; month: string; day: string }) {
+    // 如果日期有輸入，則檢查日期區間
+    if (date && this.checkDateRange) {
+      if (
+        compareDate(
+          this.form.value.insurancePeriod_start,
+          this.form.value.insurancePeriod_end
+        )
+      ) {
+        this.checkDateRange = false;
+        return;
+      } else {
+        this.checkDateRange = true;
+      }
+    } else {
+      this.checkDateRange = false;
+    }
   }
 }

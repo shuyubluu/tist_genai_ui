@@ -2,19 +2,31 @@
   <div class="grid-container">
     <div class="grid-columns-2">
       <div class="label">姓名</div>
-      <div>
+      <div class="column-Message">
         <app-input
           [inputWidth]="'130px'"
           [maxLength]="30"
           formControlName="name"
         />
+        <app-error-message
+          [control]="form.get('name')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必填"
+        />
       </div>
       <div class="label">員工編號</div>
-      <div>
+      <div class="column-Message">
         <app-input
           [inputWidth]="'120px'"
           [maxLength]="10"
           formControlName="employeeId"
+        />
+        <app-error-message
+          [control]="form.get('employeeId')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必填"
         />
       </div>
     </div>
@@ -79,7 +91,7 @@
         <app-error-message
           [control]="form.get('officePhone')"
           errorKey="invalidHomePhone"
-          errorMessage="請輸入有效的電話號碼。"
+          errorMessage="格式錯誤'"
         />
       </div>
       <div class="label">公務手機</div>
@@ -93,18 +105,24 @@
         <app-error-message
           [control]="form.get('workMobile')"
           errorKey="invalidMobilePhone"
-          errorMessage=" 請輸入有效的手機號碼。"
+          errorMessage="格式錯誤"
         />
       </div>
     </div>
     <div class="grid-columns-1">
       <div class="label">任職單位</div>
-      <div>
+      <div class="column-Message">
         <app-select
           (ngModelChange)="onDepartmentSelectChange($event)"
           [selectWidth]="'160px'"
           [options]="selectOptions_department"
           formControlName="department"
+        />
+        <app-error-message
+          [control]="form.get('department')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必選"
         />
       </div>
     </div>

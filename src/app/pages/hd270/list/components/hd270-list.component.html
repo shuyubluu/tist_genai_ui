@@ -2,17 +2,24 @@
   <div class="grid-container">
     <div class="grid-columns-2 border-bottom-0">
       <div class="label">投保日期區間</div>
-      <div>
+      <div class="column-Message">
         <app-dayPicker
+          (ngModelChange)="onInsurancePeriodChange($event)"
           [startRange]="30"
           [endRange]="0"
           formControlName="insurancePeriod_start"
         />
         <span class="mx-2">-</span>
         <app-dayPicker
+          (ngModelChange)="onInsurancePeriodChange($event)"
           [startRange]="30"
           [endRange]="0"
           formControlName="insurancePeriod_end"
+        />
+        <app-error-message
+          [isCustom]="true"
+          [condition]="checkDateRange"
+          [errorMessage]="'格式錯誤'"
         />
       </div>
       <div class="label">投保狀態</div>

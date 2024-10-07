@@ -126,9 +126,9 @@ export class Hd640FormComponent implements OnInit {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
       // 姓名
-      name: new FormControl(''),
+      name: new FormControl('', [Validators.required]),
       // 員工編號
-      employeeId: new FormControl(''),
+      employeeId: new FormControl('', [Validators.required]),
       // 職稱
       jobTitle: new FormControl(''),
       // 代理人
@@ -142,7 +142,7 @@ export class Hd640FormComponent implements OnInit {
       // 公務手機
       workMobile: new FormControl('', [taiwanMobilePhoneValidator()]),
       // 任職單位
-      department: new FormControl(''),
+      department: new FormControl('', [Validators.required]),
       // 任職組別
       team: new FormControl(''),
       // 任職區域

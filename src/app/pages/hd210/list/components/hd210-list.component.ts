@@ -12,6 +12,8 @@ import { VolunteerInformationComponent } from '../../../../common/components/vol
 import { VolunteerInformationService } from './../../../../common/components/volunteerInformation/service/volunteer-information.service';
 import { SearchResultData } from '../service/hd210-list.interface';
 import { Hd210ListService } from '../service/hd210-list.service';
+import { ErrorMessageComponent } from '../../../../common/components/message/error-message.component';
+import { compareDate } from '../../../../common/utils/compareDate';
 
 @Component({
   selector: 'app-hd210-list',
@@ -24,11 +26,12 @@ import { Hd210ListService } from '../service/hd210-list.service';
     RouterModule,
     DayPickerComponent,
     VolunteerInformationComponent,
+    ErrorMessageComponent,
   ],
   templateUrl: './hd210-list.component.html',
   styleUrl: './hd210-list.component.scss',
 })
-export class Hd210ListComponent {
+export class Hd210ListComponent implements OnInit {
   // 搜尋條件表單
   form: FormGroup;
   // 分頁器當前頁數
@@ -39,6 +42,8 @@ export class Hd210ListComponent {
   basicTraining: boolean = true;
   // 特殊訓完成情況
   specialTraining: boolean = false;
+  // 檢查日期區間
+  checkDateRange: boolean = false;
   // 搜尋結果模擬資料
   searchResultData: SearchResultData[] = [
     {
@@ -81,6 +86,18 @@ export class Hd210ListComponent {
   // 搜尋
   search() {
     // !TODO:搜尋邏輯
+    // 如果日期有輸入，則檢查日期區間
+    if (
+      compareDate(
+        this.form.value.dateRange_start,
+        this.form.value.dateRange_end
+      )
+    ) {
+      this.checkDateRange = false;
+      return;
+    } else {
+      this.checkDateRange = true;
+    }
   }
 
   // 新增
@@ -107,5 +124,25 @@ export class Hd210ListComponent {
   // 當改變頁數時觸發
   onPageIndexChange(currentPage: number) {
     this.currentPage = currentPage;
+  }
+
+  // 當日期區間改變觸發
+  onDateRangeChange(date: { year: string; month: string; day: string }) {
+    // 如果日期有輸入，則檢查日期區間
+    if (date && this.checkDateRange) {
+      if (
+        compareDate(
+          this.form.value.dateRange_start,
+          this.form.value.dateRange_end
+        )
+      ) {
+        this.checkDateRange = false;
+        return;
+      } else {
+        this.checkDateRange = true;
+      }
+    } else {
+      this.checkDateRange = false;
+    }
   }
 }

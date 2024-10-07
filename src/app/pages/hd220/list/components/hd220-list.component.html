@@ -4,17 +4,24 @@
   <div class="grid-container">
     <div class="grid-columns-2 border-bottom-0">
       <div class="label">受獎日期區間</div>
-      <div>
+      <div class="column-Message">
         <app-dayPicker
+          (ngModelChange)="onAwardDateChange($event)"
           [startRange]="30"
           [endRange]="0"
           formControlName="awardDate_start"
         />
         <span class="mx-2">-</span>
         <app-dayPicker
+          (ngModelChange)="onAwardDateChange($event)"
           [startRange]="30"
           [endRange]="0"
           formControlName="awardDate_end"
+        />
+        <app-error-message
+          [isCustom]="true"
+          [condition]="checkDateRange"
+          [errorMessage]="'格式錯誤'"
         />
       </div>
       <div class="label">表揚單位</div>

@@ -21,10 +21,21 @@
       <div class="title">訓練內容</div>
       <div class="grid-columns-1">
         <div class="label">受訓日期</div>
-        <div>
-          <app-dayPicker formControlName="trainingDate_start" />
+        <div class="column-Message">
+          <app-dayPicker
+            (ngModelChange)="onTrainingDateChange($event)"
+            formControlName="trainingDate_start"
+          />
           <span class="mx-2">-</span>
-          <app-dayPicker formControlName="trainingDate_end" />
+          <app-dayPicker
+            (ngModelChange)="onTrainingDateChange($event)"
+            formControlName="trainingDate_end"
+          />
+          <app-error-message
+            [isCustom]="true"
+            [condition]="checkDateRange"
+            [errorMessage]="'格式錯誤'"
+          />
         </div>
       </div>
       <div class="grid-columns-1">

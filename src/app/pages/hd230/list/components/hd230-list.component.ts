@@ -12,6 +12,8 @@ import { VolunteerInformationComponent } from '../../../../common/components/vol
 import { VolunteerInformationService } from './../../../../common/components/volunteerInformation/service/volunteer-information.service';
 import { SearchResultData } from '../service/hd230-list.interface';
 import { Hd230ListService } from '../service/hd230-list.service';
+import { ErrorMessageComponent } from '../../../../common/components/message/error-message.component';
+import { compareDate } from '../../../../common/utils/compareDate';
 
 @Component({
   selector: 'app-hd230-list',
@@ -24,6 +26,7 @@ import { Hd230ListService } from '../service/hd230-list.service';
     RouterModule,
     DayPickerComponent,
     VolunteerInformationComponent,
+    ErrorMessageComponent,
   ],
   templateUrl: './hd230-list.component.html',
   styleUrl: './hd230-list.component.scss',
@@ -35,6 +38,8 @@ export class Hd230ListComponent implements OnInit {
   currentPage: number = 1;
   // 分頁器一頁多少筆數據
   pageSize: number = 10;
+  // 檢查日期區間
+  checkDateRange: boolean = false;
   // 服務內容select選項
   selectOptions_serviceContent: string[] = [
     '關懷訪視',
@@ -91,6 +96,19 @@ export class Hd230ListComponent implements OnInit {
   // 搜尋
   search() {
     // !TODO:搜尋邏輯
+    // !TODO: 搜尋邏輯
+    // 如果日期有輸入，則檢查日期區間
+    if (
+      compareDate(
+        this.form.value.serviceHoursRange_start,
+        this.form.value.serviceHoursRange_end
+      )
+    ) {
+      this.checkDateRange = false;
+      return;
+    } else {
+      this.checkDateRange = true;
+    }
   }
 
   // 檢視
@@ -119,5 +137,29 @@ export class Hd230ListComponent implements OnInit {
   // 當改變頁數時觸發
   onPageIndexChange(currentPage: number) {
     this.currentPage = currentPage;
+  }
+
+  // 當服務時期區間改變觸發
+  onServiceHoursRangeChange(date: {
+    year: string;
+    month: string;
+    day: string;
+  }) {
+    // 如果日期有輸入，則檢查日期區間
+    if (date && this.checkDateRange) {
+      if (
+        compareDate(
+          this.form.value.serviceHoursRange_start,
+          this.form.value.serviceHoursRange_end
+        )
+      ) {
+        this.checkDateRange = false;
+        return;
+      } else {
+        this.checkDateRange = true;
+      }
+    } else {
+      this.checkDateRange = false;
+    }
   }
 }

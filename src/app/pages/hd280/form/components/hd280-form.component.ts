@@ -10,10 +10,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { VolunteerInformationService } from '../../../../common/components/volunteerInformation/service/volunteer-information.service';
 import { VolunteerInformationComponent } from '../../../../common/components/volunteerInformation/components/volunteer-information.component';
-import { Hd280ListService } from '../../list/service/hd280-list.service';
 import { ErrorMessageComponent } from '../../../../common/components/message/error-message.component';
 import { Hd230ListService } from '../../../hd230/list/service/hd230-list.service';
 import { DateValidators } from '../../../../common/validator/date-validator';
+import { compareDate } from '../../../../common/utils/compareDate';
 
 @Component({
   selector: 'app-hd280-form',
@@ -34,6 +34,8 @@ import { DateValidators } from '../../../../common/validator/date-validator';
 export class Hd280FormComponent implements OnInit {
   // 搜尋條件表單
   form: FormGroup;
+  // 檢查日期區間
+  checkDateRange: boolean = false;
   // 服務內容select選項
   selectOptions_serviceContent: string[] = [
     '關懷訪視',
@@ -136,17 +138,63 @@ export class Hd280FormComponent implements OnInit {
 
   // 儲存
   save() {
+    // 如果日期有輸入，則檢查日期區間
+    if (
+      compareDate(
+        this.form.value.serviceDate_start,
+        this.form.value.serviceDate_end
+      )
+    ) {
+      this.checkDateRange = false;
+    } else {
+      this.checkDateRange = true;
+    }
+    if (!this.checkDateRange) {
     this.message.create('success', '儲存成功');
+    }
   }
 
   // 新增
   create() {
-    this.message.create('success', '新增成功');
-    this.closeTab('服務時數管理表');
+    // 如果日期有輸入，則檢查日期區間
+    if (
+      compareDate(
+        this.form.value.serviceDate_start,
+        this.form.value.serviceDate_end
+      )
+    ) {
+      this.checkDateRange = false;
+    } else {
+      this.checkDateRange = true;
+    }
+    if (!this.checkDateRange) {
+      this.message.create('success', '新增成功');
+      this.closeTab('服務時數管理表');
+    }
   }
 
   // 關閉當前的tab
   closeTab(identifier: string) {
     this.tabService.closeTab(identifier);
+  }
+
+  // 當服務日期區間改變觸發
+  onServiceDateChange(date: { year: string; month: string; day: string }) {
+    // 如果日期有輸入，則檢查日期區間
+    if (date && this.checkDateRange) {
+      if (
+        compareDate(
+          this.form.value.serviceDate_start,
+          this.form.value.serviceDate_end
+        )
+      ) {
+        this.checkDateRange = false;
+        return;
+      } else {
+        this.checkDateRange = true;
+      }
+    } else {
+      this.checkDateRange = false;
+    }
   }
 }

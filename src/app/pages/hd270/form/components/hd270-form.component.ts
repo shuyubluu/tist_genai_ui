@@ -10,6 +10,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Hd270ListService } from '../../list/service/hd270-list.service';
 import { ErrorMessageComponent } from '../../../../common/components/message/error-message.component';
+import { compareDate } from '../../../../common/utils/compareDate';
+import { DateValidators } from '../../../../common/validator/date-validator';
 
 @Component({
   selector: 'app-hd270-form',
@@ -29,6 +31,8 @@ import { ErrorMessageComponent } from '../../../../common/components/message/err
 export class Hd270FormComponent implements OnInit {
   // 搜尋條件表單
   form: FormGroup;
+  // 檢查日期區間
+  checkDateRange: boolean = false;
   // 保險公司select選項
   selectOptions_insuranceStatus: string[] = ['國泰', '富邦', '新光', '第一'];
   // 經費來源select選項
@@ -101,9 +105,9 @@ export class Hd270FormComponent implements OnInit {
       // 投保類別
       insuranceType: new FormControl('', [Validators.required]),
       // 投保日期區間_起始
-      insuranceDate_start: new FormControl('', [Validators.required]),
+      insuranceDate_start: new FormControl('', [DateValidators.dateValidator]),
       // 投保日期區間_結束
-      insuranceDate_end: new FormControl('', [Validators.required]),
+      insuranceDate_end: new FormControl('', [DateValidators.dateValidator]),
       // 保障內容
       coverageDetails: new FormControl('', [Validators.required]),
       // 投保費用
@@ -188,18 +192,64 @@ export class Hd270FormComponent implements OnInit {
 
   // 送出
   send() {
-    this.message.create('success', '送出成功');
-    this.closeTab('保險專區表');
+    // 如果日期有輸入，則檢查日期區間
+    if (
+      compareDate(
+        this.form.value.insuranceDate_start,
+        this.form.value.insuranceDate_end
+      )
+    ) {
+      this.checkDateRange = false;
+    } else {
+      this.checkDateRange = true;
+    }
+    if (!this.checkDateRange) {
+      this.message.create('success', '送出成功');
+      this.closeTab('保險專區表');
+    }
   }
 
   // 新增
   create() {
-    this.message.create('success', '新增成功');
-    this.closeTab('保險專區表');
+    // 如果日期有輸入，則檢查日期區間
+    if (
+      compareDate(
+        this.form.value.insuranceDate_start,
+        this.form.value.insuranceDate_end
+      )
+    ) {
+      this.checkDateRange = false;
+    } else {
+      this.checkDateRange = true;
+    }
+    if (!this.checkDateRange) {
+      this.message.create('success', '新增成功');
+      this.closeTab('保險專區表');
+    }
   }
 
   // 關閉當前的tab
   closeTab(identifier: string) {
     this.tabService.closeTab(identifier);
+  }
+
+  // 當投保日期起迄改變觸發
+  onInsuranceDateChange(date: { year: string; month: string; day: string }) {
+    // 如果日期有輸入，則檢查日期區間
+    if (date && this.checkDateRange) {
+      if (
+        compareDate(
+          this.form.value.insuranceDate_start,
+          this.form.value.insuranceDate_end
+        )
+      ) {
+        this.checkDateRange = false;
+        return;
+      } else {
+        this.checkDateRange = true;
+      }
+    } else {
+      this.checkDateRange = false;
+    }
   }
 }

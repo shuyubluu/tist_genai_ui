@@ -12,6 +12,8 @@ import { TabService } from '../../../../common/layouts/tab/tab.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { SearchResultData } from '../service/hd100-list.interface';
 import { CaseInformationService } from '../../../../common/components/caseInformation/service/case-information.service';
+import { compareDate } from '../../../../common/utils/compareDate';
+import { ErrorMessageComponent } from '../../../../common/components/message/error-message.component';
 
 @Component({
   selector: 'app-hd100-list',
@@ -24,6 +26,7 @@ import { CaseInformationService } from '../../../../common/components/caseInform
     RouterModule,
     DayPickerComponent,
     PaginationComponent,
+    ErrorMessageComponent,
   ],
   templateUrl: './hd100-list.component.html',
   styleUrl: './hd100-list.component.scss',
@@ -35,6 +38,8 @@ export class Hd100ListComponent implements OnInit {
   currentPage: number = 1;
   // 分頁器一頁多少筆數據
   pageSize: number = 10;
+  // 檢查日期區間
+  checkDateRange: boolean = false;
   // 搜尋結果模擬資料
   searchResultData: SearchResultData[] = [
     {
@@ -84,7 +89,7 @@ export class Hd100ListComponent implements OnInit {
       // 個案姓名
       caseName: new FormControl(''),
       // 開案日期_起始
-      caseOpeningDate_start: new FormControl(),
+      caseOpeningDate_start: new FormControl(''),
       // 開案日期_結束
       caseOpeningDate_end: new FormControl(''),
       // 個案分級
@@ -102,10 +107,21 @@ export class Hd100ListComponent implements OnInit {
   // 搜尋個案資料
   search() {
     // !TODO: 搜尋邏輯
-    console.log(this.form.value);
+    // 如果日期有輸入，則檢查日期區間
+    if (
+      compareDate(
+        this.form.value.caseOpeningDate_start,
+        this.form.value.caseOpeningDate_end
+      )
+    ) {
+      this.checkDateRange = false;
+      return;
+    } else {
+      this.checkDateRange = true;
+    }
   }
 
-  // 新增個案資料
+  // 新增個案資料87
   create() {
     this.router.navigate(['/hd110']);
     this.caseInformationService.isChoiceCase = false;
@@ -140,5 +156,25 @@ export class Hd100ListComponent implements OnInit {
   // 當改變頁數時觸發
   onPageIndexChange(currentPage: number) {
     this.currentPage = currentPage;
+  }
+
+  // 當開案日期區間改變觸發
+  onCaseOpeningDateChange(date: { year: string; month: string; day: string }) {
+    // 如果日期有輸入，則檢查日期區間
+    if (date && this.checkDateRange) {
+      if (
+        compareDate(
+          this.form.value.caseOpeningDate_start,
+          this.form.value.caseOpeningDate_end
+        )
+      ) {
+        this.checkDateRange = false;
+        return;
+      } else {
+        this.checkDateRange = true;
+      }
+    } else {
+      this.checkDateRange = false;
+    }
   }
 }

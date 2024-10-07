@@ -47,3 +47,10 @@ export interface ApprovalZoneUnsignedForms {
   formName: string;
   deadline: string;
 }
+
+export interface Announcement {
+  date: string;
+  subject: string;
+  unit: string;
+  create: string;
+}

@@ -1,6 +1,4 @@
-import { VolunteerData } from './../../../../common/components/volunteerInformation/service/volunteer-information.interface';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
 import { InputComponent } from '../../../../common/components/input/input.component';
 import { SelectComponent } from '../../../../common/components/select/select.component';
@@ -10,8 +8,9 @@ import { SharedModule } from '../../../../common/shared/shared.module';
 import { TabService } from '../../../../common/layouts/tab/tab.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { SearchResultData } from '../service/hd306-list.interface';
-import { of } from 'rxjs';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { ErrorMessageComponent } from '../../../../common/components/message/error-message.component';
+import { compareDate } from '../../../../common/utils/compareDate';
 
 @Component({
   selector: 'app-hd306-list',
@@ -23,6 +22,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
     SelectComponent,
     RouterModule,
     DayPickerComponent,
+    ErrorMessageComponent,
   ],
   templateUrl: './hd306-list.component.html',
   styleUrl: './hd306-list.component.scss',
@@ -30,6 +30,8 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 export class Hd306ListComponent implements OnInit {
   // 搜尋條件表單
   form: FormGroup;
+  // 檢查日期區間
+  checkDateRange: boolean = false;
   // 當前已選取的志工
   currentSelectedVolunteer: string[] = [];
   // 控制匯出modal是否顯示
@@ -154,6 +156,15 @@ export class Hd306ListComponent implements OnInit {
   // 搜尋
   search() {
     // !TODO:搜尋邏輯
+    // 如果日期有輸入，則檢查日期區間
+    if (
+      compareDate(this.form.value.joinDate_start, this.form.value.joinDate_end)
+    ) {
+      this.checkDateRange = false;
+      return;
+    } else {
+      this.checkDateRange = true;
+    }
   }
 
   // 打開匯出modal
@@ -205,5 +216,25 @@ export class Hd306ListComponent implements OnInit {
   // 當改變頁數時觸發
   onPageIndexChange(currentPage: number) {
     this.currentPage = currentPage;
+  }
+
+  // 當入隊日期區間改變觸發
+  onJoinDateChange(date: { year: string; month: string; day: string }) {
+    // 如果日期有輸入，則檢查日期區間
+    if (date && this.checkDateRange) {
+      if (
+        compareDate(
+          this.form.value.joinDate_start,
+          this.form.value.joinDate_end
+        )
+      ) {
+        this.checkDateRange = false;
+        return;
+      } else {
+        this.checkDateRange = true;
+      }
+    } else {
+      this.checkDateRange = false;
+    }
   }
 }

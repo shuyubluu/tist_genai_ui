@@ -4,17 +4,24 @@
   <div class="grid-container">
     <div class="grid-columns-2 border-bottom-0">
       <div class="label">查詢區間</div>
-      <div>
+      <div class="column-Message">
         <app-dayPicker
+          (ngModelChange)="onQueryTimeChange($event)"
           [startRange]="30"
           [endRange]="0"
           formControlName="queryStartTime"
         />
         <span class="mx-2">-</span>
         <app-dayPicker
+          (ngModelChange)="onQueryTimeChange($event)"
           [startRange]="30"
           [endRange]="0"
           formControlName="queryEndTime"
+        />
+        <app-error-message
+          [isCustom]="true"
+          [condition]="checkDateRange"
+          [errorMessage]="'格式錯誤'"
         />
       </div>
       <div class="label">訪視人員姓名</div>

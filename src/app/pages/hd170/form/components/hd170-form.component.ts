@@ -15,6 +15,7 @@ import { TaiwanCitySelectComponent } from '../../../../common/components/select/
 import { EmergencyContact } from '../service/hd170-form.interface';
 import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 import { Hd170ListService } from '../../list/service/hd170-list.service';
+import { DiagramService } from '../../../../../assets/diagram/service/diagram';
 
 @Component({
   selector: 'app-hd170-form',
@@ -82,6 +83,7 @@ export class Hd170FormComponent implements OnInit {
     private tabService: TabService, // 關閉tab的Service
     private message: NzMessageService, // 訊息
     public caseInformationService: CaseInformationService, // caseInformationService
+    public diagramService: DiagramService, // diagramService
     public hd170ListService: Hd170ListService // hd170ListService
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl

@@ -1,5 +1,4 @@
 import { Hd660ListService } from './../service/hd660-list.service';
-import { create } from 'domain';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
@@ -11,6 +10,8 @@ import { SharedModule } from '../../../../common/shared/shared.module';
 import { TabService } from '../../../../common/layouts/tab/tab.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { SearchResultData } from '../service/hd660-list.interface';
+import { ErrorMessageComponent } from '../../../../common/components/message/error-message.component';
+import { compareDate } from '../../../../common/utils/compareDate';
 
 @Component({
   selector: 'app-hd660-list',
@@ -22,6 +23,7 @@ import { SearchResultData } from '../service/hd660-list.interface';
     SelectComponent,
     RouterModule,
     DayPickerComponent,
+    ErrorMessageComponent,
   ],
   templateUrl: './hd660-list.component.html',
   styleUrl: './hd660-list.component.scss',
@@ -33,6 +35,8 @@ export class Hd660ListComponent implements OnInit {
   currentPage: number = 1;
   // 分頁器一頁多少筆數據
   pageSize: number = 10;
+  // 檢查日期區間
+  checkDateRange: boolean = false;
   // 發佈單位select選項
   selectOptions_publishingUnit: string[] = [
     '彭祖體驗長者導師志工隊',
@@ -117,6 +121,19 @@ export class Hd660ListComponent implements OnInit {
   // 搜尋
   search() {
     // !TODO:搜尋邏輯
+    // !TODO:搜尋邏輯
+    // 如果日期有輸入，則檢查日期區間
+    if (
+      compareDate(
+        this.form.value.publicationDate_start,
+        this.form.value.publicationDate_end
+      )
+    ) {
+      this.checkDateRange = false;
+      return;
+    } else {
+      this.checkDateRange = true;
+    }
   }
 
   // 新增
@@ -141,5 +158,25 @@ export class Hd660ListComponent implements OnInit {
   // 當改變頁數時觸發
   onPageIndexChange(currentPage: number) {
     this.currentPage = currentPage;
+  }
+
+  // 當發佈日期區間改變觸發
+  onPublicationDateChange(date: { year: string; month: string; day: string }) {
+    // 如果日期有輸入，則檢查日期區間
+    if (date && this.checkDateRange) {
+      if (
+        compareDate(
+          this.form.value.publicationDate_start,
+          this.form.value.publicationDate_end
+        )
+      ) {
+        this.checkDateRange = false;
+        return;
+      } else {
+        this.checkDateRange = true;
+      }
+    } else {
+      this.checkDateRange = false;
+    }
   }
 }

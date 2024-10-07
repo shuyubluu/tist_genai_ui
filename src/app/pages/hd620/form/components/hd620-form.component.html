@@ -2,12 +2,18 @@
   <div class="grid-container">
     <div class="grid-columns-1">
       <div class="label">角色名稱</div>
-      <div>
+      <div class="column-Message">
         <app-input
           [inputWidth]="'130px'"
           [maxLength]="30"
           formControlName="roleName"
         />
+        <app-error-message
+        [control]="form.get('roleName')"
+        [isTouched]="false"
+        errorKey="required"
+        errorMessage="必填"
+      />
       </div>
     </div>
     <div class="grid-columns-1">

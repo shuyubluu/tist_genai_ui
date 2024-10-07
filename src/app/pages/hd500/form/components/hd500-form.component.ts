@@ -29,6 +29,7 @@ import {
   TotalCaseSocialWelfareSubsidyAndSpecialIssues,
   TotalCaseSpecialIssues,
 } from '../service/hd500-form.interface';
+import { compareDate } from '../../../../common/utils/compareDate';
 
 @Component({
   selector: 'app-hd500-form',
@@ -48,6 +49,8 @@ import {
 export class Hd500FormComponent implements OnInit {
   // 搜尋條件表單
   form: FormGroup;
+  // 檢查日期區間
+  checkDateRange: boolean = false;
   // 查看單位select選項
   selectOptions_unit: string[] = ['全會', '服務處'];
   // 任職單位select選項
@@ -787,6 +790,19 @@ export class Hd500FormComponent implements OnInit {
   // 搜尋統計內容
   search() {
     // !TODO: 搜尋邏輯
+    // !TODO: 搜尋邏輯
+    // 如果日期有輸入，則檢查日期區間
+    if (
+      compareDate(
+        this.form.value.statisticsDate_start,
+        this.form.value.statisticsDate_end
+      )
+    ) {
+      this.checkDateRange = false;
+      return;
+    } else {
+      this.checkDateRange = true;
+    }
   }
 
   // 查看單位select選項變化時觸發
@@ -802,5 +818,25 @@ export class Hd500FormComponent implements OnInit {
   // 關閉當前的tab
   closeTab(identifier: string) {
     this.tabService.closeTab(identifier);
+  }
+
+  // 當統計日期區間改變觸發
+  onStatisticsDateChange(date: { year: string; month: string; day: string }) {
+    // 如果日期有輸入，則檢查日期區間
+    if (date && this.checkDateRange) {
+      if (
+        compareDate(
+          this.form.value.statisticsDate_start,
+          this.form.value.statisticsDate_end
+        )
+      ) {
+        this.checkDateRange = false;
+        return;
+      } else {
+        this.checkDateRange = true;
+      }
+    } else {
+      this.checkDateRange = false;
+    }
   }
 }

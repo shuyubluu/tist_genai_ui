@@ -23,6 +23,7 @@ import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 import { Hd200ListService } from '../../list/service/hd200-list.service';
 import { taiwanIdValidator } from '../../../../common/validator/taiwan-id-validator';
 import { DateValidators } from '../../../../common/validator/date-validator';
+import { AddressValidators } from '../../../../common/validator/address-validator';
 
 @Component({
   selector: 'app-hd200-form',
@@ -363,7 +364,7 @@ export class Hd200FormComponent implements OnInit {
       // 語言_其他
       languages_other: new FormControl(''),
       // 通訊地址
-      address_select: new FormControl('', [Validators.required]),
+      address_select: new FormControl('', [AddressValidators.addressValidator]),
       // 通訊地址
       address: new FormControl('', [Validators.required]),
       // 宗教信仰
@@ -433,6 +434,10 @@ export class Hd200FormComponent implements OnInit {
       // 志工權利義務告知聲明書
       volunteerRightsAndDutiesDeclaration: new FormControl(''),
     });
+  }
+
+  onselect(value: any) {
+    console.log(value);
   }
 
   ngOnInit(): void {

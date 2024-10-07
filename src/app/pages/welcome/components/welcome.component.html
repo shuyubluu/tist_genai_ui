@@ -47,638 +47,462 @@
   </div>
   <div class="mt-20"></div>
   <h5>個案管理</h5>
-  <form>
-    <div class="mt"></div>
-    <div class="table-container2">
-      <ng-container>
-        <table class="bordered-table2">
-          <thead>
-            <tr class="custom-header bold-text">
-              <th nzAlign="center">負責個案</th>
-              <th nzAlign="center">本月應完成</th>
-              <th nzAlign="center">逾期表單</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="custom-cell" nzAlign="center">
-                <div>{{ caseManagement_ResponsibleCaseData.length }} 筆</div>
+  <div class="managementArea">
+    <div>
+      <div class="managementArea_title">負責個案</div>
+      <div class="managementArea_content">
+        <div>
+          <div>{{ caseManagement_ResponsibleCaseData.length }} 筆</div>
+          <app-button
+            [buttonText]="'查看'"
+            (click)="showCaseManagement_ResponsibleCaseModal()"
+          />
+        </div>
+        <nz-modal
+          class="modal"
+          [(nzVisible)]="isCaseManagement_ResponsibleCaseVisible"
+          nzTitle="負責個案"
+          [nzOkText]="null"
+          [nzCancelText]="'關閉'"
+          (nzOnCancel)="closeCaseManagement_ResponsibleCaseModal()"
+        >
+          <ng-container *nzModalContent>
+            <div class="grid-columns-3">
+              <div>個案姓名</div>
+              <div>個案狀態</div>
+              <div>操作</div>
+            </div>
+            <div
+              class="grid-columns-3"
+              *ngFor="
+                let data of newCaseManagement_caseManagement_ResponsibleCaseData
+              "
+            >
+              <div>{{ data.caseName }}</div>
+              <div>{{ data.caseStatus }}</div>
+              <div>
                 <app-button
                   [buttonText]="'查看'"
-                  (click)="showCaseManagement_ResponsibleCaseModal()"
+                  (click)="viewCaseManagement_ResponsibleCaseData()"
                 />
-                <nz-modal
-                  class="modal"
-                  [(nzVisible)]="isCaseManagement_ResponsibleCaseVisible"
-                  nzTitle="負責個案"
-                  [nzOkText]="null"
-                  [nzCancelText]="'關閉'"
-                  (nzOnCancel)="closeCaseManagement_ResponsibleCaseModal()"
-                >
-                  <ng-container *nzModalContent>
-                    <div class="grid-columns-3">
-                      <div>個案姓名</div>
-                      <div>個案狀態</div>
-                      <div>操作</div>
-                    </div>
-                    <div
-                      class="grid-columns-3"
-                      *ngFor="
-                        let data of newCaseManagement_caseManagement_ResponsibleCaseData
-                      "
-                    >
-                      <div>{{ data.caseName }}</div>
-                      <div>{{ data.caseStatus }}</div>
-                      <div>
-                        <app-button
-                          [buttonText]="'查看'"
-                          (click)="viewCaseManagement_ResponsibleCaseData()"
-                        />
-                      </div>
-                    </div>
-                    <div class="mt-10"></div>
-                    <nz-pagination
-                      [nzPageIndex]="currentCaseManagement_ResponsibleCasePage"
-                      [nzPageSize]="pageSize"
-                      (nzPageIndexChange)="
-                        onCaseManagement_ResponsibleCasePageIndexChange($event)
-                      "
-                      [nzTotal]="caseManagement_ResponsibleCaseData.length"
-                    />
-                  </ng-container>
-                </nz-modal>
-              </td>
-              <td class="custom-cell" nzAlign="center">
-                <div>{{ caseManagement_MonthlyTargetData.length }} 筆</div>
-                <app-button
-                  [buttonText]="'查看'"
-                  (click)="showCaseManagement_MonthlyTargetModal()"
-                />
-                <nz-modal
-                  class="modal"
-                  [(nzVisible)]="isCaseManagement_MonthlyTargetVisible"
-                  nzTitle="本月應完成"
-                  [nzOkText]="null"
-                  [nzCancelText]="'關閉'"
-                  (nzOnCancel)="closeCaseManagement_MonthlyTargetModal()"
-                >
-                  <ng-container *nzModalContent>
-                    <div class="grid-columns-3">
-                      <div>個案姓名</div>
-                      <div>表單類型</div>
-                      <div>操作</div>
-                    </div>
-                    <div
-                      class="grid-columns-3"
-                      *ngFor="let data of newCaseManagement_MonthlyTargetData"
-                    >
-                      <div>{{ data.caseName }}</div>
-                      <div>{{ data.formType }}</div>
-                      <div>
-                        <app-button
-                          [buttonText]="'查看'"
-                          (click)="
-                            viewCaseManagement_MonthlyTargetData(data.formType)
-                          "
-                        />
-                      </div>
-                    </div>
-                    <div class="mt-10"></div>
-                    <nz-pagination
-                      [nzPageIndex]="currentCaseManagement_MonthlyTargetPage"
-                      [nzPageSize]="pageSize"
-                      (nzPageIndexChange)="
-                        onCaseManagement_MonthlyTargetPageIndexChange($event)
-                      "
-                      [nzTotal]="caseManagement_MonthlyTargetData.length"
-                    />
-                  </ng-container>
-                </nz-modal>
-              </td>
-              <td class="custom-cell" nzAlign="center">
-                <div>{{ caseManagement_OverdueFormsData.length }} 筆</div>
-                <app-button
-                  [buttonText]="'查看'"
-                  (click)="showCaseManagement_OverdueFormsModal()"
-                />
-                <nz-modal
-                  class="modal"
-                  [(nzVisible)]="isCaseManagement_OverdueFormsVisible"
-                  nzTitle="逾期表單"
-                  [nzOkText]="null"
-                  [nzCancelText]="'關閉'"
-                  (nzOnCancel)="closeCaseManagement_OverdueFormsModal()"
-                >
-                  <ng-container *nzModalContent>
-                    <div class="grid-columns-3">
-                      <div>個案姓名</div>
-                      <div>表單類型</div>
-                      <div>操作</div>
-                    </div>
-                    <div
-                      class="grid-columns-3"
-                      *ngFor="let data of newCaseManagement_OverdueFormsData"
-                    >
-                      <div>{{ data.caseName }}</div>
-                      <div>{{ data.formType }}</div>
-                      <div>
-                        <app-button
-                          [buttonText]="'查看'"
-                          (click)="
-                            viewCaseManagement_OverdueFormsData(data.formType)
-                          "
-                        />
-                      </div>
-                    </div>
-                    <div class="mt-10"></div>
-                    <nz-pagination
-                      [nzPageIndex]="currentCaseManagement_OverdueFormsPage"
-                      [nzPageSize]="pageSize"
-                      (nzPageIndexChange)="
-                        onCaseManagement_OverdueFormsPageIndexChange($event)
-                      "
-                      [nzTotal]="caseManagement_OverdueFormsData.length"
-                    />
-                  </ng-container>
-                </nz-modal>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </ng-container>
+              </div>
+            </div>
+            <div class="mt-10"></div>
+            <nz-pagination
+              [nzPageIndex]="currentCaseManagement_ResponsibleCasePage"
+              [nzPageSize]="pageSize"
+              (nzPageIndexChange)="
+                onCaseManagement_ResponsibleCasePageIndexChange($event)
+              "
+              [nzTotal]="caseManagement_ResponsibleCaseData.length"
+            />
+          </ng-container>
+        </nz-modal>
+      </div>
     </div>
-  </form>
+    <div>
+      <div class="managementArea_title">本月應完成</div>
+      <div class="managementArea_content">
+        <div>
+          <div>{{ caseManagement_MonthlyTargetData.length }} 筆</div>
+          <app-button
+            [buttonText]="'查看'"
+            (click)="showCaseManagement_MonthlyTargetModal()"
+          />
+          <nz-modal
+            class="modal"
+            [(nzVisible)]="isCaseManagement_MonthlyTargetVisible"
+            nzTitle="本月應完成"
+            [nzOkText]="null"
+            [nzCancelText]="'關閉'"
+            (nzOnCancel)="closeCaseManagement_MonthlyTargetModal()"
+          >
+            <ng-container *nzModalContent>
+              <div class="grid-columns-3">
+                <div>個案姓名</div>
+                <div>表單類型</div>
+                <div>操作</div>
+              </div>
+              <div
+                class="grid-columns-3"
+                *ngFor="let data of newCaseManagement_MonthlyTargetData"
+              >
+                <div>{{ data.caseName }}</div>
+                <div>{{ data.formType }}</div>
+                <div>
+                  <app-button
+                    [buttonText]="'查看'"
+                    (click)="
+                      viewCaseManagement_MonthlyTargetData(data.formType)
+                    "
+                  />
+                </div>
+              </div>
+              <div class="mt-10"></div>
+              <nz-pagination
+                [nzPageIndex]="currentCaseManagement_MonthlyTargetPage"
+                [nzPageSize]="pageSize"
+                (nzPageIndexChange)="
+                  onCaseManagement_MonthlyTargetPageIndexChange($event)
+                "
+                [nzTotal]="caseManagement_MonthlyTargetData.length"
+              />
+            </ng-container>
+          </nz-modal>
+        </div>
+        <nz-modal
+          class="modal"
+          [(nzVisible)]="isCaseManagement_ResponsibleCaseVisible"
+          nzTitle="負責個案"
+          [nzOkText]="null"
+          [nzCancelText]="'關閉'"
+          (nzOnCancel)="closeCaseManagement_ResponsibleCaseModal()"
+        >
+          <ng-container *nzModalContent>
+            <div class="grid-columns-3">
+              <div>個案姓名</div>
+              <div>個案狀態</div>
+              <div>操作</div>
+            </div>
+            <div
+              class="grid-columns-3"
+              *ngFor="
+                let data of newCaseManagement_caseManagement_ResponsibleCaseData
+              "
+            >
+              <div>{{ data.caseName }}</div>
+              <div>{{ data.caseStatus }}</div>
+              <div>
+                <app-button
+                  [buttonText]="'查看'"
+                  (click)="viewCaseManagement_ResponsibleCaseData()"
+                />
+              </div>
+            </div>
+            <div class="mt-10"></div>
+            <nz-pagination
+              [nzPageIndex]="currentCaseManagement_ResponsibleCasePage"
+              [nzPageSize]="pageSize"
+              (nzPageIndexChange)="
+                onCaseManagement_ResponsibleCasePageIndexChange($event)
+              "
+              [nzTotal]="caseManagement_ResponsibleCaseData.length"
+            />
+          </ng-container>
+        </nz-modal>
+      </div>
+    </div>
+    <div>
+      <div class="managementArea_title">逾期表單</div>
+      <div class="managementArea_content">
+        <div>
+          <div>{{ caseManagement_OverdueFormsData.length }} 筆</div>
+          <app-button
+            [buttonText]="'查看'"
+            (click)="showCaseManagement_OverdueFormsModal()"
+          />
+          <nz-modal
+            class="modal"
+            [(nzVisible)]="isCaseManagement_OverdueFormsVisible"
+            nzTitle="逾期表單"
+            [nzOkText]="null"
+            [nzCancelText]="'關閉'"
+            (nzOnCancel)="closeCaseManagement_OverdueFormsModal()"
+          >
+            <ng-container *nzModalContent>
+              <div class="grid-columns-3">
+                <div>個案姓名</div>
+                <div>表單類型</div>
+                <div>操作</div>
+              </div>
+              <div
+                class="grid-columns-3"
+                *ngFor="let data of newCaseManagement_OverdueFormsData"
+              >
+                <div>{{ data.caseName }}</div>
+                <div>{{ data.formType }}</div>
+                <div>
+                  <app-button
+                    [buttonText]="'查看'"
+                    (click)="viewCaseManagement_OverdueFormsData(data.formType)"
+                  />
+                </div>
+              </div>
+              <div class="mt-10"></div>
+              <nz-pagination
+                [nzPageIndex]="currentCaseManagement_OverdueFormsPage"
+                [nzPageSize]="pageSize"
+                (nzPageIndexChange)="
+                  onCaseManagement_OverdueFormsPageIndexChange($event)
+                "
+                [nzTotal]="caseManagement_OverdueFormsData.length"
+              />
+            </ng-container>
+          </nz-modal>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="mt-20"></div>
   <h5>志工管理</h5>
-  <form>
-    <div class="mt"></div>
-    <div class="table-container2">
-      <ng-container>
-        <table class="bordered-table2">
-          <thead>
-            <tr class="custom-header bold-text">
-              <th nzAlign="center">志工人數</th>
-              <th nzAlign="center">本月應完成</th>
-              <th nzAlign="center">逾期表單</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="custom-cell" nzAlign="center">
-                <div>
-                  {{ volunteerManagement_VolunteerCountData.length }} 筆
-                </div>
+  <div class="managementArea">
+    <div>
+      <div class="managementArea_title">志工人數</div>
+      <div class="managementArea_content">
+        <div>
+          <div>{{ volunteerManagement_VolunteerCountData.length }} 筆</div>
+          <app-button
+            [buttonText]="'查看'"
+            (click)="showVolunteerManagement_VolunteerCountModal()"
+          />
+        </div>
+        <nz-modal
+          class="modal"
+          [(nzVisible)]="isVolunteerManagement_VolunteerCountVisible"
+          nzTitle="志工人數"
+          [nzOkText]="null"
+          [nzCancelText]="'關閉'"
+          (nzOnCancel)="closeVolunteerManagement_VolunteerCountModal()"
+        >
+          <ng-container *nzModalContent>
+            <div class="grid-columns-3">
+              <div>個案姓名</div>
+              <div>個案狀態</div>
+              <div>操作</div>
+            </div>
+            <div
+              class="grid-columns-3"
+              *ngFor="let data of newVolunteerManagement_VolunteerCountData"
+            >
+              <div>{{ data.volunteerName }}</div>
+              <div>{{ data.volunteerStatus }}</div>
+              <div>
                 <app-button
                   [buttonText]="'查看'"
-                  (click)="showVolunteerManagement_VolunteerCountModal()"
+                  (click)="viewVolunteerManagement_VolunteerCountData()"
                 />
-                <nz-modal
-                  class="modal"
-                  [(nzVisible)]="isVolunteerManagement_VolunteerCountVisible"
-                  nzTitle="志工人數"
-                  [nzOkText]="null"
-                  [nzCancelText]="'關閉'"
-                  (nzOnCancel)="closeVolunteerManagement_VolunteerCountModal()"
-                >
-                  <ng-container *nzModalContent>
-                    <div class="grid-columns-3">
-                      <div>個案姓名</div>
-                      <div>個案狀態</div>
-                      <div>操作</div>
-                    </div>
-                    <div
-                      class="grid-columns-3"
-                      *ngFor="
-                        let data of newVolunteerManagement_VolunteerCountData
-                      "
-                    >
-                      <div>{{ data.volunteerName }}</div>
-                      <div>{{ data.volunteerStatus }}</div>
-                      <div>
-                        <app-button
-                          [buttonText]="'查看'"
-                          (click)="viewVolunteerManagement_VolunteerCountData()"
-                        />
-                      </div>
-                    </div>
-                    <div class="mt-10"></div>
-                    <nz-pagination
-                      [nzPageIndex]="
-                        currentVolunteerManagement_VolunteerCountPage
-                      "
-                      [nzPageSize]="pageSize"
-                      (nzPageIndexChange)="
-                        onVolunteerManagement_VolunteerCountPageIndexChange(
-                          $event
-                        )
-                      "
-                      [nzTotal]="volunteerManagement_VolunteerCountData.length"
-                    />
-                  </ng-container>
-                </nz-modal>
-              </td>
-              <td class="custom-cell" nzAlign="center">
-                <div>{{ volunteerManagement_MonthlyTargetData.length }} 筆</div>
-                <app-button
-                  [buttonText]="'查看'"
-                  (click)="showVolunteerManagement_MonthlyTargetModal()"
-                />
-                <nz-modal
-                  class="modal"
-                  [(nzVisible)]="isVolunteerManagement_MonthlyTargetVisible"
-                  nzTitle="本月應完成"
-                  [nzOkText]="null"
-                  [nzCancelText]="'關閉'"
-                  (nzOnCancel)="closeVolunteerManagement_MonthlyTargetModal()"
-                >
-                  <ng-container *nzModalContent>
-                    <div class="grid-columns-3">
-                      <div>個案姓名</div>
-                      <div>表單類型</div>
-                      <div>操作</div>
-                    </div>
-                    <div
-                      class="grid-columns-3"
-                      *ngFor="
-                        let data of newVolunteerManagement_MonthlyTargetData
-                      "
-                    >
-                      <div>{{ data.volunteerName }}</div>
-                      <div>{{ data.formType }}</div>
-                      <div>
-                        <app-button
-                          [buttonText]="'查看'"
-                          (click)="viewVolunteerManagement_MonthlyTargetData()"
-                        />
-                      </div>
-                    </div>
-                    <div class="mt-10"></div>
-                    <nz-pagination
-                      [nzPageIndex]="
-                        currentVolunteerManagement_MonthlyTargetPage
-                      "
-                      [nzPageSize]="pageSize"
-                      (nzPageIndexChange)="
-                        onVolunteerManagement_MonthlyTargetPageIndexChange(
-                          $event
-                        )
-                      "
-                      [nzTotal]="volunteerManagement_MonthlyTargetData.length"
-                    />
-                  </ng-container>
-                </nz-modal>
-              </td>
-              <td class="custom-cell" nzAlign="center">
-                <div>{{ volunteerManagement_OverdueFormsData.length }} 筆</div>
-                <app-button
-                  [buttonText]="'查看'"
-                  (click)="showVolunteerManagement_OverdueFormsModal()"
-                />
-                <nz-modal
-                  class="modal"
-                  [(nzVisible)]="isVolunteerManagement_OverdueFormsVisible"
-                  nzTitle="逾期表單"
-                  [nzOkText]="null"
-                  [nzCancelText]="'關閉'"
-                  (nzOnCancel)="closeVolunteerManagement_OverdueFormsModal()"
-                >
-                  <ng-container *nzModalContent>
-                    <div class="grid-columns-3">
-                      <div>個案姓名</div>
-                      <div>表單類型</div>
-                      <div>操作</div>
-                    </div>
-                    <div
-                      class="grid-columns-3"
-                      *ngFor="
-                        let data of newVolunteerManagement_OverdueFormsData
-                      "
-                    >
-                      <div>{{ data.volunteerName }}</div>
-                      <div>{{ data.formType }}</div>
-                      <div>
-                        <app-button
-                          [buttonText]="'查看'"
-                          (click)="
-                            viewVolunteerManagement_OverdueFormsModal(
-                              data.formType
-                            )
-                          "
-                        />
-                      </div>
-                    </div>
-                    <div class="mt-10"></div>
-                    <nz-pagination
-                      [nzPageIndex]="
-                        currentVolunteerManagement_OverdueFormsPage
-                      "
-                      [nzPageSize]="pageSize"
-                      (nzPageIndexChange)="
-                        onVolunteerManagement_OverdueFormsPageIndexChange(
-                          $event
-                        )
-                      "
-                      [nzTotal]="volunteerManagement_OverdueFormsData.length"
-                    />
-                  </ng-container>
-                </nz-modal>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </ng-container>
+              </div>
+            </div>
+            <div class="mt-10"></div>
+            <nz-pagination
+              [nzPageIndex]="currentVolunteerManagement_VolunteerCountPage"
+              [nzPageSize]="pageSize"
+              (nzPageIndexChange)="
+                onVolunteerManagement_VolunteerCountPageIndexChange($event)
+              "
+              [nzTotal]="volunteerManagement_VolunteerCountData.length"
+            />
+          </ng-container>
+        </nz-modal>
+      </div>
     </div>
-  </form>
+    <div>
+      <div class="managementArea_title">本月應完成</div>
+      <div class="managementArea_content">
+        <div>
+          <div>{{ volunteerManagement_MonthlyTargetData.length }} 筆</div>
+          <app-button
+            [buttonText]="'查看'"
+            (click)="showVolunteerManagement_MonthlyTargetModal()"
+          />
+          <nz-modal
+            class="modal"
+            [(nzVisible)]="isVolunteerManagement_MonthlyTargetVisible"
+            nzTitle="本月應完成"
+            [nzOkText]="null"
+            [nzCancelText]="'關閉'"
+            (nzOnCancel)="closeVolunteerManagement_MonthlyTargetModal()"
+          >
+            <ng-container *nzModalContent>
+              <div class="grid-columns-3">
+                <div>個案姓名</div>
+                <div>表單類型</div>
+                <div>操作</div>
+              </div>
+              <div
+                class="grid-columns-3"
+                *ngFor="let data of newVolunteerManagement_MonthlyTargetData"
+              >
+                <div>{{ data.volunteerName }}</div>
+                <div>{{ data.formType }}</div>
+                <div>
+                  <app-button
+                    [buttonText]="'查看'"
+                    (click)="viewVolunteerManagement_MonthlyTargetData()"
+                  />
+                </div>
+              </div>
+              <div class="mt-10"></div>
+              <nz-pagination
+                [nzPageIndex]="currentVolunteerManagement_MonthlyTargetPage"
+                [nzPageSize]="pageSize"
+                (nzPageIndexChange)="
+                  onVolunteerManagement_MonthlyTargetPageIndexChange($event)
+                "
+                [nzTotal]="volunteerManagement_MonthlyTargetData.length"
+              />
+            </ng-container>
+          </nz-modal>
+        </div>
+        <nz-modal
+          class="modal"
+          [(nzVisible)]="isCaseManagement_ResponsibleCaseVisible"
+          nzTitle="負責個案"
+          [nzOkText]="null"
+          [nzCancelText]="'關閉'"
+          (nzOnCancel)="closeCaseManagement_ResponsibleCaseModal()"
+        >
+          <ng-container *nzModalContent>
+            <div class="grid-columns-3">
+              <div>個案姓名</div>
+              <div>個案狀態</div>
+              <div>操作</div>
+            </div>
+            <div
+              class="grid-columns-3"
+              *ngFor="
+                let data of newCaseManagement_caseManagement_ResponsibleCaseData
+              "
+            >
+              <div>{{ data.caseName }}</div>
+              <div>{{ data.caseStatus }}</div>
+              <div>
+                <app-button
+                  [buttonText]="'查看'"
+                  (click)="viewCaseManagement_ResponsibleCaseData()"
+                />
+              </div>
+            </div>
+            <div class="mt-10"></div>
+            <nz-pagination
+              [nzPageIndex]="currentCaseManagement_ResponsibleCasePage"
+              [nzPageSize]="pageSize"
+              (nzPageIndexChange)="
+                onCaseManagement_ResponsibleCasePageIndexChange($event)
+              "
+              [nzTotal]="caseManagement_ResponsibleCaseData.length"
+            />
+          </ng-container>
+        </nz-modal>
+      </div>
+    </div>
+    <div>
+      <div class="managementArea_title">逾期表單</div>
+      <div class="managementArea_content">
+        <div>
+          <div>{{ volunteerManagement_OverdueFormsData.length }} 筆</div>
+          <app-button
+            [buttonText]="'查看'"
+            (click)="showVolunteerManagement_OverdueFormsModal()"
+          />
+          <nz-modal
+            class="modal"
+            [(nzVisible)]="isVolunteerManagement_OverdueFormsVisible"
+            nzTitle="逾期表單"
+            [nzOkText]="null"
+            [nzCancelText]="'關閉'"
+            (nzOnCancel)="closeVolunteerManagement_OverdueFormsModal()"
+          >
+            <ng-container *nzModalContent>
+              <div class="grid-columns-3">
+                <div>個案姓名</div>
+                <div>表單類型</div>
+                <div>操作</div>
+              </div>
+              <div
+                class="grid-columns-3"
+                *ngFor="let data of newVolunteerManagement_OverdueFormsData"
+              >
+                <div>{{ data.volunteerName }}</div>
+                <div>{{ data.formType }}</div>
+                <div>
+                  <app-button
+                    [buttonText]="'查看'"
+                    (click)="
+                      viewVolunteerManagement_OverdueFormsModal(data.formType)
+                    "
+                  />
+                </div>
+              </div>
+              <div class="mt-10"></div>
+              <nz-pagination
+                [nzPageIndex]="currentVolunteerManagement_OverdueFormsPage"
+                [nzPageSize]="pageSize"
+                (nzPageIndexChange)="
+                  onVolunteerManagement_OverdueFormsPageIndexChange($event)
+                "
+                [nzTotal]="volunteerManagement_OverdueFormsData.length"
+              />
+            </ng-container>
+          </nz-modal>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="mt-20"></div>
   <h5>簽核專區</h5>
-  <form>
-    <div class="mt"></div>
-    <div class="table-container2">
-      <ng-container>
-        <table class="bordered-table2">
-          <thead>
-            <tr class="custom-header3 bold-text">
-              <th nzAlign="center">待簽表單</th>
-              <th nzAlign="center">退件表單</th>
-              <th nzAlign="center">已送審表單</th>
-              <th nzAlign="center">已簽核表單</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="custom-cell" nzAlign="center">
-                <div>16 筆</div>
-                <app-button
-                  [buttonText]="'查看'"
-                  (click)="viewPendingForms()"
-                />
-                <!-- <nz-modal
-                  class="modal"
-                  [(nzVisible)]="isApprovalZone_SubmittedFormsVisible"
-                  nzTitle="本月應完成"
-                  [nzOkText]="null"
-                  [nzCancelText]="'關閉'"
-                  (nzOnCancel)="closeApprovalZone_SubmittedFormsModal()"
-                >
-                  <ng-container *nzModalContent>
-                    <div class="grid-columns-3">
-                      <div>表單名稱</div>
-                      <div>應完成日期</div>
-                      <div>操作</div>
-                    </div>
-                    <div
-                      class="grid-columns-3"
-                      *ngFor="let data of newApprovalZone_SubmittedFormsData"
-                    >
-                      <div>{{ data.formName }}</div>
-                      <div>{{ data.deadline }}</div>
-                      <div>
-                        <app-button [buttonText]="'查看'" />
-                      </div>
-                    </div>
-                    <div class="mt-10"></div>
-                    <nz-pagination
-                      [nzPageIndex]="currentApprovalZone_SubmittedFormsPage"
-                      [nzPageSize]="pageSize"
-                      (nzPageIndexChange)="
-                        onApprovalZone_SubmittedFormsPageIndexChange($event)
-                      "
-                      [nzTotal]="approvalZone_SubmittedFormsData.length"
-                    />
-                  </ng-container>
-                </nz-modal> -->
-              </td>
-              <td class="custom-cell" nzAlign="center">
-                <div>12 筆</div>
-                <app-button
-                  [buttonText]="'查看'"
-                  (click)="viewRejectedForms()"
-                />
-                <!-- <nz-modal
-                  class="modal"
-                  [(nzVisible)]="isApprovalZone_ApprovedByTeamLeadFormsVisible"
-                  nzTitle="本月應完成"
-                  [nzOkText]="null"
-                  [nzCancelText]="'關閉'"
-                  (nzOnCancel)="
-                    closeApprovalZone_ApprovedByTeamLeadFormsModal()
-                  "
-                >
-                  <ng-container *nzModalContent>
-                    <div class="grid-columns-3">
-                      <div>表單名稱</div>
-                      <div>應完成日期</div>
-                      <div>操作</div>
-                    </div>
-                    <div
-                      class="grid-columns-3"
-                      *ngFor="
-                        let data of newApprovalZone_ApprovedByTeamLeadFormsData
-                      "
-                    >
-                      <div>{{ data.formName }}</div>
-                      <div>{{ data.deadline }}</div>
-                      <div>
-                        <app-button [buttonText]="'查看'" />
-                      </div>
-                    </div>
-                    <div class="mt-10"></div>
-                    <nz-pagination
-                      [nzPageIndex]="
-                        currentApprovalZone_ApprovedByTeamLeadFormsPage
-                      "
-                      [nzPageSize]="pageSize"
-                      (nzPageIndexChange)="
-                        onApprovalZone_ApprovedByTeamLeadFormsPageIndexChange(
-                          $event
-                        )
-                      "
-                      [nzTotal]="
-                        approvalZone_ApprovedByTeamLeadFormsData.length
-                      "
-                    />
-                  </ng-container>
-                </nz-modal> -->
-              </td>
-              <td class="custom-cell" nzAlign="center">
-                <div>11 筆</div>
-                <app-button
-                  [buttonText]="'查看'"
-                  (click)="viewSubmittedForms()"
-                />
-                <!-- <nz-modal
-                  class="modal"
-                  [(nzVisible)]="isApprovalZone_RejectedFormsVisible"
-                  nzTitle="本月應完成"
-                  [nzOkText]="null"
-                  [nzCancelText]="'關閉'"
-                  (nzOnCancel)="closeApprovalZone_RejectedFormsModal()"
-                >
-                  <ng-container *nzModalContent>
-                    <div class="grid-columns-3">
-                      <div>表單名稱</div>
-                      <div>應完成日期</div>
-                      <div>操作</div>
-                    </div>
-                    <div
-                      class="grid-columns-3"
-                      *ngFor="let data of newApprovalZone_RejectedFormsData"
-                    >
-                      <div>{{ data.formName }}</div>
-                      <div>{{ data.deadline }}</div>
-                      <div>
-                        <app-button [buttonText]="'查看'" />
-                      </div>
-                    </div>
-                    <div class="mt-10"></div>
-                    <nz-pagination
-                      [nzPageIndex]="currentApprovalZone_RejectedFormsPage"
-                      [nzPageSize]="pageSize"
-                      (nzPageIndexChange)="
-                        onApprovalZone_RejectedFormsPageIndexChange($event)
-                      "
-                      [nzTotal]="approvalZone_RejectedFormsData.length"
-                    />
-                  </ng-container>
-                </nz-modal> -->
-              </td>
-              <td class="custom-cell" nzAlign="center">
-                <div>20 筆</div>
-                <app-button
-                  [buttonText]="'查看'"
-                  (click)="viewApprovedForms()"
-                />
-                <!-- <nz-modal
-                  class="modal"
-                  [(nzVisible)]="isApprovalZone_UnsignedFormsVisible"
-                  nzTitle="本月應完成"
-                  [nzOkText]="null"
-                  [nzCancelText]="'關閉'"
-                  (nzOnCancel)="closeApprovalZone_UnsignedFormsModal()"
-                >
-                  <ng-container *nzModalContent>
-                    <div class="grid-columns-3">
-                      <div>表單名稱</div>
-                      <div>應完成日期</div>
-                      <div>操作</div>
-                    </div>
-                    <div
-                      class="grid-columns-3"
-                      *ngFor="let data of newApprovalZone_UnsignedFormsData"
-                    >
-                      <div>{{ data.formName }}</div>
-                      <div>{{ data.deadline }}</div>
-                      <div>
-                        <app-button [buttonText]="'查看'" />
-                      </div>
-                    </div>
-                    <div class="mt-10"></div>
-                    <nz-pagination
-                      [nzPageIndex]="currentApprovalZone_UnsignedFormsPage"
-                      [nzPageSize]="pageSize"
-                      (nzPageIndexChange)="
-                        onApprovalZone_UnsignedFormsPageIndexChange($event)
-                      "
-                      [nzTotal]="approvalZone_UnsignedFormsData.length"
-                    />
-                  </ng-container>
-                </nz-modal> -->
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </ng-container>
+  <div class="approvalSectionArea">
+    <div>
+      <div class="approvalSection_title">待簽表單</div>
+      <div class="approvalSection_content">
+        <div>16 筆</div>
+        <app-button [buttonText]="'查看'" (click)="viewPendingForms()" />
+      </div>
     </div>
-  </form>
+    <div>
+      <div class="approvalSection_title">退件表單</div>
+      <div class="approvalSection_content">
+        <div>12 筆</div>
+        <app-button [buttonText]="'查看'" (click)="viewRejectedForms()" />
+      </div>
+    </div>
+    <div>
+      <div class="approvalSection_title">已送審表單</div>
+      <div class="approvalSection_content">
+        <div>11 筆</div>
+        <app-button [buttonText]="'查看'" (click)="viewSubmittedForms()" />
+      </div>
+    </div>
+    <div>
+      <div class="approvalSection_title">已簽核表單</div>
+      <div class="approvalSection_content">
+        <div>20 筆</div>
+        <app-button [buttonText]="'查看'" (click)="viewApprovedForms()" />
+      </div>
+    </div>
+  </div>
   <div class="mt-20"></div>
   <h5>最新公告</h5>
-  <form>
-    <div class="mt"></div>
-    <div class="table-container">
-      <ng-container>
-        <table class="bordered-table">
-          <thead>
-            <tr class="custom-header2 bold-text">
-              <th class="tr-cell-20" nzAlign="center">日期</th>
-              <th class="tr-cell-70" nzAlign="center">主旨</th>
-              <th class="tr-cell-20" nzAlign="center">單位</th>
-              <th class="tr-cell-20" nzAlign="center">建立者</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let item of items_2; let i = index">
-              <td class="td-cell-20 custom-cell" nzAlign="center">
-                {{ item.date }}
-              </td>
-              <td class="td-cell-80 custom-cell">
-                <a (click)="openModal('主旨標題', item.info, '')">{{
-                  item.info
-                }}</a>
-              </td>
-              <td class="td-cell-20 custom-cell" nzAlign="center">
-                {{ item.unit }}
-              </td>
-              <td class="td-cell-20 custom-cell" nzAlign="center">
-                {{ item.create }}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </ng-container>
+  <div class="latestAnnouncementArea">
+    <div class="latestAnnouncementArea_grid latestAnnouncementArea_title">
+      <div>日期</div>
+      <div>主旨</div>
+      <div>單位</div>
+      <div>建立者</div>
     </div>
-  </form>
+    <div
+      class="latestAnnouncementArea_grid"
+      *ngFor="let content of newAnnouncement; let i = index"
+      [ngClass]="{
+        'even-row': i % 2 === 1,
+        'odd-row': i % 2 !== 1
+      }"
+    >
+      <div>{{ content.date }}</div>
+      <div>
+        <a class="latestAnnouncementArea_subject" (click)="openModal('主旨標題', content.subject, '')">{{
+          content.subject
+        }}</a>
+      </div>
+      <div>{{ content.unit }}</div>
+      <div>{{ content.create }}</div>
+    </div>
+  </div>
+  <div class="mt-10"></div>
+  <nz-pagination
+    [nzPageIndex]="currentPage"
+    [nzPageSize]="pageSize"
+    (nzPageIndexChange)="onPageIndexChange($event)"
+    [nzTotal]="announcement.length"
+  />
 </div>
-
-<ng-template #contentTemplate>
-  <form>
-    <div class="mt"></div>
-    <ng-container>
-      <table class="bordered-table">
-        <thead>
-          <tr class="custom-header bold-text">
-            <th class="tr-cell-20" nzAlign="center">
-              <input type="checkbox" /> 選取
-            </th>
-            <th class="tr-cell-60" nzAlign="center">內容</th>
-            <th class="tr-cell-20" nzAlign="center">建立者</th>
-            <th class="tr-cell-20" nzAlign="center">時間</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="td-cell-20 custom-cell" nzAlign="center">
-              <input type="checkbox" />
-            </td>
-            <td class="td-cell-70 custom-cell">
-              113/6/18 加班補休到期，核銷加班費。
-            </td>
-            <td class="td-cell-20 custom-cell" nzAlign="center">王小明</td>
-            <td class="td-cell-20 custom-cell" nzAlign="center">
-              113/6/18 08:30:00
-            </td>
-          </tr>
-          <tr>
-            <td class="td-cell-20 custom-cell" nzAlign="center">
-              <input type="checkbox" />
-            </td>
-            <td class="td-cell-70 custom-cell">
-              112/12/25 街友王小明的審核期限即將到期。
-            </td>
-            <td class="td-cell-20 custom-cell" nzAlign="center">王大明</td>
-            <td class="td-cell-20 custom-cell" nzAlign="center">
-              112/12/25 08:30:00
-            </td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr>
-            <th colSpan="5">
-              <app-button [buttonText]="'同意'" />
-              <app-button [buttonText]="'退回'" />
-            </th>
-          </tr>
-        </tfoot>
-      </table>
-    </ng-container>
-  </form>
-</ng-template>

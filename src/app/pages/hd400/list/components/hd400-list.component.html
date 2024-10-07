@@ -1,18 +1,25 @@
 <form [formGroup]="form">
   <div class="grid-container">
     <div class="grid-columns-1">
-      <div class="label">申請日期</div>
-      <div>
+      <div class="label">申請日期區間</div>
+      <div class="column-Message">
         <app-dayPicker
+          (ngModelChange)="onApplicationDateChange($event)"
           [startRange]="30"
           [endRange]="0"
           formControlName="applicationDate_start"
         />
         <span class="mx-2">-</span>
         <app-dayPicker
+          (ngModelChange)="onApplicationDateChange($event)"
           [startRange]="30"
           [endRange]="0"
           formControlName="applicationDate_end"
+        />
+        <app-error-message
+          [isCustom]="true"
+          [condition]="checkDateRange"
+          [errorMessage]="'格式錯誤'"
         />
       </div>
     </div>

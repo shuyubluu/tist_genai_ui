@@ -1053,7 +1053,7 @@ export class Hd120FormComponent implements OnInit {
   }
   // 同住者選項改變
   cohabitantsChange(checkGroup: string[]) {
-    this.form.get('livingEnvironment')?.setValue(checkGroup);
+    this.form.get('cohabitants')?.setValue(checkGroup);
     // 如果勾選了無將禁用其他選項
     // 勾取其他選項則禁用無
     if (checkGroup.includes('1')) {

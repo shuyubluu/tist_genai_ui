@@ -14,6 +14,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { VolunteerInformationComponent } from '../../../../common/components/volunteerInformation/components/volunteer-information.component';
 import { VolunteerInformationService } from './../../../../common/components/volunteerInformation/service/volunteer-information.service';
 import { DateValidators } from '../../../../common/validator/date-validator';
+import { compareDate } from '../../../../common/utils/compareDate';
 
 @Component({
   selector: 'app-hd210-form',
@@ -35,6 +36,8 @@ import { DateValidators } from '../../../../common/validator/date-validator';
 export class Hd210FormComponent implements OnInit {
   // 搜尋條件表單
   form: FormGroup;
+  // 檢查日期區間
+  checkDateRange: boolean = false;
   // 訓練單位select選項
   selectOptions_trainingUnit: string[] = ['外單位', '本單位'];
   // 訓練課程select選項
@@ -133,12 +136,45 @@ export class Hd210FormComponent implements OnInit {
 
   // 新增教育訓練表
   create() {
-    this.message.create('success', '新增成功');
-    this.closeTab('教育訓練表');
+    // 如果日期有輸入，則檢查日期區間
+    if (
+      compareDate(
+        this.form.value.trainingDate_start,
+        this.form.value.trainingDate_end
+      )
+    ) {
+      this.checkDateRange = false;
+    } else {
+      this.checkDateRange = true;
+    }
+    if (!this.checkDateRange) {
+      this.message.create('success', '新增成功');
+      this.closeTab('教育訓練表');
+    }
   }
 
   // 關閉教育訓練表
   closeTab(identifier: string) {
     this.tabService.closeTab(identifier);
+  }
+
+  // 當受訓日期區間改變觸發
+  onTrainingDateChange(date: { year: string; month: string; day: string }) {
+    // 如果日期有輸入，則檢查日期區間
+    if (date && this.checkDateRange) {
+      if (
+        compareDate(
+          this.form.value.trainingDate_start,
+          this.form.value.trainingDate_end
+        )
+      ) {
+        this.checkDateRange = false;
+        return;
+      } else {
+        this.checkDateRange = true;
+      }
+    } else {
+      this.checkDateRange = false;
+    }
   }
 }

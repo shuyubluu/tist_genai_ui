@@ -36,6 +36,7 @@ hd500ListService.currentStatisticsCode !== 'C3'){
       <div class="label">統計日期區間</div>
       <div class="column-Message">
         <app-dayPicker
+          (ngModelChange)="onStatisticsDateChange($event)"
           [startRange]="30"
           [endRange]="0"
           formControlName="statisticsDate_start"
@@ -48,6 +49,7 @@ hd500ListService.currentStatisticsCode !== 'C3'){
         />
         <span class="mx-2">-</span>
         <app-dayPicker
+          (ngModelChange)="onStatisticsDateChange($event)"
           [startRange]="30"
           [endRange]="0"
           formControlName="statisticsDate_end"
@@ -57,6 +59,11 @@ hd500ListService.currentStatisticsCode !== 'C3'){
           [isTouched]="false"
           errorKey="invalidDate"
           errorMessage="必選"
+        />
+        <app-error-message
+          [isCustom]="true"
+          [condition]="checkDateRange"
+          [errorMessage]="'格式錯誤'"
         />
       </div>
     </div>

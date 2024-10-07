@@ -176,20 +176,13 @@
           [maxLength]="30"
           formControlName="registeredAddress"
         />
-        <!-- !TODO -->
-        <!-- <nz-checkbox-wrapper
-              style="width: 100%"
-              (nzOnChange)="isSameCommunicationAddressChange($event)"
-            >
-              <label nz-checkbox [nzDisabled]="isDisableReligiousAffiliationOthers || hd100ListService.isView" nzValue="1">同通訊地址</label>
-            </nz-checkbox-wrapper> -->
       </div>
     </div>
     <div class="grid-columns-2">
       <div class="label">教育程度</div>
       <div class="column-Message">
         <app-select
-          [selectWidth]="'100px'"
+          [selectWidth]="'140px'"
           [options]="selectOptions_educationLevel"
           [defaultPlaceHolder]="false"
           formControlName="educationLevel"
@@ -1153,21 +1146,19 @@
                 nzValue="9"
                 >社會福利補助</label
               >
-              <label>
-                <app-select
-                  [selectWidth]="'175px'"
-                  [defaultPlaceHolder]="false"
-                  [options]="selectOptions_socialWelfareAssistance"
-                  formControlName="socialWelfareAssistance"
-                />
-                <app-input
-                  [inputWidth]="'90px'"
-                  [placeholder]="'輸入金額'"
-                  [type]="'number'"
-                  [maxLength]="8"
-                  formControlName="socialWelfareAssistance_input"
-                />
-              </label>
+              <app-select
+                [selectWidth]="'200px'"
+                [defaultPlaceHolder]="false"
+                [options]="selectOptions_socialWelfareAssistance"
+                formControlName="socialWelfareAssistance"
+              />
+              <app-input
+                [inputWidth]="'90px'"
+                [placeholder]="'輸入金額'"
+                [type]="'number'"
+                [maxLength]="8"
+                formControlName="socialWelfareAssistance_input"
+              />
             </div>
             <div class="my-1" nz-col>
               <label
@@ -1206,7 +1197,7 @@
                 [control]="form.get('socialWelfareAssistance')"
                 [isTouched]="false"
                 errorKey="required"
-                errorMessage="社會福利補助擇一"
+                errorMessage="必選"
               />
             </div>
           </div>
@@ -1761,7 +1752,7 @@
       <div class="label">住屋種類</div>
       <div class="column-Message">
         <app-select
-          [selectWidth]="'100px'"
+          [selectWidth]="'120px'"
           [defaultPlaceHolder]="false"
           [options]="selectOptions_housingType"
           formControlName="housingType"
@@ -1776,7 +1767,7 @@
       <div class="label">住屋所有權</div>
       <div class="column-Message">
         <app-select
-          [selectWidth]="'90px'"
+          [selectWidth]="'100px'"
           [defaultPlaceHolder]="false"
           [options]="selectOptions_housingOwnership"
           formControlName="housingOwnership"
@@ -2208,7 +2199,7 @@
       <div class="label">個資同意書</div>
       <div class="column-Message">
         <app-select
-          [selectWidth]="'90px'"
+          [selectWidth]="'100px'"
           [defaultPlaceHolder]="false"
           [options]="selectOptions_includeHasNotConfirmed"
           formControlName="personalDataConsentForm"
@@ -2223,7 +2214,7 @@
       <div class="label">肖像權同意書</div>
       <div class="column-Message">
         <app-select
-          [selectWidth]="'90px'"
+          [selectWidth]="'100px'"
           [defaultPlaceHolder]="false"
           [options]="selectOptions_includeHasNotConfirmed"
           formControlName="imageRightsConsentForm"

@@ -1,11 +1,12 @@
 import { WelcomeService } from './../service/welcome.service';
 import { Router } from '@angular/router';
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SharedModule } from '../../../common/shared/shared.module';
 import { ButtonComponent } from '../../../common/components/button/button.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../../../common/components/modal/modal.component';
 import {
+  Announcement,
   CaseManagementMonthlyTarget,
   CaseManagementOverdueForms,
   CaseManagementResponsibleCase,
@@ -22,17 +23,28 @@ import {
   imports: [SharedModule, ButtonComponent],
 })
 export class WelcomeComponent implements OnInit {
-  @ViewChild('contentTemplate', { static: true })
-  contentTemplate!: TemplateRef<any>;
-
-  items_2: any[] = [];
-  items_3: any[] = [];
-  items_4: any[] = [];
-  items_5: any[] = [];
-  items_6: any[] = [];
-
   // 分頁器一頁多少筆數據
   pageSize: number = 5;
+  // 分頁器當前頁數
+  currentPage: number = 1;
+  // 分頁器切割後的資料
+  get newAnnouncement(): Announcement[] {
+    return this.announcement.slice(
+      (this.currentPage - 1) * this.pageSize,
+      this.currentPage * this.pageSize
+    );
+  }
+
+  // 最新公告模擬資料
+  announcement: Announcement[] = [
+    {
+      date: '113/6/20',
+      subject:
+        '【公告】這是測試公告。測試佈局和樣式效果。我們需要確保文字能正確換行，並且在不同裝置上都能正常顯示。這個公告的目的是驗證文字長度對頁面佈局的影響。',
+      unit: '資訊室',
+      create: '王小明',
+    },
+  ];
 
   // 個案管理
   // 1.負責個案
@@ -189,109 +201,11 @@ export class WelcomeComponent implements OnInit {
     );
   }
 
-  // // 簽核專區
-  // // 1.已送審表單
-  // // 控制已送審表單modal
-  // isApprovalZone_SubmittedFormsVisible = false;
-  // // 已送審表單分頁器當前頁數
-  // currentApprovalZone_SubmittedFormsPage: number = 1;
-  // // 已送審表單模擬資料
-  // approvalZone_SubmittedFormsData: ApprovalZoneSubmittedForms[] = [
-  //   {
-  //     formName: '個案初評表',
-  //     deadline: '113/02/02',
-  //   },
-  // ];
-  // // 分頁器切割後的已送審表單資料
-  // get newApprovalZone_SubmittedFormsData(): ApprovalZoneSubmittedForms[] {
-  //   return this.approvalZone_SubmittedFormsData.slice(
-  //     (this.currentApprovalZone_SubmittedFormsPage - 1) * this.pageSize,
-  //     this.currentApprovalZone_SubmittedFormsPage * this.pageSize
-  //   );
-  // }
-
-  // // 2.組長已簽核表單
-  // // 控制組長已簽核表單modal
-  // isApprovalZone_ApprovedByTeamLeadFormsVisible = false;
-  // // 組長已簽核表單分頁器當前頁數
-  // currentApprovalZone_ApprovedByTeamLeadFormsPage: number = 1;
-  // // 組長已簽核表單模擬資料
-  // approvalZone_ApprovedByTeamLeadFormsData: ApprovalZoneApprovedByTeamLeadForms[] =
-  //   [
-  //     {
-  //       formName: '複評表',
-  //       deadline: '113/05/02',
-  //     },
-  //   ];
-  // // 分頁器切割後的組長已簽核表單資料
-  // get newApprovalZone_ApprovedByTeamLeadFormsData(): ApprovalZoneApprovedByTeamLeadForms[] {
-  //   return this.approvalZone_ApprovedByTeamLeadFormsData.slice(
-  //     (this.currentApprovalZone_ApprovedByTeamLeadFormsPage - 1) *
-  //       this.pageSize,
-  //     this.currentApprovalZone_ApprovedByTeamLeadFormsPage * this.pageSize
-  //   );
-  // }
-
-  // // 3.退件表單
-  // // 控制組長退件表單modal
-  // isApprovalZone_RejectedFormsVisible = false;
-  // // 組長退件表單分頁器當前頁數
-  // currentApprovalZone_RejectedFormsPage: number = 1;
-  // // 組長退件表單模擬資料
-  // approvalZone_RejectedFormsData: ApprovalZoneRejectedForms[] = [
-  //   {
-  //     formName: '個案訪視紀錄表',
-  //     deadline: '113/03/02',
-  //   },
-  // ];
-  // // 分頁器切割後的組長退件表單資料
-  // get newApprovalZone_RejectedFormsData(): ApprovalZoneRejectedForms[] {
-  //   return this.approvalZone_RejectedFormsData.slice(
-  //     (this.currentApprovalZone_RejectedFormsPage - 1) * this.pageSize,
-  //     this.currentApprovalZone_RejectedFormsPage * this.pageSize
-  //   );
-  // }
-
-  // // 4.未簽核表單
-  // // 控制組長退件表單modal
-  // isApprovalZone_UnsignedFormsVisible = false;
-  // // 組長退件表單分頁器當前頁數
-  // currentApprovalZone_UnsignedFormsPage: number = 1;
-  // // 組長退件表單模擬資料
-  // approvalZone_UnsignedFormsData: ApprovalZoneUnsignedForms[] = [
-  //   {
-  //     formName: '個案訪視紀錄表',
-  //     deadline: '113/03/02',
-  //   },
-  // ];
-  // // 分頁器切割後的組長退件表單資料
-  // get newApprovalZone_UnsignedFormsData(): ApprovalZoneUnsignedForms[] {
-  //   return this.approvalZone_UnsignedFormsData.slice(
-  //     (this.currentApprovalZone_UnsignedFormsPage - 1) * this.pageSize,
-  //     this.currentApprovalZone_UnsignedFormsPage * this.pageSize
-  //   );
-  // }
-
   constructor(
     public dialog: MatDialog,
     private router: Router, // 路由
     private welcomeService: WelcomeService // welcomeService
-  ) {
-    // Initialize items_1 and items_2 arrays with mock data
-
-    const originalData_2 = {
-      date: '113/6/20',
-      info: '【公告】這是測試公告。測試佈局和樣式效果。我們需要確保文字能正確換行，並且在不同裝置上都能正常顯示。這個公告的目的是驗證文字長度對頁面佈局的影響。',
-      attach: '無',
-      unit: '資訊室',
-      create: '王小明',
-    };
-
-    for (let i = 0; i < 5; i++) {
-      const newData = { ...originalData_2 };
-      this.items_2.push(newData);
-    }
-  }
+  ) {}
 
   ngOnInit() {
     // 個案管理
@@ -334,31 +248,10 @@ export class WelcomeComponent implements OnInit {
       );
     }
 
-    // // 簽核專區
-    // // 生成多筆已送審表單模擬資料
-    // for (let i = 0; i < 10; i++) {
-    //   this.approvalZone_SubmittedFormsData.push(
-    //     this.approvalZone_SubmittedFormsData[i]
-    //   );
-    // }
-    // // 生成多筆組長已簽核表單模擬資料
-    // for (let i = 0; i < 15; i++) {
-    //   this.approvalZone_ApprovedByTeamLeadFormsData.push(
-    //     this.approvalZone_ApprovedByTeamLeadFormsData[i]
-    //   );
-    // }
-    // // 生成多筆退件表單模擬資料
-    // for (let i = 0; i < 13; i++) {
-    //   this.approvalZone_RejectedFormsData.push(
-    //     this.approvalZone_RejectedFormsData[i]
-    //   );
-    // }
-    // // 生成多筆未簽核表單模擬資料
-    // for (let i = 0; i < 18; i++) {
-    //   this.approvalZone_UnsignedFormsData.push(
-    //     this.approvalZone_UnsignedFormsData[i]
-    //   );
-    // }
+    // 生成多筆最新公告模擬資料
+    for (let i = 0; i < 12; i++) {
+      this.announcement.push(this.announcement[i]);
+    }
   }
 
   // 個案管理
@@ -480,79 +373,6 @@ export class WelcomeComponent implements OnInit {
     if (type === '為期改善') this.router.navigate(['/hd250']);
   }
 
-  // // 簽核專區
-  // // 1.已送審表單
-  // // 顯示已送審表單modal
-  // showApprovalZone_SubmittedFormsModal(): void {
-  //   this.isApprovalZone_SubmittedFormsVisible = true;
-  // }
-  // // 當已送審表單改變頁數時觸發
-  // onApprovalZone_SubmittedFormsPageIndexChange(currentPage: number) {
-  //   this.currentApprovalZone_SubmittedFormsPage = currentPage;
-  // }
-  // // 關閉已送審表單modal
-  // closeApprovalZone_SubmittedFormsModal(): void {
-  //   this.isApprovalZone_SubmittedFormsVisible = false;
-  // }
-  // // 查看單項已送審表單
-  // viewApprovalZone_SubmittedFormsData() {
-  //   // !TODO:跳轉表單邏輯
-  // }
-
-  // // 2.組長已簽核表單
-  // // 顯示組長已簽核表單modal
-  // showApprovalZone_ApprovedByTeamLeadFormsModal(): void {
-  //   this.isApprovalZone_ApprovedByTeamLeadFormsVisible = true;
-  // }
-  // // 當組長已簽核表單改變頁數時觸發
-  // onApprovalZone_ApprovedByTeamLeadFormsPageIndexChange(currentPage: number) {
-  //   this.currentApprovalZone_ApprovedByTeamLeadFormsPage = currentPage;
-  // }
-  // // 關閉組長已簽核表單modal
-  // closeApprovalZone_ApprovedByTeamLeadFormsModal(): void {
-  //   this.isApprovalZone_ApprovedByTeamLeadFormsVisible = false;
-  // }
-  // // 查看單項組長已簽核表單
-  // viewApprovalZone_ApprovedByTeamLeadFormsData() {
-  //   // !TODO:跳轉表單邏輯
-  // }
-
-  // // 3.退件表單
-  // // 顯示退件表單modal
-  // showApprovalZone_RejectedFormsModal(): void {
-  //   this.isApprovalZone_RejectedFormsVisible = true;
-  // }
-  // // 當退件表單改變頁數時觸發
-  // onApprovalZone_RejectedFormsPageIndexChange(currentPage: number) {
-  //   this.currentApprovalZone_RejectedFormsPage = currentPage;
-  // }
-  // // 關閉退件表單modal
-  // closeApprovalZone_RejectedFormsModal(): void {
-  //   this.isApprovalZone_RejectedFormsVisible = false;
-  // }
-  // // 查看單項退件表單
-  // viewApprovalZone_RejectedFormsData() {
-  //   // !TODO:跳轉表單邏輯
-  // }
-
-  // // 4.未簽核表單
-  // // 顯示未簽核表單modal
-  // showApprovalZone_UnsignedFormsModal(): void {
-  //   this.isApprovalZone_UnsignedFormsVisible = true;
-  // }
-  // // 當未簽核表單改變頁數時觸發
-  // onApprovalZone_UnsignedFormsPageIndexChange(currentPage: number) {
-  //   this.currentApprovalZone_UnsignedFormsPage = currentPage;
-  // }
-  // // 關閉未簽核表單modal
-  // closeApprovalZone_UnsignedFormsModal(): void {
-  //   this.isApprovalZone_UnsignedFormsVisible = false;
-  // }
-  // // 查看單項未簽核表單
-  // viewApprovalZone_UnsignedFormsData() {
-  //   // !TODO:跳轉表單邏輯
-  // }
-
   // 查看待簽表單
   viewPendingForms() {
     this.router.navigate(['/hd400']);
@@ -596,7 +416,11 @@ export class WelcomeComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');
-      // Handle any actions after dialog closes if needed
     });
+  }
+
+  // 當改變頁數時觸發
+  onPageIndexChange(currentPage: number) {
+    this.currentPage = currentPage;
   }
 }

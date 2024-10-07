@@ -91,18 +91,25 @@
     <div class="grid-columns-1">
       <div class="label">投保日期起迄</div>
       <div class="column-Message">
-        <app-dayPicker formControlName="insuranceDate_start" />
+        <app-dayPicker (ngModelChange)="onInsuranceDateChange($event)" formControlName="insuranceDate_start" />
+        <app-error-message
+          [control]="form.get('insuranceDate_start')"
+          [isTouched]="false"
+          errorKey="invalidDate"
+          errorMessage="必選"
+        />
         <span class="mx-2">-</span>
-        <app-dayPicker formControlName="insuranceDate_end" />
+        <app-dayPicker (ngModelChange)="onInsuranceDateChange($event)" formControlName="insuranceDate_end" />
+        <app-error-message
+          [control]="form.get('insuranceDate_end')"
+          [isTouched]="false"
+          errorKey="invalidDate"
+          errorMessage="必選"
+        />
         <app-error-message
           [isCustom]="true"
-          [condition]="
-            form.get('insuranceDate_start')?.value === '' ||
-            form.get('insuranceDate_end')?.value === ''
-          "
-          [isTouched]="false"
-          errorKey="required"
-          errorMessage="必選"
+          [condition]="checkDateRange"
+          [errorMessage]="'格式錯誤'"
         />
       </div>
     </div>

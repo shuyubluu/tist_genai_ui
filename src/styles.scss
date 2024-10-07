@@ -186,33 +186,6 @@ $angular-ngzorro-theme: mat.define-light-theme(
   font-size: 20px;
 }
 
-.table-container {
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(83, 83, 83, 0.1);
-}
-
-.bordered-table {
-  width: 100%;
-  border-collapse: collapse;
-  border: 2px solid #cccccc;
-
-  th,
-  td {
-    border: 1px solid #cccccc;
-    padding: 6px;
-    text-align: left;
-  }
-}
-
-.custom-header {
-  background: linear-gradient(to bottom, #e6f0fb, #cfe6ff);
-}
-
-.custom-cell {
-  background-color: #fffdf2;
-}
-
 html,
 body {
   height: 100%;

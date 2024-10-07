@@ -6,9 +6,10 @@ import { RouterModule } from '@angular/router';
 import { DayPickerComponent } from '../../../../common/components/dayPicker/dayPicker.component';
 import { SharedModule } from '../../../../common/shared/shared.module';
 import { TabService } from '../../../../common/layouts/tab/tab.service';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Hd620ListService } from '../../list/service/hd620-list.service';
+import { ErrorMessageComponent } from '../../../../common/components/message/error-message.component';
 
 @Component({
   selector: 'app-hd620-form',
@@ -20,6 +21,7 @@ import { Hd620ListService } from '../../list/service/hd620-list.service';
     SelectComponent,
     RouterModule,
     DayPickerComponent,
+    ErrorMessageComponent,
   ],
   templateUrl: './hd620-form.component.html',
   styleUrl: './hd620-form.component.scss',
@@ -37,7 +39,7 @@ export class Hd620FormComponent implements OnInit {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
       // 角色名稱
-      roleName: new FormControl(''),
+      roleName: new FormControl('', [Validators.required]),
 
       // 個案管理
       caseManagement: new FormControl(''),

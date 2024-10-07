@@ -3,17 +3,24 @@
   <div class="grid-container">
     <div class="grid-columns-2 border-bottom-0">
       <div class="label">結案日期區間</div>
-      <div>
+      <div class="column-Message">
         <app-dayPicker
+          (ngModelChange)="onClosureDateChange($event)"
           [startRange]="30"
           [endRange]="0"
           formControlName="closureDate_start"
         />
         <span class="mx-2">-</span>
         <app-dayPicker
+          (ngModelChange)="onClosureDateChange($event)"
           [startRange]="30"
           [endRange]="0"
           formControlName="closureDate_end"
+        />
+        <app-error-message
+          [isCustom]="true"
+          [condition]="checkDateRange"
+          [errorMessage]="'格式錯誤'"
         />
       </div>
       <div class="label">個案姓名</div>
@@ -36,51 +43,51 @@
   </div>
 </form>
 <div class="mt"></div>
-  <div class="message">搜尋結果: 共{{ searchResultData.length }}筆</div>
-  <div class="mt"></div>
-  <div class="grid-search-container">
-    <div class="grid-columns searchTitle">
-      <div>個案姓名</div>
-      <div>性別</div>
-      <div>結案日期</div>
-      <div>結案原因</div>
-      <div>操作</div>
+<div class="message">搜尋結果: 共{{ searchResultData.length }}筆</div>
+<div class="mt"></div>
+<div class="grid-search-container">
+  <div class="grid-columns searchTitle">
+    <div>個案姓名</div>
+    <div>性別</div>
+    <div>結案日期</div>
+    <div>結案原因</div>
+    <div>操作</div>
+  </div>
+  <div
+    class="grid-columns tableBorder"
+    *ngFor="let searchResult of newSearchResultData; let i = index"
+    [ngClass]="{
+      'even-row': i % 2 === 1,
+      'odd-row': i % 2 !== 1
+    }"
+  >
+    <!-- !TODO -->
+    <div>
+      {{ searchResult.caseName }}
     </div>
-    <div
-      class="grid-columns tableBorder"
-      *ngFor="let searchResult of newSearchResultData; let i = index"
-      [ngClass]="{
-        'even-row': i % 2 === 1,
-        'odd-row': i % 2 !== 1
-      }"
-    >
-      <!-- !TODO -->
-      <div>
-        {{ searchResult.caseName }}
-      </div>
-      <div>
-        {{ searchResult.gender }}
-      </div>
-      <div>
-        {{ searchResult.closureDate }}
-      </div>
-      <div>
-        {{ searchResult.closureReason }}
-      </div>
-      <div>
-        <app-button [buttonText]="'檢視'" (click)="view()" />
-        <app-button
-          [buttonText]="'編輯'"
-          [attachClassName]="['warning']"
-          (click)="edit()"
-        />
-      </div>
+    <div>
+      {{ searchResult.gender }}
+    </div>
+    <div>
+      {{ searchResult.closureDate }}
+    </div>
+    <div>
+      {{ searchResult.closureReason }}
+    </div>
+    <div>
+      <app-button [buttonText]="'檢視'" (click)="view()" />
+      <app-button
+        [buttonText]="'編輯'"
+        [attachClassName]="['warning']"
+        (click)="edit()"
+      />
     </div>
   </div>
-  <div class="mt-10"></div>
-  <nz-pagination
-    [nzPageIndex]="currentPage"
-    [nzPageSize]="pageSize"
-    (nzPageIndexChange)="onPageIndexChange($event)"
-    [nzTotal]="searchResultData.length"
-  />
+</div>
+<div class="mt-10"></div>
+<nz-pagination
+  [nzPageIndex]="currentPage"
+  [nzPageSize]="pageSize"
+  (nzPageIndexChange)="onPageIndexChange($event)"
+  [nzTotal]="searchResultData.length"
+/>

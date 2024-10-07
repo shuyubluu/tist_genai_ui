@@ -7,17 +7,24 @@
   <div class="grid-container">
     <div class="grid-columns-1">
       <div class="label">服務時期區間</div>
-      <div>
+      <div class="column-Message">
         <app-dayPicker
+          (ngModelChange)="onServiceHoursRangeChange($event)"
           [startRange]="30"
           [endRange]="0"
           formControlName="serviceHoursRange_start"
         />
         <span class="mx-2">-</span>
         <app-dayPicker
+          (ngModelChange)="onServiceHoursRangeChange($event)"
           [startRange]="30"
           [endRange]="0"
           formControlName="serviceHoursRange_end"
+        />
+        <app-error-message
+          [isCustom]="true"
+          [condition]="checkDateRange"
+          [errorMessage]="'格式錯誤'"
         />
       </div>
     </div>
