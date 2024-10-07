@@ -1,7 +1,6 @@
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Hd660ListService } from './../../list/service/hd660-list.service';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
 import { InputComponent } from '../../../../common/components/input/input.component';
 import { SelectComponent } from '../../../../common/components/select/select.component';
@@ -9,8 +8,10 @@ import { RouterModule } from '@angular/router';
 import { DayPickerComponent } from '../../../../common/components/dayPicker/dayPicker.component';
 import { SharedModule } from '../../../../common/shared/shared.module';
 import { TabService } from '../../../../common/layouts/tab/tab.service';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
+import { DateValidators } from '../../../../common/validator/date-validator';
+import { ErrorMessageComponent } from '../../../../common/components/message/error-message.component';
 
 @Component({
   selector: 'app-hd660-form',
@@ -22,6 +23,7 @@ import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
     SelectComponent,
     RouterModule,
     DayPickerComponent,
+    ErrorMessageComponent,
   ],
   templateUrl: './hd660-form.component.html',
   styleUrl: './hd660-form.component.scss',
@@ -85,15 +87,15 @@ export class Hd660FormComponent implements OnInit {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
       // 發佈日期
-      publicationDate: new FormControl(''),
+      publicationDate: new FormControl('', [DateValidators.dateValidator]),
       // 發佈單位
-      publishingUnit: new FormControl(''),
+      publishingUnit: new FormControl('', [Validators.required]),
       // 主旨標題
-      subjectTitle: new FormControl(''),
+      subjectTitle: new FormControl('', [Validators.required]),
       // 發佈人
       publisher: new FormControl(''),
       // 公告內容
-      noticeContent: new FormControl(''),
+      noticeContent: new FormControl('', [Validators.required]),
     });
   }
 

@@ -2,23 +2,43 @@
   <div class="grid-container">
     <div class="grid-columns-2">
       <div class="label">發佈日期</div>
-      <div><app-dayPicker formControlName="publicationDate" /></div>
+      <div class="column-Message">
+        <app-dayPicker formControlName="publicationDate" />
+        <app-error-message
+          [control]="form.get('publicationDate')"
+          [isTouched]="false"
+          errorKey="invalidDate"
+          errorMessage="必選"
+        />
+      </div>
       <div class="label">發佈單位</div>
-      <div>
+      <div class="column-Message">
         <app-select
           [selectWidth]="'200px'"
           [options]="selectOptions_publishingUnit"
           formControlName="publishingUnit"
         />
+        <app-error-message
+          [control]="form.get('publishingUnit')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必選"
+        />
       </div>
     </div>
     <div class="grid-columns-2">
       <div class="label">主旨標題</div>
-      <div>
+      <div class="column-Message">
         <app-input
           [inputWidth]="'150px'"
           [maxLength]="50"
           formControlName="subjectTitle"
+        />
+        <app-error-message
+          [control]="form.get('subjectTitle')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必填"
         />
       </div>
       <div class="label">發佈人</div>
@@ -27,7 +47,7 @@
     </div>
     <div class="grid-columns-1">
       <div class="label">附件上傳</div>
-      <div>
+      <div class="column-Message">
         <nz-upload
           nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
           [nzFileList]="attachment_fileList"
@@ -48,6 +68,12 @@
             formControlName="noticeContent"
           ></textarea>
         </nz-textarea-count>
+        <app-error-message
+          [control]="form.get('noticeContent')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必填"
+        />
       </div>
     </div>
   </div>

@@ -127,12 +127,12 @@ export class Hd500ListComponent implements OnInit {
   closeTab(identifier: string) {
     this.tabService.closeTab(identifier);
   }
-
   // 檢視
   view(code: string, name: string) {
+    this.closeTab('統計內容_' + this.hd500ListService.currentStatisticsName);
     this.router.navigate(['/hd500/form']);
-    this.hd500ListService.currentStatisticsCode = code;
-    this.hd500ListService.currentStatisticsName = name;
+    this.hd500ListService.setStatisticsCode(code);
+    this.hd500ListService.setStatisticsName(name);
     HD500_ROUTES.forEach((route: any) => {
       if (route.path) {
         route.data.tabName = '統計內容_' + name;

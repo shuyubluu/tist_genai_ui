@@ -651,7 +651,7 @@ export class Hd610ListComponent implements OnInit {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
       // 任職單位
-      unitName: new FormControl(''),
+      department: new FormControl(''),
       // 任職組別
       team: new FormControl(''),
       // 任職區域
