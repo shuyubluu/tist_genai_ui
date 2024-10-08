@@ -57,7 +57,19 @@ export class Hd230ListComponent implements OnInit {
       serviceHoursRange: '113/02/01 - 113/02/28',
       serviceContent: '關懷訪視',
       serviceHours: '2.0',
-      loginMethod: '系統登入',
+      loginMethod: '系統登錄',
+    },
+    {
+      serviceHoursRange: '113/02/01 - 113/02/28',
+      serviceContent: '關懷訪視',
+      serviceHours: '2.0',
+      loginMethod: 'APP登錄',
+    },
+    {
+      serviceHoursRange: '113/02/01 - 113/02/28',
+      serviceContent: '關懷訪視',
+      serviceHours: '2.0',
+      loginMethod: 'APP登錄(異常)',
     },
   ];
 

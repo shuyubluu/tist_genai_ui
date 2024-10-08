@@ -14,7 +14,6 @@ import { ErrorMessageComponent } from '../../../../common/components/message/err
 import { Hd230ListService } from '../../../hd230/list/service/hd230-list.service';
 import { DateValidators } from '../../../../common/validator/date-validator';
 import { compareDate } from '../../../../common/utils/compareDate';
-
 @Component({
   selector: 'app-hd280-form',
   standalone: true,
@@ -36,6 +35,8 @@ export class Hd280FormComponent implements OnInit {
   form: FormGroup;
   // 檢查日期區間
   checkDateRange: boolean = false;
+  // 檢查時間區間
+  checkTimeRange: boolean = false;
   // 服務內容select選項
   selectOptions_serviceContent: string[] = [
     '關懷訪視',
@@ -90,6 +91,10 @@ export class Hd280FormComponent implements OnInit {
     '潮州(潮州志工站)',
     '林邊(林邊志工站)',
   ];
+  // 時間_小時select選項
+  selectOptions_timeHours: string[] = [];
+  // 時間_分鐘select選項
+  selectOptions_timeMinutes: string[] = [];
 
   constructor(
     private tabService: TabService, // 關閉tab的Service
@@ -103,8 +108,16 @@ export class Hd280FormComponent implements OnInit {
       fillingDate: new FormControl('', [DateValidators.dateValidator]),
       // 服務日期_起始
       serviceDate_start: new FormControl('', [DateValidators.dateValidator]),
+      // 服務日期_起始_小時
+      serviceDate_start_hours: new FormControl('', Validators.required),
+      // 服務日期_起始_分鐘
+      serviceDate_start_minutes: new FormControl('', Validators.required),
       // 服務日期_結束
       serviceDate_end: new FormControl('', [DateValidators.dateValidator]),
+      // 服務日期_結束_小時
+      serviceDate_end_hours: new FormControl('', Validators.required),
+      // 服務日期_結束_分鐘
+      serviceDate_end_minutes: new FormControl('', Validators.required),
       // 服務內容
       serviceContent: new FormControl('', [Validators.required]),
       // 服務時數-小時
@@ -129,6 +142,15 @@ export class Hd280FormComponent implements OnInit {
     for (let i = 0; i <= 30; i++) {
       this.selectOptions_serviceHours.push(i.toString());
     }
+
+    // 生成時間_小時
+    for (let i = 0; i <= 24; i++) {
+      this.selectOptions_timeHours.push(i < 10 ? '0' + i : i.toString());
+    }
+    // 生成時間_分鐘
+    for (let i = 0; i <= 60; i++) {
+      this.selectOptions_timeMinutes.push(i < 10 ? '0' + i : i.toString());
+    }
   }
 
   // 服務志工選項改變
@@ -138,19 +160,19 @@ export class Hd280FormComponent implements OnInit {
 
   // 儲存
   save() {
-    // 如果日期有輸入，則檢查日期區間
     if (
       compareDate(
         this.form.value.serviceDate_start,
         this.form.value.serviceDate_end
       )
     ) {
+      // 如果日期有輸入，則檢查日期區間
       this.checkDateRange = false;
     } else {
       this.checkDateRange = true;
     }
     if (!this.checkDateRange) {
-    this.message.create('success', '儲存成功');
+      this.message.create('success', '儲存成功');
     }
   }
 

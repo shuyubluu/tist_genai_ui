@@ -28,22 +28,50 @@
       <div class="label">服務日期</div>
       <div class="column-Message">
         <app-dayPicker
+          class="mr-2"
           (ngModelChange)="onServiceDateChange($event)"
           formControlName="serviceDate_start"
         />
-        <app-error-message
-          [control]="form.get('serviceDate_start')"
-          [isTouched]="false"
-          errorKey="invalidDate"
-          errorMessage="必選"
+        <app-select
+          [selectWidth]="'70px'"
+          [options]="selectOptions_timeHours"
+          [defaultPlaceHolder]="false"
+          formControlName="serviceDate_start_hours"
+        />：<app-select
+          [selectWidth]="'70px'"
+          [options]="selectOptions_timeMinutes"
+          [defaultPlaceHolder]="false"
+          formControlName="serviceDate_start_minutes"
         />
         <span class="mx-2">-</span>
         <app-dayPicker
+          class="mr-2"
           (ngModelChange)="onServiceDateChange($event)"
           formControlName="serviceDate_end"
         />
+        <app-select
+          [selectWidth]="'70px'"
+          [options]="selectOptions_timeHours"
+          [defaultPlaceHolder]="false"
+          formControlName="serviceDate_end_hours"
+        />：<app-select
+          [selectWidth]="'70px'"
+          [options]="selectOptions_timeMinutes"
+          [defaultPlaceHolder]="false"
+          formControlName="serviceDate_end_minutes"
+        />
         <app-error-message
-          [control]="form.get('serviceDate_end')"
+          [isCustom]="true"
+          [condition]="
+            form.get('serviceDate_start')?.hasError('invalidDate') ||
+            form.get('serviceDate_end')?.hasError('invalidDate') ||
+            form.get('serviceDate_start_hours')?.hasError('required') ||
+            form.get('serviceDate_start_minutes')?.hasError('required') ||
+            form.get('serviceDate_end_hours')?.hasError('required') ||
+            form.get('serviceDate_end_minutes')?.hasError('required')
+              ? true
+              : false
+          "
           [isTouched]="false"
           errorKey="invalidDate"
           errorMessage="必選"
