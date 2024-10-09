@@ -65,14 +65,12 @@ export class Hd620ListComponent implements OnInit {
   // 編輯
   edit() {
     this.router.navigate(['/hd620/form']);
-    this.hd620ListService.isView = false;
-    this.hd620ListService.isEdit = true;
+    this.hd620ListService.setMode(false, true);
   }
 
   // 檢視
   view() {
     this.router.navigate(['/hd620/form']);
-    this.hd620ListService.isView = true;
-    this.hd620ListService.isEdit = false;
+    this.hd620ListService.setMode(true, false);
   }
 }

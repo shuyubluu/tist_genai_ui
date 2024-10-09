@@ -19,7 +19,10 @@
     <div class="grid-columns-2">
       <div class="label">訪視日期</div>
       <div class="column-Message">
-        <app-dayPicker formControlName="visitDate" />
+        <app-dayPicker
+          [disabled]="hd140ListService.isView"
+          formControlName="visitDate"
+        />
         <app-error-message
           [control]="form.get('visitDate')"
           [isTouched]="false"

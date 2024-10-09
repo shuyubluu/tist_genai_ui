@@ -673,9 +673,7 @@ export class Hd610ListComponent implements OnInit {
   // 編輯
   edit() {
     this.router.navigate(['/hd610/form']);
-    this.hd610ListService.isView = false;
-    this.hd610ListService.isCreate = false;
-    this.hd610ListService.isEdit = true;
+    this.hd610ListService.setMode(false, false, true);
   }
 
   // 搜尋
@@ -686,17 +684,13 @@ export class Hd610ListComponent implements OnInit {
   // 檢視
   view() {
     this.router.navigate(['/hd610/form']);
-    this.hd610ListService.isView = true;
-    this.hd610ListService.isCreate = false;
-    this.hd610ListService.isEdit = false;
+    this.hd610ListService.setMode(true, false, false);
   }
 
   // 新增
   create() {
     this.router.navigate(['/hd610/form']);
-    this.hd610ListService.isView = false;
-    this.hd610ListService.isCreate = true;
-    this.hd610ListService.isEdit = false;
+    this.hd610ListService.setMode(false, true, false);
   }
 
   // 停用

@@ -13,14 +13,20 @@
           *ngIf="!isCustomDepartment"
           class="mx-2"
           [buttonText]="'自訂'"
-          [attachClassName]="['success']"
+          [disabled]="hd610ListService.isView"
+          [attachClassName]="
+            hd610ListService.isView ? ['secondary'] : ['success']
+          "
           (click)="onCustomDepartment()"
         />
         <app-button
           *ngIf="isCustomDepartment"
           class="mx-2"
           [buttonText]="'取消自訂'"
-          [attachClassName]="['danger']"
+          [disabled]="hd610ListService.isView"
+          [attachClassName]="
+            hd610ListService.isView ? ['secondary'] : ['danger']
+          "
           (click)="onCancelCustomDepartment()"
         />
         <app-input
@@ -56,14 +62,20 @@
           *ngIf="!isCustomTeam"
           class="mx-2"
           [buttonText]="'自訂'"
-          [attachClassName]="['success']"
+          [disabled]="hd610ListService.isView"
+          [attachClassName]="
+            hd610ListService.isView ? ['secondary'] : ['success']
+          "
           (click)="onCustomTeam()"
         />
         <app-button
           *ngIf="isCustomTeam"
           class="mx-2"
           [buttonText]="'取消自訂'"
-          [attachClassName]="['danger']"
+          [disabled]="hd610ListService.isView"
+          [attachClassName]="
+            hd610ListService.isView ? ['secondary'] : ['danger']
+          "
           (click)="onCancelCustomTeam()"
         />
         <app-input
@@ -94,7 +106,10 @@
           class="mx-2"
           *ngIf="!isCustomRegion"
           [buttonText]="'自訂'"
-          [attachClassName]="['success']"
+          [disabled]="hd610ListService.isView"
+          [attachClassName]="
+            hd610ListService.isView ? ['secondary'] : ['success']
+          "
           (click)="onCustomRegion()"
         />
         <app-button
@@ -102,7 +117,10 @@
           *ngIf="isCustomRegion"
           class="mx-2"
           [buttonText]="'取消自訂'"
-          [attachClassName]="['danger']"
+          [disabled]="hd610ListService.isView"
+          [attachClassName]="
+            hd610ListService.isView ? ['secondary'] : ['danger']
+          "
           (click)="onCancelCustomRegion()"
         />
         <app-input
@@ -145,7 +163,8 @@
     <app-button
       *ngIf="hd610ListService.isCreate"
       [buttonText]="'新增'"
-      [attachClassName]="['success']"
+      [disabled]="hd610ListService.isView"
+      [attachClassName]="hd610ListService.isView ? ['secondary'] : ['success']"
       (click)="create()"
     />
     <app-button

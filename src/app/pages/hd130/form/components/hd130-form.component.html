@@ -28,6 +28,7 @@
       <div class="label">訪視日期</div>
       <div class="column-Message">
         <app-dayPicker
+          [disabled]="hd100ListService.isView"
           (ngModelChange)="onVisitDateChange($event)"
           formControlName="visitDate"
         />

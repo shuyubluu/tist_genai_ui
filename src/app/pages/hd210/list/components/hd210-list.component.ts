@@ -104,16 +104,14 @@ export class Hd210ListComponent implements OnInit {
   async create() {
     await this.router.navigate(['/hd210/form']);
     this.volunteerInformationService.isChoiceVolunteer = true;
-    this.hd210ListService.isCreate = true;
-    this.hd210ListService.isView = false;
+    this.hd210ListService.setMode(false, true);
   }
 
   // 檢視
   async view() {
     await this.router.navigate(['/hd210/form']);
     this.volunteerInformationService.isChoiceVolunteer = true;
-    this.hd210ListService.isCreate = false;
-    this.hd210ListService.isView = true;
+    this.hd210ListService.setMode(true, false);
   }
 
   // 關閉教育訓練清單

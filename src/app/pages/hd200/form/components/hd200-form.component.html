@@ -13,7 +13,10 @@
     <div class="grid-columns-2">
       <div class="label">填表日期</div>
       <div class="column-Message">
-        <app-dayPicker formControlName="formDate" />
+        <app-dayPicker
+          [disabled]="hd200ListService.isView"
+          formControlName="formDate"
+        />
         <app-error-message
           [control]="form.get('formDate')"
           [isTouched]="false"
@@ -23,7 +26,10 @@
       </div>
       <div class="label">志工入隊日期</div>
       <div class="column-Message">
-        <app-dayPicker formControlName="volunteerJoinDate" />
+        <app-dayPicker
+          [disabled]="hd200ListService.isView"
+          formControlName="volunteerJoinDate"
+        />
         <app-error-message
           [control]="form.get('volunteerJoinDate')"
           [isTouched]="false"
@@ -160,7 +166,10 @@
     <div class="grid-columns-2">
       <div class="label">生日</div>
       <div class="column-Message">
-        <app-dayPicker formControlName="birthDate" />
+        <app-dayPicker
+          [disabled]="hd200ListService.isView"
+          formControlName="birthDate"
+        />
         <app-error-message
           [control]="form.get('birthDate')"
           [isTouched]="false"
@@ -939,13 +948,22 @@
           />
         </span>
         <div class="my-3">
-          發卡日期：<app-dayPicker formControlName="honorCard_issueDate" />
+          發卡日期：<app-dayPicker
+            [disabled]="hd200ListService.isView"
+            formControlName="honorCard_issueDate"
+          />
           <span>
-            有效日期：<app-dayPicker formControlName="honorCard_expiryDate" />
+            有效日期：<app-dayPicker
+              [disabled]="hd200ListService.isView"
+              formControlName="honorCard_expiryDate"
+            />
           </span>
         </div>
         <div>
-          年資起訖：<app-dayPicker formControlName="honorCard_servicePeriod" />
+          年資起訖：<app-dayPicker
+            [disabled]="hd200ListService.isView"
+            formControlName="honorCard_servicePeriod"
+          />
           <span>
             申請日期：<app-dayPicker
               formControlName="honorCard_applicationDate"

@@ -14,6 +14,7 @@ import { SearchResultData } from '../service/hd100-list.interface';
 import { CaseInformationService } from '../../../../common/components/caseInformation/service/case-information.service';
 import { compareDate } from '../../../../common/utils/compareDate';
 import { ErrorMessageComponent } from '../../../../common/components/message/error-message.component';
+import { Hd100FormService } from '../../form/service/hd100-form.service';
 
 @Component({
   selector: 'app-hd100-list',
@@ -80,7 +81,8 @@ export class Hd100ListComponent implements OnInit {
     private tabService: TabService, // 關閉tab的Service
     private router: Router, // 路由
     private caseInformationService: CaseInformationService, // caseInformationService
-    private hd100ListService: Hd100ListService // hd100ListService
+    private hd100ListService: Hd100ListService, // hd100ListService
+    private hd100FormService: Hd100FormService // hd100FormService
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
@@ -121,31 +123,27 @@ export class Hd100ListComponent implements OnInit {
     }
   }
 
-  // 新增個案資料87
+  // 檢視個案資料
+  view() {
+    this.hd100FormService.setCurrentRoute('hd100');
+    this.router.navigate(['/hd110']);
+    this.caseInformationService.isChoiceCase = true;
+    this.hd100ListService.setMode(true, false, false);
+  }
+
+  // 新增個案資料
   create() {
     this.router.navigate(['/hd110']);
     this.caseInformationService.isChoiceCase = false;
-    this.hd100ListService.isView = false;
-    this.hd100ListService.isEdit = false;
-    this.hd100ListService.isCreate = true;
-  }
-
-  // 檢視個案資料
-  view() {
-    this.router.navigate(['/hd110']);
-    this.caseInformationService.isChoiceCase = true;
-    this.hd100ListService.isView = true;
-    this.hd100ListService.isEdit = false;
-    this.hd100ListService.isCreate = false;
+    this.hd100ListService.setMode(false, true, false);
   }
 
   // 編輯個案資料
   edit() {
+    this.hd100FormService.setCurrentRoute('hd100');
     this.router.navigate(['/hd110']);
     this.caseInformationService.isChoiceCase = true;
-    this.hd100ListService.isView = false;
-    this.hd100ListService.isEdit = true;
-    this.hd100ListService.isCreate = false;
+    this.hd100ListService.setMode(false, false, true);
   }
 
   // 關閉個案資料清單

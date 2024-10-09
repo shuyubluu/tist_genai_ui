@@ -1,9 +1,15 @@
+import { Hd100FormService } from './../service/hd100-form.service';
 import { Hd100ListService } from './../../list/service/hd100-list.service';
 import { Component, OnInit } from '@angular/core';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
 import { InputComponent } from '../../../../common/components/input/input.component';
 import { SelectComponent } from '../../../../common/components/select/select.component';
-import { RouterModule } from '@angular/router';
+import {
+  NavigationEnd,
+  NavigationStart,
+  Router,
+  RouterModule,
+} from '@angular/router';
 import { DayPickerComponent } from '../../../../common/components/dayPicker/dayPicker.component';
 import { SharedModule } from '../../../../common/shared/shared.module';
 import { TabService } from '../../../../common/layouts/tab/tab.service';
@@ -34,6 +40,11 @@ import { DateValidators } from '../../../../common/validator/date-validator';
 export class Hd100FormComponent implements OnInit {
   // 搜尋條件表單
   form: FormGroup;
+  // 是否從結案名冊禁入的
+  isRegisterEnter: boolean = false;
+  // 存放上個路由
+  previousUrl: string = '';
+  test: string = '';
   // 結案原因select選項
   selectOptions_closureReason: string[] = [
     '個案失聯',
@@ -50,7 +61,9 @@ export class Hd100FormComponent implements OnInit {
     private tabService: TabService, // 關閉tab的Service
     private message: NzMessageService, // 訊息
     public caseInformationService: CaseInformationService, // caseInformationService
-    public hd180ListService: Hd180ListService // hd180ListService
+    public hd180ListService: Hd180ListService, // hd180ListService
+    public hd100ListService: Hd100ListService, // hd100ListService
+    public hd100FormService: Hd100FormService // hd100FormService
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
@@ -72,14 +85,16 @@ export class Hd100FormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // 檢視模式，禁用表單
-    if (this.hd180ListService.isView) {
-      this.form.disable();
-    }
-    // 禁用填表日期選擇
-    this.form.get('formFillingDate')?.disable();
     // 禁用結案原因其他輸入框
     this.form.get('closureReason_other')?.disable();
+    if (
+      (this.hd180ListService.isView &&
+        this.hd100FormService.currentRoute === 'hd180') ||
+      (this.hd100ListService.isView &&
+        this.hd100FormService.currentRoute === 'hd100')
+    ) {
+      this.form.disable();
+    }
   }
 
   // 結案原因選擇改變

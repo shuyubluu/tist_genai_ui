@@ -1,5 +1,5 @@
+import { Hd140ListService } from './../../list/service/hd140-list.service';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
 import { InputComponent } from '../../../../common/components/input/input.component';
 import { SelectComponent } from '../../../../common/components/select/select.component';
@@ -146,7 +146,8 @@ export class Hd140Form2Component implements OnInit {
   ];
 
   constructor(
-    private tabService: TabService // 關閉tab的Service
+    private tabService: TabService, // 關閉tab的Service
+    public hd140ListService: Hd140ListService // hd140ListService
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
@@ -157,7 +158,12 @@ export class Hd140Form2Component implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // 檢視模式，禁用表單
+    if (this.hd140ListService.isView) {
+      this.form.disable();
+    }
+  }
 
   // 關閉當前的tab
   closeTab(identifier: string) {
@@ -177,8 +183,8 @@ export class Hd140Form2Component implements OnInit {
     this.form.get('questionsData')?.setValue(this.choiceQuestions);
   }
 
-  // 禁用選取按鈕
-  isDisable(questionsData: QuestionsData) {
-    return questionsData.questions.some((item) => item.isChoice);
-  }
+  // // 禁用選取按鈕
+  // isDisable(questionsData: QuestionsData) {
+  //   return questionsData.questions.some((item) => item.isChoice);
+  // }
 }

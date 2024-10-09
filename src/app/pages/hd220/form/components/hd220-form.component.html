@@ -5,7 +5,10 @@
     <div class="grid-columns-2">
       <div class="label">填表日期</div>
       <div class="column-Message">
-        <app-dayPicker formControlName="formDate" />
+        <app-dayPicker
+          [disabled]="hd220ListService.isView"
+          formControlName="formDate"
+        />
         <app-error-message
           [control]="form.get('formDate')"
           [isTouched]="false"
@@ -108,7 +111,10 @@
     <div class="grid-columns-1 border-bottom-0">
       <div class="label">受獎日期</div>
       <div class="column-Message">
-        <app-dayPicker formControlName="awardDate" />
+        <app-dayPicker
+          [disabled]="hd220ListService.isView"
+          formControlName="awardDate"
+        />
         <app-error-message
           [control]="form.get('awardDate')"
           [isTouched]="false"

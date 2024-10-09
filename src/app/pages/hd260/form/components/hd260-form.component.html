@@ -10,7 +10,10 @@
     <div class="grid-columns-2">
       <div class="label">填表日期</div>
       <div class="column-Message">
-        <app-dayPicker formControlName="fillingDate" />
+        <app-dayPicker
+          [disabled]="!this.volunteerInformationService.isChoiceVolunteer"
+          formControlName="fillingDate"
+        />
         <app-error-message
           [control]="form.get('fillingDate')"
           [isTouched]="false"
@@ -36,7 +39,10 @@
     <div class="grid-columns-2">
       <div class="label">退隊日期</div>
       <div class="column-Message">
-        <app-dayPicker formControlName="resignationDate" />
+        <app-dayPicker
+          [disabled]="!this.volunteerInformationService.isChoiceVolunteer"
+          formControlName="resignationDate"
+        />
         <app-error-message
           [control]="form.get('resignationDate')"
           [isTouched]="false"

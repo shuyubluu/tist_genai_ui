@@ -122,36 +122,28 @@ export class Hd140ListComponent implements OnInit {
   view() {
     this.router.navigate(['/hd140/form']);
     this.caseInformationService.isChoiceCase = true;
-    this.hd140ListService.isEdit = false;
-    this.hd140ListService.isCreate = false;
-    this.hd140ListService.isView = true;
+    this.hd140ListService.setMode(true, false, false);
   }
 
   // 編輯
   edit() {
     this.router.navigate(['/hd140/form']);
     this.caseInformationService.isChoiceCase = true;
-    this.hd140ListService.isEdit = true;
-    this.hd140ListService.isCreate = false;
-    this.hd140ListService.isView = false;
+    this.hd140ListService.setMode(false, false, true);
   }
 
   // 檢視_志工
   view_volunteer() {
     this.router.navigate(['/hd140/form2']);
     this.caseInformationService.isChoiceCase = true;
-    this.hd140ListService.isEdit = false;
-    this.hd140ListService.isCreate = false;
-    this.hd140ListService.isView = true;
+    this.hd140ListService.setMode(true, false, false);
   }
 
   // 新增個案資料
   create() {
     this.router.navigate(['/hd140/form']);
     this.caseInformationService.isChoiceCase = false;
-    this.hd140ListService.isEdit = false;
-    this.hd140ListService.isCreate = true;
-    this.hd140ListService.isView = false;
+    this.hd140ListService.setMode(false, true, false);
   }
 
   handleCurrentViewMode(mode: string) {

@@ -22,7 +22,10 @@
     <div class="grid-columns-2">
       <div class="label">入站/隊日期</div>
       <div class="column-Message">
-        <app-dayPicker formControlName="entryDate" />
+        <app-dayPicker
+          [disabled]="hd250ListService.isView"
+          formControlName="entryDate"
+        />
         <app-error-message
           [control]="form.get('entryDate')"
           [isTouched]="false"
@@ -32,7 +35,10 @@
       </div>
       <div class="label">填寫日期</div>
       <div class="column-Message">
-        <app-dayPicker formControlName="submissionDate" />
+        <app-dayPicker
+          [disabled]="hd250ListService.isView"
+          formControlName="submissionDate"
+        />
         <app-error-message
           [control]="form.get('submissionDate')"
           [isTouched]="false"
@@ -489,6 +495,7 @@
           <label>
             評核日期：
             <app-dayPicker
+              [disabled]="hd250ListService.isView"
               formControlName="firstImprovementPassed_evaluationDate"
           /></label>
         </div>
@@ -528,6 +535,7 @@
           <label>
             評核日期：
             <app-dayPicker
+              [disabled]="hd250ListService.isView"
               formControlName="secondImprovementPassed_evaluationDate"
           /></label>
         </div>

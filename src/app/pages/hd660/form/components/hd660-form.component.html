@@ -3,7 +3,10 @@
     <div class="grid-columns-2">
       <div class="label">發佈日期</div>
       <div class="column-Message">
-        <app-dayPicker formControlName="publicationDate" />
+        <app-dayPicker
+          [disabled]="hd660ListService.isView"
+          formControlName="publicationDate"
+        />
         <app-error-message
           [control]="form.get('publicationDate')"
           [isTouched]="false"
@@ -53,7 +56,13 @@
           [nzFileList]="attachment_fileList"
           (nzChange)="attachment_handleChange($event)"
         >
-          <app-button [buttonText]="'上傳'" [attachClassName]="['success']" />
+          <app-button
+            [disabled]="hd660ListService.isView"
+            [attachClassName]="
+              hd660ListService.isView ? ['secondary'] : ['success']
+            "
+            [buttonText]="'上傳'"
+          />
         </nz-upload>
       </div>
     </div>

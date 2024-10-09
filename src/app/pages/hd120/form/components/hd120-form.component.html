@@ -30,7 +30,10 @@
     <div class="grid-columns-2">
       <div class="label">開案日期</div>
       <div class="column-Message">
-        <app-dayPicker formControlName="caseStartDate" />
+        <app-dayPicker
+          [disabled]="hd100ListService.isView"
+          formControlName="caseStartDate"
+        />
         <app-error-message
           [control]="form.get('caseStartDate')"
           errorKey="invalidDate"
@@ -97,6 +100,7 @@
       <div class="label disableBackground">生日</div>
       <div>
         <app-dayPicker
+          [disabled]="hd100ListService.isView"
           [disabled]="true"
           [startRange]="100"
           [endRange]="0"

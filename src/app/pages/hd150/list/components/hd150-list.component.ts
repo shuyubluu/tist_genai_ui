@@ -104,27 +104,21 @@ export class Hd150ListComponent implements OnInit {
   view() {
     this.router.navigate(['/hd150/form']);
     this.caseInformationService.isChoiceCase = true;
-    this.hd150ListService.isCreate = false;
-    this.hd150ListService.isEdit = false;
-    this.hd150ListService.isView = true;
+    this.hd150ListService.setMode(true, false, false);
   }
 
   // 編輯
   edit() {
     this.router.navigate(['/hd150/form']);
     this.caseInformationService.isChoiceCase = true;
-    this.hd150ListService.isEdit = true;
-    this.hd150ListService.isCreate = false;
-    this.hd150ListService.isView = false;
+    this.hd150ListService.setMode(false, false, true);
   }
 
   // 新增個案資料
   create() {
     this.router.navigate(['/hd150/form']);
     this.caseInformationService.isChoiceCase = false;
-    this.hd150ListService.isEdit = false;
-    this.hd150ListService.isCreate = true;
-    this.hd150ListService.isView = false;
+    this.hd150ListService.setMode(false, true, false);
   }
 
   // 關閉個案複評表清單

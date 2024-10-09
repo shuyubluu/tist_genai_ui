@@ -99,7 +99,12 @@ export class Hd660FormComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // 檢視模式，禁用表單
+    if (this.hd660ListService.isView) {
+      this.form.disable();
+    }
+  }
 
   // 關閉當前的tab
   closeTab(identifier: string) {

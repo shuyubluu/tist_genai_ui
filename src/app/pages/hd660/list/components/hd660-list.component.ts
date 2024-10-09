@@ -136,18 +136,22 @@ export class Hd660ListComponent implements OnInit {
     }
   }
 
+  // 檢視
+  async view() {
+    await this.router.navigate(['/hd660/form']);
+    this.hd660ListService.setMode(true, false, false);
+  }
+
   // 新增
   async create() {
     await this.router.navigate(['/hd660/form']);
-    this.hd660ListService.isCreate = true;
-    this.hd660ListService.isEdit = false;
+    this.hd660ListService.setMode(false, true, false);
   }
 
   // 編輯
   async edit() {
     await this.router.navigate(['/hd660/form']);
-    this.hd660ListService.isCreate = false;
-    this.hd660ListService.isEdit = true;
+    this.hd660ListService.setMode(false, false, true);
   }
 
   // 關閉當前的tab

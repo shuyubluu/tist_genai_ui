@@ -11,11 +11,27 @@
     <div class="grid-columns-2">
       <div class="label">填表日期</div>
       <div>
-        <app-dayPicker formControlName="formFillingDate" />
+        <app-dayPicker
+          [disabled]="
+            (this.hd180ListService.isView &&
+              this.hd100FormService.currentRoute === 'hd180') ||
+            (this.hd100ListService.isView &&
+              this.hd100FormService.currentRoute === 'hd100')
+          "
+          formControlName="formFillingDate"
+        />
       </div>
       <div class="label">結案日期</div>
       <div class="column-Message">
-        <app-dayPicker formControlName="closureDate" />
+        <app-dayPicker
+          [disabled]="
+            (this.hd180ListService.isView &&
+              this.hd100FormService.currentRoute === 'hd180') ||
+            (this.hd100ListService.isView &&
+              this.hd100FormService.currentRoute === 'hd100')
+          "
+          formControlName="closureDate"
+        />
         <app-error-message
           [control]="form.get('closureDate')"
           [isTouched]="false"

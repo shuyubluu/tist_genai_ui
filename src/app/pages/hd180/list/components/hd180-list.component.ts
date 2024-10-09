@@ -1,3 +1,4 @@
+import { Hd100FormService } from './../../../hd100/form/service/hd100-form.service';
 import { Hd180ListService } from './../service/hd180-list.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -62,7 +63,8 @@ export class Hd180ListComponent implements OnInit {
     private tabService: TabService, // 關閉tab的Service
     private router: Router, // 路由
     public caseInformationService: CaseInformationService, // caseInformationService
-    private hd180ListService: Hd180ListService // hd180ListService
+    private hd180ListService: Hd180ListService, // hd180ListService
+    private hd100FormService: Hd100FormService // hd100FormService
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
@@ -101,22 +103,20 @@ export class Hd180ListComponent implements OnInit {
 
   // 檢視
   async view() {
+    this.hd100FormService.setCurrentRoute('hd180');
     await this.router.navigate(['/hd100/form']);
     this.closeTab('個案結案名冊');
     this.caseInformationService.isChoiceCase = true;
-    this.hd180ListService.isEdit = false;
-    this.hd180ListService.isView = true;
-    this.hd180ListService.isCanReview = false;
+    this.hd180ListService.setMode(true, false);
   }
 
   // 編輯
   async edit() {
+    this.hd100FormService.setCurrentRoute('hd180');
     await this.router.navigate(['/hd100/form']);
     this.closeTab('個案結案名冊');
     this.caseInformationService.isChoiceCase = true;
-    this.hd180ListService.isEdit = true;
-    this.hd180ListService.isView = false;
-    this.hd180ListService.isCanReview = false;
+    this.hd180ListService.setMode(false, true);
   }
 
   // 關閉個案結案名冊
@@ -130,11 +130,7 @@ export class Hd180ListComponent implements OnInit {
   }
 
   // 當結案日期區間改變觸發
-  onClosureDateChange(date: {
-    year: string;
-    month: string;
-    day: string;
-  }) {
+  onClosureDateChange(date: { year: string; month: string; day: string }) {
     // 如果日期有輸入，則檢查日期區間
     if (date && this.checkDateRange) {
       if (

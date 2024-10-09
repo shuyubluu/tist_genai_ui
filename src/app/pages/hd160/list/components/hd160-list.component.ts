@@ -105,27 +105,21 @@ export class Hd160ListComponent implements OnInit {
   view() {
     this.router.navigate(['/hd160/form']);
     this.caseInformationService.isChoiceCase = true;
-    this.hd160ListService.isCreate = false;
-    this.hd160ListService.isEdit = false;
-    this.hd160ListService.isView = true;
+    this.hd160ListService.setMode(true, false, false);
   }
 
   // 編輯
   edit() {
     this.router.navigate(['/hd160/form']);
     this.caseInformationService.isChoiceCase = true;
-    this.hd160ListService.isEdit = true;
-    this.hd160ListService.isCreate = false;
-    this.hd160ListService.isView = false;
+    this.hd160ListService.setMode(false, false, true);
   }
 
   // 新增個案資料
   create() {
     this.router.navigate(['/hd160/form']);
     this.caseInformationService.isChoiceCase = false;
-    this.hd160ListService.isEdit = false;
-    this.hd160ListService.isCreate = true;
-    this.hd160ListService.isView = false;
+    this.hd160ListService.setMode(false, true, false);
   }
 
   // 關閉生活品質問卷清單

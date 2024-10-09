@@ -565,8 +565,11 @@
       <div>
         <app-button
           [buttonText]="'添加'"
-          [attachClassName]="['success']"
+          [disabled]="hd640ListService.isView"
           (click)="showUnitViewPermissionsModal()"
+          [attachClassName]="
+            hd640ListService.isView ? ['secondary'] : ['success']
+          "
         />
         <span>{{ currentSelectedUnitViewPermissions }}</span>
         <nz-modal

@@ -84,25 +84,19 @@ export class Hd600ListComponent implements OnInit {
   // 檢視
   view() {
     this.router.navigate(['/hd600/form']);
-    this.hd600ListService.isView = true;
-    this.hd600ListService.isCreate = false;
-    this.hd600ListService.isEdit = false;
+    this.hd600ListService.setMode(true, false, false);
   }
 
   // 新增
   create() {
     this.router.navigate(['/hd600/form']);
-    this.hd600ListService.isView = false;
-    this.hd600ListService.isCreate = true;
-    this.hd600ListService.isEdit = false;
+    this.hd600ListService.setMode(false, true, false);
   }
 
   // 編輯
   edit() {
     this.router.navigate(['/hd600/form']);
-    this.hd600ListService.isView = false;
-    this.hd600ListService.isCreate = false;
-    this.hd600ListService.isEdit = true;
+    this.hd600ListService.setMode(false, false, true);
   }
 
   // 停用

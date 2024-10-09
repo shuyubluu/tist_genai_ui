@@ -30,7 +30,10 @@
       </div>
       <div class="label">填表日期</div>
       <div class="column-Message">
-        <app-dayPicker formControlName="formFillingDate" />
+        <app-dayPicker
+          [disabled]="hd100ListService.isView"
+          formControlName="formFillingDate"
+        />
         <app-error-message
           [control]="form.get('formFillingDate')"
           [isTouched]="false"
@@ -227,6 +230,7 @@
       <div class="label">生日</div>
       <div class="column-Message">
         <app-dayPicker
+          [disabled]="hd100ListService.isView"
           [startRange]="100"
           [endRange]="0"
           formControlName="dateOfBirth"

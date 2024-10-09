@@ -158,25 +158,19 @@ export class Hd640ListComponent implements OnInit {
   // 新增社工資料
   create() {
     this.router.navigate(['/hd640/form']);
-    this.hd640ListService.isCreate = true;
-    this.hd640ListService.isEdit = false;
-    this.hd640ListService.isView = false;
+    this.hd640ListService.setMode(false, true, false);
   }
 
   // 檢視社工資料
   view() {
     this.router.navigate(['/hd640/form']);
-    this.hd640ListService.isCreate = false;
-    this.hd640ListService.isEdit = false;
-    this.hd640ListService.isView = true;
+    this.hd640ListService.setMode(true, false, false);
   }
 
   // 編輯社工資料
   edit() {
     this.router.navigate(['/hd640/form']);
-    this.hd640ListService.isCreate = false;
-    this.hd640ListService.isEdit = true;
-    this.hd640ListService.isView = false;
+    this.hd640ListService.setMode(false, false, true);
   }
 
   // 關閉當前的tab

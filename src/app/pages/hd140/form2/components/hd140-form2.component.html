@@ -37,8 +37,8 @@
           <app-button
             *ngIf="!content.isChoice"
             [buttonText]="'選取'"
-            [disabled]="isDisable(item)"
-            [attachClassName]="isDisable(item) ? ['secondary'] : ['success']"
+            [disabled]="true"
+            [attachClassName]="['secondary']"
             (click)="onChoice(content)"
           />
           <app-button

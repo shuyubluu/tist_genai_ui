@@ -4,14 +4,14 @@
       <div class="label">發佈日期區間</div>
       <div class="column-Message">
         <app-dayPicker
-        (ngModelChange)="onPublicationDateChange($event)"
+          (ngModelChange)="onPublicationDateChange($event)"
           [startRange]="30"
           [endRange]="0"
           formControlName="publicationDate_start"
         />
         <span class="mx-2">-</span>
         <app-dayPicker
-        (ngModelChange)="onPublicationDateChange($event)"
+          (ngModelChange)="onPublicationDateChange($event)"
           [startRange]="30"
           [endRange]="0"
           formControlName="publicationDate_end"
@@ -78,6 +78,7 @@
     </div>
     <!-- !TODO -->
     <div>
+      <app-button [buttonText]="'檢視'" (click)="view()" />
       <app-button
         [buttonText]="'編輯'"
         [attachClassName]="['warning']"

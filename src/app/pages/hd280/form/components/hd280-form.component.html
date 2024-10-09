@@ -8,7 +8,10 @@
     <div class="grid-columns-1">
       <div class="label">填表日期</div>
       <div class="column-Message">
-        <app-dayPicker formControlName="fillingDate" />
+        <app-dayPicker
+          [disabled]="hd230ListService.isView"
+          formControlName="fillingDate"
+        />
         <app-error-message
           [control]="form.get('fillingDate')"
           [isTouched]="false"
@@ -28,6 +31,7 @@
       <div class="label">服務日期</div>
       <div class="column-Message">
         <app-dayPicker
+          [disabled]="hd230ListService.isView"
           class="mr-2"
           (ngModelChange)="onServiceDateChange($event)"
           formControlName="serviceDate_start"
@@ -45,6 +49,7 @@
         />
         <span class="mx-2">-</span>
         <app-dayPicker
+          [disabled]="hd230ListService.isView"
           class="mr-2"
           (ngModelChange)="onServiceDateChange($event)"
           formControlName="serviceDate_end"

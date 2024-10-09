@@ -42,7 +42,12 @@ export class Hd600FormComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // 檢視模式，禁用表單
+    if (this.hd600ListService.isView) {
+      this.form.disable();
+    }
+  }
 
   // 儲存
   save() {

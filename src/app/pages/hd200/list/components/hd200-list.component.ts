@@ -126,27 +126,21 @@ export class Hd200ListComponent implements OnInit {
   async create() {
     await this.router.navigate(['/hd200/form']);
     this.volunteerInformationService.isChoiceVolunteer = false;
-    this.hd200ListService.isCreate = true;
-    this.hd200ListService.isEdit = false;
-    this.hd200ListService.isView = false;
+    this.hd200ListService.setMode(false, true, false);
   }
 
   // 檢視
   async view() {
     await this.router.navigate(['/hd200/form']);
     this.volunteerInformationService.isChoiceVolunteer = true;
-    this.hd200ListService.isCreate = false;
-    this.hd200ListService.isEdit = false;
-    this.hd200ListService.isView = true;
+    this.hd200ListService.setMode(true, false, false);
   }
 
   // 編輯
   async edit() {
     await this.router.navigate(['/hd200/form']);
     this.volunteerInformationService.isChoiceVolunteer = true;
-    this.hd200ListService.isCreate = false;
-    this.hd200ListService.isEdit = true;
-    this.hd200ListService.isView = false;
+    this.hd200ListService.setMode(false, false, true);
   }
 
   // 關閉志工資料清單

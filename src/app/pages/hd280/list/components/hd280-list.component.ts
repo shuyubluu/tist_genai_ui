@@ -123,9 +123,7 @@ export class Hd280ListComponent implements OnInit {
   async create() {
     await this.router.navigate(['/hd280/form']);
     this.volunteerInformationService.isChoiceVolunteer = false;
-    this.hd230ListService.isCreate = true;
-    this.hd230ListService.isView = false;
-    this.hd230ListService.isEdit = false;
+    this.hd230ListService.setMode(false, true, false);
   }
 
   // 檢視

@@ -105,27 +105,21 @@ export class Hd170ListComponent implements OnInit {
   view() {
     this.router.navigate(['/hd170/form']);
     this.caseInformationService.isChoiceCase = true;
-    this.hd170ListService.isCreate = false;
-    this.hd170ListService.isEdit = false;
-    this.hd170ListService.isView = true;
+    this.hd170ListService.setMode(true, false, false);
   }
 
   // 編輯
   edit() {
     this.router.navigate(['/hd170/form']);
     this.caseInformationService.isChoiceCase = true;
-    this.hd170ListService.isEdit = true;
-    this.hd170ListService.isCreate = false;
-    this.hd170ListService.isView = false;
+    this.hd170ListService.setMode(false, false, true);
   }
 
   // 新增個案資料
   create() {
     this.router.navigate(['/hd170/form']);
     this.caseInformationService.isChoiceCase = false;
-    this.hd170ListService.isEdit = false;
-    this.hd170ListService.isCreate = true;
-    this.hd170ListService.isView = false;
+    this.hd170ListService.setMode(false, true, false);
   }
 
   // 關閉個案複評表清單

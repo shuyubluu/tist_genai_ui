@@ -115,27 +115,21 @@ export class Hd250ListComponent implements OnInit {
   async create() {
     await this.router.navigate(['/hd250/form']);
     this.volunteerInformationService.isChoiceVolunteer = true;
-    this.hd250ListService.isCreate = true;
-    this.hd250ListService.isEdit = false;
-    this.hd250ListService.isView = false;
+    this.hd250ListService.setMode(false, true, false);
   }
 
   // 檢視
   async view() {
     await this.router.navigate(['/hd250/form']);
     this.volunteerInformationService.isChoiceVolunteer = true;
-    this.hd250ListService.isCreate = false;
-    this.hd250ListService.isEdit = false;
-    this.hd250ListService.isView = true;
+    this.hd250ListService.setMode(true, false, false);
   }
 
   // 編輯
   async edit() {
     await this.router.navigate(['/hd250/form']);
     this.volunteerInformationService.isChoiceVolunteer = true;
-    this.hd250ListService.isCreate = false;
-    this.hd250ListService.isEdit = true;
-    this.hd250ListService.isView = false;
+    this.hd250ListService.setMode(false, false, true);
   }
 
   // 關閉保險

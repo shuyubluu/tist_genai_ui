@@ -8,7 +8,10 @@
     <div class="grid-columns-1">
       <div class="label">填表日期</div>
       <div class="column-Message">
-        <app-dayPicker formControlName="submissionDate" />
+        <app-dayPicker
+          [disabled]="hd210ListService.isView"
+          formControlName="submissionDate"
+        />
         <app-error-message
           [control]="form.get('submissionDate')"
           [isTouched]="false"
@@ -23,11 +26,13 @@
         <div class="label">受訓日期</div>
         <div class="column-Message">
           <app-dayPicker
+            [disabled]="hd210ListService.isView"
             (ngModelChange)="onTrainingDateChange($event)"
             formControlName="trainingDate_start"
           />
           <span class="mx-2">-</span>
           <app-dayPicker
+            [disabled]="hd210ListService.isView"
             (ngModelChange)="onTrainingDateChange($event)"
             formControlName="trainingDate_end"
           />
@@ -172,7 +177,10 @@
         </div>
         <div class="label">核定日期</div>
         <div>
-          <app-dayPicker formControlName="approvalDate" />
+          <app-dayPicker
+            [disabled]="hd210ListService.isView"
+            formControlName="approvalDate"
+          />
         </div>
       </div>
     </div>

@@ -60,7 +60,10 @@
     <div class="grid-columns-2">
       <div class="label disableBackground">生日</div>
       <div>
-        <app-dayPicker formControlName="dateOfBirth" />
+        <app-dayPicker
+          [disabled]="hd170ListService.isView"
+          formControlName="dateOfBirth"
+        />
       </div>
       <div class="label disableBackground">身份證字號</div>
       <div>
