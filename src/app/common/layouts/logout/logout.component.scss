@@ -4,53 +4,24 @@
   margin-top: -25px;
 }
 
-.navbar-text {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  color: var(--bs-navbar-color);
-}
-
-.navbar-text a,
-.navbar-text a:hover,
-.navbar-text a:focus {
-  color: var(--bs-navbar-active-color);
-}
-
 .auto_logout {
-  font-size: 0.9375rem;
+  font-size: 1rem;
   color: #666;
-  line-height: 1.4rem;
-  padding-top: 0;
-}
 
-.auto_logout .countdown {
-  color: #b82b22;
-}
+  .countdown {
+    color: #b82b22;
+    margin: 0px 5px;
+  }
 
-.auto_logout .reset {
-  margin: 0 1rem 0 0;
-  padding-right: 1rem;
-}
+  .reset {
+    img {
+      width: 1.4rem;
+      cursor: pointer;
 
-.auto_logout .reset img {
-  width: 1.4rem;
-}
-
-.auto_logout .reset:hover img {
-  opacity: 0.8; /* 添加懸停效果，例如改變不透明度 */
-  transform: scale(1.1); /* 放大效果 */
-}
-
-.auto_logout .reset:active img {
-  opacity: 0.6; /* 添加點擊效果，例如改變不透明度 */
-  transform: scale(1.2); /* 縮小效果 */
-}
-
-.modal-content {
-  text-align: center; /* 水平居中 */
-  margin: auto; /* 垂直居中 */
-}
-
-.button-container {
-  margin-top: 20px; /* 按钮间距 */
+      &:hover {
+        opacity: 0.8;
+        transform: scale(1.2);
+      }
+    }
+  }
 }

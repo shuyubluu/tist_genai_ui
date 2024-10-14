@@ -17,6 +17,10 @@ export class HeaderComponent {
 
   constructor(private authService: AuthService) {}
 
+  ngOnInit(): void {}
+
+  ngOnDestroy(): void {}
+
   logout(): void {
     this.authService.logout();
   }

@@ -1,15 +1,8 @@
-import {
-  Component,
-  OnDestroy,
-  OnInit,
-  TemplateRef,
-  ViewChild,
-} from '@angular/core';
-import { AuthService } from '../../auth/auth.service';
-import { Subscription, interval, map, startWith, takeWhile } from 'rxjs';
-import { ModalComponent } from '../../components/modal/modal.component';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { AuthService } from './../../auth/auth.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription, debounceTime, fromEvent, interval } from 'rxjs';
 import { ButtonComponent } from '../../components/button/button.component';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-logout',
@@ -19,91 +12,76 @@ import { ButtonComponent } from '../../components/button/button.component';
   styleUrl: './logout.component.scss',
 })
 export class LogoutComponent implements OnInit, OnDestroy {
-  @ViewChild('contentTemplate', { static: true })
-  contentTemplate!: TemplateRef<any>;
-  dialogRef!: MatDialogRef<any>;
+  minutes: number = 30;
+  seconds: number = 0;
+  clickSubscription!: Subscription;
+  timerSubscription!: Subscription;
+  countdownTime: number = 1800; // 30 分鐘的秒數
 
-  minutes: string = '30';
-  seconds: string = '00';
-  private countdownSubscription: Subscription | null = null;
-  private countdownStart = 1800; // 倒數計時30分（1800秒）
-  private countdownValue = this.countdownStart;
+  constructor(private authService: AuthService, private http: HttpClient) {}
 
-  constructor(private authService: AuthService, private dialog: MatDialog) {}
+  // private token = '';
+  // private api = '';
+
+  // getData() {
+  //   const headers = new HttpHeaders({
+  //     Authorization: `Bearer ${this.token}`,
+  //   });
+
+  //   return this.http.get(this.api, { headers });
+  // }
 
   ngOnInit(): void {
-    this.startLogoutCountdown();
+    // 初始化倒數計時器
+    this.startCountdown();
+
+    // 監聽點擊事件並設置倒數計時邏輯
+    this.detectClickAndRefresh();
   }
 
   ngOnDestroy(): void {
-    this.clearLogoutCountdown();
+    // 確保組件銷毀時停止訂閱
+    if (this.clickSubscription) {
+      this.clickSubscription.unsubscribe();
+    }
+    if (this.timerSubscription) {
+      this.timerSubscription.unsubscribe();
+    }
   }
 
-  startLogoutCountdown(): void {
-    this.clearLogoutCountdown();
-    this.authService.startLogoutCountdown(this.countdownValue * 1000);
-    this.countdownSubscription = interval(1000)
-      .pipe(
-        startWith(0), // 立即觸發一次訂閱
-        takeWhile(() => this.countdownValue > 0),
-        map(() => --this.countdownValue),
-        map((remainingSeconds: number) => {
-          const minutes = Math.floor(remainingSeconds / 60);
-          const seconds = remainingSeconds % 60;
-          return { minutes, seconds };
-        })
-      )
-      .subscribe(({ minutes, seconds }) => {
-        this.minutes = minutes < 10 ? '0' + minutes : minutes.toString();
-        this.seconds = seconds < 10 ? '0' + seconds : seconds.toString();
+  // 啟動倒數計時器
+  startCountdown(): void {
+    this.timerSubscription = interval(1000).subscribe(() => {
+      if (this.countdownTime > 0) {
+        this.countdownTime--; // 每秒減少一秒
+        this.minutes = Math.floor(this.countdownTime / 60);
+        this.seconds = this.countdownTime % 60;
+      } else {
+        this.logout();
+      }
+    });
+  }
 
-        // 當剩餘時間為 15秒 時顯示提示訊息
-        if (this.countdownValue === 15) {
-          this.openModal(this.contentTemplate);
-        }
-        // 當剩餘時間為 0秒 關閉提示訊息
-        if (this.countdownValue === 0) {
-          this.closeModal();
-          this.dialog.closeAll();
-        }
+  // 重置倒數計時器
+  resetCountdown(): void {
+    this.countdownTime = 1800; // 30 分鐘
+    this.minutes = 30;
+    this.seconds = 0;
+  }
+
+  // 偵測點擊並設置倒數計時
+  detectClickAndRefresh(): void {
+    this.clickSubscription = fromEvent(document, 'click')
+      .pipe(
+        debounceTime(1000) // 設置1秒的去抖動時間，等到1秒無連續點擊後再執行刷新
+      )
+      .subscribe(() => {
+        this.resetCountdown();
       });
   }
 
-  clearLogoutCountdown(): void {
-    if (this.countdownSubscription) {
-      this.countdownSubscription.unsubscribe();
-      this.countdownSubscription = null;
-    }
-  }
-
-  resetLogoutCountdown(): void {
-    this.countdownValue = this.countdownStart;
-    this.minutes = '30';
-    this.seconds = '00';
-    this.startLogoutCountdown();
-  }
-
-  extendedUse(): void {
-    this.resetLogoutCountdown();
-    this.closeModal();
-  }
-
-  closeModal(): void {
-    if (this.dialogRef) {
-      this.dialogRef.close();
-    }
-  }
-
-  // 打開模態對話框顯示事件詳細信息
-  openModal(contentTemplate: any): void {
-    this.dialogRef = this.dialog.open(ModalComponent, {
-      width: '300px',
-      height: '300px',
-      data: {
-        title: '提醒您',
-        contentTemplate: contentTemplate,
-      },
-      disableClose: true,
-    });
+  // 登出
+  logout(): void {
+    this.authService.logout(); // 登出操作
   }
 }

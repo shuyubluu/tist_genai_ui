@@ -102,7 +102,13 @@ export class MenuComponent implements OnInit {
               // { title: '社工員', icon: 'user', link: '#' },
             ],
           },
-          { title: '06- 系統參數維護', open: false, link: '/hd650' },
+          {
+            title: '06- 系統參數維護',
+            children: [
+              { title: '預照管理系統', link: '/hd650/system' },
+              { title: '志工Web APP', link: '/hd650/webapp' },
+            ],
+          },
           { title: '07- 佈告欄維護', open: false, link: '/hd660' },
         ],
       },

@@ -5,9 +5,11 @@
 </div> -->
 
 <div class="header">
-    <a href="/"><img src="../../../../assets/img/hondao_logo.png" alt="Logo" class="logo"></a>
-    <span class="welcome-text">歡迎! 系統管理員!</span>
-    <!-- <div class="d-flex">
+  <a href="/"
+    ><img src="../../../../assets/img/hondao_logo.png" alt="Logo" class="logo"
+  /></a>
+  <span class="welcome-text">歡迎! 系統管理員!</span>
+  <!-- <div class="d-flex">
         <div class="navbar-text auto_logout "> <span class="">自動登出時間</span>
             <span class="countdown">29:59</span>
             <span class="reset">
@@ -15,12 +17,22 @@
             </span>
         </div>
     </div> -->
-    <app-logout></app-logout>
-    <button [nzSize]="'default'" nz-button class="logout-button" (click)="logout()">
-        <span>登出</span>
-    </button>
-    <button [nzSize]="'default'" nz-button (click)="toggleCollapsed.emit()" class="toggle-menu">
-        <span nz-icon nzType="menu-fold" nzTheme="outline"></span>
-        <span>隱藏/開啟選單</span>
-    </button>
+  <app-logout></app-logout>
+  <button
+    [nzSize]="'default'"
+    nz-button
+    class="logout-button"
+    (click)="logout()"
+  >
+    <span>登出</span>
+  </button>
+  <button
+    [nzSize]="'default'"
+    nz-button
+    (click)="toggleCollapsed.emit()"
+    class="toggle-menu"
+  >
+    <span nz-icon nzType="menu-fold" nzTheme="outline"></span>
+    <span>隱藏/開啟選單</span>
+  </button>
 </div>
