@@ -275,8 +275,10 @@ export class Hd120FormComponent implements OnInit {
       registeredAddress_select: new FormControl(),
       // 戶籍地址
       registeredAddress: new FormControl(''),
-      // map定位座標
-      mapCoordinates: new FormControl(''),
+      // map定位座標_X軸
+      mapCoordinates_x: new FormControl(''),
+      // map定位座標_y軸
+      mapCoordinates_y: new FormControl(''),
       // 教育程度
       educationLevel: new FormControl('', [Validators.required]),
       // 婚姻狀況

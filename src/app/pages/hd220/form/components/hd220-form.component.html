@@ -19,6 +19,7 @@
       <div class="label">表揚單位</div>
       <div class="column-Message">
         <app-select
+        (ngModelChange)="onPraiseUnitSelectChange($event)"
           [selectWidth]="'100px'"
           [defaultPlaceHolder]="false"
           [options]="selectOptions_praiseUnit"

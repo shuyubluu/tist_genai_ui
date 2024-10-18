@@ -37,51 +37,12 @@ export class Hd660ListComponent implements OnInit {
   pageSize: number = 10;
   // 檢查日期區間
   checkDateRange: boolean = false;
-  // 發佈單位select選項
-  selectOptions_publishingUnit: string[] = [
-    '彭祖體驗長者導師志工隊',
-    '不老夢想125號志工隊',
-    '北投(北投志工站)',
-    '南港(南港志工站)',
-    '松山(松山志工站)',
-    '中正(中正志工站)',
-    '內湖(內湖志工站)',
-    '宜蘭(宜蘭志工站)',
-    '八德(八德志工站)',
-    '龍潭(龍潭志工站)',
-    '平溪(平溪志工站)',
-    '樹林(樹林志工站)',
-    '三峽(三峽志工站)',
-    '雙板(雙板志工站)',
-    '新莊(新莊志工站)',
-    '清水(清水志工站)',
-    '太平(太平志工站)',
-    '南屯(南屯志工站)',
-    '北屯(北屯志工站)',
-    '大雅(大雅志工站)',
-    '中西(中西志工站)',
-    '埔里(埔里志工站)',
-    '西屯(西屯志工隊)',
-    '和美(和美志工站)',
-    '憶智樂活之家志工隊',
-    '田中(田中志工站)',
-    '員林(員林志工站)',
-    '大林(大林志工站)',
-    '嘉西(嘉西志工站)',
-    '大寮(大寮志工站)',
-    '三民區',
-    '前金(志工站)',
-    '前金區',
-    '萬丹(萬丹志工站)',
-    '潮州(潮州志工站)',
-    '林邊(林邊志工站)',
-  ];
 
   // 搜尋結果模擬資料
   searchResultData: SearchResultData[] = [
     {
       publicationDate: '113/02/02',
-      publishingUnit: '彭祖體驗長者導師志工隊',
+      publishingUnit: '總會(系統管理者)',
       subjectTitle: '要準時完成表單填寫',
       publisher: '王小美',
     },
@@ -106,8 +67,6 @@ export class Hd660ListComponent implements OnInit {
       publicationDate_start: new FormControl(''),
       // 發佈日期_結束
       publicationDate_end: new FormControl(''),
-      // 發佈單位
-      publishingUnit: new FormControl(''),
     });
   }
 

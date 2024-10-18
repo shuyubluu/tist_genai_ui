@@ -44,17 +44,18 @@ export class Hd200List2Component implements OnInit {
   searchResultData: SearchResultData[] = [
     {
       uploadDate: '113/02/01',
+      fileName: '個督紀錄表.pdf',
     },
   ];
 
-  // 個督紀錄模擬匯入檔案
-  personalSupervisionRecord_fileList: NzUploadFile[] = [
-    {
-      uid: '1',
-      name: '個督紀錄表.excel',
-      status: 'done',
-    },
-  ];
+  // // 個督紀錄模擬匯入檔案
+  // personalSupervisionRecord_fileList: NzUploadFile[] = [
+  //   {
+  //     uid: '1',
+  //     name: '個督紀錄表.pdf',
+  //     status: 'done',
+  //   },
+  // ];
 
   // 分頁器切割後的資料
   get newSearchResultData(): SearchResultData[] {

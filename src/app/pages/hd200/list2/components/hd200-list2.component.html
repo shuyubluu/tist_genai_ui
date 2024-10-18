@@ -31,6 +31,12 @@
   </div>
   <div class="buttonArea">
     <app-button [buttonText]="'搜尋'" (click)="search()" />
+    <nz-upload
+      class="divCenter"
+      nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+    >
+      <app-button [attachClassName]="['success']" [buttonText]="'上傳紀錄表'" />
+    </nz-upload>
     <app-button
       [attachClassName]="['danger']"
       [buttonText]="'關閉'"
@@ -44,6 +50,7 @@
 <div class="grid-search-container">
   <div class="grid-columns searchTitle">
     <div>上傳日期</div>
+    <div>檔案名稱</div>
     <div>操作</div>
   </div>
   <div
@@ -57,24 +64,14 @@
     <div>
       {{ searchResult.uploadDate }}
     </div>
+    <div>
+      {{ searchResult.fileName }}
+    </div>
     <!-- !TODO -->
     <div class="divCenter">
       <app-button [buttonText]="'檢視'" />
-      <nz-upload
-        class="divCenter"
-        nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-        [nzFileList]="personalSupervisionRecord_fileList"
-        (nzChange)="personalSupervisionRecord_handleChange($event)"
-      >
-        <app-button
-          [attachClassName]="['success']"
-          [buttonText]="'上傳紀錄表'"
-        />
-      </nz-upload>
-      <!-- <app-button
-          [attachClassName]="['danger']"
-          [buttonText]="'下載紀錄表'"
-        /> -->
+      <app-button [attachClassName]="['success']" [buttonText]="'下載'" />
+      <app-button [attachClassName]="['danger']" [buttonText]="'刪除'" />
     </div>
   </div>
 </div>

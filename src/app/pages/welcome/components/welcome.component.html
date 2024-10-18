@@ -51,12 +51,11 @@
     <div>
       <div class="managementArea_title">負責個案</div>
       <div class="managementArea_content">
-        <div>
-          <div>{{ caseManagement_ResponsibleCaseData.length }} 筆</div>
-          <app-button
-            [buttonText]="'查看'"
-            (click)="showCaseManagement_ResponsibleCaseModal()"
-          />
+        <div
+          class="managementArea_button"
+          (click)="showCaseManagement_ResponsibleCaseModal()"
+        >
+          {{ caseManagement_ResponsibleCaseData.length }} 筆
         </div>
         <nz-modal
           class="modal"
@@ -104,11 +103,12 @@
       <div class="managementArea_title">本月應完成</div>
       <div class="managementArea_content">
         <div>
-          <div>{{ caseManagement_MonthlyTargetData.length }} 筆</div>
-          <app-button
-            [buttonText]="'查看'"
+          <div
+            class="managementArea_button"
             (click)="showCaseManagement_MonthlyTargetModal()"
-          />
+          >
+            {{ caseManagement_MonthlyTargetData.length }} 筆
+          </div>
           <nz-modal
             class="modal"
             [(nzVisible)]="isCaseManagement_MonthlyTargetVisible"
@@ -196,11 +196,12 @@
       <div class="managementArea_title">逾期表單</div>
       <div class="managementArea_content">
         <div>
-          <div>{{ caseManagement_OverdueFormsData.length }} 筆</div>
-          <app-button
-            [buttonText]="'查看'"
+          <div
+            class="managementArea_button"
             (click)="showCaseManagement_OverdueFormsModal()"
-          />
+          >
+            {{ caseManagement_OverdueFormsData.length }} 筆
+          </div>
           <nz-modal
             class="modal"
             [(nzVisible)]="isCaseManagement_OverdueFormsVisible"
@@ -250,11 +251,12 @@
       <div class="managementArea_title">志工人數</div>
       <div class="managementArea_content">
         <div>
-          <div>{{ volunteerManagement_VolunteerCountData.length }} 筆</div>
-          <app-button
-            [buttonText]="'查看'"
+          <div
+            class="managementArea_button"
             (click)="showVolunteerManagement_VolunteerCountModal()"
-          />
+          >
+            {{ volunteerManagement_VolunteerCountData.length }} 筆
+          </div>
         </div>
         <nz-modal
           class="modal"
@@ -300,11 +302,12 @@
       <div class="managementArea_title">本月應完成</div>
       <div class="managementArea_content">
         <div>
-          <div>{{ volunteerManagement_MonthlyTargetData.length }} 筆</div>
-          <app-button
-            [buttonText]="'查看'"
+          <div
+            class="managementArea_button"
             (click)="showVolunteerManagement_MonthlyTargetModal()"
-          />
+          >
+            {{ volunteerManagement_MonthlyTargetData.length }} 筆
+          </div>
           <nz-modal
             class="modal"
             [(nzVisible)]="isVolunteerManagement_MonthlyTargetVisible"
@@ -390,11 +393,12 @@
       <div class="managementArea_title">逾期表單</div>
       <div class="managementArea_content">
         <div>
-          <div>{{ volunteerManagement_OverdueFormsData.length }} 筆</div>
-          <app-button
-            [buttonText]="'查看'"
+          <div
+            class="managementArea_button"
             (click)="showVolunteerManagement_OverdueFormsModal()"
-          />
+          >
+            {{ volunteerManagement_OverdueFormsData.length }} 筆
+          </div>
           <nz-modal
             class="modal"
             [(nzVisible)]="isVolunteerManagement_OverdueFormsVisible"
@@ -445,29 +449,33 @@
     <div>
       <div class="approvalSection_title">待簽表單</div>
       <div class="approvalSection_content">
-        <div>16 筆</div>
-        <app-button [buttonText]="'查看'" (click)="viewPendingForms()" />
+        <div class="approvalSection_button" (click)="viewPendingForms()">
+          16 筆
+        </div>
       </div>
     </div>
     <div>
       <div class="approvalSection_title">退件表單</div>
       <div class="approvalSection_content">
-        <div>12 筆</div>
-        <app-button [buttonText]="'查看'" (click)="viewRejectedForms()" />
+        <div class="approvalSection_button" (click)="viewRejectedForms()">
+          12 筆
+        </div>
       </div>
     </div>
     <div>
       <div class="approvalSection_title">已送審表單</div>
       <div class="approvalSection_content">
-        <div>11 筆</div>
-        <app-button [buttonText]="'查看'" (click)="viewSubmittedForms()" />
+        <div class="approvalSection_button" (click)="viewSubmittedForms()">
+          11 筆
+        </div>
       </div>
     </div>
     <div>
       <div class="approvalSection_title">已簽核表單</div>
       <div class="approvalSection_content">
-        <div>20 筆</div>
-        <app-button [buttonText]="'查看'" (click)="viewApprovedForms()" />
+        <div class="approvalSection_button" (click)="viewApprovedForms()">
+          20 筆
+        </div>
       </div>
     </div>
   </div>
@@ -490,9 +498,11 @@
     >
       <div>{{ content.date }}</div>
       <div>
-        <a class="latestAnnouncementArea_subject" (click)="openModal('主旨標題', content.subject, '')">{{
-          content.subject
-        }}</a>
+        <a
+          class="latestAnnouncementArea_subject"
+          (click)="openModal('主旨標題', content.subject, '')"
+          >{{ content.subject }}</a
+        >
       </div>
       <div>{{ content.unit }}</div>
       <div>{{ content.create }}</div>

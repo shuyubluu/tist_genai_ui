@@ -61,25 +61,11 @@
           [options]="selectOptions_region"
           formControlName="serviceUnit_select2"
         />
-        <app-error-message
-          class="mr-5"
-          [control]="form.get('serviceUnit_select2')"
-          [isTouched]="false"
-          errorKey="required"
-          errorMessage="必選"
-        />
         <app-select
           [selectWidth]="'200px'"
           [defaultPlaceHolder]="false"
           [options]="selectOptions_region"
           formControlName="serviceUnit_select3"
-        />
-        <app-error-message
-          class="mr-5"
-          [control]="form.get('serviceUnit_select3')"
-          [isTouched]="false"
-          errorKey="required"
-          errorMessage="必選"
         />
       </div>
     </div>

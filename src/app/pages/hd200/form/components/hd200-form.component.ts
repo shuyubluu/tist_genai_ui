@@ -316,9 +316,9 @@ export class Hd200FormComponent implements OnInit {
       // 服務單位select1
       serviceUnit_select1: new FormControl('', [Validators.required]),
       // 服務單位select2
-      serviceUnit_select2: new FormControl('', [Validators.required]),
+      serviceUnit_select2: new FormControl(''),
       // 服務單位select3
-      serviceUnit_select3: new FormControl('', [Validators.required]),
+      serviceUnit_select3: new FormControl(''),
       // 單位名稱
       unitName: new FormControl('', [Validators.required]),
       // 主責人

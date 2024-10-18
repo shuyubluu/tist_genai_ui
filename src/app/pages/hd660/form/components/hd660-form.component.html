@@ -15,17 +15,11 @@
         />
       </div>
       <div class="label">發佈單位</div>
-      <div class="column-Message">
-        <app-select
-          [selectWidth]="'200px'"
-          [options]="selectOptions_publishingUnit"
+      <div>
+        <app-input
+          [inputWidth]="'150px'"
+          [maxLength]="30"
           formControlName="publishingUnit"
-        />
-        <app-error-message
-          [control]="form.get('publishingUnit')"
-          [isTouched]="false"
-          errorKey="required"
-          errorMessage="必選"
         />
       </div>
     </div>

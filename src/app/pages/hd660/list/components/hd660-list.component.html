@@ -1,6 +1,6 @@
 <form [formGroup]="form">
   <div class="grid-container">
-    <div class="grid-columns-2 border-bottom-0">
+    <div class="grid-columns-1 border-bottom-0">
       <div class="label">發佈日期區間</div>
       <div class="column-Message">
         <app-dayPicker
@@ -20,14 +20,6 @@
           [isCustom]="true"
           [condition]="checkDateRange"
           [errorMessage]="'格式錯誤'"
-        />
-      </div>
-      <div class="label">發布單位</div>
-      <div>
-        <app-select
-          [selectWidth]="'200px'"
-          [options]="selectOptions_publishingUnit"
-          formControlName="publishingUnit"
         />
       </div>
     </div>

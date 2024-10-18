@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
 import { InputComponent } from '../../../../common/components/input/input.component';
 import { SelectComponent } from '../../../../common/components/select/select.component';
@@ -76,12 +75,60 @@ export class Hd220FormComponent implements OnInit {
     if (this.hd220ListService.isView) {
       this.form.disable();
     }
+
+    // 如果表揚單位沒有選擇
+    // 如有選擇則判定開啟哪項表單
+    if (this.form.value.praiseUnit === '') {
+      // 禁用外單位_表揚單位名稱
+      this.form.get('externalUnit_praiseUnitName')?.disable();
+      // 禁用外單位_獎項名稱
+      this.form.get('externalUnit_awardName')?.disable();
+      // 禁用外單位_具體事蹟
+      this.form.get('externalUnit_specificDeeds')?.disable();
+      // 禁用本單位表揚
+      this.form.get('unitPraise')?.disable();
+      // 禁用具體事蹟
+      this.form.get('specificDeeds')?.disable();
+    } else {
+      this.onPraiseUnitSelectChange(this.form.value.praiseUnit);
+    }
   }
 
   // 新增獎勵表揚表
   create() {
     this.message.create('success', '新增成功');
     this.closeTab('獎勵表揚表');
+  }
+
+  // 當表揚單位選擇時觸發
+  onPraiseUnitSelectChange(option: string) {
+    if (option === '會外表揚') {
+      // 啟用外單位_表揚單位名稱
+      this.form.get('externalUnit_praiseUnitName')?.enable();
+      // 啟用外單位_獎項名稱
+      this.form.get('externalUnit_awardName')?.enable();
+      // 啟用外單位_具體事蹟
+      this.form.get('externalUnit_specificDeeds')?.enable();
+    } else {
+      this.form.get('unitPraise')?.enable();
+      // 禁用外單位_表揚單位名稱
+      this.form.get('externalUnit_praiseUnitName')?.disable();
+      // 禁用外單位_獎項名稱
+      this.form.get('externalUnit_awardName')?.disable();
+      // 禁用外單位_具體事蹟
+      this.form.get('externalUnit_specificDeeds')?.disable();
+    }
+    if (option === '會內表揚') {
+      // 啟用本單位表揚
+      this.form.get('unitPraise')?.enable();
+      // 啟用具體事蹟
+      this.form.get('specificDeeds')?.enable();
+    } else {
+      // 禁用本單位表揚
+      this.form.get('unitPraise')?.disable();
+      // 禁用具體事蹟
+      this.form.get('specificDeeds')?.disable();
+    }
   }
 
   // 關閉獎勵表揚表

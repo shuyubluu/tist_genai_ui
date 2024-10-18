@@ -58,13 +58,7 @@ export class Hd400ListComponent implements OnInit {
     '轉介單',
   ];
   // 簽核狀態select選項
-  selectOptions_approvalStatus: string[] = [
-    '全部',
-    '待簽',
-    '被退回',
-    '已送審',
-    '已簽核',
-  ];
+  selectOptions_approvalStatus: string[] = ['全部', '待簽', '被退回', '已簽核'];
 
   // 分頁器切割後的資料
   get newSearchResultData(): SearchResultData[] {
@@ -76,7 +70,6 @@ export class Hd400ListComponent implements OnInit {
 
   constructor(
     private tabService: TabService, // 關閉tab的Service
-    private router: Router, // 路由
     private welcomeService: WelcomeService // welcomeService
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
@@ -142,11 +135,7 @@ export class Hd400ListComponent implements OnInit {
   }
 
   // 當申請日期區間改變觸發
-  onApplicationDateChange(date: {
-    year: string;
-    month: string;
-    day: string;
-  }) {
+  onApplicationDateChange(date: { year: string; month: string; day: string }) {
     // 如果日期有輸入，則檢查日期區間
     if (date && this.checkDateRange) {
       if (

@@ -8,7 +8,7 @@
     <div class="title">簽核</div>
     <div class="grid-columns-1">
       <div class="label">簽核狀態</div>
-      <div class="bold-text">待簽</div>
+      <div class="bold-text">{{ hd100ListService.isView ? "待簽" : "" }}</div>
     </div>
     <div class="title">來源</div>
     <div class="grid-columns-2">
@@ -350,70 +350,17 @@
     </div>
     <div class="grid-columns-1">
       <div class="label">社會福利補助</div>
-      <div>
-        <nz-checkbox-wrapper
-          style="width: 100%"
-          (nzOnChange)="socialWelfareAssistanceChange($event)"
-        >
-          <div nz-row>
-            <div nz-col>
-              <label
-                nz-checkbox
-                nzValue="1"
-                [nzDisabled]="isDisableNone || hd100ListService.isView"
-                >無</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                nzValue="2"
-                [nzDisabled]="isDisableNoneOthers || hd100ListService.isView"
-                >身心障礙</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                nzValue="3"
-                [nzDisabled]="isDisableNoneOthers || hd100ListService.isView"
-                >原住民</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                nzValue="4"
-                [nzDisabled]="isDisableNoneOthers || hd100ListService.isView"
-                >新住民</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                nzValue="5"
-                [nzDisabled]="isDisableNoneOthers || hd100ListService.isView"
-                >榮民</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                nzValue="6"
-                [nzDisabled]="isDisableNoneOthers || hd100ListService.isView"
-                >榮眷</label
-              >
-            </div>
-            <div nz-col>
-              <app-error-message
-                [control]="form.get('socialWelfareAssistance')"
-                [isTouched]="false"
-                errorKey="required"
-                errorMessage="必選"
-              />
-            </div>
-          </div>
-        </nz-checkbox-wrapper>
+      <div class="column-Message">
+        <nz-checkbox-group
+          (ngModelChange)="socialWelfareAssistanceChange($event)"
+          formControlName="socialWelfareAssistance"
+        ></nz-checkbox-group>
+        <app-error-message
+          [control]="form.get('socialWelfareAssistance')"
+          [isTouched]="false"
+          errorKey="atLeastOneChecked"
+          errorMessage="必選"
+        />
       </div>
     </div>
     <div class="title">開案條件</div>

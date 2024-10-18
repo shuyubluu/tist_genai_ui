@@ -23,6 +23,8 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { CaseInformationService } from '../../../../common/components/caseInformation/service/case-information.service';
 import { CaseInformationComponent } from '../../../../common/components/caseInformation/components/case-information.component';
 import { DateValidators } from '../../../../common/validator/date-validator';
+import { CheckboxGroup } from '../service/hd110-form.interface';
+import { checkboxGroupValidator } from '../../../../common/validator/checkbox-group-validator';
 
 @Component({
   selector: 'app-hd110-form',
@@ -47,10 +49,6 @@ export class Hd110FormComponent implements OnInit {
   form: FormGroup;
   // 是否為轉介
   isReferral: boolean = false;
-  // 社會福利補助是否禁用無選項
-  isDisableNone: boolean = false;
-  // 社會福利補助是否禁用無選項以外的項目
-  isDisableNoneOthers: boolean = false;
   // 是否需填其他-自填指標
   isOtherFieldsRequired: boolean = false;
 
@@ -110,6 +108,7 @@ export class Hd110FormComponent implements OnInit {
       return '不開案';
     }
   }
+
   // 輸出不開案的原因
   get caseNotOpenedResult(): string | undefined {
     let results: string[] = []; // 用陣列收集結果
@@ -141,6 +140,46 @@ export class Hd110FormComponent implements OnInit {
       return '';
     }
   }
+
+  // 社會福利補助勾選狀態
+  socialWelfareAssistance: CheckboxGroup[] = [
+    {
+      label: '無',
+      value: '00',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '身心障礙',
+      value: '01',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '原住民',
+      value: '02',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '新住民',
+      value: '03',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '榮民',
+      value: '04',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '榮眷',
+      value: '05',
+      checked: false,
+      disabled: false,
+    },
+  ];
 
   constructor(
     private tabService: TabService, // 關閉tab的Service
@@ -215,8 +254,9 @@ export class Hd110FormComponent implements OnInit {
       // 福利身分
       welfareStatus: new FormControl('', [Validators.required]),
       // 社會福利補助
-      socialWelfareAssistance: new FormControl('', [Validators.required]),
-
+      socialWelfareAssistance: new FormControl(this.socialWelfareAssistance, [
+        checkboxGroupValidator(),
+      ]),
       // 4.開案條件
       // 是否老年人口
       isOlderPerson: new FormControl('', [Validators.required]),
@@ -284,6 +324,51 @@ export class Hd110FormComponent implements OnInit {
     } else {
       this.form.get('isSelfReportedMetric')?.enable();
     }
+
+    // // 模擬接收後端回傳資料
+    // this.socialWelfareAssistance = [
+    //   {
+    //     label: '無',
+    //     value: '00',
+    //     checked: false,
+    //     disabled: false,
+    //   },
+    //   {
+    //     label: '身心障礙',
+    //     value: '01',
+    //     checked: false,
+    //     disabled: false,
+    //   },
+    //   {
+    //     label: '原住民',
+    //     value: '02',
+    //     checked: true,
+    //     disabled: false,
+    //   },
+    //   {
+    //     label: '新住民',
+    //     value: '03',
+    //     checked: false,
+    //     disabled: false,
+    //   },
+    //   {
+    //     label: '榮民',
+    //     value: '04',
+    //     checked: true,
+    //     disabled: false,
+    //   },
+    //   {
+    //     label: '榮眷',
+    //     value: '05',
+    //     checked: false,
+    //     disabled: false,
+    //   },
+    // ];
+
+    // 將資料設置上去
+    this.form
+      .get('socialWelfareAssistance')
+      ?.patchValue(this.socialWelfareAssistance);
   }
 
   // 當個案來源的select發生變化時
@@ -326,18 +411,49 @@ export class Hd110FormComponent implements OnInit {
   }
 
   // 社會福利補助選項改變
-  socialWelfareAssistanceChange(checkGroup: string[]) {
-    this.form.get('socialWelfareAssistance')?.setValue(checkGroup);
-    // 如果勾選了無將禁用其他選項
-    // 勾取其他選項則禁用無
-    if (checkGroup.includes('1')) {
-      this.isDisableNoneOthers = true;
-    } else {
-      this.isDisableNoneOthers = false;
-    }
-    this.isDisableNone = checkGroup.some((check) =>
-      ['2', '3', '4', '5', '6'].includes(check)
-    );
+  socialWelfareAssistanceChange(checkGroup: CheckboxGroup[]) {
+    checkGroup.forEach((option) => {
+      if (option.value === '00') {
+        if (option.checked) {
+          // 如果「00」被勾選，禁用其他選項
+          checkGroup.forEach((option) => {
+            if (option.value !== '00') {
+              option.checked = false; // 取消勾選
+              option.disabled = true; // 禁用其他選項
+            }
+          });
+        } else {
+          // 如果「00」未被勾選，啟用其他選項
+          checkGroup.forEach((option) => {
+            option.disabled = false; // 其他選項啟用
+          });
+        }
+      } else {
+        // 當「00」以外的選項被勾選時
+        if (option.checked) {
+          // 禁用「00」選項
+          checkGroup.forEach((option) => {
+            if (option.value === '00') {
+              option.checked = false; // 取消勾選
+              option.disabled = true; // 禁用「00」選項
+            }
+          });
+        } else {
+          // 當「00」以外的選項取消勾選時，檢查其他選項狀態
+          const isAnyChecked = checkGroup.some(
+            (option) => option.value !== '00' && option.checked
+          );
+          if (!isAnyChecked) {
+            // 如果沒有其他選項被勾選，啟用「00」選項
+            checkGroup.forEach((option) => {
+              if (option.value === '00') {
+                option.disabled = false; // 啟用「00」選項
+              }
+            });
+          }
+        }
+      }
+    });
   }
 
   // 是否符合服務處重點關注議題改變
@@ -355,6 +471,7 @@ export class Hd110FormComponent implements OnInit {
   // 暫存草稿
   save() {
     this.message.create('success', '草稿暫存成功');
+    console.log(this.form.value.socialWelfareAssistance);
   }
 
   // 點選下一頁後執行操作判斷

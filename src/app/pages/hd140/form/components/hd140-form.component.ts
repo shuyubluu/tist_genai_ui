@@ -1,4 +1,3 @@
-import { Hd100ListService } from './../../../hd100/list/service/hd100-list.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
