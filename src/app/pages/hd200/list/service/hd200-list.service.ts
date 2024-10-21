@@ -33,12 +33,12 @@ export class Hd200ListService {
     };
 
     // 儲存至 localStorage
-    localStorage.setItem('Hd100Mode', JSON.stringify(mode));
+    localStorage.setItem('Hd200Mode', JSON.stringify(mode));
   }
 
   // 從 localStorage 中獲取模式狀態
   getMode(): { isView: boolean; isCreate: boolean; isEdit: boolean } | null {
-    const storedMode = localStorage.getItem('Hd100Mode');
+    const storedMode = localStorage.getItem('Hd200Mode');
     if (storedMode) {
       return JSON.parse(storedMode);
     } else {

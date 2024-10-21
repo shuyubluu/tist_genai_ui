@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
 import { InputComponent } from '../../../../common/components/input/input.component';
 import { SelectComponent } from '../../../../common/components/select/select.component';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { DayPickerComponent } from '../../../../common/components/dayPicker/dayPicker.component';
 import { SharedModule } from '../../../../common/shared/shared.module';
 import { TabService } from '../../../../common/layouts/tab/tab.service';
@@ -33,6 +33,8 @@ export class Hd270FormComponent implements OnInit {
   form: FormGroup;
   // 檢查日期區間
   checkDateRange: boolean = false;
+  // tab名稱
+  tabName: string = '';
   // 保險公司select選項
   selectOptions_insuranceStatus: string[] = ['國泰', '富邦', '新光', '第一'];
   // 經費來源select選項
@@ -86,6 +88,7 @@ export class Hd270FormComponent implements OnInit {
   ];
 
   constructor(
+    private route: ActivatedRoute,
     private tabService: TabService, // 關閉tab的Service
     private message: NzMessageService, // 訊息
     public hd270ListService: Hd270ListService // hd270ListService
@@ -170,8 +173,19 @@ export class Hd270FormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // 檢視模式，禁用表單
+    if (this.hd270ListService.isView) {
+      this.form.disable();
+    }
+    // 退保模式，禁用退保日期以外的欄位
+    if (this.hd270ListService.isSurrender) {
+      this.form.disable();
+      this.form.get('surrenderDate')?.enable();
+    }
     // 禁用服務外的保障範圍_其他
     this.form.get('coverageOutsideServiceScope_other')?.disable();
+    // 取得當前路由的tabName
+    this.tabName = this.route.snapshot.data['tabName'];
   }
 
   // 服務外的保障範圍選項改變

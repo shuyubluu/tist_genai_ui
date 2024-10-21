@@ -4,12 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
 import { InputComponent } from '../../../../common/components/input/input.component';
 import { SelectComponent } from '../../../../common/components/select/select.component';
-import {
-  NavigationEnd,
-  NavigationStart,
-  Router,
-  RouterModule,
-} from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { DayPickerComponent } from '../../../../common/components/dayPicker/dayPicker.component';
 import { SharedModule } from '../../../../common/shared/shared.module';
 import { TabService } from '../../../../common/layouts/tab/tab.service';

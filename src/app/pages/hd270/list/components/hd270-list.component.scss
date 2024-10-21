@@ -1,14 +1,23 @@
 .grid-columns {
-    display: grid;
-    place-items: center;
-    grid-template-columns: 2fr repeat(5, 1fr);
-    grid-gap: 2px;
-  }
+  display: grid;
+  place-items: center;
+  grid-template-columns: 2fr repeat(5, 1fr);
+  grid-gap: 2px;
+}
 
 .grid-columns-viewData {
-    display: grid;
-    place-items: center;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 2px;
-  }
-  
+  display: grid;
+  place-items: center;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 2px;
+}
+
+.custom-message {
+  background: #f2ddf1 url(../../../../../assets/img/information.png) 8px 50%
+    no-repeat;
+  border: 1px solid #fa58f4;
+  color: #e4ac04;
+  margin: 10px 0 5px 0;
+  padding: 5px 5px 5px 30px;
+  font-size: 20px;
+}

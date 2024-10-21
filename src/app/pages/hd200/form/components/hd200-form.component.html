@@ -44,7 +44,6 @@
       <div class="column-Message">
         <app-select
           [selectWidth]="'200px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_region"
           formControlName="serviceUnit_select1"
         />
@@ -57,13 +56,11 @@
         />
         <app-select
           [selectWidth]="'200px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_region"
           formControlName="serviceUnit_select2"
         />
         <app-select
           [selectWidth]="'200px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_region"
           formControlName="serviceUnit_select3"
         />
@@ -74,7 +71,6 @@
       <div class="column-Message">
         <app-select
           [selectWidth]="'115px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_unitName"
           formControlName="unitName"
         />
@@ -106,7 +102,6 @@
       <div class="column-Message">
         <app-select
           [selectWidth]="'90px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_volunteerStatus"
           formControlName="volunteerStatus"
         />
@@ -137,7 +132,6 @@
       <div class="column-Message">
         <app-select
           [selectWidth]="'70px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_gender"
           formControlName="gender"
         />
@@ -169,6 +163,12 @@
           [inputWidth]="'100px'"
           [maxLength]="10"
           formControlName="idNumber"
+        />
+        <app-error-message
+          [control]="form.get('idNumber')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必填"
         />
         <app-error-message
           [control]="form.get('idNumber')"
@@ -403,10 +403,7 @@
     <div class="grid-columns-1">
       <div class="label">通訊地址</div>
       <div class="column-Message">
-        <app-taiwan-city-select
-          formControlName="address_select"
-          (ngModelChange)="onselect($event)"
-        />
+        <app-taiwan-city-select formControlName="address_select" />
         <app-input
           [inputWidth]="'300px'"
           [maxLength]="30"
@@ -555,7 +552,6 @@
       <div class="column-Message">
         <app-select
           [selectWidth]="'70px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_trueOrFalse"
           formControlName="isIndigenous"
         />
@@ -572,7 +568,6 @@
       <div>
         <app-select
           [selectWidth]="'70px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_trueOrFalse"
           formControlName="isNewResident"
         />
@@ -581,7 +576,6 @@
       <div class="column-Message">
         <app-select
           [selectWidth]="'70px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_trueOrFalse"
           formControlName="isForeignNational"
         />
@@ -598,7 +592,6 @@
       <div class="column-Message">
         <app-select
           [selectWidth]="'70px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_trueOrFalse"
           formControlName="isDisasterReliefVolunteer"
         />
@@ -714,7 +707,6 @@
       <div class="column-Message">
         <app-select
           [selectWidth]="'100px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_volunteerTitle"
           formControlName="volunteerTitle"
         />
@@ -872,7 +864,6 @@
       <div>
         <app-select
           [selectWidth]="'70px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_trueOrFalse"
           formControlName="hasVolunteerExperience"
         />
@@ -910,14 +901,12 @@
         <app-select
           (ngModelChange)="handleHonorCard($event)"
           [selectWidth]="'70px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_honorCard"
           formControlName="honorCard"
         />
         @if(form.get('honorCard')?.value === '有'){
         <app-select
           [selectWidth]="'70px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_honorCard_status"
           formControlName="honorCard_status"
         />
@@ -963,14 +952,12 @@
       <div class="label">是否領取弘道志願服務證</div>
       <app-select
         [selectWidth]="'70px'"
-        [defaultPlaceHolder]="false"
         [options]="selectOptions_trueOrFalse"
         formControlName="receivedHongdaoVolunteerCertificate"
       />
       <div class="label">是否領取弘道志工背心</div>
       <app-select
         [selectWidth]="'70px'"
-        [defaultPlaceHolder]="false"
         [options]="selectOptions_trueOrFalse"
         formControlName="receivedHongdaoVolunteerVest"
       />
@@ -981,7 +968,6 @@
         <app-select
           (ngModelChange)="handleReceivedHongdaoVolunteerUniform($event)"
           [selectWidth]="'70px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_trueOrFalse"
           formControlName="receivedHongdaoVolunteerUniform"
         />
@@ -997,7 +983,6 @@
             >尺寸：
             <app-select
               [selectWidth]="'70px'"
-              [defaultPlaceHolder]="false"
               [options]="selectOptions_receivedHongdaoVolunteerUniform_size"
               formControlName="receivedHongdaoVolunteerUniform_size"
           /></span>
@@ -1011,7 +996,6 @@
         <!-- <app-button [buttonIcon]="'upload'" [buttonText]="'聲明書上傳'" /> -->
         <app-select
           [selectWidth]="'90px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_volunteerRightsAndDutiesDeclaration"
           formControlName="volunteerRightsAndDutiesDeclaration"
         />
@@ -1023,6 +1007,7 @@
     <!-- !TODO -->
     <app-button
       *ngIf="hd200ListService.isCreate"
+      [attachClassName]="['success']"
       [buttonText]="'新增'"
       (click)="create()"
     />

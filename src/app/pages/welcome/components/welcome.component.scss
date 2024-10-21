@@ -66,6 +66,7 @@
     font-weight: bold;
     border: 3px solid #cccccc;
     border-top: 0px;
+    line-height: 40px;
     border-radius: 0px 0px 5px 5px;
 
     .managementArea_button {
@@ -106,6 +107,7 @@
     font-weight: bold;
     border: 3px solid #cccccc;
     border-top: 0px;
+    line-height: 40px;
     border-radius: 0px 0px 5px 5px;
 
     .approvalSection_button {
@@ -134,7 +136,7 @@
   .latestAnnouncementArea_grid {
     display: grid;
     place-items: center;
-    grid-template-columns: 1fr 7fr repeat(2, 1fr);
+    grid-template-columns: 1fr 5fr repeat(2, 1fr);
     grid-gap: 2px;
 
     .latestAnnouncementArea_subject {

@@ -1,6 +1,7 @@
 <nz-select
   class="select"
-  nzSize="default"
+  nzShowSearch
+  nzAllowClear
   [(ngModel)]="selectedOption"
   [ngStyle]="{ width: selectWidth }"
   [nzPlaceHolder]="placeHolder"
@@ -10,7 +11,7 @@
 >
   <nz-option
     *ngFor="let option of options"
-    [nzValue]="option === '---' ? '' : option"
+    [nzValue]="option"
     [nzLabel]="option"
   ></nz-option>
 </nz-select>

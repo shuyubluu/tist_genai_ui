@@ -41,7 +41,7 @@ export class WelcomeComponent implements OnInit {
       date: '113/6/20',
       subject:
         '【公告】這是測試公告。測試佈局和樣式效果。我們需要確保文字能正確換行，並且在不同裝置上都能正常顯示。這個公告的目的是驗證文字長度對頁面佈局的影響。',
-      unit: '資訊室',
+      unit: '總會(系統管理者)',
       create: '王小明',
     },
   ];

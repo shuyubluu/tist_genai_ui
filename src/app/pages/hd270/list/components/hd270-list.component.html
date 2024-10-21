@@ -83,6 +83,11 @@
     <!-- !TODO -->
     <div>
       <app-button [buttonText]="'檢視'" (click)="view()" />
+      <app-button
+        [attachClassName]="['warning']"
+        [buttonText]="'投保人'"
+        (click)="policyHolder()"
+      />
     </div>
   </div>
 </div>
@@ -94,7 +99,9 @@
   [nzTotal]="searchResultData.length"
 />
 @if(isShowViewData){
-<div class="message">志工資料: 共{{ viewData_searchResultData.length }}筆</div>
+<div class="custom-message">
+  投保人清單: 共{{ viewData_searchResultData.length }}筆
+</div>
 <form>
   <div class="mt"></div>
   <div class="grid-search-container">
@@ -115,7 +122,11 @@
       </div>
       <!-- !TODO -->
       <div>
-        <app-button [buttonText]="'申請退保'" (click)="surrender()" />
+        <app-button
+          [attachClassName]="['warning']"
+          [buttonText]="'退保'"
+          (click)="surrender()"
+        />
       </div>
     </div>
   </div>

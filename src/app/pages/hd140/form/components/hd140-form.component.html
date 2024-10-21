@@ -34,7 +34,6 @@
       <div class="column-Message">
         <app-select
           [selectWidth]="'70px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_visitMethod"
           formControlName="visitMethod"
         />
@@ -111,7 +110,6 @@
       <div class="column-Message">
         <app-select
           [selectWidth]="'70px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_trueOrFalse"
           (ngModelChange)="handleSelectChange_linkedToOtherResources($event)"
           formControlName="linkedToOtherResources"
@@ -1160,7 +1158,6 @@
         <!-- !TODO -->
         <app-select
           [selectWidth]="'90px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_latestRiskLevel"
           formControlName="latestRiskLevel"
         />
@@ -1176,7 +1173,6 @@
         <!-- !TODO -->
         <app-select
           [selectWidth]="'100px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_visitOutcome"
           formControlName="visitOutcome"
         />

@@ -7,6 +7,7 @@
     height: 30px;
     border-radius: 5px;
     border: 1px solid #b6b6b6;
+    cursor: pointer;
   }
 
   .icon {
@@ -24,6 +25,11 @@
   align-items: center;
 
   .bottom-button {
-    text-decoration: none;
+    color: #800080;
+    cursor: pointer;
+
+    &:hover {
+      color: #b399ff;
+    }
   }
 }

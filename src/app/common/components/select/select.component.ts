@@ -16,10 +16,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
  *
  * 選單內容 [options]="[...'選單']"
  *
- * 預設選項 [defaultPlaceHolder]="boolean" 預設為true: 則預設選單--- ; 若為false: 則預設選單第一個值
- *
- * 預設已選擇選項 [optionSelected]="string" 指定選項為預設選項
- *
  * 附加客製化樣式 [attachClassName]="[...'樣式字串']" 可傳入多個 {需把客製化樣式定義在元件的.scss檔}
  *
  * 選擇事件 (selectionChange)="selectOption($event)"
@@ -43,14 +39,12 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export class SelectComponent implements OnInit, ControlValueAccessor {
   @Input() selectWidth: string = '';
   @Input() options: string[] = [];
-  @Input() defaultPlaceHolder: boolean = true;
-  @Input() optionSelected: string = '';
   @Input() attachClassName: string[] = [];
   @Input() disabled: boolean = false;
 
   @Output() selectionChange = new EventEmitter<string>();
 
-  placeHolder: string = '---';
+  placeHolder: string = '';
   selectedOption: string = '';
 
   onChange: (value: string) => void = () => {}; // 當控件值變更時調用的函數
@@ -73,24 +67,7 @@ export class SelectComponent implements OnInit, ControlValueAccessor {
     this.disabled = isDisabled;
   }
 
-  ngOnInit() {
-    if (
-      this.defaultPlaceHolder &&
-      this.options.indexOf(this.placeHolder) === -1
-    ) {
-      this.options = [this.placeHolder, ...this.options];
-    }
-
-    if (this.optionSelected) {
-      this.selectedOption = this.optionSelected;
-    } else {
-      this.selectedOption = this.defaultPlaceHolder
-        ? this.placeHolder
-        : this.options.length > 0
-        ? this.options[0]
-        : '';
-    }
-  }
+  ngOnInit() {}
 
   getSelectClass(): string {
     let classes = [];

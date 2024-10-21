@@ -75,19 +75,16 @@
               [maxLength]="3"
               formControlName="serviceEthics_volunteer_1"
             />
-            <app-input
-              [inputWidth]="'70px'"
-              [maxLength]="4"
+            <input
+              class="scoreInput"
+              nz-input
+              type="text"
               formControlName="serviceEthics_supervisor_1"
+              (input)="onScoreInput($event, 'serviceEthics_supervisor_1', 5)"
+              (blur)="onScoreInputBlur('serviceEthics_supervisor_1', 5)"
             />
           </div>
         </div>
-        <app-error-message
-          [control]="form.get('serviceEthics_supervisor_1')"
-          errorKey="rangeError"
-          errorMessage="不符合評分標準"
-          class="divRight"
-        />
         <div class="grid-col-2">
           <div>2.尊重個人權利，可主動反應服務對象狀況或受服務意見。</div>
           <div class="grid-col-3">
@@ -97,19 +94,16 @@
               [maxLength]="3"
               formControlName="serviceEthics_volunteer_2"
             />
-            <app-input
-              [inputWidth]="'70px'"
-              [maxLength]="4"
+            <input
+              class="scoreInput"
+              nz-input
+              type="text"
               formControlName="serviceEthics_supervisor_2"
+              (input)="onScoreInput($event, 'serviceEthics_supervisor_2', 5)"
+              (blur)="onScoreInputBlur('serviceEthics_supervisor_2', 5)"
             />
           </div>
         </div>
-        <app-error-message
-          [control]="form.get('serviceEthics_supervisor_2')"
-          errorKey="rangeError"
-          errorMessage="不符合評分標準"
-          class="divRight"
-        />
         <div class="grid-col-2">
           <div>
             3.遵守規範，不因個人行為因素，使本會名譽或服務對象利益受損。
@@ -121,19 +115,16 @@
               [maxLength]="3"
               formControlName="serviceEthics_volunteer_3"
             />
-            <app-input
-              [inputWidth]="'70px'"
-              [maxLength]="4"
+            <input
+              class="scoreInput"
+              nz-input
+              type="text"
               formControlName="serviceEthics_supervisor_3"
+              (input)="onScoreInput($event, 'serviceEthics_supervisor_3', 10)"
+              (blur)="onScoreInputBlur('serviceEthics_supervisor_3', 10)"
             />
           </div>
         </div>
-        <app-error-message
-          [control]="form.get('serviceEthics_supervisor_3')"
-          errorKey="rangeError"
-          errorMessage="不符合評分標準"
-          class="divRight"
-        />
         <div class="grid-col-2">
           <div>
             4.遵守倫理，不得與服務對象及家屬有非服務關係之金錢往來，並拒絕收取報酬。
@@ -145,19 +136,16 @@
               [maxLength]="3"
               formControlName="serviceEthics_volunteer_4"
             />
-            <app-input
-              [inputWidth]="'70px'"
-              [maxLength]="4"
+            <input
+              class="scoreInput"
+              nz-input
+              type="text"
               formControlName="serviceEthics_supervisor_4"
+              (input)="onScoreInput($event, 'serviceEthics_supervisor_4', 10)"
+              (blur)="onScoreInputBlur('serviceEthics_supervisor_4', 10)"
             />
           </div>
         </div>
-        <app-error-message
-          [control]="form.get('serviceEthics_supervisor_4')"
-          errorKey="rangeError"
-          errorMessage="不符合評分標準"
-          class="divRight"
-        />
       </div>
     </div>
     <div class="grid-columns-3">
@@ -174,19 +162,16 @@
               [maxLength]="3"
               formControlName="attendanceStatus_volunteer_1"
             />
-            <app-input
-              [inputWidth]="'70px'"
-              [maxLength]="4"
+            <input
+              class="scoreInput"
+              nz-input
+              type="text"
               formControlName="attendanceStatus_supervisor_1"
+              (input)="onScoreInput($event, 'attendanceStatus_supervisor_1', 5)"
+              (blur)="onScoreInputBlur('attendanceStatus_supervisor_1', 5)"
             />
           </div>
         </div>
-        <app-error-message
-          [control]="form.get('attendanceStatus_supervisor_1')"
-          errorKey="rangeError"
-          errorMessage="不符合評分標準"
-          class="divRight"
-        />
         <div class="grid-col-2">
           <div>
             6.遵守應勤裝備，著志工制服或志工背心，並視各服務處規定配戴志工證。
@@ -198,19 +183,16 @@
               [maxLength]="3"
               formControlName="attendanceStatus_volunteer_2"
             />
-            <app-input
-              [inputWidth]="'70px'"
-              [maxLength]="4"
+            <input
+              class="scoreInput"
+              nz-input
+              type="text"
               formControlName="attendanceStatus_supervisor_2"
+              (input)="onScoreInput($event, 'attendanceStatus_supervisor_2', 5)"
+              (blur)="onScoreInputBlur('attendanceStatus_supervisor_2', 5)"
             />
           </div>
         </div>
-        <app-error-message
-          [control]="form.get('attendanceStatus_supervisor_2')"
-          errorKey="rangeError"
-          errorMessage="不符合評分標準"
-          class="divRight"
-        />
         <div class="grid-col-2">
           <div>
             7.準時抵達服務/開會地點，不遲到早退，如因故無法出席，有依規定辦理請假及暫停服務之申請。
@@ -222,19 +204,16 @@
               [maxLength]="3"
               formControlName="attendanceStatus_volunteer_3"
             />
-            <app-input
-              [inputWidth]="'70px'"
-              [maxLength]="4"
+            <input
+              class="scoreInput"
+              nz-input
+              type="text"
               formControlName="attendanceStatus_supervisor_3"
+              (input)="onScoreInput($event, 'attendanceStatus_supervisor_3', 5)"
+              (blur)="onScoreInputBlur('attendanceStatus_supervisor_3', 5)"
             />
           </div>
         </div>
-        <app-error-message
-          [control]="form.get('attendanceStatus_supervisor_3')"
-          errorKey="rangeError"
-          errorMessage="不符合評分標準"
-          class="divRight"
-        />
         <div class="grid-col-2">
           <div>
             8.搭配單位要求，定期參與會務活動。(如：志工會議、在職教育訓練等)
@@ -246,19 +225,18 @@
               [maxLength]="3"
               formControlName="attendanceStatus_volunteer_4"
             />
-            <app-input
-              [inputWidth]="'70px'"
-              [maxLength]="4"
+            <input
+              class="scoreInput"
+              nz-input
+              type="text"
               formControlName="attendanceStatus_supervisor_4"
+              (input)="
+                onScoreInput($event, 'attendanceStatus_supervisor_4', 10)
+              "
+              (blur)="onScoreInputBlur('attendanceStatus_supervisor_4', 10)"
             />
           </div>
         </div>
-        <app-error-message
-          [control]="form.get('attendanceStatus_supervisor_4')"
-          errorKey="rangeError"
-          errorMessage="不符合評分標準"
-          class="divRight"
-        />
       </div>
     </div>
     <div class="grid-columns-3">
@@ -273,19 +251,16 @@
               [maxLength]="3"
               formControlName="serviceQuality_volunteer_1"
             />
-            <app-input
-              [inputWidth]="'70px'"
-              [maxLength]="4"
+            <input
+              class="scoreInput"
+              nz-input
+              type="text"
               formControlName="serviceQuality_supervisor_1"
+              (input)="onScoreInput($event, 'serviceQuality_supervisor_1', 5)"
+              (blur)="onScoreInputBlur('serviceQuality_supervisor_1', 5)"
             />
           </div>
         </div>
-        <app-error-message
-          [control]="form.get('serviceQuality_supervisor_1')"
-          errorKey="rangeError"
-          errorMessage="不符合評分標準"
-          class="divRight"
-        />
         <div class="grid-col-2">
           <div>
             10.針對服務內容具備正確知識與技能，能按照需求提供相對應之服務。(如:家訪技巧、行政庶務方法等)
@@ -297,19 +272,16 @@
               [maxLength]="3"
               formControlName="serviceQuality_volunteer_2"
             />
-            <app-input
-              [inputWidth]="'70px'"
-              [maxLength]="4"
+            <input
+              class="scoreInput"
+              nz-input
+              type="text"
               formControlName="serviceQuality_supervisor_2"
+              (input)="onScoreInput($event, 'serviceQuality_supervisor_2', 5)"
+              (blur)="onScoreInputBlur('serviceQuality_supervisor_2', 5)"
             />
           </div>
         </div>
-        <app-error-message
-          [control]="form.get('serviceQuality_supervisor_2')"
-          errorKey="rangeError"
-          errorMessage="不符合評分標準"
-          class="divRight"
-        />
         <div class="grid-col-2">
           <div>11.清楚單位分配之各項服務工作或任務，並能確實完成。</div>
           <div class="grid-col-3">
@@ -319,19 +291,16 @@
               [maxLength]="3"
               formControlName="serviceQuality_volunteer_3"
             />
-            <app-input
-              [inputWidth]="'70px'"
-              [maxLength]="4"
+            <input
+              class="scoreInput"
+              nz-input
+              type="text"
               formControlName="serviceQuality_supervisor_3"
+              (input)="onScoreInput($event, 'serviceQuality_supervisor_3', 5)"
+              (blur)="onScoreInputBlur('serviceQuality_supervisor_3', 5)"
             />
           </div>
         </div>
-        <app-error-message
-          [control]="form.get('serviceQuality_supervisor_3')"
-          errorKey="rangeError"
-          errorMessage="不符合評分標準"
-          class="divRight"
-        />
         <div class="grid-col-2">
           <div>
             <div>
@@ -348,19 +317,16 @@
               [maxLength]="3"
               formControlName="serviceQuality_volunteer_4"
             />
-            <app-input
-              [inputWidth]="'70px'"
-              [maxLength]="4"
+            <input
+              class="scoreInput"
+              nz-input
+              type="text"
               formControlName="serviceQuality_supervisor_4"
+              (input)="onScoreInput($event, 'serviceQuality_supervisor_4', 10)"
+              (blur)="onScoreInputBlur('serviceQuality_supervisor_4', 10)"
             />
           </div>
         </div>
-        <app-error-message
-          [control]="form.get('serviceQuality_supervisor_4')"
-          errorKey="rangeError"
-          errorMessage="不符合評分標準"
-          class="divRight"
-        />
       </div>
     </div>
     <div class="grid-columns-3">
@@ -377,19 +343,16 @@
               [maxLength]="3"
               formControlName="teamSpirit_volunteer_1"
             />
-            <app-input
-              [inputWidth]="'70px'"
-              [maxLength]="4"
+            <input
+              class="scoreInput"
+              nz-input
+              type="text"
               formControlName="teamSpirit_supervisor_1"
+              (input)="onScoreInput($event, 'teamSpirit_supervisor_1', 10)"
+              (blur)="onScoreInputBlur('teamSpirit_supervisor_1', 10)"
             />
           </div>
         </div>
-        <app-error-message
-          [control]="form.get('teamSpirit_supervisor_1')"
-          errorKey="rangeError"
-          errorMessage="不符合評分標準"
-          class="divRight"
-        />
         <div class="grid-col-2">
           <div>14.遭遇任何問題會及時向站長、志工督導反映，不造成團隊紛爭。</div>
           <div class="grid-col-3">
@@ -399,19 +362,16 @@
               [maxLength]="3"
               formControlName="teamSpirit_volunteer_2"
             />
-            <app-input
-              [inputWidth]="'70px'"
-              [maxLength]="4"
+            <input
+              class="scoreInput"
+              nz-input
+              type="text"
               formControlName="teamSpirit_supervisor_2"
+              (input)="onScoreInput($event, 'teamSpirit_supervisor_2', 5)"
+              (blur)="onScoreInputBlur('teamSpirit_supervisor_2', 5)"
             />
           </div>
         </div>
-        <app-error-message
-          [control]="form.get('teamSpirit_supervisor_2')"
-          errorKey="rangeError"
-          errorMessage="不符合評分標準"
-          class="divRight"
-        />
         <div class="grid-col-2">
           <div>
             15.積極參與以及推廣本會辦理之各項服務/活動(如：寒冬助老或各服務處特殊活動等)
@@ -423,19 +383,16 @@
               [maxLength]="3"
               formControlName="teamSpirit_volunteer_3"
             />
-            <app-input
-              [inputWidth]="'70px'"
-              [maxLength]="4"
+            <input
+              class="scoreInput"
+              nz-input
+              type="text"
               formControlName="teamSpirit_supervisor_3"
+              (input)="onScoreInput($event, 'teamSpirit_supervisor_3', 5)"
+              (blur)="onScoreInputBlur('teamSpirit_supervisor_3', 5)"
             />
           </div>
         </div>
-        <app-error-message
-          [control]="form.get('teamSpirit_supervisor_3')"
-          errorKey="rangeError"
-          errorMessage="不符合評分標準"
-          class="divRight"
-        />
       </div>
     </div>
     <div class="grid-columns-2">
@@ -502,7 +459,6 @@
         <div class="mx-2">
           <app-select
             [selectWidth]="'70px'"
-            [defaultPlaceHolder]="false"
             [options]="selectOptions_trueOrFalse"
             formControlName="firstImprovementPassed"
           />
@@ -542,7 +498,6 @@
         <div class="mx-2">
           <app-select
             [selectWidth]="'70px'"
-            [defaultPlaceHolder]="false"
             [options]="selectOptions_trueOrFalse"
             formControlName="secondImprovementPassed"
           />

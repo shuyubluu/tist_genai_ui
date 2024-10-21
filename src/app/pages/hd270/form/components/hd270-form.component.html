@@ -3,7 +3,10 @@
     <div class="grid-columns-2">
       <div class="label">填表日期</div>
       <div class="column-Message">
-        <app-dayPicker formControlName="fillingDate" />
+        <app-dayPicker
+          [disabled]="!hd270ListService.isCreate"
+          formControlName="fillingDate"
+        />
         <app-error-message
           [control]="form.get('fillingDate')"
           [isTouched]="false"
@@ -11,10 +14,13 @@
           errorMessage="必選"
         />
       </div>
-      @if(!hd270ListService.isCreate){
+      @if(hd270ListService.isSurrender){
       <div class="label">退保日期</div>
       <div class="column-Message">
-        <app-dayPicker formControlName="terminationDate" />
+        <app-dayPicker
+          [disabled]="!hd270ListService.isSurrender"
+          formControlName="terminationDate"
+        />
         <app-error-message
           [control]="form.get('terminationDate')"
           [isTouched]="false"
@@ -32,7 +38,6 @@
       <div class="column-Message">
         <app-select
           [selectWidth]="'100px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_insuranceStatus"
           formControlName="insuranceCompany_select"
         />
@@ -59,7 +64,6 @@
       <div class="column-Message">
         <app-select
           [selectWidth]="'90px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_fundingSource"
           formControlName="fundingSource"
         />
@@ -76,7 +80,6 @@
       <div class="column-Message">
         <app-select
           [selectWidth]="'100px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_insuranceType"
           formControlName="insuranceType"
         />
@@ -91,7 +94,11 @@
     <div class="grid-columns-1">
       <div class="label">投保日期起迄</div>
       <div class="column-Message">
-        <app-dayPicker (ngModelChange)="onInsuranceDateChange($event)" formControlName="insuranceDate_start" />
+        <app-dayPicker
+          [disabled]="!hd270ListService.isCreate"
+          (ngModelChange)="onInsuranceDateChange($event)"
+          formControlName="insuranceDate_start"
+        />
         <app-error-message
           [control]="form.get('insuranceDate_start')"
           [isTouched]="false"
@@ -99,7 +106,11 @@
           errorMessage="必選"
         />
         <span class="mx-2">-</span>
-        <app-dayPicker (ngModelChange)="onInsuranceDateChange($event)" formControlName="insuranceDate_end" />
+        <app-dayPicker
+          [disabled]="!hd270ListService.isCreate"
+          (ngModelChange)="onInsuranceDateChange($event)"
+          formControlName="insuranceDate_end"
+        />
         <app-error-message
           [control]="form.get('insuranceDate_end')"
           [isTouched]="false"
@@ -224,6 +235,7 @@
         />
         <span>百</span>
         <app-error-message
+          *ngIf="hd270ListService.isCreate"
           [isCustom]="true"
           [condition]="
             form.get('deathOrDisabilityCoverage_million')?.value === '' ||
@@ -232,7 +244,6 @@
             form.get('deathOrDisabilityCoverage_hundred')?.value === ''
           "
           [isTouched]="false"
-          errorKey="required"
           errorMessage="必填"
         />
       </div>
@@ -262,6 +273,7 @@
         />
         <span>百</span>
         <app-error-message
+          *ngIf="hd270ListService.isCreate"
           [isCustom]="true"
           [condition]="
             form.get('injuryMedicalCoverage_tenThousand')?.value === '' ||
@@ -269,7 +281,6 @@
             form.get('injuryMedicalCoverage_hundred')?.value === ''
           "
           [isTouched]="false"
-          errorKey="required"
           errorMessage="必填"
         />
       </div>
@@ -299,6 +310,7 @@
         />
         <span>百</span>
         <app-error-message
+          *ngIf="hd270ListService.isCreate"
           [isCustom]="true"
           [condition]="
             form.get('hospitalizationDailyAllowance_tenThousand')?.value ===
@@ -307,7 +319,6 @@
             form.get('hospitalizationDailyAllowance_hundred')?.value === ''
           "
           [isTouched]="false"
-          errorKey="required"
           errorMessage="必填"
         />
       </div>
@@ -359,7 +370,10 @@
         </nz-checkbox-wrapper>
       </div>
     </div>
-    <div class="grid-columns-1">
+    <div
+      class="grid-columns-1"
+      [ngClass]="{ 'border-bottom-0': hd270ListService.isSurrender }"
+    >
       <div class="label">投保單位</div>
       <div>
         <app-select
@@ -370,7 +384,10 @@
       </div>
     </div>
     <!-- !TODO -->
-    <div class="grid-columns-1 border-bottom-0">
+    <div
+      *ngIf="hd270ListService.isCreate"
+      class="grid-columns-1 border-bottom-0"
+    >
       <div class="label">投保人員</div>
       <div>
         <nz-checkbox-wrapper
@@ -409,7 +426,7 @@
     <app-button
       [attachClassName]="['danger']"
       [buttonText]="'關閉'"
-      (click)="closeTab('保險專區表')"
+      (click)="closeTab(tabName)"
     />
   </div>
 </form>

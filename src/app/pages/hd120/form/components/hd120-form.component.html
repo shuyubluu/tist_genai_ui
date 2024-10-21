@@ -12,7 +12,6 @@
       <div>
         <app-select
           [selectWidth]="'100px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_caseServiceStatus"
           formControlName="caseServiceStatus"
         />
@@ -21,7 +20,6 @@
       <div>
         <app-select
           [selectWidth]="'100px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_caseLevel"
           formControlName="caseLevel"
         />
@@ -59,7 +57,6 @@
       <div>
         <app-select
           [selectWidth]="'70px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_trueOrFalse"
           formControlName="isReferred"
         />
@@ -92,7 +89,6 @@
       <div>
         <app-select
           [selectWidth]="'70px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_gender"
           formControlName="gender"
         />
@@ -193,7 +189,6 @@
         <app-select
           [selectWidth]="'140px'"
           [options]="selectOptions_educationLevel"
-          [defaultPlaceHolder]="false"
           formControlName="educationLevel"
         />
         <app-error-message
@@ -208,7 +203,6 @@
         <app-select
           (ngModelChange)="maritalStatusChange($event)"
           [selectWidth]="'70px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_maritalStatus"
           formControlName="maritalStatus"
         />
@@ -911,7 +905,6 @@
       <div>
         <app-select
           [selectWidth]="'120px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_welfareStatus"
           formControlName="welfareStatus"
         />
@@ -961,7 +954,6 @@
       <div>
         <app-select
           [selectWidth]="'120px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_disabilityCertificateCategory"
           formControlName="disabilityCertificateCategory"
         />
@@ -977,7 +969,6 @@
       <div>
         <app-select
           [selectWidth]="'100px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_disabilityLevel"
           formControlName="disabilityLevel"
         />
@@ -1157,7 +1148,6 @@
               >
               <app-select
                 [selectWidth]="'200px'"
-                [defaultPlaceHolder]="false"
                 [options]="selectOptions_socialWelfareAssistance"
                 formControlName="socialWelfareAssistance"
               />
@@ -1762,7 +1752,6 @@
       <div class="column-Message">
         <app-select
           [selectWidth]="'120px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_housingType"
           formControlName="housingType"
         />
@@ -1777,7 +1766,6 @@
       <div class="column-Message">
         <app-select
           [selectWidth]="'100px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_housingOwnership"
           formControlName="housingOwnership"
         />
@@ -2209,7 +2197,6 @@
       <div class="column-Message">
         <app-select
           [selectWidth]="'100px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_includeHasNotConfirmed"
           formControlName="personalDataConsentForm"
         />
@@ -2224,7 +2211,6 @@
       <div class="column-Message">
         <app-select
           [selectWidth]="'100px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_includeHasNotConfirmed"
           formControlName="imageRightsConsentForm"
         />

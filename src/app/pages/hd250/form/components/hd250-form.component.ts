@@ -39,41 +39,41 @@ export class Hd250FormComponent implements OnInit {
   // 志工評分計算
   get calcVolunteerScore(): number {
     return Math.ceil(
-      this.form.get('serviceEthics_volunteer_1')?.value * 0.05 +
-        this.form.get('serviceEthics_volunteer_2')?.value * 0.05 +
-        this.form.get('serviceEthics_volunteer_3')?.value * 0.1 +
-        this.form.get('serviceEthics_volunteer_4')?.value * 0.1 +
-        this.form.get('attendanceStatus_volunteer_1')?.value * 0.05 +
-        this.form.get('attendanceStatus_volunteer_2')?.value * 0.05 +
-        this.form.get('attendanceStatus_volunteer_3')?.value * 0.05 +
-        this.form.get('attendanceStatus_volunteer_4')?.value * 0.1 +
-        this.form.get('serviceQuality_volunteer_1')?.value * 0.05 +
-        this.form.get('serviceQuality_volunteer_2')?.value * 0.05 +
-        this.form.get('serviceQuality_volunteer_3')?.value * 0.05 +
-        this.form.get('serviceQuality_volunteer_4')?.value * 0.1 +
-        this.form.get('teamSpirit_volunteer_1')?.value * 0.1 +
-        this.form.get('teamSpirit_volunteer_2')?.value * 0.05 +
-        this.form.get('teamSpirit_volunteer_3')?.value * 0.05
+      parseInt(this.form.get('serviceEthics_volunteer_1')?.value) +
+        parseInt(this.form.get('serviceEthics_volunteer_2')?.value) +
+        parseInt(this.form.get('serviceEthics_volunteer_3')?.value) +
+        parseInt(this.form.get('serviceEthics_volunteer_4')?.value) +
+        parseInt(this.form.get('attendanceStatus_volunteer_1')?.value) +
+        parseInt(this.form.get('attendanceStatus_volunteer_2')?.value) +
+        parseInt(this.form.get('attendanceStatus_volunteer_3')?.value) +
+        parseInt(this.form.get('attendanceStatus_volunteer_4')?.value) +
+        parseInt(this.form.get('serviceQuality_volunteer_1')?.value) +
+        parseInt(this.form.get('serviceQuality_volunteer_2')?.value) +
+        parseInt(this.form.get('serviceQuality_volunteer_3')?.value) +
+        parseInt(this.form.get('serviceQuality_volunteer_4')?.value) +
+        parseInt(this.form.get('teamSpirit_volunteer_1')?.value) +
+        parseInt(this.form.get('teamSpirit_volunteer_2')?.value) +
+        parseInt(this.form.get('teamSpirit_volunteer_3')?.value)
     );
   }
   // 督導評分計算
   get calcSupervisorScore(): number {
     return Math.ceil(
-      this.form.get('serviceEthics_supervisor_1')?.value * 0.05 +
-        this.form.get('serviceEthics_supervisor_2')?.value * 0.05 +
-        this.form.get('serviceEthics_supervisor_3')?.value * 0.1 +
-        this.form.get('serviceEthics_supervisor_4')?.value * 0.1 +
-        this.form.get('attendanceStatus_supervisor_1')?.value * 0.05 +
-        this.form.get('attendanceStatus_supervisor_2')?.value * 0.05 +
-        this.form.get('attendanceStatus_supervisor_3')?.value * 0.05 +
-        this.form.get('attendanceStatus_supervisor_4')?.value * 0.1 +
-        this.form.get('serviceQuality_supervisor_1')?.value * 0.05 +
-        this.form.get('serviceQuality_supervisor_2')?.value * 0.05 +
-        this.form.get('serviceQuality_supervisor_3')?.value * 0.05 +
-        this.form.get('serviceQuality_supervisor_4')?.value * 0.1 +
-        this.form.get('teamSpirit_supervisor_1')?.value * 0.1 +
-        this.form.get('teamSpirit_supervisor_2')?.value * 0.05 +
-        this.form.get('teamSpirit_supervisor_3')?.value * 0.05
+      parseInt(this.form.get('serviceEthics_supervisor_1')?.value) +
+        parseInt(this.form.get('serviceEthics_supervisor_2')?.value) +
+        parseInt(this.form.get('serviceEthics_supervisor_3')?.value) +
+        parseInt(this.form.get('serviceEthics_supervisor_4')?.value) +
+        parseInt(this.form.get('attendanceStatus_supervisor_1')?.value) +
+        parseInt(this.form.get('attendanceStatus_supervisor_2')?.value) +
+        parseInt(this.form.get('attendanceStatus_supervisor_3')?.value) +
+        parseInt(this.form.get('attendanceStatus_supervisor_4')?.value) +
+        parseInt(this.form.get('serviceQuality_supervisor_1')?.value) +
+        parseInt(this.form.get('serviceQuality_supervisor_2')?.value) +
+        parseInt(this.form.get('serviceQuality_supervisor_3')?.value) +
+        parseInt(this.form.get('serviceQuality_supervisor_4')?.value) +
+        parseInt(this.form.get('teamSpirit_supervisor_1')?.value) +
+        parseInt(this.form.get('teamSpirit_supervisor_2')?.value) +
+        parseInt(this.form.get('teamSpirit_supervisor_3')?.value)
     );
   }
   // 計算加總成績
@@ -109,146 +109,89 @@ export class Hd250FormComponent implements OnInit {
 
       // 1.服務倫理
       // 服務倫理_志工評分_1
-      serviceEthics_volunteer_1: new FormControl(''),
+      serviceEthics_volunteer_1: new FormControl(5),
       // 服務倫理_督導評分_1
-      serviceEthics_supervisor_1: new FormControl('', [
-        Validators.required,
-        rangeValidator(),
-      ]),
+      serviceEthics_supervisor_1: new FormControl(0, [Validators.required]),
       // 服務倫理_志工評分_2
-      serviceEthics_volunteer_2: new FormControl(''),
+      serviceEthics_volunteer_2: new FormControl(5),
       // 服務倫理_督導評分_2
-      serviceEthics_supervisor_2: new FormControl('', [
-        Validators.required,
-        rangeValidator(),
-      ]),
+      serviceEthics_supervisor_2: new FormControl(0, [Validators.required]),
       // 服務倫理_志工評分_3
-      serviceEthics_volunteer_3: new FormControl(''),
+      serviceEthics_volunteer_3: new FormControl(10),
       // 服務倫理_督導評分_3
-      serviceEthics_supervisor_3: new FormControl('', [
-        Validators.required,
-        rangeValidator(),
-      ]),
+      serviceEthics_supervisor_3: new FormControl(0, [Validators.required]),
       // 服務倫理_志工評分_4
-      serviceEthics_volunteer_4: new FormControl(''),
+      serviceEthics_volunteer_4: new FormControl(10),
       // 服務倫理_督導評分_4
-      serviceEthics_supervisor_4: new FormControl('', [
-        Validators.required,
-        rangeValidator(),
-      ]),
+      serviceEthics_supervisor_4: new FormControl(0, [Validators.required]),
 
       // 2.出勤狀況
       // 出勤狀況_志工評分_1
-      attendanceStatus_volunteer_1: new FormControl(''),
+      attendanceStatus_volunteer_1: new FormControl(5),
       // 出勤狀況_督導評分_1
-      attendanceStatus_supervisor_1: new FormControl('', [
-        Validators.required,
-        rangeValidator(),
-      ]),
+      attendanceStatus_supervisor_1: new FormControl(0, [Validators.required]),
       // 出勤狀況_志工評分_2
-      attendanceStatus_volunteer_2: new FormControl(''),
+      attendanceStatus_volunteer_2: new FormControl(5),
       // 出勤狀況_督導評分_2
-      attendanceStatus_supervisor_2: new FormControl('', [
-        Validators.required,
-        rangeValidator(),
-      ]),
+      attendanceStatus_supervisor_2: new FormControl(0, [Validators.required]),
       // 出勤狀況_志工評分_3
-      attendanceStatus_volunteer_3: new FormControl(''),
+      attendanceStatus_volunteer_3: new FormControl(5),
       // 出勤狀況_督導評分_3
-      attendanceStatus_supervisor_3: new FormControl('', [
-        Validators.required,
-        rangeValidator(),
-      ]),
+      attendanceStatus_supervisor_3: new FormControl(0, [Validators.required]),
       // 出勤狀況_志工評分_4
-      attendanceStatus_volunteer_4: new FormControl(''),
+      attendanceStatus_volunteer_4: new FormControl(0),
       // 出勤狀況_督導評分_4
-      attendanceStatus_supervisor_4: new FormControl('', [
-        Validators.required,
-        rangeValidator(),
-      ]),
+      attendanceStatus_supervisor_4: new FormControl(0, [Validators.required]),
 
       // 3.服務品質
       // 服務品質_志工評分_1
-      serviceQuality_volunteer_1: new FormControl(''),
+      serviceQuality_volunteer_1: new FormControl(0),
       // 服務品質_督導評分_1
-      serviceQuality_supervisor_1: new FormControl('', [
-        Validators.required,
-        rangeValidator(),
-      ]),
+      serviceQuality_supervisor_1: new FormControl(0, [Validators.required]),
       // 服務品質_志工評分_2
-      serviceQuality_volunteer_2: new FormControl(''),
+      serviceQuality_volunteer_2: new FormControl(0),
       // 服務品質_督導評分_2
-      serviceQuality_supervisor_2: new FormControl('', [
-        Validators.required,
-        rangeValidator(),
-      ]),
+      serviceQuality_supervisor_2: new FormControl(0, [Validators.required]),
       // 服務品質_志工評分_3
-      serviceQuality_volunteer_3: new FormControl(''),
+      serviceQuality_volunteer_3: new FormControl(0),
       // 服務品質_督導評分_3
-      serviceQuality_supervisor_3: new FormControl('', [
-        Validators.required,
-        rangeValidator(),
-      ]),
+      serviceQuality_supervisor_3: new FormControl(0, [Validators.required]),
       // 服務品質_志工評分_4
-      serviceQuality_volunteer_4: new FormControl(''),
+      serviceQuality_volunteer_4: new FormControl(0),
       // 服務品質_督導評分_4
-      serviceQuality_supervisor_4: new FormControl('', [
-        Validators.required,
-        rangeValidator(),
-      ]),
+      serviceQuality_supervisor_4: new FormControl(0, [Validators.required]),
 
       // 4.團隊精神
       // 團隊精神_志工評分_1
-      teamSpirit_volunteer_1: new FormControl(''),
+      teamSpirit_volunteer_1: new FormControl(0),
       // 團隊精神_督導評分_1
-      teamSpirit_supervisor_1: new FormControl('', [
-        Validators.required,
-        rangeValidator(),
-      ]),
+      teamSpirit_supervisor_1: new FormControl(0, [Validators.required]),
       // 團隊精神_志工評分_2
-      teamSpirit_volunteer_2: new FormControl(''),
+      teamSpirit_volunteer_2: new FormControl(0),
       // 團隊精神_督導評分_2
-      teamSpirit_supervisor_2: new FormControl('', [
-        Validators.required,
-        rangeValidator(),
-      ]),
+      teamSpirit_supervisor_2: new FormControl(0, [Validators.required]),
       // 團隊精神_志工評分_3
-      teamSpirit_volunteer_3: new FormControl(''),
+      teamSpirit_volunteer_3: new FormControl(0),
       // 團隊精神_督導評分_3
-      teamSpirit_supervisor_3: new FormControl('', [
-        Validators.required,
-        rangeValidator(),
-      ]),
+      teamSpirit_supervisor_3: new FormControl(0, [Validators.required]),
 
       // 5.志工評估結果
       // 為期改善原因
-      improvementReason: new FormControl('', [
-        Validators.required,
-        rangeValidator(),
-      ]),
+      improvementReason: new FormControl('', [Validators.required]),
       // 第一次為期改善是否通過_評核日期
       firstImprovementPassed_evaluationDate: new FormControl(''),
       // 第一次為期改善是否通過
       firstImprovementPassed: new FormControl(''),
       // 第一次為期改善未通過原因
-      firstImprovementFailedReason: new FormControl('', [
-        Validators.required,
-        rangeValidator(),
-      ]),
+      firstImprovementFailedReason: new FormControl('', [Validators.required]),
       // 第二次為期改善是否通過_評核日期
       secondImprovementPassed_evaluationDate: new FormControl(''),
       // 第二次為期改善是否通過
       secondImprovementPassed: new FormControl(''),
       // 第二次為期改善未通過原因
-      secondImprovementFailedReason: new FormControl('', [
-        Validators.required,
-        rangeValidator(),
-      ]),
+      secondImprovementFailedReason: new FormControl('', [Validators.required]),
       // 不予通過原因
-      rejectionReason: new FormControl('', [
-        Validators.required,
-        rangeValidator(),
-      ]),
+      rejectionReason: new FormControl('', [Validators.required]),
       // 志工督導
       volunteerSupervisor: new FormControl(''),
       // 主責人姓名
@@ -281,6 +224,51 @@ export class Hd250FormComponent implements OnInit {
     this.form.get('teamSpirit_volunteer_3')?.disable();
   }
 
+  // 通用的監控分數表單值變化方法
+  onScoreInput(event: Event, formControlName: string, maxScore: number): void {
+    const input = event.target as HTMLInputElement;
+    let value = input.value.replace(/[^0-9.]/g, '');
+
+    const parts = value.split('.');
+    if (parts.length > 2) {
+      value = parts[0] + '.' + parts.slice(1).join('');
+    }
+    if (parts.length === 2 && parts[1].length > 1) {
+      value = parts[0] + '.' + parts[1].slice(0, 1);
+    }
+
+    const numValue = parseFloat(value);
+    if (!isNaN(numValue)) {
+      if (numValue > maxScore) value = String(maxScore);
+      if (numValue < 0) value = '0';
+    }
+
+    input.value = value;
+    this.form.get(formControlName)?.setValue(value, { emitEvent: true });
+  }
+
+  // 通用的占比表單值失焦處理方法
+  onScoreInputBlur(formControlName: string, maxScore: number) {
+    const control = this.form.get(formControlName);
+    if (control) {
+      let value = control.value;
+      if (typeof value === 'string') {
+        // 如果值以 '.' 結尾，則去掉它
+        if (value.endsWith('.')) {
+          value = value.slice(0, -1);
+        }
+        const numValue = parseFloat(value);
+        // 將值限制在 0 到 maxScore 之間
+        if (!isNaN(numValue)) {
+          value = Math.min(Math.max(numValue, 0), maxScore).toString();
+        } else {
+          value = ''; // 非數字時重置為空值
+        }
+        // 更新表單控件的值
+        control.setValue(value, { emitEvent: true });
+      }
+    }
+  }
   // 完成送審
   review() {
     this.message.create('success', '送審成功');

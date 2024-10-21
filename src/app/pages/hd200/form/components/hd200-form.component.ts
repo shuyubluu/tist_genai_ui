@@ -436,10 +436,6 @@ export class Hd200FormComponent implements OnInit {
     });
   }
 
-  onselect(value: any) {
-    console.log(value);
-  }
-
   ngOnInit(): void {
     // 檢視模式，禁用表單'
     if (this.hd200ListService.isView) {

@@ -16,7 +16,6 @@
       <div class="column-Message">
         <app-select
           [selectWidth]="'160px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_caseSource"
           (selectionChange)="onCaseSourceSelectChange()"
           formControlName="caseSource"
@@ -214,7 +213,6 @@
       <div class="column-Message">
         <app-select
           [selectWidth]="'70px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_gender"
           formControlName="gender"
         />
@@ -336,7 +334,6 @@
       <div class="column-Message">
         <app-select
           [selectWidth]="'120px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_welfareStatus"
           formControlName="welfareStatus"
         />
@@ -369,7 +366,6 @@
       <div>
         <app-select
           [selectWidth]="'70px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_trueOrFalse"
           formControlName="isOlderPerson"
         />
@@ -391,7 +387,6 @@
       <div>
         <app-select
           [selectWidth]="'70px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_trueOrFalse"
           formControlName="isVulnerableGroup"
         />
@@ -415,7 +410,6 @@
       <div>
         <app-select
           [selectWidth]="'70px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_trueOrFalse"
           formControlName="isIncludesSpecialIssues"
         />
@@ -437,7 +431,6 @@
       <div class="column-Message">
         <app-select
           [selectWidth]="'70px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_trueOrFalse"
           (ngModelChange)="handleSelectChange_isPriorityIssue($event)"
           formControlName="isPriorityIssue"
@@ -477,7 +470,6 @@
       <div class="column-Message">
         <app-select
           [selectWidth]="'90px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_caseClassification"
           formControlName="caseClassification"
         />
@@ -508,7 +500,6 @@
       <div class="column-Message">
         <app-select
           [selectWidth]="'90px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_serviceAcceptanceByElderly"
           formControlName="isServiceAcceptanceByElderly"
         />
@@ -525,7 +516,6 @@
       <div class="column-Message">
         <app-select
           [selectWidth]="'90px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_elderlyNeedsSatisfactionStatus"
           formControlName="isElderlyNeedsSatisfactionStatus"
         />
@@ -540,7 +530,6 @@
       <div class="column-Message">
         <app-select
           [selectWidth]="'70px'"
-          [defaultPlaceHolder]="false"
           [options]="selectOptions_trueOrFalse"
           formControlName="isElderlyInServiceArea"
         />

@@ -8,7 +8,7 @@ hd500ListService.currentStatisticsCode !== 'C3'){
       <div class="column-Message">
         <app-select
           [selectWidth]="'90px'"
-          [defaultPlaceHolder]="false"
+          
           (ngModelChange)="onUnitChange($event)"
           [options]="selectOptions_unit"
           formControlName="unit"
@@ -16,7 +16,7 @@ hd500ListService.currentStatisticsCode !== 'C3'){
         <app-select
           *ngIf="form.get('unit')?.value === '服務處'"
           [selectWidth]="'160px'"
-          [defaultPlaceHolder]="false"
+          
           [options]="selectOptions_department"
           formControlName="department"
         />

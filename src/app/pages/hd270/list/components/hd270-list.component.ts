@@ -126,21 +126,26 @@ export class Hd270ListComponent implements OnInit {
   }
 
   // 新增
-  async create() {
-    await this.router.navigate(['/hd270/form']);
-    this.hd270ListService.isCreate = true;
-    this.hd270ListService.isSurrender = false;
+  create() {
+    this.router.navigate(['/hd270/create']);
+    this.hd270ListService.setMode(false, true, false);
   }
+
   // 檢視
   view() {
+    this.router.navigate(['/hd270/view']);
+    this.hd270ListService.setMode(true, false, false);
+  }
+
+  // 列出投保人
+  policyHolder() {
     this.isShowViewData = true;
   }
 
   // 申請退保
   async surrender() {
-    await this.router.navigate(['/hd270/form']);
-    this.hd270ListService.isCreate = false;
-    this.hd270ListService.isSurrender = true;
+    await this.router.navigate(['/hd270/surrender']);
+    this.hd270ListService.setMode(false, false, true);
   }
 
   // 關閉當前的tab

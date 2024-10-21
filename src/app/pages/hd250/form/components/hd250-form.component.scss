@@ -36,3 +36,19 @@
 .m-0 {
   margin: 0px;
 }
+
+// 圓角
+:host ::ng-deep .ant-input {
+  width: 70px;
+  height: 31px;
+  border-radius: 5px !important;
+  border: 1px solid #b6b6b6 !important;
+}
+
+:host ::ng-deep .ant-input:focus,
+:host ::ng-deep .ant-input:active {
+  border-color: rgb(0, 0, 0) !important;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2) !important;
+  border-width: 1.2px !important;
+  border-style: solid !important;
+}
