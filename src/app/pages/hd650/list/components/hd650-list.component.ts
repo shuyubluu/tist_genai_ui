@@ -37,8 +37,6 @@ export class Hd650ListComponent implements OnInit {
   ) {
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
-      // 是否提供前台ID帳號修改
-      allowFrontendIdEdit: new FormControl(''),
       // 登入密碼規則
       loginPasswordRules: new FormControl(''),
       // 密碼最小長度

@@ -1,6 +1,6 @@
 import { Hd100ListService } from './../../../hd100/list/service/hd100-list.service';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
 import { InputComponent } from '../../../../common/components/input/input.component';
 import { SelectComponent } from '../../../../common/components/select/select.component';
@@ -51,7 +51,8 @@ export class Hd110FormComponent implements OnInit {
   isReferral: boolean = false;
   // 是否需填其他-自填指標
   isOtherFieldsRequired: boolean = false;
-
+  // tab名稱
+  tabName: string = '';
   // 個案來源select選項
   selectOptions_caseSource: string[] = [
     '主動發掘',
@@ -109,38 +110,6 @@ export class Hd110FormComponent implements OnInit {
     }
   }
 
-  // 輸出不開案的原因
-  get caseNotOpenedResult(): string | undefined {
-    let results: string[] = []; // 用陣列收集結果
-    if (
-      this.form.get('isOlderPerson')?.value === '否' ||
-      (this.form.get('isVulnerableGroup')?.value === '否' &&
-        this.form.get('isIncludesSpecialIssues')?.value === '否' &&
-        this.form.get('isPriorityIssue')?.value === '否') ||
-      this.form.get('caseClassification')?.value === '無' ||
-      (this.form.get('isPriorityIssue')?.value === '是' &&
-        this.form.get('isSelfReportedMetric')?.value?.length === 0)
-    ) {
-      results.push('尚未符合開案標準');
-    }
-    if (this.form.get('isServiceAcceptanceByElderly')?.value === '無意願') {
-      results.push('長者無意願接受服務');
-    }
-    if (
-      this.form.get('isElderlyNeedsSatisfactionStatus')?.value === '不可提供'
-    ) {
-      results.push('服務未能符合長者需求');
-    }
-    if (this.form.get('isElderlyInServiceArea')?.value === '否') {
-      results.push('超出服務區域範圍');
-    }
-    if (results.length > 0) {
-      return results.join('、'); // 用頓號連結所有結果
-    } else {
-      return '';
-    }
-  }
-
   // 社會福利補助勾選狀態
   socialWelfareAssistance: CheckboxGroup[] = [
     {
@@ -181,7 +150,40 @@ export class Hd110FormComponent implements OnInit {
     },
   ];
 
+  // 輸出不開案的原因
+  get caseNotOpenedResult(): string | undefined {
+    let results: string[] = []; // 用陣列收集結果
+    if (
+      this.form.get('isOlderPerson')?.value === '否' ||
+      (this.form.get('isVulnerableGroup')?.value === '否' &&
+        this.form.get('isIncludesSpecialIssues')?.value === '否' &&
+        this.form.get('isPriorityIssue')?.value === '否') ||
+      this.form.get('caseClassification')?.value === '無' ||
+      (this.form.get('isPriorityIssue')?.value === '是' &&
+        this.form.get('isSelfReportedMetric')?.value?.length === 0)
+    ) {
+      results.push('尚未符合開案標準');
+    }
+    if (this.form.get('isServiceAcceptanceByElderly')?.value === '無意願') {
+      results.push('長者無意願接受服務');
+    }
+    if (
+      this.form.get('isElderlyNeedsSatisfactionStatus')?.value === '不可提供'
+    ) {
+      results.push('服務未能符合長者需求');
+    }
+    if (this.form.get('isElderlyInServiceArea')?.value === '否') {
+      results.push('超出服務區域範圍');
+    }
+    if (results.length > 0) {
+      return results.join('、'); // 用頓號連結所有結果
+    } else {
+      return '';
+    }
+  }
+
   constructor(
+    private route: ActivatedRoute,
     private tabService: TabService, // 關閉tab的Service
     private router: Router, // 路由
     private modal: NzModalService, // 彈窗
@@ -189,6 +191,24 @@ export class Hd110FormComponent implements OnInit {
     public caseInformationService: CaseInformationService, // caseInformationService
     public hd100ListService: Hd100ListService // hd100ListService
   ) {
+    // 接收後端回傳質料
+    // this.socialWelfareAssistance =
+
+    // 社會福利補助CheckboxGroup
+    const socialWelfareAssistanceGroup: { [key: string]: FormControl } = {};
+    this.socialWelfareAssistance.forEach((option) => {
+      socialWelfareAssistanceGroup[option.value] = new FormControl(
+        option.checked
+      );
+      if (option.disabled) {
+        socialWelfareAssistanceGroup[option.value].disable(); // 如果該選項應該被禁用，則禁用對應的 FormControl
+      }
+    });
+    const socialWelfareAssistanceCheckedValues = this.socialWelfareAssistance
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.socialWelfareAssistanceChange(socialWelfareAssistanceCheckedValues);
+
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
       // 1.來源
@@ -254,7 +274,7 @@ export class Hd110FormComponent implements OnInit {
       // 福利身分
       welfareStatus: new FormControl('', [Validators.required]),
       // 社會福利補助
-      socialWelfareAssistance: new FormControl(this.socialWelfareAssistance, [
+      socialWelfareAssistance: new FormGroup(socialWelfareAssistanceGroup, [
         checkboxGroupValidator(),
       ]),
       // 4.開案條件
@@ -284,6 +304,8 @@ export class Hd110FormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // 取得當前路由的tabName
+    this.tabName = this.route.snapshot.data['tabName'];
     // 檢視模式下禁用表單
     if (this.hd100ListService.isView) {
       this.form.disable();
@@ -324,51 +346,6 @@ export class Hd110FormComponent implements OnInit {
     } else {
       this.form.get('isSelfReportedMetric')?.enable();
     }
-
-    // // 模擬接收後端回傳資料
-    // this.socialWelfareAssistance = [
-    //   {
-    //     label: '無',
-    //     value: '00',
-    //     checked: false,
-    //     disabled: false,
-    //   },
-    //   {
-    //     label: '身心障礙',
-    //     value: '01',
-    //     checked: false,
-    //     disabled: false,
-    //   },
-    //   {
-    //     label: '原住民',
-    //     value: '02',
-    //     checked: true,
-    //     disabled: false,
-    //   },
-    //   {
-    //     label: '新住民',
-    //     value: '03',
-    //     checked: false,
-    //     disabled: false,
-    //   },
-    //   {
-    //     label: '榮民',
-    //     value: '04',
-    //     checked: true,
-    //     disabled: false,
-    //   },
-    //   {
-    //     label: '榮眷',
-    //     value: '05',
-    //     checked: false,
-    //     disabled: false,
-    //   },
-    // ];
-
-    // 將資料設置上去
-    this.form
-      .get('socialWelfareAssistance')
-      ?.patchValue(this.socialWelfareAssistance);
   }
 
   // 當個案來源的select發生變化時
@@ -411,43 +388,47 @@ export class Hd110FormComponent implements OnInit {
   }
 
   // 社會福利補助選項改變
-  socialWelfareAssistanceChange(checkGroup: CheckboxGroup[]) {
-    checkGroup.forEach((option) => {
+  socialWelfareAssistanceChange(checkedValues: string[]): void {
+    this.socialWelfareAssistance.forEach((option) => {
+      // 更新每個選項的 checked 狀態
+      option.checked = checkedValues.includes(option.value);
+
+      // 當 "00" 被勾選時
       if (option.value === '00') {
         if (option.checked) {
-          // 如果「00」被勾選，禁用其他選項
-          checkGroup.forEach((option) => {
+          // 禁用其他選項
+          this.socialWelfareAssistance.forEach((option) => {
             if (option.value !== '00') {
               option.checked = false; // 取消勾選
               option.disabled = true; // 禁用其他選項
             }
           });
         } else {
-          // 如果「00」未被勾選，啟用其他選項
-          checkGroup.forEach((option) => {
-            option.disabled = false; // 其他選項啟用
+          // 啟用其他選項
+          this.socialWelfareAssistance.forEach((option) => {
+            option.disabled = false; // 啟用所有選項
           });
         }
       } else {
-        // 當「00」以外的選項被勾選時
+        // 當 "00" 以外的選項被勾選時
         if (option.checked) {
-          // 禁用「00」選項
-          checkGroup.forEach((option) => {
+          // 禁用 "00" 選項
+          this.socialWelfareAssistance.forEach((option) => {
             if (option.value === '00') {
               option.checked = false; // 取消勾選
-              option.disabled = true; // 禁用「00」選項
+              option.disabled = true; // 禁用 "00" 選項
             }
           });
         } else {
-          // 當「00」以外的選項取消勾選時，檢查其他選項狀態
-          const isAnyChecked = checkGroup.some(
+          // 檢查其他選項是否被勾選
+          const isAnyChecked = this.socialWelfareAssistance.some(
             (option) => option.value !== '00' && option.checked
           );
           if (!isAnyChecked) {
-            // 如果沒有其他選項被勾選，啟用「00」選項
-            checkGroup.forEach((option) => {
+            // 如果沒有其他選項被勾選，啟用 "00" 選項
+            this.socialWelfareAssistance.forEach((option) => {
               if (option.value === '00') {
-                option.disabled = false; // 啟用「00」選項
+                option.disabled = false; // 啟用 "00" 選項
               }
             });
           }
@@ -478,14 +459,14 @@ export class Hd110FormComponent implements OnInit {
   async onNextPage() {
     // if (this.form.valid) {
     // if (this.isCaseOpened === '開案') {
-    await this.router.navigate(['/hd120']);
+    await this.router.navigate(['/hd120/create']);
     this.message.create('success', '開案成功');
-    this.closeTab('個案開案評估表');
+    this.closeTab(this.tabName);
     // } else {
     //   this.showConfirmationModal();
     // }
     // } else {
-    //   this.message.create('warning', '所有必須填寫的項目請先完成填寫');
+    //   this.message.create('warning', '有必填欄位尚未填寫');
     // }
   }
 

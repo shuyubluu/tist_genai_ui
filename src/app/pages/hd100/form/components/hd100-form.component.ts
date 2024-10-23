@@ -39,7 +39,6 @@ export class Hd100FormComponent implements OnInit {
   isRegisterEnter: boolean = false;
   // 存放上個路由
   previousUrl: string = '';
-  test: string = '';
   // 結案原因select選項
   selectOptions_closureReason: string[] = [
     '個案失聯',

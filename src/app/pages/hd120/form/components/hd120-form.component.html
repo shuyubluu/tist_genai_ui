@@ -174,13 +174,33 @@
     </div>
     <div class="grid-columns-1">
       <div class="label">戶籍地址</div>
-      <div>
-        <app-taiwan-city-select formControlName="registeredAddress_select" />
+      <div class="column-Message">
+        <app-taiwan-city-select
+          *ngIf="!isSameAsMailingAddress"
+          formControlName="registeredAddress_select"
+        />
         <app-input
+          *ngIf="!isSameAsMailingAddress"
           [inputWidth]="'300px'"
           [maxLength]="30"
           formControlName="registeredAddress"
         />
+        <!-- !TODO 接資料問題代處理 -->
+        <div *ngIf="isSameAsMailingAddress">XXX市XXX區XXX里XXX號</div>
+        <div>
+          <app-button
+            *ngIf="!isSameAsMailingAddress"
+            [attachClassName]="['success']"
+            [buttonText]="'同通訊地址'"
+            (click)="isSameAsMailingAddress = !isSameAsMailingAddress"
+          />
+          <app-button
+            *ngIf="isSameAsMailingAddress"
+            [attachClassName]="['danger']"
+            [buttonText]="'取消'"
+            (click)="isSameAsMailingAddress = !isSameAsMailingAddress"
+          />
+        </div>
       </div>
     </div>
     <div class="grid-columns-2">
@@ -229,420 +249,146 @@
     </div>
     <div class="grid-columns-1">
       <div class="label">宗教信仰</div>
-      <div>
-        <nz-checkbox-wrapper
-          style="width: 100%"
-          (nzOnChange)="religiousAffiliationChange($event)"
-        >
-          <div nz-row>
-            <div nz-col>
+      <div class="column-Message">
+        <nz-checkbox-wrapper (nzOnChange)="religiousAffiliationChange($event)">
+          <div formGroupName="religiousAffiliation">
+            <span *ngFor="let option of religiousAffiliation">
               <label
+                [nzDisabled]="option.disabled"
                 nz-checkbox
-                [nzDisabled]="
-                  isDisableReligiousAffiliationNone || hd100ListService.isView
-                "
-                nzValue="1"
-                >無</label
+                [formControlName]="option.value"
+                [nzValue]="option.value"
               >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableReligiousAffiliationOthers || hd100ListService.isView
-                "
-                nzValue="2"
-                >道教</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableReligiousAffiliationOthers || hd100ListService.isView
-                "
-                nzValue="3"
-                >佛教</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableReligiousAffiliationOthers || hd100ListService.isView
-                "
-                nzValue="4"
-                >基督教</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableReligiousAffiliationOthers || hd100ListService.isView
-                "
-                nzValue="5"
-                >天主教</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableReligiousAffiliationOthers || hd100ListService.isView
-                "
-                nzValue="6"
-                >一貫道</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableReligiousAffiliationOthers || hd100ListService.isView
-                "
-                nzValue="7"
-                >回教</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableReligiousAffiliationOthers || hd100ListService.isView
-                "
-                nzValue="8"
-                >民間信仰</label
-              >
-            </div>
-            <div nz-col>
+                {{ option.label }}
+              </label>
+              <!-- 判斷是否為 '08' 來顯示對應的輸入框 -->
+              <app-input
+                *ngIf="option.value === '08' && option.checked"
+                [inputWidth]="'100px'"
+                [maxLength]="30"
+                formControlName="religiousAffiliation_other"
+              />
+            </span>
+            <label>
               <app-error-message
                 [control]="form.get('religiousAffiliation')"
                 [isTouched]="false"
-                errorKey="required"
+                errorKey="atLeastOneChecked"
                 errorMessage="必選"
               />
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableReligiousAffiliationOthers || hd100ListService.isView
+              <app-error-message
+                [control]="
+                  form.get('religiousAffiliation.religiousAffiliation_other')
                 "
-                nzValue="9"
-                >其他
-              </label>
-              <label>
-                <app-input
-                  [inputWidth]="'100px'"
-                  [maxLength]="30"
-                  formControlName="religiousAffiliation_other"
-              /></label>
-              <label>
-                <app-error-message
-                  [control]="form.get('religiousAffiliation_other')"
-                  [isTouched]="false"
-                  errorKey="required"
-                  errorMessage="必填"
-              /></label>
-            </div>
+                [isTouched]="false"
+                errorKey="required"
+                errorMessage="必填"
+              />
+            </label>
           </div>
         </nz-checkbox-wrapper>
       </div>
     </div>
     <div class="grid-columns-1">
       <div class="label">習慣用語</div>
-      <div>
-        <nz-checkbox-wrapper
-          style="width: 100%"
-          (nzOnChange)="commonLanguageChange($event)"
-        >
-          <div nz-row>
-            <div nz-col>
+      <div class="column-Message">
+        <nz-checkbox-wrapper (nzOnChange)="commonLanguageChange($event)">
+          <div formGroupName="commonLanguage">
+            <span *ngFor="let option of commonLanguage">
               <label
+                [nzDisabled]="option.disabled"
                 nz-checkbox
-                [nzDisabled]="hd100ListService.isView"
-                nzValue="1"
-                >國語</label
+                [formControlName]="option.value"
+                [nzValue]="option.value"
               >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd100ListService.isView"
-                nzValue="2"
-                >台語</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd100ListService.isView"
-                nzValue="3"
-                >日語</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd100ListService.isView"
-                nzValue="4"
-                >客家話</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd100ListService.isView"
-                nzValue="5"
-                >其他
+                {{ option.label }}
               </label>
-              <label>
-                <app-input
-                  [inputWidth]="'100px'"
-                  [maxLength]="30"
-                  formControlName="commonLanguage_other"
-              /></label>
-            </div>
-            <div nz-col>
+              <!-- 判斷是否為 '05' 來顯示對應的輸入框 -->
+              <app-input
+                *ngIf="option.value === '04' && option.checked"
+                [inputWidth]="'100px'"
+                [maxLength]="30"
+                formControlName="commonLanguage_other"
+              />
+            </span>
+            <label>
               <app-error-message
                 [control]="form.get('commonLanguage')"
                 [isTouched]="false"
-                errorKey="required"
+                errorKey="atLeastOneChecked"
                 errorMessage="必選"
               />
               <app-error-message
-                [control]="form.get('commonLanguage_other')"
+                [control]="form.get('commonLanguage.commonLanguage_other')"
                 [isTouched]="false"
                 errorKey="required"
                 errorMessage="必填"
               />
-            </div>
+            </label>
           </div>
         </nz-checkbox-wrapper>
       </div>
     </div>
     <div class="grid-columns-1">
       <div class="label">飲食習慣</div>
-      <div>
-        <nz-checkbox-wrapper
-          style="width: 100%"
-          (nzOnChange)="eatingHabitsChange($event)"
-        >
-          <div nz-row>
-            <div nz-col>
+      <div class="column-Message">
+        <nz-checkbox-wrapper>
+          <div formGroupName="eatingHabits">
+            <span *ngFor="let option of eatingHabits">
               <label
+                [nzDisabled]="option.disabled"
                 nz-checkbox
-                [nzDisabled]="hd100ListService.isView"
-                nzValue="1"
-                >葷</label
+                [formControlName]="option.value"
+                [nzValue]="option.value"
               >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd100ListService.isView"
-                nzValue="2"
-                >全素</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd100ListService.isView"
-                nzValue="3"
-                >蛋奶素</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd100ListService.isView"
-                nzValue="4"
-                >鍋邊素</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd100ListService.isView"
-                nzValue="5"
-                >初一十五素</label
-              >
-            </div>
+                {{ option.label }}
+              </label>
+            </span>
           </div>
         </nz-checkbox-wrapper>
       </div>
     </div>
     <div class="grid-columns-1">
       <div class="label">現有疾病狀態</div>
-      <div>
+      <div class="column-Message">
         <nz-checkbox-wrapper
-          style="width: 100%"
           (nzOnChange)="currentHealthConditionsChange($event)"
         >
-          <div nz-row>
-            <div nz-col>
+          <div formGroupName="currentHealthConditions">
+            <span *ngFor="let option of currentHealthConditions">
               <label
+                [nzDisabled]="option.disabled"
                 nz-checkbox
-                [nzDisabled]="
-                  isDisableCurrentHealthConditionsNone ||
-                  hd100ListService.isView
-                "
-                nzValue="1"
-                >無</label
+                [formControlName]="option.value"
+                [nzValue]="option.value"
               >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableCurrentHealthConditionsOthers ||
-                  hd100ListService.isView
+                {{ option.label }}
+              </label>
+              <app-input
+                *ngIf="option.value === '12' && option.checked"
+                [inputWidth]="'100px'"
+                [maxLength]="30"
+                formControlName="currentHealthConditions_other"
+              />
+            </span>
+            <label>
+              <app-error-message
+                [control]="form.get('currentHealthConditions')"
+                [isTouched]="false"
+                errorKey="atLeastOneChecked"
+                errorMessage="必選"
+              />
+              <app-error-message
+                [control]="
+                  form.get(
+                    'currentHealthConditions.currentHealthConditions_other'
+                  )
                 "
-                nzValue="2"
-                >中風</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableCurrentHealthConditionsOthers ||
-                  hd100ListService.isView
-                "
-                nzValue="3"
-                >高血壓</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableCurrentHealthConditionsOthers ||
-                  hd100ListService.isView
-                "
-                nzValue="4"
-                >心臟病</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableCurrentHealthConditionsOthers ||
-                  hd100ListService.isView
-                "
-                nzValue="5"
-                >糖尿病</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableCurrentHealthConditionsOthers ||
-                  hd100ListService.isView
-                "
-                nzValue="6"
-                >腎臟疾病</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableCurrentHealthConditionsOthers ||
-                  hd100ListService.isView
-                "
-                nzValue="7"
-                >骨骼系統(關節炎、骨折)</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableCurrentHealthConditionsOthers ||
-                  hd100ListService.isView
-                "
-                nzValue="8"
-                >巴金森氏症</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableCurrentHealthConditionsOthers ||
-                  hd100ListService.isView
-                "
-                nzValue="9"
-                >失智症</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableCurrentHealthConditionsOthers ||
-                  hd100ListService.isView
-                "
-                nzValue="10"
-                >癌症</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableCurrentHealthConditionsOthers ||
-                  hd100ListService.isView
-                "
-                nzValue="11"
-                >眼部疾病</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableCurrentHealthConditionsOthers ||
-                  hd100ListService.isView
-                "
-                nzValue="12"
-                >精神疾病</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableCurrentHealthConditionsOthers ||
-                  hd100ListService.isView
-                "
-                nzValue="13"
-                >其他</label
-              >
-              <label>
-                <app-input
-                  [inputWidth]="'100px'"
-                  [maxLength]="30"
-                  formControlName="currentHealthConditions_other"
-              /></label>
-              <label
-                ><app-error-message
-                  [control]="form.get('currentHealthConditions')"
-                  [isTouched]="false"
-                  errorKey="required"
-                  errorMessage="必選" />
-                <app-error-message
-                  [control]="form.get('currentHealthConditions_other')"
-                  [isTouched]="false"
-                  errorKey="required"
-                  errorMessage="必填"
-              /></label>
-            </div>
+                [isTouched]="false"
+                errorKey="required"
+                errorMessage="必填"
+              />
+            </label>
           </div>
         </nz-checkbox-wrapper>
       </div>
@@ -695,10 +441,12 @@
                 [inputWidth]="'175px'"
                 [maxLength]="15"
                 formControlName="medicalStatus_medicalCategory"
-            /></label>
+              />
+            </label>
             <app-error-message
               [condition]="
-                form.get('medicalStatus_medicalCategory')?.value.length === 0
+                form.get('medicalStatus_medicalCategory')?.value === null ||
+                form.get('medicalStatus_medicalCategory')?.value?.length === 0
               "
               [isCustom]="true"
               errorMessage="必填"
@@ -713,7 +461,8 @@
             </label>
             <app-error-message
               [condition]="
-                form.get('medicalStatus_department')?.value.length === 0
+                form.get('medicalStatus_department')?.value === null ||
+                form.get('medicalStatus_department')?.value?.length === 0
               "
               [isCustom]="true"
               errorMessage="必填"
@@ -725,14 +474,15 @@
                 [maxLength]="10"
                 formControlName="medicalStatus_frequency"
               />
-              <app-error-message
-                [condition]="
-                  form.get('medicalStatus_frequency')?.value.length === 0
-                "
-                [isCustom]="true"
-                errorMessage="必填"
-              />
             </label>
+            <app-error-message
+              [condition]="
+                form.get('medicalStatus_frequency')?.value === null ||
+                form.get('medicalStatus_frequency')?.value?.length === 0
+              "
+              [isCustom]="true"
+              errorMessage="必填"
+            />
           </ng-container>
         </nz-modal>
         <app-error-message
@@ -745,153 +495,46 @@
     </div>
     <div class="grid-columns-1">
       <div class="label">輔具使用</div>
-      <div>
-        <nz-checkbox-wrapper
-          style="width: 100%"
-          (nzOnChange)="assistiveDeviceUsageChange($event)"
-        >
-          <div nz-row>
-            <div nz-col>
+      <div class="column-Message">
+        <nz-checkbox-wrapper (nzOnChange)="assistiveDeviceUsageChange($event)">
+          <div formGroupName="assistiveDeviceUsage">
+            <span *ngFor="let option of assistiveDeviceUsage">
               <label
+                [nzDisabled]="option.disabled"
                 nz-checkbox
-                [nzDisabled]="
-                  isDisableAssistiveDeviceUsageNone || hd100ListService.isView
-                "
-                nzValue="1"
-                >無</label
+                [formControlName]="option.value"
+                [nzValue]="option.value"
               >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableAssistiveDeviceUsageOthers || hd100ListService.isView
-                "
-                nzValue="2"
-                >單手拐杖</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableAssistiveDeviceUsageOthers || hd100ListService.isView
-                "
-                nzValue="3"
-                >助行器</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableAssistiveDeviceUsageOthers || hd100ListService.isView
-                "
-                nzValue="4"
-                >腋下拐杖</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableAssistiveDeviceUsageOthers || hd100ListService.isView
-                "
-                nzValue="5"
-                >輪椅</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableAssistiveDeviceUsageOthers || hd100ListService.isView
-                "
-                nzValue="6"
-                >氣墊床</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableAssistiveDeviceUsageOthers || hd100ListService.isView
-                "
-                nzValue="7"
-                >助聽器</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableAssistiveDeviceUsageOthers || hd100ListService.isView
-                "
-                nzValue="8"
-                >便盆椅</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableAssistiveDeviceUsageOthers || hd100ListService.isView
-                "
-                nzValue="9"
-                >假牙</label
-              >
-            </div>
-            <div class="square" nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableAssistiveDeviceUsageOthers || hd100ListService.isView
-                "
-                nzValue="10"
-                >義肢</label
-              >
-              <label nz-checkbox nzValue="11" formControlName="upperLimb"
-                >上肢</label
-              >
-              <label nz-checkbox nzValue="12" formControlName="lowerLimb"
-                >下肢</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableAssistiveDeviceUsageOthers || hd100ListService.isView
-                "
-                nzValue="13"
-                >其他</label
-              >
-              <label>
-                <app-input
-                  [inputWidth]="'100px'"
-                  [maxLength]="30"
-                  formControlName="assistiveDeviceUsage_other"
-              /></label>
-              <label>
-                <app-error-message
-                  [control]="form.get('assistiveDeviceUsage')"
-                  [isTouched]="false"
-                  errorKey="required"
-                  errorMessage="必選"
-                />
-                <app-error-message
-                  [condition]="isChoiceProsthesis"
-                  [isCustom]="true"
-                  errorMessage="義肢選項勾選後必須選擇一項。"
-                />
-                <app-error-message
-                  [control]="form.get('assistiveDeviceUsage_other')"
-                  [isTouched]="false"
-                  errorKey="required"
-                  errorMessage="必填"
-                />
+                {{ option.label }}
               </label>
-            </div>
+              <app-input
+                *ngIf="option.value === '12' && option.checked"
+                [inputWidth]="'100px'"
+                [maxLength]="30"
+                formControlName="assistiveDeviceUsage_other"
+              />
+            </span>
+            <label>
+              <app-error-message
+                [control]="form.get('assistiveDeviceUsage')"
+                [isTouched]="false"
+                errorKey="atLeastOneChecked"
+                errorMessage="必選"
+              />
+              <app-error-message
+                [control]="
+                  form.get('assistiveDeviceUsage.assistiveDeviceUsage_other')
+                "
+                [isTouched]="false"
+                errorKey="required"
+                errorMessage="必填"
+              />
+              <app-error-message
+                [condition]="isChoiceProsthesis"
+                [isCustom]="true"
+                errorMessage="上肢及下肢最少擇一"
+              />
+            </label>
           </div>
         </nz-checkbox-wrapper>
       </div>
@@ -912,45 +555,31 @@
     </div>
     <div class="grid-columns-1">
       <div class="label disableBackground">社會福利補助</div>
-      <div>
-        <nz-checkbox-wrapper
-          style="width: 100%"
-          (nzOnChange)="socialWelfareSubsidyChange($event)"
-        >
-          <div nz-row>
-            <div nz-col>
-              <label nz-checkbox [nzDisabled]="true" nzValue="1">無</label>
-            </div>
-            <div nz-col>
-              <label nz-checkbox [nzDisabled]="true" nzValue="2"
-                >身心障礙</label
-              >
-            </div>
-            <div nz-col>
-              <label nz-checkbox [nzDisabled]="true" nzValue="3">原住民</label>
-            </div>
-            <div nz-col>
-              <label nz-checkbox [nzDisabled]="true" nzValue="4">新住民</label>
-            </div>
-            <div nz-col>
-              <label nz-checkbox [nzDisabled]="true" nzValue="5">榮民</label>
-            </div>
-            <div nz-col>
-              <label nz-checkbox [nzDisabled]="true" nzValue="6">榮眷</label>
-            </div>
+      <div class="column-Message">
+        <nz-checkbox-wrapper (nzOnChange)="socialWelfareSubsidyChange($event)">
+          <div formGroupName="socialWelfareSubsidy">
+            <label
+              [nzDisabled]="option.disabled"
+              nz-checkbox
+              *ngFor="let option of socialWelfareSubsidy"
+              [formControlName]="option.value"
+              [nzValue]="option.value"
+            >
+              {{ option.label }}
+            </label>
+            <label>
+              <app-error-message
+                [control]="form.get('socialWelfareSubsidy')"
+                [isTouched]="false"
+                errorKey="atLeastOneChecked"
+                errorMessage="必選"
+            /></label>
           </div>
         </nz-checkbox-wrapper>
       </div>
     </div>
     <div class="grid-columns-2">
-      <div
-        class="label"
-        [ngClass]="{
-          disableBackground: !isPhysicalAndMentalDisability
-        }"
-      >
-        身障證明障礙類別
-      </div>
+      <div class="label">身障證明障礙類別</div>
       <div>
         <app-select
           [selectWidth]="'120px'"
@@ -958,14 +587,7 @@
           formControlName="disabilityCertificateCategory"
         />
       </div>
-      <div
-        class="label"
-        [ngClass]="{
-          disableBackground: !isPhysicalAndMentalDisability
-        }"
-      >
-        障礙等級
-      </div>
+      <div class="label">障礙等級</div>
       <div>
         <app-select
           [selectWidth]="'100px'"
@@ -981,224 +603,127 @@
       <div class="label">長期每月經濟來源</div>
       <div>
         <nz-checkbox-wrapper
-          style="width: 100%"
           (nzOnChange)="longTermMonthlyIncomeSourceChange($event)"
         >
-          <div nz-row>
-            <div class="my-1" nz-col>
+          <div formGroupName="longTermMonthlyIncomeSource">
+            <span *ngFor="let option of longTermMonthlyIncomeSource">
               <label
+                [nzDisabled]="option.disabled"
                 nz-checkbox
-                [nzDisabled]="
-                  isDisableLongTermMonthlyIncomeSourceNone ||
-                  hd100ListService.isView
-                "
-                nzValue="1"
-                >無</label
+                [formControlName]="option.value"
+                [nzValue]="option.value"
               >
-            </div>
-            <div class="my-1" nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableLongTermMonthlyIncomeSourceOthers ||
-                  hd100ListService.isView
-                "
-                nzValue="2"
-                >子女供應</label
-              >
-              <label>
-                <app-input
-                  [inputWidth]="'90px'"
-                  [placeholder]="'輸入金額'"
-                  [type]="'number'"
-                  [maxLength]="8"
-                  formControlName="childrenSupport"
-                />
+                {{ option.label }}
               </label>
-            </div>
-            <div class="my-1" nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableLongTermMonthlyIncomeSourceOthers ||
-                  hd100ListService.isView
-                "
-                nzValue="3"
-                >退休俸</label
-              >
-              <label>
-                <app-input
-                  [inputWidth]="'90px'"
-                  [placeholder]="'輸入金額'"
-                  [type]="'number'"
-                  [maxLength]="8"
-                  formControlName="retirementPension"
-                />
-              </label>
-            </div>
-            <div class="my-1" nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableLongTermMonthlyIncomeSourceOthers ||
-                  hd100ListService.isView
-                "
-                nzValue="4"
-                >自己工作收入</label
-              >
-              <label>
-                <app-input
-                  [inputWidth]="'90px'"
-                  [placeholder]="'輸入金額'"
-                  [type]="'number'"
-                  [maxLength]="8"
-                  formControlName="ownEmploymentIncome"
-                />
-              </label>
-            </div>
-            <div class="my-1" nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableLongTermMonthlyIncomeSourceOthers ||
-                  hd100ListService.isView
-                "
-                nzValue="5"
-                >配偶工作收入</label
-              >
-              <label>
-                <app-input
-                  [inputWidth]="'90px'"
-                  [placeholder]="'輸入金額'"
-                  [type]="'number'"
-                  [maxLength]="8"
-                  formControlName="spouseEmploymentIncome"
-                />
-              </label>
-            </div>
-            <div class="my-1" nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableLongTermMonthlyIncomeSourceOthers ||
-                  hd100ListService.isView
-                "
-                nzValue="6"
-                >自己或配偶工作積蓄</label
-              >
-              <label>
-                <app-input
-                  [inputWidth]="'90px'"
-                  [placeholder]="'輸入金額'"
-                  [type]="'number'"
-                  [maxLength]="8"
-                  formControlName="personalOrSpouseSavings"
-                />
-              </label>
-            </div>
-            <div class="my-1" nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableLongTermMonthlyIncomeSourceOthers ||
-                  hd100ListService.isView
-                "
-                nzValue="7"
-                >老年年金</label
-              >
-              <label>
-                <app-input
-                  [inputWidth]="'90px'"
-                  [placeholder]="'輸入金額'"
-                  [type]="'number'"
-                  [maxLength]="8"
-                  formControlName="seniorPension"
-                />
-              </label>
-            </div>
-            <div class="my-1" nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableLongTermMonthlyIncomeSourceOthers ||
-                  hd100ListService.isView
-                "
-                nzValue="8"
-                >民間單位補助</label
-              >
-              <label>
-                <app-input
-                  [inputWidth]="'90px'"
-                  [placeholder]="'輸入金額'"
-                  [type]="'number'"
-                  [maxLength]="8"
-                  formControlName="privateSectorSubsidy"
-                />
-              </label>
-            </div>
-            <div class="my-1" nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableLongTermMonthlyIncomeSourceOthers ||
-                  hd100ListService.isView
-                "
-                nzValue="9"
-                >社會福利補助</label
-              >
               <app-select
+                *ngIf="option.value === '01' && option.checked"
                 [selectWidth]="'200px'"
-                [options]="selectOptions_socialWelfareAssistance"
-                formControlName="socialWelfareAssistance"
+                [options]="selectOptions_socialWelfareSubsidy"
+                formControlName="socialWelfareAssistance_select"
               />
               <app-input
+                *ngIf="
+                  form.get(
+                    'longTermMonthlyIncomeSource.socialWelfareAssistance_select'
+                  )?.value && option.value === '01'
+                "
                 [inputWidth]="'90px'"
-                [placeholder]="'輸入金額'"
-                [type]="'number'"
                 [maxLength]="8"
+                [type]="'number'"
                 formControlName="socialWelfareAssistance_input"
               />
-            </div>
-            <div class="my-1" nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableLongTermMonthlyIncomeSourceOthers ||
-                  hd100ListService.isView
+              <app-input
+                *ngIf="option.value === '02' && option.checked"
+                [inputWidth]="'90px'"
+                [maxLength]="8"
+                [type]="'number'"
+                formControlName="childrenSupport"
+              />
+              <app-input
+                *ngIf="option.value === '03' && option.checked"
+                [inputWidth]="'90px'"
+                [maxLength]="8"
+                [type]="'number'"
+                formControlName="retirementPension"
+              />
+              <app-input
+                *ngIf="option.value === '04' && option.checked"
+                [inputWidth]="'90px'"
+                [maxLength]="8"
+                [type]="'number'"
+                formControlName="ownEmploymentIncome"
+              />
+              <app-input
+                *ngIf="option.value === '05' && option.checked"
+                [inputWidth]="'90px'"
+                [maxLength]="8"
+                [type]="'number'"
+                formControlName="spouseEmploymentIncome"
+              />
+              <app-input
+                *ngIf="option.value === '06' && option.checked"
+                [inputWidth]="'90px'"
+                [maxLength]="8"
+                [type]="'number'"
+                formControlName="personalOrSpouseSavings"
+              />
+              <app-input
+                *ngIf="option.value === '07' && option.checked"
+                [inputWidth]="'90px'"
+                [maxLength]="8"
+                [type]="'number'"
+                formControlName="seniorPension"
+              />
+              <app-input
+                *ngIf="option.value === '08' && option.checked"
+                [inputWidth]="'90px'"
+                [maxLength]="8"
+                [type]="'number'"
+                formControlName="privateSectorSubsidy"
+              />
+              <app-input
+                *ngIf="option.value === '09' && option.checked"
+                [inputWidth]="'120px'"
+                [maxLength]="30"
+                formControlName="otherIncome_text"
+              />
+              <app-input
+                *ngIf="
+                  form.get('longTermMonthlyIncomeSource.otherIncome_text')
+                    ?.value && option.value === '09'
                 "
-                nzValue="10"
-                >其他收入</label
-              >
-              <label>
-                <app-input
-                  [inputWidth]="'90px'"
-                  [placeholder]="'收入類別'"
-                  [maxLength]="15"
-                  formControlName="otherIncome"
-                />
-                <app-input
-                  [inputWidth]="'90px'"
-                  [placeholder]="'輸入金額'"
-                  [type]="'number'"
-                  [maxLength]="8"
-                  formControlName="otherIncome_input"
-                />
-              </label>
-            </div>
-            <div nz-col>
+                [inputWidth]="'90px'"
+                [maxLength]="8"
+                [type]="'number'"
+                formControlName="otherIncome_input"
+              />
+            </span>
+            <label>
               <app-error-message
                 [control]="form.get('longTermMonthlyIncomeSource')"
                 [isTouched]="false"
-                errorKey="required"
+                errorKey="atLeastOneChecked"
                 errorMessage="必選"
               />
               <app-error-message
-                [control]="form.get('socialWelfareAssistance')"
+                [control]="
+                  form.get('longTermMonthlyIncomeSource.otherIncome_text')
+                "
+                [isTouched]="false"
+                errorKey="required"
+                errorMessage="必填"
+              />
+              <app-error-message
+                [control]="
+                  form.get(
+                    'longTermMonthlyIncomeSource.socialWelfareAssistance_select'
+                  )
+                "
                 [isTouched]="false"
                 errorKey="required"
                 errorMessage="必選"
               />
-            </div>
+            </label>
           </div>
         </nz-checkbox-wrapper>
       </div>
@@ -1209,87 +734,21 @@
     <div class="grid-columns-1">
       <div class="label">特殊議題</div>
       <div>
-        <nz-checkbox-wrapper
-          style="width: 100%"
-          (nzOnChange)="specialIssuesChange($event)"
-        >
-          <div nz-row>
-            <div nz-col>
+        <nz-checkbox-wrapper (nzOnChange)="specialIssuesChange($event)">
+          <div formGroupName="specialIssues">
+            <span *ngFor="let option of specialIssues">
               <label
+                [nzDisabled]="option.disabled"
                 nz-checkbox
-                [nzDisabled]="
-                  isDisableSpecialIssuesNone || hd100ListService.isView
-                "
-                nzValue="1"
-                >無</label
+                [formControlName]="option.value"
+                [nzValue]="option.value"
               >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableSpecialIssuesOthers || hd100ListService.isView
-                "
-                nzValue="2"
-                >全時獨居</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableSpecialIssuesOthers || hd100ListService.isView
-                "
-                nzValue="3"
-                >白天獨居</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableSpecialIssuesOthers || hd100ListService.isView
-                "
-                nzValue="4"
-                >老人照顧</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableSpecialIssuesOthers || hd100ListService.isView
-                "
-                nzValue="5"
-                >雙重老化</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="true"
-                nzValue="6"
-                [nzChecked]="isDementia"
-                >失智(確診個案)</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="true"
-                nzValue="7"
-                [nzChecked]="isPhysicalAndMentalDisability"
-                >身心障礙</label
-              >
-            </div>
-            <div nz-col>
-              <app-error-message
-                [control]="form.get('specialIssues')"
-                [isTouched]="false"
-                errorKey="required"
-                errorMessage="必選"
-              />
-            </div>
+                {{ option.label }}
+              </label>
+            </span>
+            <label>
+              <!-- TODO: 特殊議題必選驗證-->
+            </label>
           </div>
         </nz-checkbox-wrapper>
       </div>
@@ -1301,132 +760,41 @@
       <div class="label">是否使用其他服務</div>
       <div>
         <nz-checkbox-wrapper
-          style="width: 100%"
           (nzOnChange)="usingOtherHongDaoServicesChange($event)"
         >
-          <div nz-row>
-            <div nz-col>
+          <div formGroupName="usingOtherHongDaoServices">
+            <span *ngFor="let option of usingOtherHongDaoServices">
               <label
+                [nzDisabled]="option.disabled"
                 nz-checkbox
-                [nzDisabled]="
-                  isDisableUsingOtherHongDaoServicesNone ||
-                  hd100ListService.isView
-                "
-                nzValue="1"
-                >無</label
+                [formControlName]="option.value"
+                [nzValue]="option.value"
               >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableUsingOtherHongDaoServicesOthers ||
-                  hd100ListService.isView
-                "
-                nzValue="2"
-                >獨老標案</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableUsingOtherHongDaoServicesOthers ||
-                  hd100ListService.isView
-                "
-                nzValue="3"
-                >送餐服務</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableUsingOtherHongDaoServicesOthers ||
-                  hd100ListService.isView
-                "
-                nzValue="4"
-                >日常照顧</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableUsingOtherHongDaoServicesOthers ||
-                  hd100ListService.isView
-                "
-                nzValue="5"
-                >居家服務</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableUsingOtherHongDaoServicesOthers ||
-                  hd100ListService.isView
-                "
-                nzValue="6"
-                >A單位服務</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableUsingOtherHongDaoServicesOthers ||
-                  hd100ListService.isView
-                "
-                nzValue="7"
-                >其他長照服務</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableUsingOtherHongDaoServicesOthers ||
-                  hd100ListService.isView
-                "
-                nzValue="8"
-                [nzChecked]="isPhysicalAndMentalDisability"
-                >區據點(含C、失智據點、好客廳等)</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableUsingOtherHongDaoServicesOthers ||
-                  hd100ListService.isView
-                "
-                nzValue="9"
-                [nzChecked]="isPhysicalAndMentalDisability"
-                >其他</label
-              >
-              <label>
-                <app-input
-                  [inputWidth]="'100px'"
-                  [maxLength]="30"
-                  formControlName="usingOtherHongDaoServices_other"
-                />
+                {{ option.label }}
               </label>
-              <label>
-                <app-error-message
-                  [control]="form.get('usingOtherHongDaoServices')"
-                  [isTouched]="false"
-                  errorKey="required"
-                  errorMessage="必選"
-                />
-                <app-error-message
-                  [control]="form.get('usingOtherHongDaoServices_other')"
-                  [isTouched]="false"
-                  errorKey="required"
-                  errorMessage="必填"
-                />
-              </label>
-            </div>
+              <app-input
+                *ngIf="option.value === '08' && option.checked"
+                [inputWidth]="'100px'"
+                [maxLength]="30"
+                formControlName="usingOtherHongDaoServices_other"
+              />
+            </span>
+            <label>
+              <app-error-message
+                [control]="form.get('usingOtherHongDaoServices')"
+                [isTouched]="false"
+                errorKey="atLeastOneChecked"
+                errorMessage="必選" />
+              <app-error-message
+                [control]="
+                  form.get(
+                    'usingOtherHongDaoServices.usingOtherHongDaoServices_other'
+                  )
+                "
+                [isTouched]="false"
+                errorKey="required"
+                errorMessage="必填"
+            /></label>
           </div>
         </nz-checkbox-wrapper>
       </div>
@@ -1434,314 +802,258 @@
     <div class="grid-columns-1">
       <div class="label">福利使用概況</div>
       <div>
-        <nz-checkbox-wrapper
-          style="width: 100%"
-          (nzOnChange)="welfareUsageOverviewChange($event)"
-        >
-          <div nz-row>
-            <div class="my-1" nz-col>
+        <nz-checkbox-wrapper (nzOnChange)="welfareUsageOverviewChange($event)">
+          <div nz-row formGroupName="welfareUsageOverview">
+            <div
+              nz-col
+              class="my-1"
+              nzSpan="24"
+              *ngFor="let option of welfareUsageOverview"
+            >
               <label
+                [nzDisabled]="option.disabled"
                 nz-checkbox
-                [nzDisabled]="
-                  isDisableWelfareUsageOverviewNone || hd100ListService.isView
-                "
-                nzValue="1"
-                >無</label
+                [formControlName]="option.value"
+                [nzValue]="option.value"
               >
-            </div>
-            <div class="my-1" nz-col nzSpan="24">
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableWelfareUsageOverviewOthers || hd100ListService.isView
-                "
-                nzValue="2"
-                >送餐服務</label
-              >
-              <label>
-                單位名稱：
-                <app-input
-                  [inputWidth]="'100px'"
-                  [maxLength]="30"
-                  formControlName="mealDeliveryService_unitName"
-                />
-                主責人員：
-                <app-input
-                  [inputWidth]="'100px'"
-                  [maxLength]="30"
-                  formControlName="mealDeliveryService_serviceResponsiblePerson"
-                />
-                聯絡電話：
-                <app-input
-                  [inputWidth]="'100px'"
-                  [maxLength]="30"
-                  formControlName="mealDeliveryService_contactPhone"
-                />
+                {{ option.label }}
               </label>
-            </div>
-            <div class="my-1" nz-col nzSpan="24">
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableWelfareUsageOverviewOthers || hd100ListService.isView
-                "
-                nzValue="3"
-                >日間照顧</label
-              >
-              <label>
-                單位名稱：
-                <app-input
-                  [inputWidth]="'100px'"
-                  [maxLength]="30"
-                  formControlName="daytimeCare_unitName"
-                />
-                主責人員：
-                <app-input
-                  [inputWidth]="'100px'"
-                  [maxLength]="30"
-                  formControlName="daytimeCare_serviceResponsiblePerson"
-                />
-                聯絡電話：
-                <app-input
-                  [inputWidth]="'100px'"
-                  [maxLength]="30"
-                  formControlName="daytimeCare_contactPhone"
-                />
-              </label>
-            </div>
-            <div class="my-1" nz-col nzSpan="24">
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableWelfareUsageOverviewOthers || hd100ListService.isView
-                "
-                nzValue="4"
-                >居家服務</label
-              >
-              <label>
-                單位名稱：
-                <app-input
-                  [inputWidth]="'100px'"
-                  [maxLength]="30"
-                  formControlName="homeCareService_unitName"
-                />
-                主責人員：
-                <app-input
-                  [inputWidth]="'100px'"
-                  [maxLength]="30"
-                  formControlName="homeCareService_serviceResponsiblePerson"
-                />
-                聯絡電話：
-                <app-input
-                  [inputWidth]="'100px'"
-                  [maxLength]="30"
-                  formControlName="homeCareService_contactPhone"
-                />
-              </label>
-            </div>
-            <div class="my-1" nz-col nzSpan="24">
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableWelfareUsageOverviewOthers || hd100ListService.isView
-                "
-                nzValue="5"
-                >A單位服務</label
-              >
-              <label>
-                單位名稱：
-                <app-input
-                  [inputWidth]="'100px'"
-                  [maxLength]="30"
-                  formControlName="unitAService_unitName"
-                />
-                主責人員：
-                <app-input
-                  [inputWidth]="'100px'"
-                  [maxLength]="30"
-                  formControlName="unitAService_serviceResponsiblePerson"
-                />
-                聯絡電話：
-                <app-input
-                  [inputWidth]="'100px'"
-                  [maxLength]="30"
-                  formControlName="unitAService_contactPhone"
-                />
-              </label>
-            </div>
-            <div class="my-1" nz-col nzSpan="24">
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableWelfareUsageOverviewOthers || hd100ListService.isView
-                "
-                nzValue="6"
-                >其他長照服務</label
-              >
-              <label>
-                單位名稱：
-                <app-input
-                  [inputWidth]="'100px'"
-                  [maxLength]="30"
-                  formControlName="otherUnitService_unitName"
-                />
-                主責人員：
-                <app-input
-                  [inputWidth]="'100px'"
-                  [maxLength]="30"
-                  formControlName="otherUnitService_serviceResponsiblePerson"
-                />
-                聯絡電話：
-                <app-input
-                  [inputWidth]="'100px'"
-                  [maxLength]="30"
-                  formControlName="otherUnitService_contactPhone"
-                />
-              </label>
-            </div>
-            <div class="my-1" nz-col nzSpan="24">
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableWelfareUsageOverviewOthers || hd100ListService.isView
-                "
-                nzValue="7"
-                [nzChecked]="isPhysicalAndMentalDisability"
-                >交通服務</label
-              >
-              <label>
-                單位名稱：
-                <app-input
-                  [inputWidth]="'100px'"
-                  [maxLength]="30"
-                  formControlName="transportationService_unitName"
-                />
-                主責人員：
-                <app-input
-                  [inputWidth]="'100px'"
-                  [maxLength]="30"
-                  formControlName="transportationService_serviceResponsiblePerson"
-                />
-                聯絡電話：
-                <app-input
-                  [inputWidth]="'100px'"
-                  [maxLength]="30"
-                  formControlName="transportationService_contactPhone"
-                />
-              </label>
-            </div>
-            <div class="my-1" nz-col nzSpan="24">
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableWelfareUsageOverviewOthers || hd100ListService.isView
-                "
-                nzValue="8"
-                [nzChecked]="isPhysicalAndMentalDisability"
-                >社區據點</label
-              >
-              <label>
-                單位名稱：
-                <app-input
-                  [inputWidth]="'100px'"
-                  [maxLength]="30"
-                  formControlName="communityCenter_unitName"
-                />
-                主責人員：
-                <app-input
-                  [inputWidth]="'100px'"
-                  [maxLength]="30"
-                  formControlName="communityCenter_serviceResponsiblePerson"
-                />
-                聯絡電話：
-                <app-input
-                  [inputWidth]="'100px'"
-                  [maxLength]="30"
-                  formControlName="communityCenter_contactPhone"
-                />
-              </label>
-            </div>
-            <div class="my-1" nz-col nzSpan="24">
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableWelfareUsageOverviewOthers || hd100ListService.isView
-                "
-                nzValue="9"
-                [nzChecked]="isPhysicalAndMentalDisability"
-                >緊急救援系統</label
-              >
-              <label>
-                單位名稱：
-                <app-input
-                  [inputWidth]="'100px'"
-                  [maxLength]="30"
-                  formControlName="emergencyRescueSystem_unitName"
-                />
-                主責人員：
-                <app-input
-                  [inputWidth]="'100px'"
-                  [maxLength]="30"
-                  formControlName="emergencyRescueSystem_serviceResponsiblePerson"
-                />
-                聯絡電話：
-                <app-input
-                  [inputWidth]="'100px'"
-                  [maxLength]="30"
-                  formControlName="emergencyRescueSystem_contactPhone"
-                />
-              </label>
-            </div>
-            <div class="my-1" nz-col nzSpan="24">
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableWelfareUsageOverviewOthers || hd100ListService.isView
-                "
-                nzValue="10"
-                >其他</label
-              >
-              <label>
+              <span *ngIf="option.value === '01' && option.checked">
+                <label
+                  >單位名稱：
+                  <app-input
+                    [inputWidth]="'100px'"
+                    [maxLength]="30"
+                    formControlName="mealDeliveryService_unitName"
+                /></label>
+                <label>
+                  主責人員：
+                  <app-input
+                    [inputWidth]="'100px'"
+                    [maxLength]="30"
+                    formControlName="mealDeliveryService_serviceResponsiblePerson"
+                  />
+                </label>
+                <label
+                  >聯絡電話：
+                  <app-input
+                    [inputWidth]="'100px'"
+                    [maxLength]="30"
+                    formControlName="mealDeliveryService_contactPhone"
+                /></label>
+              </span>
+              <span *ngIf="option.value === '02' && option.checked">
+                <label>
+                  單位名稱：
+                  <app-input
+                    [inputWidth]="'100px'"
+                    [maxLength]="30"
+                    formControlName="daytimeCare_unitName"
+                /></label>
+                <label>
+                  主責人員：
+                  <app-input
+                    [inputWidth]="'100px'"
+                    [maxLength]="30"
+                    formControlName="daytimeCare_serviceResponsiblePerson"
+                /></label>
+                <label>
+                  聯絡電話：
+                  <app-input
+                    [inputWidth]="'100px'"
+                    [maxLength]="30"
+                    formControlName="daytimeCare_contactPhone"
+                /></label>
+              </span>
+              <span *ngIf="option.value === '03' && option.checked">
+                <label>
+                  單位名稱：
+                  <app-input
+                    [inputWidth]="'100px'"
+                    [maxLength]="30"
+                    formControlName="homeCareService_unitName"
+                /></label>
+                <label>
+                  主責人員：
+                  <app-input
+                    [inputWidth]="'100px'"
+                    [maxLength]="30"
+                    formControlName="homeCareService_serviceResponsiblePerson"
+                /></label>
+                <label>
+                  聯絡電話：
+                  <app-input
+                    [inputWidth]="'100px'"
+                    [maxLength]="30"
+                    formControlName="homeCareService_contactPhone"
+                /></label>
+              </span>
+              <span *ngIf="option.value === '04' && option.checked">
+                <label>
+                  單位名稱：
+                  <app-input
+                    [inputWidth]="'100px'"
+                    [maxLength]="30"
+                    formControlName="unitAService_unitName"
+                /></label>
+                <label>
+                  主責人員：
+                  <app-input
+                    [inputWidth]="'100px'"
+                    [maxLength]="30"
+                    formControlName="unitAService_serviceResponsiblePerson"
+                /></label>
+                <label>
+                  聯絡電話：
+                  <app-input
+                    [inputWidth]="'100px'"
+                    [maxLength]="30"
+                    formControlName="unitAService_contactPhone"
+                /></label>
+              </span>
+              <span *ngIf="option.value === '05' && option.checked">
+                <label>
+                  單位名稱：
+                  <app-input
+                    [inputWidth]="'100px'"
+                    [maxLength]="30"
+                    formControlName="otherUnitService_unitName"
+                /></label>
+                <label>
+                  主責人員：
+                  <app-input
+                    [inputWidth]="'100px'"
+                    [maxLength]="30"
+                    formControlName="otherUnitService_serviceResponsiblePerson"
+                /></label>
+                <label>
+                  聯絡電話：
+                  <app-input
+                    [inputWidth]="'100px'"
+                    [maxLength]="30"
+                    formControlName="otherUnitService_contactPhone"
+                /></label>
+              </span>
+              <span *ngIf="option.value === '06' && option.checked">
+                <label>
+                  單位名稱：
+                  <app-input
+                    [inputWidth]="'100px'"
+                    [maxLength]="30"
+                    formControlName="transportationService_unitName"
+                /></label>
+                <label>
+                  主責人員：
+                  <app-input
+                    [inputWidth]="'100px'"
+                    [maxLength]="30"
+                    formControlName="transportationService_serviceResponsiblePerson"
+                /></label>
+                <label>
+                  聯絡電話：
+                  <app-input
+                    [inputWidth]="'100px'"
+                    [maxLength]="30"
+                    formControlName="transportationService_contactPhone"
+                /></label>
+              </span>
+              <span *ngIf="option.value === '07' && option.checked">
+                <label>
+                  單位名稱：
+                  <app-input
+                    [inputWidth]="'100px'"
+                    [maxLength]="30"
+                    formControlName="communityCenter_unitName"
+                  />
+                </label>
+                <label>
+                  主責人員：
+                  <app-input
+                    [inputWidth]="'100px'"
+                    [maxLength]="30"
+                    formControlName="communityCenter_serviceResponsiblePerson"
+                  />
+                </label>
+                <label>
+                  聯絡電話：
+                  <app-input
+                    [inputWidth]="'100px'"
+                    [maxLength]="30"
+                    formControlName="communityCenter_contactPhone"
+                  />
+                </label>
+              </span>
+              <span *ngIf="option.value === '08' && option.checked">
+                <label>
+                  單位名稱：
+                  <app-input
+                    [inputWidth]="'100px'"
+                    [maxLength]="30"
+                    formControlName="emergencyRescueSystem_unitName"
+                /></label>
+                <label>
+                  主責人員：
+                  <app-input
+                    [inputWidth]="'100px'"
+                    [maxLength]="30"
+                    formControlName="emergencyRescueSystem_serviceResponsiblePerson"
+                /></label>
+                <label>
+                  聯絡電話：
+                  <app-input
+                    [inputWidth]="'100px'"
+                    [maxLength]="30"
+                    formControlName="emergencyRescueSystem_contactPhone"
+                  />
+                </label>
+              </span>
+              <span *ngIf="option.value === '09' && option.checked">
                 <app-input
                   [inputWidth]="'130px'"
                   [placeholder]="'其他福利名稱'"
                   [maxLength]="30"
-                  formControlName="welfareUsageOverview_other"
-                />
-                單位名稱：
-                <app-input
-                  [inputWidth]="'100px'"
-                  [maxLength]="30"
-                  formControlName="welfareUsageOverview_other_unitName"
-                />
-                主責人員：
-                <app-input
-                  [inputWidth]="'100px'"
-                  [maxLength]="30"
-                  formControlName="welfareUsageOverview_other_serviceResponsiblePerson"
-                />
-                聯絡電話：
-                <app-input
-                  [inputWidth]="'100px'"
-                  [maxLength]="30"
-                  formControlName="welfareUsageOverview_other_contactPhone"
-                />
-              </label>
+                  formControlName="welfareUsageOverview_other" />
+                <label>
+                  單位名稱：
+                  <app-input
+                    [inputWidth]="'100px'"
+                    [maxLength]="30"
+                    formControlName="welfareUsageOverview_other_unitName"
+                  />
+                </label>
+                <label>
+                  主責人員：
+                  <app-input
+                    [inputWidth]="'100px'"
+                    [maxLength]="30"
+                    formControlName="welfareUsageOverview_other_serviceResponsiblePerson"
+                  />
+                </label>
+                <label>
+                  聯絡電話：
+                  <app-input
+                    [inputWidth]="'100px'"
+                    [maxLength]="30"
+                    formControlName="welfareUsageOverview_other_contactPhone"
+                  /> </label
+              ></span>
             </div>
+            <label>
+              <app-error-message
+                [control]="form.get('welfareUsageOverview')"
+                [isTouched]="false"
+                errorKey="required"
+                errorMessage="必選" />
+              <app-error-message
+                [control]="
+                  form.get('welfareUsageOverview.welfareUsageOverview_other')
+                "
+                [isTouched]="false"
+                errorKey="required"
+                errorMessage="必填"
+            /></label>
           </div>
         </nz-checkbox-wrapper>
-        <app-error-message
-          [control]="form.get('welfareUsageOverview')"
-          [isTouched]="false"
-          errorKey="required"
-          errorMessage="必選"
-        />
-        <app-error-message
-          [control]="form.get('welfareUsageOverview_other')"
-          [isTouched]="false"
-          errorKey="required"
-          errorMessage="必填"
-        />
       </div>
     </div>
     <div>
@@ -1780,52 +1092,18 @@
     <div class="grid-columns-1">
       <div class="label">住屋概況</div>
       <div>
-        <nz-checkbox-wrapper
-          style="width: 100%"
-          (nzOnChange)="housingConditionChange($event)"
-        >
-          <div nz-row>
-            <div nz-col>
+        <nz-checkbox-wrapper>
+          <div formGroupName="housingCondition">
+            <span *ngFor="let option of housingCondition">
               <label
+                [nzDisabled]="option.disabled"
                 nz-checkbox
-                [nzDisabled]="hd100ListService.isView"
-                nzValue="1"
-                >電梯</label
+                [formControlName]="option.value"
+                [nzValue]="option.value"
               >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd100ListService.isView"
-                nzValue="2"
-                >管理員</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd100ListService.isView"
-                nzValue="3"
-                >套房</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd100ListService.isView"
-                nzValue="4"
-              >
-                雅房</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd100ListService.isView"
-                nzValue="5"
-                >違建</label
-              >
-            </div>
+                {{ option.label }}
+              </label>
+            </span>
           </div>
         </nz-checkbox-wrapper>
       </div>
@@ -1833,59 +1111,25 @@
     <div class="grid-columns-1">
       <div class="label">居住環境</div>
       <div>
-        <nz-checkbox-wrapper
-          style="width: 100%"
-          (nzOnChange)="livingEnvironmentChange($event)"
-        >
-          <div nz-row>
-            <div nz-col>
+        <nz-checkbox-wrapper>
+          <div formGroupName="livingEnvironment">
+            <span *ngFor="let option of livingEnvironment">
               <label
+                [nzDisabled]="option.disabled"
                 nz-checkbox
-                [nzDisabled]="hd100ListService.isView"
-                nzValue="1"
-                >乾淨整齊</label
+                [formControlName]="option.value"
+                [nzValue]="option.value"
               >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd100ListService.isView"
-                nzValue="2"
-                >尚算乾淨</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd100ListService.isView"
-                nzValue="3"
-                >髒亂</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd100ListService.isView"
-                nzValue="4"
-                >有異味</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd100ListService.isView"
-                nzValue="5"
-                >堆放許多雜物</label
-              >
-            </div>
-            <div nz-col>
+                {{ option.label }}
+              </label>
+            </span>
+            <label>
               <app-error-message
                 [control]="form.get('livingEnvironment')"
                 [isTouched]="false"
-                errorKey="required"
+                errorKey="atLeastOneChecked"
                 errorMessage="必選"
-              />
-            </div>
+            /></label>
           </div>
         </nz-checkbox-wrapper>
       </div>
@@ -1893,142 +1137,36 @@
     <div class="grid-columns-1">
       <div class="label">同住者</div>
       <div>
-        <nz-checkbox-wrapper
-          style="width: 100%"
-          (nzOnChange)="cohabitantsChange($event)"
-        >
-          <div nz-row>
-            <div nz-col>
+        <nz-checkbox-wrapper (nzOnChange)="cohabitantsChange($event)">
+          <div formGroupName="cohabitants">
+            <span *ngFor="let option of cohabitants">
               <label
+                [nzDisabled]="option.disabled"
                 nz-checkbox
-                [nzDisabled]="
-                  isDisableCohabitantsNone || hd100ListService.isView
-                "
-                nzValue="1"
-                >無</label
+                [formControlName]="option.value"
+                [nzValue]="option.value"
               >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableCohabitantsOthers || hd100ListService.isView
-                "
-                nzValue="2"
-                >配偶</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableCohabitantsOthers || hd100ListService.isView
-                "
-                nzValue="3"
-                >未婚子女</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableCohabitantsOthers || hd100ListService.isView
-                "
-                nzValue="4"
-                >已婚子女</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableCohabitantsOthers || hd100ListService.isView
-                "
-                nzValue="5"
-                >孫子女</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableCohabitantsOthers || hd100ListService.isView
-                "
-                nzValue="6"
-                >兄弟姊妹</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableCohabitantsOthers || hd100ListService.isView
-                "
-                nzValue="7"
-                >朋友</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableCohabitantsOthers || hd100ListService.isView
-                "
-                nzValue="8"
-                >同居人</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableCohabitantsOthers || hd100ListService.isView
-                "
-                nzValue="9"
-                >台籍看護</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableCohabitantsOthers || hd100ListService.isView
-                "
-                nzValue="10"
-                >外籍看護</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableCohabitantsOthers || hd100ListService.isView
-                "
-                nzValue="11"
-                >其他</label
-              >
-              <label>
-                <app-input
-                  [inputWidth]="'100px'"
-                  [maxLength]="30"
-                  formControlName="cohabitants_other"
-                />
+                {{ option.label }}
               </label>
-              <label>
-                <app-error-message
-                  [control]="form.get('cohabitants')"
-                  [isTouched]="false"
-                  errorKey="required"
-                  errorMessage="必選"
-                />
-                <app-error-message
-                  [control]="form.get('cohabitants_other')"
-                  [isTouched]="false"
-                  errorKey="required"
-                  errorMessage="必填"
-                />
-              </label>
-            </div>
+              <app-input
+                *ngIf="option.value === '10' && option.checked"
+                [inputWidth]="'100px'"
+                [maxLength]="30"
+                formControlName="cohabitants_other"
+              />
+            </span>
+            <label>
+              <app-error-message
+                [control]="form.get('cohabitants')"
+                [isTouched]="false"
+                errorKey="atLeastOneChecked"
+                errorMessage="必選" />
+              <app-error-message
+                [control]="form.get('cohabitants.cohabitants_other')"
+                [isTouched]="false"
+                errorKey="required"
+                errorMessage="必填"
+            /></label>
           </div>
         </nz-checkbox-wrapper>
       </div>
@@ -2088,8 +1226,9 @@
             /></label>
             <app-error-message
               [condition]="
+                form.get('emergencyContact_emergencyContact')?.value === null ||
                 form.get('emergencyContact_emergencyContact')?.value.length ===
-                0
+                  0
               "
               [isCustom]="true"
               errorMessage="必填"
@@ -2104,6 +1243,7 @@
             </label>
             <app-error-message
               [condition]="
+                form.get('emergencyContact_relationship')?.value === null ||
                 form.get('emergencyContact_relationship')?.value.length === 0
               "
               [isCustom]="true"
@@ -2119,6 +1259,7 @@
               />
               <app-error-message
                 [condition]="
+                  form.get('emergencyContact_phone')?.value === null ||
                   form.get('emergencyContact_phone')?.value.length === 0
                 "
                 [isCustom]="true"
@@ -2195,6 +1336,11 @@
     <div class="grid-columns-2">
       <div class="label">個資同意書</div>
       <div class="column-Message">
+        <!-- !TODO:讓User可以下載範本 -->
+        <app-button
+          [attachClassName]="['danger']"
+          [buttonText]="'範本下載'"
+        ></app-button>
         <app-select
           [selectWidth]="'100px'"
           [options]="selectOptions_includeHasNotConfirmed"
@@ -2209,6 +1355,11 @@
       </div>
       <div class="label">肖像權同意書</div>
       <div class="column-Message">
+        <!-- !TODO:讓User可以下載範本 -->
+        <app-button
+          [attachClassName]="['danger']"
+          [buttonText]="'範本下載'"
+        ></app-button>
         <app-select
           [selectWidth]="'100px'"
           [options]="selectOptions_includeHasNotConfirmed"
@@ -2253,33 +1404,18 @@
     <div class="grid-columns-1 border-bottom-0">
       <div class="label">服務志工</div>
       <div>
-        <nz-checkbox-wrapper style="width: 100%">
-          <!-- !TODO -->
-          <div nz-row>
-            <div nz-col>
+        <nz-checkbox-wrapper>
+          <div formGroupName="serviceVolunteer">
+            <span *ngFor="let option of serviceVolunteer">
               <label
+                [nzDisabled]="option.disabled"
                 nz-checkbox
-                [nzDisabled]="hd100ListService.isView"
-                nzValue="1"
-                >志工1</label
+                [formControlName]="option.value"
+                [nzValue]="option.value"
               >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd100ListService.isView"
-                nzValue="2"
-                >志工2</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd100ListService.isView"
-                nzValue="3"
-                >志工3</label
-              >
-            </div>
+                {{ option.label }}
+              </label>
+            </span>
           </div>
         </nz-checkbox-wrapper>
       </div>

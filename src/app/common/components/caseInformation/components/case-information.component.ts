@@ -4,8 +4,9 @@ import { SharedModule } from '../../../shared/shared.module';
 import { ButtonComponent } from '../../button/button.component';
 import { InputComponent } from '../../input/input.component';
 import { CaseInformationService } from '../service/case-information.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TabService } from '../../../layouts/tab/tab.service';
+import { Hd100ListService } from '../../../../pages/hd100/list/service/hd100-list.service';
 
 @Component({
   selector: 'app-case-information',
@@ -17,42 +18,69 @@ import { TabService } from '../../../layouts/tab/tab.service';
 export class CaseInformationComponent implements OnInit {
   // 當前的頁面
   @Input() currentTab: string = '';
+  // tab名稱
+  tabName: string = '';
+  // 當前模式
+  currentMode: string = '';
 
   constructor(
+    private route: ActivatedRoute,
     public caseInformationService: CaseInformationService, // caseInformationService
     public router: Router, // 路由
     private tabService: TabService, // 關閉tab的Service
-    private hd180ListService: Hd180ListService // hd180ListService
+    private hd180ListService: Hd180ListService, // hd180ListService
+    public hd100ListService: Hd100ListService // hd100ListService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // 取得當前路由的tabName
+    this.tabName = this.route.snapshot.data['tabName'];
+
+    if (this.hd100ListService.isCreate) {
+      this.currentMode = '/create';
+    } else if (this.hd100ListService.isEdit) {
+      this.currentMode = '/edit';
+    } else {
+      this.currentMode = '/view';
+    }
+  }
 
   // 前往hd110
   async goToHd110() {
-    await this.router.navigate(['/hd110']);
-    if (this.currentTab !== '個案開案評估表') {
-      this.closeTab(this.currentTab);
-    } else {
+    if (
+      this.router.url.startsWith('/hd110/view') ||
+      this.router.url.startsWith('/hd110/edit')
+    ) {
       return;
+    } else {
+      await this.router.navigate(['/hd110' + this.currentMode]);
+      this.closeTab(this.tabName);
     }
   }
 
   // 前往hd120
   async goToHd120() {
-    await this.router.navigate(['/hd120']);
-    if (this.currentTab === '個案開案資料表') {
+    if (
+      this.router.url.startsWith('/hd120/view') ||
+      this.router.url.startsWith('/hd120/edit')
+    ) {
       return;
+    } else {
+      await this.router.navigate(['/hd120' + this.currentMode]);
+      this.closeTab(this.tabName);
     }
-    this.closeTab(this.currentTab);
   }
 
   // 前往hd130
   async goToHd130() {
-    await this.router.navigate(['/hd130']);
-    if (this.currentTab !== '個案初評表') {
-      this.closeTab(this.currentTab);
-    } else {
+    if (
+      this.router.url.startsWith('/hd130/view') ||
+      this.router.url.startsWith('/hd130/edit')
+    ) {
       return;
+    } else {
+      await this.router.navigate(['/hd130' + this.currentMode]);
+      this.closeTab(this.tabName);
     }
   }
 

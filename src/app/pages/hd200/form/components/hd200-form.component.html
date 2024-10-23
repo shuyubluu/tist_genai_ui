@@ -40,6 +40,23 @@
     </div>
     <div class="title">資訊</div>
     <div class="grid-columns-1">
+      <div class="label">單位名稱</div>
+      <div class="column-Message">
+        <app-select
+          [selectWidth]="'200px'"
+          [options]="selectOptions_region"
+          (ngModelChange)="handelUnitNameChange($event)"
+          formControlName="unitName"
+        />
+        <app-error-message
+          [control]="form.get('unitName')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必選"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-1">
       <div class="label">服務單位</div>
       <div class="column-Message">
         <app-select
@@ -66,33 +83,14 @@
         />
       </div>
     </div>
-    <div class="grid-columns-2">
-      <div class="label">單位名稱</div>
-      <div class="column-Message">
-        <app-select
-          [selectWidth]="'115px'"
-          [options]="selectOptions_unitName"
-          formControlName="unitName"
-        />
-        <app-error-message
-          [control]="form.get('unitName')"
-          [isTouched]="false"
-          errorKey="required"
-          errorMessage="必選"
-        />
-      </div>
+    <!-- 自動代入 -->
+    <div class="grid-columns-1">
       <div class="label">主責人</div>
       <div class="column-Message">
         <app-input
           [inputWidth]="'100px'"
           [maxLength]="30"
           formControlName="primaryContact"
-        />
-        <app-error-message
-          [control]="form.get('primaryContact')"
-          [isTouched]="false"
-          errorKey="required"
-          errorMessage="必填"
         />
       </div>
     </div>

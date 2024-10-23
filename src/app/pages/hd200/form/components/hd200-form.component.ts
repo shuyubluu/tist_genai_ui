@@ -57,18 +57,6 @@ export class Hd200FormComponent implements OnInit {
   // 用來暫存希望服務區域
   tempDesiredServiceArea: string[] = [];
 
-  // 單位名稱select選項
-  selectOptions_unitName: string[] = [
-    '事業發展處',
-    '臺北服務處',
-    '新北服務處',
-    '臺中服務處',
-    '彰化服務處',
-    '嘉義服務處',
-    '高雄服務處',
-    '屏東服務處',
-  ];
-
   // 服務單位select選項
   selectOptions_region: string[] = [
     '彭祖體驗長者導師志工隊',
@@ -449,6 +437,8 @@ export class Hd200FormComponent implements OnInit {
     this.form.get('maritalStatus_other')?.disable();
     // 志工來源其他
     this.form.get('volunteerSource_other')?.disable();
+    // 禁用主責人
+    this.form.get('primaryContact')?.disable();
   }
 
   // 飲食習慣選項改變
@@ -580,6 +570,11 @@ export class Hd200FormComponent implements OnInit {
   // 關閉志工基本資料
   closeTab(identifier: string) {
     this.tabService.closeTab(identifier);
+  }
+
+  // 當單位名稱選擇後觸發
+  handelUnitNameChange(option: string) {
+    this.form.get('serviceUnit_select1')?.setValue(option);
   }
 
   // 服務紀錄測上傳點擊事件

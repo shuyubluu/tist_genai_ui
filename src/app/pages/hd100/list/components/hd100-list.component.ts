@@ -1,6 +1,6 @@
 import { Hd100ListService } from './../service/hd100-list.service';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
 import { InputComponent } from '../../../../common/components/input/input.component';
 import { SelectComponent } from '../../../../common/components/select/select.component';
@@ -41,6 +41,8 @@ export class Hd100ListComponent implements OnInit {
   pageSize: number = 10;
   // 檢查日期區間
   checkDateRange: boolean = false;
+  // tab名稱
+  tabName: string = '';
   // 搜尋結果模擬資料
   searchResultData: SearchResultData[] = [
     {
@@ -78,6 +80,7 @@ export class Hd100ListComponent implements OnInit {
   }
 
   constructor(
+    private route: ActivatedRoute,
     private tabService: TabService, // 關閉tab的Service
     private router: Router, // 路由
     private caseInformationService: CaseInformationService, // caseInformationService
@@ -100,6 +103,8 @@ export class Hd100ListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // 取得當前路由的tabName
+    this.tabName = this.route.snapshot.data['tabName'];
     // 生成多筆模擬搜尋結果資料
     for (let i = 0; i < 20; i++) {
       this.searchResultData.push(this.searchResultData[i]);
@@ -126,14 +131,14 @@ export class Hd100ListComponent implements OnInit {
   // 檢視個案資料
   view() {
     this.hd100FormService.setCurrentRoute('hd100');
-    this.router.navigate(['/hd110']);
+    this.router.navigate(['/hd110/view']);
     this.caseInformationService.isChoiceCase = true;
     this.hd100ListService.setMode(true, false, false);
   }
 
   // 新增個案資料
   create() {
-    this.router.navigate(['/hd110']);
+    this.router.navigate(['/hd110/create']);
     this.caseInformationService.isChoiceCase = false;
     this.hd100ListService.setMode(false, true, false);
   }
@@ -141,7 +146,7 @@ export class Hd100ListComponent implements OnInit {
   // 編輯個案資料
   edit() {
     this.hd100FormService.setCurrentRoute('hd100');
-    this.router.navigate(['/hd110']);
+    this.router.navigate(['/hd110/edit']);
     this.caseInformationService.isChoiceCase = true;
     this.hd100ListService.setMode(false, false, true);
   }

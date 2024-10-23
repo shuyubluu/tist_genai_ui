@@ -101,8 +101,6 @@ export class Hd270FormComponent implements OnInit {
       terminationDate: new FormControl('', [Validators.required]),
       // 保險公司_下拉式選單
       insuranceCompany_select: new FormControl('', [Validators.required]),
-      // 保險公司_搜尋關鍵字
-      insuranceCompany_keyword: new FormControl('', [Validators.required]),
       // 經費來源
       fundingSource: new FormControl('', [Validators.required]),
       // 投保類別

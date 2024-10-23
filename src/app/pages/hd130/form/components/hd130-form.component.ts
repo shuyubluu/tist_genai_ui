@@ -116,11 +116,18 @@ export class Hd130FormComponent implements OnInit {
       // 5.主管簽核
       // 單位主管意見
       supervisorComments: new FormControl('', [Validators.required]),
+      checkOptions: new FormControl([]),
     });
   }
 
+  onCheckboxChange(checkedValues: string[]): void {
+    // 傳入的值正確無誤，更新到表單控件中
+    this.form.get('checkOptions')?.setValue(checkedValues);
+  }
+
   ngOnInit(): void {
-    console.log(this.form.get('visitDate')?.value);
+    this.form.get('checkOptions')?.setValue(['A']); // 預設選中 'A'
+    console.log(this.form.value.checkOptions);
 
     // 檢視模式，禁用表單
     if (this.hd100ListService.isView) {

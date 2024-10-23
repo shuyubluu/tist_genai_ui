@@ -42,7 +42,7 @@ export class Hd140FormComponent implements OnInit {
   // 最新風險等級select選項
   selectOptions_latestRiskLevel: string[] = ['低風險', '中風險', '高風險'];
   // 訪視結果select選項
-  selectOptions_visitOutcome: string[] = ['持續服務', '暫停風險', '結案'];
+  selectOptions_visitOutcome: string[] = ['持續服務', '暫停', '結案'];
 
   constructor(
     private tabService: TabService, // 關閉tab的Service

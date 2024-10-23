@@ -18,6 +18,8 @@ import { CaseInformationComponent } from '../../../../common/components/caseInfo
 import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 import { Hd100ListService } from '../../../hd100/list/service/hd100-list.service';
 import { DateValidators } from '../../../../common/validator/date-validator';
+import { CheckboxGroup } from '../service/hd120-form.interface';
+import { checkboxGroupValidator } from '../../../../common/validator/checkbox-group-validator';
 
 @Component({
   selector: 'app-hd120-form',
@@ -40,52 +42,14 @@ import { DateValidators } from '../../../../common/validator/date-validator';
 export class Hd120FormComponent implements OnInit {
   // 個案開案評估表單
   form: FormGroup;
-  // 宗教信仰是否禁用無選項
-  isDisableReligiousAffiliationNone: boolean = false;
-  // 宗教信仰是否禁用無選項以外的項目
-  isDisableReligiousAffiliationOthers: boolean = false;
-  // 現有疾病狀態是否禁用無選項
-  isDisableCurrentHealthConditionsNone: boolean = false;
-  // 現有疾病狀態是否禁用無選項以外的項目
-  isDisableCurrentHealthConditionsOthers: boolean = false;
   // 就醫狀態modal是否顯示
   isVisible_medicalStatus: boolean = false;
-  // 輔具使用是否禁用無選項
-  isDisableAssistiveDeviceUsageNone: boolean = false;
-  // 輔具使用是否禁用無選項以外的項目
-  isDisableAssistiveDeviceUsageOthers: boolean = false;
   // 義肢的附加選項是否已擇一
   isChoiceProsthesis: boolean = false;
-  // 社會福利補助是否禁用無選項
-  // isDisableSocialWelfareSubsidyNone: boolean = false;
-  // 社會福利補助是否禁用無選項以外的項目
-  // isDisableSocialWelfareSubsidyOthers: boolean = false;
-  // 是否為身心障礙者
-  isPhysicalAndMentalDisability: boolean = false;
-  // 長期每月經濟來源是否禁用無選項
-  isDisableLongTermMonthlyIncomeSourceNone: boolean = false;
-  // 長期每月經濟來源是否禁用無選項以外的項目
-  isDisableLongTermMonthlyIncomeSourceOthers: boolean = false;
-  // 特殊議題是否禁用無選項
-  isDisableSpecialIssuesNone: boolean = false;
-  // 特殊議題是否禁用無選項以外的項目
-  isDisableSpecialIssuesOthers: boolean = false;
-  // 是否為失智症者
-  isDementia: boolean = false;
-  // 是否使用弘道其他服務是否禁用無選項
-  isDisableUsingOtherHongDaoServicesNone: boolean = false;
-  // 是否使用弘道其他服務是否禁用無選項以外的項目
-  isDisableUsingOtherHongDaoServicesOthers: boolean = false;
-  // 福利使用概況是否禁用無選項
-  isDisableWelfareUsageOverviewNone: boolean = false;
-  // 福利使用概況是否禁用無選項以外的項目
-  isDisableWelfareUsageOverviewOthers: boolean = false;
-  // 同住者是否禁用無選項
-  isDisableCohabitantsNone: boolean = false;
-  // 同住者是否禁用無選項以外的項目
-  isDisableCohabitantsOthers: boolean = false;
   // 緊急聯絡人modal是否顯示
   isVisible_emergencyContact: boolean = false;
+  // 是否同通訊地址
+  isSameAsMailingAddress: boolean = false;
   // 個案服務狀態select選項
   selectOptions_caseServiceStatus: string[] = ['持續服務', '暫停服務', '結案'];
   // 個案分級select選項
@@ -142,7 +106,7 @@ export class Hd120FormComponent implements OnInit {
     '極重度',
   ];
   // 社會福利補助select選項
-  selectOptions_socialWelfareAssistance: string[] = [
+  selectOptions_socialWelfareSubsidy: string[] = [
     '老農津貼',
     '身障津貼',
     '中低收入補助',
@@ -223,6 +187,760 @@ export class Hd120FormComponent implements OnInit {
     },
   ];
 
+  // 定義福利使用狀況控件名稱
+  welfareUsageOverviewControlsToInitialize: string[] = [
+    'mealDeliveryService_unitName',
+    'mealDeliveryService_serviceResponsiblePerson',
+    'mealDeliveryService_contactPhone',
+    'daytimeCare_unitName',
+    'daytimeCare_serviceResponsiblePerson',
+    'daytimeCare_contactPhone',
+    'homeCareService_unitName',
+    'homeCareService_serviceResponsiblePerson',
+    'homeCareService_contactPhone',
+    'unitAService_unitName',
+    'unitAService_serviceResponsiblePerson',
+    'unitAService_contactPhone',
+    'otherUnitService_unitName',
+    'otherUnitService_serviceResponsiblePerson',
+    'otherUnitService_contactPhone',
+    'transportationService_unitName',
+    'transportationService_serviceResponsiblePerson',
+    'transportationService_contactPhone',
+    'communityCenter_unitName',
+    'communityCenter_serviceResponsiblePerson',
+    'communityCenter_contactPhone',
+    'emergencyRescueSystem_unitName',
+    'emergencyRescueSystem_serviceResponsiblePerson',
+    'emergencyRescueSystem_contactPhone',
+    'welfareUsageOverview_other',
+    'welfareUsageOverview_other_unitName',
+    'welfareUsageOverview_other_serviceResponsiblePerson',
+    'welfareUsageOverview_other_contactPhone',
+  ];
+
+  // 社會福利補助勾選狀態
+  religiousAffiliation: CheckboxGroup[] = [
+    {
+      label: '無',
+      value: '00',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '道教',
+      value: '01',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '佛教',
+      value: '02',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '基督教',
+      value: '03',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '天主教',
+      value: '04',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '一貫道',
+      value: '05',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '回教',
+      value: '06',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '民間信仰',
+      value: '07',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '其他',
+      value: '08',
+      checked: false,
+      disabled: false,
+    },
+  ];
+
+  // 習慣用語勾選狀態
+  commonLanguage: CheckboxGroup[] = [
+    {
+      label: '國語',
+      value: '00',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '台語',
+      value: '01',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '日語',
+      value: '02',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '客家話',
+      value: '03',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '其他',
+      value: '04',
+      checked: false,
+      disabled: false,
+    },
+  ];
+
+  // 飲食習慣勾選狀態
+  eatingHabits: CheckboxGroup[] = [
+    {
+      label: '葷',
+      value: '00',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '全素',
+      value: '01',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '蛋奶素',
+      value: '02',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '鍋邊素',
+      value: '03',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '初一十五素',
+      value: '04',
+      checked: false,
+      disabled: false,
+    },
+  ];
+
+  // 現有疾病狀態勾選狀態
+  currentHealthConditions: CheckboxGroup[] = [
+    {
+      label: '無',
+      value: '00',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '中風',
+      value: '01',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '高血壓',
+      value: '02',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '心臟病',
+      value: '03',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '糖尿病',
+      value: '04',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '腎臟疾病',
+      value: '05',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '骨骼系統(關節炎、骨折)',
+      value: '06',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '巴金森氏症',
+      value: '07',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '失智症',
+      value: '08',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '癌症',
+      value: '09',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '眼部疾病',
+      value: '10',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '精神疾病',
+      value: '11',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '其他',
+      value: '12',
+      checked: false,
+      disabled: false,
+    },
+  ];
+
+  // 輔具使用勾選狀態
+  assistiveDeviceUsage: CheckboxGroup[] = [
+    {
+      label: '無',
+      value: '00',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '單手拐杖',
+      value: '01',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '助行器',
+      value: '02',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '腋下拐杖',
+      value: '03',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '輪椅',
+      value: '04',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '氣墊床',
+      value: '05',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '助聽器',
+      value: '06',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '便盆椅',
+      value: '07',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '假牙',
+      value: '08',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '義肢',
+      value: '09',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '上肢',
+      value: '10',
+      checked: false,
+      disabled: true,
+    },
+    {
+      label: '下肢',
+      value: '11',
+      checked: false,
+      disabled: true,
+    },
+    {
+      label: '其他',
+      value: '12',
+      checked: false,
+      disabled: false,
+    },
+  ];
+
+  // 社會福利補助勾選狀態
+  socialWelfareSubsidy: CheckboxGroup[] = [
+    {
+      label: '無',
+      value: '00',
+      checked: false,
+      disabled: true,
+    },
+    {
+      label: '身心障礙',
+      value: '01',
+      checked: false,
+      disabled: true,
+    },
+    {
+      label: '原住民',
+      value: '02',
+      checked: false,
+      disabled: true,
+    },
+    {
+      label: '新住民',
+      value: '03',
+      checked: false,
+      disabled: true,
+    },
+    {
+      label: '榮民',
+      value: '04',
+      checked: false,
+      disabled: true,
+    },
+    {
+      label: '榮眷',
+      value: '05',
+      checked: false,
+      disabled: true,
+    },
+  ];
+
+  // 長期每月經濟來源勾選狀態
+  longTermMonthlyIncomeSource: CheckboxGroup[] = [
+    {
+      label: '無',
+      value: '00',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '社會福利補助 ',
+      value: '01',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '子女供應',
+      value: '02',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '退休俸',
+      value: '03',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '自己工作收入',
+      value: '04',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '配偶工作收入',
+      value: '05',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '自己或配偶積蓄',
+      value: '06',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '老年年金',
+      value: '07',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '民間單位補助',
+      value: '08',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '其他收入',
+      value: '09',
+      checked: false,
+      disabled: false,
+    },
+  ];
+
+  // 特殊議題勾選狀態
+  specialIssues: CheckboxGroup[] = [
+    {
+      label: '無',
+      value: '00',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '全時獨居 ',
+      value: '01',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '白天獨居',
+      value: '02',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '老老照顧',
+      value: '03',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '雙重老化',
+      value: '04',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '失智(確診個案)',
+      value: '05',
+      checked: false,
+      disabled: true,
+    },
+    {
+      label: '身心障礙',
+      value: '06',
+      checked: false,
+      disabled: true,
+    },
+  ];
+
+  // 是否使用弘道其他服務勾選狀態
+  usingOtherHongDaoServices: CheckboxGroup[] = [
+    {
+      label: '無',
+      value: '00',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '獨老專案 ',
+      value: '01',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '送餐服務',
+      value: '02',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '日間照顧',
+      value: '03',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '居家服務',
+      value: '04',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: 'A單位服務',
+      value: '05',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '其他長照服務',
+      value: '06',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '區據點(含C、失智據點、好客廳等)',
+      value: '07',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '其他',
+      value: '08',
+      checked: false,
+      disabled: false,
+    },
+  ];
+
+  // 福利使用概況勾選狀態
+  welfareUsageOverview: CheckboxGroup[] = [
+    {
+      label: '無',
+      value: '00',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '送餐服務 ',
+      value: '01',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '日間照顧',
+      value: '02',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '居家服務',
+      value: '03',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: 'A單位服務',
+      value: '04',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '其他長照服務',
+      value: '05',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '交通服務',
+      value: '06',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '社區據點',
+      value: '07',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '緊急救援系統',
+      value: '08',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '其他',
+      value: '09',
+      checked: false,
+      disabled: false,
+    },
+  ];
+
+  // 住屋概況勾選狀態
+  housingCondition: CheckboxGroup[] = [
+    {
+      label: '電梯',
+      value: '00',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '管理員 ',
+      value: '01',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '套房',
+      value: '02',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '雅房',
+      value: '03',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '違建',
+      value: '04',
+      checked: false,
+      disabled: false,
+    },
+  ];
+
+  // 居住環境勾選狀態
+  livingEnvironment: CheckboxGroup[] = [
+    {
+      label: '乾淨整齊',
+      value: '00',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '尚算乾淨 ',
+      value: '01',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '髒亂',
+      value: '02',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '有異味',
+      value: '03',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '堆放許多雜物',
+      value: '04',
+      checked: false,
+      disabled: false,
+    },
+  ];
+
+  // 同住者勾選狀態
+  cohabitants: CheckboxGroup[] = [
+    {
+      label: '無',
+      value: '00',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '配偶 ',
+      value: '01',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '未婚子女',
+      value: '02',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '已婚子女',
+      value: '03',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '孫子女',
+      value: '04',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '兄弟姊妹',
+      value: '05',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '朋友',
+      value: '06',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '同居人',
+      value: '07',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '台籍看護',
+      value: '08',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '外籍看護',
+      value: '09',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '其他',
+      value: '10',
+      checked: false,
+      disabled: false,
+    },
+  ];
+
+  // 服務志工勾選狀態
+  serviceVolunteer: CheckboxGroup[] = [
+    {
+      label: '志工1',
+      value: '00',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '志工2 ',
+      value: '01',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '志工3',
+      value: '02',
+      checked: false,
+      disabled: false,
+    },
+  ];
+
   // 個案開案資料表單
   constructor(
     private tabService: TabService, // 關閉tab的Service
@@ -232,6 +950,196 @@ export class Hd120FormComponent implements OnInit {
     public diagramService: DiagramService, // diagramService
     public hd100ListService: Hd100ListService // hd100ListService
   ) {
+    // 串接複選框的狀態
+    // this.religiousAffiliation =
+    // this.commonLanguage =
+    // this.eatingHabits =
+    // this.currentHealthConditions =
+    // this.assistiveDeviceUsage =
+    // this.socialWelfareSubsidy =
+    // this.longTermMonthlyIncomeSource =
+    // this.specialIssues =
+    // this.usingOtherHongDaoServices =
+    // this.welfareUsageOverview =
+    // this.housingCondition =
+    // this.livingEnvironment =
+    // this.cohabitants =
+    // this.serviceVolunteer =
+
+    // 宗教信仰CheckboxGroup
+    const religiousAffiliationGroup: { [key: string]: FormControl } = {};
+    this.religiousAffiliation.forEach((option) => {
+      religiousAffiliationGroup[option.value] = new FormControl(option.checked);
+      if (option.disabled) {
+        religiousAffiliationGroup[option.value].disable(); // 如果該選項應該被禁用，則禁用對應的 FormControl
+      }
+    });
+    religiousAffiliationGroup['religiousAffiliation_other'] = new FormControl(
+      '',
+      [Validators.required]
+    );
+
+    // 習慣用語CheckboxGroup
+    const commonLanguageGroup: { [key: string]: FormControl } = {};
+    this.commonLanguage.forEach((option) => {
+      commonLanguageGroup[option.value] = new FormControl(option.checked);
+      if (option.disabled) {
+        commonLanguageGroup[option.value].disable(); // 如果該選項應該被禁用，則禁用對應的 FormControl
+      }
+    });
+    commonLanguageGroup['commonLanguage_other'] = new FormControl('', [
+      Validators.required,
+    ]);
+
+    // 飲食習慣CheckboxGroup
+    const eatingHabitsGroup: { [key: string]: FormControl } = {};
+    this.eatingHabits.forEach((option) => {
+      eatingHabitsGroup[option.value] = new FormControl(option.checked);
+      if (option.disabled) {
+        eatingHabitsGroup[option.value].disable(); // 如果該選項應該被禁用，則禁用對應的 FormControl
+      }
+    });
+
+    // 現有疾病狀態CheckboxGroup
+    const currentHealthConditionsGroup: { [key: string]: FormControl } = {};
+    this.currentHealthConditions.forEach((option) => {
+      currentHealthConditionsGroup[option.value] = new FormControl(
+        option.checked
+      );
+      if (option.disabled) {
+        currentHealthConditionsGroup[option.value].disable(); // 如果該選項應該被禁用，則禁用對應的 FormControl
+      }
+    });
+
+    // 輔具使用CheckboxGroup
+    const assistiveDeviceUsageGroup: { [key: string]: FormControl } = {};
+    this.assistiveDeviceUsage.forEach((option) => {
+      assistiveDeviceUsageGroup[option.value] = new FormControl(option.checked);
+      if (option.disabled) {
+        assistiveDeviceUsageGroup[option.value].disable(); // 如果該選項應該被禁用，則禁用對應的 FormControl
+      }
+    });
+    assistiveDeviceUsageGroup['assistiveDeviceUsage_other'] = new FormControl(
+      '',
+      [Validators.required]
+    );
+
+    // 社會福利補助CheckboxGroup
+    const socialWelfareSubsidyGroup: { [key: string]: FormControl } = {};
+    this.socialWelfareSubsidy.forEach((option) => {
+      socialWelfareSubsidyGroup[option.value] = new FormControl(option.checked);
+      if (option.disabled) {
+        socialWelfareSubsidyGroup[option.value].disable(); // 如果該選項應該被禁用，則禁用對應的 FormControl
+      }
+    });
+
+    // 長期每月經濟來源CheckboxGroup
+    const longTermMonthlyIncomeSourceGroup: { [key: string]: FormControl } = {};
+    this.longTermMonthlyIncomeSource.forEach((option) => {
+      longTermMonthlyIncomeSourceGroup[option.value] = new FormControl(
+        option.checked
+      );
+      if (option.disabled) {
+        longTermMonthlyIncomeSourceGroup[option.value].disable(); // 如果該選項應該被禁用，則禁用對應的 FormControl
+      }
+    });
+    longTermMonthlyIncomeSourceGroup['socialWelfareAssistance_select'] =
+      new FormControl('', [Validators.required]);
+    longTermMonthlyIncomeSourceGroup['socialWelfareAssistance_input'] =
+      new FormControl('');
+    longTermMonthlyIncomeSourceGroup['childrenSupport'] = new FormControl('');
+    longTermMonthlyIncomeSourceGroup['retirementPension'] = new FormControl('');
+    longTermMonthlyIncomeSourceGroup['ownEmploymentIncome'] = new FormControl(
+      ''
+    );
+    longTermMonthlyIncomeSourceGroup['spouseEmploymentIncome'] =
+      new FormControl('');
+    longTermMonthlyIncomeSourceGroup['personalOrSpouseSavings'] =
+      new FormControl('');
+    longTermMonthlyIncomeSourceGroup['seniorPension'] = new FormControl('');
+    longTermMonthlyIncomeSourceGroup['privateSectorSubsidy'] = new FormControl(
+      ''
+    );
+    longTermMonthlyIncomeSourceGroup['otherIncome_text'] = new FormControl('', [
+      Validators.required,
+    ]);
+    longTermMonthlyIncomeSourceGroup['otherIncome_input'] = new FormControl('');
+
+    // 特殊議題CheckboxGroup
+    const specialIssuesGroup: { [key: string]: FormControl } = {};
+    this.specialIssues.forEach((option) => {
+      specialIssuesGroup[option.value] = new FormControl(option.checked);
+      if (option.disabled) {
+        specialIssuesGroup[option.value].disable(); // 如果該選項應該被禁用，則禁用對應的 FormControl
+      }
+    });
+
+    // 是否使用其他服務CheckboxGroup
+    const usingOtherHongDaoServicesGroup: { [key: string]: FormControl } = {};
+    this.usingOtherHongDaoServices.forEach((option) => {
+      usingOtherHongDaoServicesGroup[option.value] = new FormControl(
+        option.checked
+      );
+      if (option.disabled) {
+        usingOtherHongDaoServicesGroup[option.value].disable(); // 如果該選項應該被禁用，則禁用對應的 FormControl
+      }
+    });
+    usingOtherHongDaoServicesGroup['usingOtherHongDaoServices_other'] =
+      new FormControl('', [Validators.required]);
+
+    // 福利使用概況CheckboxGroup
+    const welfareUsageOverviewGroup: { [key: string]: FormControl } = {};
+    this.welfareUsageOverview.forEach((option) => {
+      welfareUsageOverviewGroup[option.value] = new FormControl(option.checked);
+      if (option.disabled) {
+        welfareUsageOverviewGroup[option.value].disable(); // 如果該選項應該被禁用，則禁用對應的 FormControl
+      }
+    });
+
+    // 初始化每個福利使用概況控件
+    this.welfareUsageOverviewControlsToInitialize.forEach((control) => {
+      welfareUsageOverviewGroup[control] = new FormControl('');
+    });
+
+    // 住屋概況CheckboxGroup
+    const housingConditionGroup: { [key: string]: FormControl } = {};
+    this.housingCondition.forEach((option) => {
+      housingConditionGroup[option.value] = new FormControl(option.checked);
+      if (option.disabled) {
+        housingConditionGroup[option.value].disable(); // 如果該選項應該被禁用，則禁用對應的 FormControl
+      }
+    });
+
+    // 居住環境CheckboxGroup
+    const livingEnvironmentGroup: { [key: string]: FormControl } = {};
+    this.livingEnvironment.forEach((option) => {
+      livingEnvironmentGroup[option.value] = new FormControl(option.checked);
+      if (option.disabled) {
+        livingEnvironmentGroup[option.value].disable(); // 如果該選項應該被禁用，則禁用對應的 FormControl
+      }
+    });
+
+    // 同住者CheckboxGroup
+    const cohabitantsGroup: { [key: string]: FormControl } = {};
+    this.cohabitants.forEach((option) => {
+      cohabitantsGroup[option.value] = new FormControl(option.checked);
+      if (option.disabled) {
+        cohabitantsGroup[option.value].disable(); // 如果該選項應該被禁用，則禁用對應的 FormControl
+      }
+    });
+    cohabitantsGroup['cohabitants_other'] = new FormControl('', [
+      Validators.required,
+    ]);
+
+    // 服務志工CheckboxGroup
+    const serviceVolunteerGroup: { [key: string]: FormControl } = {};
+    this.serviceVolunteer.forEach((option) => {
+      serviceVolunteerGroup[option.value] = new FormControl(option.checked);
+      if (option.disabled) {
+        serviceVolunteerGroup[option.value].disable(); // 如果該選項應該被禁用，則禁用對應的 FormControl
+      }
+    });
+
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
       // 1.個案狀態
@@ -275,6 +1183,8 @@ export class Hd120FormComponent implements OnInit {
       registeredAddress_select: new FormControl(),
       // 戶籍地址
       registeredAddress: new FormControl(''),
+      // 同通訊地址
+      registeredAddress_sameAsMailingAddress: new FormControl(false),
       // map定位座標_X軸
       mapCoordinates_x: new FormControl(''),
       // map定位座標_y軸
@@ -286,19 +1196,20 @@ export class Hd120FormComponent implements OnInit {
       // 婚姻狀況其他
       maritalStatus_other: new FormControl('', [Validators.required]),
       // 宗教信仰
-      religiousAffiliation: new FormControl('', [Validators.required]),
-      // 宗教信仰其他
-      religiousAffiliation_other: new FormControl('', [Validators.required]),
+      religiousAffiliation: new FormGroup(religiousAffiliationGroup, [
+        checkboxGroupValidator(),
+      ]),
       // 習慣用語
-      commonLanguage: new FormControl('', [Validators.required]),
-      // 習慣用語其他
-      commonLanguage_other: new FormControl('', [Validators.required]),
+      commonLanguage: new FormGroup(commonLanguageGroup, [
+        checkboxGroupValidator(),
+      ]),
       // 飲食習慣
-      eatingHabits: new FormControl(''),
+      eatingHabits: new FormGroup(eatingHabitsGroup),
       // 現有疾病狀況
-      currentHealthConditions: new FormControl('', [Validators.required]),
-      // 現有疾病狀況其他
-      currentHealthConditions_other: new FormControl('', [Validators.required]),
+      currentHealthConditions: new FormGroup(currentHealthConditionsGroup, [
+        checkboxGroupValidator(),
+      ]),
+
       // 就醫狀態
       medicalStatus: new FormArray([]),
       // 就醫狀態_就醫醫別
@@ -307,20 +1218,19 @@ export class Hd120FormComponent implements OnInit {
       medicalStatus_department: new FormControl(''),
       // 就醫狀態_頻率
       medicalStatus_frequency: new FormControl(''),
+
       // 輔具使用
-      assistiveDeviceUsage: new FormControl('', [Validators.required]),
-      // 上肢
-      upperLimb: new FormControl(),
-      // 下肢
-      lowerLimb: new FormControl(),
-      // 輔具使用其他
-      assistiveDeviceUsage_other: new FormControl('', [Validators.required]),
+      assistiveDeviceUsage: new FormGroup(assistiveDeviceUsageGroup, [
+        checkboxGroupValidator(),
+      ]),
 
       // 3.福利狀況
       // 福利身份
       welfareStatus: new FormControl(''),
       // 社會福利補助
-      socialWelfareSubsidy: new FormControl(''),
+      socialWelfareSubsidy: new FormGroup(socialWelfareSubsidyGroup, [
+        checkboxGroupValidator(),
+      ]),
       // 身障證明障礙類別
       disabilityCertificateCategory: new FormControl(''),
       // 障礙等級
@@ -328,112 +1238,38 @@ export class Hd120FormComponent implements OnInit {
 
       // 4.經濟來源
       // 長期每月經濟來源
-      longTermMonthlyIncomeSource: new FormControl('', [Validators.required]),
-      // 社會福利補助
-      socialWelfareAssistance: new FormControl('', [Validators.required]),
-      // 社會福利補助輸入框
-      socialWelfareAssistance_input: new FormControl(''),
-      // 子女供應
-      childrenSupport: new FormControl(''),
-      // 退休俸
-      retirementPension: new FormControl(''),
-      // 自己工作收入
-      ownEmploymentIncome: new FormControl(''),
-      // 配偶工作收入
-      spouseEmploymentIncome: new FormControl(''),
-      // 自己或配偶積蓄
-      personalOrSpouseSavings: new FormControl(''),
-      // 老年年金
-      seniorPension: new FormControl(''),
-      // 民間單位補助
-      privateSectorSubsidy: new FormControl(''),
-      // 其他收入
-      otherIncome: new FormControl(''),
-      // 其他收入輸入框
-      otherIncome_input: new FormControl(''),
+      longTermMonthlyIncomeSource: new FormGroup(
+        longTermMonthlyIncomeSourceGroup,
+        [checkboxGroupValidator()]
+      ),
 
+      // Fix:驗證可能需調整
       // 5.特殊議題
       // 特殊議題
-      specialIssues: new FormControl('', [Validators.required]),
+      specialIssues: new FormGroup(specialIssuesGroup),
       // 6.福利使用
       // 是否使用弘道其他服務
-      usingOtherHongDaoServices: new FormControl('', [Validators.required]),
-      // 是否使用弘道其他服務其他
-      usingOtherHongDaoServices_other: new FormControl('', [
-        Validators.required,
+      usingOtherHongDaoServices: new FormGroup(usingOtherHongDaoServicesGroup, [
+        checkboxGroupValidator(),
       ]),
       // 福利使用概況
-      welfareUsageOverview: new FormControl('', [Validators.required]),
-      // 送餐服務單位名稱
-      mealDeliveryService_unitName: new FormControl(''),
-      // 送餐服務服務主責人員
-      mealDeliveryService_serviceResponsiblePerson: new FormControl(''),
-      // 送餐服務聯絡電話
-      mealDeliveryService_contactPhone: new FormControl(''),
-      // 日間照顧單位名稱
-      daytimeCare_unitName: new FormControl(''),
-      // 日間照顧服務主責人員
-      daytimeCare_serviceResponsiblePerson: new FormControl(''),
-      // 日間照顧聯絡電話
-      daytimeCare_contactPhone: new FormControl(''),
-      // 居家服務單位名稱
-      homeCareService_unitName: new FormControl(''),
-      // 居家服務服務主責人員
-      homeCareService_serviceResponsiblePerson: new FormControl(''),
-      // 居家服務聯絡電話
-      homeCareService_contactPhone: new FormControl(''),
-      // A單位服務單位名稱
-      unitAService_unitName: new FormControl(''),
-      // A單位服務服務主責人員
-      unitAService_serviceResponsiblePerson: new FormControl(''),
-      // A單位服務聯絡電話
-      unitAService_contactPhone: new FormControl(''),
-      // 其他單位服務單位名稱
-      otherUnitService_unitName: new FormControl(''),
-      // 其他單位服務服務主責人員
-      otherUnitService_serviceResponsiblePerson: new FormControl(''),
-      // 其他單位服務聯絡電話
-      otherUnitService_contactPhone: new FormControl(''),
-      // 交通服務單位名稱
-      transportationService_unitName: new FormControl(''),
-      // 交通服務服務主責人員
-      transportationService_serviceResponsiblePerson: new FormControl(''),
-      // 交通服務聯絡電話
-      transportationService_contactPhone: new FormControl(''),
-      // 社區據點單位名稱
-      communityCenter_unitName: new FormControl(''),
-      // 社區據點服務主責人員
-      communityCenter_serviceResponsiblePerson: new FormControl(''),
-      // 社區據點聯絡電話
-      communityCenter_contactPhone: new FormControl(''),
-      // 緊急救援系統單位名稱
-      emergencyRescueSystem_unitName: new FormControl(''),
-      // 緊急救援系統服務主責人員
-      emergencyRescueSystem_serviceResponsiblePerson: new FormControl(''),
-      // 緊急救援系統聯絡電話
-      emergencyRescueSystem_contactPhone: new FormControl(''),
-      // 福利使用概況其他
-      welfareUsageOverview_other: new FormControl('', [Validators.required]),
-      // 福利使用概況其他單位名稱
-      welfareUsageOverview_other_unitName: new FormControl(''),
-      // 福利使用概況其他服務主責人員
-      welfareUsageOverview_other_serviceResponsiblePerson: new FormControl(''),
-      // 福利使用概況其他聯絡電話
-      welfareUsageOverview_other_contactPhone: new FormControl(''),
+      welfareUsageOverview: new FormGroup(welfareUsageOverviewGroup, [
+        checkboxGroupValidator(),
+      ]),
 
       // 6.居住環境
       // 住屋種類
       housingType: new FormControl('', [Validators.required]),
       // 住屋概況
-      housingCondition: new FormControl(''),
+      housingCondition: new FormGroup(housingConditionGroup),
       // 住屋所有權
       housingOwnership: new FormControl('', [Validators.required]),
       // 居住環境
-      livingEnvironment: new FormControl('', [Validators.required]),
+      livingEnvironment: new FormGroup(livingEnvironmentGroup, [
+        checkboxGroupValidator(),
+      ]),
       // 同住者
-      cohabitants: new FormControl('', [Validators.required]),
-      // 同住者其他
-      cohabitants_other: new FormControl('', [Validators.required]),
+      cohabitants: new FormGroup(cohabitantsGroup, [checkboxGroupValidator()]),
 
       // 7.緊急聯絡人
       // 緊急聯絡人
@@ -457,10 +1293,69 @@ export class Hd120FormComponent implements OnInit {
       // 服務團隊
       serviceTeam: new FormControl(''),
       // 服務志工
-      serviceVolunteer: new FormControl(''),
+      serviceVolunteer: new FormGroup(serviceVolunteerGroup, [
+        checkboxGroupValidator(),
+      ]),
     });
   }
   ngOnInit(): void {
+    // 複選框初始化
+    const religiousAffiliationCheckedValues = this.religiousAffiliation
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.religiousAffiliationChange(religiousAffiliationCheckedValues);
+
+    const commonLanguageCheckedValues = this.commonLanguage
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.commonLanguageChange(commonLanguageCheckedValues);
+
+    const currentHealthConditionsCheckedValues = this.currentHealthConditions
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.currentHealthConditionsChange(currentHealthConditionsCheckedValues);
+
+    const assistiveDeviceUsageCheckedValues = this.assistiveDeviceUsage
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.assistiveDeviceUsageChange(assistiveDeviceUsageCheckedValues);
+
+    const socialWelfareSubsidyCheckedValues = this.socialWelfareSubsidy
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.socialWelfareSubsidyChange(socialWelfareSubsidyCheckedValues);
+
+    const longTermMonthlyIncomeSourceCheckedValues =
+      this.longTermMonthlyIncomeSource
+        .filter((option) => option.checked)
+        .map((option) => option.value);
+    this.longTermMonthlyIncomeSourceChange(
+      longTermMonthlyIncomeSourceCheckedValues
+    );
+
+    const specialIssuesCheckedValues = this.specialIssues
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.specialIssuesChange(specialIssuesCheckedValues);
+
+    const usingOtherHongDaoServicesCheckedValues =
+      this.usingOtherHongDaoServices
+        .filter((option) => option.checked)
+        .map((option) => option.value);
+    this.usingOtherHongDaoServicesChange(
+      usingOtherHongDaoServicesCheckedValues
+    );
+
+    const welfareUsageOverviewCheckedValues = this.welfareUsageOverview
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.welfareUsageOverviewChange(welfareUsageOverviewCheckedValues);
+
+    const cohabitantsCheckedValues = this.cohabitants
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.cohabitantsChange(cohabitantsCheckedValues);
+
     // 檢視模式下，禁用表單
     if (this.hd100ListService.isView) {
       this.form.disable();
@@ -494,111 +1389,70 @@ export class Hd120FormComponent implements OnInit {
     // 禁用電話_電話號碼
     this.form.get('phoneNumber_phoneNumber')?.disable();
     // 禁用宗教信仰其他
-    this.form.get('religiousAffiliation_other')?.disable();
+    this.form.get('religiousAffiliation.religiousAffiliation_other')?.disable();
     // 禁用習慣用語其他
-    this.form.get('commonLanguage_other')?.disable();
+    this.form.get('commonLanguage.commonLanguage_other')?.disable();
+    // 禁用現有疾病狀態其他
+    this.form
+      .get('currentHealthConditions.currentHealthConditions_other')
+      ?.disable();
     // 禁用婚姻狀況其他
     this.form.get('maritalStatus_other')?.disable();
-    // 禁用習慣用語其他
-    this.form.get('commonLanguage_other')?.disable();
-    // 禁用現有疾病狀態其他
-    this.form.get('currentHealthConditions_other')?.disable();
-    // 禁用上肢選項
-    this.form.get('upperLimb')?.disable();
-    // 禁用下肢選項
-    this.form.get('lowerLimb')?.disable();
     // 禁用輔具使用其他
-    this.form.get('assistiveDeviceUsage_other')?.disable();
+    this.form.get('assistiveDeviceUsage.assistiveDeviceUsage_other')?.disable();
     // 禁用福利身份select
     this.form.get('welfareStatus')?.disable();
     // 禁用身障證明障礙類別
     this.form.get('disabilityCertificateCategory')?.disable();
     // 禁用障礙等級
     this.form.get('disabilityLevel')?.disable();
-    // 禁用子女供應
-    this.form.get('childrenSupport')?.disable();
-    // 禁用退休俸
-    this.form.get('retirementPension')?.disable();
-    // 禁用自己工作收入
-    this.form.get('ownEmploymentIncome')?.disable();
-    // 禁用配偶工作收入
-    this.form.get('spouseEmploymentIncome')?.disable();
-    // 禁用自己或配偶積蓄
-    this.form.get('personalOrSpouseSavings')?.disable();
-    // 禁用老年年金
-    this.form.get('seniorPension')?.disable();
-    // 禁用民間單位補助
-    this.form.get('privateSectorSubsidy')?.disable();
-    // 禁用其他收入
-    this.form.get('otherIncome')?.disable();
-    // 禁用其他收入輸入框
-    this.form.get('otherIncome_input')?.disable();
-    // 禁用社會福利補助
-    this.form.get('socialWelfareAssistance')?.disable();
-    // 禁用社會福利補助輸入框
-    this.form.get('socialWelfareAssistance_input')?.disable();
-    // 禁用是否使用弘道其他服務
-    this.form.get('usingOtherHongDaoServices_other')?.disable();
-    // 禁用福利使用概況送餐服務單位名稱
-    this.form.get('mealDeliveryService_unitName')?.disable();
-    // 禁用福利使用概況送餐服務服務主責人員
-    this.form.get('mealDeliveryService_serviceResponsiblePerson')?.disable();
-    // 禁用福利使用概況送餐服務聯絡電話
-    this.form.get('mealDeliveryService_contactPhone')?.disable();
-    // 禁用福利使用概況日間照顧單位名稱
-    this.form.get('daytimeCare_unitName')?.disable();
-    // 禁用福利使用概況日間照顧服務主責人員
-    this.form.get('daytimeCare_serviceResponsiblePerson')?.disable();
-    // 禁用福利使用概況日間照顧聯絡電話
-    this.form.get('daytimeCare_contactPhone')?.disable();
-    // 禁用福利使用概況居家服務單位名稱
-    this.form.get('homeCareService_unitName')?.disable();
-    // 禁用福利使用概況居家服務服務主責人員
-    this.form.get('homeCareService_serviceResponsiblePerson')?.disable();
-    // 禁用福利使用概況居家服務聯絡電話
-    this.form.get('homeCareService_contactPhone')?.disable();
-    // 禁用福利使用概況A單位服務單位名稱
-    this.form.get('unitAService_unitName')?.disable();
-    // 禁用福利使用概況A單位服務服務主責人員
-    this.form.get('unitAService_serviceResponsiblePerson')?.disable();
-    // 禁用福利使用概況A單位服務聯絡電話
-    this.form.get('unitAService_contactPhone')?.disable();
-    // 禁用福利使用概況其他單位服務單位名稱
-    this.form.get('otherUnitService_unitName')?.disable();
-    // 禁用福利使用概況其他單位服務服務主責人員
-    this.form.get('otherUnitService_serviceResponsiblePerson')?.disable();
-    // 禁用福利使用概況其他單位服務聯絡電話
-    this.form.get('otherUnitService_contactPhone')?.disable();
-    // 禁用福利使用概況交通服務單位名稱
-    this.form.get('transportationService_unitName')?.disable();
-    // 禁用福利使用概況交通服務服務主責人員
-    this.form.get('transportationService_serviceResponsiblePerson')?.disable();
-    // 禁用福利使用概況交通服務聯絡電話
-    this.form.get('transportationService_contactPhone')?.disable();
-    // 禁用福利使用概況社區據點單位名稱
-    this.form.get('communityCenter_unitName')?.disable();
-    // 禁用福利使用概況社區據點服務主責人員
-    this.form.get('communityCenter_serviceResponsiblePerson')?.disable();
-    // 禁用福利使用概況社區據點聯絡電話
-    this.form.get('communityCenter_contactPhone')?.disable();
-    // 禁用福利使用概況緊急救援系統單位名稱
-    this.form.get('emergencyRescueSystem_unitName')?.disable();
-    // 禁用福利使用概況緊急救援系統服務主責人員
-    this.form.get('emergencyRescueSystem_serviceResponsiblePerson')?.disable();
-    // 禁用福利使用概況緊急救援系統聯絡電話
-    this.form.get('emergencyRescueSystem_contactPhone')?.disable();
-    // 禁用福利使用概況其他
-    this.form.get('welfareUsageOverview_other')?.disable();
-    // 禁用福利使用概況其他單位名稱
-    this.form.get('welfareUsageOverview_other_unitName')?.disable();
-    // 禁用福利使用概況其他單位服務主責人員
+
+    // 長期每月經濟來源
+    // 禁用社會福利補助_select
     this.form
-      .get('welfareUsageOverview_other_serviceResponsiblePerson')
+      .get('longTermMonthlyIncomeSource.socialWelfareAssistance_select')
       ?.disable();
-    // 禁用福利使用概況其他單位聯絡電話
-    this.form.get('welfareUsageOverview_other_contactPhone')?.disable();
+    // 禁用社會福利補助_input
+    this.form
+      .get('longTermMonthlyIncomeSource.socialWelfareAssistance_input')
+      ?.disable();
+    // 禁用子女供應
+    this.form.get('longTermMonthlyIncomeSource.childrenSupport')?.disable();
+    // 禁用退休俸
+    this.form.get('longTermMonthlyIncomeSource.retirementPension')?.disable();
+    // 禁用自己工作收入
+    this.form.get('longTermMonthlyIncomeSource.ownEmploymentIncome')?.disable();
+    // 禁用配偶工作收入
+    this.form
+      .get('longTermMonthlyIncomeSource.spouseEmploymentIncome')
+      ?.disable();
+    // 禁用自己或配偶積蓄
+    this.form
+      .get('longTermMonthlyIncomeSource.personalOrSpouseSavings')
+      ?.disable();
+    // 禁用老年年金
+    this.form.get('longTermMonthlyIncomeSource.seniorPension')?.disable();
+    // 禁用民間單位補助
+    this.form
+      .get('longTermMonthlyIncomeSource.privateSectorSubsidy')
+      ?.disable();
+    // 禁用其他收入_文字
+    this.form.get('longTermMonthlyIncomeSource.otherIncome_text')?.disable();
+    // 禁用其他收入輸入框
+    this.form.get('longTermMonthlyIncomeSource.otherIncome_input')?.disable();
+
+    // 禁用是否使用弘道其他服務
+    this.form
+      .get('usingOtherHongDaoServices.usingOtherHongDaoServices_other')
+      ?.disable();
+
+    // 禁用所有指定的控件
+    this.welfareUsageOverviewControlsToInitialize.forEach((control) => {
+      this.form.get('welfareUsageOverview.' + control)?.disable();
+    });
+
     // 禁用同住者其他
-    this.form.get('cohabitants_other')?.disable();
+    this.form.get('cohabitants.cohabitants_other')?.disable();
   }
 
   // 婚姻狀況選項改變
@@ -614,72 +1468,156 @@ export class Hd120FormComponent implements OnInit {
   }
 
   // 宗教信仰選項改變
-  religiousAffiliationChange(checkGroup: string[]) {
-    this.form.get('religiousAffiliation')?.setValue(checkGroup);
-    // 如果勾選了無將禁用其他選項
-    // 勾取其他選項則禁用無
-    if (checkGroup.includes('1')) {
-      this.isDisableReligiousAffiliationOthers = true;
-    } else {
-      this.isDisableReligiousAffiliationOthers = false;
-    }
-    if (checkGroup.includes('9')) {
-      this.form.get('religiousAffiliation_other')?.enable();
-    } else {
-      this.form.get('religiousAffiliation_other')?.reset();
-      this.form.get('religiousAffiliation_other')?.disable();
-    }
-    this.isDisableReligiousAffiliationNone = checkGroup.some((check) =>
-      ['2', '3', '4', '5', '6', '7', '8', '9'].includes(check)
-    );
+  religiousAffiliationChange(checkedValues: string[]) {
+    this.religiousAffiliation.forEach((option) => {
+      // 更新每個選項的 checked 狀態
+      option.checked = checkedValues.includes(option.value);
+      // 當 "00" 被勾選時
+      if (option.value === '00') {
+        if (option.checked) {
+          // 禁用其他選項
+          this.religiousAffiliation.forEach((option) => {
+            if (option.value !== '00') {
+              option.checked = false; // 取消勾選
+              option.disabled = true; // 禁用其他選項
+            }
+          });
+        } else {
+          // 啟用其他選項
+          this.religiousAffiliation.forEach((option) => {
+            option.disabled = false; // 啟用所有選項
+          });
+        }
+      } else {
+        if (option.value === '08' && this.form) {
+          if (option.checked) {
+            this.form
+              .get('religiousAffiliation.religiousAffiliation_other')
+              ?.enable();
+          } else {
+            this.form
+              .get('religiousAffiliation.religiousAffiliation_other')
+              ?.disable();
+            this.form
+              .get('religiousAffiliation.religiousAffiliation_other')
+              ?.reset();
+          }
+        }
+        // 當 "00" 以外的選項被勾選時
+        if (option.checked) {
+          // 禁用 "00" 選項
+          this.religiousAffiliation.forEach((option) => {
+            if (option.value === '00') {
+              option.checked = false; // 取消勾選
+              option.disabled = true; // 禁用 "00" 選項
+            }
+          });
+        } else {
+          // 檢查其他選項是否被勾選
+          const isAnyChecked = this.religiousAffiliation.some(
+            (option) => option.value !== '00' && option.checked
+          );
+          if (!isAnyChecked) {
+            // 如果沒有其他選項被勾選，啟用 "00" 選項
+            this.religiousAffiliation.forEach((option) => {
+              if (option.value === '00') {
+                option.disabled = false; // 啟用 "00" 選項
+              }
+            });
+          }
+        }
+      }
+    });
   }
 
   // 習慣用語選項改變
-  commonLanguageChange(checkGroup: string[]) {
-    this.form.get('commonLanguage')?.setValue(checkGroup);
-    if (checkGroup.includes('5')) {
-      this.form.get('commonLanguage_other')?.enable();
-    } else {
-      this.form.get('commonLanguage_other')?.disable();
-      this.form.get('commonLanguage_other')?.reset();
-    }
-  }
-
-  // 飲食習慣選項改變
-  eatingHabitsChange(checkGroup: string[]) {
-    this.form.get('eatingHabits')?.setValue(checkGroup);
+  commonLanguageChange(checkedValues: string[]) {
+    this.commonLanguage.forEach((option) => {
+      option.checked = checkedValues.includes(option.value);
+      if (option.value === '04' && this.form) {
+        if (option.checked) {
+          this.form.get('commonLanguage.commonLanguage_other')?.enable();
+        } else {
+          this.form.get('commonLanguage.commonLanguage_other')?.reset();
+          this.form.get('commonLanguage.commonLanguage_other')?.disable();
+        }
+      }
+    });
   }
 
   // 現有疾病狀態選項改變
-  currentHealthConditionsChange(checkGroup: string[]) {
-    this.form.get('currentHealthConditions')?.setValue(checkGroup);
-    // 如果勾選了無將禁用其他選項
-    // 勾取其他選項則禁用無
-    if (checkGroup.includes('1')) {
-      this.isDisableCurrentHealthConditionsOthers = true;
-    } else {
-      this.isDisableCurrentHealthConditionsOthers = false;
-    }
-    if (checkGroup.includes('9')) {
-      this.isDementia = true;
-    } else {
-      this.isDementia = false;
-    }
-    if (checkGroup.includes('13')) {
-      this.form.get('currentHealthConditions_other')?.enable();
-    } else {
-      this.form.get('currentHealthConditions_other')?.reset();
-      this.form.get('currentHealthConditions_other')?.disable();
-    }
-    this.isDisableCurrentHealthConditionsNone = checkGroup.some((check) =>
-      ['2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13'].includes(
-        check
-      )
-    );
+  currentHealthConditionsChange(checkedValues: string[]) {
+    this.currentHealthConditions.forEach((option) => {
+      // 更新每個選項的 checked 狀態
+      option.checked = checkedValues.includes(option.value);
+      // 當 "00" 被勾選時
+      if (option.value === '00') {
+        if (option.checked) {
+          // 禁用其他選項
+          this.currentHealthConditions.forEach((option) => {
+            if (option.value !== '00') {
+              option.checked = false; // 取消勾選
+              option.disabled = true; // 禁用其他選項
+            }
+          });
+        } else {
+          // 啟用其他選項
+          this.currentHealthConditions.forEach((option) => {
+            option.disabled = false; // 啟用所有選項
+          });
+        }
+      } else {
+        if (option.value === '12' && this.form) {
+          if (option.checked) {
+            this.form
+              .get('currentHealthConditions.currentHealthConditions_other')
+              ?.enable();
+          } else {
+            this.form
+              .get('currentHealthConditions.currentHealthConditions_other')
+              ?.disable();
+            this.form
+              .get('currentHealthConditions.currentHealthConditions_other')
+              ?.reset();
+          }
+        }
+        // 當 "00" 以外的選項被勾選時
+        if (option.checked) {
+          // 禁用 "00" 選項
+          this.currentHealthConditions.forEach((option) => {
+            if (option.value === '00') {
+              option.checked = false; // 取消勾選
+              option.disabled = true; // 禁用 "00" 選項
+            }
+          });
+        } else {
+          // 檢查其他選項是否被勾選
+          const isAnyChecked = this.currentHealthConditions.some(
+            (option) => option.value !== '00' && option.checked
+          );
+          if (!isAnyChecked) {
+            // 如果沒有其他選項被勾選，啟用 "00" 選項
+            this.currentHealthConditions.forEach((option) => {
+              if (option.value === '00') {
+                option.disabled = false; // 啟用 "00" 選項
+              }
+            });
+          }
+        }
+      }
+      // 當 "08" 勾選時同步更新 "失智症" 的選項
+      if (option.value === '08' && this.form) {
+        this.form.get('specialIssues.05')?.setValue(option.checked);
+      }
+    });
   }
 
   // 顯示就醫狀態的modal
   showMedicalStatusModal(): void {
+    // 清空輸入框
+    this.form.get('medicalStatus_medicalCategory')?.reset();
+    this.form.get('medicalStatus_department')?.reset();
+    this.form.get('medicalStatus_frequency')?.reset();
     this.isVisible_medicalStatus = true;
   }
 
@@ -697,7 +1635,14 @@ export class Hd120FormComponent implements OnInit {
     const department = this.form.get('medicalStatus_department')?.value;
     const frequency = this.form.get('medicalStatus_frequency')?.value;
     // 判斷資料是否皆有填寫
-    if (medicalCategory === '' || department === '' || frequency === '') {
+    if (
+      medicalCategory === null ||
+      medicalCategory === '' ||
+      department === null ||
+      department === '' ||
+      frequency === null ||
+      frequency === ''
+    ) {
       this.message.create('error', '請填寫完整資料');
       return;
     }
@@ -711,10 +1656,7 @@ export class Hd120FormComponent implements OnInit {
     (this.form.get('medicalStatus') as FormArray).push(
       new FormControl(medicalStatusObj)
     );
-    // 清空輸入框
-    this.form.get('medicalStatus_medicalCategory')?.reset();
-    this.form.get('medicalStatus_department')?.reset();
-    this.form.get('medicalStatus_frequency')?.reset();
+
     this.message.create('success', '新增成功');
     this.isVisible_medicalStatus = false;
   }
@@ -726,327 +1668,841 @@ export class Hd120FormComponent implements OnInit {
   }
 
   // 輔具使用選項改變
-  assistiveDeviceUsageChange(checkGroup: string[]) {
-    this.form.get('assistiveDeviceUsage')?.setValue(checkGroup);
-    // 如果勾選了無將禁用其他選項
-    // 勾取其他選項則禁用無
-    if (checkGroup.includes('1')) {
-      this.isDisableAssistiveDeviceUsageOthers = true;
-    } else {
-      this.isDisableAssistiveDeviceUsageOthers = false;
-    }
-    if (checkGroup.includes('13')) {
-      this.form.get('assistiveDeviceUsage_other')?.enable();
-    } else {
-      this.form.get('assistiveDeviceUsage_other')?.reset();
-      this.form.get('assistiveDeviceUsage_other')?.disable();
-    }
-    if (checkGroup.includes('10')) {
-      this.isChoiceProsthesis = true;
-      this.form.get('upperLimb')?.enable();
-      this.form.get('lowerLimb')?.enable();
-      if (checkGroup.includes('11') || checkGroup.includes('12')) {
-        this.isChoiceProsthesis = false;
+  assistiveDeviceUsageChange(checkedValues: string[]) {
+    this.assistiveDeviceUsage.forEach((option) => {
+      // 更新每個選項的 checked 狀態
+      option.checked = checkedValues.includes(option.value);
+      // 當 "00" 被勾選時
+      if (option.value === '00') {
+        if (option.checked) {
+          // 禁用其他選項
+          this.assistiveDeviceUsage.forEach((option) => {
+            if (option.value !== '00') {
+              option.checked = false; // 取消勾選
+              option.disabled = true; // 禁用其他選項
+            }
+          });
+        } else {
+          // 啟用其他選項
+          this.assistiveDeviceUsage.forEach((option) => {
+            option.disabled = false; // 啟用所有選項
+          });
+        }
       } else {
-        this.isChoiceProsthesis = true;
+        // 當 "09" 被取消勾選時的處理
+        if (option.value === '09' && this.form) {
+          if (option.checked) {
+            this.isChoiceProsthesis = true;
+            this.assistiveDeviceUsage.forEach((option) => {
+              if (option.value === '10' || option.value === '11') {
+                option.disabled = false;
+                this.form.get(`assistiveDeviceUsage.${option.value}`)?.enable(); // 啟用對應的 FormControl
+              }
+            });
+          } else {
+            this.isChoiceProsthesis = false;
+            this.assistiveDeviceUsage.forEach((option) => {
+              if (option.value === '10' || option.value === '11') {
+                option.disabled = true;
+                option.checked = false;
+                this.form
+                  .get(`assistiveDeviceUsage.${option.value}`)
+                  ?.disable(); // 禁用對應的 FormControl
+                this.form
+                  .get(`assistiveDeviceUsage.${option.value}`)
+                  ?.setValue(false); // 取消勾選
+              }
+            });
+          }
+        }
+        if (option.value === '12' && this.form) {
+          if (option.checked) {
+            this.form
+              .get('assistiveDeviceUsage.assistiveDeviceUsage_other')
+              ?.enable();
+          } else {
+            this.form
+              .get('assistiveDeviceUsage.assistiveDeviceUsage_other')
+              ?.disable();
+            this.form
+              .get('assistiveDeviceUsage.assistiveDeviceUsage_other')
+              ?.reset();
+          }
+        }
+        // 當 "00" 以外的選項被勾選時
+        if (option.checked) {
+          // 禁用 "00" 選項
+          this.assistiveDeviceUsage.forEach((option) => {
+            if (option.value === '00') {
+              option.checked = false; // 取消勾選
+              option.disabled = true; // 禁用 "00" 選項
+            }
+          });
+        } else {
+          // 檢查其他選項是否被勾選
+          const isAnyChecked = this.assistiveDeviceUsage.some(
+            (option) => option.value !== '00' && option.checked
+          );
+          if (!isAnyChecked) {
+            // 如果沒有其他選項被勾選，啟用 "00" 選項
+            this.assistiveDeviceUsage.forEach((option) => {
+              if (option.value === '00') {
+                option.disabled = false; // 啟用 "00" 選項
+              }
+            });
+          }
+        }
       }
-    } else {
-      this.isChoiceProsthesis = false;
-      this.form.get('upperLimb')?.disable();
-      this.form.get('upperLimb')?.reset();
-      this.form.get('lowerLimb')?.disable();
-      this.form.get('lowerLimb')?.reset();
-    }
-    this.isDisableAssistiveDeviceUsageNone = checkGroup.some((check) =>
-      ['2', '3', '4', '5', '6', '7', '8', '9', '10', '13'].includes(check)
-    );
+    });
   }
 
   // 社會福利補助選項改變
-  socialWelfareSubsidyChange(checkGroup: string[]) {
-    this.form.get('socialWelfareSubsidy')?.setValue(checkGroup);
-    // 如果勾選了無將禁用其他選項
-    // 勾取其他選項則禁用無
-    // if (checkGroup.includes('1')) {
-    //   this.isDisableSocialWelfareSubsidyOthers = true;
-    // } else {
-    //   this.isDisableSocialWelfareSubsidyOthers = false;
-    // }
-    // if (checkGroup.includes('2')) {
-    //   this.isPhysicalAndMentalDisability = true;
-    //   this.form.get('disabilityCertificateCategory')?.enable();
-    //   this.form.get('disabilityLevel')?.enable();
-    // } else {
-    //   this.isPhysicalAndMentalDisability = false;
-    //   this.form.get('disabilityCertificateCategory')?.disable();
-    //   this.form.get('disabilityCertificateCategory')?.reset();
-    //   this.form.get('disabilityLevel')?.disable();
-    //   this.form.get('disabilityLevel')?.reset();
-    // }
-    // this.isDisableSocialWelfareSubsidyNone = checkGroup.some((check) =>
-    //   ['2', '3', '4', '5', '6'].includes(check)
-    // );
+  socialWelfareSubsidyChange(checkedValues: string[]): void {
+    this.socialWelfareSubsidy.forEach((option) => {
+      // 更新每個選項的 checked 狀態
+      option.checked = checkedValues.includes(option.value);
+      // 當 "00" 被勾選時
+      if (option.value === '00') {
+        if (option.checked) {
+          // 禁用其他選項
+          this.socialWelfareSubsidy.forEach((option) => {
+            if (option.value !== '00') {
+              option.checked = false; // 取消勾選
+              option.disabled = true; // 禁用其他選項
+            }
+          });
+        } else {
+          // 啟用其他選項
+          this.socialWelfareSubsidy.forEach((option) => {
+            option.disabled = false; // 啟用所有選項
+          });
+        }
+      } else {
+        // 當 "00" 以外的選項被勾選時
+        if (option.checked) {
+          // 禁用 "00" 選項
+          this.socialWelfareSubsidy.forEach((option) => {
+            if (option.value === '00') {
+              option.checked = false; // 取消勾選
+              option.disabled = true; // 禁用 "00" 選項
+            }
+          });
+        } else {
+          // 檢查其他選項是否被勾選
+          const isAnyChecked = this.socialWelfareSubsidy.some(
+            (option) => option.value !== '00' && option.checked
+          );
+          if (!isAnyChecked) {
+            // 如果沒有其他選項被勾選，啟用 "00" 選項
+            this.socialWelfareSubsidy.forEach((option) => {
+              if (option.value === '00') {
+                option.disabled = false; // 啟用 "00" 選項
+              }
+            });
+          }
+        }
+      }
+
+      // 當 "01" 勾選時同步更新 "身心障礙" 的選項
+      if (option.value === '01' && this.form) {
+        this.form.get('specialIssues.06')?.setValue(option.checked);
+      }
+    });
   }
 
   // 長期每月經濟來源選項改變
-  longTermMonthlyIncomeSourceChange(checkGroup: string[]) {
-    this.form.get('longTermMonthlyIncomeSource')?.setValue(checkGroup);
-    // 如果勾選了無將禁用其他選項
-    // 勾取其他選項則禁用無
-    if (checkGroup.includes('1')) {
-      this.isDisableLongTermMonthlyIncomeSourceOthers = true;
-    } else {
-      this.isDisableLongTermMonthlyIncomeSourceOthers = false;
-    }
-    if (checkGroup.includes('2')) {
-      this.form.get('childrenSupport')?.enable();
-    } else {
-      this.form.get('childrenSupport')?.disable();
-      this.form.get('childrenSupport')?.reset();
-    }
-    if (checkGroup.includes('3')) {
-      this.form.get('retirementPension')?.enable();
-    } else {
-      this.form.get('retirementPension')?.disable();
-      this.form.get('retirementPension')?.reset();
-    }
-    if (checkGroup.includes('4')) {
-      this.form.get('ownEmploymentIncome')?.enable();
-    } else {
-      this.form.get('ownEmploymentIncome')?.disable();
-      this.form.get('ownEmploymentIncome')?.reset();
-    }
-    if (checkGroup.includes('5')) {
-      this.form.get('spouseEmploymentIncome')?.enable();
-    } else {
-      this.form.get('spouseEmploymentIncome')?.disable();
-      this.form.get('spouseEmploymentIncome')?.reset();
-    }
-    if (checkGroup.includes('6')) {
-      this.form.get('personalOrSpouseSavings')?.enable();
-    } else {
-      this.form.get('personalOrSpouseSavings')?.disable();
-      this.form.get('personalOrSpouseSavings')?.reset();
-    }
-    if (checkGroup.includes('7')) {
-      this.form.get('seniorPension')?.enable();
-    } else {
-      this.form.get('seniorPension')?.disable();
-      this.form.get('seniorPension')?.reset();
-    }
-    if (checkGroup.includes('8')) {
-      this.form.get('privateSectorSubsidy')?.enable();
-    } else {
-      this.form.get('privateSectorSubsidy')?.disable();
-      this.form.get('privateSectorSubsidy')?.reset();
-    }
-    if (checkGroup.includes('9')) {
-      this.form.get('socialWelfareAssistance')?.enable();
-      this.form.get('socialWelfareAssistance_input')?.enable();
-    } else {
-      this.form.get('socialWelfareAssistance')?.disable();
-      this.form.get('socialWelfareAssistance')?.reset();
-      this.form.get('socialWelfareAssistance_input')?.disable();
-      this.form.get('socialWelfareAssistance_input')?.reset();
-    }
-    if (checkGroup.includes('10')) {
-      this.form.get('otherIncome')?.enable();
-      this.form.get('otherIncome')?.reset();
-      this.form.get('otherIncome_input')?.enable();
-      this.form.get('otherIncome_input')?.reset();
-    } else {
-      this.form.get('otherIncome')?.disable();
-      this.form.get('otherIncome')?.reset();
-      this.form.get('otherIncome_input')?.disable();
-      this.form.get('otherIncome_input')?.reset();
-    }
-    this.isDisableLongTermMonthlyIncomeSourceNone = checkGroup.some((check) =>
-      ['2', '3', '4', '5', '6', '7', '8', '9', '10'].includes(check)
-    );
+  longTermMonthlyIncomeSourceChange(checkedValues: string[]) {
+    this.longTermMonthlyIncomeSource.forEach((option) => {
+      // 更新每個選項的 checked 狀態
+      option.checked = checkedValues.includes(option.value);
+      // 當 "00" 被勾選時
+      if (option.value === '00') {
+        if (option.checked) {
+          // 禁用其他選項
+          this.longTermMonthlyIncomeSource.forEach((option) => {
+            if (option.value !== '00') {
+              option.checked = false; // 取消勾選
+              option.disabled = true; // 禁用其他選項
+            }
+          });
+        } else {
+          // 啟用其他選項
+          this.longTermMonthlyIncomeSource.forEach((option) => {
+            option.disabled = false; // 啟用所有選項
+          });
+        }
+      } else {
+        if (option.value === '01' && this.form) {
+          if (option.checked) {
+            this.form
+              .get('longTermMonthlyIncomeSource.socialWelfareAssistance_select')
+              ?.enable();
+            this.form
+              .get('longTermMonthlyIncomeSource.socialWelfareAssistance_input')
+              ?.enable();
+          } else {
+            this.form
+              .get('longTermMonthlyIncomeSource.socialWelfareAssistance_select')
+              ?.disable();
+            this.form
+              .get('longTermMonthlyIncomeSource.socialWelfareAssistance_select')
+              ?.reset();
+            this.form
+              .get('longTermMonthlyIncomeSource.socialWelfareAssistance_input')
+              ?.disable();
+            this.form
+              .get('longTermMonthlyIncomeSource.socialWelfareAssistance_input')
+              ?.reset();
+          }
+        }
+        if (option.value === '02' && this.form) {
+          if (option.checked) {
+            this.form
+              .get('longTermMonthlyIncomeSource.childrenSupport')
+              ?.enable();
+          } else {
+            this.form
+              .get('longTermMonthlyIncomeSource.childrenSupport')
+              ?.disable();
+            this.form
+              .get('longTermMonthlyIncomeSource.childrenSupport')
+              ?.reset();
+          }
+        }
+        if (option.value === '03' && this.form) {
+          if (option.checked) {
+            this.form
+              .get('longTermMonthlyIncomeSource.retirementPension')
+              ?.enable();
+          } else {
+            this.form
+              .get('longTermMonthlyIncomeSource.retirementPension')
+              ?.disable();
+            this.form
+              .get('longTermMonthlyIncomeSource.retirementPension')
+              ?.reset();
+          }
+        }
+        if (option.value === '04' && this.form) {
+          if (option.checked) {
+            this.form
+              .get('longTermMonthlyIncomeSource.ownEmploymentIncome')
+              ?.enable();
+          } else {
+            this.form
+              .get('longTermMonthlyIncomeSource.ownEmploymentIncome')
+              ?.disable();
+            this.form
+              .get('longTermMonthlyIncomeSource.ownEmploymentIncome')
+              ?.reset();
+          }
+        }
+        if (option.value === '05' && this.form) {
+          if (option.checked) {
+            this.form
+              .get('longTermMonthlyIncomeSource.spouseEmploymentIncome')
+              ?.enable();
+          } else {
+            this.form
+              .get('longTermMonthlyIncomeSource.spouseEmploymentIncome')
+              ?.disable();
+            this.form
+              .get('longTermMonthlyIncomeSource.spouseEmploymentIncome')
+              ?.reset();
+          }
+        }
+        if (option.value === '06' && this.form) {
+          if (option.checked) {
+            this.form
+              .get('longTermMonthlyIncomeSource.personalOrSpouseSavings')
+              ?.enable();
+          } else {
+            this.form
+              .get('longTermMonthlyIncomeSource.personalOrSpouseSavings')
+              ?.disable();
+            this.form
+              .get('longTermMonthlyIncomeSource.personalOrSpouseSavings')
+              ?.reset();
+          }
+        }
+        if (option.value === '07' && this.form) {
+          if (option.checked) {
+            this.form
+              .get('longTermMonthlyIncomeSource.seniorPension')
+              ?.enable();
+          } else {
+            this.form
+              .get('longTermMonthlyIncomeSource.seniorPension')
+              ?.disable();
+            this.form.get('longTermMonthlyIncomeSource.seniorPension')?.reset();
+          }
+        }
+        if (option.value === '08' && this.form) {
+          if (option.checked) {
+            this.form
+              .get('longTermMonthlyIncomeSource.privateSectorSubsidy')
+              ?.enable();
+          } else {
+            this.form
+              .get('longTermMonthlyIncomeSource.privateSectorSubsidy')
+              ?.disable();
+            this.form
+              .get('longTermMonthlyIncomeSource.privateSectorSubsidy')
+              ?.reset();
+          }
+        }
+        if (option.value === '09' && this.form) {
+          if (option.checked) {
+            this.form
+              .get('longTermMonthlyIncomeSource.otherIncome_text')
+              ?.enable();
+            this.form
+              .get('longTermMonthlyIncomeSource.otherIncome_input')
+              ?.enable();
+          } else {
+            this.form
+              .get('longTermMonthlyIncomeSource.otherIncome_text')
+              ?.disable();
+            this.form
+              .get('longTermMonthlyIncomeSource.otherIncome_text')
+              ?.reset();
+            this.form
+              .get('longTermMonthlyIncomeSource.otherIncome_input')
+              ?.disable();
+            this.form
+              .get('longTermMonthlyIncomeSource.otherIncome_input')
+              ?.reset();
+          }
+        }
+        // 當 "00" 以外的選項被勾選時
+        if (option.checked) {
+          // 禁用 "00" 選項
+          this.longTermMonthlyIncomeSource.forEach((option) => {
+            if (option.value === '00') {
+              option.checked = false; // 取消勾選
+              option.disabled = true; // 禁用 "00" 選項
+            }
+          });
+        } else {
+          // 檢查其他選項是否被勾選
+          const isAnyChecked = this.longTermMonthlyIncomeSource.some(
+            (option) => option.value !== '00' && option.checked
+          );
+          if (!isAnyChecked) {
+            // 如果沒有其他選項被勾選，啟用 "00" 選項
+            this.longTermMonthlyIncomeSource.forEach((option) => {
+              if (option.value === '00') {
+                option.disabled = false; // 啟用 "00" 選項
+              }
+            });
+          }
+        }
+      }
+    });
   }
 
   // 特殊議題選項改變
-  specialIssuesChange(checkGroup: string[]) {
-    this.form.get('specialIssues')?.setValue(checkGroup);
-    // 如果勾選了無將禁用其他選項
-    // 勾取其他選項則禁用無
-    if (checkGroup.includes('1')) {
-      this.isDisableSpecialIssuesOthers = true;
-    } else {
-      this.isDisableSpecialIssuesOthers = false;
-    }
-    this.isDisableSpecialIssuesNone = checkGroup.some((check) =>
-      ['2', '3', '4', '5', '6', '7'].includes(check)
-    );
+  specialIssuesChange(checkedValues: string[]) {
+    this.specialIssues.forEach((option) => {
+      // 更新每個選項的 checked 狀態
+      option.checked = checkedValues.includes(option.value);
+      // 當 "00" 被勾選時
+      if (option.value === '00') {
+        if (option.checked) {
+          // 禁用其他選項
+          this.specialIssues.forEach((option) => {
+            if (option.value !== '00') {
+              option.checked = false; // 取消勾選
+              option.disabled = true; // 禁用其他選項
+            }
+          });
+        } else {
+          // 啟用其他選項
+          this.specialIssues.forEach((option) => {
+            option.disabled = false; // 啟用所有選項
+          });
+        }
+      } else {
+        // 當 "00" 以外的選項被勾選時
+        if (option.checked) {
+          // 禁用 "00" 選項
+          this.specialIssues.forEach((option) => {
+            if (option.value === '00') {
+              option.checked = false; // 取消勾選
+              option.disabled = true; // 禁用 "00" 選項
+            }
+          });
+        } else {
+          // 檢查其他選項是否被勾選
+          const isAnyChecked = this.specialIssues.some(
+            (option) => option.value !== '00' && option.checked
+          );
+          if (!isAnyChecked) {
+            // 如果沒有其他選項被勾選，啟用 "00" 選項
+            this.specialIssues.forEach((option) => {
+              if (option.value === '00') {
+                option.disabled = false; // 啟用 "00" 選項
+              }
+            });
+          }
+        }
+      }
+    });
   }
 
   // 是否使用弘道其他服務選項改變
-  usingOtherHongDaoServicesChange(checkGroup: string[]) {
-    this.form.get('usingOtherHongDaoServices')?.setValue(checkGroup);
-    // 如果勾選了無將禁用其他選項
-    // 勾取其他選項則禁用無
-    if (checkGroup.includes('1')) {
-      this.isDisableUsingOtherHongDaoServicesOthers = true;
-    } else {
-      this.isDisableUsingOtherHongDaoServicesOthers = false;
-    }
-    if (checkGroup.includes('9')) {
-      this.form.get('usingOtherHongDaoServices_other')?.enable();
-    } else {
-      this.form.get('usingOtherHongDaoServices_other')?.disable();
-      this.form.get('usingOtherHongDaoServices_other')?.reset();
-    }
-    this.isDisableUsingOtherHongDaoServicesNone = checkGroup.some((check) =>
-      ['2', '3', '4', '5', '6', '7', '8', '9'].includes(check)
-    );
+  usingOtherHongDaoServicesChange(checkedValues: string[]) {
+    this.usingOtherHongDaoServices.forEach((option) => {
+      // 更新每個選項的 checked 狀態
+      option.checked = checkedValues.includes(option.value);
+      // 當 "00" 被勾選時
+      if (option.value === '00') {
+        if (option.checked) {
+          // 禁用其他選項
+          this.usingOtherHongDaoServices.forEach((option) => {
+            if (option.value !== '00') {
+              option.checked = false; // 取消勾選
+              option.disabled = true; // 禁用其他選項
+            }
+          });
+        } else {
+          // 啟用其他選項
+          this.usingOtherHongDaoServices.forEach((option) => {
+            option.disabled = false; // 啟用所有選項
+          });
+        }
+      } else {
+        if (option.value === '08' && this.form) {
+          if (option.checked) {
+            this.form
+              .get('usingOtherHongDaoServices.usingOtherHongDaoServices_other')
+              ?.enable();
+          } else {
+            this.form
+              .get('usingOtherHongDaoServices.usingOtherHongDaoServices_other')
+              ?.reset();
+            this.form
+              .get('usingOtherHongDaoServices.usingOtherHongDaoServices_other')
+              ?.disable();
+          }
+        }
+        // 當 "00" 以外的選項被勾選時
+        if (option.checked) {
+          // 禁用 "00" 選項
+          this.usingOtherHongDaoServices.forEach((option) => {
+            if (option.value === '00') {
+              option.checked = false; // 取消勾選
+              option.disabled = true; // 禁用 "00" 選項
+            }
+          });
+        } else {
+          // 檢查其他選項是否被勾選
+          const isAnyChecked = this.usingOtherHongDaoServices.some(
+            (option) => option.value !== '00' && option.checked
+          );
+          if (!isAnyChecked) {
+            // 如果沒有其他選項被勾選，啟用 "00" 選項
+            this.usingOtherHongDaoServices.forEach((option) => {
+              if (option.value === '00') {
+                option.disabled = false; // 啟用 "00" 選項
+              }
+            });
+          }
+        }
+      }
+    });
   }
 
   // 福利使用概況選項改變
-  welfareUsageOverviewChange(checkGroup: string[]) {
-    this.form.get('welfareUsageOverview')?.setValue(checkGroup);
-    // 如果勾選了無將禁用其他選項
-    // 勾取其他選項則禁用無
-    if (checkGroup.includes('1')) {
-      this.isDisableWelfareUsageOverviewOthers = true;
-    } else {
-      this.isDisableWelfareUsageOverviewOthers = false;
-    }
-    if (checkGroup.includes('2')) {
-      this.form.get('mealDeliveryService_unitName')?.enable();
-      this.form.get('mealDeliveryService_serviceResponsiblePerson')?.enable();
-      this.form.get('mealDeliveryService_contactPhone')?.enable();
-    } else {
-      this.form.get('mealDeliveryService_unitName')?.disable();
-      this.form.get('mealDeliveryService_serviceResponsiblePerson')?.disable();
-      this.form.get('mealDeliveryService_contactPhone')?.disable();
-      this.form.get('mealDeliveryService_unitName')?.reset();
-      this.form.get('mealDeliveryService_serviceResponsiblePerson')?.reset();
-      this.form.get('mealDeliveryService_contactPhone')?.reset();
-    }
-    if (checkGroup.includes('3')) {
-      this.form.get('daytimeCare_unitName')?.enable();
-      this.form.get('daytimeCare_serviceResponsiblePerson')?.enable();
-      this.form.get('daytimeCare_contactPhone')?.enable();
-    } else {
-      this.form.get('daytimeCare_unitName')?.disable();
-      this.form.get('daytimeCare_serviceResponsiblePerson')?.disable();
-      this.form.get('daytimeCare_contactPhone')?.disable();
-      this.form.get('daytimeCare_unitName')?.reset();
-      this.form.get('daytimeCare_serviceResponsiblePerson')?.reset();
-      this.form.get('daytimeCare_contactPhone')?.reset();
-    }
-
-    if (checkGroup.includes('4')) {
-      this.form.get('homeCareService_unitName')?.enable();
-      this.form.get('homeCareService_serviceResponsiblePerson')?.enable();
-      this.form.get('homeCareService_contactPhone')?.enable();
-    } else {
-      this.form.get('homeCareService_unitName')?.disable();
-      this.form.get('homeCareService_serviceResponsiblePerson')?.disable();
-      this.form.get('homeCareService_contactPhone')?.disable();
-      this.form.get('homeCareService_unitName')?.reset();
-      this.form.get('homeCareService_serviceResponsiblePerson')?.reset();
-      this.form.get('homeCareService_contactPhone')?.reset();
-    }
-
-    if (checkGroup.includes('5')) {
-      this.form.get('unitAService_unitName')?.enable();
-      this.form.get('unitAService_serviceResponsiblePerson')?.enable();
-      this.form.get('unitAService_contactPhone')?.enable();
-    } else {
-      this.form.get('unitAService_unitName')?.disable();
-      this.form.get('unitAService_serviceResponsiblePerson')?.disable();
-      this.form.get('unitAService_contactPhone')?.disable();
-      this.form.get('unitAService_unitName')?.reset();
-      this.form.get('unitAService_serviceResponsiblePerson')?.reset();
-      this.form.get('unitAService_contactPhone')?.reset();
-    }
-
-    if (checkGroup.includes('6')) {
-      this.form.get('otherUnitService_unitName')?.enable();
-      this.form.get('otherUnitService_serviceResponsiblePerson')?.enable();
-      this.form.get('otherUnitService_contactPhone')?.enable();
-    } else {
-      this.form.get('otherUnitService_unitName')?.disable();
-      this.form.get('otherUnitService_serviceResponsiblePerson')?.disable();
-      this.form.get('otherUnitService_contactPhone')?.disable();
-      this.form.get('otherUnitService_unitName')?.reset();
-      this.form.get('otherUnitService_serviceResponsiblePerson')?.reset();
-      this.form.get('otherUnitService_contactPhone')?.reset();
-    }
-
-    if (checkGroup.includes('7')) {
-      this.form.get('transportationService_unitName')?.enable();
-      this.form.get('transportationService_serviceResponsiblePerson')?.enable();
-      this.form.get('transportationService_contactPhone')?.enable();
-    } else {
-      this.form.get('transportationService_unitName')?.disable();
-      this.form
-        .get('transportationService_serviceResponsiblePerson')
-        ?.disable();
-      this.form.get('transportationService_contactPhone')?.disable();
-      this.form.get('transportationService_unitName')?.reset();
-      this.form.get('transportationService_serviceResponsiblePerson')?.reset();
-      this.form.get('transportationService_contactPhone')?.reset();
-    }
-
-    if (checkGroup.includes('8')) {
-      this.form.get('communityCenter_unitName')?.enable();
-      this.form.get('communityCenter_serviceResponsiblePerson')?.enable();
-      this.form.get('communityCenter_contactPhone')?.enable();
-    } else {
-      this.form.get('communityCenter_unitName')?.disable();
-      this.form.get('communityCenter_serviceResponsiblePerson')?.disable();
-      this.form.get('communityCenter_contactPhone')?.disable();
-      this.form.get('communityCenter_unitName')?.reset();
-      this.form.get('communityCenter_serviceResponsiblePerson')?.reset();
-      this.form.get('communityCenter_contactPhone')?.reset();
-    }
-
-    if (checkGroup.includes('9')) {
-      this.form.get('emergencyRescueSystem_unitName')?.enable();
-      this.form.get('emergencyRescueSystem_serviceResponsiblePerson')?.enable();
-      this.form.get('emergencyRescueSystem_contactPhone')?.enable();
-    } else {
-      this.form.get('emergencyRescueSystem_unitName')?.disable();
-      this.form
-        .get('emergencyRescueSystem_serviceResponsiblePerson')
-        ?.disable();
-      this.form.get('emergencyRescueSystem_contactPhone')?.disable();
-      this.form.get('emergencyRescueSystem_unitName')?.reset();
-      this.form.get('emergencyRescueSystem_serviceResponsiblePerson')?.reset();
-      this.form.get('emergencyRescueSystem_contactPhone')?.reset();
-    }
-
-    if (checkGroup.includes('10')) {
-      this.form.get('welfareUsageOverview_other')?.enable();
-      this.form.get('welfareUsageOverview_other_unitName')?.enable();
-      this.form
-        .get('welfareUsageOverview_other_serviceResponsiblePerson')
-        ?.enable();
-      this.form.get('welfareUsageOverview_other_contactPhone')?.enable();
-    } else {
-      this.form.get('welfareUsageOverview_other')?.disable();
-      this.form.get('welfareUsageOverview_other_unitName')?.disable();
-      this.form
-        .get('welfareUsageOverview_other_serviceResponsiblePerson')
-        ?.disable();
-      this.form.get('welfareUsageOverview_other_contactPhone')?.disable();
-      this.form.get('welfareUsageOverview_other')?.reset();
-      this.form.get('welfareUsageOverview_other_unitName')?.reset();
-      this.form
-        .get('welfareUsageOverview_other_serviceResponsiblePerson')
-        ?.reset();
-      this.form.get('welfareUsageOverview_other_contactPhone')?.reset();
-    }
-    this.isDisableWelfareUsageOverviewNone = checkGroup.some((check) =>
-      ['2', '3', '4', '5', '6', '7', '8', '9', '10'].includes(check)
-    );
-  }
-
-  // 住屋概況選項改變
-  housingConditionChange(checkGroup: string[]) {
-    this.form.get('housingCondition')?.setValue(checkGroup);
+  welfareUsageOverviewChange(checkedValues: string[]) {
+    this.welfareUsageOverview.forEach((option) => {
+      // 更新每個選項的 checked 狀態
+      option.checked = checkedValues.includes(option.value);
+      // 當 "00" 被勾選時
+      if (option.value === '00') {
+        if (option.checked) {
+          // 禁用其他選項
+          this.welfareUsageOverview.forEach((option) => {
+            if (option.value !== '00') {
+              option.checked = false; // 取消勾選
+              option.disabled = true; // 禁用其他選項
+            }
+          });
+        } else {
+          // 啟用其他選項
+          this.welfareUsageOverview.forEach((option) => {
+            option.disabled = false; // 啟用所有選項
+          });
+        }
+      } else {
+        if (option.value === '01' && this.form) {
+          if (option.checked) {
+            this.form
+              .get('welfareUsageOverview.mealDeliveryService_unitName')
+              ?.enable();
+            this.form
+              .get(
+                'welfareUsageOverview.mealDeliveryService_serviceResponsiblePerson'
+              )
+              ?.enable();
+            this.form
+              .get('welfareUsageOverview.mealDeliveryService_contactPhone')
+              ?.enable();
+          } else {
+            this.form
+              .get('welfareUsageOverview.mealDeliveryService_unitName')
+              ?.reset();
+            this.form
+              .get('welfareUsageOverview.mealDeliveryService_unitName')
+              ?.disable();
+            this.form
+              .get(
+                'welfareUsageOverview.mealDeliveryService_serviceResponsiblePerson'
+              )
+              ?.reset();
+            this.form
+              .get(
+                'welfareUsageOverview.mealDeliveryService_serviceResponsiblePerson'
+              )
+              ?.disable();
+            this.form
+              .get('welfareUsageOverview.mealDeliveryService_contactPhone')
+              ?.reset();
+            this.form
+              .get('welfareUsageOverview.mealDeliveryService_contactPhone')
+              ?.disable();
+          }
+        }
+        if (option.value === '02' && this.form) {
+          if (option.checked) {
+            this.form
+              .get('welfareUsageOverview.daytimeCare_unitName')
+              ?.enable();
+            this.form
+              .get('welfareUsageOverview.daytimeCare_serviceResponsiblePerson')
+              ?.enable();
+            this.form
+              .get('welfareUsageOverview.daytimeCare_contactPhone')
+              ?.enable();
+          } else {
+            this.form.get('welfareUsageOverview.daytimeCare_unitName')?.reset();
+            this.form
+              .get('welfareUsageOverview.daytimeCare_unitName')
+              ?.disable();
+            this.form
+              .get('welfareUsageOverview.daytimeCare_serviceResponsiblePerson')
+              ?.reset();
+            this.form
+              .get('welfareUsageOverview.daytimeCare_serviceResponsiblePerson')
+              ?.disable();
+            this.form
+              .get('welfareUsageOverview.daytimeCare_contactPhone')
+              ?.reset();
+            this.form
+              .get('welfareUsageOverview.daytimeCare_contactPhone')
+              ?.disable();
+          }
+        }
+        if (option.value === '03' && this.form) {
+          if (option.checked) {
+            this.form
+              .get('welfareUsageOverview.homeCareService_unitName')
+              ?.enable();
+            this.form
+              .get(
+                'welfareUsageOverview.homeCareService_serviceResponsiblePerson'
+              )
+              ?.enable();
+            this.form
+              .get('welfareUsageOverview.homeCareService_contactPhone')
+              ?.enable();
+          } else {
+            this.form
+              .get('welfareUsageOverview.homeCareService_unitName')
+              ?.reset();
+            this.form
+              .get('welfareUsageOverview.homeCareService_unitName')
+              ?.disable();
+            this.form
+              .get(
+                'welfareUsageOverview.homeCareService_serviceResponsiblePerson'
+              )
+              ?.reset();
+            this.form
+              .get(
+                'welfareUsageOverview.homeCareService_serviceResponsiblePerson'
+              )
+              ?.disable();
+            this.form
+              .get('welfareUsageOverview.homeCareService_contactPhone')
+              ?.reset();
+            this.form
+              .get('welfareUsageOverview.homeCareService_contactPhone')
+              ?.disable();
+          }
+        }
+        if (option.value === '04' && this.form) {
+          if (option.checked) {
+            this.form
+              .get('welfareUsageOverview.unitAService_unitName')
+              ?.enable();
+            this.form
+              .get('welfareUsageOverview.unitAService_serviceResponsiblePerson')
+              ?.enable();
+            this.form
+              .get('welfareUsageOverview.unitAService_contactPhone')
+              ?.enable();
+          } else {
+            this.form
+              .get('welfareUsageOverview.unitAService_unitName')
+              ?.reset();
+            this.form
+              .get('welfareUsageOverview.unitAService_unitName')
+              ?.disable();
+            this.form
+              .get('welfareUsageOverview.unitAService_serviceResponsiblePerson')
+              ?.reset();
+            this.form
+              .get('welfareUsageOverview.unitAService_serviceResponsiblePerson')
+              ?.disable();
+            this.form
+              .get('welfareUsageOverview.unitAService_contactPhone')
+              ?.reset();
+            this.form
+              .get('welfareUsageOverview.unitAService_contactPhone')
+              ?.disable();
+          }
+        }
+        if (option.value === '05' && this.form) {
+          if (option.checked) {
+            this.form
+              .get('welfareUsageOverview.otherUnitService_unitName')
+              ?.enable();
+            this.form
+              .get(
+                'welfareUsageOverview.otherUnitService_serviceResponsiblePerson'
+              )
+              ?.enable();
+            this.form
+              .get('welfareUsageOverview.otherUnitService_contactPhone')
+              ?.enable();
+          } else {
+            this.form
+              .get('welfareUsageOverview.otherUnitService_unitName')
+              ?.reset();
+            this.form
+              .get('welfareUsageOverview.otherUnitService_unitName')
+              ?.disable();
+            this.form
+              .get(
+                'welfareUsageOverview.otherUnitService_serviceResponsiblePerson'
+              )
+              ?.reset();
+            this.form
+              .get(
+                'welfareUsageOverview.otherUnitService_serviceResponsiblePerson'
+              )
+              ?.disable();
+            this.form
+              .get('welfareUsageOverview.otherUnitService_contactPhone')
+              ?.reset();
+            this.form
+              .get('welfareUsageOverview.otherUnitService_contactPhone')
+              ?.disable();
+          }
+        }
+        if (option.value === '06' && this.form) {
+          if (option.checked) {
+            this.form
+              .get('welfareUsageOverview.transportationService_unitName')
+              ?.enable();
+            this.form
+              .get(
+                'welfareUsageOverview.transportationService_serviceResponsiblePerson'
+              )
+              ?.enable();
+            this.form
+              .get('welfareUsageOverview.transportationService_contactPhone')
+              ?.enable();
+          } else {
+            this.form
+              .get('welfareUsageOverview.transportationService_unitName')
+              ?.reset();
+            this.form
+              .get('welfareUsageOverview.transportationService_unitName')
+              ?.disable();
+            this.form
+              .get(
+                'welfareUsageOverview.transportationService_serviceResponsiblePerson'
+              )
+              ?.reset();
+            this.form
+              .get(
+                'welfareUsageOverview.transportationService_serviceResponsiblePerson'
+              )
+              ?.disable();
+            this.form
+              .get('welfareUsageOverview.transportationService_contactPhone')
+              ?.reset();
+            this.form
+              .get('welfareUsageOverview.transportationService_contactPhone')
+              ?.disable();
+          }
+        }
+        if (option.value === '07' && this.form) {
+          if (option.checked) {
+            this.form
+              .get('welfareUsageOverview.communityCenter_unitName')
+              ?.enable();
+            this.form
+              .get(
+                'welfareUsageOverview.communityCenter_serviceResponsiblePerson'
+              )
+              ?.enable();
+            this.form
+              .get('welfareUsageOverview.communityCenter_contactPhone')
+              ?.enable();
+          } else {
+            this.form
+              .get('welfareUsageOverview.communityCenter_unitName')
+              ?.reset();
+            this.form
+              .get('welfareUsageOverview.communityCenter_unitName')
+              ?.disable();
+            this.form
+              .get(
+                'welfareUsageOverview.communityCenter_serviceResponsiblePerson'
+              )
+              ?.reset();
+            this.form
+              .get(
+                'welfareUsageOverview.communityCenter_serviceResponsiblePerson'
+              )
+              ?.disable();
+            this.form
+              .get('welfareUsageOverview.communityCenter_contactPhone')
+              ?.reset();
+            this.form
+              .get('welfareUsageOverview.communityCenter_contactPhone')
+              ?.disable();
+          }
+        }
+        if (option.value === '08' && this.form) {
+          if (option.checked) {
+            this.form
+              .get('welfareUsageOverview.emergencyRescueSystem_unitName')
+              ?.enable();
+            this.form
+              .get(
+                'welfareUsageOverview.emergencyRescueSystem_serviceResponsiblePerson'
+              )
+              ?.enable();
+            this.form
+              .get('welfareUsageOverview.emergencyRescueSystem_contactPhone')
+              ?.enable();
+          } else {
+            this.form
+              .get('welfareUsageOverview.emergencyRescueSystem_unitName')
+              ?.reset();
+            this.form
+              .get('welfareUsageOverview.emergencyRescueSystem_unitName')
+              ?.disable();
+            this.form
+              .get(
+                'welfareUsageOverview.emergencyRescueSystem_serviceResponsiblePerson'
+              )
+              ?.reset();
+            this.form
+              .get(
+                'welfareUsageOverview.emergencyRescueSystem_serviceResponsiblePerson'
+              )
+              ?.disable();
+            this.form
+              .get('welfareUsageOverview.emergencyRescueSystem_contactPhone')
+              ?.reset();
+            this.form
+              .get('welfareUsageOverview.emergencyRescueSystem_contactPhone')
+              ?.disable();
+          }
+        }
+        if (option.value === '09' && this.form) {
+          if (option.checked) {
+            this.form
+              .get('welfareUsageOverview.welfareUsageOverview_other')
+              ?.enable();
+            this.form
+              .get('welfareUsageOverview.welfareUsageOverview_other_unitName')
+              ?.enable();
+            this.form
+              .get(
+                'welfareUsageOverview.welfareUsageOverview_other_serviceResponsiblePerson'
+              )
+              ?.enable();
+            this.form
+              .get(
+                'welfareUsageOverview.welfareUsageOverview_other_contactPhone'
+              )
+              ?.enable();
+          } else {
+            this.form
+              .get('welfareUsageOverview.welfareUsageOverview_other')
+              ?.reset();
+            this.form
+              .get('welfareUsageOverview.welfareUsageOverview_other')
+              ?.disable();
+            this.form
+              .get('welfareUsageOverview.welfareUsageOverview_other_unitName')
+              ?.reset();
+            this.form
+              .get('welfareUsageOverview.welfareUsageOverview_other_unitName')
+              ?.disable();
+            this.form
+              .get(
+                'welfareUsageOverview.welfareUsageOverview_other_serviceResponsiblePerson'
+              )
+              ?.reset();
+            this.form
+              .get(
+                'welfareUsageOverview.welfareUsageOverview_other_serviceResponsiblePerson'
+              )
+              ?.disable();
+            this.form
+              .get(
+                'welfareUsageOverview.welfareUsageOverview_other_contactPhone'
+              )
+              ?.reset();
+            this.form
+              .get(
+                'welfareUsageOverview.welfareUsageOverview_other_contactPhone'
+              )
+              ?.disable();
+          }
+        }
+        // 當 "00" 以外的選項被勾選時
+        if (option.checked) {
+          // 禁用 "00" 選項
+          this.welfareUsageOverview.forEach((option) => {
+            if (option.value === '00') {
+              option.checked = false; // 取消勾選
+              option.disabled = true; // 禁用 "00" 選項
+            }
+          });
+        } else {
+          // 檢查其他選項是否被勾選
+          const isAnyChecked = this.welfareUsageOverview.some(
+            (option) => option.value !== '00' && option.checked
+          );
+          if (!isAnyChecked) {
+            // 如果沒有其他選項被勾選，啟用 "00" 選項
+            this.welfareUsageOverview.forEach((option) => {
+              if (option.value === '00') {
+                option.disabled = false; // 啟用 "00" 選項
+              }
+            });
+          }
+        }
+      }
+    });
   }
 
   // 居住環境選項改變
@@ -1054,28 +2510,68 @@ export class Hd120FormComponent implements OnInit {
     this.form.get('livingEnvironment')?.setValue(checkGroup);
   }
   // 同住者選項改變
-  cohabitantsChange(checkGroup: string[]) {
-    this.form.get('cohabitants')?.setValue(checkGroup);
-    // 如果勾選了無將禁用其他選項
-    // 勾取其他選項則禁用無
-    if (checkGroup.includes('1')) {
-      this.isDisableCohabitantsOthers = true;
-    } else {
-      this.isDisableCohabitantsOthers = false;
-    }
-    if (checkGroup.includes('11')) {
-      this.form.get('cohabitants_other')?.enable();
-    } else {
-      this.form.get('cohabitants_other')?.disable();
-      this.form.get('cohabitants_other')?.reset();
-    }
-    this.isDisableCohabitantsNone = checkGroup.some((check) =>
-      ['2', '3', '4', '5', '6', '7', '8', '9', '10', '11'].includes(check)
-    );
+  cohabitantsChange(checkedValues: string[]) {
+    this.cohabitants.forEach((option) => {
+      // 更新每個選項的 checked 狀態
+      option.checked = checkedValues.includes(option.value);
+      // 當 "00" 被勾選時
+      if (option.value === '00') {
+        if (option.checked) {
+          // 禁用其他選項
+          this.cohabitants.forEach((option) => {
+            if (option.value !== '00') {
+              option.checked = false; // 取消勾選
+              option.disabled = true; // 禁用其他選項
+            }
+          });
+        } else {
+          // 啟用其他選項
+          this.cohabitants.forEach((option) => {
+            option.disabled = false; // 啟用所有選項
+          });
+        }
+      } else {
+        if (option.value === '10' && this.form) {
+          if (option.checked) {
+            this.form.get('cohabitants.cohabitants_other')?.enable();
+          } else {
+            this.form.get('cohabitants.cohabitants_other')?.reset();
+            this.form.get('cohabitants.cohabitants_other')?.disable();
+          }
+        }
+        // 當 "00" 以外的選項被勾選時
+        if (option.checked) {
+          // 禁用 "00" 選項
+          this.cohabitants.forEach((option) => {
+            if (option.value === '00') {
+              option.checked = false; // 取消勾選
+              option.disabled = true; // 禁用 "00" 選項
+            }
+          });
+        } else {
+          // 檢查其他選項是否被勾選
+          const isAnyChecked = this.cohabitants.some(
+            (option) => option.value !== '00' && option.checked
+          );
+          if (!isAnyChecked) {
+            // 如果沒有其他選項被勾選，啟用 "00" 選項
+            this.cohabitants.forEach((option) => {
+              if (option.value === '00') {
+                option.disabled = false; // 啟用 "00" 選項
+              }
+            });
+          }
+        }
+      }
+    });
   }
 
   // 顯示緊急聯絡人的modal
   showEmergencyContactModal(): void {
+    // 清空輸入框
+    this.form.get('emergencyContact_emergencyContact')?.reset();
+    this.form.get('emergencyContact_relationship')?.reset();
+    this.form.get('emergencyContact_phone')?.reset();
     this.isVisible_emergencyContact = true;
   }
 
@@ -1093,7 +2589,14 @@ export class Hd120FormComponent implements OnInit {
     const relationship = this.form.get('emergencyContact_relationship')?.value;
     const phone = this.form.get('emergencyContact_phone')?.value;
     // 判斷資料是否皆有填寫
-    if (emergencyContact === '' || relationship === '' || phone === '') {
+    if (
+      emergencyContact === null ||
+      emergencyContact === '' ||
+      relationship === null ||
+      relationship === '' ||
+      phone === null ||
+      phone === ''
+    ) {
       this.message.create('error', '請填寫完整資料');
       return;
     }
@@ -1107,10 +2610,7 @@ export class Hd120FormComponent implements OnInit {
     (this.form.get('emergencyContact') as FormArray).push(
       new FormControl(emergencyContactObj)
     );
-    // 清空輸入框
-    this.form.get('emergencyContact_emergencyContact')?.reset();
-    this.form.get('emergencyContact_relationship')?.reset();
-    this.form.get('emergencyContact_phone')?.reset();
+
     this.message.create('success', '新增成功');
     this.isVisible_emergencyContact = false;
   }

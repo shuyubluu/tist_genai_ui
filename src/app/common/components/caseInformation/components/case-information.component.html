@@ -14,19 +14,31 @@
   <div class="divCenter">
     <span
       class="checkFormButton"
-      [ngClass]="{ highlightButton: router.url === '/hd110' }"
+      [ngClass]="{
+        highlightButton:
+          router.url.startsWith('/hd110/view') ||
+          router.url.startsWith('/hd110/edit')
+      }"
       (click)="goToHd110()"
       >開案評估</span
     >
     <span
       class="checkFormButton"
-      [ngClass]="{ highlightButton: router.url === '/hd120' }"
+      [ngClass]="{
+        highlightButton:
+          router.url.startsWith('/hd120/view') ||
+          router.url.startsWith('/hd120/edit')
+      }"
       (click)="goToHd120()"
       >基本資料</span
     >
     <span
       class="checkFormButton"
-      [ngClass]="{ highlightButton: router.url === '/hd130' }"
+      [ngClass]="{
+        highlightButton:
+          router.url.startsWith('/hd130/view') ||
+          router.url.startsWith('/hd130/edit')
+      }"
       (click)="goToHd130()"
       >初評表</span
     >

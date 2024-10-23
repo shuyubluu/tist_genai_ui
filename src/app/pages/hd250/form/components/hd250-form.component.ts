@@ -222,6 +222,9 @@ export class Hd250FormComponent implements OnInit {
     this.form.get('teamSpirit_volunteer_1')?.disable();
     this.form.get('teamSpirit_volunteer_2')?.disable();
     this.form.get('teamSpirit_volunteer_3')?.disable();
+
+    // 禁用主責人姓名
+    this.form.get('responsiblePersonName')?.disable();
   }
 
   // 通用的監控分數表單值變化方法

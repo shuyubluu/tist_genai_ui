@@ -348,16 +348,28 @@
     <div class="grid-columns-1">
       <div class="label">社會福利補助</div>
       <div class="column-Message">
-        <nz-checkbox-group
-          (ngModelChange)="socialWelfareAssistanceChange($event)"
-          formControlName="socialWelfareAssistance"
-        ></nz-checkbox-group>
-        <app-error-message
-          [control]="form.get('socialWelfareAssistance')"
-          [isTouched]="false"
-          errorKey="atLeastOneChecked"
-          errorMessage="必選"
-        />
+        <nz-checkbox-wrapper
+          (nzOnChange)="socialWelfareAssistanceChange($event)"
+        >
+          <div formGroupName="socialWelfareAssistance">
+            <label
+              [nzDisabled]="option.disabled"
+              nz-checkbox
+              *ngFor="let option of socialWelfareAssistance"
+              [formControlName]="option.value"
+              [nzValue]="option.value"
+            >
+              {{ option.label }}
+            </label>
+            <label>
+              <app-error-message
+                [control]="form.get('socialWelfareAssistance')"
+                [isTouched]="false"
+                errorKey="atLeastOneChecked"
+                errorMessage="必選"
+            /></label>
+          </div>
+        </nz-checkbox-wrapper>
       </div>
     </div>
     <div class="title">開案條件</div>
@@ -574,7 +586,7 @@
     <app-button
       [buttonText]="'關閉'"
       [attachClassName]="['danger']"
-      (click)="closeTab('個案開案評估表')"
+      (click)="closeTab(tabName)"
     />
   </div>
 </form>

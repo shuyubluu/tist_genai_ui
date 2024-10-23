@@ -68,7 +68,7 @@ export class ErrorMessageComponent {
   @Input() errorMessage: string = '';
   @Input() isTouched: boolean = true;
   @Input() isCustom: boolean = false;
-  @Input() condition: boolean = false;
+  @Input() condition: boolean | undefined = false;
 
   shouldShowError(): boolean {
     // 如果是自訂的錯誤訊息，則根據condition來決定是否顯示
