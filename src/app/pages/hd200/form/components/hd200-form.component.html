@@ -960,7 +960,7 @@
         formControlName="receivedHongdaoVolunteerVest"
       />
     </div>
-    <div class="grid-columns-1">
+    <div class="grid-columns-2">
       <div class="label">是否領取弘道志工制服</div>
       <div>
         <app-select
@@ -987,17 +987,25 @@
         </span>
         }
       </div>
+      <div class="label">是否領取弘道志工名片</div>
+      <div>
+        <app-select
+        [selectWidth]="'70px'"
+        [options]="selectOptions_trueOrFalse"
+        formControlName="receivedHongdaoVolunteerCard"
+    />
+      </div>
     </div>
     <div class="grid-columns-1 border-bottom-0">
       <div class="label">志工權利義務告知聲明書</div>
       <div class="colunns-Message">
         <!-- <app-button [buttonIcon]="'upload'" [buttonText]="'聲明書上傳'" /> -->
+        <app-button [attachClassName]="['danger']" [buttonText]="'範本下載'" />
         <app-select
           [selectWidth]="'90px'"
           [options]="selectOptions_volunteerRightsAndDutiesDeclaration"
           formControlName="volunteerRightsAndDutiesDeclaration"
         />
-        <app-button [attachClassName]="['danger']" [buttonText]="'範本下載'" />
       </div>
     </div>
   </div>
@@ -1022,7 +1030,7 @@
     <app-button
       [attachClassName]="['danger']"
       [buttonText]="'關閉'"
-      (click)="closeTab('志工基本資料')"
+      (click)="closeTab(tabName)"
     />
   </div>
 </form>

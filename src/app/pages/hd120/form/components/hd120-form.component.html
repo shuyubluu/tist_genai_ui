@@ -152,12 +152,7 @@
         <app-input
           [inputWidth]="'100px'"
           [maxLength]="50"
-          formControlName="mapCoordinates_x"
-        />
-        <app-input
-          [inputWidth]="'100px'"
-          [maxLength]="50"
-          formControlName="mapCoordinates_y"
+          formControlName="mapCoordinates"
         />
       </div>
     </div>
@@ -1443,7 +1438,7 @@
     <app-button
       [attachClassName]="['danger']"
       [buttonText]="'關閉'"
-      (click)="closeTab('個案開案資料表')"
+      (click)="closeTab(tabName)"
     />
   </div>
 </form>

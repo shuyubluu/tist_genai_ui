@@ -110,6 +110,7 @@ export class MenuComponent implements OnInit {
             ],
           },
           { title: '07- 佈告欄維護', open: false, link: '/hd660' },
+          { title: '08- 信件維護', open: false, link: '/hd670' },
         ],
       },
     ];

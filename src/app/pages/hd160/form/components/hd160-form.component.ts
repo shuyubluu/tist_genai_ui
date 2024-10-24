@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
 import { InputComponent } from '../../../../common/components/input/input.component';
 import { SelectComponent } from '../../../../common/components/select/select.component';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { DayPickerComponent } from '../../../../common/components/dayPicker/dayPicker.component';
 import { SharedModule } from '../../../../common/shared/shared.module';
 import { TabService } from '../../../../common/layouts/tab/tab.service';
@@ -33,6 +33,8 @@ import { DateValidators } from '../../../../common/validator/date-validator';
 export class Hd160FormComponent implements OnInit {
   // 搜尋條件表單
   form: FormGroup;
+  // tab名稱
+  tabName: string = '';
   // 生理select選項
   selectOptions_sheet: string[] = [
     '非常同意',
@@ -43,6 +45,7 @@ export class Hd160FormComponent implements OnInit {
   ];
 
   constructor(
+    private route: ActivatedRoute,
     private tabService: TabService, // 關閉tab的Service
     private message: NzMessageService, // 訊息
     public caseInformationService: CaseInformationService, // caseInformationService
@@ -80,6 +83,8 @@ export class Hd160FormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // 取得當前路由的tabName
+    this.tabName = this.route.snapshot.data['tabName'];
     // 檢視模式，禁用表單
     if (this.hd160ListService.isView) {
       this.form.disable();
@@ -169,7 +174,7 @@ export class Hd160FormComponent implements OnInit {
   // 暫存草稿
   send() {
     this.message.create('success', '送出成功');
-    this.closeTab('生活品質問卷');
+    this.closeTab();
   }
   // 暫存草稿
   save() {
@@ -177,7 +182,7 @@ export class Hd160FormComponent implements OnInit {
   }
 
   // 關閉生活品質問卷
-  closeTab(identifier: string) {
-    this.tabService.closeTab(identifier);
+  closeTab() {
+    this.tabService.closeTab(this.tabName);
   }
 }

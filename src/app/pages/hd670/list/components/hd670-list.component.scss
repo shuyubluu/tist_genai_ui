@@ -1,0 +1,10 @@
+.grid-columns {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr 5fr 1fr;
+  grid-gap: 2px;
+}
+
+.notificationTarget_select {
+  min-width: 200px;
+}

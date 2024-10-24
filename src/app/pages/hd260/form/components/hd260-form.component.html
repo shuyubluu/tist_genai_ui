@@ -54,7 +54,6 @@
       <div class="column-Message">
         <app-select
           [selectWidth]="'130px'"
-          
           [options]="selectOptions_importantNotesSummary"
           formControlName="importantNotesSummary"
         />
@@ -98,6 +97,14 @@
                 nz-checkbox
                 [nzDisabled]="!volunteerInformationService.isChoiceVolunteer"
                 nzValue="3"
+                >志工名片</label
+              >
+            </div>
+            <div nz-col>
+              <label
+                nz-checkbox
+                [nzDisabled]="!volunteerInformationService.isChoiceVolunteer"
+                nzValue="4"
                 >志工制服</label
               >
               <span> <span class="volunteerUniformCount">2</span> 件 </span>

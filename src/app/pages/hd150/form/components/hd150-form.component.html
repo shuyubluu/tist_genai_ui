@@ -34,7 +34,6 @@
       <div class="column-Message">
         <app-select
           [selectWidth]="'70px'"
-          
           [options]="selectOptions_visitMethod"
           formControlName="visitMethod"
         />
@@ -825,7 +824,6 @@
         <!-- !TODO -->
         <app-select
           [selectWidth]="'90px'"
-          
           [options]="selectOptions_latestRiskLevel"
           formControlName="latestRiskLevel"
         />
@@ -841,7 +839,6 @@
         <!-- !TODO -->
         <app-select
           [selectWidth]="'100px'"
-          
           [options]="selectOptions_visitOutcome"
           formControlName="visitOutcome"
         />
@@ -907,7 +904,7 @@
     <app-button
       [attachClassName]="['danger']"
       [buttonText]="'關閉'"
-      (click)="closeTab('個案複評表')"
+      (click)="closeTab()"
     />
   </div>
 </form>

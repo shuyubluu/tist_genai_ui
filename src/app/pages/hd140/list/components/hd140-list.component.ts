@@ -1,6 +1,6 @@
 import { Hd140ListService } from './../service/hd140-list.service';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
 import { InputComponent } from '../../../../common/components/input/input.component';
 import { SelectComponent } from '../../../../common/components/select/select.component';
@@ -43,6 +43,8 @@ export class Hd140ListComponent implements OnInit {
   pageSize: number = 10;
   // 檢查日期區間
   checkDateRange: boolean = false;
+  // tab名稱
+  tabName: string = '';
   // 搜尋結果模擬資料_社工
   searchResultData_socialWorker: SearchResultData_socialWorker[] = [
     {
@@ -78,6 +80,7 @@ export class Hd140ListComponent implements OnInit {
   }
 
   constructor(
+    private route: ActivatedRoute,
     public caseInformationService: CaseInformationService, // caseInformationService
     private tabService: TabService, // 關閉tab的Service
     private router: Router, // 路由
@@ -95,6 +98,8 @@ export class Hd140ListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // 取得當前路由的tabName
+    this.tabName = this.route.snapshot.data['tabName'];
     // 生成多筆模擬搜尋結果資料
     for (let i = 0; i < 20; i++) {
       this.searchResultData_socialWorker.push(
@@ -120,28 +125,28 @@ export class Hd140ListComponent implements OnInit {
 
   // 檢視
   view() {
-    this.router.navigate(['/hd140/form']);
+    this.router.navigate(['/hd140/view']);
     this.caseInformationService.isChoiceCase = true;
     this.hd140ListService.setMode(true, false, false);
   }
 
   // 編輯
   edit() {
-    this.router.navigate(['/hd140/form']);
+    this.router.navigate(['/hd140/edit']);
     this.caseInformationService.isChoiceCase = true;
     this.hd140ListService.setMode(false, false, true);
   }
 
   // 檢視_志工
   view_volunteer() {
-    this.router.navigate(['/hd140/form2']);
+    this.router.navigate(['/hd140/view_volunteer']);
     this.caseInformationService.isChoiceCase = true;
     this.hd140ListService.setMode(true, false, false);
   }
 
   // 新增個案資料
   create() {
-    this.router.navigate(['/hd140/form']);
+    this.router.navigate(['/hd140/create']);
     this.caseInformationService.isChoiceCase = false;
     this.hd140ListService.setMode(false, true, false);
   }

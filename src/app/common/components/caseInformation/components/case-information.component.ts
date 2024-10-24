@@ -20,8 +20,8 @@ export class CaseInformationComponent implements OnInit {
   @Input() currentTab: string = '';
   // tab名稱
   tabName: string = '';
-  // 當前模式
-  currentMode: string = '';
+  // 當前hd100模式
+  currentHd100Mode: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -37,11 +37,11 @@ export class CaseInformationComponent implements OnInit {
     this.tabName = this.route.snapshot.data['tabName'];
 
     if (this.hd100ListService.isCreate) {
-      this.currentMode = '/create';
+      this.currentHd100Mode = '/create';
     } else if (this.hd100ListService.isEdit) {
-      this.currentMode = '/edit';
+      this.currentHd100Mode = '/edit';
     } else {
-      this.currentMode = '/view';
+      this.currentHd100Mode = '/view';
     }
   }
 
@@ -53,8 +53,8 @@ export class CaseInformationComponent implements OnInit {
     ) {
       return;
     } else {
-      await this.router.navigate(['/hd110' + this.currentMode]);
-      this.closeTab(this.tabName);
+      await this.router.navigate(['/hd110' + this.currentHd100Mode]);
+      this.closeTab();
     }
   }
 
@@ -66,8 +66,8 @@ export class CaseInformationComponent implements OnInit {
     ) {
       return;
     } else {
-      await this.router.navigate(['/hd120' + this.currentMode]);
-      this.closeTab(this.tabName);
+      await this.router.navigate(['/hd120' + this.currentHd100Mode]);
+      this.closeTab();
     }
   }
 
@@ -79,74 +79,87 @@ export class CaseInformationComponent implements OnInit {
     ) {
       return;
     } else {
-      await this.router.navigate(['/hd130' + this.currentMode]);
-      this.closeTab(this.tabName);
+      await this.router.navigate(['/hd130' + this.currentHd100Mode]);
+      this.closeTab();
     }
   }
 
   // 前往hd140
   async goToHd140() {
-    await this.router.navigate(['/hd140']);
     if (
-      this.currentTab !== '例行訪視表清單' &&
-      this.currentTab !== '例行訪視表'
+      this.router.url.startsWith('/hd140') ||
+      this.router.url.startsWith('/hd140/create') ||
+      this.router.url.startsWith('/hd140/view') ||
+      this.router.url.startsWith('/hd140/edit')
     ) {
-      this.closeTab(this.currentTab);
-    } else {
       return;
+    } else {
+      await this.router.navigate(['/hd140']);
+      this.closeTab();
     }
   }
 
   // 前往hd150
   async goToHd150() {
-    await this.router.navigate(['/hd150']);
     if (
-      this.currentTab !== '個案複評表清單' &&
-      this.currentTab !== '個案複評表'
+      this.router.url.startsWith('/hd150') ||
+      this.router.url.startsWith('/hd150/create') ||
+      this.router.url.startsWith('/hd150/view') ||
+      this.router.url.startsWith('/hd150/edit')
     ) {
-      this.closeTab(this.currentTab);
-    } else {
       return;
+    } else {
+      await this.router.navigate(['/hd150']);
+      this.closeTab();
     }
   }
 
   // 前往hd160
   async goToHd160() {
-    await this.router.navigate(['/hd160']);
     if (
-      this.currentTab !== '生活品質問卷清單' &&
-      this.currentTab !== '生活品質問卷'
+      this.router.url.startsWith('/hd160') ||
+      this.router.url.startsWith('/hd160/create') ||
+      this.router.url.startsWith('/hd160/view') ||
+      this.router.url.startsWith('/hd160/edit')
     ) {
-      this.closeTab(this.currentTab);
-    } else {
       return;
+    } else {
+      await this.router.navigate(['/hd160']);
+      this.closeTab();
     }
   }
 
   // 前往hd100Form
   async goToHd100Form() {
-    this.hd180ListService.isEdit = true;
     this.hd180ListService.isCanReview = true;
-    await this.router.navigate(['/hd100/form']);
-    if (this.currentTab !== '個案結案表') {
-      this.closeTab(this.currentTab);
-    } else {
+    if (
+      this.router.url.startsWith('/hd100/view') ||
+      this.router.url.startsWith('/hd100/edit')
+    ) {
       return;
+    } else {
+      await this.router.navigate(['/hd100' + this.currentHd100Mode]);
+      this.closeTab();
     }
   }
 
   // 前往hd170
   async goToHd170() {
-    await this.router.navigate(['/hd170']);
-    if (this.currentTab !== '轉介單清單' && this.currentTab !== '轉介單') {
-      this.closeTab(this.currentTab);
-    } else {
+    if (
+      this.router.url.startsWith('/hd170') ||
+      this.router.url.startsWith('/hd170/create') ||
+      this.router.url.startsWith('/hd170/view') ||
+      this.router.url.startsWith('/hd170/edit')
+    ) {
       return;
+    } else {
+      await this.router.navigate(['/hd170']);
+      this.closeTab();
     }
   }
 
   // 關閉tab
-  closeTab(identifier: string) {
-    this.tabService.closeTab(identifier);
+  closeTab() {
+    this.tabService.closeTab(this.tabName);
   }
 }

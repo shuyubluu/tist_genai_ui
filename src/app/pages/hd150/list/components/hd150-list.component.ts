@@ -1,6 +1,6 @@
 import { Hd150ListService } from './../service/hd150-list.service';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
 import { InputComponent } from '../../../../common/components/input/input.component';
 import { SelectComponent } from '../../../../common/components/select/select.component';
@@ -34,6 +34,8 @@ import { ErrorMessageComponent } from '../../../../common/components/message/err
 export class Hd150ListComponent implements OnInit {
   // 搜尋條件表單
   form: FormGroup;
+  // tab名稱
+  tabName: string = '';
   // 分頁器當前頁數
   currentPage: number = 1;
   // 分頁器一頁多少筆數據
@@ -62,6 +64,7 @@ export class Hd150ListComponent implements OnInit {
   }
 
   constructor(
+    private route: ActivatedRoute,
     public caseInformationService: CaseInformationService, // caseInformationService
     private tabService: TabService, // 關閉tab的Service
     private router: Router, // 路由
@@ -77,6 +80,8 @@ export class Hd150ListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // 取得當前路由的tabName
+    this.tabName = this.route.snapshot.data['tabName'];
     // 生成多筆模擬搜尋結果資料
     for (let i = 0; i < 20; i++) {
       this.searchResultData.push(this.searchResultData[i]);
@@ -102,21 +107,21 @@ export class Hd150ListComponent implements OnInit {
 
   // 檢視
   view() {
-    this.router.navigate(['/hd150/form']);
+    this.router.navigate(['/hd150/view']);
     this.caseInformationService.isChoiceCase = true;
     this.hd150ListService.setMode(true, false, false);
   }
 
   // 編輯
   edit() {
-    this.router.navigate(['/hd150/form']);
+    this.router.navigate(['/hd150/edit']);
     this.caseInformationService.isChoiceCase = true;
     this.hd150ListService.setMode(false, false, true);
   }
 
   // 新增個案資料
   create() {
-    this.router.navigate(['/hd150/form']);
+    this.router.navigate(['/hd150/create']);
     this.caseInformationService.isChoiceCase = false;
     this.hd150ListService.setMode(false, true, false);
   }

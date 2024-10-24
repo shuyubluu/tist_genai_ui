@@ -34,13 +34,11 @@ export const routes: Routes = [
         path: 'hd120',
         loadChildren: () =>
           import('./pages/hd120/hd120.routes').then((m) => m.HD120_ROUTES),
-       
       },
       {
         path: 'hd130',
         loadChildren: () =>
           import('./pages/hd130/hd130.routes').then((m) => m.HD130_ROUTES),
-        data: { tabName: '個案初評表' },
       },
       {
         path: 'hd140',
@@ -221,6 +219,12 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./pages/hd660/hd660.routes').then((m) => m.HD660_ROUTES),
         data: { tabName: '佈告欄維護' },
+      },
+      {
+        path: 'hd670',
+        loadChildren: () =>
+          import('./pages/hd670/hd670.routes').then((m) => m.HD670_ROUTES),
+        data: { tabName: '信件維護清單' },
       },
     ],
   },

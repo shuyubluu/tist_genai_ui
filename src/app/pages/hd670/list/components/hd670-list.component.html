@@ -1,0 +1,47 @@
+<div class="grid-search-container border-bottom-0">
+  <div class="grid-columns searchTitle">
+    <div>事件名稱</div>
+    <div>通知對象</div>
+    <div>建立時間</div>
+  </div>
+  <div
+    class="grid-columns tableBorder"
+    *ngFor="let searchResult of newSearchResultData; let i = index"
+    [ngClass]="{
+      'even-row': i % 2 === 1,
+      'odd-row': i % 2 !== 1
+    }"
+  >
+    <div>
+      {{ searchResult.eventName }}
+    </div>
+    <div>
+      <nz-select
+        class="notificationTarget_select"
+        nzMode="multiple"
+        [(ngModel)]="searchResult.listOfSelectedValue"
+      >
+        @for (item of searchResult.listOfOption; track item) {
+        <nz-option [nzLabel]="item" [nzValue]="item"></nz-option>
+        }
+      </nz-select>
+    </div>
+    <div>
+      {{ searchResult.creationTime }}
+    </div>
+  </div>
+</div>
+<div class="buttonArea">
+  <app-button [buttonText]="'儲存'" (click)="save()" />
+  <app-button
+    [attachClassName]="['danger']"
+    [buttonText]="'關閉'"
+    (click)="closeTab()"
+  />
+</div>
+<nz-pagination
+  [nzPageIndex]="currentPage"
+  [nzPageSize]="pageSize"
+  (nzPageIndexChange)="onPageIndexChange($event)"
+  [nzTotal]="searchResultData.length"
+/>

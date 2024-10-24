@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
 import { InputComponent } from '../../../../common/components/input/input.component';
 import { SelectComponent } from '../../../../common/components/select/select.component';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { DayPickerComponent } from '../../../../common/components/dayPicker/dayPicker.component';
 import { SharedModule } from '../../../../common/shared/shared.module';
 import { TabService } from '../../../../common/layouts/tab/tab.service';
@@ -46,6 +46,8 @@ import { AddressValidators } from '../../../../common/validator/address-validato
 export class Hd200FormComponent implements OnInit {
   // 搜尋條件表單
   form: FormGroup;
+  // tab名稱
+  tabName: string = '';
   // 宗教信仰是否禁用無選項
   isDisableReligiousAffiliationNone: boolean = false;
   // 宗教信仰是否禁用無選項以外的項目
@@ -287,6 +289,7 @@ export class Hd200FormComponent implements OnInit {
   ];
 
   constructor(
+    private route: ActivatedRoute,
     private tabService: TabService, // 關閉tab的Service
     private message: NzMessageService, // 訊息
     public volunteerInformationService: VolunteerInformationService, // volunteerInformationService
@@ -419,13 +422,17 @@ export class Hd200FormComponent implements OnInit {
       receivedHongdaoVolunteerUniform_quantity: new FormControl(''),
       // 是否領取弘道志工制服_尺寸
       receivedHongdaoVolunteerUniform_size: new FormControl(''),
+      // 是否領取弘道志工名片
+      receivedHongdaoVolunteerCard: new FormControl(''),
       // 志工權利義務告知聲明書
       volunteerRightsAndDutiesDeclaration: new FormControl(''),
     });
   }
 
   ngOnInit(): void {
-    // 檢視模式，禁用表單'
+    // 取得當前路由的tabName
+    this.tabName = this.route.snapshot.data['tabName'];
+    // 檢視模式，禁用表單
     if (this.hd200ListService.isView) {
       this.form.disable();
     }

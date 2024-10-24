@@ -1,5 +1,6 @@
+import { routes } from './../../../../app.routes';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
 import { InputComponent } from '../../../../common/components/input/input.component';
 import { SelectComponent } from '../../../../common/components/select/select.component';
@@ -14,6 +15,7 @@ import { CaseInformationService } from '../../../../common/components/caseInform
 import { CaseInformationComponent } from '../../../../common/components/caseInformation/components/case-information.component';
 import { Hd100ListService } from '../../../hd100/list/service/hd100-list.service';
 import { DateValidators } from '../../../../common/validator/date-validator';
+import { CheckboxGroup } from '../service/hd130-form.interface';
 
 @Component({
   selector: 'app-hd130-form',
@@ -32,23 +34,105 @@ import { DateValidators } from '../../../../common/validator/date-validator';
   styleUrl: './hd130-form.component.scss',
 })
 export class Hd130FormComponent implements OnInit {
-  onVisitDateChange(date: string) {
-    console.log(date);
-    console.log(this.form.get('visitDate')?.value);
-  }
   // 個案初判表單
   form: FormGroup;
-
+  // tab名稱
+  tabName: string = '';
   // 訪視方式select選項
   selectOptions_visitMethod: string[] = ['面訪', '電訪', '視訊'];
 
+  // 福利身分別勾選狀態
+  welfareStatus: CheckboxGroup[] = [
+    {
+      label: ' 身障證明申請',
+      value: '00',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '低收、中低收申請',
+      value: '01',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '中低收老人津貼申請',
+      value: '02',
+      checked: false,
+      disabled: false,
+    },
+  ];
+
+  // 長照需求勾選狀態
+  longTermCareNeeds: CheckboxGroup[] = [
+    {
+      label: ' 居家服務',
+      value: '00',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '日間照顧',
+      value: '01',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '機構安置',
+      value: '02',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '喘息服務',
+      value: '03',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '照顧指導',
+      value: '04',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '家庭託管',
+      value: '05',
+      checked: false,
+      disabled: false,
+    },
+  ];
+
   constructor(
+    private route: ActivatedRoute,
     public caseInformationService: CaseInformationService, // caseInformationService
     private tabService: TabService, // 關閉tab的Service
     public router: Router, // 路由
     private message: NzMessageService, // 訊息
     public hd100ListService: Hd100ListService // hd100ListService
   ) {
+    // 接收後端回傳質料
+    // this.welfareStatus =
+    // this.longTermCareNeeds =
+
+    // 福利身分別CheckboxGroup
+    const welfareStatusGroup: { [key: string]: FormControl } = {};
+    this.welfareStatus.forEach((option) => {
+      welfareStatusGroup[option.value] = new FormControl(option.checked);
+      if (option.disabled) {
+        welfareStatusGroup[option.value].disable(); // 如果該選項應該被禁用，則禁用對應的 FormControl
+      }
+    });
+
+    // 長照需求CheckboxGroup
+    const longTermCareNeedsGroup: { [key: string]: FormControl } = {};
+    this.longTermCareNeeds.forEach((option) => {
+      longTermCareNeedsGroup[option.value] = new FormControl(option.checked);
+      if (option.disabled) {
+        longTermCareNeedsGroup[option.value].disable(); // 如果該選項應該被禁用，則禁用對應的 FormControl
+      }
+    });
+
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
       // 1.訪視概況
@@ -79,9 +163,9 @@ export class Hd130FormComponent implements OnInit {
 
       // 2.需求評估
       // 福利身分別
-      welfareStatus: new FormControl(''),
+      welfareStatus: new FormGroup(welfareStatusGroup),
       // 長照需求
-      longTermCareNeeds: new FormControl(''),
+      longTermCareNeeds: new FormGroup(longTermCareNeedsGroup),
       // 餐食需求
       mealNeeds: new FormControl(''),
       // 醫療需求
@@ -116,18 +200,12 @@ export class Hd130FormComponent implements OnInit {
       // 5.主管簽核
       // 單位主管意見
       supervisorComments: new FormControl('', [Validators.required]),
-      checkOptions: new FormControl([]),
     });
   }
 
-  onCheckboxChange(checkedValues: string[]): void {
-    // 傳入的值正確無誤，更新到表單控件中
-    this.form.get('checkOptions')?.setValue(checkedValues);
-  }
-
   ngOnInit(): void {
-    this.form.get('checkOptions')?.setValue(['A']); // 預設選中 'A'
-    console.log(this.form.value.checkOptions);
+    // 取得當前路由的tabName
+    this.tabName = this.route.snapshot.data['tabName'];
 
     // 檢視模式，禁用表單
     if (this.hd100ListService.isView) {
@@ -141,11 +219,6 @@ export class Hd130FormComponent implements OnInit {
     this.form.get('socialMealNeeds_other')?.disable();
     // 禁用自我保護需求其他
     this.form.get('selfProtectionNeeds_other')?.disable();
-  }
-
-  // 福利身分別選項改變
-  welfareStatusChange(checkGroup: string[]) {
-    this.form.get('welfareStatus')?.setValue(checkGroup);
   }
 
   // 長照需求選項改變
@@ -220,18 +293,18 @@ export class Hd130FormComponent implements OnInit {
 
   // 點選上一頁後執行操作判斷
   async onPreviousPage() {
-    await this.router.navigate(['/hd120']);
-    this.closeTab('個案初評表');
+    await this.router.navigate(['/hd120/create']);
+    this.closeTab();
   }
 
   // 完成送審
   review() {
     this.message.create('success', '送審成功');
-    this.closeTab('個案初評表');
+    this.closeTab();
   }
 
   // 關閉個案初評表
-  closeTab(identifier: string) {
-    this.tabService.closeTab(identifier);
+  closeTab() {
+    this.tabService.closeTab(this.tabName);
   }
 }

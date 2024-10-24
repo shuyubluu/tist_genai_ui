@@ -117,11 +117,6 @@
   <div class="buttonArea">
     <div>
       <app-button
-        *ngIf="hd180ListService.isEdit"
-        [buttonText]="'儲存'"
-        (click)="save()"
-      />
-      <app-button
         *ngIf="hd180ListService.isCanReview"
         [buttonText]="'送審'"
         [attachClassName]="['success']"
@@ -130,7 +125,7 @@
       <app-button
         [buttonText]="'關閉'"
         [attachClassName]="['danger']"
-        (click)="closeTab('個案結案表')"
+        (click)="closeTab()"
       />
     </div>
   </div>

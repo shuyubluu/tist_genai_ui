@@ -38,7 +38,7 @@
     <app-button
       [attachClassName]="['danger']"
       [buttonText]="'關閉'"
-      (click)="closeTab('個案結案名冊')"
+      (click)="closeTab(tabName)"
     />
   </div>
 </form>
@@ -76,11 +76,6 @@
     </div>
     <div>
       <app-button [buttonText]="'檢視'" (click)="view()" />
-      <app-button
-        [buttonText]="'編輯'"
-        [attachClassName]="['warning']"
-        (click)="edit()"
-      />
     </div>
   </div>
 </div>

@@ -452,7 +452,6 @@ export class Hd110FormComponent implements OnInit {
   // 暫存草稿
   save() {
     this.message.create('success', '草稿暫存成功');
-    console.log(this.form.value.socialWelfareAssistance);
   }
 
   // 點選下一頁後執行操作判斷

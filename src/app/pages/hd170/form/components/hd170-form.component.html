@@ -11,7 +11,6 @@
         <!-- !TODO -->
         <app-select
           [selectWidth]="'175px'"
-          
           [options]="selectOptions_referralUnit"
           formControlName="referralUnit"
         />
@@ -51,7 +50,6 @@
       <div>
         <app-select
           [selectWidth]="'70px'"
-          
           [options]="selectOptions_gender"
           formControlName="gender"
         />
@@ -127,7 +125,6 @@
       <div>
         <app-select
           [selectWidth]="'120px'"
-          
           [options]="selectOptions_welfareStatus"
           formControlName="welfareStatus"
         />
@@ -378,7 +375,7 @@
     <app-button
       [attachClassName]="['danger']"
       [buttonText]="'關閉'"
-      (click)="closeTab('轉介單')"
+      (click)="closeTab()"
     />
   </div>
 </form>

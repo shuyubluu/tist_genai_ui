@@ -45,7 +45,11 @@
     <span
       class="checkFormButton"
       [ngClass]="{
-        highlightButton: router.url === '/hd140' || router.url === '/hd140/form'
+        highlightButton:
+          router.url.startsWith('/hd140') ||
+          router.url.startsWith('/hd140/create') ||
+          router.url.startsWith('/hd140/view') ||
+          router.url.startsWith('/hd140/edit')
       }"
       (click)="goToHd140()"
       >例行訪視紀錄</span
@@ -53,7 +57,11 @@
     <span
       class="checkFormButton"
       [ngClass]="{
-        highlightButton: router.url === '/hd150' || router.url === '/hd150/form'
+        highlightButton:
+          router.url.startsWith('/hd150') ||
+          router.url.startsWith('/hd150/create') ||
+          router.url.startsWith('/hd150/view') ||
+          router.url.startsWith('/hd150/edit')
       }"
       (click)="goToHd150()"
       >複評表</span
@@ -61,21 +69,33 @@
     <span
       class="checkFormButton"
       [ngClass]="{
-        highlightButton: router.url === '/hd160' || router.url === '/hd160/form'
+        highlightButton:
+          router.url.startsWith('/hd160') ||
+          router.url.startsWith('/hd160/create') ||
+          router.url.startsWith('/hd160/view') ||
+          router.url.startsWith('/hd160/edit')
       }"
       (click)="goToHd160()"
       >生活品質問卷</span
     >
     <span
       class="checkFormButton"
-      [ngClass]="{ highlightButton: router.url === '/hd100/form' }"
+      [ngClass]="{
+        highlightButton:
+          router.url.startsWith('/hd100/view') ||
+          router.url.startsWith('/hd100/edit')
+      }"
       (click)="goToHd100Form()"
       >結案表</span
     >
     <span
       class="checkFormButton"
       [ngClass]="{
-        highlightButton: router.url === '/hd170' || router.url === '/hd170/form'
+        highlightButton:
+          router.url.startsWith('/hd170') ||
+          router.url.startsWith('/hd170/create') ||
+          router.url.startsWith('/hd170/view') ||
+          router.url.startsWith('/hd170/edit')
       }"
       (click)="goToHd170()"
       >轉介單</span

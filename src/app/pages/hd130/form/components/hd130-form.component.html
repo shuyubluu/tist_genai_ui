@@ -29,7 +29,6 @@
       <div class="column-Message">
         <app-dayPicker
           [disabled]="hd100ListService.isView"
-          (ngModelChange)="onVisitDateChange($event)"
           formControlName="visitDate"
         />
         <app-error-message
@@ -203,43 +202,18 @@
     <div class="grid-columns-1">
       <div class="label">福利身分別</div>
       <div class="column-Message">
-        <nz-checkbox-wrapper
-          style="width: 100%"
-          (nzOnChange)="welfareStatusChange($event)"
-        >
-          <div nz-row>
-            <div nz-col>
+        <nz-checkbox-wrapper>
+          <div formGroupName="welfareStatus">
+            <span *ngFor="let option of welfareStatus">
               <label
+                [nzDisabled]="option.disabled"
                 nz-checkbox
-                [nzDisabled]="hd100ListService.isView"
-                nzValue="1"
-                >身障證明申請</label
+                [formControlName]="option.value"
+                [nzValue]="option.value"
               >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd100ListService.isView"
-                nzValue="2"
-                >低收</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd100ListService.isView"
-                nzValue="3"
-                >中低收申請</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd100ListService.isView"
-                nzValue="4"
-                >中低收老人津貼申請</label
-              >
-            </div>
+                {{ option.label }}
+              </label>
+            </span>
           </div>
         </nz-checkbox-wrapper>
       </div>
@@ -247,59 +221,18 @@
     <div class="grid-columns-1">
       <div class="label">長照需求</div>
       <div class="column-Message">
-        <nz-checkbox-wrapper
-          style="width: 100%"
-          (nzOnChange)="longTermCareNeedsChange($event)"
-        >
-          <div nz-row>
-            <div nz-col>
+        <nz-checkbox-wrapper (nzOnChange)="longTermCareNeedsChange($event)">
+          <div formGroupName="longTermCareNeeds">
+            <span *ngFor="let option of longTermCareNeeds">
               <label
+                [nzDisabled]="option.disabled"
                 nz-checkbox
-                [nzDisabled]="hd100ListService.isView"
-                nzValue="1"
-                >居家服務</label
+                [formControlName]="option.value"
+                [nzValue]="option.value"
               >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd100ListService.isView"
-                nzValue="2"
-                >日間照顧</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd100ListService.isView"
-                nzValue="3"
-                >機構安置</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd100ListService.isView"
-                nzValue="4"
-                >喘息服務</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd100ListService.isView"
-                nzValue="5"
-                >照顧指導</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd100ListService.isView"
-                nzValue="6"
-                >家庭托顧</label
-              >
-            </div>
+                {{ option.label }}
+              </label>
+            </span>
           </div>
         </nz-checkbox-wrapper>
       </div>
@@ -882,7 +815,7 @@
     <app-button
       [attachClassName]="['danger']"
       [buttonText]="'關閉'"
-      (click)="closeTab('個案初評表')"
+      (click)="closeTab()"
     />
   </div>
 </form>

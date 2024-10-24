@@ -9,11 +9,27 @@ export const HD170_ROUTES: Routes = [
       ),
   },
   {
-    path: 'form',
+    path: 'create',
     loadComponent: () =>
       import('./form/components/hd170-form.component').then(
         (m) => m.Hd170FormComponent
       ),
-    data: { tabName: '轉介單' },
+    data: { tabName: '[轉介單] :::新增' },
+  },
+  {
+    path: 'edit',
+    loadComponent: () =>
+      import('./form/components/hd170-form.component').then(
+        (m) => m.Hd170FormComponent
+      ),
+    data: { tabName: '[轉介單] :::編輯' },
+  },
+  {
+    path: 'view',
+    loadComponent: () =>
+      import('./form/components/hd170-form.component').then(
+        (m) => m.Hd170FormComponent
+      ),
+    data: { tabName: '[轉介單] :::檢視' },
   },
 ];

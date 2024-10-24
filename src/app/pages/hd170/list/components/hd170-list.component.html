@@ -36,7 +36,7 @@
     <app-button
       [attachClassName]="['danger']"
       [buttonText]="'關閉'"
-      (click)="closeTab('轉介單清單')"
+      (click)="closeTab(tabName)"
     />
   </div>
 </form>
@@ -75,7 +75,7 @@
         [attachClassName]="['warning']"
         (click)="edit()"
       />
-      <app-button [attachClassName]="['success']" [buttonText]="'回覆單'" />
+      <app-button [attachClassName]="['success']" [buttonText]="'上傳回覆單'" />
     </div>
   </div>
 </div>

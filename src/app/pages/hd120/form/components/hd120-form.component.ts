@@ -1,6 +1,6 @@
 import { DiagramService } from './../../../../../assets/diagram/service/diagram';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
 import { InputComponent } from '../../../../common/components/input/input.component';
 import { SelectComponent } from '../../../../common/components/select/select.component';
@@ -42,6 +42,8 @@ import { checkboxGroupValidator } from '../../../../common/validator/checkbox-gr
 export class Hd120FormComponent implements OnInit {
   // 個案開案評估表單
   form: FormGroup;
+  // tab名稱
+  tabName: string = '';
   // 就醫狀態modal是否顯示
   isVisible_medicalStatus: boolean = false;
   // 義肢的附加選項是否已擇一
@@ -943,6 +945,7 @@ export class Hd120FormComponent implements OnInit {
 
   // 個案開案資料表單
   constructor(
+    private route: ActivatedRoute,
     private tabService: TabService, // 關閉tab的Service
     private router: Router, // 路由
     private message: NzMessageService, // 訊息
@@ -1185,10 +1188,8 @@ export class Hd120FormComponent implements OnInit {
       registeredAddress: new FormControl(''),
       // 同通訊地址
       registeredAddress_sameAsMailingAddress: new FormControl(false),
-      // map定位座標_X軸
-      mapCoordinates_x: new FormControl(''),
-      // map定位座標_y軸
-      mapCoordinates_y: new FormControl(''),
+      // map定位座標
+      mapCoordinates: new FormControl(''),
       // 教育程度
       educationLevel: new FormControl('', [Validators.required]),
       // 婚姻狀況
@@ -1299,6 +1300,8 @@ export class Hd120FormComponent implements OnInit {
     });
   }
   ngOnInit(): void {
+    // 取得當前路由的tabName
+    this.tabName = this.route.snapshot.data['tabName'];
     // 複選框初始化
     const religiousAffiliationCheckedValues = this.religiousAffiliation
       .filter((option) => option.checked)
@@ -1700,7 +1703,6 @@ export class Hd120FormComponent implements OnInit {
               }
             });
           } else {
-            this.isChoiceProsthesis = false;
             this.assistiveDeviceUsage.forEach((option) => {
               if (option.value === '10' || option.value === '11') {
                 option.disabled = true;
@@ -1711,6 +1713,19 @@ export class Hd120FormComponent implements OnInit {
                 this.form
                   .get(`assistiveDeviceUsage.${option.value}`)
                   ?.setValue(false); // 取消勾選
+                this.isChoiceProsthesis = false;
+              }
+            });
+          }
+        }
+        if (option.value === '10' || option.value === '11') {
+          if (option.checked) {
+            console.log(option);
+            this.assistiveDeviceUsage.forEach((option) => {
+              if (option.value === '09') {
+                if (option.checked) {
+                  this.isChoiceProsthesis = false;
+                }
               }
             });
           }
@@ -2628,15 +2643,15 @@ export class Hd120FormComponent implements OnInit {
 
   // 點選上一頁後執行操作判斷
   async onPreviousPage() {
-    await this.router.navigate(['/hd110']);
-    this.closeTab('個案開案資料表');
+    await this.router.navigate(['/hd110/create']);
+    this.closeTab(this.tabName);
   }
 
   // 點選下一頁後執行操作判斷
   async onNextPage() {
     // if (this.form.valid) {
-    await this.router.navigate(['/hd130']);
-    this.closeTab('個案開案資料表');
+    await this.router.navigate(['/hd130/create']);
+    this.closeTab(this.tabName);
     // } else {
     //   this.message.create('warning', '所有必須填寫的項目請先完成填寫');
     // }

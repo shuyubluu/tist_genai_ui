@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
 import { InputComponent } from '../../../../common/components/input/input.component';
 import { SelectComponent } from '../../../../common/components/select/select.component';
@@ -34,6 +34,8 @@ import { DateValidators } from '../../../../common/validator/date-validator';
 export class Hd150FormComponent implements OnInit {
   // 個案初判表單
   form: FormGroup;
+  // tab名稱
+  tabName: string = '';
   // 訪視方式select選項
   selectOptions_visitMethod: string[] = ['面訪', '電訪', '視訊'];
   // 最新風險等級select選項
@@ -42,6 +44,7 @@ export class Hd150FormComponent implements OnInit {
   selectOptions_visitOutcome: string[] = ['持續服務', '暫停', '結案'];
 
   constructor(
+    private route: ActivatedRoute,
     private tabService: TabService, // 關閉tab的Service
     private router: Router, // 路由
     private message: NzMessageService, // 訊息
@@ -124,6 +127,24 @@ export class Hd150FormComponent implements OnInit {
     });
   }
 
+  ngOnInit(): void {
+    // 取得當前路由的tabName
+    this.tabName = this.route.snapshot.data['tabName'];
+
+    // 檢視模式，禁用表單
+    if (this.hd150ListService.isView) {
+      this.form.disable();
+    }
+    // 禁用個案姓名
+    this.form.get('caseName')?.disable();
+    // 禁用經濟需求其他
+    this.form.get('economicNeeds_other')?.disable();
+    // 禁用社會餐與其他
+    this.form.get('socialMealNeeds_other')?.disable();
+    // 禁用自我保護需求其他
+    this.form.get('selfProtectionNeeds_other')?.disable();
+  }
+
   // 福利身分別選項改變
   welfareStatusChange(checkGroup: string[]) {
     this.form.get('welfareStatus')?.setValue(checkGroup);
@@ -194,21 +215,6 @@ export class Hd150FormComponent implements OnInit {
     this.form.get('otherCareNeeds')?.setValue(checkGroup);
   }
 
-  ngOnInit(): void {
-    // 檢視模式，禁用表單
-    if (this.hd150ListService.isView) {
-      this.form.disable();
-    }
-    // 禁用個案姓名
-    this.form.get('caseName')?.disable();
-    // 禁用經濟需求其他
-    this.form.get('economicNeeds_other')?.disable();
-    // 禁用社會餐與其他
-    this.form.get('socialMealNeeds_other')?.disable();
-    // 禁用自我保護需求其他
-    this.form.get('selfProtectionNeeds_other')?.disable();
-  }
-
   // 暫存草稿
   save() {
     this.message.create('success', '儲存存成功');
@@ -220,11 +226,11 @@ export class Hd150FormComponent implements OnInit {
   // 完成送審
   review() {
     this.message.create('success', '送審成功');
-    this.closeTab('個案複評表');
+    this.closeTab();
   }
 
   // 關閉個案複評表
-  closeTab(identifier: string) {
-    this.tabService.closeTab(identifier);
+  closeTab() {
+    this.tabService.closeTab(this.tabName);
   }
 }

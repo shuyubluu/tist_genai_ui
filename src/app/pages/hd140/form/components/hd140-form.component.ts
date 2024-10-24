@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
 import { InputComponent } from '../../../../common/components/input/input.component';
 import { SelectComponent } from '../../../../common/components/select/select.component';
@@ -34,6 +34,8 @@ import { DateValidators } from '../../../../common/validator/date-validator';
 export class Hd140FormComponent implements OnInit {
   // 搜尋條件表單
   form: FormGroup;
+  // tab名稱
+  tabName: string = '';
 
   // 訪視方式select選項
   selectOptions_visitMethod: string[] = ['面訪', '電訪', '視訊'];
@@ -45,6 +47,7 @@ export class Hd140FormComponent implements OnInit {
   selectOptions_visitOutcome: string[] = ['持續服務', '暫停', '結案'];
 
   constructor(
+    private route: ActivatedRoute,
     private tabService: TabService, // 關閉tab的Service
     private router: Router, // 路由
     private message: NzMessageService, // 訊息
@@ -118,6 +121,8 @@ export class Hd140FormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // 取得當前路由的tabName
+    this.tabName = this.route.snapshot.data['tabName'];
     // 檢視模式，禁用表單
     if (this.hd140ListService.isView) {
       this.form.disable();
@@ -220,11 +225,11 @@ export class Hd140FormComponent implements OnInit {
   // 送審
   review() {
     this.message.create('success', '送審成功');
-    this.closeTab('例行訪視表');
+    this.closeTab();
   }
 
   // 關閉個案開案評估表
-  closeTab(identifier: string) {
-    this.tabService.closeTab(identifier);
+  closeTab() {
+    this.tabService.closeTab(this.tabName);
   }
 }
