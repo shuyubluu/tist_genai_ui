@@ -8,3 +8,10 @@ export interface SearchResultData {
   caseClassification: string;
   isChoice: boolean;
 }
+
+export interface CheckboxGroup {
+  label: string;
+  value: string;
+  checked: boolean;
+  disabled: boolean;
+}

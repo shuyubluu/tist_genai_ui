@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
 import { InputComponent } from '../../../../common/components/input/input.component';
 import { SelectComponent } from '../../../../common/components/select/select.component';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { DayPickerComponent } from '../../../../common/components/dayPicker/dayPicker.component';
 import { SharedModule } from '../../../../common/shared/shared.module';
 import { TabService } from '../../../../common/layouts/tab/tab.service';
@@ -29,6 +29,8 @@ import { ErrorMessageComponent } from '../../../../common/components/message/err
 export class Hd610FormComponent implements OnInit {
   // 搜尋條件表單
   form: FormGroup;
+  // tab名稱
+  tabName: string = '';
   // 任職單位是否自訂
   isCustomDepartment: boolean = false;
   // 任職組別是否自訂
@@ -119,6 +121,7 @@ export class Hd610FormComponent implements OnInit {
   ];
 
   constructor(
+    private route: ActivatedRoute,
     private tabService: TabService, // 關閉tab的Service
     public hd610ListService: Hd610ListService, // hd610ListService
     private message: NzMessageService // message
@@ -143,6 +146,9 @@ export class Hd610FormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // 取得當前路由的tabName
+    this.tabName = this.route.snapshot.data['tabName'];
+
     // 檢視模式，禁用表單
     if (this.hd610ListService.isView) {
       this.form.disable();
@@ -269,11 +275,11 @@ export class Hd610FormComponent implements OnInit {
   // 新增
   create() {
     this.message.success('新增成功');
-    this.closeTab('組織單位資料維護');
+    this.closeTab();
   }
 
   // 關閉當前的tab
-  closeTab(identifier: string) {
-    this.tabService.closeTab(identifier);
+  closeTab(): void {
+    this.tabService.closeTab(this.tabName);
   }
 }

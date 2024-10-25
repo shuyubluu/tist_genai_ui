@@ -7,3 +7,10 @@ export interface SearchResultData {
   joinDate: string; // 入隊日期
   isChoice: boolean; // 是否選擇
 }
+
+export interface CheckboxGroup {
+  label: string;
+  value: string;
+  checked: boolean;
+  disabled: boolean;
+}

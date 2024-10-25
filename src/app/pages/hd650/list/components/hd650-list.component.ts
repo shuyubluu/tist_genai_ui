@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
 import { InputComponent } from '../../../../common/components/input/input.component';
 import { SelectComponent } from '../../../../common/components/select/select.component';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { DayPickerComponent } from '../../../../common/components/dayPicker/dayPicker.component';
 import { SharedModule } from '../../../../common/shared/shared.module';
 import { TabService } from '../../../../common/layouts/tab/tab.service';
@@ -26,12 +26,15 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class Hd650ListComponent implements OnInit {
   // 搜尋條件表單
   form: FormGroup;
+  // tab名稱
+  tabName: string = '';
   // 是非題select選項
   selectOptions_trueOrFalse: string[] = ['是', '否'];
   // 時間單位select選項
   selectOptions_timeUnit: string[] = ['小時', '分鐘'];
 
   constructor(
+    private route: ActivatedRoute,
     private tabService: TabService, // 關閉tab的Service
     private message: NzMessageService // message
   ) {
@@ -71,6 +74,9 @@ export class Hd650ListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // 取得當前路由的tabName
+    this.tabName = this.route.snapshot.data['tabName'];
+
     // 禁用密碼最小長度
     this.form.get('passwordMinLength')?.disable();
     // 禁用密碼有效天數
@@ -169,7 +175,7 @@ export class Hd650ListComponent implements OnInit {
   }
 
   // 關閉當前的tab
-  closeTab(identifier: string) {
-    this.tabService.closeTab(identifier);
+  closeTab(): void {
+    this.tabService.closeTab(this.tabName);
   }
 }

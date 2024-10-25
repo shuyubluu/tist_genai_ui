@@ -2,12 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
 import { InputComponent } from '../../../../common/components/input/input.component';
 import { SelectComponent } from '../../../../common/components/select/select.component';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { DayPickerComponent } from '../../../../common/components/dayPicker/dayPicker.component';
 import { SharedModule } from '../../../../common/shared/shared.module';
 import { TabService } from '../../../../common/layouts/tab/tab.service';
 import { FormControl, FormGroup } from '@angular/forms';
-import { SearchResultData } from '../service/hd307-list.interface';
+import {
+  CheckboxGroup,
+  SearchResultData,
+} from '../service/hd307-list.interface';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { ErrorMessageComponent } from '../../../../common/components/message/error-message.component';
 import { compareDate } from '../../../../common/utils/compareDate';
@@ -30,6 +33,8 @@ import { compareDate } from '../../../../common/utils/compareDate';
 export class Hd307ListComponent implements OnInit {
   // 搜尋條件表單
   form: FormGroup;
+  // tab名稱
+  tabName: string = '';
   // 當前已選取的個案
   currentSelectedCase: string[] = [];
   // 控制匯出modal是否顯示
@@ -110,10 +115,57 @@ export class Hd307ListComponent implements OnInit {
     );
   }
 
+  // 匯出檔案勾選狀態
+  exportFile: CheckboxGroup[] = [
+    {
+      label: '個案基本資料表',
+      value: '00',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '個案訪視紀錄',
+      value: '01',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '個案清冊(Excel)',
+      value: '02',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '服務紀錄清冊(Excel)',
+      value: '03',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '個案生活品質量表清冊(Word)',
+      value: '04',
+      checked: false,
+      disabled: false,
+    },
+  ];
+
   constructor(
+    private route: ActivatedRoute,
     private tabService: TabService, // 關閉tab的Service
     private message: NzMessageService // message
   ) {
+    // 匯出檔案CheckboxGroup
+    const exportFileGroup = this.createCheckboxGroup(this.exportFile);
+
+    // 個案基本資料表_檔案類型
+    exportFileGroup['caseBasicInfo_fileType'] = new FormControl('');
+    // 個案基本資料表_是否需要隱碼
+    exportFileGroup['caseBasicInfo_needsAnonymization'] = new FormControl('');
+    // 個案訪視紀錄_檔案類型
+    exportFileGroup['caseVisitRecord_fileType'] = new FormControl('');
+    // 個案訪視紀錄_是否需要隱碼
+    exportFileGroup['caseVisitRecord_needsAnonymization'] = new FormControl('');
+
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
       // 服務狀態
@@ -126,20 +178,21 @@ export class Hd307ListComponent implements OnInit {
       caseOpeningDate_end: new FormControl(''),
       // 個案分級
       caseClassification: new FormControl(''),
-      // 匯出檔案設定
-      exportFile: new FormControl(''),
-      // 個案基本資料表_檔案類型
-      caseBasicInfo_fileType: new FormControl(''),
-      // 個案基本資料表_是否需要隱碼
-      caseBasicInfo_needsAnonymization: new FormControl(''),
-      // 個案訪視紀錄_檔案類型
-      caseVisitRecord_fileType: new FormControl(''),
-      // 個案訪視紀錄_是否需要隱碼
-      caseVisitRecord_needsAnonymization: new FormControl(''),
+      // 匯出的檔案
+      exportFile: new FormGroup(exportFileGroup),
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // 取得當前路由的tabName
+    this.tabName = this.route.snapshot.data['tabName'];
+
+    // 禁用檔案類型及是否需要隱碼
+    this.form.get('exportFile.caseBasicInfo_fileType')?.disable();
+    this.form.get('exportFile.caseBasicInfo_needsAnonymization')?.disable();
+    this.form.get('exportFile.caseVisitRecord_fileType')?.disable();
+    this.form.get('exportFile.caseVisitRecord_needsAnonymization')?.disable();
+  }
 
   // 搜尋個案資料
   search() {
@@ -165,18 +218,18 @@ export class Hd307ListComponent implements OnInit {
       return;
     }
     // 重製modal內的表單
-    this.form.get('caseBasicInfo_fileType')?.reset();
-    this.form.get('caseBasicInfo_fileType')?.disable();
-    this.form.get('caseBasicInfo_needsAnonymization')?.reset();
-    this.form.get('caseBasicInfo_needsAnonymization')?.disable();
-    this.form.get('caseBasicInfo_fileType')?.reset();
-    this.form.get('caseBasicInfo_needsAnonymization')?.reset();
-    this.form.get('caseVisitRecord_fileType')?.reset();
-    this.form.get('caseVisitRecord_fileType')?.disable();
-    this.form.get('caseVisitRecord_needsAnonymization')?.reset();
-    this.form.get('caseVisitRecord_needsAnonymization')?.disable();
-    this.form.get('caseVisitRecord_fileType')?.reset();
-    this.form.get('caseVisitRecord_needsAnonymization')?.reset();
+    this.form.get('exportFile.caseBasicInfo_fileType')?.reset();
+    this.form.get('exportFile.caseBasicInfo_fileType')?.disable();
+    this.form.get('exportFile.caseBasicInfo_needsAnonymization')?.reset();
+    this.form.get('exportFile.caseBasicInfo_needsAnonymization')?.disable();
+    this.form.get('exportFile.caseBasicInfo_fileType')?.reset();
+    this.form.get('exportFile.caseBasicInfo_needsAnonymization')?.reset();
+    this.form.get('exportFile.caseVisitRecord_fileType')?.reset();
+    this.form.get('exportFile.caseVisitRecord_fileType')?.disable();
+    this.form.get('exportFile.caseVisitRecord_needsAnonymization')?.reset();
+    this.form.get('exportFile.caseVisitRecord_needsAnonymization')?.disable();
+    this.form.get('exportFile.caseVisitRecord_fileType')?.reset();
+    this.form.get('exportFile.caseVisitRecord_needsAnonymization')?.reset();
     this.isVisible = true;
   }
 
@@ -208,31 +261,60 @@ export class Hd307ListComponent implements OnInit {
   }
 
   // 當匯出檔案的選項改變時觸發
-  handleExportFileChange(checkGroup: string[]) {
-    this.form.get('exportFile')?.setValue(checkGroup);
-    if (checkGroup.includes('1')) {
-      this.form.get('caseBasicInfo_fileType')?.enable();
-      this.form.get('caseBasicInfo_needsAnonymization')?.enable();
-    } else {
-      this.form.get('caseBasicInfo_fileType')?.reset();
-      this.form.get('caseBasicInfo_fileType')?.disable();
-      this.form.get('caseBasicInfo_needsAnonymization')?.reset();
-      this.form.get('caseBasicInfo_needsAnonymization')?.disable();
-    }
-    if (checkGroup.includes('2')) {
-      this.form.get('caseVisitRecord_fileType')?.enable();
-      this.form.get('caseVisitRecord_needsAnonymization')?.enable();
-    } else {
-      this.form.get('caseVisitRecord_fileType')?.reset();
-      this.form.get('caseVisitRecord_fileType')?.disable();
-      this.form.get('caseVisitRecord_needsAnonymization')?.reset();
-      this.form.get('caseVisitRecord_needsAnonymization')?.disable();
-    }
+  exportFileChange(checkedValues: string[]) {
+    this.exportFile.forEach((option) => {
+      // 更新每個選項的 checked 狀態
+      option.checked = checkedValues.includes(option.value);
+      if (option.value === '00') {
+        if (option.checked) {
+          this.form.get('exportFile.caseBasicInfo_fileType')?.enable();
+          this.form
+            .get('exportFile.caseBasicInfo_needsAnonymization')
+            ?.enable();
+        } else {
+          this.form.get('exportFile.caseBasicInfo_fileType')?.disable();
+          this.form.get('exportFile.caseBasicInfo_fileType')?.reset();
+          this.form
+            .get('exportFile.caseBasicInfo_needsAnonymization')
+            ?.disable();
+          this.form.get('exportFile.caseBasicInfo_needsAnonymization')?.reset();
+        }
+      }
+      if (option.value === '01') {
+        if (option.checked) {
+          this.form.get('exportFile.caseVisitRecord_fileType')?.enable();
+          this.form
+            .get('exportFile.caseVisitRecord_needsAnonymization')
+            ?.enable();
+        } else {
+          this.form.get('exportFile.caseVisitRecord_fileType')?.disable();
+          this.form.get('exportFile.caseVisitRecord_fileType')?.reset();
+          this.form
+            .get('exportFile.caseVisitRecord_needsAnonymization')
+            ?.disable();
+          this.form
+            .get('exportFile.caseVisitRecord_needsAnonymization')
+            ?.reset();
+        }
+      }
+    });
+  }
+
+  // 創建checkbox group
+  createCheckboxGroup(options: any[]): { [key: string]: FormControl } {
+    const group: { [key: string]: FormControl } = {};
+    options.forEach((option) => {
+      group[option.value] = new FormControl(option.checked);
+      if (option.disabled) {
+        group[option.value].disable(); // 如果該選項應該被禁用，則禁用對應的 FormControl
+      }
+    });
+    return group;
   }
 
   // 關閉當前的tab
-  closeTab(identifier: string) {
-    this.tabService.closeTab(identifier);
+  closeTab() {
+    this.tabService.closeTab(this.tabName);
   }
 
   // 當改變頁數時觸發

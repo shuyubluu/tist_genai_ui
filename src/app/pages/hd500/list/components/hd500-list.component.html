@@ -16,10 +16,7 @@
     <div>{{ searchResult.statisticsItems }}</div>
     <div>{{ searchResult.contentStatistics }}</div>
     <div>
-      <app-button
-        [buttonText]="'檢視'"
-        (click)="view(searchResult.code, searchResult.contentStatistics)"
-      />
+      <app-button [buttonText]="'檢視'" (click)="view(searchResult.code)" />
     </div>
   </div>
 </div>
@@ -27,6 +24,6 @@
   <app-button
     [attachClassName]="['danger']"
     [buttonText]="'關閉'"
-    (click)="closeTab('統計專區')"
+    (click)="closeTab()"
   />
 </div>

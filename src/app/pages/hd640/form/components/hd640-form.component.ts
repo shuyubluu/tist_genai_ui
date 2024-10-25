@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
 import { InputComponent } from '../../../../common/components/input/input.component';
 import { SelectComponent } from '../../../../common/components/select/select.component';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { DayPickerComponent } from '../../../../common/components/dayPicker/dayPicker.component';
 import { SharedModule } from '../../../../common/shared/shared.module';
 import { TabService } from '../../../../common/layouts/tab/tab.service';
@@ -35,6 +35,8 @@ import { HondaoUnitComponent } from '../../../../common/components/hondaoUnit/co
 export class Hd640FormComponent implements OnInit {
   // 搜尋條件表單
   form: FormGroup;
+  // tab名稱
+  tabName: string = '';
   // 控制角色modal
   isRoleVisible: boolean = false;
   // 控制單位檢視權限modal
@@ -119,6 +121,7 @@ export class Hd640FormComponent implements OnInit {
   ];
 
   constructor(
+    private route: ActivatedRoute,
     private tabService: TabService, // 關閉tab的Service
     private message: NzMessageService, // message
     public hd640ListService: Hd640ListService // hd640ListService
@@ -244,6 +247,9 @@ export class Hd640FormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // 取得當前路由的tabName
+    this.tabName = this.route.snapshot.data['tabName'];
+
     // 檢視模式，禁用表單
     if (this.hd640ListService.isView) {
       this.form.disable();
@@ -919,11 +925,11 @@ export class Hd640FormComponent implements OnInit {
   // 新增
   create(): void {
     this.message.success('新增成功');
-    this.closeTab('社工帳號管理');
+    this.closeTab();
   }
 
   // 關閉當前的tab
-  closeTab(identifier: string) {
-    this.tabService.closeTab(identifier);
+  closeTab(): void {
+    this.tabService.closeTab(this.tabName);
   }
 }

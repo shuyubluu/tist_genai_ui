@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
 import { InputComponent } from '../../../../common/components/input/input.component';
 import { SelectComponent } from '../../../../common/components/select/select.component';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { DayPickerComponent } from '../../../../common/components/dayPicker/dayPicker.component';
 import { SharedModule } from '../../../../common/shared/shared.module';
 import { TabService } from '../../../../common/layouts/tab/tab.service';
@@ -31,6 +31,8 @@ import { ErrorMessageComponent } from '../../../../common/components/message/err
 export class Hd660FormComponent implements OnInit {
   // 搜尋條件表單
   form: FormGroup;
+  // tab名稱
+  tabName: string = '';
 
   // 附件模擬上傳檔案
   attachment_fileList: NzUploadFile[] = [
@@ -42,6 +44,7 @@ export class Hd660FormComponent implements OnInit {
   ];
 
   constructor(
+    private route: ActivatedRoute,
     private tabService: TabService, // 關閉tab的Service
     public hd660ListService: Hd660ListService, // hd660ListService
     private message: NzMessageService // message
@@ -62,6 +65,9 @@ export class Hd660FormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // 取得當前路由的tabName
+    this.tabName = this.route.snapshot.data['tabName'];
+
     // 檢視模式，禁用表單
     if (this.hd660ListService.isView) {
       this.form.disable();
@@ -71,8 +77,8 @@ export class Hd660FormComponent implements OnInit {
   }
 
   // 關閉當前的tab
-  closeTab(identifier: string) {
-    this.tabService.closeTab(identifier);
+  closeTab(): void {
+    this.tabService.closeTab(this.tabName);
   }
 
   // 附件上傳點擊事件

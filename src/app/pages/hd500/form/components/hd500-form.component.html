@@ -8,7 +8,6 @@ hd500ListService.currentStatisticsCode !== 'C3'){
       <div class="column-Message">
         <app-select
           [selectWidth]="'90px'"
-          
           (ngModelChange)="onUnitChange($event)"
           [options]="selectOptions_unit"
           formControlName="unit"
@@ -16,7 +15,6 @@ hd500ListService.currentStatisticsCode !== 'C3'){
         <app-select
           *ngIf="form.get('unit')?.value === '服務處'"
           [selectWidth]="'160px'"
-          
           [options]="selectOptions_department"
           formControlName="department"
         />
@@ -74,7 +72,7 @@ hd500ListService.currentStatisticsCode !== 'C3'){
     <app-button
       [buttonText]="'關閉'"
       [attachClassName]="['danger']"
-      (click)="closeTab('統計內容_' + hd500ListService.currentStatisticsName)"
+      (click)="closeTab()"
     />
   </div>
 </form>
@@ -498,7 +496,7 @@ hd500ListService.currentStatisticsCode !== 'C3'){
   <app-button
     [buttonText]="'關閉'"
     [attachClassName]="['danger']"
-    (click)="closeTab('統計內容_' + hd500ListService.currentStatisticsName)"
+    (click)="closeTab()"
   />
 </div>
 }
@@ -529,7 +527,7 @@ hd500ListService.currentStatisticsCode !== 'C3'){
   <app-button
     [buttonText]="'關閉'"
     [attachClassName]="['danger']"
-    (click)="closeTab('統計內容_' + hd500ListService.currentStatisticsName)"
+    (click)="closeTab()"
   />
 </div>
 }
@@ -560,7 +558,7 @@ hd500ListService.currentStatisticsCode !== 'C3'){
   <app-button
     [buttonText]="'關閉'"
     [attachClassName]="['danger']"
-    (click)="closeTab('統計內容_' + hd500ListService.currentStatisticsName)"
+    (click)="closeTab()"
   />
 </div>
 }

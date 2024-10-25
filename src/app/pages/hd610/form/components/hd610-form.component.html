@@ -5,7 +5,6 @@
       <div class="column-Message">
         <app-select
           [selectWidth]="'160px'"
-          
           [options]="selectOptions_department"
           formControlName="department"
         />
@@ -170,7 +169,7 @@
     <app-button
       [attachClassName]="['danger']"
       [buttonText]="'關閉'"
-      (click)="closeTab('組織單位資料維護')"
+      (click)="closeTab()"
     />
   </div>
 </form>

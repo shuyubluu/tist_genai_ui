@@ -165,7 +165,6 @@ export class Hd260FormComponent implements OnInit {
   // 儲存
   save() {
     this.message.create('success', '儲存成功');
-    this.closeTab();
   }
 
   // 關閉當前的tab

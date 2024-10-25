@@ -9,11 +9,19 @@ export const HD620_ROUTES: Routes = [
       ),
   },
   {
-    path: 'form',
+    path: 'edit',
     loadComponent: () =>
       import('./form/components/hd620-form.component').then(
         (m) => m.Hd620FormComponent
       ),
-    data: { tabName: '角色資料權限維護' },
+    data: { tabName: '[角色資料權限維護] :::編輯' },
+  },
+  {
+    path: 'view',
+    loadComponent: () =>
+      import('./form/components/hd620-form.component').then(
+        (m) => m.Hd620FormComponent
+      ),
+    data: { tabName: '[角色資料權限維護] :::檢視' },
   },
 ];

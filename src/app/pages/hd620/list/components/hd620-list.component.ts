@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
 import { InputComponent } from '../../../../common/components/input/input.component';
 import { SelectComponent } from '../../../../common/components/select/select.component';
@@ -25,6 +25,9 @@ import { SearchResultData } from '../service/hd620-list.interface';
   styleUrl: './hd620-list.component.scss',
 })
 export class Hd620ListComponent implements OnInit {
+  // tab名稱
+  tabName: string = '';
+
   // 搜尋結果模擬資料
   searchResultData: SearchResultData[] = [
     {
@@ -50,27 +53,31 @@ export class Hd620ListComponent implements OnInit {
   ];
 
   constructor(
+    private route: ActivatedRoute,
     private tabService: TabService, // 關閉tab的Service
     private router: Router, // 路由
     private hd620ListService: Hd620ListService // hd620ListService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // 取得當前路由的tabName
+    this.tabName = this.route.snapshot.data['tabName'];
+  }
 
   // 關閉當前的tab
-  closeTab(identifier: string) {
-    this.tabService.closeTab(identifier);
+  closeTab(): void {
+    this.tabService.closeTab(this.tabName);
   }
 
   // 編輯
   edit() {
-    this.router.navigate(['/hd620/form']);
+    this.router.navigate(['/hd620/edit']);
     this.hd620ListService.setMode(false, true);
   }
 
   // 檢視
   view() {
-    this.router.navigate(['/hd620/form']);
+    this.router.navigate(['/hd620/view']);
     this.hd620ListService.setMode(true, false);
   }
 }

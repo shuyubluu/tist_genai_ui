@@ -1,6 +1,6 @@
 import { WelcomeService } from './../../../welcome/service/welcome.service';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
 import { InputComponent } from '../../../../common/components/input/input.component';
 import { SelectComponent } from '../../../../common/components/select/select.component';
@@ -31,6 +31,8 @@ import { compareDate } from '../../../../common/utils/compareDate';
 export class Hd400ListComponent implements OnInit {
   // 搜尋條件表單
   form: FormGroup;
+  // tab名稱
+  tabName: string = '';
   // 分頁器當前頁數
   currentPage: number = 1;
   // 分頁器一頁多少筆數據
@@ -69,6 +71,7 @@ export class Hd400ListComponent implements OnInit {
   }
 
   constructor(
+    private route: ActivatedRoute,
     private tabService: TabService, // 關閉tab的Service
     private welcomeService: WelcomeService // welcomeService
   ) {
@@ -86,6 +89,9 @@ export class Hd400ListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // 取得當前路由的tabName
+    this.tabName = this.route.snapshot.data['tabName'];
+
     // 當從儀表單簽核功能進入根據所點擊表單狀態去更改表單狀態
     if (this.welcomeService.currentFormState === 'approved') {
       this.form.get('approvalStatus')?.setValue('已簽核');
@@ -103,8 +109,8 @@ export class Hd400ListComponent implements OnInit {
   }
 
   // 關閉當前的tab
-  closeTab(identifier: string) {
-    this.tabService.closeTab(identifier);
+  closeTab(): void {
+    this.tabService.closeTab(this.tabName);
   }
 
   // 搜尋

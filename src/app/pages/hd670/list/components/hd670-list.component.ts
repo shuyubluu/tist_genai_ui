@@ -8,6 +8,7 @@ import { DayPickerComponent } from '../../../../common/components/dayPicker/dayP
 import { SharedModule } from '../../../../common/shared/shared.module';
 import { TabService } from '../../../../common/layouts/tab/tab.service';
 import { SearchResultData } from '../service/hd670-list.interface';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-hd670-list',
@@ -56,6 +57,7 @@ export class Hd670ListComponent implements OnInit {
   }
 
   constructor(
+    private message: NzMessageService, // message
     private route: ActivatedRoute,
     private tabService: TabService // 關閉tab的Service
   ) {}
@@ -72,7 +74,7 @@ export class Hd670ListComponent implements OnInit {
 
   // 儲存
   save() {
-    // !TODO儲存邏輯
+    this.message.success('儲存成功');
   }
 
   // 關閉當前的tab

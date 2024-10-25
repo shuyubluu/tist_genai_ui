@@ -82,29 +82,18 @@
         </div>
         <div class="mt"></div>
         <div class="bold-text">請選擇要匯出的檔案</div>
-        <nz-checkbox-wrapper
-          style="width: 100%"
-          (nzOnChange)="handleExportFileChange($event)"
-        >
-          <div nz-row>
-            <div nz-col>
-              <label nz-checkbox nzValue="1">志工基本資料表(Excel)</label>
-            </div>
-            <div nz-col>
-              <label nz-checkbox nzValue="2">志工教育訓練(Excel)</label>
-            </div>
-            <div nz-col>
-              <label nz-checkbox nzValue="3ˇ">志工時數(Excel)</label>
-            </div>
-            <div nz-col>
-              <label nz-checkbox nzValue="4">志工考核表清冊(Excel)</label>
-            </div>
-            <div nz-col>
-              <label nz-checkbox nzValue="5">志工紀錄冊(Word)</label>
-            </div>
-            <div nz-col>
-              <label nz-checkbox nzValue="6">志願服務績效證明書(Word)</label>
-            </div>
+        <nz-checkbox-wrapper (nzOnChange)="exportFileChange($event)">
+          <div formGroupName="exportFile">
+            <span *ngFor="let option of exportFile">
+              <label
+                [nzDisabled]="option.disabled"
+                nz-checkbox
+                [formControlName]="option.value"
+                [nzValue]="option.value"
+              >
+                {{ option.label }}
+              </label>
+            </span>
           </div>
         </nz-checkbox-wrapper>
       </ng-container>
@@ -112,7 +101,7 @@
     <app-button
       [attachClassName]="['danger']"
       [buttonText]="'關閉'"
-      (click)="closeTab('表單匯出_志工清冊')"
+      (click)="closeTab()"
     />
   </div>
 </form>

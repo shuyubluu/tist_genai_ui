@@ -73,62 +73,50 @@
         </div>
         <div class="mt"></div>
         <div class="bold-text">請選擇要匯出的檔案</div>
-        <nz-checkbox-wrapper
-          style="width: 100%"
-          (nzOnChange)="handleExportFileChange($event)"
-        >
-          <div nz-row>
-            <div nz-col nzSpan="24">
-              <label nz-checkbox nzValue="1">個案基本資料表</label>
-            </div>
-            <div nz-col nzSpan="24">
-              <label>
-                檔案類型：
-                <app-select
-                  [selectWidth]="'90px'"
-                  
-                  [options]="selectOptions_fileType"
-                  formControlName="caseBasicInfo_fileType"
-              /></label>
-              <label>
-                是否需要隱碼：
-                <app-select
-                  [selectWidth]="'70px'"
-                  
-                  [options]="selectOptions_trueOrFalse"
-                  formControlName="caseBasicInfo_needsAnonymization"
-              /></label>
-            </div>
-            <div nz-col nzSpan="24">
-              <label nz-checkbox nzValue="2">個案訪視紀錄</label>
-            </div>
-            <div nz-col nzSpan="24">
-              <label>
-                檔案類型：
-                <app-select
-                  [selectWidth]="'90px'"
-                  
-                  [options]="selectOptions_fileType"
-                  formControlName="caseVisitRecord_fileType"
-              /></label>
-              <label>
-                是否需要隱碼：
-                <app-select
-                  [selectWidth]="'70px'"
-                  
-                  [options]="selectOptions_trueOrFalse"
-                  formControlName="caseVisitRecord_needsAnonymization"
-              /></label>
-            </div>
-            <div nz-col>
-              <label nz-checkbox nzValue="3ˇ">個案清冊(Excel)</label>
-            </div>
-            <div nz-col>
-              <label nz-checkbox nzValue="4">服務紀錄清冊(Excel)</label>
-            </div>
-            <div nz-col>
-              <label nz-checkbox nzValue="5">個案生活品質量表清冊(Excel)</label>
-            </div>
+        <nz-checkbox-wrapper (nzOnChange)="exportFileChange($event)">
+          <div formGroupName="exportFile">
+            <span *ngFor="let option of exportFile">
+              <label
+                [nzDisabled]="option.disabled"
+                nz-checkbox
+                [formControlName]="option.value"
+                [nzValue]="option.value"
+              >
+                {{ option.label }}
+              </label>
+              <div *ngIf="option.value === '00' && option.checked">
+                <label>
+                  檔案類型：
+                  <app-select
+                    [selectWidth]="'90px'"
+                    [options]="selectOptions_fileType"
+                    formControlName="caseBasicInfo_fileType"
+                /></label>
+                <label>
+                  是否需要隱碼：
+                  <app-select
+                    [selectWidth]="'70px'"
+                    [options]="selectOptions_trueOrFalse"
+                    formControlName="caseBasicInfo_needsAnonymization"
+                /></label>
+              </div>
+              <div *ngIf="option.value === '01' && option.checked">
+                <label>
+                  檔案類型：
+                  <app-select
+                    [selectWidth]="'90px'"
+                    [options]="selectOptions_fileType"
+                    formControlName="caseVisitRecord_fileType"
+                /></label>
+                <label>
+                  是否需要隱碼：
+                  <app-select
+                    [selectWidth]="'70px'"
+                    [options]="selectOptions_trueOrFalse"
+                    formControlName="caseVisitRecord_needsAnonymization"
+                /></label>
+              </div>
+            </span>
           </div>
         </nz-checkbox-wrapper>
       </ng-container>
@@ -136,7 +124,7 @@
     <app-button
       [buttonText]="'關閉'"
       [attachClassName]="['danger']"
-      (click)="closeTab('表單匯出_個案清冊')"
+      (click)="closeTab()"
     />
   </div>
 </form>

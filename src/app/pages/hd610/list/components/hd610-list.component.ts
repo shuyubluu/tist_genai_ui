@@ -1,6 +1,6 @@
 import { Hd610ListService } from './../service/hd610-list.service';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
 import { InputComponent } from '../../../../common/components/input/input.component';
 import { SelectComponent } from '../../../../common/components/select/select.component';
@@ -28,6 +28,8 @@ import { SearchResultData } from '../service/hd610-list.interface';
 export class Hd610ListComponent implements OnInit {
   // 搜尋條件表單
   form: FormGroup;
+  // tab名稱
+  tabName: string = '';
   // 分頁器當前頁數
   currentPage: number = 1;
   // 分頁器一頁多少筆數據
@@ -644,6 +646,7 @@ export class Hd610ListComponent implements OnInit {
   }
 
   constructor(
+    private route: ActivatedRoute,
     private tabService: TabService, // 關閉tab的Service
     private router: Router, // 路由
     private hd610ListService: Hd610ListService // hd610ListService
@@ -663,16 +666,19 @@ export class Hd610ListComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // 取得當前路由的tabName
+    this.tabName = this.route.snapshot.data['tabName'];
+  }
 
   // 關閉當前的tab
-  closeTab(identifier: string) {
-    this.tabService.closeTab(identifier);
+  closeTab(): void {
+    this.tabService.closeTab(this.tabName);
   }
 
   // 編輯
   edit() {
-    this.router.navigate(['/hd610/form']);
+    this.router.navigate(['/hd610/edit']);
     this.hd610ListService.setMode(false, false, true);
   }
 
@@ -683,13 +689,13 @@ export class Hd610ListComponent implements OnInit {
 
   // 檢視
   view() {
-    this.router.navigate(['/hd610/form']);
+    this.router.navigate(['/hd610/view']);
     this.hd610ListService.setMode(true, false, false);
   }
 
   // 新增
   create() {
-    this.router.navigate(['/hd610/form']);
+    this.router.navigate(['/hd610/create']);
     this.hd610ListService.setMode(false, true, false);
   }
 

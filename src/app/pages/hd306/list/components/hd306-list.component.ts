@@ -2,12 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
 import { InputComponent } from '../../../../common/components/input/input.component';
 import { SelectComponent } from '../../../../common/components/select/select.component';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { DayPickerComponent } from '../../../../common/components/dayPicker/dayPicker.component';
 import { SharedModule } from '../../../../common/shared/shared.module';
 import { TabService } from '../../../../common/layouts/tab/tab.service';
 import { FormControl, FormGroup } from '@angular/forms';
-import { SearchResultData } from '../service/hd306-list.interface';
+import {
+  CheckboxGroup,
+  SearchResultData,
+} from '../service/hd306-list.interface';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { ErrorMessageComponent } from '../../../../common/components/message/error-message.component';
 import { compareDate } from '../../../../common/utils/compareDate';
@@ -32,6 +35,8 @@ export class Hd306ListComponent implements OnInit {
   form: FormGroup;
   // 檢查日期區間
   checkDateRange: boolean = false;
+  // tab名稱
+  tabName: string = '';
   // 當前已選取的志工
   currentSelectedVolunteer: string[] = [];
   // 控制匯出modal是否顯示
@@ -81,6 +86,7 @@ export class Hd306ListComponent implements OnInit {
     '林邊(林邊志工站)',
   ];
 
+  // 搜尋結果模擬資料
   searchResultData: SearchResultData[] = [
     {
       serviceUnit: '彭祖體驗長者導師志工隊',
@@ -120,6 +126,46 @@ export class Hd306ListComponent implements OnInit {
     },
   ];
 
+  // 匯出檔案勾選狀態
+  exportFile: CheckboxGroup[] = [
+    {
+      label: '志工基本資料表(Excel)',
+      value: '00',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '志工教育訓練(Excel)',
+      value: '01',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '志工時數(Excel)',
+      value: '02',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '志工考核表清冊(Excel)',
+      value: '03',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '志工紀錄冊(Word)',
+      value: '04',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '志願服務績效證明書(Word)',
+      value: '05',
+      checked: false,
+      disabled: false,
+    },
+  ];
+
   // 分頁器切割後的資料
   get newSearchResultData(): SearchResultData[] {
     return this.searchResultData.slice(
@@ -129,9 +175,13 @@ export class Hd306ListComponent implements OnInit {
   }
 
   constructor(
+    private route: ActivatedRoute,
     private tabService: TabService, // 關閉tab的Service
     private message: NzMessageService // message
   ) {
+    // 匯出檔案CheckboxGroup
+    const exportFileGroup = this.createCheckboxGroup(this.exportFile);
+
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
       // 服務單位
@@ -147,11 +197,14 @@ export class Hd306ListComponent implements OnInit {
       // 入隊日期_結束
       joinDate_end: new FormControl(''),
       // 匯出的檔案
-      exportFile: new FormControl(''),
+      exportFile: new FormGroup(exportFileGroup),
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // 取得當前路由的tabName
+    this.tabName = this.route.snapshot.data['tabName'];
+  }
 
   // 搜尋
   search() {
@@ -204,13 +257,28 @@ export class Hd306ListComponent implements OnInit {
   }
 
   // 當匯出檔案的選項改變時觸發
-  handleExportFileChange(checkGroup: string[]) {
-    this.form.get('exportFile')?.setValue(checkGroup);
+  exportFileChange(checkedValues: string[]) {
+    this.exportFile.forEach((option) => {
+      // 更新每個選項的 checked 狀態
+      option.checked = checkedValues.includes(option.value);
+    });
+  }
+
+  // 創建checkbox group
+  createCheckboxGroup(options: any[]): { [key: string]: FormControl } {
+    const group: { [key: string]: FormControl } = {};
+    options.forEach((option) => {
+      group[option.value] = new FormControl(option.checked);
+      if (option.disabled) {
+        group[option.value].disable(); // 如果該選項應該被禁用，則禁用對應的 FormControl
+      }
+    });
+    return group;
   }
 
   // 關閉當前的tab
-  closeTab(identifier: string) {
-    this.tabService.closeTab(identifier);
+  closeTab(): void {
+    this.tabService.closeTab(this.tabName);
   }
 
   // 當改變頁數時觸發
