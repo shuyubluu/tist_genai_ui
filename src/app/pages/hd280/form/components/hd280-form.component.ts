@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
 import { InputComponent } from '../../../../common/components/input/input.component';
 import { SelectComponent } from '../../../../common/components/select/select.component';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { DayPickerComponent } from '../../../../common/components/dayPicker/dayPicker.component';
 import { SharedModule } from '../../../../common/shared/shared.module';
 import { TabService } from '../../../../common/layouts/tab/tab.service';
@@ -14,6 +14,7 @@ import { ErrorMessageComponent } from '../../../../common/components/message/err
 import { Hd230ListService } from '../../../hd230/list/service/hd230-list.service';
 import { DateValidators } from '../../../../common/validator/date-validator';
 import { compareDate } from '../../../../common/utils/compareDate';
+import { CheckboxGroup } from '../service/hd280-form.interface';
 @Component({
   selector: 'app-hd280-form',
   standalone: true,
@@ -33,6 +34,8 @@ import { compareDate } from '../../../../common/utils/compareDate';
 export class Hd280FormComponent implements OnInit {
   // 搜尋條件表單
   form: FormGroup;
+  // tab名稱
+  tabName: string = '';
   // 檢查日期區間
   checkDateRange: boolean = false;
   // 檢查時間區間
@@ -96,12 +99,42 @@ export class Hd280FormComponent implements OnInit {
   // 時間_分鐘select選項
   selectOptions_timeMinutes: string[] = [];
 
+  // 服務志工勾選狀態
+  serviceVolunteer: CheckboxGroup[] = [
+    {
+      label: '吳小美(11300200001)',
+      value: '00',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '陳大天(11300200002)',
+      value: '01',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '陳大天(11300200002)',
+      value: '02',
+      checked: false,
+      disabled: false,
+    },
+  ];
+
   constructor(
+    private route: ActivatedRoute,
     private tabService: TabService, // 關閉tab的Service
     private message: NzMessageService, // 訊息
     public hd230ListService: Hd230ListService, // Hd230ListService
     public volunteerInformationService: VolunteerInformationService // volunteerInformationService
   ) {
+    // 接收後端回傳質料
+    // this.serviceVolunteer =
+
+    const serviceVolunteerGroup = this.createCheckboxGroup(
+      this.serviceVolunteer
+    );
+
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
       // 填表日期
@@ -129,11 +162,14 @@ export class Hd280FormComponent implements OnInit {
       // 服務單位
       serviceUnit: new FormControl(''),
       // 服務志工
-      serviceVolunteer: new FormControl(''),
+      serviceVolunteer: new FormGroup(serviceVolunteerGroup),
     });
   }
 
   ngOnInit(): void {
+    // 取得當前路由的tabName
+    this.tabName = this.route.snapshot.data['tabName'];
+
     // 檢視模式，禁用表單
     if (this.hd230ListService.isView) {
       this.form.disable();
@@ -154,8 +190,23 @@ export class Hd280FormComponent implements OnInit {
   }
 
   // 服務志工選項改變
-  serviceVolunteerChange(checkGroup: string[]) {
-    this.form.get('serviceVolunteer')?.setValue(checkGroup);
+  serviceVolunteerChange(checkedValues: string[]) {
+    this.serviceVolunteer.forEach((option) => {
+      // 更新每個選項的 checked 狀態
+      option.checked = checkedValues.includes(option.value);
+    });
+  }
+
+  // 創建checkbox group
+  createCheckboxGroup(options: any[]): { [key: string]: FormControl } {
+    const group: { [key: string]: FormControl } = {};
+    options.forEach((option) => {
+      group[option.value] = new FormControl(option.checked);
+      if (option.disabled) {
+        group[option.value].disable(); // 如果該選項應該被禁用，則禁用對應的 FormControl
+      }
+    });
+    return group;
   }
 
   // 儲存
@@ -191,13 +242,13 @@ export class Hd280FormComponent implements OnInit {
     }
     if (!this.checkDateRange) {
       this.message.create('success', '新增成功');
-      this.closeTab('服務時數管理表');
+      this.closeTab();
     }
   }
 
   // 關閉當前的tab
-  closeTab(identifier: string) {
-    this.tabService.closeTab(identifier);
+  closeTab(): void {
+    this.tabService.closeTab(this.tabName);
   }
 
   // 當服務日期區間改變觸發

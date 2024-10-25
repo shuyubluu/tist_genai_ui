@@ -1,4 +1,4 @@
-<app-volunteer-information [currentTab]="'服務品質評估表'" />
+<app-volunteer-information />
 <div class="mt"></div>
 <form [formGroup]="form">
   <div class="grid-container">
@@ -442,10 +442,7 @@
         />
       </div>
     </div>
-    <div
-      *ngIf="assessmentResults === '三個月內為期改善'"
-      class="grid-columns-1"
-    >
+    <div *ngIf="isNeedsPeriodicImprovement" class="grid-columns-1">
       <div class="label">第一次為期改善是否通過</div>
       <div class="column-Message">
         <div>
@@ -458,6 +455,7 @@
         </div>
         <div class="mx-2">
           <app-select
+            (ngModelChange)="firstImprovementPassedChange($event)"
             [selectWidth]="'70px'"
             [options]="selectOptions_trueOrFalse"
             formControlName="firstImprovementPassed"
@@ -565,7 +563,7 @@
     <app-button
       [attachClassName]="['danger']"
       [buttonText]="'關閉'"
-      (click)="closeTab('服務品質評估表')"
+      (click)="closeTab()"
     />
   </div>
 </form>

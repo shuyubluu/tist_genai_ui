@@ -1,4 +1,4 @@
-<app-volunteer-information [currentTab]="'獎勵表揚表'" />
+<app-volunteer-information />
 <div class="mt"></div>
 <form [formGroup]="form">
   <div class="grid-container">
@@ -19,9 +19,8 @@
       <div class="label">表揚單位</div>
       <div class="column-Message">
         <app-select
-        (ngModelChange)="onPraiseUnitSelectChange($event)"
+          (ngModelChange)="onPraiseUnitSelectChange($event)"
           [selectWidth]="'100px'"
-          
           [options]="selectOptions_praiseUnit"
           formControlName="praiseUnit"
         />
@@ -79,7 +78,6 @@
           本單位表揚：
           <app-select
             [selectWidth]="'250px'"
-            
             [options]="selectOptions_unitPraise"
             formControlName="unitPraise"
           />
@@ -136,7 +134,7 @@
     <app-button
       [attachClassName]="['danger']"
       [buttonText]="'關閉'"
-      (click)="closeTab('獎勵表揚表')"
+      (click)="closeTab()"
     />
   </div>
 </form>

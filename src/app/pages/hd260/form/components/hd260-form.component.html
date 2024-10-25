@@ -1,6 +1,5 @@
 <app-volunteer-information
   *ngIf="volunteerInformationService.isChoiceVolunteer"
-  [currentTab]="'退隊表'"
 />
 <form [formGroup]="form">
   <div class="grid-container">
@@ -11,7 +10,10 @@
       <div class="label">填表日期</div>
       <div class="column-Message">
         <app-dayPicker
-          [disabled]="!this.volunteerInformationService.isChoiceVolunteer"
+          [disabled]="
+            !volunteerInformationService.isChoiceVolunteer ||
+            hd200ListService.isView
+          "
           formControlName="fillingDate"
         />
         <app-error-message
@@ -40,7 +42,10 @@
       <div class="label">退隊日期</div>
       <div class="column-Message">
         <app-dayPicker
-          [disabled]="!this.volunteerInformationService.isChoiceVolunteer"
+          [disabled]="
+            !volunteerInformationService.isChoiceVolunteer ||
+            hd200ListService.isView
+          "
           formControlName="resignationDate"
         />
         <app-error-message
@@ -71,89 +76,41 @@
     <div class="grid-columns-1">
       <div class="label">備品是否繳回</div>
       <div>
-        <nz-checkbox-wrapper
-          style="width: 100%"
-          (nzOnChange)="equipmentReturnedChange($event)"
-        >
-          <div nz-row>
-            <div nz-col>
+        <nz-checkbox-wrapper (nzOnChange)="equipmentReturnedChange($event)">
+          <div formGroupName="equipmentReturned">
+            <span *ngFor="let option of equipmentReturned">
               <label
+                [nzDisabled]="option.disabled"
                 nz-checkbox
-                [nzDisabled]="!volunteerInformationService.isChoiceVolunteer"
-                nzValue="1"
-                >志工證</label
+                [formControlName]="option.value"
+                [nzValue]="option.value"
               >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="!volunteerInformationService.isChoiceVolunteer"
-                nzValue="2"
-                >志工背心</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="!volunteerInformationService.isChoiceVolunteer"
-                nzValue="3"
-                >志工名片</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="!volunteerInformationService.isChoiceVolunteer"
-                nzValue="4"
-                >志工制服</label
-              >
-              <span> <span class="volunteerUniformCount">2</span> 件 </span>
-            </div>
-            <div nz-col>
-              <app-error-message
-                [control]="form.get('equipmentReturned')"
-                [isTouched]="false"
-                errorKey="required"
-                errorMessage="必選"
-              />
-            </div>
+                {{ option.label }}
+              </label>
+            </span>
           </div>
         </nz-checkbox-wrapper>
       </div>
     </div>
-    <div class="grid-columns-2 border-bottom-0">
+    <div class="grid-columns-1 border-bottom-0">
       <div class="label">同意書檔案下載</div>
       <div>
+        <app-button [attachClassName]="['danger']" [buttonText]="'範本下載'" />
         <nz-upload
+          *ngIf="isNeedUploadConsentForm"
           nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
           [nzFileList]="consentForm_fileList"
           (nzChange)="consentForm_handleChange($event)"
         >
           <app-button
-            [disabled]="!volunteerInformationService.isChoiceVolunteer"
-            *ngIf="form.get('equipmentReturned')?.value.length === 0"
+            [disabled]="
+              !volunteerInformationService.isChoiceVolunteer ||
+              hd200ListService.isView
+            "
             [buttonText]="'上傳同意書'"
             [attachClassName]="
-              !volunteerInformationService.isChoiceVolunteer
-                ? ['secondary']
-                : ['success']
-            "
-          />
-        </nz-upload>
-        <!-- <app-button [buttonText]="'下載'" [attachClassName]="['danger']" /> -->
-      </div>
-      <div class="label">上傳檔案</div>
-      <div>
-        <nz-upload
-          nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-          [nzFileList]="file_fileList"
-          (nzChange)="file_handleChange($event)"
-        >
-          <app-button
-            [disabled]="!volunteerInformationService.isChoiceVolunteer"
-            [buttonText]="'上傳'"
-            [attachClassName]="
-              !volunteerInformationService.isChoiceVolunteer
+              !volunteerInformationService.isChoiceVolunteer ||
+              hd200ListService.isView
                 ? ['secondary']
                 : ['success']
             "
@@ -166,13 +123,13 @@
     <app-button
       *ngIf="volunteerInformationService.isChoiceVolunteer"
       [attachClassName]="['success']"
-      [buttonText]="'送審'"
-      (click)="review()"
+      [buttonText]="'儲存'"
+      (click)="save()"
     />
     <app-button
       [attachClassName]="['danger']"
       [buttonText]="'關閉'"
-      (click)="closeTab('退隊表')"
+      (click)="closeTab()"
     />
   </div>
 </form>

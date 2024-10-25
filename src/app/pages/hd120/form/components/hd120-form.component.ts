@@ -221,7 +221,7 @@ export class Hd120FormComponent implements OnInit {
     'welfareUsageOverview_other_contactPhone',
   ];
 
-  // 社會福利補助勾選狀態
+  // 宗教信仰勾選狀態
   religiousAffiliation: CheckboxGroup[] = [
     {
       label: '無',
@@ -1233,11 +1233,6 @@ export class Hd120FormComponent implements OnInit {
       .filter((option) => option.checked)
       .map((option) => option.value);
     this.religiousAffiliationChange(religiousAffiliationCheckedValues);
-
-    const commonLanguageCheckedValues = this.commonLanguage
-      .filter((option) => option.checked)
-      .map((option) => option.value);
-    this.commonLanguageChange(commonLanguageCheckedValues);
 
     const currentHealthConditionsCheckedValues = this.currentHealthConditions
       .filter((option) => option.checked)

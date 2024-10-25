@@ -1,6 +1,5 @@
 <app-volunteer-information
   *ngIf="volunteerInformationService.isChoiceVolunteer"
-  [currentTab]="'志工基本資料'"
 />
 <div class="mt"></div>
 <form [formGroup]="form">
@@ -264,51 +263,18 @@
     <div class="grid-columns-1">
       <div class="label">飲食習慣</div>
       <div>
-        <nz-checkbox-wrapper
-          style="width: 100%"
-          (nzOnChange)="eatingHabitsChange($event)"
-        >
-          <div nz-row>
-            <div nz-col>
+        <nz-checkbox-wrapper (nzOnChange)="eatingHabitsChange($event)">
+          <div formGroupName="eatingHabits">
+            <span *ngFor="let option of eatingHabits">
               <label
+                [nzDisabled]="option.disabled"
                 nz-checkbox
-                [nzDisabled]="hd200ListService.isView"
-                nzValue="1"
-                >葷</label
+                [formControlName]="option.value"
+                [nzValue]="option.value"
               >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd200ListService.isView"
-                nzValue="2"
-                >全素</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd200ListService.isView"
-                nzValue="3"
-                >蛋奶素</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd200ListService.isView"
-                nzValue="4"
-                >鍋邊素</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd200ListService.isView"
-                nzValue="5"
-                >初一十五素</label
-              >
-            </div>
+                {{ option.label }}
+              </label>
+            </span>
           </div>
         </nz-checkbox-wrapper>
       </div>
@@ -326,74 +292,24 @@
     <div class="grid-columns-1">
       <div class="label">語言</div>
       <div>
-        <nz-checkbox-wrapper
-          style="width: 100%"
-          (nzOnChange)="languagesChange($event)"
-        >
-          <div nz-row>
-            <div nz-col>
+        <nz-checkbox-wrapper (nzOnChange)="languagesChange($event)">
+          <div formGroupName="languages">
+            <span *ngFor="let option of languages">
               <label
+                [nzDisabled]="option.disabled"
                 nz-checkbox
-                [nzDisabled]="hd200ListService.isView"
-                nzValue="1"
-                >國語</label
+                [formControlName]="option.value"
+                [nzValue]="option.value"
               >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd200ListService.isView"
-                nzValue="2"
-                >台語</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd200ListService.isView"
-                nzValue="3"
-                >客家語</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd200ListService.isView"
-                nzValue="4"
-                >英語</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd200ListService.isView"
-                nzValue="5"
-                >日語</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd200ListService.isView"
-                nzValue="6"
-                >手語</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd200ListService.isView"
-                nzValue="7"
-                >其他</label
-              >
-              <label>
-                <app-input
-                  [inputWidth]="'100px'"
-                  [maxLength]="30"
-                  formControlName="languages_other"
-                />
+                {{ option.label }}
               </label>
-            </div>
+              <app-input
+                *ngIf="option.value === '06' && option.checked"
+                [inputWidth]="'100px'"
+                [maxLength]="30"
+                formControlName="languages_other"
+              />
+            </span>
           </div>
         </nz-checkbox-wrapper>
       </div>
@@ -424,107 +340,24 @@
     <div class="grid-columns-1">
       <div class="label">宗教信仰</div>
       <div>
-        <nz-checkbox-wrapper
-          style="width: 100%"
-          (nzOnChange)="religiousAffiliationChange($event)"
-        >
-          <div nz-row>
-            <div nz-col>
+        <nz-checkbox-wrapper (nzOnChange)="religiousAffiliationChange($event)">
+          <div formGroupName="religiousAffiliation">
+            <span *ngFor="let option of religiousAffiliation">
               <label
+                [nzDisabled]="option.disabled"
                 nz-checkbox
-                [nzDisabled]="
-                  isDisableReligiousAffiliationNone || hd200ListService.isView
-                "
-                nzValue="1"
-                >無</label
+                [formControlName]="option.value"
+                [nzValue]="option.value"
               >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableReligiousAffiliationOthers || hd200ListService.isView
-                "
-                nzValue="2"
-                >道教</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableReligiousAffiliationOthers || hd200ListService.isView
-                "
-                nzValue="3"
-                >佛教</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableReligiousAffiliationOthers || hd200ListService.isView
-                "
-                nzValue="4"
-                >基督教</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableReligiousAffiliationOthers || hd200ListService.isView
-                "
-                nzValue="5"
-                >天主教</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableReligiousAffiliationOthers || hd200ListService.isView
-                "
-                nzValue="6"
-                >一貫道</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableReligiousAffiliationOthers || hd200ListService.isView
-                "
-                nzValue="7"
-                >回教</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableReligiousAffiliationOthers || hd200ListService.isView
-                "
-                nzValue="8"
-                >民間信仰</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="
-                  isDisableReligiousAffiliationOthers || hd200ListService.isView
-                "
-                nzValue="9"
-                >其他
+                {{ option.label }}
               </label>
-              <label>
-                <app-input
-                  [inputWidth]="'100px'"
-                  [maxLength]="30"
-                  formControlName="religiousAffiliation_other"
-              /></label>
-            </div>
+              <app-input
+                *ngIf="option.value === '08' && option.checked"
+                [inputWidth]="'100px'"
+                [maxLength]="30"
+                formControlName="religiousAffiliation_other"
+              />
+            </span>
           </div>
         </nz-checkbox-wrapper>
       </div>
@@ -644,58 +477,24 @@
     <div class="grid-columns-1">
       <div class="label">志工來源</div>
       <div>
-        <nz-checkbox-wrapper
-          style="width: 100%"
-          (nzOnChange)="volunteerSourceChange($event)"
-        >
-          <div nz-row>
-            <div nz-col>
+        <nz-checkbox-wrapper (nzOnChange)="volunteerSourceChange($event)">
+          <div formGroupName="volunteerSource">
+            <span *ngFor="let option of volunteerSource">
               <label
+                [nzDisabled]="option.disabled"
                 nz-checkbox
-                [nzDisabled]="hd200ListService.isView"
-                nzValue="1"
-                >親友</label
+                [formControlName]="option.value"
+                [nzValue]="option.value"
               >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd200ListService.isView"
-                nzValue="2"
-                >電視、廣播等傳播媒體</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd200ListService.isView"
-                nzValue="3"
-                >海報、宣傳簡介</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd200ListService.isView"
-                nzValue="4"
-                >本會志工介紹</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd200ListService.isView"
-                nzValue="5"
-                >其他</label
-              >
-              <label>
-                <app-input
-                  [inputWidth]="'100px'"
-                  [maxLength]="30"
-                  formControlName="volunteerSource_other"
-                />
+                {{ option.label }}
               </label>
-            </div>
+              <app-input
+                *ngIf="option.value === '04' && option.checked"
+                [inputWidth]="'100px'"
+                [maxLength]="30"
+                formControlName="volunteerSource_other"
+              />
+            </span>
           </div>
         </nz-checkbox-wrapper>
       </div>
@@ -747,51 +546,18 @@
     <div class="grid-columns-1">
       <div class="label">服務交通工具</div>
       <div>
-        <nz-checkbox-wrapper
-          style="width: 100%"
-          (nzOnChange)="serviceTransportationChange($event)"
-        >
-          <div nz-row>
-            <div nz-col>
+        <nz-checkbox-wrapper (nzOnChange)="serviceTransportationChange($event)">
+          <div formGroupName="serviceTransportation">
+            <span *ngFor="let option of serviceTransportation">
               <label
+                [nzDisabled]="option.disabled"
                 nz-checkbox
-                [nzDisabled]="hd200ListService.isView"
-                nzValue="1"
-                >汽車</label
+                [formControlName]="option.value"
+                [nzValue]="option.value"
               >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd200ListService.isView"
-                nzValue="2"
-                >機車</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd200ListService.isView"
-                nzValue="3"
-                >腳踏車</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd200ListService.isView"
-                nzValue="4"
-                >大眾運輸</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd200ListService.isView"
-                nzValue="5"
-                >走路</label
-              >
-            </div>
+                {{ option.label }}
+              </label>
+            </span>
           </div>
         </nz-checkbox-wrapper>
       </div>
@@ -799,59 +565,18 @@
     <div class="grid-columns-1">
       <div class="label">擁有交通工具</div>
       <div>
-        <nz-checkbox-wrapper
-          style="width: 100%"
-          (nzOnChange)="hasTransportationChange($event)"
-        >
-          <div nz-row>
-            <div nz-col>
+        <nz-checkbox-wrapper (nzOnChange)="hasTransportationChange($event)">
+          <div formGroupName="hasTransportation">
+            <span *ngFor="let option of hasTransportation">
               <label
+                [nzDisabled]="option.disabled"
                 nz-checkbox
-                [nzDisabled]="hd200ListService.isView"
-                nzValue="1"
-                >汽車</label
+                [formControlName]="option.value"
+                [nzValue]="option.value"
               >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd200ListService.isView"
-                nzValue="2"
-                >機車</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd200ListService.isView"
-                nzValue="3"
-                >腳踏車</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd200ListService.isView"
-                nzValue="4"
-                >廂型車</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd200ListService.isView"
-                nzValue="5"
-                >卡車</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd200ListService.isView"
-                nzValue="6"
-                >遊覽車</label
-              >
-            </div>
+                {{ option.label }}
+              </label>
+            </span>
           </div>
         </nz-checkbox-wrapper>
       </div>
@@ -990,22 +715,30 @@
       <div class="label">是否領取弘道志工名片</div>
       <div>
         <app-select
-        [selectWidth]="'70px'"
-        [options]="selectOptions_trueOrFalse"
-        formControlName="receivedHongdaoVolunteerCard"
-    />
+          [selectWidth]="'70px'"
+          [options]="selectOptions_trueOrFalse"
+          formControlName="receivedHongdaoVolunteerCard"
+        />
       </div>
     </div>
     <div class="grid-columns-1 border-bottom-0">
       <div class="label">志工權利義務告知聲明書</div>
       <div class="colunns-Message">
-        <!-- <app-button [buttonIcon]="'upload'" [buttonText]="'聲明書上傳'" /> -->
         <app-button [attachClassName]="['danger']" [buttonText]="'範本下載'" />
         <app-select
           [selectWidth]="'90px'"
           [options]="selectOptions_volunteerRightsAndDutiesDeclaration"
           formControlName="volunteerRightsAndDutiesDeclaration"
         />
+        <nz-upload
+          nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+          [nzFileList]="volunteerRightsObligationsDeclaration_fileList"
+          (nzChange)="
+            volunteerRightsObligationsDeclaration_handleChange($event)
+          "
+        >
+          <app-button [attachClassName]="['success']" [buttonText]="'上傳'" />
+        </nz-upload>
       </div>
     </div>
   </div>

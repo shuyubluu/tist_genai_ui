@@ -9,11 +9,19 @@ export const HD210_ROUTES: Routes = [
       ),
   },
   {
-    path: 'form',
+    path: 'create',
     loadComponent: () =>
       import('./form/components/hd210-form.component').then(
         (m) => m.Hd210FormComponent
       ),
-    data: { tabName: '教育訓練表' },
+    data: { tabName: '[教育訓練表] :::新增' },
+  },
+  {
+    path: 'view',
+    loadComponent: () =>
+      import('./form/components/hd210-form.component').then(
+        (m) => m.Hd210FormComponent
+      ),
+    data: { tabName: '[教育訓練表] :::檢視' },
   },
 ];

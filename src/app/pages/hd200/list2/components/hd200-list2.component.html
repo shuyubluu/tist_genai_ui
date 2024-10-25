@@ -1,6 +1,5 @@
 <app-volunteer-information
   *ngIf="volunteerInformationService.isChoiceVolunteer"
-  [currentTab]="'個督紀錄'"
 />
 <div class="mt"></div>
 <form [formGroup]="form">
@@ -40,7 +39,7 @@
     <app-button
       [attachClassName]="['danger']"
       [buttonText]="'關閉'"
-      (click)="closeTab('個督紀錄')"
+      (click)="closeTab()"
     />
   </div>
 </form>

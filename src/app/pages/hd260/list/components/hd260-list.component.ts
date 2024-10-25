@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
 import { InputComponent } from '../../../../common/components/input/input.component';
 import { SelectComponent } from '../../../../common/components/select/select.component';
@@ -31,6 +31,8 @@ import { compareDate } from '../../../../common/utils/compareDate';
 export class Hd260ListComponent implements OnInit {
   // 搜尋條件表單
   form: FormGroup;
+  // tab名稱
+  tabName: string = '';
   // 分頁器當前頁數
   currentPage: number = 1;
   // 分頁器一頁多少筆數據
@@ -55,6 +57,7 @@ export class Hd260ListComponent implements OnInit {
   }
 
   constructor(
+    private route: ActivatedRoute,
     private tabService: TabService, // 關閉tab的Service
     private router: Router, // 路由
     public volunteerInformationService: VolunteerInformationService // volunteerInformationService
@@ -73,6 +76,9 @@ export class Hd260ListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // 取得當前路由的tabName
+    this.tabName = this.route.snapshot.data['tabName'];
+
     // 生成多筆模擬搜尋結果資料
     for (let i = 0; i < 20; i++) {
       this.searchResultData.push(this.searchResultData[i]);
@@ -98,13 +104,13 @@ export class Hd260ListComponent implements OnInit {
 
   // 檢視
   async view() {
-    await this.router.navigate(['/hd260/form']);
+    await this.router.navigate(['/hd260/view']);
     this.volunteerInformationService.isChoiceVolunteer = false;
   }
 
   // 關閉當前的tab
-  closeTab(identifier: string) {
-    this.tabService.closeTab(identifier);
+  closeTab(): void {
+    this.tabService.closeTab(this.tabName);
   }
 
   // 當改變頁數時觸發
@@ -113,11 +119,7 @@ export class Hd260ListComponent implements OnInit {
   }
 
   // 當填單日期區間改變觸發
-  onResignationDatChange(date: {
-    year: string;
-    month: string;
-    day: string;
-  }) {
+  onResignationDatChange(date: { year: string; month: string; day: string }) {
     // 如果日期有輸入，則檢查日期區間
     if (date && this.checkDateRange) {
       if (

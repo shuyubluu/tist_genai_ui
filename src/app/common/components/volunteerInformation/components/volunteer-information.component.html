@@ -32,14 +32,22 @@
   <div class="divCenter">
     <span
       class="checkFormButton"
-      [ngClass]="{ highlightButton: router.url === '/hd200/form' }"
+      [ngClass]="{
+        highlightButton:
+          router.url.startsWith('/hd200/create') ||
+          router.url.startsWith('/hd200/view') ||
+          router.url.startsWith('/hd200/edit')
+      }"
       (click)="goToHd200Form()"
       >基本資料</span
     >
     <span
       class="checkFormButton"
       [ngClass]="{
-        highlightButton: router.url === '/hd210' || router.url === '/hd210/form'
+        highlightButton:
+          router.url.startsWith('/hd210/create') ||
+          router.url.startsWith('/hd210/view') ||
+          router.url.startsWith('/hd210')
       }"
       (click)="goToHd210()"
       >教育訓練</span
@@ -47,7 +55,10 @@
     <span
       class="checkFormButton"
       [ngClass]="{
-        highlightButton: router.url === '/hd220' || router.url === '/hd220/form'
+        highlightButton:
+          router.url.startsWith('/hd220/create') ||
+          router.url.startsWith('/hd220/view') ||
+          router.url.startsWith('/hd220')
       }"
       (click)="goToHd220()"
       >獎勵表揚</span
@@ -55,7 +66,10 @@
     <span
       class="checkFormButton"
       [ngClass]="{
-        highlightButton: router.url === '/hd230' || router.url === '/hd280/form'
+        highlightButton:
+          router.url.startsWith('/hd230/edit') ||
+          router.url.startsWith('/hd230/view') ||
+          router.url.startsWith('/hd230')
       }"
       (click)="goToHd230()"
       >服務時數</span
@@ -63,7 +77,7 @@
     <span
       class="checkFormButton"
       [ngClass]="{
-        highlightButton: router.url === '/hd240' || router.url === '/hd240/form'
+        highlightButton: router.url.startsWith('/hd240')
       }"
       (click)="goToHd240()"
       >保險</span
@@ -71,7 +85,11 @@
     <span
       class="checkFormButton"
       [ngClass]="{
-        highlightButton: router.url === '/hd250' || router.url === '/hd250/form'
+        highlightButton:
+          router.url.startsWith('/hd250') ||
+          router.url.startsWith('/hd250/create') ||
+          router.url.startsWith('/hd250/view') ||
+          router.url.startsWith('/hd250/edit')
       }"
       (click)="goToHd250()"
       >服務品質評估表</span
@@ -79,8 +97,7 @@
     <span
       class="checkFormButton"
       [ngClass]="{
-        highlightButton:
-          router.url === '/hd200/list2' || router.url === '/hd200/form2'
+        highlightButton: router.url.startsWith('/hd200/list2')
       }"
       (click)="goToHd200List2()"
       >個督紀錄</span
@@ -88,7 +105,7 @@
     <span
       class="checkFormButton"
       [ngClass]="{
-        highlightButton: router.url === '/hd260/form'
+        highlightButton:  router.url.startsWith('/hd260/edit') || router.url.startsWith('/hd260/view')
       }"
       (click)="goToHd260Form()"
       >退隊表</span

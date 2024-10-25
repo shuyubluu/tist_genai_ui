@@ -316,45 +316,41 @@
       <div class="label">服務外的保障範圍</div>
       <div>
         <nz-checkbox-wrapper
-          style="width: 100%"
           (nzOnChange)="coverageOutsideServiceScopeChange($event)"
         >
-          <div nz-row>
-            <div nz-col>
-              <label nz-checkbox nzValue="1">志工會議</label>
-            </div>
-            <div nz-col>
-              <label nz-checkbox nzValue="2">教育訓練</label>
-            </div>
-            <div nz-col>
-              <label nz-checkbox nzValue="3">外縣市活動</label>
-            </div>
-            <div nz-col>
-              <label nz-checkbox nzValue="4">其他</label>
-              <span
-                ><app-input
-                  [inputWidth]="'100px'"
-                  [maxLength]="30"
-                  formControlName="coverageOutsideServiceScope_other"
-                />
-              </span>
-            </div>
-            <div nz-col>
+          <div formGroupName="coverageOutsideServiceScope">
+            <span *ngFor="let option of coverageOutsideServiceScope">
+              <label
+                [nzDisabled]="option.disabled"
+                nz-checkbox
+                [formControlName]="option.value"
+                [nzValue]="option.value"
+              >
+                {{ option.label }}
+              </label>
+              <app-input
+                *ngIf="option.value === '03' && option.checked"
+                [inputWidth]="'100px'"
+                [maxLength]="30"
+                formControlName="coverageOutsideServiceScope_other"
+              />
+            </span>
+            <label>
+              <app-error-message
+                [control]="
+                  form.get(
+                    'coverageOutsideServiceScope.coverageOutsideServiceScope_other'
+                  )
+                "
+                [isTouched]="false"
+                errorKey="required"
+                errorMessage="必填" />
               <app-error-message
                 [control]="form.get('coverageOutsideServiceScope')"
                 [isTouched]="false"
-                errorKey="required"
+                errorKey="atLeastOneChecked"
                 errorMessage="必選"
-              />
-            </div>
-            <div nz-col>
-              <app-error-message
-                [control]="form.get('coverageOutsideServiceScope_other')"
-                [isTouched]="false"
-                errorKey="required"
-                errorMessage="必填"
-              />
-            </div>
+            /></label>
           </div>
         </nz-checkbox-wrapper>
       </div>
@@ -379,20 +375,18 @@
     >
       <div class="label">投保人員</div>
       <div>
-        <nz-checkbox-wrapper
-          style="width: 100%"
-          (nzOnChange)="insuredPersonChange($event)"
-        >
-          <div nz-row>
-            <div nz-col>
-              <label nz-checkbox nzValue="1">吳小美</label>
-            </div>
-            <div nz-col>
-              <label nz-checkbox nzValue="2">陳大天</label>
-            </div>
-            <div nz-col>
-              <label nz-checkbox nzValue="3">張大壯</label>
-            </div>
+        <nz-checkbox-wrapper (nzOnChange)="insuredPersonChange($event)">
+          <div formGroupName="insuredPerson">
+            <span *ngFor="let option of insuredPerson">
+              <label
+                [nzDisabled]="option.disabled"
+                nz-checkbox
+                [formControlName]="option.value"
+                [nzValue]="option.value"
+              >
+                {{ option.label }}
+              </label>
+            </span>
           </div>
         </nz-checkbox-wrapper>
       </div>
@@ -415,7 +409,7 @@
     <app-button
       [attachClassName]="['danger']"
       [buttonText]="'關閉'"
-      (click)="closeTab(tabName)"
+      (click)="closeTab()"
     />
   </div>
 </form>

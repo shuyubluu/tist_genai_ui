@@ -9,12 +9,28 @@ export const HD200_ROUTES: Routes = [
       ),
   },
   {
-    path: 'form',
+    path: 'create',
     loadComponent: () =>
       import('./form/components/hd200-form.component').then(
         (m) => m.Hd200FormComponent
       ),
-    data: { tabName: '志工基本資料' },
+    data: { tabName: '[志工基本資料] :::新增' },
+  },
+  {
+    path: 'edit',
+    loadComponent: () =>
+      import('./form/components/hd200-form.component').then(
+        (m) => m.Hd200FormComponent
+      ),
+    data: { tabName: '[志工基本資料] :::編輯' },
+  },
+  {
+    path: 'view',
+    loadComponent: () =>
+      import('./form/components/hd200-form.component').then(
+        (m) => m.Hd200FormComponent
+      ),
+    data: { tabName: '[志工基本資料] :::檢視' },
   },
   {
     path: 'list2',

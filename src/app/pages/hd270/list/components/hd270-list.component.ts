@@ -1,6 +1,6 @@
 import { Hd270ListService } from './../service/hd270-list.service';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
 import { InputComponent } from '../../../../common/components/input/input.component';
 import { SelectComponent } from '../../../../common/components/select/select.component';
@@ -34,6 +34,8 @@ import { compareDate } from '../../../../common/utils/compareDate';
 export class Hd270ListComponent implements OnInit {
   // 搜尋條件表單
   form: FormGroup;
+  // tab名稱
+  tabName: string = '';
   // 分頁器當前頁數
   currentPage: number = 1;
   // 檢視資料分頁器一頁多少筆數據
@@ -82,6 +84,7 @@ export class Hd270ListComponent implements OnInit {
   }
 
   constructor(
+    private route: ActivatedRoute,
     private tabService: TabService, // 關閉tab的Service
     private router: Router, // 路由
     public hd270ListService: Hd270ListService // hd270ListService
@@ -98,6 +101,9 @@ export class Hd270ListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // 取得當前路由的tabName
+    this.tabName = this.route.snapshot.data['tabName'];
+
     // 生成多筆模擬搜尋結果資料
     for (let i = 0; i < 20; i++) {
       this.searchResultData.push(this.searchResultData[i]);
@@ -149,8 +155,8 @@ export class Hd270ListComponent implements OnInit {
   }
 
   // 關閉當前的tab
-  closeTab(identifier: string) {
-    this.tabService.closeTab(identifier);
+  closeTab(): void {
+    this.tabService.closeTab(this.tabName);
   }
 
   // 當改變頁數時觸發

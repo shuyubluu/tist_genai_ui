@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
 import { InputComponent } from '../../../../common/components/input/input.component';
 import { SelectComponent } from '../../../../common/components/select/select.component';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { DayPickerComponent } from '../../../../common/components/dayPicker/dayPicker.component';
 import { SharedModule } from '../../../../common/shared/shared.module';
 import { TabService } from '../../../../common/layouts/tab/tab.service';
@@ -36,6 +36,8 @@ import { compareDate } from '../../../../common/utils/compareDate';
 export class Hd210FormComponent implements OnInit {
   // 搜尋條件表單
   form: FormGroup;
+  // tab名稱
+  tabName: string = '';
   // 檢查日期區間
   checkDateRange: boolean = false;
   // 訓練單位select選項
@@ -66,6 +68,7 @@ export class Hd210FormComponent implements OnInit {
   selectOptions_trainingMinutes: string[] = ['00', '30'];
 
   constructor(
+    private route: ActivatedRoute,
     private tabService: TabService, // 關閉tab的Service
     private message: NzMessageService, // 訊息
     public hd210ListService: Hd210ListService, // hd210ListService
@@ -105,6 +108,9 @@ export class Hd210FormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // 取得當前路由的tabName
+    this.tabName = this.route.snapshot.data['tabName'];
+
     // 檢視模式，禁用表單
     if (this.hd210ListService.isView) {
       this.form.disable();
@@ -149,13 +155,13 @@ export class Hd210FormComponent implements OnInit {
     }
     if (!this.checkDateRange) {
       this.message.create('success', '新增成功');
-      this.closeTab('教育訓練表');
+      this.closeTab();
     }
   }
 
-  // 關閉教育訓練表
-  closeTab(identifier: string) {
-    this.tabService.closeTab(identifier);
+  // 關閉教育訓練清單
+  closeTab() {
+    this.tabService.closeTab(this.tabName);
   }
 
   // 當受訓日期區間改變觸發

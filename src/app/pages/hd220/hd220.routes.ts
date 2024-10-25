@@ -9,11 +9,19 @@ export const HD220_ROUTES: Routes = [
       ),
   },
   {
-    path: 'form',
+    path: 'create',
     loadComponent: () =>
       import('./form/components/hd220-form.component').then(
         (m) => m.Hd220FormComponent
       ),
-    data: { tabName: '獎勵表揚表' },
+    data: { tabName: '[獎勵表揚表] :::新增' },
+  },
+  {
+    path: 'view',
+    loadComponent: () =>
+      import('./form/components/hd220-form.component').then(
+        (m) => m.Hd220FormComponent
+      ),
+    data: { tabName: '[獎勵表揚表] :::檢視' },
   },
 ];

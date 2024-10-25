@@ -1,4 +1,4 @@
-<app-volunteer-information [currentTab]="'獎勵表揚'" />
+<app-volunteer-information />
 <div class="mt"></div>
 <form [formGroup]="form">
   <div class="grid-container">
@@ -44,7 +44,7 @@
     <app-button
       [attachClassName]="['danger']"
       [buttonText]="'關閉'"
-      (click)="closeTab('獎勵表揚')"
+      (click)="closeTab()"
     />
   </div>
 </form>

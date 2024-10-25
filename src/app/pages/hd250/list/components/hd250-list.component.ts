@@ -1,6 +1,6 @@
 import { Hd250ListService } from './../service/hd250-list.service';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
 import { InputComponent } from '../../../../common/components/input/input.component';
 import { SelectComponent } from '../../../../common/components/select/select.component';
@@ -38,6 +38,8 @@ export class Hd250ListComponent implements OnInit {
   currentPage: number = 1;
   // 分頁器一頁多少筆數據
   pageSize: number = 10;
+  // tab名稱
+  tabName: string = '';
   // 檢查日期區間
   checkDateRange: boolean = false;
   // 投保狀態select選項
@@ -72,6 +74,7 @@ export class Hd250ListComponent implements OnInit {
   }
 
   constructor(
+    private route: ActivatedRoute,
     private tabService: TabService, // 關閉tab的Service
     private router: Router, // 路由
     private hd250ListService: Hd250ListService, // hd250ListService
@@ -89,6 +92,9 @@ export class Hd250ListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // 取得當前路由的tabName
+    this.tabName = this.route.snapshot.data['tabName'];
+
     // 生成多筆模擬搜尋結果資料
     for (let i = 0; i < 20; i++) {
       this.searchResultData.push(this.searchResultData[i]);
@@ -113,28 +119,28 @@ export class Hd250ListComponent implements OnInit {
 
   // 新增
   async create() {
-    await this.router.navigate(['/hd250/form']);
+    await this.router.navigate(['/hd250/create']);
     this.volunteerInformationService.isChoiceVolunteer = true;
     this.hd250ListService.setMode(false, true, false);
   }
 
   // 檢視
   async view() {
-    await this.router.navigate(['/hd250/form']);
+    await this.router.navigate(['/hd250/view']);
     this.volunteerInformationService.isChoiceVolunteer = true;
     this.hd250ListService.setMode(true, false, false);
   }
 
   // 編輯
   async edit() {
-    await this.router.navigate(['/hd250/form']);
+    await this.router.navigate(['/hd250/edit']);
     this.volunteerInformationService.isChoiceVolunteer = true;
     this.hd250ListService.setMode(false, false, true);
   }
 
   // 關閉保險
-  closeTab(identifier: string) {
-    this.tabService.closeTab(identifier);
+  closeTab(): void {
+    this.tabService.closeTab(this.tabName);
   }
 
   // 當改變頁數時觸發

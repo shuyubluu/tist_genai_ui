@@ -1,6 +1,5 @@
 <app-volunteer-information
   *ngIf="volunteerInformationService.isChoiceVolunteer"
-  [currentTab]="'教育訓練表'"
 />
 <div class="mt"></div>
 <form [formGroup]="form">
@@ -48,7 +47,6 @@
         <div class="column-Message">
           <app-select
             [selectWidth]="'90px'"
-            
             [options]="selectOptions_trainingUnit"
             formControlName="trainingUnit"
           />
@@ -82,7 +80,6 @@
           <app-select
             (ngModelChange)="handleTrainingCourse($event)"
             [selectWidth]="'150px'"
-            
             [options]="selectOptions_trainingCourse"
             formControlName="trainingCourse"
           />
@@ -107,7 +104,6 @@
         <div class="column-Message">
           <app-select
             [selectWidth]="'130px'"
-            
             [options]="selectOptions_courseField"
             formControlName="courseField"
           />
@@ -139,7 +135,6 @@
         <div class="column-Message">
           <app-select
             [selectWidth]="'70px'"
-            
             [options]="selectOptions_trainingHours"
             formControlName="trainingHours"
           />
@@ -154,7 +149,6 @@
         <div class="column-Message">
           <app-select
             [selectWidth]="'70px'"
-            
             [options]="selectOptions_trainingMinutes"
             formControlName="trainingMinutes"
           />
@@ -196,7 +190,7 @@
     <app-button
       [attachClassName]="['danger']"
       [buttonText]="'關閉'"
-      (click)="closeTab('教育訓練表')"
+      (click)="closeTab()"
     />
   </div>
 </form>

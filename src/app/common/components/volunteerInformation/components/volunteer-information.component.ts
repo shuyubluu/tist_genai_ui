@@ -3,8 +3,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { SharedModule } from '../../../shared/shared.module';
 import { ButtonComponent } from '../../button/button.component';
 import { InputComponent } from '../../input/input.component';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TabService } from '../../../layouts/tab/tab.service';
+import { Hd200ListService } from '../../../../pages/hd200/list/service/hd200-list.service';
 
 @Component({
   selector: 'app-volunteer-information',
@@ -14,101 +15,139 @@ import { TabService } from '../../../layouts/tab/tab.service';
   styleUrl: './volunteer-information.component.scss',
 })
 export class VolunteerInformationComponent implements OnInit {
-  // 當前的頁面
-  @Input() currentTab: string = '';
+  // tab名稱
+  tabName: string = '';
+  // 當前hd200模式
+  currentHd200Mode: string = '';
 
   constructor(
+    private route: ActivatedRoute,
+
     public router: Router, // 路由
     public volunteerInformationService: VolunteerInformationService, // VolunteerInformationService
-    private tabService: TabService // 關閉tab的Service
+    private tabService: TabService, // 關閉tab的Service
+    private hd200ListService: Hd200ListService // hd200ListService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // 取得當前路由的tabName
+    this.tabName = this.route.snapshot.data['tabName'];
+
+    if (this.hd200ListService.isCreate) {
+      this.currentHd200Mode = '/create';
+    } else if (this.hd200ListService.isEdit) {
+      this.currentHd200Mode = '/edit';
+    } else {
+      this.currentHd200Mode = '/view';
+    }
+  }
 
   // 前往hd200Form
   async goToHd200Form() {
-    await this.router.navigate(['/hd200/form']);
-    if (this.currentTab !== '志工基本資料') {
-      this.closeTab(this.currentTab);
-    } else {
+    if (
+      this.router.url.startsWith('/hd200/create') ||
+      this.router.url.startsWith('/hd200/view') ||
+      this.router.url.startsWith('/hd200/edit')
+    ) {
       return;
+    } else {
+      await this.router.navigate(['/hd200' + this.currentHd200Mode]);
+      this.closeTab();
     }
   }
 
   // 前往hd210
   async goToHd210() {
-    await this.router.navigate(['/hd210']);
-    if (this.currentTab === '教育訓練' || this.currentTab === '教育訓練表') {
+    if (
+      this.router.url.startsWith('/hd210') ||
+      this.router.url.startsWith('/hd210/create') ||
+      this.router.url.startsWith('/hd210/view')
+    ) {
       return;
+    } else {
+      await this.router.navigate(['/hd210']);
+      this.closeTab();
     }
-    this.closeTab(this.currentTab);
   }
 
   // 前往hd220
   async goToHd220() {
-    await this.router.navigate(['/hd220']);
-    if (this.currentTab === '獎勵表揚' || this.currentTab === '獎勵表揚表') {
+    if (
+      this.router.url.startsWith('/hd220') ||
+      this.router.url.startsWith('/hd220/create') ||
+      this.router.url.startsWith('/hd220/view')
+    ) {
       return;
     } else {
-      this.closeTab(this.currentTab);
+      await this.router.navigate(['/hd220']);
+      this.closeTab();
     }
   }
 
   // 前往hd230
   async goToHd230() {
-    await this.router.navigate(['/hd230']);
     if (
-      this.currentTab === '服務時數' ||
-      this.currentTab === '服務時數管理表'
+      this.router.url.startsWith('/hd230') ||
+      this.router.url.startsWith('/hd230/edit') ||
+      this.router.url.startsWith('/hd230/view')
     ) {
       return;
     } else {
-      this.closeTab(this.currentTab);
+      await this.router.navigate(['/hd230']);
+      this.closeTab();
     }
   }
 
   // 前往hd240
   async goToHd240() {
-    await this.router.navigate(['/hd240']);
-    if (this.currentTab !== '保險') {
-      this.closeTab(this.currentTab);
-    } else {
+    if (this.router.url.startsWith('/hd240')) {
       return;
+    } else {
+      await this.router.navigate(['/hd240']);
+      this.closeTab();
     }
   }
 
   // 前往hd250
   async goToHd250() {
-    await this.router.navigate(['/hd250']);
-    if (this.currentTab === '評核表' || this.currentTab === '服務品質評估表') {
+    if (
+      this.router.url.startsWith('/hd250') ||
+      this.router.url.startsWith('/hd250/edit') ||
+      this.router.url.startsWith('/hd250/view') ||
+      this.router.url.startsWith('/hd250/create')
+    ) {
       return;
     } else {
-      this.closeTab(this.currentTab);
+      await this.router.navigate(['/hd250']);
+      this.closeTab();
     }
   }
 
   // 前往hd200List
   async goToHd200List2() {
-    await this.router.navigate(['/hd200/list2']);
-    if (this.currentTab !== '個督紀錄') {
-      this.closeTab(this.currentTab);
-    } else {
+    if (this.router.url.startsWith('/hd200/list2')) {
       return;
+    } else {
+      await this.router.navigate(['/hd200/list2']);
+      this.closeTab();
     }
   }
 
   // 前往hd260Form
   async goToHd260Form() {
-    await this.router.navigate(['/hd260/form']);
-    if (this.currentTab !== '退隊表') {
-      this.closeTab(this.currentTab);
-    } else {
+    if (
+      this.router.url.startsWith('/hd260/edit') ||
+      this.router.url.startsWith('/hd260/view')
+    ) {
       return;
+    } else {
+      await this.router.navigate(['/hd260' + this.currentHd200Mode]);
+      this.closeTab();
     }
   }
 
   // 關閉tab
-  closeTab(identifier: string) {
-    this.tabService.closeTab(identifier);
+  closeTab() {
+    this.tabService.closeTab(this.tabName);
   }
 }

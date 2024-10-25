@@ -24,6 +24,7 @@ import { Hd200ListService } from '../../list/service/hd200-list.service';
 import { taiwanIdValidator } from '../../../../common/validator/taiwan-id-validator';
 import { DateValidators } from '../../../../common/validator/date-validator';
 import { AddressValidators } from '../../../../common/validator/address-validator';
+import { CheckboxGroup } from '../service/hd200-form.interface';
 
 @Component({
   selector: 'app-hd200-form',
@@ -287,6 +288,260 @@ export class Hd200FormComponent implements OnInit {
       status: 'done',
     },
   ];
+  // 志工權利義務告知聲明書模擬匯入檔案
+  volunteerRightsObligationsDeclaration_fileList: NzUploadFile[] = [
+    {
+      uid: '1',
+      name: '志工權利義務告知聲明書.word',
+      status: 'done',
+    },
+  ];
+
+  // 飲食習慣勾選狀態
+  eatingHabits: CheckboxGroup[] = [
+    {
+      label: '葷',
+      value: '00',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '全素',
+      value: '01',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '蛋奶素',
+      value: '02',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '鍋邊素',
+      value: '03',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '初一十五素',
+      value: '04',
+      checked: false,
+      disabled: false,
+    },
+  ];
+
+  // 語言勾選狀態
+  languages: CheckboxGroup[] = [
+    {
+      label: '國語',
+      value: '00',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '台語',
+      value: '01',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '客家話',
+      value: '02',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '英語',
+      value: '03',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '日語',
+      value: '04',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '手語',
+      value: '05',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '其它',
+      value: '06',
+      checked: false,
+      disabled: false,
+    },
+  ];
+
+  // 宗教信仰勾選狀態
+  religiousAffiliation: CheckboxGroup[] = [
+    {
+      label: '無',
+      value: '00',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '道教',
+      value: '01',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '佛教',
+      value: '02',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '基督教',
+      value: '03',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '天主教',
+      value: '04',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '一貫道',
+      value: '05',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '回教',
+      value: '06',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '民間信仰',
+      value: '07',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '其他',
+      value: '08',
+      checked: false,
+      disabled: false,
+    },
+  ];
+
+  // 志工來源勾選狀態
+  volunteerSource: CheckboxGroup[] = [
+    {
+      label: '親友',
+      value: '00',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '電視、廣播、報紙等傳播媒體',
+      value: '01',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '海報、宣傳簡介',
+      value: '02',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '本會志工介紹',
+      value: '03',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '其他',
+      value: '04',
+      checked: false,
+      disabled: false,
+    },
+  ];
+
+  // 服務交通工具相關勾選狀態
+  serviceTransportation: CheckboxGroup[] = [
+    {
+      label: '汽車',
+      value: '00',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '機車',
+      value: '01',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '腳踏車',
+      value: '02',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '大眾運輸',
+      value: '03',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '走路',
+      value: '04',
+      checked: false,
+      disabled: false,
+    },
+  ];
+
+  // 擁有交通工具相關勾選狀態
+  hasTransportation: CheckboxGroup[] = [
+    {
+      label: '汽車',
+      value: '00',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '機車',
+      value: '01',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '腳踏車',
+      value: '02',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '箱型車',
+      value: '03',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '卡車',
+      value: '04',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '遊覽車',
+      value: '05',
+      checked: false,
+      disabled: false,
+    },
+  ];
 
   constructor(
     private route: ActivatedRoute,
@@ -295,6 +550,43 @@ export class Hd200FormComponent implements OnInit {
     public volunteerInformationService: VolunteerInformationService, // volunteerInformationService
     public hd200ListService: Hd200ListService // hd200ListService
   ) {
+    // 串接複選框的狀態
+    // this.eatingHabits =
+    // this.languages =
+    // this.religiousAffiliation =
+    // this.volunteerSource =
+    // this.serviceTransportation =
+    // this.hasTransportation =
+
+    // 飲食習慣CheckboxGroup
+    const eatingHabitsGroup = this.createCheckboxGroup(this.eatingHabits);
+
+    // 語言CheckboxGroup
+    const languagesGroup = this.createCheckboxGroup(this.languages);
+    languagesGroup['languages_other'] = new FormControl('');
+
+    // 宗教信仰CheckboxGroup
+    const religiousAffiliationGroup = this.createCheckboxGroup(
+      this.religiousAffiliation
+    );
+    religiousAffiliationGroup['religiousAffiliation_other'] = new FormControl(
+      ''
+    );
+
+    // 志工來源CheckboxGroup
+    const volunteerSourceGroup = this.createCheckboxGroup(this.volunteerSource);
+    volunteerSourceGroup['volunteerSource_other'] = new FormControl('');
+
+    // 服務交通工具CheckboxGroup
+    const serviceTransportationGroup = this.createCheckboxGroup(
+      this.serviceTransportation
+    );
+
+    // 擁有交通工具CheckboxGroup
+    const hasTransportationGroup = this.createCheckboxGroup(
+      this.hasTransportation
+    );
+
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
       // 1.志工入隊
@@ -347,21 +639,17 @@ export class Hd200FormComponent implements OnInit {
       // E-mail
       email: new FormControl('', [Validators.email]),
       // 飲食習慣
-      eatingHabits: new FormControl(''),
+      eatingHabits: new FormGroup(eatingHabitsGroup),
       // 學歷
       education: new FormControl(''),
       // 語言
-      languages: new FormControl(''),
-      // 語言_其他
-      languages_other: new FormControl(''),
+      languages: new FormGroup(languagesGroup),
       // 通訊地址
       address_select: new FormControl('', [AddressValidators.addressValidator]),
       // 通訊地址
       address: new FormControl('', [Validators.required]),
       // 宗教信仰
-      religiousAffiliation: new FormControl(''),
-      // 宗教信仰_其他
-      religiousAffiliation_other: new FormControl(''),
+      religiousAffiliation: new FormGroup(religiousAffiliationGroup),
       // 婚姻狀況
       maritalStatus: new FormControl(''),
       // 婚姻狀況其他
@@ -379,17 +667,15 @@ export class Hd200FormComponent implements OnInit {
       // 證照
       certification: new FormControl(''),
       // 志工來源
-      volunteerSource: new FormControl(''),
-      // 志工來源_其他
-      volunteerSource_other: new FormControl(''),
+      volunteerSource: new FormGroup(volunteerSourceGroup),
       // 志工職稱
       volunteerTitle: new FormControl('', [Validators.required]),
       // 希望服務區域
       desiredServiceArea: new FormControl('', [Validators.required]),
       // 服務交通工具
-      serviceTransportation: new FormControl(''),
+      serviceTransportation: new FormGroup(serviceTransportationGroup),
       // 擁有交通工具
-      hasTransportation: new FormControl(''),
+      hasTransportation: new FormGroup(hasTransportationGroup),
 
       // 4.識別
       // 是否曾擔任志工
@@ -430,6 +716,12 @@ export class Hd200FormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // 複選框初始化
+    const religiousAffiliationCheckedValues = this.religiousAffiliation
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.religiousAffiliationChange(religiousAffiliationCheckedValues);
+
     // 取得當前路由的tabName
     this.tabName = this.route.snapshot.data['tabName'];
     // 檢視模式，禁用表單
@@ -437,52 +729,102 @@ export class Hd200FormComponent implements OnInit {
       this.form.disable();
     }
     // 禁用語言其他
-    this.form.get('languages_other')?.disable();
+    this.form.get('languages.languages_other')?.disable();
     // 禁用宗教信仰其他
-    this.form.get('religiousAffiliation_other')?.disable();
+    this.form.get('religiousAffiliation.religiousAffiliation_other')?.disable();
     // 禁用婚姻狀況其他
     this.form.get('maritalStatus_other')?.disable();
     // 志工來源其他
-    this.form.get('volunteerSource_other')?.disable();
+    this.form.get('volunteerSource.volunteerSource_other')?.disable();
     // 禁用主責人
     this.form.get('primaryContact')?.disable();
   }
 
   // 飲食習慣選項改變
-  eatingHabitsChange(checkGroup: string[]) {
-    this.form.get('eatingHabits')?.setValue(checkGroup);
+  eatingHabitsChange(checkedValues: string[]) {
+    this.eatingHabits.forEach((option) => {
+      // 更新每個選項的 checked 狀態
+      option.checked = checkedValues.includes(option.value);
+    });
   }
 
   // 語言選項改變
-  languagesChange(checkGroup: string[]) {
-    this.form.get('languages')?.setValue(checkGroup);
-    if (checkGroup.includes('7')) {
-      this.form.get('languages_other')?.enable();
-    } else {
-      this.form.get('languages_other')?.disable();
-      this.form.get('languages_other')?.reset();
-    }
+  languagesChange(checkedValues: string[]) {
+    this.languages.forEach((option) => {
+      // 更新每個選項的 checked 狀態
+      option.checked = checkedValues.includes(option.value);
+      if (option.value === '06') {
+        if (option.checked) {
+          this.form.get('languages.languages_other')?.enable();
+        } else {
+          this.form.get('languages.languages_other')?.disable();
+          this.form.get('languages.languages_other')?.reset();
+        }
+      }
+    });
   }
 
   // 宗教信仰選項改變
-  religiousAffiliationChange(checkGroup: string[]) {
-    this.form.get('religiousAffiliation')?.setValue(checkGroup);
-    // 如果勾選了無將禁用其他選項
-    // 勾取其他選項則禁用無
-    if (checkGroup.includes('1')) {
-      this.isDisableReligiousAffiliationOthers = true;
-    } else {
-      this.isDisableReligiousAffiliationOthers = false;
-    }
-    if (checkGroup.includes('9')) {
-      this.form.get('religiousAffiliation_other')?.enable();
-    } else {
-      this.form.get('religiousAffiliation_other')?.reset();
-      this.form.get('religiousAffiliation_other')?.disable();
-    }
-    this.isDisableReligiousAffiliationNone = checkGroup.some((check) =>
-      ['2', '3', '4', '5', '6', '7', '8', '9'].includes(check)
-    );
+  religiousAffiliationChange(checkedValues: string[]) {
+    this.religiousAffiliation.forEach((option) => {
+      // 更新每個選項的 checked 狀態
+      option.checked = checkedValues.includes(option.value);
+      // 當 "00" 被勾選時
+      if (option.value === '00') {
+        if (option.checked) {
+          // 禁用其他選項
+          this.religiousAffiliation.forEach((option) => {
+            if (option.value !== '00') {
+              option.checked = false; // 取消勾選
+              option.disabled = true; // 禁用其他選項
+            }
+          });
+        } else {
+          // 啟用其他選項
+          this.religiousAffiliation.forEach((option) => {
+            option.disabled = false; // 啟用所有選項
+          });
+        }
+      } else {
+        if (option.value === '08' && this.form) {
+          if (option.checked) {
+            this.form
+              .get('religiousAffiliation.religiousAffiliation_other')
+              ?.enable();
+          } else {
+            this.form
+              .get('religiousAffiliation.religiousAffiliation_other')
+              ?.disable();
+            this.form
+              .get('religiousAffiliation.religiousAffiliation_other')
+              ?.reset();
+          }
+        }
+        // 當 "00" 以外的選項被勾選時
+        if (option.checked) {
+          // 禁用 "00" 選項
+          this.religiousAffiliation.forEach((option) => {
+            if (option.value === '00') {
+              option.checked = false; // 取消勾選
+              option.disabled = true; // 禁用 "00" 選項
+            }
+          });
+        } else {
+          // 檢查其他選項是否被勾選
+          const isAnyChecked = this.religiousAffiliation.some(
+            (option) => option.value !== '00' && option.checked
+          );
+          if (!isAnyChecked) {
+            // 如果沒有其他選項被勾選，啟用 "00" 選項
+            this.religiousAffiliation.forEach((option) => {
+              if (option.value === '00') {
+                option.disabled = false; // 啟用 "00" 選項
+              }
+            });
+          }
+        }
+      }
+    });
   }
 
   // 婚姻狀況選項改變
@@ -498,24 +840,47 @@ export class Hd200FormComponent implements OnInit {
   }
 
   // 志工來源選項改變
-  volunteerSourceChange(checkGroup: string[]) {
-    this.form.get('volunteerSource')?.setValue(checkGroup);
-    if (checkGroup.includes('5')) {
-      this.form.get('volunteerSource_other')?.enable();
-    } else {
-      this.form.get('volunteerSource_other')?.reset();
-      this.form.get('volunteerSource_other')?.disable();
-    }
+  volunteerSourceChange(checkedValues: string[]) {
+    this.volunteerSource.forEach((option) => {
+      // 更新每個選項的 checked 狀態
+      option.checked = checkedValues.includes(option.value);
+      if (option.value === '04') {
+        if (option.checked) {
+          this.form.get('volunteerSource.volunteerSource_other')?.enable();
+        } else {
+          this.form.get('volunteerSource.volunteerSource_other')?.disable();
+          this.form.get('volunteerSource.volunteerSource_other')?.reset();
+        }
+      }
+    });
   }
 
   // 服務交通工具選項改變
-  serviceTransportationChange(checkGroup: string[]) {
-    this.form.get('serviceTransportation')?.setValue(checkGroup);
+  serviceTransportationChange(checkedValues: string[]) {
+    this.serviceTransportation.forEach((option) => {
+      // 更新每個選項的 checked 狀態
+      option.checked = checkedValues.includes(option.value);
+    });
   }
 
   // 擁有交通工具選項改變
-  hasTransportationChange(checkGroup: string[]) {
-    this.form.get('hasTransportation')?.setValue(checkGroup);
+  hasTransportationChange(checkedValues: string[]) {
+    this.hasTransportation.forEach((option) => {
+      // 更新每個選項的 checked 狀態
+      option.checked = checkedValues.includes(option.value);
+    });
+  }
+
+  // 創建checkbox group
+  createCheckboxGroup(options: any[]): { [key: string]: FormControl } {
+    const group: { [key: string]: FormControl } = {};
+    options.forEach((option) => {
+      group[option.value] = new FormControl(option.checked);
+      if (option.disabled) {
+        group[option.value].disable(); // 如果該選項應該被禁用，則禁用對應的 FormControl
+      }
+    });
+    return group;
   }
 
   // 榮譽卡選項改變
@@ -584,8 +949,19 @@ export class Hd200FormComponent implements OnInit {
     this.form.get('serviceUnit_select1')?.setValue(option);
   }
 
-  // 服務紀錄測上傳點擊事件
+  // 服務紀錄冊上傳點擊事件
   volunteerServiceRecord_handleChange(info: NzUploadChangeParam): void {
+    if (info.file.status === 'done') {
+      this.message.success(`${info.file.name} 上傳成功`);
+    } else if (info.file.status === 'error') {
+      this.message.error(`${info.file.name} 上傳失敗.`);
+    }
+  }
+
+  // 志工權利義務告知聲明書上傳點擊事件
+  volunteerRightsObligationsDeclaration_handleChange(
+    info: NzUploadChangeParam
+  ): void {
     if (info.file.status === 'done') {
       this.message.success(`${info.file.name} 上傳成功`);
     } else if (info.file.status === 'error') {

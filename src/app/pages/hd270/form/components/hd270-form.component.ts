@@ -12,6 +12,8 @@ import { Hd270ListService } from '../../list/service/hd270-list.service';
 import { ErrorMessageComponent } from '../../../../common/components/message/error-message.component';
 import { compareDate } from '../../../../common/utils/compareDate';
 import { DateValidators } from '../../../../common/validator/date-validator';
+import { CheckboxGroup } from '../service/hd270-form.interface';
+import { checkboxGroupValidator } from '../../../../common/validator/checkbox-group-validator';
 
 @Component({
   selector: 'app-hd270-form',
@@ -87,12 +89,76 @@ export class Hd270FormComponent implements OnInit {
     '林邊(林邊志工站)',
   ];
 
+  // 服務外的保障範圍勾選狀態
+  coverageOutsideServiceScope: CheckboxGroup[] = [
+    {
+      label: '志工會議',
+      value: '00',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '教育訓練',
+      value: '01',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '外縣市活動',
+      value: '02',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '其他',
+      value: '03',
+      checked: false,
+      disabled: false,
+    },
+  ];
+
+  // 投保人員勾選狀態
+  insuredPerson: CheckboxGroup[] = [
+    {
+      label: '吳小美',
+      value: '00',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '陳大天',
+      value: '01',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '張大壯',
+      value: '02',
+      checked: false,
+      disabled: false,
+    },
+  ];
+
   constructor(
     private route: ActivatedRoute,
     private tabService: TabService, // 關閉tab的Service
     private message: NzMessageService, // 訊息
     public hd270ListService: Hd270ListService // hd270ListService
   ) {
+    // 接收後端回傳質料
+    // this.coverageOutsideServiceScope =
+    // this.insuredPerson =
+
+    // 服務外的保障範圍CheckboxGroup
+    const coverageOutsideServiceScopeGroup = this.createCheckboxGroup(
+      this.coverageOutsideServiceScope
+    );
+    coverageOutsideServiceScopeGroup['coverageOutsideServiceScope_other'] =
+      new FormControl('', [Validators.required]);
+
+    // 投保人員CheckboxGroup
+    const insuredPersonGroup = this.createCheckboxGroup(this.insuredPerson);
+
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
       // 填表日期
@@ -158,19 +224,21 @@ export class Hd270FormComponent implements OnInit {
         Validators.required,
       ]),
       // 服務外的保障範圍
-      coverageOutsideServiceScope: new FormControl('', [Validators.required]),
-      // 服務外的保障範圍_其他
-      coverageOutsideServiceScope_other: new FormControl('', [
-        Validators.required,
-      ]),
+      coverageOutsideServiceScope: new FormGroup(
+        coverageOutsideServiceScopeGroup,
+        [checkboxGroupValidator()]
+      ),
       // 投保單位
       insuredUnit: new FormControl(''),
       // 投保人員
-      insuredPerson: new FormControl(''),
+      insuredPerson: new FormGroup(insuredPersonGroup),
     });
   }
 
   ngOnInit(): void {
+    // 取得當前路由的tabName
+    this.tabName = this.route.snapshot.data['tabName'];
+
     // 檢視模式，禁用表單
     if (this.hd270ListService.isView) {
       this.form.disable();
@@ -181,25 +249,57 @@ export class Hd270FormComponent implements OnInit {
       this.form.get('surrenderDate')?.enable();
     }
     // 禁用服務外的保障範圍_其他
-    this.form.get('coverageOutsideServiceScope_other')?.disable();
-    // 取得當前路由的tabName
-    this.tabName = this.route.snapshot.data['tabName'];
+    this.form
+      .get('coverageOutsideServiceScope.coverageOutsideServiceScope_other')
+      ?.disable();
   }
 
   // 服務外的保障範圍選項改變
-  coverageOutsideServiceScopeChange(checkGroup: string[]) {
-    this.form.get('coverageOutsideServiceScope')?.setValue(checkGroup);
-    if (checkGroup.includes('4')) {
-      this.form.get('coverageOutsideServiceScope_other')?.enable();
-    } else {
-      this.form.get('coverageOutsideServiceScope_other')?.disable();
-      this.form.get('coverageOutsideServiceScope_other')?.reset();
-    }
+  coverageOutsideServiceScopeChange(checkedValues: string[]) {
+    this.coverageOutsideServiceScope.forEach((option) => {
+      // 更新每個選項的 checked 狀態
+      option.checked = checkedValues.includes(option.value);
+      if (option.value === '03') {
+        if (option.checked) {
+          this.form
+            .get(
+              'coverageOutsideServiceScope.coverageOutsideServiceScope_other'
+            )
+            ?.enable();
+        } else {
+          this.form
+            .get(
+              'coverageOutsideServiceScope.coverageOutsideServiceScope_other'
+            )
+            ?.disable();
+          this.form
+            .get(
+              'coverageOutsideServiceScope.coverageOutsideServiceScope_other'
+            )
+            ?.reset();
+        }
+      }
+    });
   }
 
   // 投保人員選項改變
-  insuredPersonChange(checkGroup: string[]) {
-    this.form.get('insuredPerson')?.setValue(checkGroup);
+  insuredPersonChange(checkedValues: string[]) {
+    this.insuredPerson.forEach((option) => {
+      // 更新每個選項的 checked 狀態
+      option.checked = checkedValues.includes(option.value);
+    });
+  }
+
+  // 創建checkbox group
+  createCheckboxGroup(options: any[]): { [key: string]: FormControl } {
+    const group: { [key: string]: FormControl } = {};
+    options.forEach((option) => {
+      group[option.value] = new FormControl(option.checked);
+      if (option.disabled) {
+        group[option.value].disable(); // 如果該選項應該被禁用，則禁用對應的 FormControl
+      }
+    });
+    return group;
   }
 
   // 送出
@@ -217,7 +317,7 @@ export class Hd270FormComponent implements OnInit {
     }
     if (!this.checkDateRange) {
       this.message.create('success', '送出成功');
-      this.closeTab('保險專區表');
+      this.closeTab();
     }
   }
 
@@ -236,13 +336,13 @@ export class Hd270FormComponent implements OnInit {
     }
     if (!this.checkDateRange) {
       this.message.create('success', '新增成功');
-      this.closeTab('保險專區表');
+      this.closeTab();
     }
   }
 
   // 關閉當前的tab
-  closeTab(identifier: string) {
-    this.tabService.closeTab(identifier);
+  closeTab(): void {
+    this.tabService.closeTab(this.tabName);
   }
 
   // 當投保日期起迄改變觸發

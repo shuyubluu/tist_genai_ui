@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ButtonComponent } from '../../../../common/components/button/button.component';
 import { InputComponent } from '../../../../common/components/input/input.component';
 import { SelectComponent } from '../../../../common/components/select/select.component';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { DayPickerComponent } from '../../../../common/components/dayPicker/dayPicker.component';
 import { SharedModule } from '../../../../common/shared/shared.module';
 import { TabService } from '../../../../common/layouts/tab/tab.service';
@@ -33,6 +33,10 @@ import { DateValidators } from '../../../../common/validator/date-validator';
 export class Hd250FormComponent implements OnInit {
   // 搜尋條件表單
   form: FormGroup;
+  // tab名稱
+  tabName: string = '';
+  // 是否需要為期改善
+  isNeedsPeriodicImprovement: boolean = false;
   // 是非題select選項
   selectOptions_trueOrFalse: string[] = ['是', '否'];
 
@@ -85,15 +89,22 @@ export class Hd250FormComponent implements OnInit {
   // 判斷評估結果
   get assessmentResults(): string {
     if (this.totalScore >= 80) {
+      this.isNeedsPeriodicImprovement = false;
+      this.updateFirstImprovementInput(this.isNeedsPeriodicImprovement);
       return '通過';
     } else if (this.totalScore < 60) {
+      this.isNeedsPeriodicImprovement = false;
+      this.updateFirstImprovementInput(this.isNeedsPeriodicImprovement);
       return '不予通過';
     } else {
+      this.isNeedsPeriodicImprovement = true;
+      this.updateFirstImprovementInput(this.isNeedsPeriodicImprovement);
       return '三個月內為期改善';
     }
   }
 
   constructor(
+    private route: ActivatedRoute,
     private tabService: TabService, // 關閉tab的Service
     public hd250ListService: Hd250ListService, // hd250ListService
     private message: NzMessageService // 訊息
@@ -202,6 +213,9 @@ export class Hd250FormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // 取得當前路由的tabName
+    this.tabName = this.route.snapshot.data['tabName'];
+
     // 檢視模式，禁用表單
     if (this.hd250ListService.isView) {
       this.form.disable();
@@ -222,6 +236,14 @@ export class Hd250FormComponent implements OnInit {
     this.form.get('teamSpirit_volunteer_1')?.disable();
     this.form.get('teamSpirit_volunteer_2')?.disable();
     this.form.get('teamSpirit_volunteer_3')?.disable();
+
+    // 禁用為期改善
+    this.form.get('firstImprovementPassed_evaluationDate')?.disable();
+    this.form.get('firstImprovementPassed')?.disable();
+    this.form.get('firstImprovementFailedReason')?.disable();
+    this.form.get('secondImprovementPassed_evaluationDate')?.disable();
+    this.form.get('secondImprovementPassed')?.disable();
+    this.form.get('secondImprovementFailedReason')?.disable();
 
     // 禁用主責人姓名
     this.form.get('responsiblePersonName')?.disable();
@@ -272,20 +294,62 @@ export class Hd250FormComponent implements OnInit {
       }
     }
   }
+
+  // 第一次為期改善select變更
+  firstImprovementPassedChange(option: string) {
+    if (option === '是') {
+      this.form.get('secondImprovementPassed_evaluationDate')?.enable();
+      this.form.get('secondImprovementPassed')?.enable();
+      this.form.get('secondImprovementFailedReason')?.enable();
+    } else {
+      this.form.get('secondImprovementPassed_evaluationDate')?.disable();
+      this.form.get('secondImprovementPassed_evaluationDate')?.reset();
+      this.form.get('secondImprovementPassed')?.disable();
+      this.form.get('secondImprovementPassed')?.reset();
+      this.form.get('secondImprovementFailedReason')?.disable();
+      this.form.get('secondImprovementFailedReason')?.reset();
+    }
+  }
+
+  // 更新第一次為期改善輸入選項
+  updateFirstImprovementInput(isNeedsPeriodicImprovement: boolean) {
+    if (isNeedsPeriodicImprovement) {
+      this.form.get('firstImprovementPassed_evaluationDate')?.enable();
+      this.form.get('firstImprovementPassed')?.enable();
+      this.form.get('firstImprovementFailedReason')?.enable();
+      this.form.get('secondImprovementPassed_evaluationDate')?.enable();
+      this.form.get('secondImprovementPassed')?.enable();
+      this.form.get('secondImprovementFailedReason')?.enable();
+    } else {
+      this.form.get('firstImprovementPassed_evaluationDate')?.disable();
+      this.form.get('firstImprovementPassed_evaluationDate')?.reset();
+      this.form.get('firstImprovementPassed')?.disable();
+      this.form.get('firstImprovementPassed')?.reset();
+      this.form.get('firstImprovementFailedReason')?.disable();
+      this.form.get('firstImprovementFailedReason')?.reset();
+      this.form.get('secondImprovementPassed_evaluationDate')?.disable();
+      this.form.get('secondImprovementPassed_evaluationDate')?.reset();
+      this.form.get('secondImprovementPassed')?.disable();
+      this.form.get('secondImprovementPassed')?.reset();
+      this.form.get('secondImprovementFailedReason')?.disable();
+      this.form.get('secondImprovementFailedReason')?.reset();
+    }
+  }
+
   // 完成送審
   review() {
     this.message.create('success', '送審成功');
-    this.closeTab('服務品質評估表');
+    this.closeTab();
   }
 
   // 儲存
   save() {
     this.message.create('success', '儲存成功');
-    this.closeTab('服務品質評估表');
+    this.closeTab();
   }
 
   // 關閉當前的tab
-  closeTab(identifier: string) {
-    this.tabService.closeTab(identifier);
+  closeTab(): void {
+    this.tabService.closeTab(this.tabName);
   }
 }

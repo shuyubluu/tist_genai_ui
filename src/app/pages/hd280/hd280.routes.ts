@@ -9,11 +9,11 @@ export const HD280_ROUTES: Routes = [
       ),
   },
   {
-    path: 'form',
+    path: 'create',
     loadComponent: () =>
       import('./form/components/hd280-form.component').then(
         (m) => m.Hd280FormComponent
       ),
-    data: { tabName: '服務時數管理表' },
+    data: { tabName: '[服務時數管理表] :::新增' },
   },
 ];

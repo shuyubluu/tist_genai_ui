@@ -205,6 +205,13 @@ export class Hd170FormComponent implements OnInit {
   ngOnInit(): void {
     // 取得當前路由的tabName
     this.tabName = this.route.snapshot.data['tabName'];
+
+    // 複選框初始化
+    const socialWelfareAssistanceCheckedValues = this.socialWelfareAssistance
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.socialWelfareAssistanceChange(socialWelfareAssistanceCheckedValues);
+
     // 檢視模式，禁用表單
     if (this.hd170ListService.isView) {
       this.form.disable();
