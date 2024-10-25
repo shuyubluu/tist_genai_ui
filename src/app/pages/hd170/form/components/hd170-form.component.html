@@ -58,10 +58,7 @@
     <div class="grid-columns-2">
       <div class="label disableBackground">生日</div>
       <div>
-        <app-dayPicker
-          [disabled]="hd170ListService.isView"
-          formControlName="dateOfBirth"
-        />
+        <app-dayPicker [disabled]="true" formControlName="dateOfBirth" />
       </div>
       <div class="label disableBackground">身份證字號</div>
       <div>
@@ -134,30 +131,25 @@
       <div class="label disableBackground">社會福利補助</div>
       <div>
         <nz-checkbox-wrapper
-          style="width: 100%"
-          (nzOnChange)="socialWelfareSubsidyChange($event)"
+          (nzOnChange)="socialWelfareAssistanceChange($event)"
         >
-          <div nz-row>
-            <div nz-col>
-              <label nz-checkbox [nzDisabled]="true" nzValue="1">無</label>
-            </div>
-            <div nz-col>
-              <label nz-checkbox [nzDisabled]="true" nzValue="2"
-                >身心障礙</label
-              >
-            </div>
-            <div nz-col>
-              <label nz-checkbox [nzDisabled]="true" nzValue="3">原住民</label>
-            </div>
-            <div nz-col>
-              <label nz-checkbox [nzDisabled]="true" nzValue="4">新住民</label>
-            </div>
-            <div nz-col>
-              <label nz-checkbox [nzDisabled]="true" nzValue="5">榮民</label>
-            </div>
-            <div nz-col>
-              <label nz-checkbox [nzDisabled]="true" nzValue="6">榮眷</label>
-            </div>
+          <div formGroupName="socialWelfareAssistance">
+            <label
+              [nzDisabled]="option.disabled"
+              nz-checkbox
+              *ngFor="let option of socialWelfareAssistance"
+              [formControlName]="option.value"
+              [nzValue]="option.value"
+            >
+              {{ option.label }}
+            </label>
+            <label>
+              <app-error-message
+                [control]="form.get('socialWelfareAssistance')"
+                [isTouched]="false"
+                errorKey="atLeastOneChecked"
+                errorMessage="必選"
+            /></label>
           </div>
         </nz-checkbox-wrapper>
       </div>

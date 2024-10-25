@@ -194,43 +194,18 @@
     <div class="grid-columns-1">
       <div class="label">福利身分別</div>
       <div class="column-Message">
-        <nz-checkbox-wrapper
-          style="width: 100%"
-          (nzOnChange)="welfareStatusChange($event)"
-        >
-          <div nz-row>
-            <div nz-col>
+        <nz-checkbox-wrapper (nzOnChange)="welfareStatusChange($event)">
+          <div formGroupName="welfareStatus">
+            <span *ngFor="let option of welfareStatus">
               <label
+                [nzDisabled]="option.disabled"
                 nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="1"
-                >身障證明申請</label
+                [formControlName]="option.value"
+                [nzValue]="option.value"
               >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="2"
-                >低收</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="3"
-                >中低收申請</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="4"
-                >中低收老人津貼申請</label
-              >
-            </div>
+                {{ option.label }}
+              </label>
+            </span>
           </div>
         </nz-checkbox-wrapper>
       </div>
@@ -238,59 +213,18 @@
     <div class="grid-columns-1">
       <div class="label">長照需求</div>
       <div class="column-Message">
-        <nz-checkbox-wrapper
-          style="width: 100%"
-          (nzOnChange)="longTermCareNeedsChange($event)"
-        >
-          <div nz-row>
-            <div nz-col>
+        <nz-checkbox-wrapper (nzOnChange)="longTermCareNeedsChange($event)">
+          <div formGroupName="longTermCareNeeds">
+            <span *ngFor="let option of longTermCareNeeds">
               <label
+                [nzDisabled]="option.disabled"
                 nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="1"
-                >居家服務</label
+                [formControlName]="option.value"
+                [nzValue]="option.value"
               >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="2"
-                >日間照顧</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="3"
-                >機構安置</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="4"
-                >喘息服務</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="5"
-                >照顧指導</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="6"
-                >家庭托顧</label
-              >
-            </div>
+                {{ option.label }}
+              </label>
+            </span>
           </div>
         </nz-checkbox-wrapper>
       </div>
@@ -298,43 +232,18 @@
     <div class="grid-columns-1">
       <div class="label">餐食需求</div>
       <div class="column-Message">
-        <nz-checkbox-wrapper
-          style="width: 100%"
-          (nzOnChange)="mealNeedsChange($event)"
-        >
-          <div nz-row>
-            <div nz-col>
+        <nz-checkbox-wrapper (nzOnChange)="mealNeedsChange($event)">
+          <div formGroupName="mealNeeds">
+            <span *ngFor="let option of mealNeeds">
               <label
+                [nzDisabled]="option.disabled"
                 nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="1"
-                >長照護送</label
+                [formControlName]="option.value"
+                [nzValue]="option.value"
               >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="2"
-                >非長照護送</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="3"
-                >營養評估</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="4"
-                >待餐物資</label
-              >
-            </div>
+                {{ option.label }}
+              </label>
+            </span>
           </div>
         </nz-checkbox-wrapper>
       </div>
@@ -342,59 +251,18 @@
     <div class="grid-columns-1">
       <div class="label">醫療需求</div>
       <div class="column-Message">
-        <nz-checkbox-wrapper
-          style="width: 100%"
-          (nzOnChange)="medicalNeedsChange($event)"
-        >
-          <div nz-row>
-            <div nz-col>
+        <nz-checkbox-wrapper (nzOnChange)="medicalNeedsChange($event)">
+          <div formGroupName="medicalNeeds">
+            <span *ngFor="let option of medicalNeeds">
               <label
+                [nzDisabled]="option.disabled"
                 nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="1"
-                >了解醫囑</label
+                [formControlName]="option.value"
+                [nzValue]="option.value"
               >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="2"
-                >陪同門診、門診手術</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="3"
-                >居家護理</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="4"
-                >復健</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="5"
-                >衛教宣導</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="6"
-                >用藥安全指導</label
-              >
-            </div>
+                {{ option.label }}
+              </label>
+            </span>
           </div>
         </nz-checkbox-wrapper>
       </div>
@@ -402,82 +270,24 @@
     <div class="grid-columns-1">
       <div class="label">經濟需求</div>
       <div class="column-Message">
-        <nz-checkbox-wrapper
-          style="width: 100%"
-          (nzOnChange)="economicNeedsChange($event)"
-        >
-          <div nz-row>
-            <div nz-col>
+        <nz-checkbox-wrapper (nzOnChange)="economicNeedsChange($event)">
+          <div formGroupName="economicNeeds">
+            <span *ngFor="let option of economicNeeds">
               <label
+                [nzDisabled]="option.disabled"
                 nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="1"
-                >住院看護費用</label
+                [formControlName]="option.value"
+                [nzValue]="option.value"
               >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="2"
-                >急難救助金申請</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="3"
-                >醫療補助費用</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="4"
-                >機構緊急安置費用</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="5"
-                >長照服務費用缺口</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="6"
-                >送物資生活用品提供</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="7"
-                >房租費用</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="8"
-                >其他</label
-              >
-              <label>
-                <app-input
-                  [inputWidth]="'100px'"
-                  [maxLength]="30"
-                  formControlName="economicNeeds_other"
-                />
+                {{ option.label }}
               </label>
-            </div>
+              <app-input
+                *ngIf="option.value === '07' && option.checked"
+                [inputWidth]="'100px'"
+                [maxLength]="30"
+                formControlName="economicNeeds_other"
+              />
+            </span>
           </div>
         </nz-checkbox-wrapper>
       </div>
@@ -485,43 +295,18 @@
     <div class="grid-columns-1">
       <div class="label">輔具需求</div>
       <div class="column-Message">
-        <nz-checkbox-wrapper
-          style="width: 100%"
-          (nzOnChange)="assistiveDeviceNeedsChange($event)"
-        >
-          <div nz-row>
-            <div nz-col>
+        <nz-checkbox-wrapper (nzOnChange)="assistiveDeviceNeedsChange($event)">
+          <div formGroupName="assistiveDeviceNeeds">
+            <span *ngFor="let option of assistiveDeviceNeeds">
               <label
+                [nzDisabled]="option.disabled"
                 nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="1"
-                >輔具堤供</label
+                [formControlName]="option.value"
+                [nzValue]="option.value"
               >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="2"
-                >輔具申請</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="3"
-                >輔具租借</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="4"
-                >輔具修理
+                {{ option.label }}
               </label>
-            </div>
+            </span>
           </div>
         </nz-checkbox-wrapper>
       </div>
@@ -529,35 +314,18 @@
     <div class="grid-columns-1">
       <div class="label">環境需求</div>
       <div class="column-Message">
-        <nz-checkbox-wrapper
-          style="width: 100%"
-          (nzOnChange)="environmentalNeedsChange($event)"
-        >
-          <div nz-row>
-            <div nz-col>
+        <nz-checkbox-wrapper (nzOnChange)="environmentalNeedsChange($event)">
+          <div formGroupName="environmentalNeeds">
+            <span *ngFor="let option of environmentalNeeds">
               <label
+                [nzDisabled]="option.disabled"
                 nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="1"
-                >無障礙環境改善</label
+                [formControlName]="option.value"
+                [nzValue]="option.value"
               >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="2"
-                >居家修繕</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="3"
-                >居家環境清潔</label
-              >
-            </div>
+                {{ option.label }}
+              </label>
+            </span>
           </div>
         </nz-checkbox-wrapper>
       </div>
@@ -565,50 +333,24 @@
     <div class="grid-columns-1">
       <div class="label">社會參與</div>
       <div class="column-Message">
-        <nz-checkbox-wrapper
-          style="width: 100%"
-          (nzOnChange)="socialMealNeedsChange($event)"
-        >
-          <div nz-row>
-            <div nz-col>
+        <nz-checkbox-wrapper (nzOnChange)="socialMealNeedsChange($event)">
+          <div formGroupName="socialMealNeeds">
+            <span *ngFor="let option of socialMealNeeds">
               <label
+                [nzDisabled]="option.disabled"
                 nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="1"
-                >媒合據點活動</label
+                [formControlName]="option.value"
+                [nzValue]="option.value"
               >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="2"
-                >志工關懷訪視服務</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="3"
-                >參與敬老旅遊或長者活動</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="4"
-                >其他</label
-              >
-              <label>
-                <app-input
-                  [inputWidth]="'100px'"
-                  [maxLength]="30"
-                  formControlName="socialMealNeeds_other"
-                />
+                {{ option.label }}
               </label>
-            </div>
+              <app-input
+                *ngIf="option.value === '03' && option.checked"
+                [inputWidth]="'100px'"
+                [maxLength]="30"
+                formControlName="socialMealNeeds_other"
+              />
+            </span>
           </div>
         </nz-checkbox-wrapper>
       </div>
@@ -616,58 +358,24 @@
     <div class="grid-columns-1">
       <div class="label">自我保護需求</div>
       <div class="column-Message">
-        <nz-checkbox-wrapper
-          style="width: 100%"
-          (nzOnChange)="selfProtectionNeedsChange($event)"
-        >
-          <div nz-row>
-            <div nz-col>
+        <nz-checkbox-wrapper (nzOnChange)="selfProtectionNeedsChange($event)">
+          <div formGroupName="selfProtectionNeeds">
+            <span *ngFor="let option of selfProtectionNeeds">
               <label
+                [nzDisabled]="option.disabled"
                 nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="1"
-                >自殺通報</label
+                [formControlName]="option.value"
+                [nzValue]="option.value"
               >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="2"
-                >家暴通報</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="3"
-                >性侵通報</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="4"
-                >緊急救援守護連線</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="5"
-                >其他</label
-              >
-              <label>
-                <app-input
-                  [inputWidth]="'100px'"
-                  [maxLength]="30"
-                  formControlName="selfProtectionNeeds_other"
-                />
+                {{ option.label }}
               </label>
-            </div>
+              <app-input
+                *ngIf="option.value === '04' && option.checked"
+                [inputWidth]="'100px'"
+                [maxLength]="30"
+                formControlName="selfProtectionNeeds_other"
+              />
+            </span>
           </div>
         </nz-checkbox-wrapper>
       </div>
@@ -675,51 +383,18 @@
     <div class="grid-columns-1">
       <div class="label">鑑定需求</div>
       <div class="column-Message">
-        <nz-checkbox-wrapper
-          style="width: 100%"
-          (nzOnChange)="assessmentNeedsChange($event)"
-        >
-          <div nz-row>
-            <div nz-col>
+        <nz-checkbox-wrapper (nzOnChange)="assessmentNeedsChange($event)">
+          <div formGroupName="assessmentNeeds">
+            <span *ngFor="let option of assessmentNeeds">
               <label
+                [nzDisabled]="option.disabled"
                 nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="1"
-                >身障鑑定</label
+                [formControlName]="option.value"
+                [nzValue]="option.value"
               >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="2"
-                >失智症鑑定</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="3"
-                >重大傷病申請</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="4"
-                >憂鬱/躁鬱鑑定</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="5"
-                >監護鑑定</label
-              >
-            </div>
+                {{ option.label }}
+              </label>
+            </span>
           </div>
         </nz-checkbox-wrapper>
       </div>
@@ -727,43 +402,18 @@
     <div class="grid-columns-1">
       <div class="label">其他照顧需求</div>
       <div class="column-Message">
-        <nz-checkbox-wrapper
-          style="width: 100%"
-          (nzOnChange)="otherCareNeedsChange($event)"
-        >
-          <div nz-row>
-            <div nz-col>
+        <nz-checkbox-wrapper (nzOnChange)="otherCareNeedsChange($event)">
+          <div formGroupName="otherCareNeeds">
+            <span *ngFor="let option of otherCareNeeds">
               <label
+                [nzDisabled]="option.disabled"
                 nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="1"
-                >交通需求</label
+                [formControlName]="option.value"
+                [nzValue]="option.value"
               >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="2"
-                >心理諮商需求</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="3"
-                >善終預備</label
-              >
-            </div>
-            <div nz-col>
-              <label
-                nz-checkbox
-                [nzDisabled]="hd150ListService.isView"
-                nzValue="4"
-                >法律需求</label
-              >
-            </div>
+                {{ option.label }}
+              </label>
+            </span>
           </div>
         </nz-checkbox-wrapper>
       </div>

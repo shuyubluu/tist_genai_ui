@@ -156,8 +156,8 @@ export class Hd140ListComponent implements OnInit {
   }
 
   // 關閉例行訪視記錄表
-  closeTab(identifier: string) {
-    this.tabService.closeTab(identifier);
+  closeTab() {
+    this.tabService.closeTab(this.tabName);
   }
 
   // 當改變頁數時觸發

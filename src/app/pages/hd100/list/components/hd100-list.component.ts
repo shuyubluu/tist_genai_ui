@@ -152,8 +152,8 @@ export class Hd100ListComponent implements OnInit {
   }
 
   // 關閉個案資料清單
-  closeTab(identifier: string) {
-    this.tabService.closeTab(identifier);
+  closeTab() {
+    this.tabService.closeTab(this.tabName);
   }
 
   // 當改變頁數時觸發

@@ -12,7 +12,10 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { CaseInformationComponent } from '../../../../common/components/caseInformation/components/case-information.component';
 import { CaseInformationService } from '../../../../common/components/caseInformation/service/case-information.service';
 import { TaiwanCitySelectComponent } from '../../../../common/components/select/taiwanCitySelect/components/taiwan-city-select.component';
-import { EmergencyContact } from '../service/hd170-form.interface';
+import {
+  CheckboxGroup,
+  EmergencyContact,
+} from '../service/hd170-form.interface';
 import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 import { Hd170ListService } from '../../list/service/hd170-list.service';
 import { DiagramService } from '../../../../../assets/diagram/service/diagram';
@@ -81,6 +84,46 @@ export class Hd170FormComponent implements OnInit {
     },
   ];
 
+  // 社會福利補助勾選狀態
+  socialWelfareAssistance: CheckboxGroup[] = [
+    {
+      label: '無',
+      value: '00',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '身心障礙',
+      value: '01',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '原住民',
+      value: '02',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '新住民',
+      value: '03',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '榮民',
+      value: '04',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '榮眷',
+      value: '05',
+      checked: false,
+      disabled: false,
+    },
+  ];
+
   constructor(
     private route: ActivatedRoute,
     private tabService: TabService, // 關閉tab的Service
@@ -89,6 +132,20 @@ export class Hd170FormComponent implements OnInit {
     public diagramService: DiagramService, // diagramService
     public hd170ListService: Hd170ListService // hd170ListService
   ) {
+    // 接收後端回傳質料
+    // this.socialWelfareAssistance =
+
+    // 社會福利補助CheckboxGroup
+    const socialWelfareAssistanceGroup: { [key: string]: FormControl } = {};
+    this.socialWelfareAssistance.forEach((option) => {
+      socialWelfareAssistanceGroup[option.value] = new FormControl(
+        option.checked
+      );
+      if (option.disabled) {
+        socialWelfareAssistanceGroup[option.value].disable(); // 如果該選項應該被禁用，則禁用對應的 FormControl
+      }
+    });
+
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
       // 1.單位資料
@@ -123,7 +180,7 @@ export class Hd170FormComponent implements OnInit {
       // 福利身份
       welfareStatus: new FormControl(''),
       // 社會福利補助
-      socialWelfareSubsidy: new FormControl(''),
+      socialWelfareAssistance: new FormGroup(socialWelfareAssistanceGroup, []),
 
       // 4.轉介內容
       // 個案概況與處遇摘要
@@ -184,6 +241,8 @@ export class Hd170FormComponent implements OnInit {
     this.form.get('communicationAddress')?.disable();
     // 禁用福利身份select
     this.form.get('welfareStatus')?.disable();
+    // 禁用社會福利補助
+    this.form.get('socialWelfareAssistance')?.disable();
 
     // 生成緊急聯絡人假資料三筆
     for (let i = 0; i < 2; i++) {
@@ -192,29 +251,53 @@ export class Hd170FormComponent implements OnInit {
   }
 
   // 社會福利補助選項改變
-  socialWelfareSubsidyChange(checkGroup: string[]) {
-    this.form.get('socialWelfareSubsidy')?.setValue(checkGroup);
-    // 如果勾選了無將禁用其他選項
-    // 勾取其他選項則禁用無
-    // if (checkGroup.includes('1')) {
-    //   this.isDisableSocialWelfareSubsidyOthers = true;
-    // } else {
-    //   this.isDisableSocialWelfareSubsidyOthers = false;
-    // }
-    // if (checkGroup.includes('2')) {
-    //   this.isPhysicalAndMentalDisability = true;
-    //   this.form.get('disabilityCertificateCategory')?.enable();
-    //   this.form.get('disabilityLevel')?.enable();
-    // } else {
-    //   this.isPhysicalAndMentalDisability = false;
-    //   this.form.get('disabilityCertificateCategory')?.disable();
-    //   this.form.get('disabilityCertificateCategory')?.reset();
-    //   this.form.get('disabilityLevel')?.disable();
-    //   this.form.get('disabilityLevel')?.reset();
-    // }
-    // this.isDisableSocialWelfareSubsidyNone = checkGroup.some((check) =>
-    //   ['2', '3', '4', '5', '6'].includes(check)
-    // );
+  socialWelfareAssistanceChange(checkedValues: string[]): void {
+    this.socialWelfareAssistance.forEach((option) => {
+      // 更新每個選項的 checked 狀態
+      option.checked = checkedValues.includes(option.value);
+
+      // 當 "00" 被勾選時
+      if (option.value === '00') {
+        if (option.checked) {
+          // 禁用其他選項
+          this.socialWelfareAssistance.forEach((option) => {
+            if (option.value !== '00') {
+              option.checked = false; // 取消勾選
+              option.disabled = true; // 禁用其他選項
+            }
+          });
+        } else {
+          // 啟用其他選項
+          this.socialWelfareAssistance.forEach((option) => {
+            option.disabled = false; // 啟用所有選項
+          });
+        }
+      } else {
+        // 當 "00" 以外的選項被勾選時
+        if (option.checked) {
+          // 禁用 "00" 選項
+          this.socialWelfareAssistance.forEach((option) => {
+            if (option.value === '00') {
+              option.checked = false; // 取消勾選
+              option.disabled = true; // 禁用 "00" 選項
+            }
+          });
+        } else {
+          // 檢查其他選項是否被勾選
+          const isAnyChecked = this.socialWelfareAssistance.some(
+            (option) => option.value !== '00' && option.checked
+          );
+          if (!isAnyChecked) {
+            // 如果沒有其他選項被勾選，啟用 "00" 選項
+            this.socialWelfareAssistance.forEach((option) => {
+              if (option.value === '00') {
+                option.disabled = false; // 啟用 "00" 選項
+              }
+            });
+          }
+        }
+      }
+    });
   }
 
   // 暫存草稿

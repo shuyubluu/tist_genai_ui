@@ -127,8 +127,8 @@ export class Hd150ListComponent implements OnInit {
   }
 
   // 關閉個案複評表清單
-  closeTab(identifier: string) {
-    this.tabService.closeTab(identifier);
+  closeTab() {
+    this.tabService.closeTab(this.tabName);
   }
 
   // 當改變頁數時觸發

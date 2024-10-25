@@ -204,10 +204,6 @@ export class Hd110FormComponent implements OnInit {
         socialWelfareAssistanceGroup[option.value].disable(); // 如果該選項應該被禁用，則禁用對應的 FormControl
       }
     });
-    const socialWelfareAssistanceCheckedValues = this.socialWelfareAssistance
-      .filter((option) => option.checked)
-      .map((option) => option.value);
-    this.socialWelfareAssistanceChange(socialWelfareAssistanceCheckedValues);
 
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
@@ -306,6 +302,12 @@ export class Hd110FormComponent implements OnInit {
   ngOnInit(): void {
     // 取得當前路由的tabName
     this.tabName = this.route.snapshot.data['tabName'];
+
+    const socialWelfareAssistanceCheckedValues = this.socialWelfareAssistance
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.socialWelfareAssistanceChange(socialWelfareAssistanceCheckedValues);
+
     // 檢視模式下禁用表單
     if (this.hd100ListService.isView) {
       this.form.disable();
@@ -460,7 +462,7 @@ export class Hd110FormComponent implements OnInit {
     // if (this.isCaseOpened === '開案') {
     await this.router.navigate(['/hd120/create']);
     this.message.create('success', '開案成功');
-    this.closeTab(this.tabName);
+    this.closeTab();
     // } else {
     //   this.showConfirmationModal();
     // }
@@ -486,7 +488,7 @@ export class Hd110FormComponent implements OnInit {
   }
 
   // 關閉個案開案評估表
-  closeTab(identifier: string) {
-    this.tabService.closeTab(identifier);
+  closeTab() {
+    this.tabService.closeTab(this.tabName);
   }
 }

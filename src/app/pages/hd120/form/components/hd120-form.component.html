@@ -327,7 +327,7 @@
     <div class="grid-columns-1">
       <div class="label">飲食習慣</div>
       <div class="column-Message">
-        <nz-checkbox-wrapper>
+        <nz-checkbox-wrapper (nzOnChange)="eatingHabitsChange($event)">
           <div formGroupName="eatingHabits">
             <span *ngFor="let option of eatingHabits">
               <label
@@ -1087,7 +1087,7 @@
     <div class="grid-columns-1">
       <div class="label">住屋概況</div>
       <div>
-        <nz-checkbox-wrapper>
+        <nz-checkbox-wrapper (nzOnChange)="housingConditionChange($event)">
           <div formGroupName="housingCondition">
             <span *ngFor="let option of housingCondition">
               <label
@@ -1106,7 +1106,7 @@
     <div class="grid-columns-1">
       <div class="label">居住環境</div>
       <div>
-        <nz-checkbox-wrapper>
+        <nz-checkbox-wrapper (nzOnChange)="livingEnvironmentChange($event)">
           <div formGroupName="livingEnvironment">
             <span *ngFor="let option of livingEnvironment">
               <label
@@ -1438,7 +1438,7 @@
     <app-button
       [attachClassName]="['danger']"
       [buttonText]="'關閉'"
-      (click)="closeTab(tabName)"
+      (click)="closeTab()"
     />
   </div>
 </form>

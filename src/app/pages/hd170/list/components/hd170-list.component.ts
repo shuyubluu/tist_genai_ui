@@ -14,6 +14,8 @@ import { CaseInformationComponent } from '../../../../common/components/caseInfo
 import { CaseInformationService } from '../../../../common/components/caseInformation/service/case-information.service';
 import { ErrorMessageComponent } from '../../../../common/components/message/error-message.component';
 import { compareDate } from '../../../../common/utils/compareDate';
+import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-hd170-list',
@@ -56,6 +58,15 @@ export class Hd170ListComponent implements OnInit {
     },
   ];
 
+  // 回覆單模擬匯入檔案
+  replyForm_fileList: NzUploadFile[] = [
+    {
+      uid: '1',
+      name: '回覆單.pdf',
+      status: 'done',
+    },
+  ];
+
   // 分頁器切割後的資料
   get newSearchResultData(): SearchResultData[] {
     return this.searchResultData.slice(
@@ -68,6 +79,7 @@ export class Hd170ListComponent implements OnInit {
     private route: ActivatedRoute,
     private tabService: TabService, // 關閉tab的Service
     private router: Router, // 路由
+    private message: NzMessageService, // 訊息
     public caseInformationService: CaseInformationService, // caseInformationService
     private hd170ListService: Hd170ListService // hd170ListService
   ) {
@@ -128,13 +140,22 @@ export class Hd170ListComponent implements OnInit {
   }
 
   // 關閉個案複評表清單
-  closeTab(identifier: string) {
-    this.tabService.closeTab(identifier);
+  closeTab() {
+    this.tabService.closeTab(this.tabName);
   }
 
   // 當改變頁數時觸發
   onPageIndexChange(currentPage: number) {
     this.currentPage = currentPage;
+  }
+
+  // 回覆單匯入點擊事件
+  replyForm_handleChange(info: NzUploadChangeParam): void {
+    if (info.file.status === 'done') {
+      this.message.success(`${info.file.name} 上傳成功`);
+    } else if (info.file.status === 'error') {
+      this.message.error(`${info.file.name} 上傳失敗.`);
+    }
   }
 
   // 當填單日期區間改變觸發

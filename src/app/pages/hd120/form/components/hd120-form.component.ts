@@ -970,82 +970,46 @@ export class Hd120FormComponent implements OnInit {
     // this.serviceVolunteer =
 
     // 宗教信仰CheckboxGroup
-    const religiousAffiliationGroup: { [key: string]: FormControl } = {};
-    this.religiousAffiliation.forEach((option) => {
-      religiousAffiliationGroup[option.value] = new FormControl(option.checked);
-      if (option.disabled) {
-        religiousAffiliationGroup[option.value].disable(); // 如果該選項應該被禁用，則禁用對應的 FormControl
-      }
-    });
+    const religiousAffiliationGroup = this.createCheckboxGroup(
+      this.religiousAffiliation
+    );
     religiousAffiliationGroup['religiousAffiliation_other'] = new FormControl(
       '',
       [Validators.required]
     );
 
     // 習慣用語CheckboxGroup
-    const commonLanguageGroup: { [key: string]: FormControl } = {};
-    this.commonLanguage.forEach((option) => {
-      commonLanguageGroup[option.value] = new FormControl(option.checked);
-      if (option.disabled) {
-        commonLanguageGroup[option.value].disable(); // 如果該選項應該被禁用，則禁用對應的 FormControl
-      }
-    });
+    const commonLanguageGroup = this.createCheckboxGroup(this.commonLanguage);
     commonLanguageGroup['commonLanguage_other'] = new FormControl('', [
       Validators.required,
     ]);
 
     // 飲食習慣CheckboxGroup
-    const eatingHabitsGroup: { [key: string]: FormControl } = {};
-    this.eatingHabits.forEach((option) => {
-      eatingHabitsGroup[option.value] = new FormControl(option.checked);
-      if (option.disabled) {
-        eatingHabitsGroup[option.value].disable(); // 如果該選項應該被禁用，則禁用對應的 FormControl
-      }
-    });
+    const eatingHabitsGroup = this.createCheckboxGroup(this.eatingHabits);
 
     // 現有疾病狀態CheckboxGroup
-    const currentHealthConditionsGroup: { [key: string]: FormControl } = {};
-    this.currentHealthConditions.forEach((option) => {
-      currentHealthConditionsGroup[option.value] = new FormControl(
-        option.checked
-      );
-      if (option.disabled) {
-        currentHealthConditionsGroup[option.value].disable(); // 如果該選項應該被禁用，則禁用對應的 FormControl
-      }
-    });
+    const currentHealthConditionsGroup = this.createCheckboxGroup(
+      this.currentHealthConditions
+    );
 
     // 輔具使用CheckboxGroup
-    const assistiveDeviceUsageGroup: { [key: string]: FormControl } = {};
-    this.assistiveDeviceUsage.forEach((option) => {
-      assistiveDeviceUsageGroup[option.value] = new FormControl(option.checked);
-      if (option.disabled) {
-        assistiveDeviceUsageGroup[option.value].disable(); // 如果該選項應該被禁用，則禁用對應的 FormControl
-      }
-    });
+    const assistiveDeviceUsageGroup = this.createCheckboxGroup(
+      this.assistiveDeviceUsage
+    );
     assistiveDeviceUsageGroup['assistiveDeviceUsage_other'] = new FormControl(
       '',
       [Validators.required]
     );
 
     // 社會福利補助CheckboxGroup
-    const socialWelfareSubsidyGroup: { [key: string]: FormControl } = {};
-    this.socialWelfareSubsidy.forEach((option) => {
-      socialWelfareSubsidyGroup[option.value] = new FormControl(option.checked);
-      if (option.disabled) {
-        socialWelfareSubsidyGroup[option.value].disable(); // 如果該選項應該被禁用，則禁用對應的 FormControl
-      }
-    });
+    const socialWelfareSubsidyGroup = this.createCheckboxGroup(
+      this.socialWelfareSubsidy
+    );
 
     // 長期每月經濟來源CheckboxGroup
-    const longTermMonthlyIncomeSourceGroup: { [key: string]: FormControl } = {};
-    this.longTermMonthlyIncomeSource.forEach((option) => {
-      longTermMonthlyIncomeSourceGroup[option.value] = new FormControl(
-        option.checked
-      );
-      if (option.disabled) {
-        longTermMonthlyIncomeSourceGroup[option.value].disable(); // 如果該選項應該被禁用，則禁用對應的 FormControl
-      }
-    });
+    const longTermMonthlyIncomeSourceGroup = this.createCheckboxGroup(
+      this.longTermMonthlyIncomeSource
+    );
     longTermMonthlyIncomeSourceGroup['socialWelfareAssistance_select'] =
       new FormControl('', [Validators.required]);
     longTermMonthlyIncomeSourceGroup['socialWelfareAssistance_input'] =
@@ -1069,35 +1033,19 @@ export class Hd120FormComponent implements OnInit {
     longTermMonthlyIncomeSourceGroup['otherIncome_input'] = new FormControl('');
 
     // 特殊議題CheckboxGroup
-    const specialIssuesGroup: { [key: string]: FormControl } = {};
-    this.specialIssues.forEach((option) => {
-      specialIssuesGroup[option.value] = new FormControl(option.checked);
-      if (option.disabled) {
-        specialIssuesGroup[option.value].disable(); // 如果該選項應該被禁用，則禁用對應的 FormControl
-      }
-    });
+    const specialIssuesGroup = this.createCheckboxGroup(this.specialIssues);
 
     // 是否使用其他服務CheckboxGroup
-    const usingOtherHongDaoServicesGroup: { [key: string]: FormControl } = {};
-    this.usingOtherHongDaoServices.forEach((option) => {
-      usingOtherHongDaoServicesGroup[option.value] = new FormControl(
-        option.checked
-      );
-      if (option.disabled) {
-        usingOtherHongDaoServicesGroup[option.value].disable(); // 如果該選項應該被禁用，則禁用對應的 FormControl
-      }
-    });
+    const usingOtherHongDaoServicesGroup = this.createCheckboxGroup(
+      this.usingOtherHongDaoServices
+    );
     usingOtherHongDaoServicesGroup['usingOtherHongDaoServices_other'] =
       new FormControl('', [Validators.required]);
 
     // 福利使用概況CheckboxGroup
-    const welfareUsageOverviewGroup: { [key: string]: FormControl } = {};
-    this.welfareUsageOverview.forEach((option) => {
-      welfareUsageOverviewGroup[option.value] = new FormControl(option.checked);
-      if (option.disabled) {
-        welfareUsageOverviewGroup[option.value].disable(); // 如果該選項應該被禁用，則禁用對應的 FormControl
-      }
-    });
+    const welfareUsageOverviewGroup = this.createCheckboxGroup(
+      this.welfareUsageOverview
+    );
 
     // 初始化每個福利使用概況控件
     this.welfareUsageOverviewControlsToInitialize.forEach((control) => {
@@ -1105,43 +1053,25 @@ export class Hd120FormComponent implements OnInit {
     });
 
     // 住屋概況CheckboxGroup
-    const housingConditionGroup: { [key: string]: FormControl } = {};
-    this.housingCondition.forEach((option) => {
-      housingConditionGroup[option.value] = new FormControl(option.checked);
-      if (option.disabled) {
-        housingConditionGroup[option.value].disable(); // 如果該選項應該被禁用，則禁用對應的 FormControl
-      }
-    });
+    const housingConditionGroup = this.createCheckboxGroup(
+      this.housingCondition
+    );
 
     // 居住環境CheckboxGroup
-    const livingEnvironmentGroup: { [key: string]: FormControl } = {};
-    this.livingEnvironment.forEach((option) => {
-      livingEnvironmentGroup[option.value] = new FormControl(option.checked);
-      if (option.disabled) {
-        livingEnvironmentGroup[option.value].disable(); // 如果該選項應該被禁用，則禁用對應的 FormControl
-      }
-    });
+    const livingEnvironmentGroup = this.createCheckboxGroup(
+      this.livingEnvironment
+    );
 
     // 同住者CheckboxGroup
-    const cohabitantsGroup: { [key: string]: FormControl } = {};
-    this.cohabitants.forEach((option) => {
-      cohabitantsGroup[option.value] = new FormControl(option.checked);
-      if (option.disabled) {
-        cohabitantsGroup[option.value].disable(); // 如果該選項應該被禁用，則禁用對應的 FormControl
-      }
-    });
+    const cohabitantsGroup = this.createCheckboxGroup(this.cohabitants);
     cohabitantsGroup['cohabitants_other'] = new FormControl('', [
       Validators.required,
     ]);
 
     // 服務志工CheckboxGroup
-    const serviceVolunteerGroup: { [key: string]: FormControl } = {};
-    this.serviceVolunteer.forEach((option) => {
-      serviceVolunteerGroup[option.value] = new FormControl(option.checked);
-      if (option.disabled) {
-        serviceVolunteerGroup[option.value].disable(); // 如果該選項應該被禁用，則禁用對應的 FormControl
-      }
-    });
+    const serviceVolunteerGroup = this.createCheckboxGroup(
+      this.serviceVolunteer
+    );
 
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
@@ -1221,17 +1151,13 @@ export class Hd120FormComponent implements OnInit {
       medicalStatus_frequency: new FormControl(''),
 
       // 輔具使用
-      assistiveDeviceUsage: new FormGroup(assistiveDeviceUsageGroup, [
-        checkboxGroupValidator(),
-      ]),
+      assistiveDeviceUsage: new FormGroup(assistiveDeviceUsageGroup),
 
       // 3.福利狀況
       // 福利身份
       welfareStatus: new FormControl(''),
       // 社會福利補助
-      socialWelfareSubsidy: new FormGroup(socialWelfareSubsidyGroup, [
-        checkboxGroupValidator(),
-      ]),
+      socialWelfareSubsidy: new FormGroup(socialWelfareSubsidyGroup),
       // 身障證明障礙類別
       disabilityCertificateCategory: new FormControl(''),
       // 障礙等級
@@ -1545,6 +1471,14 @@ export class Hd120FormComponent implements OnInit {
           this.form.get('commonLanguage.commonLanguage_other')?.disable();
         }
       }
+    });
+  }
+
+  // 飲食習慣選項改變
+  eatingHabitsChange(checkedValues: string[]) {
+    this.eatingHabits.forEach((option) => {
+      // 更新每個選項的 checked 狀態
+      option.checked = checkedValues.includes(option.value);
     });
   }
 
@@ -2520,10 +2454,34 @@ export class Hd120FormComponent implements OnInit {
     });
   }
 
-  // 居住環境選項改變
-  livingEnvironmentChange(checkGroup: string[]) {
-    this.form.get('livingEnvironment')?.setValue(checkGroup);
+  // 住屋概況選項改變
+  housingConditionChange(checkedValues: string[]) {
+    this.housingCondition.forEach((option) => {
+      // 更新每個選項的 checked 狀態
+      option.checked = checkedValues.includes(option.value);
+    });
   }
+
+  // 居住環境選項改變
+  livingEnvironmentChange(checkedValues: string[]) {
+    this.livingEnvironment.forEach((option) => {
+      // 更新每個選項的 checked 狀態
+      option.checked = checkedValues.includes(option.value);
+    });
+  }
+
+  // 創建checkbox group
+  createCheckboxGroup(options: any[]): { [key: string]: FormControl } {
+    const group: { [key: string]: FormControl } = {};
+    options.forEach((option) => {
+      group[option.value] = new FormControl(option.checked);
+      if (option.disabled) {
+        group[option.value].disable(); // 如果該選項應該被禁用，則禁用對應的 FormControl
+      }
+    });
+    return group;
+  }
+
   // 同住者選項改變
   cohabitantsChange(checkedValues: string[]) {
     this.cohabitants.forEach((option) => {
@@ -2644,22 +2602,22 @@ export class Hd120FormComponent implements OnInit {
   // 點選上一頁後執行操作判斷
   async onPreviousPage() {
     await this.router.navigate(['/hd110/create']);
-    this.closeTab(this.tabName);
+    this.closeTab();
   }
 
   // 點選下一頁後執行操作判斷
   async onNextPage() {
     // if (this.form.valid) {
     await this.router.navigate(['/hd130/create']);
-    this.closeTab(this.tabName);
+    this.closeTab();
     // } else {
     //   this.message.create('warning', '所有必須填寫的項目請先完成填寫');
     // }
   }
 
   // 關閉個案開案資料表
-  closeTab(identifier: string) {
-    this.tabService.closeTab(identifier);
+  closeTab() {
+    this.tabService.closeTab(this.tabName);
   }
 
   // 家系圖匯入點擊事件

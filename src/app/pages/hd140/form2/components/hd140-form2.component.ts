@@ -171,8 +171,8 @@ export class Hd140Form2Component implements OnInit {
   }
 
   // 關閉當前的tab
-  closeTab(identifier: string) {
-    this.tabService.closeTab(identifier);
+  closeTab() {
+    this.tabService.closeTab(this.tabName);
   }
 
   // 選取或取消選取選項

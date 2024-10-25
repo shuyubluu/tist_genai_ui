@@ -111,14 +111,14 @@ export class Hd180ListComponent implements OnInit {
     this.hd180ListService.isCanReview = false;
     this.hd100FormService.setCurrentRoute('hd180');
     await this.router.navigate(['/hd100/view']);
-    this.closeTab(this.tabName);
+    this.closeTab();
     this.caseInformationService.isChoiceCase = true;
     this.hd180ListService.setMode(true);
   }
 
   // 關閉個案結案名冊
-  closeTab(identifier: string) {
-    this.tabService.closeTab(identifier);
+  closeTab() {
+    this.tabService.closeTab(this.tabName);
   }
 
   // 當改變頁數時觸發
