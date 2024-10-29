@@ -716,11 +716,9 @@ export class Hd200FormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // 複選框初始化
-    const religiousAffiliationCheckedValues = this.religiousAffiliation
-      .filter((option) => option.checked)
-      .map((option) => option.value);
-    this.religiousAffiliationChange(religiousAffiliationCheckedValues);
+    // 串接希望服務區域後端資料
+    this.form.get('desiredServiceArea')?.patchValue([]);
+    this.handleOk();
 
     // 取得當前路由的tabName
     this.tabName = this.route.snapshot.data['tabName'];
@@ -738,6 +736,37 @@ export class Hd200FormComponent implements OnInit {
     this.form.get('volunteerSource.volunteerSource_other')?.disable();
     // 禁用主責人
     this.form.get('primaryContact')?.disable();
+
+    // 複選框初始化
+    const eatingHabitsCheckedValues = this.eatingHabits
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.eatingHabitsChange(eatingHabitsCheckedValues);
+
+    const languagesCheckedValues = this.languages
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.languagesChange(languagesCheckedValues);
+
+    const religiousAffiliationCheckedValues = this.religiousAffiliation
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.religiousAffiliationChange(religiousAffiliationCheckedValues);
+
+    const volunteerSourceCheckedValues = this.volunteerSource
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.volunteerSourceChange(volunteerSourceCheckedValues);
+
+    const serviceTransportationCheckedValues = this.serviceTransportation
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.serviceTransportationChange(serviceTransportationCheckedValues);
+
+    const hasTransportationCheckedValues = this.hasTransportation
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.hasTransportationChange(hasTransportationCheckedValues);
   }
 
   // 飲食習慣選項改變
@@ -919,6 +948,7 @@ export class Hd200FormComponent implements OnInit {
       ...this.form.get('desiredServiceArea')?.value,
     ];
     this.message.success('修改成功');
+    console.log(this.form.get('desiredServiceArea')?.value);
   }
 
   // 希望服務區域modal取消按鈕事件

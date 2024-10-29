@@ -252,6 +252,20 @@ export class Hd270FormComponent implements OnInit {
     this.form
       .get('coverageOutsideServiceScope.coverageOutsideServiceScope_other')
       ?.disable();
+
+    // 複選框初始化
+    const coverageOutsideServiceScopeCheckedValues =
+      this.coverageOutsideServiceScope
+        .filter((option) => option.checked)
+        .map((option) => option.value);
+    this.coverageOutsideServiceScopeChange(
+      coverageOutsideServiceScopeCheckedValues
+    );
+
+    const insuredPersonCheckedValues = this.insuredPerson
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.insuredPersonChange(insuredPersonCheckedValues);
   }
 
   // 服務外的保障範圍選項改變

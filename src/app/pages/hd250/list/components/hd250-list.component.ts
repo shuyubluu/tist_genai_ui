@@ -46,6 +46,7 @@ export class Hd250ListComponent implements OnInit {
   selectOptions_evaluationResult: string[] = ['通過', '為期改善', '不予通過'];
 
   // 搜尋結果模擬資料
+  // 由志工APP評分完後刷後資料
   searchResultData: SearchResultData[] = [
     {
       assessmentDate: '113/08/01',
@@ -117,25 +118,19 @@ export class Hd250ListComponent implements OnInit {
     }
   }
 
-  // 新增
-  async create() {
-    await this.router.navigate(['/hd250/create']);
-    this.volunteerInformationService.isChoiceVolunteer = true;
-    this.hd250ListService.setMode(false, true, false);
-  }
-
   // 檢視
   async view() {
     await this.router.navigate(['/hd250/view']);
     this.volunteerInformationService.isChoiceVolunteer = true;
-    this.hd250ListService.setMode(true, false, false);
+    this.hd250ListService.setMode(true, false);
   }
 
   // 編輯
   async edit() {
+    // 僅開放在可評分時間點選，其他時段禁止點選
     await this.router.navigate(['/hd250/edit']);
     this.volunteerInformationService.isChoiceVolunteer = true;
-    this.hd250ListService.setMode(false, false, true);
+    this.hd250ListService.setMode(false, true);
   }
 
   // 關閉保險

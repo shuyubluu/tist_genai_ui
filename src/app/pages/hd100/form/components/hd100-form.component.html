@@ -117,6 +117,10 @@
   <div class="buttonArea">
     <div>
       <app-button
+        [buttonText]="'儲存'"
+        (click)="save()"
+      />
+      <app-button
         *ngIf="hd180ListService.isCanReview"
         [buttonText]="'送審'"
         [attachClassName]="['success']"

@@ -122,12 +122,6 @@ export class Hd260FormComponent implements OnInit {
     // 取得當前路由的tabName
     this.tabName = this.route.snapshot.data['tabName'];
 
-    // 複選框初始化
-    const equipmentReturnedCheckedValues = this.equipmentReturned
-      .filter((option) => option.checked)
-      .map((option) => option.value);
-    this.equipmentReturnedChange(equipmentReturnedCheckedValues);
-
     // 若不是從志工管理頁簽進入，則禁用表單
     if (
       !this.volunteerInformationService.isChoiceVolunteer ||
@@ -135,8 +129,12 @@ export class Hd260FormComponent implements OnInit {
     ) {
       this.form.disable();
     }
-    // 禁用志工制服數量
-    // this.form.get('volunteerUniformCount')?.disable();
+
+    // 複選框初始化
+    const equipmentReturnedCheckedValues = this.equipmentReturned
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.equipmentReturnedChange(equipmentReturnedCheckedValues);
   }
 
   // 備品是否繳回選項改變

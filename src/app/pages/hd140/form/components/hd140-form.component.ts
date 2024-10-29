@@ -979,6 +979,57 @@ export class Hd140FormComponent implements OnInit {
     this.form.get('socialMealNeeds.socialMealNeeds_other')?.disable();
     // 禁用自我保護需求其他
     this.form.get('selfProtectionNeeds.selfProtectionNeeds_other')?.disable();
+
+    // 複選框初始化
+    const welfareStatusCheckedValues = this.welfareStatus
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.welfareStatusChange(welfareStatusCheckedValues);
+
+    const mealNeedsCheckedValues = this.mealNeeds
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.mealNeedsChange(mealNeedsCheckedValues);
+
+    const medicalNeedsCheckedValues = this.medicalNeeds
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.medicalNeedsChange(medicalNeedsCheckedValues);
+
+    const economicNeedsCheckedValues = this.economicNeeds
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.economicNeedsChange(economicNeedsCheckedValues);
+
+    const assistiveDeviceNeedsCheckedValues = this.assistiveDeviceNeeds
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.assistiveDeviceNeedsChange(assistiveDeviceNeedsCheckedValues);
+
+    const environmentalNeedsCheckedValues = this.environmentalNeeds
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.environmentalNeedsChange(environmentalNeedsCheckedValues);
+
+    const socialMealNeedsCheckedValues = this.socialMealNeeds
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.socialMealNeedsChange(socialMealNeedsCheckedValues);
+
+    const selfProtectionNeedsCheckedValues = this.selfProtectionNeeds
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.selfProtectionNeedsChange(selfProtectionNeedsCheckedValues);
+
+    const assessmentNeedsCheckedValues = this.assessmentNeeds
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.assessmentNeedsChange(assessmentNeedsCheckedValues);
+
+    const otherCareNeedsCheckedValues = this.otherCareNeeds
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.otherCareNeedsChange(otherCareNeedsCheckedValues);
   }
 
   // 是否連結其他資源選項改變

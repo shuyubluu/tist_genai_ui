@@ -14,6 +14,15 @@
           errorMessage="必選"
         />
       </div>
+      <div class="label">下架日期</div>
+      <div class="column-Message">
+        <app-dayPicker
+          [disabled]="hd660ListService.isView"
+          formControlName="offShelfDate"
+        />
+      </div>
+    </div>
+    <div class="grid-columns-1">
       <div class="label">發佈單位</div>
       <div>
         <app-input

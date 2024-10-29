@@ -303,11 +303,6 @@ export class Hd110FormComponent implements OnInit {
     // 取得當前路由的tabName
     this.tabName = this.route.snapshot.data['tabName'];
 
-    const socialWelfareAssistanceCheckedValues = this.socialWelfareAssistance
-      .filter((option) => option.checked)
-      .map((option) => option.value);
-    this.socialWelfareAssistanceChange(socialWelfareAssistanceCheckedValues);
-
     // 檢視模式下禁用表單
     if (this.hd100ListService.isView) {
       this.form.disable();
@@ -348,6 +343,11 @@ export class Hd110FormComponent implements OnInit {
     } else {
       this.form.get('isSelfReportedMetric')?.enable();
     }
+
+    const socialWelfareAssistanceCheckedValues = this.socialWelfareAssistance
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.socialWelfareAssistanceChange(socialWelfareAssistanceCheckedValues);
   }
 
   // 當個案來源的select發生變化時

@@ -206,12 +206,6 @@ export class Hd170FormComponent implements OnInit {
     // 取得當前路由的tabName
     this.tabName = this.route.snapshot.data['tabName'];
 
-    // 複選框初始化
-    const socialWelfareAssistanceCheckedValues = this.socialWelfareAssistance
-      .filter((option) => option.checked)
-      .map((option) => option.value);
-    this.socialWelfareAssistanceChange(socialWelfareAssistanceCheckedValues);
-
     // 檢視模式，禁用表單
     if (this.hd170ListService.isView) {
       this.form.disable();
@@ -250,6 +244,12 @@ export class Hd170FormComponent implements OnInit {
     this.form.get('welfareStatus')?.disable();
     // 禁用社會福利補助
     this.form.get('socialWelfareAssistance')?.disable();
+
+    // 複選框初始化
+    const socialWelfareAssistanceCheckedValues = this.socialWelfareAssistance
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.socialWelfareAssistanceChange(socialWelfareAssistanceCheckedValues);
 
     // 生成緊急聯絡人假資料三筆
     for (let i = 0; i < 2; i++) {

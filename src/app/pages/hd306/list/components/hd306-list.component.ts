@@ -204,6 +204,12 @@ export class Hd306ListComponent implements OnInit {
   ngOnInit(): void {
     // 取得當前路由的tabName
     this.tabName = this.route.snapshot.data['tabName'];
+
+    // 複選框初始化
+    const exportFileCheckedValues = this.exportFile
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.exportFileChange(exportFileCheckedValues);
   }
 
   // 搜尋

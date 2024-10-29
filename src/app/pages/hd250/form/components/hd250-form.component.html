@@ -555,7 +555,7 @@
       (click)="save()"
     />
     <app-button
-      *ngIf="hd250ListService.isCreate"
+      *ngIf="hd250ListService.isEdit"
       [attachClassName]="['success']"
       [buttonText]="'送審'"
       (click)="review()"

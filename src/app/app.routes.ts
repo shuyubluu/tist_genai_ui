@@ -1,3 +1,4 @@
+import { RESETPASSWORD_ROUTES } from './pages/resetPassword/resetPassword.routes';
 import { Routes } from '@angular/router';
 import { LayoutComponent } from './common/layouts/layout/layout.component';
 
@@ -183,6 +184,14 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./pages/hd500/hd500.routes').then((m) => m.HD500_ROUTES),
         data: { tabName: '統計專區' },
+      },
+      {
+        path: 'resetPassword',
+        loadChildren: () =>
+          import('./pages/resetPassword/resetPassword.routes').then(
+            (m) => m.RESETPASSWORD_ROUTES
+          ),
+        data: { tabName: '重設密碼' },
       },
       {
         path: 'hd600',

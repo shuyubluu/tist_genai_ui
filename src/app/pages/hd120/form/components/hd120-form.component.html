@@ -741,7 +741,12 @@
               </label>
             </span>
             <label>
-              <!-- TODO: 特殊議題必選驗證-->
+              <app-error-message
+                [control]="form.get('specialIssues')"
+                [isTouched]="false"
+                errorKey="atLeastOneChecked"
+                errorMessage="必選"
+              />
             </label>
           </div>
         </nz-checkbox-wrapper>

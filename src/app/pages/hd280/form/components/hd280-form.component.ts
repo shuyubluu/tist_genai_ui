@@ -187,6 +187,12 @@ export class Hd280FormComponent implements OnInit {
     for (let i = 0; i <= 60; i++) {
       this.selectOptions_timeMinutes.push(i < 10 ? '0' + i : i.toString());
     }
+
+    // 複選框初始化
+    const serviceVolunteerCheckedValues = this.serviceVolunteer
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.serviceVolunteerChange(serviceVolunteerCheckedValues);
   }
 
   // 服務志工選項改變

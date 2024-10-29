@@ -14,6 +14,7 @@ import {
   VolunteerManagementOverdueForms,
   VolunteerManagementVolunteerCount,
 } from '../service/welcome-interface';
+import { Hd100ListService } from '../../hd100/list/service/hd100-list.service';
 
 @Component({
   selector: 'app-welcome',
@@ -204,7 +205,8 @@ export class WelcomeComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private router: Router, // 路由
-    private welcomeService: WelcomeService // welcomeService
+    private welcomeService: WelcomeService, // welcomeService
+    private hd100ListService: Hd100ListService // hd100ListService
   ) {}
 
   ngOnInit() {
@@ -290,7 +292,8 @@ export class WelcomeComponent implements OnInit {
 
   // 查看單項本月應完成
   viewCaseManagement_MonthlyTargetData(type: string) {
-    if (type === '個案初評表') this.router.navigate(['/hd130']);
+    this.hd100ListService.setMode(true, false, false);
+    if (type === '個案初評表') this.router.navigate(['/hd130/view']);
     if (type === '個案訪視紀錄表') this.router.navigate(['/hd140']);
     if (type === '複評表') this.router.navigate(['/hd150']);
   }
@@ -311,7 +314,8 @@ export class WelcomeComponent implements OnInit {
 
   // 查看單項逾期表單
   viewCaseManagement_OverdueFormsData(type: string) {
-    if (type === '個案初評表') this.router.navigate(['/hd130']);
+    this.hd100ListService.setMode(true, false, false);
+    if (type === '個案初評表') this.router.navigate(['/hd130/view']);
     if (type === '個案訪視紀錄表') this.router.navigate(['/hd140']);
     if (type === '生活品質問卷') this.router.navigate(['/hd160']);
     if (type === '複評表') this.router.navigate(['/hd150']);

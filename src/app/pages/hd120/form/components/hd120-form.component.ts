@@ -400,7 +400,7 @@ export class Hd120FormComponent implements OnInit {
     {
       label: '失智症',
       value: '08',
-      checked: false,
+      checked: true,
       disabled: false,
     },
     {
@@ -1170,10 +1170,11 @@ export class Hd120FormComponent implements OnInit {
         [checkboxGroupValidator()]
       ),
 
-      // Fix:驗證可能需調整
       // 5.特殊議題
       // 特殊議題
-      specialIssues: new FormGroup(specialIssuesGroup),
+      specialIssues: new FormGroup(specialIssuesGroup, [
+        checkboxGroupValidator(),
+      ]),
       // 6.福利使用
       // 是否使用弘道其他服務
       usingOtherHongDaoServices: new FormGroup(usingOtherHongDaoServicesGroup, [
@@ -1228,57 +1229,6 @@ export class Hd120FormComponent implements OnInit {
   ngOnInit(): void {
     // 取得當前路由的tabName
     this.tabName = this.route.snapshot.data['tabName'];
-    // 複選框初始化
-    const religiousAffiliationCheckedValues = this.religiousAffiliation
-      .filter((option) => option.checked)
-      .map((option) => option.value);
-    this.religiousAffiliationChange(religiousAffiliationCheckedValues);
-
-    const currentHealthConditionsCheckedValues = this.currentHealthConditions
-      .filter((option) => option.checked)
-      .map((option) => option.value);
-    this.currentHealthConditionsChange(currentHealthConditionsCheckedValues);
-
-    const assistiveDeviceUsageCheckedValues = this.assistiveDeviceUsage
-      .filter((option) => option.checked)
-      .map((option) => option.value);
-    this.assistiveDeviceUsageChange(assistiveDeviceUsageCheckedValues);
-
-    const socialWelfareSubsidyCheckedValues = this.socialWelfareSubsidy
-      .filter((option) => option.checked)
-      .map((option) => option.value);
-    this.socialWelfareSubsidyChange(socialWelfareSubsidyCheckedValues);
-
-    const longTermMonthlyIncomeSourceCheckedValues =
-      this.longTermMonthlyIncomeSource
-        .filter((option) => option.checked)
-        .map((option) => option.value);
-    this.longTermMonthlyIncomeSourceChange(
-      longTermMonthlyIncomeSourceCheckedValues
-    );
-
-    const specialIssuesCheckedValues = this.specialIssues
-      .filter((option) => option.checked)
-      .map((option) => option.value);
-    this.specialIssuesChange(specialIssuesCheckedValues);
-
-    const usingOtherHongDaoServicesCheckedValues =
-      this.usingOtherHongDaoServices
-        .filter((option) => option.checked)
-        .map((option) => option.value);
-    this.usingOtherHongDaoServicesChange(
-      usingOtherHongDaoServicesCheckedValues
-    );
-
-    const welfareUsageOverviewCheckedValues = this.welfareUsageOverview
-      .filter((option) => option.checked)
-      .map((option) => option.value);
-    this.welfareUsageOverviewChange(welfareUsageOverviewCheckedValues);
-
-    const cohabitantsCheckedValues = this.cohabitants
-      .filter((option) => option.checked)
-      .map((option) => option.value);
-    this.cohabitantsChange(cohabitantsCheckedValues);
 
     // 檢視模式下，禁用表單
     if (this.hd100ListService.isView) {
@@ -1377,6 +1327,78 @@ export class Hd120FormComponent implements OnInit {
 
     // 禁用同住者其他
     this.form.get('cohabitants.cohabitants_other')?.disable();
+
+    // 複選框初始化
+    const religiousAffiliationCheckedValues = this.religiousAffiliation
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.religiousAffiliationChange(religiousAffiliationCheckedValues);
+
+    const commonLanguageCheckedValues = this.commonLanguage
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.commonLanguageChange(commonLanguageCheckedValues);
+
+    const eatingHabitsCheckedValues = this.eatingHabits
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.eatingHabitsChange(eatingHabitsCheckedValues);
+
+    const currentHealthConditionsCheckedValues = this.currentHealthConditions
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.currentHealthConditionsChange(currentHealthConditionsCheckedValues);
+
+    const assistiveDeviceUsageCheckedValues = this.assistiveDeviceUsage
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.assistiveDeviceUsageChange(assistiveDeviceUsageCheckedValues);
+
+    const socialWelfareSubsidyCheckedValues = this.socialWelfareSubsidy
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.socialWelfareSubsidyChange(socialWelfareSubsidyCheckedValues);
+
+    const longTermMonthlyIncomeSourceCheckedValues =
+      this.longTermMonthlyIncomeSource
+        .filter((option) => option.checked)
+        .map((option) => option.value);
+    this.longTermMonthlyIncomeSourceChange(
+      longTermMonthlyIncomeSourceCheckedValues
+    );
+
+    const specialIssuesCheckedValues = this.specialIssues
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.specialIssuesChange(specialIssuesCheckedValues);
+
+    const usingOtherHongDaoServicesCheckedValues =
+      this.usingOtherHongDaoServices
+        .filter((option) => option.checked)
+        .map((option) => option.value);
+    this.usingOtherHongDaoServicesChange(
+      usingOtherHongDaoServicesCheckedValues
+    );
+
+    const welfareUsageOverviewCheckedValues = this.welfareUsageOverview
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.welfareUsageOverviewChange(welfareUsageOverviewCheckedValues);
+
+    const housingConditionCheckedValues = this.housingCondition
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.housingConditionChange(housingConditionCheckedValues);
+
+    const livingEnvironmentCheckedValues = this.livingEnvironment
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.livingEnvironmentChange(livingEnvironmentCheckedValues);
+
+    const cohabitantsCheckedValues = this.cohabitants
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.cohabitantsChange(cohabitantsCheckedValues);
   }
 
   // 婚姻狀況選項改變
@@ -1539,7 +1561,17 @@ export class Hd120FormComponent implements OnInit {
       }
       // 當 "08" 勾選時同步更新 "失智症" 的選項
       if (option.value === '08' && this.form) {
-        this.form.get('specialIssues.05')?.setValue(option.checked);
+        if (option.checked) {
+          this.form.get('specialIssues.05')?.setValue(option.checked);
+          this.form.get('specialIssues.00')?.disable();
+        } else {
+          if (!this.form.get('specialIssues.06')?.value) {
+            this.form.get('specialIssues.05')?.setValue(option.checked);
+            this.form.get('specialIssues.00')?.enable();
+          } else {
+            this.form.get('specialIssues.05')?.setValue(option.checked);
+          }
+        }
       }
     });
   }
@@ -1649,7 +1681,6 @@ export class Hd120FormComponent implements OnInit {
         }
         if (option.value === '10' || option.value === '11') {
           if (option.checked) {
-            console.log(option);
             this.assistiveDeviceUsage.forEach((option) => {
               if (option.value === '09') {
                 if (option.checked) {
@@ -1749,7 +1780,17 @@ export class Hd120FormComponent implements OnInit {
 
       // 當 "01" 勾選時同步更新 "身心障礙" 的選項
       if (option.value === '01' && this.form) {
-        this.form.get('specialIssues.06')?.setValue(option.checked);
+        if (option.checked) {
+          this.form.get('specialIssues.06')?.setValue(option.checked);
+          this.form.get('specialIssues.00')?.disable();
+        } else {
+          if (!this.form.get('specialIssues.05')?.value) {
+            this.form.get('specialIssues.06')?.setValue(option.checked);
+            this.form.get('specialIssues.00')?.enable();
+          } else {
+            this.form.get('specialIssues.06')?.setValue(option.checked);
+          }
+        }
       }
     });
   }
@@ -1955,7 +1996,11 @@ export class Hd120FormComponent implements OnInit {
         if (option.checked) {
           // 禁用其他選項
           this.specialIssues.forEach((option) => {
-            if (option.value !== '00') {
+            if (
+              option.value !== '00' &&
+              option.value !== '05' &&
+              option.value !== '06'
+            ) {
               option.checked = false; // 取消勾選
               option.disabled = true; // 禁用其他選項
             }

@@ -192,6 +192,12 @@ export class Hd307ListComponent implements OnInit {
     this.form.get('exportFile.caseBasicInfo_needsAnonymization')?.disable();
     this.form.get('exportFile.caseVisitRecord_fileType')?.disable();
     this.form.get('exportFile.caseVisitRecord_needsAnonymization')?.disable();
+
+    // 複選框初始化
+    const exportFileCheckedValues = this.exportFile
+      .filter((option) => option.checked)
+      .map((option) => option.value);
+    this.exportFileChange(exportFileCheckedValues);
   }
 
   // 搜尋個案資料

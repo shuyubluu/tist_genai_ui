@@ -3,31 +3,27 @@
     <div class="grid-columns-1">
       <div class="label">登入密碼規則</div>
       <div>
-        <nz-checkbox-wrapper
-          style="width: 100%"
-          (nzOnChange)="loginPasswordRulesChange($event)"
-        >
-          <div nz-row>
-            <div nz-col nzSpan="24">
-              <!-- !TODO -->
-              <label nz-checkbox nzValue="1"></label>
-              密碼最小長度
-              <app-input
-                [inputWidth]="'70px'"
-                [maxLength]="3"
-                [type]="'number'"
-                formControlName="passwordMinLength"
-              />碼<span class="color-blue">(系統預設長度為6碼)</span>
-            </div>
-            <div nz-col>
-              <label nz-checkbox nzValue="2">密碼為英文數字組合</label>
-            </div>
-            <div nz-col>
-              <label nz-checkbox nzValue="3">密碼需帶有大小寫英文字</label>
-            </div>
-            <div nz-col>
-              <label nz-checkbox nzValue="4">密碼需有特殊符號</label>
-            </div>
+        <nz-checkbox-wrapper (nzOnChange)="loginPasswordRulesChange($event)">
+          <div formGroupName="loginPasswordRules">
+            <span *ngFor="let option of loginPasswordRules">
+              <label
+                [nzDisabled]="option.disabled"
+                nz-checkbox
+                [formControlName]="option.value"
+                [nzValue]="option.value"
+              >
+                {{ option.label }}
+              </label>
+              <label *ngIf="option.value === '00' && option.checked">
+                <app-input
+                  [inputWidth]="'70px'"
+                  [maxLength]="3"
+                  formControlName="passwordMinLength"
+                />
+                碼
+                <span class="color-blue">(系統預設長度為6碼)</span>
+              </label>
+            </span>
           </div>
         </nz-checkbox-wrapper>
       </div>
@@ -36,79 +32,81 @@
       <div class="label">員工變更密碼規則</div>
       <div>
         <nz-checkbox-wrapper
-          style="width: 100%"
           (nzOnChange)="employeePasswordChangeRulesChange($event)"
         >
-          <div nz-row>
-            <div nz-col nzSpan="24">
-              <label nz-checkbox nzValue="1"></label>
-              密碼有效天數
-              <app-input
-                [inputWidth]="'70px'"
-                [maxLength]="3"
-                [type]="'number'"
-                formControlName="passwordExpiryDays"
-              />天，且距離到期前
-              <app-input
-                [inputWidth]="'70px'"
-                [maxLength]="3"
-                [type]="'number'"
-                formControlName="reminderAdvanceDays"
-              />天發送提醒通知
-              <div class="my-2">
-                系統是否主動提供使用者修改密碼畫面
-                <app-select
-                  [selectWidth]="'70px'"
-                  [options]="selectOptions_trueOrFalse"
-                  formControlName="autoShowPasswordChangeScreen"
-                />
-                <span
-                  class="color-red"
-                  *ngIf="
-                    form.get('autoShowPasswordChangeScreen')?.value === '是'
-                  "
-                  >使用者登入後提醒修改並提供修改畫面</span
-                >
-                <span
-                  class="color-red"
-                  *ngIf="
-                    form.get('autoShowPasswordChangeScreen')?.value === '否'
-                  "
-                  >請使用者於個人資料維護中進行密碼修改</span
-                >
-                <div>
-                  <label
-                    nz-checkbox
-                    nzValue="2"
-                    formControlName="passwordExpirationCheckbox"
-                    >密碼到期未修改則Portal前台無法登入</label
+          <div formGroupName="employeePasswordChangeRules">
+            <span *ngFor="let option of employeePasswordChangeRules">
+              <label
+                [nzDisabled]="option.disabled"
+                nz-checkbox
+                [formControlName]="option.value"
+                [nzValue]="option.value"
+              >
+                {{ option.label }}
+              </label>
+              <span *ngIf="option.value === '00' && option.checked">
+                <app-input
+                  [inputWidth]="'70px'"
+                  [maxLength]="3"
+                  [type]="'number'"
+                  formControlName="passwordExpiryDays"
+                />天，且距離到期前
+                <app-input
+                  [inputWidth]="'70px'"
+                  [maxLength]="3"
+                  [type]="'number'"
+                  formControlName="reminderAdvanceDays"
+                />天發送提醒通知
+                <div class="my-2">
+                  系統是否主動提供使用者修改密碼畫面
+                  <app-select
+                    [selectWidth]="'70px'"
+                    [options]="selectOptions_trueOrFalse"
+                    formControlName="autoShowPasswordChangeScreen"
+                  />
+                  <span
+                    class="color-blue"
+                    *ngIf="
+                      form.get(
+                        'employeePasswordChangeRules.autoShowPasswordChangeScreen'
+                      )?.value === '是'
+                    "
+                    >使用者登入後提醒修改並提供修改畫面</span
                   >
+                  <span
+                    class="color-red"
+                    *ngIf="
+                      form.get(
+                        'employeePasswordChangeRules.autoShowPasswordChangeScreen'
+                      )?.value === '否'
+                    "
+                    >請使用者於個人資料維護中進行密碼修改</span
+                  >
+                  密碼到期未修改則Portal前台無法登入
+                  <app-select
+                    [selectWidth]="'70px'"
+                    [options]="selectOptions_trueOrFalse"
+                    formControlName="passwordExpiryNoPortalAccess"
+                  />
                 </div>
-              </div>
-            </div>
-            <div class="mr-5" nz-col>
-              <label nz-checkbox nzValue="3"></label>
-              上次密碼變更後，
-              <app-input
-                [inputWidth]="'70px'"
-                [maxLength]="3"
-                [type]="'number'"
-                formControlName="passwordChangeInterval"
-              />小時(含)內不可變更密碼
-            </div>
-            <div nz-col class="my-2" nzSpan="24">
-              <label nz-checkbox nzValue="4"></label>
-              密碼變更時，不得重複前
-              <app-input
-                [inputWidth]="'70px'"
-                [maxLength]="3"
-                [type]="'number'"
-                formControlName="passwordHistoryLimit"
-              />次密碼
-            </div>
-            <div nz-col>
-              <label nz-checkbox nzValue="5">首次登入系統須變更密碼</label>
-            </div>
+              </span>
+              <label *ngIf="option.value === '01' && option.checked">
+                <app-input
+                  [inputWidth]="'70px'"
+                  [maxLength]="3"
+                  [type]="'number'"
+                  formControlName="passwordChangeInterval"
+                />小時(含)內不可變更密碼
+              </label>
+              <label *ngIf="option.value === '02' && option.checked">
+                <app-input
+                  [inputWidth]="'70px'"
+                  [maxLength]="3"
+                  [type]="'number'"
+                  formControlName="passwordHistoryLimit"
+                />次密碼
+              </label>
+            </span>
           </div>
         </nz-checkbox-wrapper>
       </div>
@@ -117,6 +115,51 @@
       <div class="label">帳戶鎖定原則</div>
       <div>
         <nz-checkbox-wrapper
+          (nzOnChange)="accountLockPolicyRulesChange($event)"
+        >
+          <div formGroupName="accountLockPolicyRules">
+            <span *ngFor="let option of accountLockPolicyRules">
+              <label
+                [nzDisabled]="option.disabled"
+                nz-checkbox
+                [formControlName]="option.value"
+                [nzValue]="option.value"
+              >
+                {{ option.label }}
+              </label>
+              <span>
+                <app-input
+                  [inputWidth]="'70px'"
+                  [maxLength]="3"
+                  [type]="'number'"
+                  formControlName="time_1"
+                /><app-select
+                  [selectWidth]="'70px'"
+                  [options]="selectOptions_timeUnit"
+                  formControlName="timeUnit_1"
+                />(含)內，連續輸入密碼錯誤達
+                <app-input
+                  [inputWidth]="'70px'"
+                  [maxLength]="3"
+                  [type]="'number'"
+                  formControlName="passwordErrorCount"
+                />次，<br />則鎖定該帳戶，帳戶鎖定期間
+                <app-input
+                  [inputWidth]="'70px'"
+                  [maxLength]="3"
+                  [type]="'number'"
+                  formControlName="time_2"
+                />
+                <app-select
+                  [selectWidth]="'70px'"
+                  [options]="selectOptions_timeUnit"
+                  formControlName="timeUnit_2"
+                />
+              </span>
+            </span>
+          </div>
+        </nz-checkbox-wrapper>
+        <!-- <nz-checkbox-wrapper
           style="width: 100%"
           (nzOnChange)="accountLockPolicyChange($event)"
         >
@@ -153,7 +196,7 @@
               />
             </div>
           </div>
-        </nz-checkbox-wrapper>
+        </nz-checkbox-wrapper> -->
       </div>
     </div>
   </div>

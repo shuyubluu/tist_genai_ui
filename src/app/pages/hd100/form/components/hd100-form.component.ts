@@ -106,6 +106,11 @@ export class Hd100FormComponent implements OnInit {
     }
   }
 
+  // 儲存
+  save() {
+    // !TODO:儲存邏輯
+  }
+
   // 完成送審
   review() {
     this.message.create('success', '送審成功');

@@ -9,343 +9,137 @@
           formControlName="roleName"
         />
         <app-error-message
-        [control]="form.get('roleName')"
-        [isTouched]="false"
-        errorKey="required"
-        errorMessage="必填"
-      />
+          [control]="form.get('roleName')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="必填"
+        />
       </div>
     </div>
     <div class="grid-columns-1">
       <div class="label">功能權限</div>
       <div>
         <div class="bold-text">
+          個案管理：
           <nz-checkbox-wrapper
-            style="width: 100%"
-            (nzOnChange)="handleCaseManagementChange($event)"
+            (nzOnChange)="functionPermission_caseManagementChange($event)"
           >
-            <div nz-row>
-              <div nz-col class="bold-text">個案管理：</div>
-              <div nz-col>
+            <div formGroupName="functionPermission_caseManagement">
+              <span *ngFor="let option of functionPermission_caseManagement">
                 <label
+                  [nzDisabled]="option.disabled"
                   nz-checkbox
-                  [nzDisabled]="hd620ListService.isView"
-                  formControlName="caseManagement_add"
-                  nzValue="1"
-                  >新增</label
+                  [formControlName]="option.value"
+                  [nzValue]="option.value"
                 >
-              </div>
-              <div nz-col>
-                <label
-                  nz-checkbox
-                  [nzDisabled]="hd620ListService.isView"
-                  formControlName="caseManagement_view"
-                  nzValue="2"
-                  >檢視</label
-                >
-              </div>
-              <div nz-col>
-                <label
-                  nz-checkbox
-                  [nzDisabled]="hd620ListService.isView"
-                  formControlName="caseManagement_edit"
-                  nzValue="3"
-                  >編輯</label
-                >
-              </div>
-              <div nz-col>
-                <label
-                  nz-checkbox
-                  [nzDisabled]="hd620ListService.isView"
-                  formControlName="caseManagement_print"
-                  nzValue="4"
-                  >列印</label
-                >
-              </div>
-              <div nz-col>
-                <label
-                  nz-checkbox
-                  [nzDisabled]="hd620ListService.isView"
-                  formControlName="caseManagement_delete"
-                  nzValue="5"
-                  >刪除</label
-                >
-              </div>
+                  {{ option.label }}
+                </label>
+              </span>
             </div>
           </nz-checkbox-wrapper>
         </div>
         <div class="bold-text">
+          志工管理：
           <nz-checkbox-wrapper
-            style="width: 100%"
-            (nzOnChange)="handleVolunteerManagementChange($event)"
+            (nzOnChange)="functionPermission_volunteerManagementChange($event)"
           >
-            <div nz-row>
-              <div nz-col class="bold-text">志工管理：</div>
-              <div nz-col>
+            <div formGroupName="functionPermission_volunteerManagement">
+              <span
+                *ngFor="let option of functionPermission_volunteerManagement"
+              >
                 <label
+                  [nzDisabled]="option.disabled"
                   nz-checkbox
-                  [nzDisabled]="hd620ListService.isView"
-                  formControlName="volunteerManagement_add"
-                  nzValue="1"
-                  >新增</label
+                  [formControlName]="option.value"
+                  [nzValue]="option.value"
                 >
-              </div>
-              <div nz-col>
-                <label
-                  nz-checkbox
-                  [nzDisabled]="hd620ListService.isView"
-                  formControlName="volunteerManagement_view"
-                  nzValue="2"
-                  >檢視</label
-                >
-              </div>
-              <div nz-col>
-                <label
-                  nz-checkbox
-                  [nzDisabled]="hd620ListService.isView"
-                  formControlName="volunteerManagement_edit"
-                  nzValue="3"
-                  >編輯</label
-                >
-              </div>
-              <div nz-col>
-                <label
-                  nz-checkbox
-                  [nzDisabled]="hd620ListService.isView"
-                  formControlName="volunteerManagement_print"
-                  nzValue="4"
-                  >列印</label
-                >
-              </div>
-              <div nz-col>
-                <label
-                  nz-checkbox
-                  [nzDisabled]="hd620ListService.isView"
-                  formControlName="volunteerManagement_delete"
-                  nzValue="5"
-                  >刪除</label
-                >
-              </div>
+                  {{ option.label }}
+                </label>
+              </span>
             </div>
           </nz-checkbox-wrapper>
         </div>
         <div class="bold-text">
+          報表專區：
           <nz-checkbox-wrapper
-            style="width: 100%"
-            (nzOnChange)="handleReportSectionChange($event)"
+            (nzOnChange)="functionPermission_reportSectionChange($event)"
           >
-            <div nz-row>
-              <div nz-col class="bold-text">報表專區：</div>
-              <div nz-col>
+            <div formGroupName="functionPermission_reportSection">
+              <span
+                *ngFor="let option of functionPermission_reportSection"
+              >
                 <label
+                  [nzDisabled]="option.disabled"
                   nz-checkbox
-                  [nzDisabled]="hd620ListService.isView"
-                  formControlName="reportSection_add"
-                  nzValue="1"
-                  >新增</label
+                  [formControlName]="option.value"
+                  [nzValue]="option.value"
                 >
-              </div>
-              <div nz-col>
-                <label
-                  nz-checkbox
-                  [nzDisabled]="hd620ListService.isView"
-                  formControlName="reportSection_view"
-                  nzValue="2"
-                  >檢視</label
-                >
-              </div>
-              <div nz-col>
-                <label
-                  nz-checkbox
-                  [nzDisabled]="hd620ListService.isView"
-                  formControlName="reportSection_edit"
-                  nzValue="3"
-                  >編輯</label
-                >
-              </div>
-              <div nz-col>
-                <label
-                  nz-checkbox
-                  [nzDisabled]="hd620ListService.isView"
-                  formControlName="reportSection_print"
-                  nzValue="4"
-                  >列印</label
-                >
-              </div>
-              <div nz-col>
-                <label
-                  nz-checkbox
-                  [nzDisabled]="hd620ListService.isView"
-                  formControlName="reportSection_delete"
-                  nzValue="5"
-                  >刪除</label
-                >
-              </div>
+                  {{ option.label }}
+                </label>
+              </span>
             </div>
           </nz-checkbox-wrapper>
         </div>
         <div class="bold-text">
+          簽核專區：
           <nz-checkbox-wrapper
-            style="width: 100%"
-            (nzOnChange)="handleSignatureSectionChange($event)"
+            (nzOnChange)="functionPermission_signatureSectionChange($event)"
           >
-            <div nz-row>
-              <div nz-col class="bold-text">簽核專區：</div>
-              <div nz-col>
+            <div formGroupName="functionPermission_signatureSection">
+              <span
+                *ngFor="let option of functionPermission_signatureSection"
+              >
                 <label
+                  [nzDisabled]="option.disabled"
                   nz-checkbox
-                  [nzDisabled]="hd620ListService.isView"
-                  formControlName="signatureSection_add"
-                  nzValue="1"
-                  >新增</label
+                  [formControlName]="option.value"
+                  [nzValue]="option.value"
                 >
-              </div>
-              <div nz-col>
-                <label
-                  nz-checkbox
-                  [nzDisabled]="hd620ListService.isView"
-                  formControlName="signatureSection_view"
-                  nzValue="2"
-                  >檢視</label
-                >
-              </div>
-              <div nz-col>
-                <label
-                  nz-checkbox
-                  [nzDisabled]="hd620ListService.isView"
-                  formControlName="signatureSection_edit"
-                  nzValue="3"
-                  >編輯</label
-                >
-              </div>
-              <div nz-col>
-                <label
-                  nz-checkbox
-                  [nzDisabled]="hd620ListService.isView"
-                  formControlName="signatureSection_print"
-                  nzValue="4"
-                  >列印</label
-                >
-              </div>
-              <div nz-col>
-                <label
-                  nz-checkbox
-                  [nzDisabled]="hd620ListService.isView"
-                  formControlName="signatureSection_delete"
-                  nzValue="5"
-                  >刪除</label
-                >
-              </div>
+                  {{ option.label }}
+                </label>
+              </span>
             </div>
           </nz-checkbox-wrapper>
         </div>
         <div class="bold-text">
+          成果統計專區：
           <nz-checkbox-wrapper
-            style="width: 100%"
-            (nzOnChange)="handleOutcomeStatisticsChange($event)"
+            (nzOnChange)="functionPermission_outcomeStatisticsChange($event)"
           >
-            <div nz-row>
-              <div nz-col class="bold-text">成果統計專區：</div>
-              <div nz-col>
+            <div formGroupName="functionPermission_outcomeStatistics">
+              <span
+                *ngFor="let option of functionPermission_outcomeStatistics"
+              >
                 <label
+                  [nzDisabled]="option.disabled"
                   nz-checkbox
-                  [nzDisabled]="hd620ListService.isView"
-                  formControlName="outcomeStatistics_add"
-                  nzValue="1"
-                  >新增</label
+                  [formControlName]="option.value"
+                  [nzValue]="option.value"
                 >
-              </div>
-              <div nz-col>
-                <label
-                  nz-checkbox
-                  [nzDisabled]="hd620ListService.isView"
-                  formControlName="outcomeStatistics_view"
-                  nzValue="2"
-                  >檢視</label
-                >
-              </div>
-              <div nz-col>
-                <label
-                  nz-checkbox
-                  [nzDisabled]="hd620ListService.isView"
-                  formControlName="outcomeStatistics_edit"
-                  nzValue="3"
-                  >編輯</label
-                >
-              </div>
-              <div nz-col>
-                <label
-                  nz-checkbox
-                  [nzDisabled]="hd620ListService.isView"
-                  formControlName="outcomeStatistics_print"
-                  nzValue="4"
-                  >列印</label
-                >
-              </div>
-              <div nz-col>
-                <label
-                  nz-checkbox
-                  [nzDisabled]="hd620ListService.isView"
-                  formControlName="outcomeStatistics_delete"
-                  nzValue="5"
-                  >刪除</label
-                >
-              </div>
+                  {{ option.label }}
+                </label>
+              </span>
             </div>
           </nz-checkbox-wrapper>
         </div>
         <div class="bold-text">
+          系統管理權限：
           <nz-checkbox-wrapper
-            style="width: 100%"
-            (nzOnChange)="handleSystemAdminPermissionsChange($event)"
+            (nzOnChange)="functionPermission_systemAdminPermissionsChange($event)"
           >
-            <div nz-row>
-              <div nz-col class="bold-text">系統管理權限：</div>
-              <div nz-col>
+            <div formGroupName="functionPermission_systemAdminPermissions">
+              <span
+                *ngFor="let option of functionPermission_systemAdminPermissions"
+              >
                 <label
+                  [nzDisabled]="option.disabled"
                   nz-checkbox
-                  [nzDisabled]="hd620ListService.isView"
-                  formControlName="systemAdminPermissions_add"
-                  nzValue="1"
-                  >新增</label
+                  [formControlName]="option.value"
+                  [nzValue]="option.value"
                 >
-              </div>
-              <div nz-col>
-                <label
-                  nz-checkbox
-                  [nzDisabled]="hd620ListService.isView"
-                  formControlName="systemAdminPermissions_view"
-                  nzValue="2"
-                  >檢視</label
-                >
-              </div>
-              <div nz-col>
-                <label
-                  nz-checkbox
-                  [nzDisabled]="hd620ListService.isView"
-                  formControlName="systemAdminPermissions_edit"
-                  nzValue="3"
-                  >編輯</label
-                >
-              </div>
-              <div nz-col>
-                <label
-                  nz-checkbox
-                  [nzDisabled]="hd620ListService.isView"
-                  formControlName="systemAdminPermissions_print"
-                  nzValue="4"
-                  >列印</label
-                >
-              </div>
-              <div nz-col>
-                <label
-                  nz-checkbox
-                  [nzDisabled]="hd620ListService.isView"
-                  formControlName="systemAdminPermissions_delete"
-                  nzValue="5"
-                  >刪除</label
-                >
-              </div>
+                  {{ option.label }}
+                </label>
+              </span>
             </div>
           </nz-checkbox-wrapper>
         </div>

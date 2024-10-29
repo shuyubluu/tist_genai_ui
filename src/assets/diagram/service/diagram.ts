@@ -7,6 +7,6 @@ export class DiagramService {
   constructor() {}
 
   openDiagramPage() {
-    window.location.href = 'assets/diagram/family.html';
+    window.open('assets/diagram/family.html', '_blank');
   }
 }

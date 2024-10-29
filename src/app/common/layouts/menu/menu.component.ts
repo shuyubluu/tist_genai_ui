@@ -88,6 +88,11 @@ export class MenuComponent implements OnInit {
         link: '/hd500',
       },
       {
+        title: '重設密碼',
+        icon: 'lock',
+        link: '/resetPassword',
+      },
+      {
         title: '系統管理權限',
         icon: 'setting',
         children: [

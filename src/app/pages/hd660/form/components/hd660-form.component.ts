@@ -53,6 +53,8 @@ export class Hd660FormComponent implements OnInit {
     this.form = new FormGroup({
       // 發佈日期
       publicationDate: new FormControl('', [DateValidators.dateValidator]),
+      // 下架日期
+      offShelfDate: new FormControl(''),
       // 發佈單位
       publishingUnit: new FormControl('總會(系統管理者)'),
       // 主旨標題

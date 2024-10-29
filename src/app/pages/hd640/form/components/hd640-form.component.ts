@@ -15,6 +15,7 @@ import {
 import { ErrorMessageComponent } from '../../../../common/components/message/error-message.component';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { HondaoUnitComponent } from '../../../../common/components/hondaoUnit/components/hondao-unit.component';
+import { CheckboxGroup } from '../service/hd640-form.interface';
 
 @Component({
   selector: 'app-hd640-form',
@@ -120,12 +121,255 @@ export class Hd640FormComponent implements OnInit {
     '林邊(林邊志工站)',
   ];
 
+  // 職稱select選項
+  selectOptions_jobTitle: string[] = [
+    // 模擬用資料
+    '職稱1',
+    '職稱2',
+    '職稱3',
+  ];
+
+  // 功能權限_個案管理勾選狀態
+  functionPermission_caseManagement: CheckboxGroup[] = [
+    {
+      label: '新增',
+      value: '00',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '檢視',
+      value: '01',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '編輯',
+      value: '02',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '列印',
+      value: '03',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '刪除',
+      value: '04',
+      checked: false,
+      disabled: false,
+    },
+  ];
+
+  // 功能權限_志工管理勾選狀態
+  functionPermission_volunteerManagement: CheckboxGroup[] = [
+    {
+      label: '新增',
+      value: '00',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '檢視',
+      value: '01',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '編輯',
+      value: '02',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '列印',
+      value: '03',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '刪除',
+      value: '04',
+      checked: false,
+      disabled: false,
+    },
+  ];
+
+  // 功能權限_報表專區勾選狀態
+  functionPermission_reportSection: CheckboxGroup[] = [
+    {
+      label: '新增',
+      value: '00',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '檢視',
+      value: '01',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '編輯',
+      value: '02',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '列印',
+      value: '03',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '刪除',
+      value: '04',
+      checked: false,
+      disabled: false,
+    },
+  ];
+
+  // 功能權限_簽核專區勾選狀態
+  functionPermission_signatureSection: CheckboxGroup[] = [
+    {
+      label: '新增',
+      value: '00',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '檢視',
+      value: '01',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '編輯',
+      value: '02',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '列印',
+      value: '03',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '刪除',
+      value: '04',
+      checked: false,
+      disabled: false,
+    },
+  ];
+
+  // 功能權限_成果統計專區勾選狀態
+  functionPermission_outcomeStatistics: CheckboxGroup[] = [
+    {
+      label: '新增',
+      value: '00',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '檢視',
+      value: '01',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '編輯',
+      value: '02',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '列印',
+      value: '03',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '刪除',
+      value: '04',
+      checked: false,
+      disabled: false,
+    },
+  ];
+
+  // 功能權限_系統管理權限勾選狀態
+  functionPermission_systemAdminPermissions: CheckboxGroup[] = [
+    {
+      label: '新增',
+      value: '00',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '檢視',
+      value: '01',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '編輯',
+      value: '02',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '列印',
+      value: '03',
+      checked: false,
+      disabled: false,
+    },
+    {
+      label: '刪除',
+      value: '04',
+      checked: false,
+      disabled: false,
+    },
+  ];
+
   constructor(
     private route: ActivatedRoute,
     private tabService: TabService, // 關閉tab的Service
     private message: NzMessageService, // message
     public hd640ListService: Hd640ListService // hd640ListService
   ) {
+    // 接收後端回傳資料
+    // this.functionPermission_caseManagement =
+    // this.functionPermission_volunteerManagement =
+    // this.functionPermission_reportSection =
+    // this.functionPermission_signatureSection =
+    // this.functionPermission_outcomeStatistics =
+    // this.functionPermission_systemAdminPermissions =
+
+    // 功能權限_個案管理CheckboxGroup
+    const functionPermission_caseManagementGroup = this.createCheckboxGroup(
+      this.functionPermission_caseManagement
+    );
+    // 功能權限_志工管理CheckboxGroup
+    const functionPermission_volunteerManagementGroup =
+      this.createCheckboxGroup(this.functionPermission_volunteerManagement);
+    // 功能權限_報表專區CheckboxGroup
+    const functionPermission_reportSectionGroup = this.createCheckboxGroup(
+      this.functionPermission_reportSection
+    );
+    // 功能權限_簽核專區CheckboxGroup
+    const functionPermission_signatureSectionGroup = this.createCheckboxGroup(
+      this.functionPermission_signatureSection
+    );
+    // 功能權限_成果統計專區CheckboxGroup
+    const functionPermission_outcomeStatisticsGroup = this.createCheckboxGroup(
+      this.functionPermission_outcomeStatistics
+    );
+    // 功能權限_系統管理權限CheckboxGroup
+    const functionPermission_systemAdminPermissionsGroup =
+      this.createCheckboxGroup(this.functionPermission_systemAdminPermissions);
+
     // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({
       // 姓名
@@ -138,8 +382,6 @@ export class Hd640FormComponent implements OnInit {
       agent: new FormControl(''),
       // 電子信箱
       email: new FormControl('', Validators.email),
-      // 重設密碼
-      resetPassword: new FormControl(''),
       // 辦公室電話
       officePhone: new FormControl('', [taiwanHomePhoneValidator()]),
       // 公務手機
@@ -163,83 +405,30 @@ export class Hd640FormComponent implements OnInit {
       // 站點主責人
       siteCoordinator: new FormControl(),
 
-      // 個案管理
-      caseManagement: new FormControl(''),
-      // 個案管理_新增
-      caseManagement_add: new FormControl(),
-      // 個案管理_檢視
-      caseManagement_view: new FormControl(),
-      // 個案管理_編輯
-      caseManagement_edit: new FormControl(),
-      // 個案管理_列印
-      caseManagement_print: new FormControl(),
-      // 個案管理_刪除
-      caseManagement_delete: new FormControl(),
-
-      // 志工管理
-      volunteerManagement: new FormControl(''),
-      // 志工管理_新增
-      volunteerManagement_add: new FormControl(),
-      // 志工管理_檢視
-      volunteerManagement_view: new FormControl(),
-      // 志工管理_編輯
-      volunteerManagement_edit: new FormControl(),
-      // 志工管理_列印
-      volunteerManagement_print: new FormControl(),
-      // 志工管理_刪除
-      volunteerManagement_delete: new FormControl(),
-
-      // 報表專區
-      reportSection: new FormControl(''),
-      // 報表專區_新增
-      reportSection_add: new FormControl(),
-      // 報表專區_檢視
-      reportSection_view: new FormControl(),
-      // 報表專區_編輯
-      reportSection_edit: new FormControl(),
-      // 報表專區_列印
-      reportSection_print: new FormControl(),
-      // 報表專區_刪除
-      reportSection_delete: new FormControl(),
-
-      // 簽核專區
-      signatureSection: new FormControl(''),
-      // 簽核專區_新增
-      signatureSection_add: new FormControl(),
-      // 簽核專區_檢視
-      signatureSection_view: new FormControl(),
-      // 簽核專區_編輯
-      signatureSection_edit: new FormControl(),
-      // 簽核專區_列印
-      signatureSection_print: new FormControl(),
-      // 簽核專區_刪除
-      signatureSection_delete: new FormControl(),
-
-      // 成果統計專區
-      outcomeStatistics: new FormControl(''),
-      // 成果統計專區_新增
-      outcomeStatistics_add: new FormControl(),
-      // 成果統計專區_檢視
-      outcomeStatistics_view: new FormControl(),
-      // 成果統計專區_編輯
-      outcomeStatistics_edit: new FormControl(),
-      // 成果統計專區_列印
-      outcomeStatistics_print: new FormControl(),
-      // 成果統計專區_刪除
-      outcomeStatistics_delete: new FormControl(),
-
-      // 系統管理權限
-      systemAdminPermissions: new FormControl(''),
-      // 系統管理權限_新增
-      systemAdminPermissions_add: new FormControl(),
-      // 系統管理權限_檢視
-      systemAdminPermissions_view: new FormControl(),
-      // 系統管理權限_編輯
-      systemAdminPermissions_edit: new FormControl(),
-      // 系統管理權限_列印
-      systemAdminPermissions_print: new FormControl(),
-      // 系統管理權限_刪除
-      systemAdminPermissions_delete: new FormControl(),
+      // 功能權限_個案管理
+      functionPermission_caseManagement: new FormGroup(
+        functionPermission_caseManagementGroup
+      ),
+      // 功能權限_志工管理
+      functionPermission_volunteerManagement: new FormGroup(
+        functionPermission_volunteerManagementGroup
+      ),
+      // 功能權限_報表專區
+      functionPermission_reportSection: new FormGroup(
+        functionPermission_reportSectionGroup
+      ),
+      // 功能權限_簽核專區
+      functionPermission_signatureSection: new FormGroup(
+        functionPermission_signatureSectionGroup
+      ),
+      // 功能權限_成果統計專區
+      functionPermission_outcomeStatistics: new FormGroup(
+        functionPermission_outcomeStatisticsGroup
+      ),
+      // 功能權限_系統管理權限
+      functionPermission_systemAdminPermissions: new FormGroup(
+        functionPermission_systemAdminPermissionsGroup
+      ),
 
       // 單位檢視權限
       unitViewPermissions: new FormControl(),
@@ -247,12 +436,23 @@ export class Hd640FormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // 單位檢視權限串接後端資料
+    this.form.get('unitViewPermissions')?.patchValue([]);
+    this.handleUnitViewPermissionsOk();
+
     // 取得當前路由的tabName
     this.tabName = this.route.snapshot.data['tabName'];
 
     // 檢視模式，禁用表單
     if (this.hd640ListService.isView) {
       this.form.disable();
+    }
+    // 編輯模式，禁用不可編輯欄位
+    if (this.hd640ListService.isEdit) {
+      this.form.get('name')?.disable();
+      this.form.get('employeeId')?.disable();
+      this.form.get('jobTitle')?.disable();
+      this.form.get('email')?.disable();
     }
     // 新增模式，禁用功能權限
     if (this.hd640ListService.isCreate) {
@@ -274,6 +474,55 @@ export class Hd640FormComponent implements OnInit {
     this.form.get('siteCoordinator')?.disable();
     // 禁用全會選項
     this.form.get('headquartersManagement')?.disable();
+
+    // 複選框初始化
+    const functionPermission_caseManagementCheckedValues =
+      this.functionPermission_caseManagement
+        .filter((option) => option.checked)
+        .map((option) => option.value);
+    this.functionPermission_caseManagementChange(
+      functionPermission_caseManagementCheckedValues
+    );
+
+    const functionPermission_volunteerManagementCheckedValues =
+      this.functionPermission_volunteerManagement
+        .filter((option) => option.checked)
+        .map((option) => option.value);
+    this.functionPermission_volunteerManagementChange(
+      functionPermission_volunteerManagementCheckedValues
+    );
+
+    const functionPermission_reportSectionCheckedValues =
+      this.functionPermission_reportSection
+        .filter((option) => option.checked)
+        .map((option) => option.value);
+    this.functionPermission_reportSectionChange(
+      functionPermission_reportSectionCheckedValues
+    );
+
+    const functionPermission_signatureSectionCheckedValues =
+      this.functionPermission_signatureSection
+        .filter((option) => option.checked)
+        .map((option) => option.value);
+    this.functionPermission_signatureSectionChange(
+      functionPermission_signatureSectionCheckedValues
+    );
+
+    const functionPermission_outcomeStatisticsCheckedValues =
+      this.functionPermission_outcomeStatistics
+        .filter((option) => option.checked)
+        .map((option) => option.value);
+    this.functionPermission_outcomeStatisticsChange(
+      functionPermission_outcomeStatisticsCheckedValues
+    );
+
+    const functionPermission_systemAdminPermissionsCheckedValues =
+      this.functionPermission_systemAdminPermissions
+        .filter((option) => option.checked)
+        .map((option) => option.value);
+    this.functionPermission_systemAdminPermissionsChange(
+      functionPermission_systemAdminPermissionsCheckedValues
+    );
   }
 
   // 開啟角色modal
@@ -307,241 +556,205 @@ export class Hd640FormComponent implements OnInit {
     this.isRoleVisible = true;
   }
 
+  // 將每個權限組的選項根據條件進行更新的通用函式
+  private updatePermissions(
+    permissionGroup: any[],
+    formControlName: string,
+    selectedValues: string[] = [],
+    defaultCheck: boolean = false
+  ) {
+    // 構建 patchValue 所需的物件格式
+    const updatedValues = permissionGroup.reduce((acc, option) => {
+      acc[option.value] = selectedValues.includes(option.value)
+        ? true
+        : defaultCheck;
+      option.checked = acc[option.value];
+      return acc;
+    }, {} as { [key: string]: boolean });
+
+    // 更新表單的權限組狀態
+    this.form.get(formControlName)?.patchValue(updatedValues);
+  }
+
   // 角色modal按下確認
   handleRoleOk(): void {
     this.currentSelectRole = this.form.get('role')?.value;
     if (this.form.get('role')?.value.includes('系統管理者')) {
-      this.form.patchValue({
-        caseManagement_add: true,
-        caseManagement_view: true,
-        caseManagement_edit: true,
-        caseManagement_print: true,
-        caseManagement_delete: true,
-
-        volunteerManagement_add: true,
-        volunteerManagement_view: true,
-        volunteerManagement_edit: true,
-        volunteerManagement_print: true,
-        volunteerManagement_delete: true,
-
-        reportSection_add: true,
-        reportSection_view: true,
-        reportSection_edit: true,
-        reportSection_print: true,
-        reportSection_delete: true,
-
-        signatureSection_add: true,
-        signatureSection_view: true,
-        signatureSection_edit: true,
-        signatureSection_print: true,
-        signatureSection_delete: true,
-
-        outcomeStatistics_add: true,
-        outcomeStatistics_view: true,
-        outcomeStatistics_edit: true,
-        outcomeStatistics_print: true,
-        outcomeStatistics_delete: true,
-
-        systemAdminPermissions_add: true,
-        systemAdminPermissions_view: true,
-        systemAdminPermissions_edit: true,
-        systemAdminPermissions_print: true,
-        systemAdminPermissions_delete: true,
-      });
-    } else {
-      // 取消勾選所有功能權限
-      this.cancelAllFunctionPermission();
-    }
-    if (this.form.get('role')?.value.includes('系統管理者')) {
-      this.form.patchValue({
-        caseManagement_add: true,
-        caseManagement_view: true,
-        caseManagement_edit: true,
-        caseManagement_print: true,
-        caseManagement_delete: true,
-
-        volunteerManagement_add: true,
-        volunteerManagement_view: true,
-        volunteerManagement_edit: true,
-        volunteerManagement_print: true,
-        volunteerManagement_delete: true,
-
-        reportSection_add: true,
-        reportSection_view: true,
-        reportSection_edit: true,
-        reportSection_print: true,
-        reportSection_delete: true,
-
-        signatureSection_add: true,
-        signatureSection_view: true,
-        signatureSection_edit: true,
-        signatureSection_print: true,
-        signatureSection_delete: true,
-
-        outcomeStatistics_add: true,
-        outcomeStatistics_view: true,
-        outcomeStatistics_edit: true,
-        outcomeStatistics_print: true,
-        outcomeStatistics_delete: true,
-
-        systemAdminPermissions_add: true,
-        systemAdminPermissions_view: true,
-        systemAdminPermissions_edit: true,
-        systemAdminPermissions_print: true,
-        systemAdminPermissions_delete: true,
-      });
+      // 實際情況後端要從hd620-form抓取設定好的功能權限
+      this.updatePermissions(
+        this.functionPermission_caseManagement,
+        'functionPermission_caseManagement',
+        [],
+        true
+      );
+      this.updatePermissions(
+        this.functionPermission_volunteerManagement,
+        'functionPermission_volunteerManagement',
+        [],
+        true
+      );
+      this.updatePermissions(
+        this.functionPermission_outcomeStatistics,
+        'functionPermission_outcomeStatistics',
+        [],
+        true
+      );
+      this.updatePermissions(
+        this.functionPermission_reportSection,
+        'functionPermission_reportSection',
+        [],
+        true
+      );
+      this.updatePermissions(
+        this.functionPermission_signatureSection,
+        'functionPermission_signatureSection',
+        [],
+        true
+      );
+      this.updatePermissions(
+        this.functionPermission_systemAdminPermissions,
+        'functionPermission_systemAdminPermissions',
+        [],
+        true
+      );
     } else if (this.form.get('role')?.value.includes('總會(處長)')) {
-      this.form.patchValue({
-        caseManagement_add: false,
-        caseManagement_view: true,
-        caseManagement_edit: false,
-        caseManagement_print: false,
-        caseManagement_delete: false,
-
-        volunteerManagement_add: false,
-        volunteerManagement_view: true,
-        volunteerManagement_edit: false,
-        volunteerManagement_print: false,
-        volunteerManagement_delete: false,
-
-        reportSection_add: false,
-        reportSection_view: true,
-        reportSection_edit: false,
-        reportSection_print: false,
-        reportSection_delete: false,
-
-        signatureSection_add: false,
-        signatureSection_view: true,
-        signatureSection_edit: false,
-        signatureSection_print: false,
-        signatureSection_delete: false,
-
-        outcomeStatistics_add: false,
-        outcomeStatistics_view: true,
-        outcomeStatistics_edit: false,
-        outcomeStatistics_print: true,
-        outcomeStatistics_delete: false,
-
-        systemAdminPermissions_add: false,
-        systemAdminPermissions_view: false,
-        systemAdminPermissions_edit: false,
-        systemAdminPermissions_print: false,
-        systemAdminPermissions_delete: false,
-      });
+      // 實際情況後端要從hd620-form抓取設定好的功能權限
+      this.updatePermissions(
+        this.functionPermission_caseManagement,
+        'functionPermission_caseManagement',
+        ['01']
+      );
+      this.updatePermissions(
+        this.functionPermission_volunteerManagement,
+        'functionPermission_volunteerManagement',
+        ['01']
+      );
+      this.updatePermissions(
+        this.functionPermission_reportSection,
+        'functionPermission_reportSection',
+        ['01']
+      );
+      this.updatePermissions(
+        this.functionPermission_signatureSection,
+        'functionPermission_signatureSection',
+        ['01']
+      );
+      this.updatePermissions(
+        this.functionPermission_outcomeStatistics,
+        'functionPermission_outcomeStatistics',
+        ['01', '03']
+      );
+      this.updatePermissions(
+        this.functionPermission_systemAdminPermissions,
+        'functionPermission_systemAdminPermissions',
+        [],
+        false
+      );
     } else if (this.form.get('role')?.value.includes('服務處(處長)')) {
-      this.form.patchValue({
-        caseManagement_add: false,
-        caseManagement_view: true,
-        caseManagement_edit: false,
-        caseManagement_print: false,
-        caseManagement_delete: false,
-
-        volunteerManagement_add: false,
-        volunteerManagement_view: true,
-        volunteerManagement_edit: false,
-        volunteerManagement_print: false,
-        volunteerManagement_delete: false,
-
-        reportSection_add: false,
-        reportSection_view: true,
-        reportSection_edit: false,
-        reportSection_print: false,
-        reportSection_delete: false,
-
-        signatureSection_add: false,
-        signatureSection_view: true,
-        signatureSection_edit: false,
-        signatureSection_print: false,
-        signatureSection_delete: false,
-
-        outcomeStatistics_add: false,
-        outcomeStatistics_view: true,
-        outcomeStatistics_edit: false,
-        outcomeStatistics_print: true,
-        outcomeStatistics_delete: false,
-
-        systemAdminPermissions_add: false,
-        systemAdminPermissions_view: false,
-        systemAdminPermissions_edit: false,
-        systemAdminPermissions_print: false,
-        systemAdminPermissions_delete: false,
-      });
+      // 實際情況後端要從hd620-form抓取設定好的功能權限
+      this.updatePermissions(
+        this.functionPermission_caseManagement,
+        'functionPermission_caseManagement',
+        ['01']
+      );
+      this.updatePermissions(
+        this.functionPermission_volunteerManagement,
+        'functionPermission_volunteerManagement',
+        ['01']
+      );
+      this.updatePermissions(
+        this.functionPermission_reportSection,
+        'functionPermission_reportSection',
+        ['01']
+      );
+      this.updatePermissions(
+        this.functionPermission_signatureSection,
+        'functionPermission_signatureSection',
+        ['01']
+      );
+      this.updatePermissions(
+        this.functionPermission_outcomeStatistics,
+        'functionPermission_outcomeStatistics',
+        ['01', '03']
+      );
+      this.updatePermissions(
+        this.functionPermission_systemAdminPermissions,
+        'functionPermission_systemAdminPermissions',
+        [],
+        false
+      );
     } else if (this.form.get('role')?.value.includes('組長')) {
-      this.form.patchValue({
-        caseManagement_add: true,
-        caseManagement_view: true,
-        caseManagement_edit: true,
-        caseManagement_print: true,
-        caseManagement_delete: true,
-
-        volunteerManagement_add: true,
-        volunteerManagement_view: true,
-        volunteerManagement_edit: true,
-        volunteerManagement_print: true,
-        volunteerManagement_delete: true,
-
-        reportSection_add: true,
-        reportSection_view: true,
-        reportSection_edit: true,
-        reportSection_print: true,
-        reportSection_delete: true,
-
-        signatureSection_add: true,
-        signatureSection_view: true,
-        signatureSection_edit: true,
-        signatureSection_print: true,
-        signatureSection_delete: true,
-
-        outcomeStatistics_add: false,
-        outcomeStatistics_view: true,
-        outcomeStatistics_edit: false,
-        outcomeStatistics_print: true,
-        outcomeStatistics_delete: false,
-
-        systemAdminPermissions_add: true,
-        systemAdminPermissions_view: true,
-        systemAdminPermissions_edit: true,
-        systemAdminPermissions_print: true,
-        systemAdminPermissions_delete: true,
-      });
+      // 實際情況後端要從hd620-form抓取設定好的功能權限
+      this.updatePermissions(
+        this.functionPermission_caseManagement,
+        'functionPermission_caseManagement',
+        [],
+        true
+      );
+      this.updatePermissions(
+        this.functionPermission_volunteerManagement,
+        'functionPermission_volunteerManagement',
+        [],
+        true
+      );
+      this.updatePermissions(
+        this.functionPermission_reportSection,
+        'functionPermission_reportSection',
+        [],
+        true
+      );
+      this.updatePermissions(
+        this.functionPermission_signatureSection,
+        'functionPermission_signatureSection',
+        [],
+        true
+      );
+      this.updatePermissions(
+        this.functionPermission_outcomeStatistics,
+        'functionPermission_outcomeStatistics',
+        ['01', '03']
+      );
+      this.updatePermissions(
+        this.functionPermission_systemAdminPermissions,
+        'functionPermission_systemAdminPermissions',
+        [],
+        true
+      );
     } else if (this.form.get('role')?.value.includes('站點主責人')) {
-      this.form.patchValue({
-        caseManagement_add: true,
-        caseManagement_view: true,
-        caseManagement_edit: true,
-        caseManagement_print: true,
-        caseManagement_delete: true,
-
-        volunteerManagement_add: true,
-        volunteerManagement_view: true,
-        volunteerManagement_edit: true,
-        volunteerManagement_print: true,
-        volunteerManagement_delete: true,
-
-        reportSection_add: true,
-        reportSection_view: true,
-        reportSection_edit: true,
-        reportSection_print: true,
-        reportSection_delete: false,
-
-        signatureSection_add: false,
-        signatureSection_view: true,
-        signatureSection_edit: false,
-        signatureSection_print: true,
-        signatureSection_delete: false,
-
-        outcomeStatistics_add: false,
-        outcomeStatistics_view: true,
-        outcomeStatistics_edit: false,
-        outcomeStatistics_print: true,
-        outcomeStatistics_delete: false,
-
-        systemAdminPermissions_add: false,
-        systemAdminPermissions_view: false,
-        systemAdminPermissions_edit: false,
-        systemAdminPermissions_print: false,
-        systemAdminPermissions_delete: false,
-      });
+      // 實際情況後端要從hd620-form抓取設定好的功能權限
+      this.updatePermissions(
+        this.functionPermission_caseManagement,
+        'functionPermission_caseManagement',
+        [],
+        true
+      );
+      this.updatePermissions(
+        this.functionPermission_volunteerManagement,
+        'functionPermission_volunteerManagement',
+        [],
+        true
+      );
+      this.updatePermissions(
+        this.functionPermission_reportSection,
+        'functionPermission_reportSection',
+        ['00', '01', '02', '03']
+      );
+      this.updatePermissions(
+        this.functionPermission_signatureSection,
+        'functionPermission_signatureSection',
+        ['01', '03']
+      );
+      this.updatePermissions(
+        this.functionPermission_outcomeStatistics,
+        'functionPermission_outcomeStatistics',
+        ['01', '03']
+      );
+      this.updatePermissions(
+        this.functionPermission_systemAdminPermissions,
+        'functionPermission_systemAdminPermissions',
+        [],
+        false
+      );
     } else {
       // 取消勾選所有功能權限
       this.cancelAllFunctionPermission();
@@ -783,112 +996,108 @@ export class Hd640FormComponent implements OnInit {
 
   // 取消勾選所有功能權限
   cancelAllFunctionPermission() {
-    this.form.patchValue({
-      caseManagement_add: false,
-      caseManagement_view: false,
-      caseManagement_edit: false,
-      caseManagement_print: false,
-      caseManagement_delete: false,
-
-      volunteerManagement_add: false,
-      volunteerManagement_view: false,
-      volunteerManagement_edit: false,
-      volunteerManagement_print: false,
-      volunteerManagement_delete: false,
-
-      reportSection_add: false,
-      reportSection_view: false,
-      reportSection_edit: false,
-      reportSection_print: false,
-      reportSection_delete: false,
-
-      signatureSection_add: false,
-      signatureSection_view: false,
-      signatureSection_edit: false,
-      signatureSection_print: false,
-      signatureSection_delete: false,
-
-      outcomeStatistics_add: false,
-      outcomeStatistics_view: false,
-      outcomeStatistics_edit: false,
-      outcomeStatistics_print: false,
-      outcomeStatistics_delete: false,
-
-      systemAdminPermissions_add: false,
-      systemAdminPermissions_view: false,
-      systemAdminPermissions_edit: false,
-      systemAdminPermissions_print: false,
-      systemAdminPermissions_delete: false,
+    this.functionPermission_caseManagement.forEach((option) => {
+      option.checked = false;
+    });
+    this.functionPermission_volunteerManagement.forEach((option) => {
+      option.checked = false;
+    });
+    this.functionPermission_reportSection.forEach((option) => {
+      option.checked = false;
+    });
+    this.functionPermission_outcomeStatistics.forEach((option) => {
+      option.checked = false;
+    });
+    this.functionPermission_signatureSection.forEach((option) => {
+      option.checked = false;
+    });
+    this.functionPermission_systemAdminPermissions.forEach((option) => {
+      option.checked = false;
     });
   }
 
   // 禁用功能權限
   disableFunctionPermissions(): void {
-    this.form.get('caseManagement_add')?.disable();
-    this.form.get('caseManagement_view')?.disable();
-    this.form.get('caseManagement_edit')?.disable();
-    this.form.get('caseManagement_print')?.disable();
-    this.form.get('caseManagement_delete')?.disable();
-
-    this.form.get('volunteerManagement_add')?.disable();
-    this.form.get('volunteerManagement_view')?.disable();
-    this.form.get('volunteerManagement_edit')?.disable();
-    this.form.get('volunteerManagement_print')?.disable();
-    this.form.get('volunteerManagement_delete')?.disable();
-
-    this.form.get('reportSection_add')?.disable();
-    this.form.get('reportSection_view')?.disable();
-    this.form.get('reportSection_edit')?.disable();
-    this.form.get('reportSection_print')?.disable();
-    this.form.get('reportSection_delete')?.disable();
-
-    this.form.get('signatureSection_add')?.disable();
-    this.form.get('signatureSection_view')?.disable();
-    this.form.get('signatureSection_edit')?.disable();
-    this.form.get('signatureSection_print')?.disable();
-    this.form.get('signatureSection_delete')?.disable();
-
-    this.form.get('outcomeStatistics_add')?.disable();
-    this.form.get('outcomeStatistics_view')?.disable();
-    this.form.get('outcomeStatistics_edit')?.disable();
-    this.form.get('outcomeStatistics_print')?.disable();
-    this.form.get('outcomeStatistics_delete')?.disable();
-
-    this.form.get('systemAdminPermissions_add')?.disable();
-    this.form.get('systemAdminPermissions_view')?.disable();
-    this.form.get('systemAdminPermissions_edit')?.disable();
-    this.form.get('systemAdminPermissions_print')?.disable();
-    this.form.get('systemAdminPermissions_delete')?.disable();
+    this.functionPermission_caseManagement.forEach((option) => {
+      option.disabled = false;
+    });
+    this.functionPermission_volunteerManagement.forEach((option) => {
+      option.disabled = false;
+    });
+    this.functionPermission_reportSection.forEach((option) => {
+      option.disabled = false;
+    });
+    this.functionPermission_outcomeStatistics.forEach((option) => {
+      option.disabled = false;
+    });
+    this.functionPermission_signatureSection.forEach((option) => {
+      option.disabled = false;
+    });
+    this.functionPermission_systemAdminPermissions.forEach((option) => {
+      option.disabled = false;
+    });
   }
 
   // 個案管理選項勾選時觸發
-  handleCaseManagementChange(checkGroup: string[]): void {
-    this.form.get('caseManagement')?.setValue(checkGroup);
+  functionPermission_caseManagementChange(checkedValues: string[]): void {
+    this.functionPermission_caseManagement.forEach((option) => {
+      // 更新每個選項的 checked 狀態
+      option.checked = checkedValues.includes(option.value);
+    });
   }
 
   // 志工管理選項勾選時觸發
-  handleVolunteerManagementChange(checkGroup: string[]): void {
-    this.form.get('volunteerManagement')?.setValue(checkGroup);
+  functionPermission_volunteerManagementChange(checkedValues: string[]): void {
+    this.functionPermission_caseManagement.forEach((option) => {
+      // 更新每個選項的 checked 狀態
+      option.checked = checkedValues.includes(option.value);
+    });
   }
 
   // 報表專區選項勾選時觸發
-  handleReportSectionChange(checkGroup: string[]): void {
-    this.form.get('reportSection')?.setValue(checkGroup);
+  functionPermission_reportSectionChange(checkedValues: string[]): void {
+    this.functionPermission_caseManagement.forEach((option) => {
+      // 更新每個選項的 checked 狀態
+      option.checked = checkedValues.includes(option.value);
+    });
   }
 
   // 簽核專區選項勾選時觸發
-  handleSignatureSectionChange(checkGroup: string[]): void {
-    this.form.get('signatureSection')?.setValue(checkGroup);
+  functionPermission_signatureSectionChange(checkedValues: string[]): void {
+    this.functionPermission_caseManagement.forEach((option) => {
+      // 更新每個選項的 checked 狀態
+      option.checked = checkedValues.includes(option.value);
+    });
   }
 
   // 成果統計專區選項勾選時觸發
-  handleOutcomeStatisticsChange(checkGroup: string[]): void {
-    this.form.get('outcomeStatistics')?.setValue(checkGroup);
+  functionPermission_outcomeStatisticsChange(checkedValues: string[]): void {
+    this.functionPermission_caseManagement.forEach((option) => {
+      // 更新每個選項的 checked 狀態
+      option.checked = checkedValues.includes(option.value);
+    });
   }
 
   // 系統管理權限選項勾選時觸發
-  handleSystemAdminPermissionsChange(checkGroup: string[]): void {
-    this.form.get('systemAdminPermissions')?.setValue(checkGroup);
+  functionPermission_systemAdminPermissionsChange(
+    checkedValues: string[]
+  ): void {
+    this.functionPermission_caseManagement.forEach((option) => {
+      // 更新每個選項的 checked 狀態
+      option.checked = checkedValues.includes(option.value);
+    });
+  }
+
+  // 創建checkbox group
+  createCheckboxGroup(options: any[]): { [key: string]: FormControl } {
+    const group: { [key: string]: FormControl } = {};
+    options.forEach((option) => {
+      group[option.value] = new FormControl(option.checked);
+      if (option.disabled) {
+        group[option.value].disable(); // 如果該選項應該被禁用，則禁用對應的 FormControl
+      }
+    });
+    return group;
   }
 
   // 開啟單位檢視權限modal
@@ -906,6 +1115,7 @@ export class Hd640FormComponent implements OnInit {
       ...this.form.get('unitViewPermissions')?.value,
     ];
     this.message.success('修改成功');
+    console.log(this.form.get('unitViewPermissions')?.value);
   }
 
   // 單位檢視權限modal取消按鈕事件

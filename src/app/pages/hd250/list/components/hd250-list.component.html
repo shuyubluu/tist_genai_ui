@@ -8,23 +8,23 @@
       <div class="label">填寫日期區間</div>
       <div class="column-Message">
         <app-dayPicker
-        (ngModelChange)="onSubmissionDateRangeChange($event)"
-        [startRange]="30"
-        [endRange]="0"
+          (ngModelChange)="onSubmissionDateRangeChange($event)"
+          [startRange]="30"
+          [endRange]="0"
           formControlName="submissionDateRange_start"
         />
         <span class="mx-2">-</span>
         <app-dayPicker
-        (ngModelChange)="onSubmissionDateRangeChange($event)"
-        [startRange]="30"
-        [endRange]="0"
+          (ngModelChange)="onSubmissionDateRangeChange($event)"
+          [startRange]="30"
+          [endRange]="0"
           formControlName="submissionDateRange_end"
         />
         <app-error-message
-        [isCustom]="true"
-        [condition]="checkDateRange"
-        [errorMessage]="'格式錯誤'"
-      />
+          [isCustom]="true"
+          [condition]="checkDateRange"
+          [errorMessage]="'格式錯誤'"
+        />
       </div>
     </div>
     <div class="grid-columns-1 border-bottom-0">
@@ -40,11 +40,6 @@
   </div>
   <div class="buttonArea">
     <app-button [buttonText]="'搜尋'" (click)="search()" />
-    <app-button
-      [attachClassName]="['success']"
-      [buttonText]="'新增'"
-      (click)="create()"
-    />
     <app-button
       [attachClassName]="['danger']"
       [buttonText]="'關閉'"

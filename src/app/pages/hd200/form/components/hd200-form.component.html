@@ -527,6 +527,12 @@
           (click)="showModal()"
         />
         <span>{{ currentSelectedDesiredServiceArea }}</span>
+        <app-error-message
+          [control]="form.get('desiredServiceArea')"
+          [isTouched]="false"
+          errorKey="required"
+          errorMessage="希望服務區域至少擇一"
+        />
         <nz-modal
           [(nzVisible)]="isVisible"
           nzTitle="希望服務區域"
