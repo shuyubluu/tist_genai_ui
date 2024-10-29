@@ -241,9 +241,13 @@ P  {FONT-SIZE: 9pt; COLOR: black; FONT-FAMILY: arial}
 	MODIFY BY Nick 105.04.15
 */
 .titleb {
-	BACKGROUND-COLOR: #0099CC;
-	width:100%;
+	/* BACKGROUND-COLOR: #0099CC; */
+	/* width:100%; */
 	border: none;
+	text-align: center; /* 文字置中 */
+    display: flex;
+    justify-content: center; /* 元素水平置中 */
+    align-items: center; /* 元素垂直置中 */
 }
 
 .titlea {

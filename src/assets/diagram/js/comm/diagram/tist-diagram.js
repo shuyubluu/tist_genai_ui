@@ -4857,24 +4857,24 @@ class Paper {
                     }
                 }
 
-                ,
-                {
-                    title: function () {
-                        return '匯出Json';
-                    },
-                    event: function () {
-                        self.exportJson();
-                    }
-                }
-                ,
-                {
-                    title: function () {
-                        return '匯入Json';
-                    },
-                    event: function () {
-                        self.fromJsonFile();
-                    }
-                }
+                // ,
+                // {
+                //     title: function () {
+                //         return '匯出Json';
+                //     },
+                //     event: function () {
+                //         self.exportJson();
+                //     }
+                // }
+                // ,
+                // {
+                //     title: function () {
+                //         return '匯入Json';
+                //     },
+                //     event: function () {
+                //         self.fromJsonFile();
+                //     }
+                // }
 
             ];
             menulist.forEach(function (content) {

@@ -23,7 +23,7 @@
       <form name="main" action="*" method="post">
         <table class="titleb">
           <tr id="tr_family_json">
-            <td class="must" width="20%">
+            <!-- <td class="must" width="20%">
               家系圖<br />
               <input
                 type="button"
@@ -44,17 +44,27 @@
                   onchange="loadFile(this.files[0])"
                 />
               </div>
-            </td>
+            </td> -->
 
-            <td class="title2" colspan="3">
-              請按滑鼠右鍵繪製，儲存後會替代原家系圖<font color="red"
+            <td class="title2">
+              <!-- 請按滑鼠右鍵繪製，儲存後會替代原家系圖<font color="red"
+                >新增角色後請先至空白處按左鍵消除紅點</font
+              > -->
+              請按滑鼠右鍵繪製，<font color="red"
                 >新增角色後請先至空白處按左鍵消除紅點</font
               >
-              <div id="backButton">回上一頁</div>
+              <div><input
+                type="button"
+                name="file_name"
+                value="清空家系圖"
+                onclick="clearPaper()"
+              />
+              </div>
+              <!-- <div id="backButton">回上一頁</div> -->
               <div id="paper"></div>
             </td>
           </tr>
-          <tr id="tr_family_json">
+          <!-- <tr id="tr_family_json">
             <td class="must" width="20%">家系圖Json code<br /></td>
             <td class="title2" colspan="3">
               <textarea
@@ -63,7 +73,7 @@
                 name="family_json"
               ></textarea>
             </td>
-          </tr>
+          </tr> -->
         </table>
       </form>
     </div>
@@ -71,11 +81,11 @@
       async function loadFile(file) {
         let text = await file.text();
         paper.clear();
-        paper.getOriginalPaper().options.width = 600;
-        paper.getOriginalPaper().options.height = 600;
+        paper.getOriginalPaper().options.width = 1250;
+        paper.getOriginalPaper().options.height = 770;
         var temppaper = document.getElementById("paper");
-        temppaper.style.width = 600;
-        temppaper.style.height = 600;
+        temppaper.style.width = 1250;
+        temppaper.style.height = 770;
         paper.fromJson(JSON.parse(text));
       }
 

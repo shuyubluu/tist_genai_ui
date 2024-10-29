@@ -6,8 +6,8 @@ $(document).ready(function() {
 	        el: document.getElementById('paper'),
 	       /* width: 1320,
 	        height: 500,*/
-	        width: 600,
-	        height: 600,
+	        width: 1250,
+	        height: 770,
 	        background: {
 	            color: 'white'
 	        }
@@ -33,11 +33,11 @@ function blobToFile(theBlob, fileName){
 function clearPaper (){
 	if(confirm("確定要清空家系圖嗎？")){
 		paper.clear();
-		paper.getOriginalPaper().options.width = 600;
-		paper.getOriginalPaper().options.height = 600;
+		paper.getOriginalPaper().options.width = 1250;
+		paper.getOriginalPaper().options.height = 770;
 		var temppaper = document.getElementById('paper');
-		temppaper.style.width = 600;
-		temppaper.style.height = 600;
+		temppaper.style.width = 1250;
+		temppaper.style.height = 770;
 	}
 }
 
