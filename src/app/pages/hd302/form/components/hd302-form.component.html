@@ -1,33 +1,52 @@
-<form [formGroup]="form">
-  <div class="grid-container">
-    <div class="grid-columns-1">
-      <div class="label">表單上傳</div>
-      <div>
-        <nz-upload
-          nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-          [nzFileList]="form_fileList"
-          (nzChange)="form_handleChange($event)"
-        >
-          <app-button [attachClassName]="['success']" [buttonText]="'上傳'" />
-        </nz-upload>
-      </div>
-    </div>
-    <!-- !TODO -->
-    <div class="grid-columns-1">
-      <div class="label">匯入結果</div>
-      <div>已匯入</div>
-    </div>
-    <div class="grid-columns-1 border-bottom-0">
-      <div class="label">資料預覽</div>
-      <div></div>
-    </div>
+<div class="report-summary">
+  <!-- 今日通報總數 -->
+  <nz-statistic [nzValue]="totalReports" nzTitle="今日通報總數"></nz-statistic>
+
+  <!-- 未處理通報數量 -->
+  <nz-statistic [nzValue]="pendingReports" nzTitle="未處理通報數量"></nz-statistic>
+
+  <!-- 已處理通報數量 -->
+  <nz-statistic [nzValue]="completedReports" nzTitle="已處理通報數量"></nz-statistic>
+</div>
+
+<div class="risk-summary">
+  <!-- 風險等級顯示 -->
+  <div *ngFor="let item of riskData; let i = index">
+    <nz-card>
+      <nz-card-meta
+        [nzTitle]="item.level"
+        [nzDescription]="
+          '通報數量: ' + item.count + ' (' + percentFormatter(riskPercentages[i]) + ')'
+        "
+      >
+      </nz-card-meta>
+      <nz-progress
+        [nzPercent]="riskPercentages[i]"
+        [nzStatus]="'active'"
+        [nzStrokeColor]="item.color"
+      ></nz-progress>
+    </nz-card>
   </div>
-  <div class="buttonArea">
-    <app-button [buttonText]="'儲存'" (click)="save()" />
-    <app-button
-      [attachClassName]="['danger']"
-      [buttonText]="'關閉'"
-      (click)="closeTab()"
-    />
-  </div>
-</form>
+</div>
+
+<!-- 通報列表顯示 -->
+<div class="report-table">
+  <nz-table #basicTable [nzData]="reportList" [nzBordered]="true">
+    <thead>
+      <tr>
+        <th nzWidth="25%">通報 ID</th>
+        <th nzWidth="25%">風險等級</th>
+        <th nzWidth="25%">描述</th>
+        <th nzWidth="25%">狀態</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let report of reportList">
+        <td>{{ report.id }}</td>
+        <td>{{ report.level }}</td>
+        <td>{{ report.description }}</td>
+        <td>{{ report.status }}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

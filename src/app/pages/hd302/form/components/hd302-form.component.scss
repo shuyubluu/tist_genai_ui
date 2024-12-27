@@ -1,0 +1,116 @@
+/* 背景顏色與頁面結構 */
+:host {
+    display: block;
+    padding: 30px;
+    background: #f9f9f9; /* 淺灰背景色 */
+    border-radius: 10px;
+  }
+  
+  /* 統計數據區域 */
+  .report-summary {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+  
+  nz-statistic {
+    background-color: #fff; /* 統計數據背景色 */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* 統計框陰影效果 */
+    text-align: center;
+    width: 30%;
+    transition: transform 0.3s ease;
+  }
+  
+  nz-statistic:hover {
+    transform: translateY(-10px); /* 滑動效果 */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* 風險統計顯示區域 */
+  .risk-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);  /* 設置為三列 */
+    gap: 30px;
+    margin-bottom: 30px;
+  }
+  
+  nz-card {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  nz-card:hover {
+    transform: translateY(-5px); /* 卡片滑動效果 */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  }
+  
+  nz-card-meta {
+    padding: 20px;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  
+  nz-card-meta .nz-card-meta-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333; /* 標題文字顏色 */
+  }
+  
+  nz-progress {
+    margin-top: 20px;
+    border-radius: 8px;
+  }
+  
+  /* 通報列表表格 */
+  .report-table {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  nz-table {
+    border-radius: 8px;
+  }
+  
+  nz-table th {
+    background-color: #f5f5f5; /* 表格標題背景 */
+    color: #333; /* 表格標題文字顏色 */
+    font-weight: bold;
+  }
+  
+  nz-table td {
+    color: #555; /* 表格內容文字顏色 */
+  }
+  
+  .nz-table .ant-table-row:hover {
+    background-color: #f5f5f5; /* 滑過表格行的背景顏色 */
+  }
+  
+  /* 響應式設計調整 */
+  @media (max-width: 1200px) {
+    .risk-summary {
+      grid-template-columns: repeat(2, 1fr);  /* 螢幕寬度小於1200px時，顯示為兩列 */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .report-summary {
+      flex-direction: column;
+      gap: 15px;
+    }
+  
+    nz-statistic {
+      width: 100%; /* 設定為100%寬度 */
+    }
+  
+    .risk-summary {
+      grid-template-columns: 1fr; /* 螢幕寬度小於768px時，顯示為單列 */
+    }
+  }
+  

@@ -25,50 +25,111 @@ import { NzMessageService } from 'ng-zorro-antd/message';
   styleUrl: './hd301-form.component.scss',
 })
 export class Hd301FormComponent implements OnInit {
-  // 搜尋條件表單
   form: FormGroup;
-  // tab名稱
   tabName: string = '';
 
-  // 模擬表單上傳檔案
+  // 模擬上傳的檔案清單
   form_fileList: NzUploadFile[] = [
     {
       uid: '1',
-      name: '志工獎勵.excel',
+      name: '突發緊急通報單.docx',
       status: 'done',
+    },
+  ];
+
+  // 模擬的個案清單資料
+  form_caseList: Array<any> = [
+    {
+      caseId: 'E202401001',
+      name: '張家航',
+      idCard: 'A123456789',
+      reporter: '呂育銓',
+      unit: '台北市社會局',
+      reportTime: '2024-12-23 10:45',
+      reported: false, // 新增欄位來標示是否通報過
+    },
+    {
+      caseId: 'E202401002',
+      name: '劉偉健',
+      idCard: 'B987654321',
+      reporter: '鐘培生',
+      unit: '新北市社會局',
+      reportTime: '2024-12-23 11:30',
+      reported: false, // 新增欄位來標示是否通報過
+    },
+    {
+      caseId: 'E202401003',
+      name: '孫生',
+      idCard: 'C112233445',
+      reporter: '陳玟理',
+      unit: '高雄市社會局',
+      reportTime: '2024-12-23 12:15',
+      reported: false, // 新增欄位來標示是否通報過
     },
   ];
 
   constructor(
     private route: ActivatedRoute,
-    private tabService: TabService, // 關閉tab的Service
-    private message: NzMessageService // message
+    private tabService: TabService,
+    private message: NzMessageService
   ) {
-    // 初始化表單，使用 FormGroup 來組織多個 FormControl
     this.form = new FormGroup({});
   }
 
   ngOnInit(): void {
-    // 取得當前路由的tabName
     this.tabName = this.route.snapshot.data['tabName'];
   }
 
-  // 關閉當前的tab
   closeTab() {
     this.tabService.closeTab(this.tabName);
   }
 
-  // 表單上傳點擊事件
   form_handleChange(info: NzUploadChangeParam): void {
     if (info.file.status === 'done') {
       this.message.success(`${info.file.name} 上傳成功`);
+
+      // 模擬新增資料至個案清單
+      this.form_caseList.push({
+        caseId: `E20240100${this.form_caseList.length + 1}`,
+        name: '張美麗',
+        idCard: 'B987654321',
+        reporter: '林小芳',
+        unit: '新北市衛生局',
+        reportTime: new Date().toLocaleString(),
+        reported: false, // 初始未通報
+      });
     } else if (info.file.status === 'error') {
       this.message.error(`${info.file.name} 上傳失敗.`);
     }
   }
 
-  // 儲存
   save() {
     this.message.success('儲存成功');
+  }
+
+  // 新增通報方法
+  reportCase(index: number): void {
+    const caseData = this.form_caseList[index];
+
+    if (caseData.reported) {
+      this.message.info(`案件 ${caseData.caseId} 已通報過`);
+      return; // 如果已經通報過，就不再處理
+    }
+
+    // 模擬後端處理
+    this.message.loading('正在處理通報...', { nzDuration: 2000 });
+
+    setTimeout(() => {
+      caseData.reported = true; // 標記為已通報
+      this.message.success(`案件 ${caseData.caseId} 通報成功`);
+
+      // 更新按鈕狀態
+      const button = document.getElementById(`report-btn-${index}`) as HTMLButtonElement;
+      if (button) {
+        button.disabled = true;
+        button.style.backgroundColor = '#dcdcdc'; // 設為灰色
+        button.innerText = '已通報'; // 修改按鈕文字
+      }
+    }, 2000);
   }
 }

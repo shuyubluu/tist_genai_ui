@@ -23,101 +23,102 @@ export class MenuComponent implements OnInit {
         icon: 'home',
         link: '/welcome',
       },
-      {
-        title: '個案管理',
-        icon: 'solution',
-        children: [
-          {
-            title: '01- 個案資料清單',
-            open: false,
-            link: '/hd100',
-          },
+      // {
+      //   title: '個案管理',
+      //   icon: 'solution',
+      //   children: [
+      //     {
+      //       title: '01- 個案資料清單',
+      //       open: false,
+      //       link: '/hd100',
+      //     },
           // { title: '02- 例行訪視表清單', open: false, link: '/hd140' },
           // { title: '03- 個案複評表清單', open: false, link: '/hd150' },
           // { title: '04- 生活品質問卷清單', open: false, link: '/hd160' },
           // { title: '05- 轉介單清單', open: false, link: '/hd170' },
-          {
-            title: '02- 個案結案名冊',
-            open: false,
-            link: '/hd180',
-          },
-        ],
-      },
+      //     {
+      //       title: '02- 個案結案名冊',
+      //       open: false,
+      //       link: '/hd180',
+      //     },
+      //   ],
+      // },
+      // {
+      //   title: '志工管理',
+      //   icon: 'team',
+      //   children: [
+      //     { title: '01- 志工資料清單', open: false, link: '/hd200' },
+      //     { title: '02- 保險專區', open: false, link: '/hd270' },
+      //     { title: '03- 服務時數管理', open: false, link: '/hd280' },
+      //     { title: '04- 志工退隊名冊', open: false, link: '/hd260' },
+      //   ],
+      // },
       {
-        title: '志工管理',
-        icon: 'team',
-        children: [
-          { title: '01- 志工資料清單', open: false, link: '/hd200' },
-          { title: '02- 保險專區', open: false, link: '/hd270' },
-          { title: '03- 服務時數管理', open: false, link: '/hd280' },
-          { title: '04- 志工退隊名冊', open: false, link: '/hd260' },
-        ],
-      },
-      {
-        title: '報表專區',
+        title: 'AI',
         icon: 'reconciliation',
         children: [
           {
-            title: '01- 表單匯入',
+            title: '01- 音檔AI',
             children: [
-              { title: '志工教育訓練', icon: 'file-add', link: '/hd300' },
-              { title: '志工獎勵', icon: 'file-add', link: '/hd301' },
-              { title: '志工時數', icon: 'file-add', link: '/hd302' },
-              { title: '志工考核表', icon: 'file-add', link: '/hd303' },
-              { title: '個案基本資料表', icon: 'file-add', link: '/hd304' },
-              { title: '個案生活品質量表', icon: 'file-add', link: '/hd305' },
+              { title: '音檔轉文字AI', icon: 'file-add', link: '/hd300' },
+              // { title: '志工獎勵', icon: 'file-add', link: '/hd301' },
+              // { title: '通報管理', icon: 'file-add', link: '/hd302' },
+              // { title: '志工考核表', icon: 'file-add', link: '/hd303' },
+              // { title: '個案基本資料表', icon: 'file-add', link: '/hd304' },
+              // { title: '個案生活品質量表', icon: 'file-add', link: '/hd305' },
             ],
           },
           {
-            title: '02- 表單匯出',
+            title: '02- 緊急通報AI',
             children: [
-              { title: '志工管理', icon: 'export', link: '/hd306' },
-              { title: '個案管理', icon: 'export', link: '/hd307' },
+              // { title: '志工管理', icon: 'export', link: '/hd306' },
+              { title: '緊急突發通報AI', icon: 'export', link: '/hd301' },
+              { title: '通報管理', icon: 'file-add', link: '/hd302' },
             ],
           },
         ],
       },
-      {
-        title: '簽核專區',
-        icon: 'edit',
-        link: '/hd400',
-      },
-      {
-        title: '統計專區',
-        icon: 'area-chart',
-        link: '/hd500',
-      },
-      {
-        title: '重設密碼',
-        icon: 'lock',
-        link: '/resetPassword',
-      },
-      {
-        title: '系統管理權限',
-        icon: 'setting',
-        children: [
-          { title: '01- 保險公司代碼維護', open: false, link: '/hd600' },
-          { title: '02- 組織單位資料維護', open: false, link: '/hd610' },
-          { title: '03- 角色權限資料維護', open: false, link: '/hd620' },
-          { title: '04- 系統功能權限維護', open: false, link: '/hd630' },
-          {
-            title: '05- 帳號管理',
-            children: [
-              { title: '社工帳號管理', icon: 'robot', link: '/hd640' },
-              // { title: '社工員', icon: 'user', link: '#' },
-            ],
-          },
-          {
-            title: '06- 系統參數維護',
-            children: [
-              { title: '預照管理系統', link: '/hd650/system' },
-              { title: '志工Web APP', link: '/hd650/webapp' },
-            ],
-          },
-          { title: '07- 佈告欄維護', open: false, link: '/hd660' },
-          { title: '08- 信件維護', open: false, link: '/hd670' },
-        ],
-      },
+      // {
+      //   title: '簽核專區',
+      //   icon: 'edit',
+      //   link: '/hd400',
+      // },
+      // {
+      //   title: '統計專區',
+      //   icon: 'area-chart',
+      //   link: '/hd500',
+      // },
+      // {
+      //   title: '重設密碼',
+      //   icon: 'lock',
+      //   link: '/resetPassword',
+      // },
+      // {
+      //   title: '系統管理權限',
+      //   icon: 'setting',
+      //   children: [
+      //     { title: '01- 保險公司代碼維護', open: false, link: '/hd600' },
+      //     { title: '02- 組織單位資料維護', open: false, link: '/hd610' },
+      //     { title: '03- 角色權限資料維護', open: false, link: '/hd620' },
+      //     { title: '04- 系統功能權限維護', open: false, link: '/hd630' },
+      //     {
+      //       title: '05- 帳號管理',
+      //       children: [
+      //         { title: '社工帳號管理', icon: 'robot', link: '/hd640' },
+      //         // { title: '社工員', icon: 'user', link: '#' },
+      //       ],
+      //     },
+      //     {
+      //       title: '06- 系統參數維護',
+      //       children: [
+      //         { title: '預照管理系統', link: '/hd650/system' },
+      //         { title: '志工Web APP', link: '/hd650/webapp' },
+      //       ],
+      //     },
+      //     { title: '07- 佈告欄維護', open: false, link: '/hd660' },
+      //     { title: '08- 信件維護', open: false, link: '/hd670' },
+      //   ],
+      // },
     ];
 
     this.menuData = data;

@@ -1,0 +1,169 @@
+// 全局顏色變數
+$primary-color: #1890ff;
+$hover-color: #40a9ff;
+$active-color: #096dd9;
+$disabled-color: #d9d9d9;
+$text-color: #333;
+$background-color: #f9f9f9;
+$border-radius: 8px;
+$box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+// grid 容器樣式
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+}
+
+// 標籤樣式
+.label {
+  font-weight: bold;
+  margin-bottom: 8px;
+  font-size: 16px;
+  color: $text-color;
+}
+
+// 上傳區域樣式
+.nz-upload {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+
+  .ant-upload-select {
+    border: 2px solid #d9d9d9;
+    border-radius: $border-radius;
+  }
+}
+
+// 資料預覽區域樣式
+.preview-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.preview-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: $border-radius;
+  background-color: #f9f9f9;
+}
+
+.file-info {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  gap: 10px;
+}
+
+.file-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: $text-color;
+  flex-grow: 1;
+  margin-bottom: 10px; // 增加底部空間，讓textarea與檔名有間隔
+}
+
+.preview-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+// 刪除按鈕樣式
+.delete-btn {
+  background-color: transparent;
+  color: $text-color;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0;
+
+  &:hover {
+    color: #ff4d4f;
+  }
+}
+
+// 編輯與轉換按鈕樣式
+.edit-btn, .convert-btn {
+  background-color: transparent;  // 背景透明，讓按鈕顯得輕盈
+  color: #333;                    // 文字顏色為深灰，避免使用純黑色
+  border: 1px solid #ddd;         // 使用細邊框，柔和的灰色邊框
+  padding: 6px 12px;              // 內邊距稍微增加，提升按鈕的可點擊區域
+  cursor: pointer;
+  border-radius: 4px;             // 圓角設置
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease; // 添加顏色過渡效果
+
+  &:hover {
+    background-color: #f0f0f0;    // 懸停時顯示輕微背景色變化，增添柔和感
+    color: $primary-color;        // 懸停時文字顏色變為主色
+  }
+
+  &:disabled {
+    background-color: #f5f5f5;    // 禁用狀態時背景顏色變為淺灰色
+    color: #d9d9d9;               // 禁用狀態文字顏色變為灰色
+    border: 1px solid #ddd;       // 禁用時仍保留灰色邊框
+    cursor: not-allowed;          // 禁用時顯示禁用樣式
+  }
+}
+
+// 儲存與關閉按鈕樣式
+.buttonArea {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 20px;
+
+  button {
+    background-color: $primary-color;
+    border-color: $primary-color;
+    color: white;
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+
+  button:hover {
+    background-color: $active-color;
+    transform: translateY(-2px);
+  }
+
+  button:active {
+    background-color: #004085;
+    transform: translateY(0);
+  }
+}
+
+// 轉換按鈕顯示 loading 時的樣式
+.nz-spin {
+  margin-left: 10px;
+}
+
+textarea {
+  width: 100%;                /* 讓 textarea 撐滿父容器 */
+  font-size: 14px;            /* 設定字型大小 */
+  padding: 12px 16px;         /* 增加上下 padding 讓區域更大，保持左右適中 */
+  border-radius: 4px;         /* 圓角邊框 */
+  border: 1px solid #ccc;     /* 邊框顏色 */
+  resize: none;               /* 禁用 textarea 的拖拉調整大小功能 */
+  color: $text-color;         /* 文字顏色 */
+  min-height: 300px;          /* 設定更大的最小高度 */
+  max-height: 500px;          /* 設定最大高度避免過長 */
+  box-sizing: border-box;     /* 包含 padding 和 border 到寬高計算中 */
+  line-height: 1.6;           /* 提高行間距，讓文字區域更寬敞 */
+}
+
+/* 可選：在 hover 時加入邊框顏色改變的效果 */
+textarea:hover {
+  border-color: $primary-color;
+}

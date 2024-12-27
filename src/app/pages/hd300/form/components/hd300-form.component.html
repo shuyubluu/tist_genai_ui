@@ -1,33 +1,71 @@
 <form [formGroup]="form">
   <div class="grid-container">
     <div class="grid-columns-1">
-      <div class="label">表單上傳</div>
+      <div class="label">音檔上傳</div>
       <div>
         <nz-upload
-          nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-          [nzFileList]="form_fileList"
-          (nzChange)="form_handleChange($event)"
-        >
+          nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76" 
+          [nzFileList]="form_fileList" 
+          (nzChange)="form_handleChange($event)">
           <app-button [attachClassName]="['success']" [buttonText]="'上傳'" />
         </nz-upload>
       </div>
     </div>
-    <!-- !TODO -->
+
     <div class="grid-columns-1">
       <div class="label">匯入結果</div>
-      <div>已匯入</div>
-    </div>
-    <div class="grid-columns-1 border-bottom-0">
-      <div class="label">資料預覽</div>
-      <div></div>
+      <div>成功 {{ form_fileList.length }} </div> <!-- 顯示匯入的檔案數量 -->
     </div>
   </div>
+
+  <!-- 資料預覽 -->
+  <div class="preview-container">
+    <div class="preview-item" *ngFor="let file of form_fileList">
+      <div class="file-info">
+        <div class="preview-buttons">
+          <!-- 編輯按鈕 -->
+          <button *ngIf="editingFile !== file && file['isConverted']" (click)="editFile(file)" class="edit-btn">
+            <i nz-icon nzType="edit" nzTheme="outline"></i> 
+          </button>
+          <button *ngIf="editingFile === file" (click)="saveEdit()" class="edit-btn">
+            <i nz-icon nzType="save" nzTheme="outline"></i> 儲存
+          </button>
+          <button *ngIf="editingFile === file" (click)="cancelEdit()" class="edit-btn">
+            <i nz-icon nzType="close" nzTheme="outline"></i> 取消
+          </button>
+
+          <!-- 轉換按鈕（當檔案尚未轉換時） -->
+          <button *ngIf="file.status === 'done' && !file['isConverted'] && !file['isConverting']" (click)="convertFile(file)" class="convert-btn">
+            <i nz-icon nzType="robot" nzTheme="outline"></i> 
+          </button>
+          
+          <!-- 顯示正在轉換的loading圖示 -->
+          <i *ngIf="file['isConverting']" nz-icon nzType="loading" nzTheme="outline"></i>
+        </div>
+
+        <!-- 顯示檔案名稱 -->
+        <span class="file-name">
+          <!-- 修改後：將 textarea 放在父容器外 -->
+          <textarea *ngIf="editingFile === file" [(ngModel)]="newFileName" [value]="file['result']"></textarea>
+          <span *ngIf="editingFile !== file">{{ file.name }}</span> <!-- 顯示檔案名稱 -->
+        </span>
+        <button *ngIf="file['isConverted']" (click)="summarizeFile(file)" class="delete-btn">
+          <i *ngIf="file['isLoading']" nz-icon nzType="loading" nzTheme="outline"></i> <!-- 顯示loading圖示 -->
+          <i *ngIf="!file['isLoading']" nz-icon nzType="file-text" nzTheme="outline"></i> <!-- 顯示檔案摘要圖示 -->
+        </button>
+        <button *ngIf="file['isConverted']" (click)="downloadFile(file)" class="delete-btn">
+          <i nz-icon nzType="download" nzTheme="outline"></i>
+        </button>
+        <button (click)="deleteFile(file)" class="delete-btn">
+          <i nz-icon nzType="delete" nzTheme="outline"></i> <!-- 顯示垃圾桶圖標 -->
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 儲存和關閉按鈕區域 -->
   <div class="buttonArea">
     <app-button [buttonText]="'儲存'" (click)="save()" />
-    <app-button
-      [attachClassName]="['danger']"
-      [buttonText]="'關閉'"
-      (click)="closeTab()"
-    />
+    <app-button [attachClassName]="['danger']" [buttonText]="'關閉'" (click)="closeTab()" />
   </div>
 </form>

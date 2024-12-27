@@ -1,7 +1,7 @@
 <form [formGroup]="form">
   <div class="grid-container">
     <div class="grid-columns-1">
-      <div class="label">表單上傳</div>
+      <div class="label">通報單上傳</div>
       <div>
         <nz-upload
           nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
@@ -12,22 +12,42 @@
         </nz-upload>
       </div>
     </div>
-    <!-- !TODO -->
     <div class="grid-columns-1">
       <div class="label">匯入結果</div>
-      <div>已匯入</div>
+      <div>成功 3</div>
     </div>
-    <div class="grid-columns-1 border-bottom-0">
-      <div class="label">資料預覽</div>
-      <div></div>
-    </div>
-  </div>
-  <div class="buttonArea">
-    <app-button [buttonText]="'儲存'" (click)="save()" />
-    <app-button
-      [attachClassName]="['danger']"
-      [buttonText]="'關閉'"
-      (click)="closeTab()"
-    />
-  </div>
+
+  <table class="case-list">
+    <thead>
+      <tr>
+        <th>案件編號</th>
+        <th>姓名</th>
+        <th>身分證</th>
+        <th>通報人</th>
+        <th>通報單位</th>
+        <th>通報時間</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let case of form_caseList; let i = index">
+        <td>{{ case.caseId }}</td>
+        <td>{{ case.name }}</td>
+        <td>{{ case.idCard }}</td>
+        <td>{{ case.reporter }}</td>
+        <td>{{ case.unit }}</td>
+        <td>{{ case.reportTime }}</td>
+        <td>
+          <button 
+            nz-button 
+            nzType="primary" 
+            [disabled]="case.reported" 
+            (click)="reportCase(i)">
+            {{ case.reported ? '已通報' : '通報' }}
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 </form>

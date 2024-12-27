@@ -129,19 +129,19 @@ export const routes: Routes = [
         path: 'hd300',
         loadChildren: () =>
           import('./pages/hd300/hd300.routes').then((m) => m.HD300_ROUTES),
-        data: { tabName: '表單匯入_志工教育訓練' },
+        data: { tabName: '音檔轉文字AI' },
       },
       {
         path: 'hd301',
         loadChildren: () =>
           import('./pages/hd301/hd301.routes').then((m) => m.HD301_ROUTES),
-        data: { tabName: '表單匯入_志工獎勵' },
+        data: { tabName: '緊急通報AI' },
       },
       {
         path: 'hd302',
         loadChildren: () =>
           import('./pages/hd302/hd302.routes').then((m) => m.HD302_ROUTES),
-        data: { tabName: '表單匯入_志工時數' },
+        data: { tabName: '通報管理' },
       },
       {
         path: 'hd303',
