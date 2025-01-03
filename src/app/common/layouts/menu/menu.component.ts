@@ -57,19 +57,19 @@ export class MenuComponent implements OnInit {
         title: 'AI',
         icon: 'reconciliation',
         children: [
+          // {
+          //   title: '01- 音檔AI',
+          //   children: [
+          //     { title: '音檔轉文字AI', icon: 'file-add', link: '/hd300' },
+          //     // { title: '志工獎勵', icon: 'file-add', link: '/hd301' },
+          //     // { title: '通報管理', icon: 'file-add', link: '/hd302' },
+          //     // { title: '志工考核表', icon: 'file-add', link: '/hd303' },
+          //     // { title: '個案基本資料表', icon: 'file-add', link: '/hd304' },
+          //     // { title: '個案生活品質量表', icon: 'file-add', link: '/hd305' },
+          //   ],
+          // },
           {
-            title: '01- 音檔AI',
-            children: [
-              { title: '音檔轉文字AI', icon: 'file-add', link: '/hd300' },
-              // { title: '志工獎勵', icon: 'file-add', link: '/hd301' },
-              // { title: '通報管理', icon: 'file-add', link: '/hd302' },
-              // { title: '志工考核表', icon: 'file-add', link: '/hd303' },
-              // { title: '個案基本資料表', icon: 'file-add', link: '/hd304' },
-              // { title: '個案生活品質量表', icon: 'file-add', link: '/hd305' },
-            ],
-          },
-          {
-            title: '02- 緊急通報AI',
+            title: '緊急通報AI',
             children: [
               // { title: '志工管理', icon: 'export', link: '/hd306' },
               { title: '緊急突發通報AI', icon: 'export', link: '/hd301' },

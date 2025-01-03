@@ -4,11 +4,11 @@
       <div class="label">音檔上傳</div>
       <div>
         <nz-upload
-          nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76" 
-          [nzFileList]="form_fileList" 
-          (nzChange)="form_handleChange($event)">
-          <app-button [attachClassName]="['success']" [buttonText]="'上傳'" />
-        </nz-upload>
+        nzAction="http://localhost:8080/api/files/upload"
+        [nzFileList]="form_fileList"
+        (nzChange)="form_handleChange($event)">
+        <app-button [attachClassName]="['success']" [buttonText]="'上傳'" />
+      </nz-upload>
       </div>
     </div>
 
