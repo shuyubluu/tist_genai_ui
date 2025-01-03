@@ -9,6 +9,7 @@ import { TabService } from '../../../../common/layouts/tab/tab.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzIconModule } from 'ng-zorro-antd/icon';  // 匯入 NzIconModule
 
 @Component({
   selector: 'app-hd301-form',
@@ -20,9 +21,10 @@ import { NzMessageService } from 'ng-zorro-antd/message';
     SelectComponent,
     RouterModule,
     DayPickerComponent,
+    NzIconModule,  // 在這裡加入 NzIconModule
   ],
   templateUrl: './hd301-form.component.html',
-  styleUrl: './hd301-form.component.scss',
+  styleUrls: ['./hd301-form.component.scss'],
 })
 export class Hd301FormComponent implements OnInit {
   form: FormGroup;
@@ -47,6 +49,7 @@ export class Hd301FormComponent implements OnInit {
       unit: '台北市社會局',
       reportTime: '2024-12-23 10:45',
       reported: false, // 新增欄位來標示是否通報過
+      riskLevel: '', // 風險等級
     },
     {
       caseId: 'E202401002',
@@ -56,6 +59,7 @@ export class Hd301FormComponent implements OnInit {
       unit: '新北市社會局',
       reportTime: '2024-12-23 11:30',
       reported: false, // 新增欄位來標示是否通報過
+      riskLevel: '', // 風險等級
     },
     {
       caseId: 'E202401003',
@@ -65,6 +69,7 @@ export class Hd301FormComponent implements OnInit {
       unit: '高雄市社會局',
       reportTime: '2024-12-23 12:15',
       reported: false, // 新增欄位來標示是否通報過
+      riskLevel: '', // 風險等級
     },
   ];
 
@@ -97,6 +102,7 @@ export class Hd301FormComponent implements OnInit {
         unit: '新北市衛生局',
         reportTime: new Date().toLocaleString(),
         reported: false, // 初始未通報
+        riskLevel: '', // 初始風險等級
       });
     } else if (info.file.status === 'error') {
       this.message.error(`${info.file.name} 上傳失敗.`);
@@ -121,15 +127,27 @@ export class Hd301FormComponent implements OnInit {
 
     setTimeout(() => {
       caseData.reported = true; // 標記為已通報
-      this.message.success(`案件 ${caseData.caseId} 通報成功`);
 
-      // 更新按鈕狀態
-      const button = document.getElementById(`report-btn-${index}`) as HTMLButtonElement;
-      if (button) {
-        button.disabled = true;
-        button.style.backgroundColor = '#dcdcdc'; // 設為灰色
-        button.innerText = '已通報'; // 修改按鈕文字
-      }
+      // 假資料：直接給定風險等級
+      caseData.riskLevel = this.getMockRiskLevel(); // 假資料的風險等級
+
+      // 根據風險等級新增附加訊息
+      const additionalMessage =
+        caseData.riskLevel === 'high'
+          ? '，已發送通知信件'
+          : '';
+
+      this.message.success(
+        `案件 ${caseData.caseId} 通報成功，風險等級為：${caseData.riskLevel}${additionalMessage}`
+      );
     }, 2000);
+  }
+
+  // 假資料風險等級（模擬後端 API 回傳的風險等級）
+  getMockRiskLevel(): string {
+    // 這邊你可以根據需求自訂假資料的風險等級邏輯
+    const mockLevels = ['low', 'medium', 'high'];
+    const randomIndex = Math.floor(Math.random() * mockLevels.length);
+    return mockLevels[randomIndex];
   }
 }

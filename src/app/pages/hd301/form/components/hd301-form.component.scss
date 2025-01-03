@@ -44,8 +44,8 @@
 }
 
 .case-table th {
-  background-color: #007bff;
-  color: white;
+  background-color: #f5f5f5; /* 柔和的米白色 */
+  color: #333; /* 深灰色字體 */
   font-size: 14px;
   font-weight: 600;
 }
@@ -58,9 +58,12 @@
 .case-table tr:nth-child(even) {
   background-color: #f9f9f9;
 }
-
+.case-table tr:nth-child(odd) {
+  background-color: #f9f9f9; /* 統一設為柔和灰色 */
+}
 .case-table tr:hover {
-  background-color: #f1f1f1;
+  background-color: #e0e0e0; /* 更深的柔和灰色 */
+  transition: background-color 0.3s ease; /* 添加平滑過渡效果 */
 }
 
 .case-table td:last-child {

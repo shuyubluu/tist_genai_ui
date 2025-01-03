@@ -12,12 +12,15 @@
         </nz-upload>
       </div>
     </div>
+
     <div class="grid-columns-1">
       <div class="label">匯入結果</div>
-      <div>成功 3</div>
+      <div>成功 {{ form_fileList.length }}</div> <!-- 顯示上傳成功的檔案數量 -->
     </div>
+  </div>
 
-  <table class="case-list">
+  <!-- 案件清單 -->
+  <table class="case-table">
     <thead>
       <tr>
         <th>案件編號</th>
@@ -26,6 +29,7 @@
         <th>通報人</th>
         <th>通報單位</th>
         <th>通報時間</th>
+        <th>風險等級</th> <!-- 新增風險等級欄位 -->
         <th>操作</th>
       </tr>
     </thead>
@@ -37,6 +41,14 @@
         <td>{{ case.reporter }}</td>
         <td>{{ case.unit }}</td>
         <td>{{ case.reportTime }}</td>
+        
+        <!-- 顯示燈泡圖示根據風險等級 -->
+        <td>
+          <i *ngIf="case.riskLevel === 'low'" class="fas fa-circle" style="color: green;"></i> <!-- 低風險綠燈 -->
+          <i *ngIf="case.riskLevel === 'medium'" class="fas fa-circle" style="color: yellow;"></i> <!-- 中風險黃燈 -->
+          <i *ngIf="case.riskLevel === 'high'" class="fas fa-circle" style="color: red;"></i> <!-- 高風險紅燈 -->
+          <span *ngIf="!case.riskLevel">待評估</span> <!-- 未設定風險等級顯示 '待評估' -->
+        </td>
         <td>
           <button 
             nz-button 
@@ -49,5 +61,4 @@
       </tr>
     </tbody>
   </table>
-</div>
 </form>
