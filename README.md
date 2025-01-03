@@ -1,3 +1,3 @@
-# hondao_prototype
+# TistGenAI 緊急通報系統
 
-台中弘道老人福利基金會系統雛型
+緊急通報系統雛型
